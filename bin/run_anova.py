@@ -38,7 +38,7 @@ def main():
    
     if not args.vars:
     # Assuming f1_results is your pandas DataFrame and factor_names is a list of column names
-        factor_names = ["ref_tissue","query_tissue","tissue_match","subsample_ref","method"]  # replace with actual factor column names
+        factor_names = ["ref_region","query_region","region_match","subsample_ref","method"]  # replace with actual factor column names
     else:
         factor_names = args.vars
     # Convert factor columns to categorical
