@@ -58,23 +58,23 @@ def add_violin_plot(df, var, split, facet):
         dodge=True
     )
 
-def add_strip_plot(df, var, split, facet, add_tissue_match=True):
+def add_strip_plot(df, var, split, facet, add_region_match=True):
     """Add a strip plot to the figure."""
     # remove extra weighted f1 values
     # doesn't change overall values
     #df = df.drop_duplicates(subset=[split, facet, var])
-    df['match_tissue'] = df.apply(lambda row: row['query_tissue'] in row['ref_tissue'], axis=1)
-    # Map match_tissue to colors before plotting
-    df['color'] = df['match_tissue'].map({True: 'red', False: 'grey'})
+    df['match_region'] = df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
+    # Map match_region to colors before plotting
+    df['color'] = df['match_region'].map({True: 'red', False: 'grey'})
     
-    # Separate data into two groups based on 'match_tissue'
-    mask = df['match_tissue']
-    match_tissue_df = df[mask]
-    non_match_tissue_df = df[~mask]
+    # Separate data into two groups based on 'match_region'
+    mask = df['match_region']
+    match_region_df = df[mask]
+    non_match_region_df = df[~mask]
     
-    # Create the strip plot for non-matching tissue data
+    # Create the strip plot for non-matching region data
     ax = sns.stripplot(
-        data=non_match_tissue_df,
+        data=non_match_region_df,
         y=var,
         x=split,
         hue=facet,
@@ -84,13 +84,13 @@ def add_strip_plot(df, var, split, facet, add_tissue_match=True):
         alpha=0.8,           
         jitter=True,
         marker="o",
-        edgecolor='grey',    # Grey edge color for non-match tissue
+        edgecolor='grey',    # Grey edge color for non-match region
         linewidth=0.5
     )
-    if add_tissue_match:
-        # Create the strip plot for matching tissue data with customized edgecolor
+    if add_region_match:
+        # Create the strip plot for matching region data with customized edgecolor
         sns.stripplot(
-            data=match_tissue_df,
+            data=match_region_df,
             y=var,
             x=split,
             hue=facet,
@@ -100,7 +100,7 @@ def add_strip_plot(df, var, split, facet, add_tissue_match=True):
             alpha=0.8,           
             jitter=True,
             marker="o",
-            edgecolor='r',       # Red edge color for match tissue
+            edgecolor='r',       # Red edge color for match region
             linewidth=0.5,         
             legend=None,         # Disable legend for second plot
             ax=ax                # Add to same axis
@@ -127,7 +127,7 @@ def save_plot(var, split, facet, outdir):
     plt.savefig(save_path, bbox_inches="tight")
     plt.close()
 
-def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=None, add_tissue_match=True):
+def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=None, add_region_match=True):
     """
     Create a violin and strip plot for the given variable across groups.
     
@@ -147,7 +147,7 @@ def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=N
     plt.yticks(fontsize=25)
 
     # Add the custom legend to the plot
-    #plt.legend(handles=[red_patch, grey_patch], title="Match Tissue", loc='upper left', bbox_to_anchor=(1, 1.02))
+    #plt.legend(handles=[red_patch, grey_patch], title="Match region", loc='upper left', bbox_to_anchor=(1, 1.02))
     
     handles, labels = plt.gca().get_legend_handles_labels()
     facet_legend = plt.legend(
@@ -159,14 +159,14 @@ def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=N
         fontsize=15
     )
 
-    if add_tissue_match:
-        red_patch = mlines.Line2D([], [], color='red', marker='o', markersize=7, label='Matching Tissue')
-        grey_patch = mlines.Line2D([], [], color='grey', marker='o', markersize=7, label='Non-Matching Tissue')
-        # Add custom legend for match_tissue
+    if add_region_match:
+        red_patch = mlines.Line2D([], [], color='red', marker='o', markersize=7, label='Matching region')
+        grey_patch = mlines.Line2D([], [], color='grey', marker='o', markersize=7, label='Non-Matching region')
+        # Add custom legend for match_region
         plt.gca().add_artist(facet_legend)  # Add facet legend separately
         plt.legend(
             handles=[red_patch, grey_patch],
-            #title="Match Tissue",
+            #title="Match region",
             loc='upper left',
             bbox_to_anchor=(1.05, 0.3),
             fontsize=15
@@ -204,7 +204,7 @@ def main():
         # temp_df["method"] = method
         f1_df = pd.concat([temp_df, f1_df], ignore_index=True)
         
-    f1_df["tissue_match"] = f1_df.apply(lambda row: row['query_tissue'] in row['ref_tissue'], axis=1)
+    f1_df["region_match"] = f1_df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
     f1_df["reference_acronym"] = f1_df["reference"].apply(make_acronym)
     f1_df["query_acronym"] = f1_df["query"].apply(make_acronym)
     f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
@@ -212,7 +212,7 @@ def main():
     
 
     # Boxplots: Show the effect of categorical parameters
-    categorical_columns = ['query_tissue', 'ref_tissue', "reference_acronym", "query_acronym",'method','ref_split', 'tissue_match',"subsample_ref"] #organism, other categoricals
+    categorical_columns = ['query_region', 'ref_region', "reference_acronym", "query_acronym",'method','ref_split', 'region_match',"subsample_ref"] #organism, other categoricals
     outdir = "weighted_f1_distributions"
     label_columns = ["label", "f1_score","macro_f1","micro_f1"]
     os.makedirs(outdir, exist_ok=True)
@@ -241,7 +241,7 @@ def main():
         for col in categorical_columns:
           # if col != "method":
             plot_distribution(label_results, var="f1_score",outdir=outdir, split=col, facet="label", 
-                        acronym_mapping = None, add_tissue_match=False)
+                        acronym_mapping = None, add_region_match=False)
     
     
 if __name__ == "__main__":
