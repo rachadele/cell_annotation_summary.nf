@@ -87,25 +87,24 @@ def add_strip_plot(df, var, split, facet, add_region_match=True):
         edgecolor='grey',    # Grey edge color for non-match region
         linewidth=0.5
     )
-    if add_region_match:
-        # Create the strip plot for matching region data with customized edgecolor
-        sns.stripplot(
-            data=match_region_df,
-            y=var,
-            x=split,
-            hue=facet,
-            dodge=True,          
-            palette="Set2",      
-            size=2,
-            alpha=0.8,           
-            jitter=True,
-            marker="o",
-            edgecolor='r',       # Red edge color for match region
-            linewidth=0.5,         
-            legend=None,         # Disable legend for second plot
-            ax=ax                # Add to same axis
-        )
-     # Create custom legend handles for edge color
+    # Create the strip plot for matching region data with customized edgecolor
+    sns.stripplot(
+        data=match_region_df,
+        y=var,
+        x=split,
+        hue=facet,
+        dodge=True,          
+        palette="Set2",      
+        size=2,
+        alpha=0.8,           
+        jitter=True,
+        marker="o",
+        edgecolor='r',       # Red edge color for match region
+        linewidth=0.5,         
+        legend=None,         # Disable legend for second plot
+        ax=ax                # Add to same axis
+    )
+    # Create custom legend handles for edge color
           
 
 def add_acronym_legend(acronym_mapping, figure=None, x=1.05, y=0.5, title=None):
@@ -141,7 +140,8 @@ def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=N
     """
     setup_plot(var, split)
     add_violin_plot(df, var, split, facet)
-    add_strip_plot(df, var, split, facet)
+    if add_region_match:
+        add_strip_plot(df, var, split, facet)
     #plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1), borderaxespad=0)
     plt.xticks(rotation=90, ha="right", fontsize=25)
     plt.yticks(fontsize=25)
@@ -151,13 +151,15 @@ def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=N
     
     handles, labels = plt.gca().get_legend_handles_labels()
     facet_legend = plt.legend(
-        handles=handles[:len(labels)//2],  # Take only the facet group handles
-        title=facet.replace("_"," ").capitalize() if facet else "Group",
-        loc='upper left',
-        bbox_to_anchor=(1.05, 1),
-        borderaxespad=0,
-        fontsize=15
+    handles=handles,  # Use all the handles
+    labels=labels,    # Ensure that we provide all the labels too
+    title=facet.replace("_", " ").capitalize() if facet else "Group",  # Title formatting
+    loc='upper left',
+    bbox_to_anchor=(1.05, 1),
+    borderaxespad=0,
+    fontsize=15
     )
+
 
     if add_region_match:
         red_patch = mlines.Line2D([], [], color='red', marker='o', markersize=7, label='Matching region')
@@ -208,13 +210,13 @@ def main():
     f1_df["reference_acronym"] = f1_df["reference"].apply(make_acronym)
     f1_df["query_acronym"] = f1_df["query"].apply(make_acronym)
     f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
+    f1_df["manuscript"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
-    
 
     # Boxplots: Show the effect of categorical parameters
-    categorical_columns = ['query_region', 'ref_region', "reference_acronym", "query_acronym",'method','ref_split', 'region_match',"subsample_ref"] #organism, other categoricals
+    categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease","dev_stage","cutoff"] #organism, other categoricals
     outdir = "weighted_f1_distributions"
-    label_columns = ["label", "f1_score","macro_f1","micro_f1"]
+    label_columns = ["label", "f1_score"]
     os.makedirs(outdir, exist_ok=True)
     weighted_f1_results = f1_df.drop(columns=label_columns).drop_duplicates()
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
@@ -232,7 +234,8 @@ def main():
     outdir = "label_distributions"
     os.makedirs(outdir, exist_ok=True)
     label_results = f1_df[f1_df['label'].notnull()]
-    label_results = label_results.drop(columns = ["macro_f1", "micro_f1"])
+    label_results = label_results[label_results["f1_score"].notnull()]
+    #label_results = label_results.drop(columns = ["macro_f1", "micro_f1"])
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
     for key in label_results["key"].unique():
         df_subset = label_results[label_results["key"] == key]
@@ -240,7 +243,7 @@ def main():
         os.makedirs(outdir, exist_ok=True)
         for col in categorical_columns:
           # if col != "method":
-            plot_distribution(label_results, var="f1_score",outdir=outdir, split=col, facet="label", 
+            plot_distribution(df_subset, var="f1_score",outdir=outdir, split=col, facet="label", 
                         acronym_mapping = None, add_region_match=False)
     
     

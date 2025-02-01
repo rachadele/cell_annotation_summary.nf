@@ -47,8 +47,9 @@ process runAnova {
     path label_f1_results_aggregated
 
     output:
-    path "*anova_label_plot.png"
-    path "*anova_global_plot.png"
+
+    path "*anova_*.tsv"
+    path "*png"
 
     script:
     """
