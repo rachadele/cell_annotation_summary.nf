@@ -212,9 +212,9 @@ def main():
     f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
     f1_df["manuscript"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
-
+    f1_df["disease_state"] = np.where(f1_df["disease"] == "Control", "Control", "Disease")
     # Boxplots: Show the effect of categorical parameters
-    categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease","dev_stage","cutoff"] #organism, other categoricals
+    categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
     outdir = "weighted_f1_distributions"
     label_columns = ["label", "f1_score"]
     os.makedirs(outdir, exist_ok=True)
