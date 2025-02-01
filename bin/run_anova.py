@@ -34,102 +34,7 @@ def parse_arguments():
         known_args, _ = parser.parse_known_args()
         return known_args
 
-
-def compute_pca(df, f1_column, factor_names):
-    """
-    Parameters:
-    - df (pd.DataFrame): DataFrame containing the F1 scores and metadata factors.
-    - f1_column (str): Either "weighted_F1" or "label_F1".
-    - factor_cols (list): List of categorical metadata factors.
-
-    Returns:
-    - df_pca (pd.DataFrame): DataFrame with PC1, PC2, and factor columns.
-    - explained_variance (array): Explained variance ratio of the components.
-    """
-    # Identify categorical columns
-    factor_cols= [col for col in factor_names if df[col].nunique() > 1]
-    categorical_cols = [col for col in factor_cols if df[col].dtype != "numeric"]
-
-    # scale F1 column
-    X_f1 = df[[f1_column]].values
-    scaler = StandardScaler()
-    X_numeric = scaler.fit_transform(X_f1)
-
-    # One-hot encode categorical variables
-    encoder = OneHotEncoder(sparse_output=False, drop="first")
-    X_categorical = encoder.fit_transform(df[categorical_cols])
-
-    # Combine standardized F1 scores with encoded categorical data
-    X_combined = np.hstack([X_numeric, X_categorical])
-    n_samples, n_features = X_combined.shape
-    n_components = min(n_samples, n_features, 10)  # Adjust to valid range
-
-    # Run PCA
-    pca = PCA(n_components=n_components)
-    X_pca = pca.fit_transform(X_combined)
-
-    # Convert PCA output to DataFrame
-    df_pca = pd.DataFrame(X_pca, columns=[f"PC{i+1}" for i in range(X_pca.shape[1])])
-    df_pca = pd.concat([df_pca, df[categorical_cols].reset_index(drop=True)], axis=1)
-
-    return df_pca, pca.explained_variance_ratio_, factor_cols
-
-def plot_pca(df_pca, explained_variance, factor_cols, title_prefix, outdir):
-    """
-    Plots PCA results colored by each factor and saves the plots.
-
-    Parameters:
-    - df_pca (pd.DataFrame): DataFrame with PC1, PC2, and factors.
-    - explained_variance (array): Explained variance ratio from PCA.
-    - factor_cols (list): List of factors to color plots.
-    - title_prefix (str): Prefix for plot titles.
-    - outdir (str): Directory to save plots (optional).
-
-    Returns:
-    - None (displays and saves plots)
-    """
-    if outdir:
-        os.makedirs(outdir, exist_ok=True)  # Create directory if it doesn't exist
-
-    for factor in factor_cols:
-            # Create a figure with two subplots: one for PC1 vs PC2, and one for PC3 vs PC4
-            fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-
-            # Plot for PC1 vs PC2
-            sns.scatterplot(data=df_pca, x="PC1", y="PC2", hue=factor, palette="tab10", alpha=0.7, ax=axes[0])
-            axes[0].set_title(f"{title_prefix} - Colored by {factor} (PC1 vs PC2)")
-            axes[0].legend(bbox_to_anchor=(1.05, 1), loc="upper left")
-
-            # Plot for PC3 vs PC4
-            sns.scatterplot(data=df_pca, x="PC3", y="PC4", hue=factor, palette="tab10", alpha=0.7, ax=axes[1])
-            axes[1].set_title(f"{title_prefix} - Colored by {factor} (PC3 vs PC4)")
-            axes[1].legend(bbox_to_anchor=(1.05, 1), loc="upper left")
-
-            # Adjust layout to prevent overlapping of titles/labels
-            plt.tight_layout()
-
-            # Save plot if outdir is specified
-            if outdir:
-                plt.savefig(os.path.join(outdir, f"{title_prefix}_{factor}_PCA.png"), bbox_inches="tight", dpi=300)
-
-            plt.show()
-
-    # Explained variance plot
-    plt.figure(figsize=(6, 4))
-    plt.bar(range(1, len(explained_variance) + 1), explained_variance * 100, alpha=0.7, color="blue")
-    plt.xticks(range(1, len(explained_variance) + 1))
-    plt.xlabel("Principal Component")
-    plt.ylabel("Explained Variance (%)")
-    plt.title(f"{title_prefix} - Explained Variance")
-
-    # Save variance plot
-    if outdir:
-        plt.savefig(os.path.join(outdir, f"{title_prefix}_explained_variance.png"), bbox_inches="tight", dpi=300)
-
-    plt.show()
-
     
-
 def run_anova(df, factor_names, f1_column):
     # Select factors with more than one unique value
     factor_names_uniq = [col for col in factor_names if df[col].nunique() > 1]
@@ -175,12 +80,12 @@ def main():
     args = parse_arguments()
     weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
     label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
-    categoricals = ['manuscript','reference','method','ref_split', 'region_match',"sex","disease","dev_stage"]
+    categoricals = ['manuscript','reference','method','ref_split', 'region_match',"sex","disease_state","dev_stage"]
 
     if not args.vars:
     # Assuming f1_results is your pandas DataFrame and factor_names is a list of column names
         factor_names = ['manuscript','reference','method','ref_split', 
-                        'region_match',"subsample_ref","sex","disease","dev_stage","cutoff"] # replace with actual factor column names
+                        'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] # replace with actual factor column names
 
     else:
         factor_names = args.vars
