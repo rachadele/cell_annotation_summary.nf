@@ -28,8 +28,8 @@ process aggregateResults {
    // path "f1_results_all_pipeline_runs.tsv", emit: f1_results_aggregated
     path "weighted_f1_results.tsv", emit: weighted_f1_results_aggregated
     path "label_f1_results.tsv", emit: label_f1_results_aggregated
-    path "label_distributions/*"
-    path "weighted_f1_distributions/*"
+  //  path "label_distributions/*"
+   // path "weighted_f1_distributions/*"
 
     script:
     """
@@ -56,6 +56,23 @@ process runAnova {
     python $projectDir/bin/run_anova.py --weighted_f1_results ${weighted_f1_results_aggregated} --label_f1_results ${label_f1_results_aggregated}
     """
 
+}
+
+process plotCutoff {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/cutoff_plots", mode: 'copy'
+
+    input:
+    path weighted_f1_results_aggregated
+    path label_f1_results_aggregated
+
+    output:
+    path "**png"
+
+    script:
+    """
+    python $projectDir/bin/plot_cutoff.py --weighted_f1_results ${weighted_f1_results_aggregated} --label_f1_results ${label_f1_results_aggregated}
+    """
 }
 
 workflow {
@@ -88,12 +105,8 @@ workflow {
     label_f1_results_aggregated = aggregateResults.out.label_f1_results_aggregated 
     
     // run ANOVA on aggregated results
+    plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
     runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
-
-
-
-
-
 
 
 }

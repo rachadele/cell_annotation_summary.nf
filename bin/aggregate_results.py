@@ -220,14 +220,14 @@ def main():
     os.makedirs(outdir, exist_ok=True)
     weighted_f1_results = f1_df.drop(columns=label_columns).drop_duplicates()
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
-    for key in weighted_f1_results["key"].unique():
-        df_subset = weighted_f1_results[weighted_f1_results["key"] == key]
-        outdir = f"weighted_f1_distributions/{key}"
-        os.makedirs(outdir, exist_ok=True)
-        for col in categorical_columns:
-            if col not in ["method"]:   
-                plot_distribution(df_subset, var="weighted_f1", outdir=outdir, split=col, facet="method", 
-                                acronym_mapping=None)
+    #for key in weighted_f1_results["key"].unique():
+        #df_subset = weighted_f1_results[weighted_f1_results["key"] == key]
+        #outdir = f"weighted_f1_distributions/{key}"
+        #os.makedirs(outdir, exist_ok=True)
+        #for col in categorical_columns:
+            #if col not in ["method"]:   
+                #plot_distribution(df_subset, var="weighted_f1", outdir=outdir, split=col, facet="method", 
+                                #acronym_mapping=None)
 
     
     # plot distribution of label_f1 across different splits
@@ -237,14 +237,14 @@ def main():
     label_results = label_results[label_results["f1_score"].notnull()]
     #label_results = label_results.drop(columns = ["macro_f1", "micro_f1"])
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
-    for key in label_results["key"].unique():
-        df_subset = label_results[label_results["key"] == key]
-        outdir = f"label_distributions/{key}"
-        os.makedirs(outdir, exist_ok=True)
-        for col in categorical_columns:
-          # if col != "method":
-            plot_distribution(df_subset, var="f1_score",outdir=outdir, split=col, facet="label", 
-                        acronym_mapping = None, add_region_match=False)
+    #for key in label_results["key"].unique():
+        #df_subset = label_results[label_results["key"] == key]
+        #outdir = f"label_distributions/{key}"
+        #os.makedirs(outdir, exist_ok=True)
+        #for col in categorical_columns:
+          ## if col != "method":
+            #plot_distribution(df_subset, var="f1_score",outdir=outdir, split=col, facet="label", 
+                        #acronym_mapping = None, add_region_match=False)
     
     
 if __name__ == "__main__":

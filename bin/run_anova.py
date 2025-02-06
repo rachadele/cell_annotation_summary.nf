@@ -94,7 +94,11 @@ def main():
     for factor in categoricals:
         weighted_f1_results[factor] =weighted_f1_results[factor].astype('category')
         label_f1_results[factor] =label_f1_results[factor].astype('category')
+    for factor in ["cutoff", "subsample_ref"]:
+        weighted_f1_results[factor] =weighted_f1_results[factor].astype('float')
+        label_f1_results[factor] =label_f1_results[factor].astype('float')
     
+ 
 
     aov_combined = []
     df_list = [group for _, group in weighted_f1_results.groupby('key')]
