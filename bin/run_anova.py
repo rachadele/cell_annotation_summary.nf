@@ -26,9 +26,9 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_eval/weighted_f1_results.tsv")
+    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/weighted_f1_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_eval/label_f1_results.tsv")   
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/label_f1_results.tsv")   
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -80,11 +80,11 @@ def main():
     args = parse_arguments()
     weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
     label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
-    categoricals = ['manuscript','reference','method','ref_split', 'region_match',"sex","disease_state","dev_stage"]
+    categoricals = ['study','reference','method','ref_split', 'region_match',"sex","disease_state","dev_stage"]
 
     if not args.vars:
     # Assuming f1_results is your pandas DataFrame and factor_names is a list of column names
-        factor_names = ['manuscript','reference','method','ref_split', 
+        factor_names = ['study','reference','method','ref_split', 
                         'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] # replace with actual factor column names
 
     else:

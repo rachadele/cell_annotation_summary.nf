@@ -56,10 +56,10 @@ def main():
     
     args = parse_arguments()
     weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
-    weighted_f1_results["manuscript"] = weighted_f1_results["query"].str.split(" ").str[0]
+    weighted_f1_results["study"] = weighted_f1_results["query"].str.split(" ").str[0]
     label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
-    label_f1_results["manuscript"] = label_f1_results["query"].str.split("_").str[0]
-    categoricals = ['manuscript','reference','method','ref_split', 'region_match',"sex","disease_state","dev_stage"]
+    label_f1_results["study"] = label_f1_results["query"].str.split("_").str[0]
+    categoricals = ['study','reference','method','ref_split', 'region_match',"sex","disease_state","dev_stage"]
 
 
     # Convert factor columns to categorical
@@ -103,7 +103,7 @@ def main():
         os.makedirs(outdir, exist_ok=True)
         weighted_subset = weighted_f1_results[weighted_f1_results["key"] == key_value]
         # Convert the relevant categories into a long format for faceting
-        #categories = ['reference', 'ref_split', 'manuscript', 'region_match', 'disease_state', 
+        #categories = ['reference', 'ref_split', 'study', 'region_match', 'disease_state', 
                       #'dev_stage', 'sex', 'query_region', 'ref_region', 'subsample_ref']
         #weighted_subset_long = pd.melt(weighted_subset, id_vars=['cutoff', 'weighted_f1', 'method'], value_vars=categories, 
                                     #var_name='category', value_name='category_value')
@@ -133,7 +133,7 @@ def main():
         plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method",hue="ref_split", xlabel="Cutoff", style=None,
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_ref_split.png"))
         
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="manuscript", style=None, xlabel="Cutoff",
+        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="study", style=None, xlabel="Cutoff",
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_query.png"))
 
         plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="region_match", style=None, xlabel="Cutoff",
