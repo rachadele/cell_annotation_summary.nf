@@ -210,7 +210,7 @@ def main():
     f1_df["reference_acronym"] = f1_df["reference"].apply(make_acronym)
     f1_df["query_acronym"] = f1_df["query"].apply(make_acronym)
     f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
-    f1_df["manuscript"] = f1_df["query"].apply(lambda x: x.split("_")[0])
+    f1_df["study"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
     f1_df["disease_state"] = np.where(f1_df["disease"] == "Control", "Control", "Disease")
     # Boxplots: Show the effect of categorical parameters
