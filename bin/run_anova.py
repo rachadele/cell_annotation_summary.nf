@@ -41,17 +41,21 @@ def run_anova(df, factor_names, f1_column):
     # Construct formula
     formula = f'{f1_column} ~ ' + ' + '.join(factor_names_uniq)
     # Fit model
+    # find r2 from model
     model = ols(formula, data=df).fit()
+    r2 = model.rsquared
     # Run ANOVA with error handling for warnings
     with warnings.catch_warnings():
         warnings.simplefilter('error')
         aov_table = anova_lm(model, typ=2)
+    
     # Apply FDR correction
     aov_table['FDR'] = np.append(stats.false_discovery_control(aov_table['PR(>F)'].dropna()), np.nan)
+    aov_table['Rsquared'] = r2
     return aov_table
 
 def plot_anova_results(aov_combined_df, title_prefix):
-    
+    plt.rcParams.update({'font.size': 20})  # Set default font size for all plot elements 
     custom_order = ['subclass', 'class', 'family']
     
     # Set 'key' column as categorical with a custom order
@@ -66,15 +70,11 @@ def plot_anova_results(aov_combined_df, title_prefix):
 
     # Set axis labels and titles
     g.set_axis_labels('F-statistic', 'Factor')
-    g.set_titles(col_template="{col_name}", fontsize=30)
+    g.set_titles(col_template="{col_name}")
    # g.set(xticks=[], yticks=[])
 
     g.set_xlabels(fontsize=10)
-    g.set_xticklabels(fontsize = 20, rotation=90)
-    # captialize y labels and relace "_" with " "   
-    g.set_yticklabels([y.get_text().replace("_", " ").capitalize() for y in g.axes[0].get_yticklabels()])
-    g.set_yticklabels(fontsize = 20)
-    g.set_ylabels(fontsize=10)
+    g.set_ylabels(fontsize=12)
         # Adjust layout and save the figure
     plt.tight_layout()
     plt.savefig(f"{title_prefix}_anova_plot.png")
@@ -131,33 +131,7 @@ def main():
     aov_combined_df = pd.concat(aov_table_label)
     plot_anova_results(aov_combined_df, "label_f1") 
     
-    
-    # run and plot anova for subset of data with cutoff=0
-    #weighted_f1_results = weighted_f1_results[weighted_f1_results["cutoff"]==0]
-    #aov_combined = []
-    #df_list = [group for _, group in weighted_f1_results.groupby('key')]
-    #factor_names = factor_names
-    #for df in df_list:
-        #aov_table = run_anova(df, factor_names, f1_column="weighted_f1")
-        #aov_table.to_csv(df['key'].values[0] + "_anova_global_table_cutoff0.tsv", sep="\t")
-        #aov_table = aov_table.drop('Residual', axis=0)
-        #aov_table['key'] = df['key'].values[0] 
-        #aov_combined.append(aov_table)
-    #aov_combined_df = pd.concat(aov_combined)
-    #plot_anova_results(aov_combined_df, "weighted_f1_cutoff_0")
-    
-    #label_f1_results = label_f1_results[label_f1_results["cutoff"]==0]
-    #aov_table_label = []
-    #df_list = [group for _, group in label_f1_results.groupby('key')]
-    #factor_names = factor_names + ["label"]
-    #for df in df_list:
-        #aov_table = run_anova(df, factor_names_label, f1_column="f1_score")
-        #aov_table.to_csv(df['key'].values[0] + "_anova_label_table_cutoff0.tsv", sep="\t")
-        #aov_table = aov_table.drop('Residual', axis=0)
-        #aov_table['key'] = df['key'].values[0] 
-        #aov_table_label.append(aov_table)
-    #aov_combined_df = pd.concat(aov_table_label)
-    #plot_anova_results(aov_combined_df, "label_f1_cutoff_0")
+
     
 if __name__ == "__main__":
     main()

@@ -117,6 +117,21 @@ def main():
     # plot boxplots for duration, realtime and %cpu for rows wehre name==rfPredict vs name==predictSeurat
     # use a facetmap to plot the boxplots
     trace_subset = reports[reports["name"].isin(["rfPredict", "predictSeurat"])]
+    
+    #get median and mean for each method
+    
+    print("mean:", trace_subset.groupby("name")["duration (hours)"].mean())
+    print("median:",trace_subset.groupby("name")["duration (hours)"].median())
+    
+    print(trace_subset.groupby("name")["realtime (hours)"].mean())
+    print(trace_subset.groupby("name")["realtime (hours)"].median())
+    
+    print("mean: ",trace_subset.groupby("name")["%cpu"].mean())
+    print("median: ",trace_subset.groupby("name")["%cpu"].median())
+    
+    print(trace_subset.groupby("name")["peak virtual memory (GB)"].mean())
+    print(trace_subset.groupby("name")["peak virtual memory (GB)"].median())
+    
     # Melt data for FacetGrid
     trace_melted = trace_subset.melt(id_vars=["name"], value_vars=["duration (hours)","%cpu"], var_name="Metric", value_name="Value")
 
