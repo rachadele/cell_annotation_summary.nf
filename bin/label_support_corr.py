@@ -25,7 +25,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
+
     parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/label_f1_results.tsv")   
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
@@ -35,10 +35,10 @@ def parse_arguments():
     return parser.parse_args()
 
 def main():
-    
+    # set global fontsize for matplotlib
+    plt.rcParams.update({'font.size': 25})
     # Parse arguments
     args = parse_arguments()
-    vars = args.vars
     label_f1_results = args.label_f1_results
     
     # Read in data
@@ -73,6 +73,7 @@ def main():
     #move legend outside of plot
     plt.legend(title='Correlation', bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.title("Correlation between F1 score and reference support for each label")
+    plt.tight_layout()
     plt.savefig("label_support_corr.png")
 
 

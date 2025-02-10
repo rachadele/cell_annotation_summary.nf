@@ -92,6 +92,38 @@ process plotHeatmap {
     """
 }
 
+process plotComptime {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/comptime_plots", mode: 'copy'
+
+    input:
+    path reports_ch
+
+    output:
+    path "**png"
+
+    script:
+    """
+    python $projectDir/bin/plot_comptime.py --reports_dir ${reports_ch}
+    """
+}
+
+process labelSupportCorr {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/label_support_corr", mode: 'copy'
+
+    input:
+    path label_f1_results_aggregated
+
+    output:
+    path "**png"
+
+    script:
+    """
+    python $projectDir/bin/label_support_corr.py --label_f1_results ${label_f1_results_aggregated}
+    """
+
+}
 workflow {
 
     Channel
@@ -125,6 +157,15 @@ workflow {
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
     runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
     plotHeatmap(weighted_f1_results_aggregated)
+    labelSupportCorr(label_f1_results_aggregated)
+    
+    // plot comptime
+    Channel
+    .fromPath("${params.reports_dir}")
+    .set { reports_ch }
+    //plotComptime(reports_ch)
+    reports_ch.view()
+
 
 }
 
