@@ -69,7 +69,7 @@ def plot_anova_results(aov_combined_df, title_prefix):
     g.set_titles(col_template="{col_name}", fontsize=20)
    # g.set(xticks=[], yticks=[])
 
-    g.set_xlabels(fontsize=20)
+    g.set_xlabels(fontsize=20, rotation=90)
     g.set_ylabels(fontsize=20)
         # Adjust layout and save the figure
     plt.tight_layout()

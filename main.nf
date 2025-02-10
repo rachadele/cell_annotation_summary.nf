@@ -4,7 +4,7 @@ process addParams {
 
     input:
     //val pipeline_run_dir_name
-    tuple val(run_name), val(params_file), val(f1_results)
+    tuple val(run_name), val(params_file), val(ref_obs), val(f1_results)
 
 
     output:
@@ -12,7 +12,7 @@ process addParams {
 
     script:
     """
-    python $projectDir/bin/add_params.py --run_name ${run_name} --f1_results  ${f1_results} --params_file ${params_file}
+    python $projectDir/bin/add_params.py --run_name ${run_name}  --ref_obs ${ref_obs}  --f1_results ${f1_results} --params_file ${params_file}
     """
 
 }
@@ -75,6 +75,23 @@ process plotCutoff {
     """
 }
 
+process plotHeatmap {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/heatmap_plots", mode: 'copy'
+
+    input:
+    path weighted_f1_results_aggregated
+
+    output:
+    path "**png"
+    path "na_values.tsv"
+
+    script:
+    """
+    python $projectDir/bin/plot_heatmaps.py --weighted_f1_results ${weighted_f1_results_aggregated}
+    """
+}
+
 workflow {
 
     Channel
@@ -82,7 +99,7 @@ workflow {
     .map { pipeline_run_dir ->
         def pipeline_run_dirname = pipeline_run_dir.getName().toString()
         def params_file = "${pipeline_run_dir}/params.yaml"
-
+        def ref_obs = "${pipeline_run_dir}/refs/"
         // Collect 'f1_results' directories
         def pipeline_results = []
         pipeline_run_dir.eachDirRecurse { dir ->
@@ -91,7 +108,7 @@ workflow {
                         pipeline_results << dir_path
             }
         }
-        [pipeline_run_dirname, params_file, pipeline_results.flatten().join(' ')] // Return collected results for this pipeline_run_dir
+        [pipeline_run_dirname, params_file, ref_obs, pipeline_results.flatten().join(' ')] // Return collected results for this pipeline_run_dir
     }
 
     .set { all_pipeline_results } 
@@ -107,7 +124,7 @@ workflow {
     // run ANOVA on aggregated results
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
     runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
-
+    plotHeatmap(weighted_f1_results_aggregated)
 
 }
 
