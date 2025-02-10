@@ -180,7 +180,8 @@ def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=N
     add_acronym_legend(acronym_mapping, title=split.split("_")[0].capitalize())
     plt.tight_layout()
     save_plot(var, split, facet, outdir)
-    
+
+ 
         
 def make_acronym(ref_name):
     # Split on "_" and replace with spaces
@@ -188,7 +189,21 @@ def make_acronym(ref_name):
     # Create acronym from the first letter of each word
     acronym = "".join(word[0].upper() for word in words if word)
     return acronym
+
+def map_development_stage(stage):
+    # re write dict
+    dev_stage_mapping_dict = {
+        "HsapDv_0000083": "infant",
+        "HsapDv_0000084": "toddler",
+        "HsapDv_0000085": "child",
+        "HsapDv_0000086": "adolescent",
+        "HsapDv_0000088": "adult",
+        "HsapDv_0000091": "late adult"
+    }
+    return dev_stage_mapping_dict[stage]
     
+        
+ 
 def main():
     # Parse command line arguments
     args = parse_arguments()
@@ -213,12 +228,24 @@ def main():
     f1_df["study"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
     f1_df["disease_state"] = np.where(f1_df["disease"] == "Control", "Control", "Disease")
+    f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage)
+    
+    # replace rosmap infant with rosmap late adult
+    f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
+    
+    
     # Boxplots: Show the effect of categorical parameters
     categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
     outdir = "weighted_f1_distributions"
     label_columns = ["label", "f1_score"]
     os.makedirs(outdir, exist_ok=True)
-    weighted_f1_results = f1_df.drop(columns=label_columns).drop_duplicates()
+    
+    # Drop duplicates, but exclude 'ref_split' column (so duplicates in 'ref_split' are allowed)
+    weighted_f1_results = f1_df.drop(columns=label_columns)
+    weighted_f1_results = weighted_f1_results.drop_duplicates(subset=weighted_f1_results.columns.difference(['ref_split']))
+    # Keep only rows where 'weighted_f1' is not null
+    weighted_f1_results = weighted_f1_results[weighted_f1_results["weighted_f1"].notnull()] 
+    
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
     #for key in weighted_f1_results["key"].unique():
         #df_subset = weighted_f1_results[weighted_f1_results["key"] == key]
@@ -235,7 +262,7 @@ def main():
     os.makedirs(outdir, exist_ok=True)
     label_results = f1_df[f1_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
-    #label_results = label_results.drop(columns = ["macro_f1", "micro_f1"])
+    label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_split']))
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
     #for key in label_results["key"].unique():
         #df_subset = label_results[label_results["key"] == key]
