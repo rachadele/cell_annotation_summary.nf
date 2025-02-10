@@ -45,7 +45,7 @@ def add_acronym_legend(acronym_mapping, figure=None, x=1.05, y=0.5, title=None):
         )
         
 def main():
-    plt.rcParams.update({'font.size': 25}) 
+    plt.rcParams.update({'font.size': 35}) 
     # Parse arguments
     args = parse_arguments()
 
@@ -129,21 +129,19 @@ def main():
         cmap="Reds", 
         col_cluster=True, 
         row_cluster=True,  # Enable clustering
-        figsize=(25, 20), 
+        figsize=(25, 16), 
         xticklabels=False, 
         yticklabels=False, 
         linewidths=0, 
         col_colors=col_colors, 
         row_colors=row_colors,  # Add parameter annotations
         annot=False,
-        dendrogram_ratio=(0.1, 0.1),
+        dendrogram_ratio=(0.2, 0.25),
         cbar_kws={"label": "Weighted F1"}
         # Adjust the size of the row and column dendrograms
         #cbar_pos=(0.02, 0.2, 0.03, 0.4)  # Adjust the colorbar position (optional)
     )
-    g.fig.suptitle(title)
-
-
+    g.fig.suptitle(title, y=1.05)  # Increase y value to move the title 
     plt.savefig("weighted_f1_heatmap.png", bbox_inches='tight')
 
     # make a figure for legend separately
