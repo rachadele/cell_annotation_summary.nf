@@ -66,15 +66,15 @@ def main():
     
     # plot bar plot and color by correlation
     #add legend
-    plt.figure(figsize=(15, 8)) 
+    plt.figure(figsize=(20, 8)) 
     sns.barplot(x = "label", y = "correlation", data = label_support_corr_df, hue="correlation", palette="coolwarm")
     
     plt.xticks(rotation=90)
     #move legend outside of plot
     plt.legend(title='Correlation', bbox_to_anchor=(1.05, 1), loc='upper left')
-    plt.title("Correlation between F1 score and reference support for each label")
-    plt.tight_layout()
-    plt.savefig("label_support_corr.png")
+    plt.title("Correlation between F1 score and reference support for subclass labels")
+    #plt.tight_layout()
+    plt.savefig("label_support_corr.png", bbox_inches="tight")
 
 
 if __name__ == "__main__":
