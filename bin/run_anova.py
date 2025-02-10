@@ -66,11 +66,15 @@ def plot_anova_results(aov_combined_df, title_prefix):
 
     # Set axis labels and titles
     g.set_axis_labels('F-statistic', 'Factor')
-    g.set_titles(col_template="{col_name}", fontsize=20)
+    g.set_titles(col_template="{col_name}", fontsize=30)
    # g.set(xticks=[], yticks=[])
 
-    g.set_xlabels(fontsize=20, rotation=90)
-    g.set_ylabels(fontsize=20)
+    g.set_xlabels(fontsize=10)
+    g.set_xticklabels(fontsize = 20, rotation=90)
+    # captialize y labels and relace "_" with " "   
+    g.set_yticklabels([y.get_text().replace("_", " ").capitalize() for y in g.axes[0].get_yticklabels()])
+    g.set_yticklabels(fontsize = 20)
+    g.set_ylabels(fontsize=10)
         # Adjust layout and save the figure
     plt.tight_layout()
     plt.savefig(f"{title_prefix}_anova_plot.png")

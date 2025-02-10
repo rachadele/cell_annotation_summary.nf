@@ -45,7 +45,7 @@ def add_acronym_legend(acronym_mapping, figure=None, x=1.05, y=0.5, title=None):
         )
         
 def main():
-    plt.rcParams.update({'font.size': 35}) 
+    plt.rcParams.update({'font.size': 25}) 
     # Parse arguments
     args = parse_arguments()
 
@@ -129,14 +129,14 @@ def main():
         cmap="Reds", 
         col_cluster=True, 
         row_cluster=True,  # Enable clustering
-        figsize=(25, 16), 
+        figsize=(25, 18), 
         xticklabels=False, 
         yticklabels=False, 
         linewidths=0, 
         col_colors=col_colors, 
         row_colors=row_colors,  # Add parameter annotations
         annot=False,
-        dendrogram_ratio=(0.2, 0.25),
+        dendrogram_ratio=(0.1, 0.1),
         cbar_kws={"label": "Weighted F1"}
         # Adjust the size of the row and column dendrograms
         #cbar_pos=(0.02, 0.2, 0.03, 0.4)  # Adjust the colorbar position (optional)
