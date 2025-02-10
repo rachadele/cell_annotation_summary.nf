@@ -112,12 +112,13 @@ def main():
     reports["duration (hours)"] = reports["duration"].apply(convert_time)
     reports["realtime (hours)"] = reports["realtime"].apply(convert_time)
 
-    reports["name"] = reports["name"].apply(lambda x: x.split(" ")[0])        
+    reports["name"] = reports["name"].apply(lambda x: x.split(" ")[0])
+    reports["peak virtual memory (GB)"] = reports["peak_vmem"].astype(str).str.split(" ", expand=True)[0].replace("-",np.nan).astype(float) / 1024  # Convert to GB
     # plot boxplots for duration, realtime and %cpu for rows wehre name==rfPredict vs name==predictSeurat
     # use a facetmap to plot the boxplots
     trace_subset = reports[reports["name"].isin(["rfPredict", "predictSeurat"])]
     # Melt data for FacetGrid
-    trace_melted = trace_subset.melt(id_vars=["name"], value_vars=["duration (hours)","realtime (hours)","%cpu"], var_name="Metric", value_name="Value")
+    trace_melted = trace_subset.melt(id_vars=["name"], value_vars=["duration (hours)","%cpu"], var_name="Metric", value_name="Value")
 
     # Create FacetGrid
     g = sns.FacetGrid(trace_melted, col="Metric", sharey=False, height=5, aspect=1)
@@ -126,14 +127,7 @@ def main():
     g.set_ylabels("")
     plt.savefig("comptime.png")
     
-    #reports = args.reports
-    #all_html_results = []
-    #for root, dirs, files in os.walk(reports):
-        #for file in files:
-            #if file.endswith(".html"):
-                #all_html_results.append(os.path.join(root, file)) 
-    
-             
-    #extract_nextflow_metrics(all_html_results)
+if __name__ == "__main__":
+    main()
     
     

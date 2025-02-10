@@ -66,7 +66,7 @@ def main():
     
     # plot bar plot and color by correlation
     #add legend
-    plt.figure(figsize=(10, 8)) 
+    plt.figure(figsize=(15, 8)) 
     sns.barplot(x = "label", y = "correlation", data = label_support_corr_df, hue="correlation", palette="coolwarm")
     
     plt.xticks(rotation=90)
