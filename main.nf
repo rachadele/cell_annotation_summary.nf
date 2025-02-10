@@ -166,6 +166,7 @@ workflow {
     //plotComptime(reports_ch)
     reports_ch.view()
 
+   plotComptime(reports_ch) 
 
 }
 
