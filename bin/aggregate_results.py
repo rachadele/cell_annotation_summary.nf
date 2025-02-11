@@ -183,9 +183,9 @@ def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=N
 
  
         
-def make_acronym(ref_name):
+def make_acronym(name):
     # Split on "_" and replace with spaces
-    words = ref_name.split("_")
+    words = name.split("_")
     # Create acronym from the first letter of each word
     acronym = "".join(word[0].upper() for word in words if word)
     return acronym
@@ -223,7 +223,7 @@ def main():
         
     f1_df["region_match"] = f1_df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
     f1_df["reference_acronym"] = f1_df["reference"].apply(make_acronym)
-    f1_df["query_acronym"] = f1_df["query"].apply(make_acronym)
+    #f1_df["query_acronym"] = f1_df["query"].apply(make_acronym)
     f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
     f1_df["study"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
@@ -237,13 +237,12 @@ def main():
     # Boxplots: Show the effect of categorical parameters
     categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
     outdir = "weighted_f1_distributions"
-    label_columns = ["label", "f1_score"]
+    label_columns = ["label", "f1_score","ref_support"]
     os.makedirs(outdir, exist_ok=True)
     
     # Drop duplicates, but exclude 'ref_split' column (so duplicates in 'ref_split' are allowed)
     weighted_f1_results = f1_df.drop(columns=label_columns)
     weighted_f1_results = weighted_f1_results.drop_duplicates()
-    weighted_f1_results = weighted_f1_results.drop_duplicates(subset=weighted_f1_results.columns.difference(['ref_support']))
     # Keep only rows where 'weighted_f1' is not null
     weighted_f1_results = weighted_f1_results[weighted_f1_results["weighted_f1"].notnull()] 
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)

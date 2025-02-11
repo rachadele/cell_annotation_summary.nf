@@ -64,7 +64,7 @@ def run_lm_regressed(df, formula, control_vars=['study']):
     control_formula = f"{formula.split('~')[0]} ~ " + ' + '.join(control_vars)
     control_model = ols(control_formula, data=df).fit()
     
-    # Get residuals (this is the outcome with the "Study" and "Cutoff" effects removed)
+    # Get residuals (this is the outcome with the "Study" effects removed)
     df['residualized_outcome'] = control_model.resid
 
     # Step 2: Fit the main model using the residualized outcome
@@ -113,34 +113,36 @@ def make_acronym(ref_name):
     return acronym
 
 
+
 def plot_model_summary(model_summary):
-    plt.rcParams.update({'font.size': 20})  # Large font size for readability
+    plt.rcParams.update({'font.size': 20})
     model_summary["FDR<0.05"] = model_summary["FDR"] < 0.05
-    formula = model_summary["formula"].unique()[0]
     model_summary["Term"] = model_summary["Term"].str.replace("T.", "")
-    
-    for key in model_summary["key"].unique():
-        subset = model_summary[model_summary["key"] == key]
-        
-        # Set a smaller, fixed plot size
-        plt.figure(figsize=(30, 10))  # Simple, fixed figure size
-        
-        # Create barplot
-        sns.barplot(data=subset, y='Term', x='Coef.', palette='coolwarm', hue='FDR<0.05', dodge=False)
-        
-        # Add labels and title with large fonts
-        plt.title(f'Model Coefficients for {key} ({formula})', fontsize=24)
-        plt.xlabel('Coefficient', fontsize=18)
-        plt.ylabel('Term', fontsize=18)
-        
-        # Ensure labels are readable and plot is saved
+    formula = model_summary["formula"].unique()[0]
+
+    for key, subset in model_summary.groupby("key"):
+        plt.figure(figsize=(30, max(10, len(subset) * 0.5)))  # Scale height dynamically
+        ax = sns.barplot(
+            data=subset, y="Term", x="Coef.", hue="FDR<0.05", dodge=False, errorbar=None, palette="coolwarm"
+        )
+
+        # Set y-axis limits to remove extra space
+        ax.set_ylim(-0.5, len(subset) - 0.5)        
+        for patch, (_, row) in zip(ax.patches, subset.iterrows()):
+            x_center = patch.get_x() + patch.get_width() / 2  # Get center of the bar horizontally
+            y_center = patch.get_y() + patch.get_height() / 2  # Get center of the bar vertically
+            plt.errorbar(x=x_center, y=y_center, xerr=2 * row["Std.Err."], fmt="none", color="black", capsize=5, capthick=2)
+
+        plt.title(f"Model Coefficients for {key} ({formula})", fontsize=24)
+        plt.xlabel("Coefficient", fontsize=18)
+        plt.ylabel("Term", fontsize=18)
         plt.tight_layout()
         plt.savefig(f"{key}_{formula}_lm_coefficients.png")
-        plt.close()
-    
+        plt.show()
 
 
 def plot_model_metrics(df_list, formulas):
+    plt.rcParams.update({'font.size': 15})
     results = []
     
     for df in df_list:
@@ -156,13 +158,13 @@ def plot_model_metrics(df_list, formulas):
     results_df = pd.concat(results, ignore_index=True)
 
     # Plot Rsquared vs. AIC
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(15, 6))
     scatter = sns.scatterplot(data=results_df, x="AIC", y="Rsquared", hue="Dataset", style="Formula", palette="tab10", edgecolor="black", s=100)
     
     # Add labels
-    plt.title("Rsquared vs AIC Across Models", fontsize=14)
-    plt.xlabel("AIC", fontsize=12)
-    plt.ylabel("R-squared", fontsize=12)
+    plt.title("Rsquared vs AIC Across Models")
+    plt.xlabel("AIC")
+    plt.ylabel("R-squared")
     
     # Improve legend
     plt.legend(title="Dataset", bbox_to_anchor=(1, 1))
@@ -170,10 +172,7 @@ def plot_model_metrics(df_list, formulas):
     plt.tight_layout()
     
     plt.savefig("model_metrics.png")
-
-
-
-    
+    plt.show()
     
 def main():
     
@@ -218,8 +217,8 @@ def main():
     plot_model_metrics(df_list, formulas)
     
 
-    formulas = ["weighted_f1 ~ " + " + ".join(factor_names),
-            "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method"]
+    #formulas = ["weighted_f1 ~ " + " + ".join(factor_names),
+     #       "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method"]
     lm_combined = pd.DataFrame()
     for df in df_list:
         df["method"] = pd.Categorical(df["method"], categories=["seurat","scvi"], ordered=True)
