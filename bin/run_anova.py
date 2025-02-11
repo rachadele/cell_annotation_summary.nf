@@ -55,13 +55,18 @@ def run_anova(df, factor_names, f1_column):
     return aov_table
 
 def plot_anova_results(aov_combined_df, title_prefix):
+    
     plt.rcParams.update({'font.size': 20})  # Set default font size for all plot elements 
     custom_order = ['subclass', 'class', 'family']
+    
+    # rename factors
     
     # Set 'key' column as categorical with a custom order
     aov_combined_df['key'] = pd.Categorical(aov_combined_df['key'], categories=custom_order, ordered=True)
    
     aov_combined_df["factor"] = aov_combined_df.index
+    aov_combined_df['factor'] = aov_combined_df['factor'].str.replace("_"," ").str.capitalize().replace("Label", "Cell type")
+
     aov_combined_df.reset_index(drop=True, inplace=True)
      # Plot with faceting by 'key'
     sns.set(style="whitegrid")
@@ -74,6 +79,7 @@ def plot_anova_results(aov_combined_df, title_prefix):
    # g.set(xticks=[], yticks=[])
 
     g.set_xlabels(fontsize=10)
+    g.set_xticklabels(rotation=90)
     g.set_ylabels(fontsize=12)
         # Adjust layout and save the figure
     plt.tight_layout()
@@ -101,8 +107,9 @@ def main():
     for factor in ["cutoff", "subsample_ref"]:
         weighted_f1_results[factor] =weighted_f1_results[factor].astype('float')
         label_f1_results[factor] =label_f1_results[factor].astype('float')
-    
- 
+   
+   # change names and capitalize categories
+   
 
     aov_combined = []
     df_list = [group for _, group in weighted_f1_results.groupby('key')]

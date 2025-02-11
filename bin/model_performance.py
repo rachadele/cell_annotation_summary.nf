@@ -25,8 +25,8 @@ import matplotlib.lines as mlines
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--pipeline_results', type=str, nargs = "+", 
-                        help="files containing f1 results with params")                                            
+    parser.add_argument('--weighted_f1_results', type=str, default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/weighted_f1_results.tsv", help="Aggregated weighted results")
+    parser.add_argument('--label_f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/label_f1_results.tsv", help="Label level f1 results")                                            
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
         return known_args
@@ -189,77 +189,37 @@ def make_acronym(ref_name):
     # Create acronym from the first letter of each word
     acronym = "".join(word[0].upper() for word in words if word)
     return acronym
-
-def map_development_stage(stage):
-    # re write dict
-    dev_stage_mapping_dict = {
-        "HsapDv_0000083": "infant",
-        "HsapDv_0000084": "toddler",
-        "HsapDv_0000085": "child",
-        "HsapDv_0000086": "adolescent",
-        "HsapDv_0000088": "adult",
-        "HsapDv_0000091": "late adult"
-    }
-    return dev_stage_mapping_dict[stage]
     
-        
- 
 def main():
-    # Parse command line arguments
+    
     args = parse_arguments()
-    # Set organism and census_version from arguments
-    pipeline_results = args.pipeline_results
+    weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
+    label_results = pd.read_csv(args.label_f1_results, sep="\t")
 
-    
-    f1_df = pd.DataFrame() 
-     
-    #for file in os.listdir(pipeline_results):
-    for filepath in pipeline_results:
-    #filepath = os.path.join(pipeline_results, file)
-    # method = filepath.split("/")[-3]
-        temp_df = pd.read_csv(filepath,sep="\t")
-        # temp_df["method"] = method
-        f1_df = pd.concat([temp_df, f1_df], ignore_index=True)
-        
-    f1_df["region_match"] = f1_df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
-    f1_df["reference_acronym"] = f1_df["reference"].apply(make_acronym)
-    f1_df["query_acronym"] = f1_df["query"].apply(make_acronym)
-    f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
-    f1_df["study"] = f1_df["query"].apply(lambda x: x.split("_")[0])
-    f1_df["query"] = f1_df["query"].str.replace("_", " ")
-    f1_df["disease_state"] = np.where(f1_df["disease"] == "Control", "Control", "Disease")
-    f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage)
-    
-    # replace rosmap infant with rosmap late adult
-    f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
-    
-    
     # Boxplots: Show the effect of categorical parameters
-    categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
+    categorical_columns = ['query', 'method', 'reference']
     outdir = "weighted_f1_distributions"
     label_columns = ["label", "f1_score"]
     os.makedirs(outdir, exist_ok=True)
-    
-    # Drop duplicates, but exclude 'ref_split' column (so duplicates in 'ref_split' are allowed)
-    weighted_f1_results = f1_df.drop(columns=label_columns)
-    weighted_f1_results = weighted_f1_results.drop_duplicates()
-    #weighted_f1_results = weighted_f1_results.drop_duplicates(subset=weighted_f1_results.columns.difference(['ref_split']))
-    # Keep only rows where 'weighted_f1' is not null
-    weighted_f1_results = weighted_f1_results[weighted_f1_results["weighted_f1"].notnull()] 
-    weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
 
 
+    for key in weighted_f1_results["key"].unique():
+        df_subset = weighted_f1_results[weighted_f1_results["key"] == key]
+        outdir = f"weighted_f1_distributions/{key}"
+        os.makedirs(outdir, exist_ok=True)
+        for col in categorical_columns:
+            if col not in ["method"]:   
+                plot_distribution(df_subset, var="weighted_f1", outdir=outdir, split=col, facet="method", 
+                                acronym_mapping=None)
+                
+    for key in label_results["key"].unique():
+        df_subset = label_results[label_results["key"] == key]
+        outdir = f"label_distributions/{key}"
+        os.makedirs(outdir, exist_ok=True)
+        for col in categorical_columns:
+          # if col != "method":
+            plot_distribution(df_subset, var="f1_score",outdir=outdir, split=col, facet="label", 
+                        acronym_mapping = None, add_region_match=False)
     
-    # plot distribution of label_f1 across different splits
-    outdir = "label_distributions"
-    os.makedirs(outdir, exist_ok=True)
-    label_results = f1_df[f1_df['label'].notnull()]
-    label_results = label_results[label_results["f1_score"].notnull()]
-    label_results = label_results.drop_duplicates()
-    #label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_split']))
-    label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
-    
-    
-if __name__ == "__main__":
-    main()
+            
     
