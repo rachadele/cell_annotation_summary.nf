@@ -124,6 +124,24 @@ process labelSupportCorr {
     """
 
 }
+
+process modelEval {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/model_eval", mode: 'copy'
+
+    input:
+    path weighted_f1_results_aggregated
+    path label_f1_results_aggregated
+
+    output:
+    path "**png"
+    path "**tsv"
+
+    script:
+    """
+    python $projectDir/bin/model_performance.py --weighted_f1_results ${weighted_f1_results_aggregated} --label_f1_results ${label_f1_results_aggregated}
+    """
+}
 workflow {
 
     Channel
@@ -166,7 +184,10 @@ workflow {
     //plotComptime(reports_ch)
     reports_ch.view()
 
-   plotComptime(reports_ch) 
+    plotComptime(reports_ch) 
+
+    // model evaluation
+    modelEval(weighted_f1_results_aggregated, label_f1_results_aggregated)
 
 }
 
