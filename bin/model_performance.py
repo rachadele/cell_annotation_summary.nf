@@ -1,26 +1,31 @@
 #!/user/bin/python3
 
+
+
 from pathlib import Path
 import os
-import sys
 import scanpy as sc
 import numpy as np
 import pandas as pd
 import anndata as ad
-from scipy.sparse import csr_matrix
 import warnings
-#import adata_functions
-#from adata_functions import *
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+from statsmodels.stats.anova import anova_lm
 from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
-import json
 import argparse
 import os
-import json
-import ast
-import sys
-import matplotlib.lines as mlines
+import statsmodels as sm
+from scipy import stats
+import matplotlib.pyplot as plt
+from statsmodels.stats.multitest import multipletests
+from matplotlib import cm
+from matplotlib.colors import Normalize
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+from statsmodels.formula.api import glm
 
 # Function to parse command line arguments
 def parse_arguments():
@@ -31,155 +36,72 @@ def parse_arguments():
         known_args, _ = parser.parse_known_args()
         return known_args
 
+
+def run_lm(df, formula):
+
+    model = ols(formula, data=df).fit() 
+    # Get model summary
+    model_summary = model.summary()
+    # Extract R-squared value
+    r2 = model.rsquared
+    aic = model.aic
+    # Extract coefficients and p-values table (this will typically be in model_summary.tables[1])
+    model_summary_df = model.summary2().tables[1]
+    # Apply FDR correction to p-values
+    pvals = model_summary_df['P>|t|']
+    _, fdr_corrected_pvals, _, _ = multipletests(pvals, method='fdr_bh')
+    model_summary_df['FDR'] = fdr_corrected_pvals
+    # Add R-squared value
+    model_summary_df['Rsquared'] = r2
+    model_summary_df['AIC'] = aic
+    return model.summary2().tables[0], model_summary_df
+
+
+def run_lm_regressed(df, formula, control_vars=['study']):
     
-def setup_plot(var, split, facet=None):
-    """Set up the basic plot structure."""
+    # Step 1: Regress out the effects of "Study" and "Cutoff"
+    # Create a formula that includes both control variables
+    control_formula = f"{formula.split('~')[0]} ~ " + ' + '.join(control_vars)
+    control_model = ols(control_formula, data=df).fit()
     
-    plt.figure(figsize=(17, 10))
-    plt.xlabel(split.replace("_"," ").capitalize(), fontsize=25)
-    var = var.replace("_", " ")
-    #plt.ylabel(f"{var}", fontsize=25)
-    plt.ylabel("Performance (weighted F1)", fontsize=25)
-    #plt.title(f'Distribution of {var} across {split}', fontsize=25)
+    # Get residuals (this is the outcome with the "Study" and "Cutoff" effects removed)
+    df['residualized_outcome'] = control_model.resid
+
+    # Step 2: Fit the main model using the residualized outcome
+    # Replace the original outcome with the residualized outcome in the formula
+    main_formula = formula.replace(formula.split('~')[0], 'residualized_outcome')
+    model = ols(main_formula, data=df).fit()
+
+    # Get model summary
+    model_summary = model.summary()
+    # Extract R-squared and AIC values
+    r2 = model.rsquared
+    aic = model.aic
+    # Extract coefficients and p-values table
+    model_summary_df = model.summary2().tables[1]
+    # Apply FDR correction to p-values
+    pvals = model_summary_df['P>|t|']
+    _, fdr_corrected_pvals, _, _ = multipletests(pvals, method='fdr_bh')
+    model_summary_df['FDR'] = fdr_corrected_pvals
+    # Add R-squared and AIC values to the summary dataframe
+    model_summary_df['Rsquared'] = r2
+    model_summary_df['AIC'] = aic
+
+    return model.summary2().tables[0], model_summary_df
 
 
-def add_violin_plot(df, var, split, facet):
-    """Add a violin plot to the figure."""
-    # remove extra weighted f1 values
-    
-    #df = df.drop_duplicates(subset=[split, facet, var])
-    sns.violinplot(
-        data=df, 
-        y=var, 
-        x=split, 
-        palette="Set2", 
-        hue=facet, 
-        split=False, 
-        dodge=True
-    )
+def run_glm(df, formula):
+    # Fit the GLM model with Gaussian family (similar to OLS)
+    model = glm(formula, data=df, family=sm.families.Gaussian()).fit() 
 
-def add_strip_plot(df, var, split, facet, add_region_match=True):
-    """Add a strip plot to the figure."""
-    # remove extra weighted f1 values
-    # doesn't change overall values
-    #df = df.drop_duplicates(subset=[split, facet, var])
-    df['match_region'] = df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
-    # Map match_region to colors before plotting
-    df['color'] = df['match_region'].map({True: 'red', False: 'grey'})
-    
-    # Separate data into two groups based on 'match_region'
-    mask = df['match_region']
-    match_region_df = df[mask]
-    non_match_region_df = df[~mask]
-    
-    # Create the strip plot for non-matching region data
-    ax = sns.stripplot(
-        data=non_match_region_df,
-        y=var,
-        x=split,
-        hue=facet,
-        dodge=True,          
-        palette="Set2",      
-        size=2,
-        alpha=0.8,           
-        jitter=True,
-        marker="o",
-        edgecolor='grey',    # Grey edge color for non-match region
-        linewidth=0.5
-    )
-    # Create the strip plot for matching region data with customized edgecolor
-    sns.stripplot(
-        data=match_region_df,
-        y=var,
-        x=split,
-        hue=facet,
-        dodge=True,          
-        palette="Set2",      
-        size=2,
-        alpha=0.8,           
-        jitter=True,
-        marker="o",
-        edgecolor='r',       # Red edge color for match region
-        linewidth=0.5,         
-        legend=None,         # Disable legend for second plot
-        ax=ax                # Add to same axis
-    )
-    # Create custom legend handles for edge color
-          
+    # Get model summary
+    model_summary = model.summary()
 
-def add_acronym_legend(acronym_mapping, figure=None, x=1.05, y=0.5, title=None):
-    if acronym_mapping:
-        legend_text = f"{title}\n" + "\n".join([f"{k}: {v}" for k, v in acronym_mapping.items()])        
-        figure = figure or plt.gcf()
-        figure.text(
-            x, y, legend_text,
-            fontsize=14,
-            verticalalignment='center',
-            bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.1')
-        )
+    # Extract coefficients and p-values table
+    model_summary_df = model.summary2().tables[1]
 
-def save_plot(var, split, facet, outdir):
-    """Save the plot to the specified directory."""
-    os.makedirs(outdir, exist_ok=True)
-    var = var.replace(" ", "_")
-    save_path = os.path.join(outdir, f"{var}_{split}_{facet}_distribution.png")
-    plt.savefig(save_path, bbox_inches="tight")
-    plt.close()
+    return model_summary, model_summary_df
 
-def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=None, add_region_match=True):
-    """
-    Create a violin and strip plot for the given variable across groups.
-    
-    Parameters:
-        df (pd.DataFrame): Data to plot.
-        var (str): Column name for the variable to plot.
-        outdir (str): Directory to save the plot.
-        split (str): Column name to split the x-axis.
-        facet (str): Column name for facet grouping (optional).
-        acronym_mapping (dict): Mapping for acronyms to add as a legend (optional).
-    """
-    setup_plot(var, split)
-    add_violin_plot(df, var, split, facet)
-    if add_region_match:
-        add_strip_plot(df, var, split, facet)
-    #plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1), borderaxespad=0)
-    plt.xticks(rotation=90, ha="right", fontsize=25)
-    plt.yticks(fontsize=25)
-
-    # Add the custom legend to the plot
-    #plt.legend(handles=[red_patch, grey_patch], title="Match region", loc='upper left', bbox_to_anchor=(1, 1.02))
-    
-    handles, labels = plt.gca().get_legend_handles_labels()
-    facet_legend = plt.legend(
-    handles=handles,  # Use all the handles
-    labels=labels,    # Ensure that we provide all the labels too
-    title=facet.replace("_", " ").capitalize() if facet else "Group",  # Title formatting
-    loc='upper left',
-    bbox_to_anchor=(1.05, 1),
-    borderaxespad=0,
-    fontsize=15
-    )
-
-
-    if add_region_match:
-        red_patch = mlines.Line2D([], [], color='red', marker='o', markersize=7, label='Matching region')
-        grey_patch = mlines.Line2D([], [], color='grey', marker='o', markersize=7, label='Non-Matching region')
-        # Add custom legend for match_region
-        plt.gca().add_artist(facet_legend)  # Add facet legend separately
-        plt.legend(
-            handles=[red_patch, grey_patch],
-            #title="Match region",
-            loc='upper left',
-            bbox_to_anchor=(1.05, 0.3),
-            fontsize=15
-        )
-
-    # Move the legend to the desired location
-    #sns.move_legend(plt, bbox_to_anchor=(1, 1.02), loc='upper left')
-
-    add_acronym_legend(acronym_mapping, title=split.split("_")[0].capitalize())
-    plt.tight_layout()
-    save_plot(var, split, facet, outdir)
 
  
         
@@ -189,6 +111,69 @@ def make_acronym(ref_name):
     # Create acronym from the first letter of each word
     acronym = "".join(word[0].upper() for word in words if word)
     return acronym
+
+
+def plot_model_summary(model_summary):
+    plt.rcParams.update({'font.size': 20})  # Large font size for readability
+    model_summary["FDR<0.05"] = model_summary["FDR"] < 0.05
+    formula = model_summary["formula"].unique()[0]
+    model_summary["Term"] = model_summary["Term"].str.replace("T.", "")
+    
+    for key in model_summary["key"].unique():
+        subset = model_summary[model_summary["key"] == key]
+        
+        # Set a smaller, fixed plot size
+        plt.figure(figsize=(30, 10))  # Simple, fixed figure size
+        
+        # Create barplot
+        sns.barplot(data=subset, y='Term', x='Coef.', palette='coolwarm', hue='FDR<0.05', dodge=False)
+        
+        # Add labels and title with large fonts
+        plt.title(f'Model Coefficients for {key} ({formula})', fontsize=24)
+        plt.xlabel('Coefficient', fontsize=18)
+        plt.ylabel('Term', fontsize=18)
+        
+        # Ensure labels are readable and plot is saved
+        plt.tight_layout()
+        plt.savefig(f"{key}_{formula}_lm_coefficients.png")
+        plt.close()
+    
+
+
+def plot_model_metrics(df_list, formulas):
+    results = []
+    
+    for df in df_list:
+        for formula in formulas:
+            model_summary, model_summary_df = run_lm(df, formula)
+            for key in df['key'].unique():
+                key_df = model_summary_df.copy()
+                key_df['Dataset'] = key
+                key_df['Formula'] = formula
+                results.append(key_df[['Dataset', 'Formula', 'Rsquared', 'AIC']])
+
+    # Combine results into a single DataFrame
+    results_df = pd.concat(results, ignore_index=True)
+
+    # Plot Rsquared vs. AIC
+    plt.figure(figsize=(10, 6))
+    scatter = sns.scatterplot(data=results_df, x="AIC", y="Rsquared", hue="Dataset", style="Formula", palette="tab10", edgecolor="black", s=100)
+    
+    # Add labels
+    plt.title("Rsquared vs AIC Across Models", fontsize=14)
+    plt.xlabel("AIC", fontsize=12)
+    plt.ylabel("R-squared", fontsize=12)
+    
+    # Improve legend
+    plt.legend(title="Dataset", bbox_to_anchor=(1, 1))
+    plt.grid(True, linestyle="--", alpha=0.6)
+    plt.tight_layout()
+    
+    plt.savefig("model_metrics.png")
+
+
+
+    
     
 def main():
     
@@ -196,30 +181,66 @@ def main():
     weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
     label_results = pd.read_csv(args.label_f1_results, sep="\t")
 
-    # Boxplots: Show the effect of categorical parameters
-    categorical_columns = ['query', 'method', 'reference']
-    outdir = "weighted_f1_distributions"
-    label_columns = ["label", "f1_score"]
-    os.makedirs(outdir, exist_ok=True)
+ 
+    # Example: adding hue and faceting to the weighted F1 scores distribution plot
+    sns.histplot(weighted_f1_results, x='weighted_f1', hue='key', multiple="fill", palette="Set1")
+    plt.xlabel("Weighted F1")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Weighted F1 Scores by Key")
+    plt.savefig("weighted_f1_distribution.png")
+    plt.show()
 
+    # Create the FacetGrid
+    g = sns.FacetGrid(label_results, col="key", hue="label", height=4, aspect=1.5)
+    # Map the KDE plot to the FacetGrid
+    g.map(sns.histplot, 'f1_score', multiple="layer")
+    # Set axis labels and titles
+    g.set_axis_labels("F1 Scores", "Frequency")
+    g.set_titles("F1 Score Distribution by {col_name}")
+    # Add a legend
+    g.add_legend()
+    # Save and display the plot
+    g.savefig("label_f1_distribution_facet.png")
+    plt.show()
 
-    for key in weighted_f1_results["key"].unique():
-        df_subset = weighted_f1_results[weighted_f1_results["key"] == key]
-        outdir = f"weighted_f1_distributions/{key}"
-        os.makedirs(outdir, exist_ok=True)
-        for col in categorical_columns:
-            if col not in ["method"]:   
-                plot_distribution(df_subset, var="weighted_f1", outdir=outdir, split=col, facet="method", 
-                                acronym_mapping=None)
-                
-    for key in label_results["key"].unique():
-        df_subset = label_results[label_results["key"] == key]
-        outdir = f"label_distributions/{key}"
-        os.makedirs(outdir, exist_ok=True)
-        for col in categorical_columns:
-          # if col != "method":
-            plot_distribution(df_subset, var="f1_score",outdir=outdir, split=col, facet="label", 
-                        acronym_mapping = None, add_region_match=False)
+    # restrict to cutoff=0 for now
+    weighted_f1_results = weighted_f1_results[weighted_f1_results["cutoff"] == 0]
     
+    factor_names = ["study", "reference", "method"]
+
+    # compare models
+    formulas = ["weighted_f1 ~ " + " + ".join(factor_names),
+                "weighted_f1 ~ " + " * ".join(factor_names),
+                "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method"]
+
+    # set base level of method to "seurat"
+    df_list = [group for _, group in weighted_f1_results.groupby('key')]
+    plot_model_metrics(df_list, formulas)
+    
+
+    formulas = ["weighted_f1 ~ " + " + ".join(factor_names),
+            "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method"]
+    lm_combined = pd.DataFrame()
+    for df in df_list:
+        df["method"] = pd.Categorical(df["method"], categories=["seurat","scvi"], ordered=True)
+        for formula in formulas:
             
-    
+            model_summary, model_summary_df = run_lm_regressed(df, formula)
+            print(df['key'].unique())
+            print(formula)
+            print(model_summary_df["Rsquared"].unique())
+            print(model_summary_df["AIC"].unique())
+
+            model_summary_df['key'] = df['key'].values[0] 
+            model_summary_df['formula'] = formula
+            
+            lm_combined = pd.concat([lm_combined, model_summary_df], ignore_index=True)
+            model_summary_df["Term"] = model_summary_df.index
+            
+            plot_model_summary(model_summary_df)
+            
+            
+    lm_combined.to_csv("model_summary.tsv", sep="\t")    
+        
+if __name__ == "__main__":
+    main()

@@ -180,7 +180,7 @@ def main():
         handles, labels = g.axes[0, 0].get_legend_handles_labels()
         # Create a separate legend figure
         fig_legend, ax_legend = plt.subplots(figsize=(10, 6))
-        ax_legend.legend(handles, labels, loc="center", ncol=2, frameon=False, fontsize=20)
+        ax_legend.legend(handles, labels, loc="center", ncol=2, frameon=False, fontsize=12)
         ax_legend.axis("off")
 
         g.savefig(os.path.join(outdir, f"{key_value}_weighted_f1_score_ref.png"))
