@@ -90,12 +90,12 @@ def main():
     args = parse_arguments()
     weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
     label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
-    categoricals = ['study','reference','method','ref_split', 'region_match',"sex","disease_state","dev_stage"]
+    categoricals = ['study','reference','method','ref_split', 'region_match',"sex","disease_state"]
 
     if not args.vars:
     # Assuming f1_results is your pandas DataFrame and factor_names is a list of column names
         factor_names = ['study','reference','method','ref_split', 
-                        'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] # replace with actual factor column names
+                        'region_match',"subsample_ref","sex","disease_state","cutoff"] # replace with actual factor column names
 
     else:
         factor_names = args.vars
