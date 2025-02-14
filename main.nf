@@ -158,10 +158,12 @@ workflow {
                         pipeline_results << dir_path
             }
         }
+
         [pipeline_run_dirname, params_file, ref_obs, pipeline_results.flatten().join(' ')] // Return collected results for this pipeline_run_dir
     }
 
     .set { all_pipeline_results } 
+    all_pipeline_results.view()
     // add parameters to files  addParams(all_pipeline_results) 
     addParams(all_pipeline_results)
 
@@ -178,13 +180,13 @@ workflow {
     labelSupportCorr(label_f1_results_aggregated)
     
     // plot comptime
-    Channel
-    .fromPath("${params.reports_dir}")
-    .set { reports_ch }
+   // Channel
+   // .fromPath("${params.reports_dir}")
+   // .set { reports_ch }
     //plotComptime(reports_ch)
-    reports_ch.view()
+   // reports_ch.view()
 
-    plotComptime(reports_ch) 
+    // plotComptime(reports_ch) 
 
     // model evaluation
     modelEval(weighted_f1_results_aggregated, label_f1_results_aggregated)
