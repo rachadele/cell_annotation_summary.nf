@@ -112,7 +112,7 @@ def main():
         # Extract legend handles and labels
         handles, labels = g.axes[0, 0].get_legend_handles_labels()
         # Create a separate legend figure
-        fig_legend, ax_legend = plt.subplots(figsize=(10, 6))
+        fig_legend, ax_legend = plt.subplots(figsize=(15, 10))
         ax_legend.legend(handles, labels, loc="center", ncol=2, frameon=False, fontsize=12)
         ax_legend.axis("off")
         plt.show()
@@ -179,7 +179,7 @@ def main():
         # Extract legend handles and labels
         handles, labels = g.axes[0, 0].get_legend_handles_labels()
         # Create a separate legend figure
-        fig_legend, ax_legend = plt.subplots(figsize=(10, 6))
+        fig_legend, ax_legend = plt.subplots(figsize=(15, 10))
         ax_legend.legend(handles, labels, loc="center", ncol=2, frameon=False, fontsize=12)
         ax_legend.axis("off")
 
