@@ -205,7 +205,7 @@ def plot_contrast_boxplot(df, model, contrast, model_summary_df, outdir):
         df_filtered = df[df['method'].isin([baseline, method_group])]
         
     # Create the boxplot
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(12, 8))
     sns.boxplot(x="method", y="weighted_f1", data=df_filtered, palette="Set2")
     x1, x2 = 0, 1  # X positions of the boxplots
     y_max = df_filtered['weighted_f1'].max() + 0.05  # Adjust for better visibility
@@ -214,12 +214,12 @@ def plot_contrast_boxplot(df, model, contrast, model_summary_df, outdir):
     plt.text((x1 + x2) / 2, y_max - 0.02 , f"p = {p_value:.3e}", ha="center", fontsize=12)
     # Annotate with p-value
     # paste contrast instead of reference_group
-    plt.title(f"Comparison of {method_group} to {baseline} ({contrast})")
-    plt.xlabel("Method")
-    plt.ylabel("Weighted F1 Score")
+    plt.title(f"Comparison of {method_group} to {baseline} ({contrast})", fontsize=16)
+    plt.xlabel("Method", fontsize=14)
+    plt.ylabel("Weighted F1 Score", fontsize=14)
     plt.tight_layout()
     # Show plot
-    plt.savefig(os.path.join(outdir,f"{reference_group}_{method_group}_boxplot.png"))
+    plt.savefig(os.path.join(outdir,f"{contrast}_boxplot.png"))
 
 
  
