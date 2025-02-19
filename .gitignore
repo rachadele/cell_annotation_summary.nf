@@ -88,3 +88,5 @@ profile_default/
 ipython_config.py
 *tsv
 inputs/
+label_f1_results
+weighted_f1_results

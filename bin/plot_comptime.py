@@ -17,54 +17,17 @@ from scipy import stats
 import matplotlib.pyplot as plt
 import re
 import json
-from bs4 import BeautifulSoup
+import yaml
 
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument("--reports_dir", type=str, help="Path to trace results directory", default="/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/reports")
+    parser.add_argument("--all_runs", type=str, help="Path to trace results directory", default="/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/test_new_hierarchy/homo_sapiens")
        # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
         return known_args
 
-
-def extract_nextflow_metrics(report_files, output_csv="aggregated_metrics.csv"):
-    all_data = []
-
-    for report_file in report_files:
-        with open(report_file, "r", encoding="utf-8") as f:
-            soup = BeautifulSoup(f, "html.parser")
-        
-        # Extract JSON data if present
-        script_tags = soup.find_all("script")
-        json_data = None
-        for script in script_tags:
-            try:
-                json_data = json.loads(script.text.strip())
-                break  # Assume the first valid JSON is the execution data
-            except json.JSONDecodeError:
-                continue
-
-        if json_data:
-            metrics = json_data.get("trace", [])  # Adjust based on structure
-            df = pd.DataFrame(metrics)
-        else:
-            # Extract tables if JSON is not available
-            tables = soup.find_all("table")
-            if tables:
-                df_list = pd.read_html(str(tables))
-                df = pd.concat(df_list, ignore_index=True)
-            else:
-                continue  # Skip if no JSON or tables found
-
-        df["source_file"] = os.path.basename(report_file)  # Track source
-        all_data.append(df)
-
-    final_df = pd.concat(all_data, ignore_index=True)
-    return final_df
-
-    
 
 def convert_time(time_str):
     if pd.isna(time_str) or time_str == "-" or not isinstance(time_str, str):
@@ -93,20 +56,41 @@ def convert_percent(value):
     return float(value.strip("%")) if isinstance(value, str) and value.endswith("%") else np.nan
 
 def main():
-    args = parse_arguments()
-    reports_dir = args.reports_dir
-    reports = pd.DataFrame()
-    for root, dirs, files in os.walk(reports_dir):
-        for file in files:
-            if file.endswith(".txt"):
-                trace_results = pd.read_csv(os.path.join(root, file), sep="\t")
-                reports = pd.concat([reports, trace_results], ignore_index=True)
-    
-    reports["%cpu"] = reports["%cpu"].apply(convert_percent)
-            
-    # set global fontsize
+        # set global fontsize
     sns.set(font_scale=1.5)
     plt.rcParams.update({'font.size': 25})
+    
+    args = parse_arguments()
+    all_runs = args.all_runs
+    
+    reports = pd.DataFrame()
+    
+    for dir in next(os.walk(all_runs))[1]:  # Get top-level directories
+        dir_path = os.path.join(all_runs, dir)
+        files = next(os.walk(dir_path))[2]  # Get files inside the directory
+
+
+        for file in files:
+            if file == "trace.txt":
+                trace_results = pd.read_csv(os.path.join(dir_path, file), sep="\t")
+            #  reports = pd.concat([reports, trace_results], ignore_index=True)
+        
+                # read in params.yaml and add to trace dataframe
+            if file == "params.yaml":
+                with open(os.path.join(dir_path, file), "r") as f:
+                    parameters_dict = yaml.safe_load(f)  # Parse the YAML file into a Python dictionary
+                    # Convert the dictionary to a pandas DataFrame
+
+        keys_to_drop = ["ref_collections", "ref_keys", "outdir", 
+                        "batch_keys", "relabel_r", "relabel_q", "tree_file","queries_adata"]
+        for key in keys_to_drop:
+            parameters_dict.pop(key, None)
+        for key, value in parameters_dict.items():
+            trace_results[key] = value
+                        
+        reports = pd.concat([reports, trace_results], ignore_index=True)
+
+    reports["%cpu"] = reports["%cpu"].apply(convert_percent)
     
     # Apply conversion functions
     reports["duration (hours)"] = reports["duration"].apply(convert_time)
@@ -133,14 +117,17 @@ def main():
     print(trace_subset.groupby("name")["peak virtual memory (GB)"].median())
     
     # Melt data for FacetGrid
-    trace_melted = trace_subset.melt(id_vars=["name"], value_vars=["duration (hours)","%cpu"], var_name="Metric", value_name="Value")
+    trace_melted = trace_subset.melt(id_vars=["name","subsample_ref","subsample_query","cutoff"], value_vars=["duration (hours)","%cpu"], var_name="Metric", value_name="Value")
 
     # Create FacetGrid
     g = sns.FacetGrid(trace_melted, col="Metric", sharey=False, height=5, aspect=1)
-    g.map(sns.violinplot, "name", "Value", palette="Set3", order=["rfPredict", "predictSeurat"])
-    # remove y axis label
-    g.set_ylabels("")
-    plt.savefig("comptime.png")
+
+    # Map the violin plot while keeping 'subsample_ref' and 'subsample_query' in the hue
+    g.map_dataframe(sns.stripplot, x="name", y="Value", hue="subsample_ref",palette="Set3", order=["rfPredict", "predictSeurat"], dodge=True, jitter=True, legend=True)
+
+    # Adjust legend
+    g.add_legend(title="Number of cells subsampled from reference per cell type")
+    plt.savefig("comptime.png",bbox_inches='tight')
     
 if __name__ == "__main__":
     main()
