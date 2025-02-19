@@ -83,6 +83,9 @@ def plot_anova_results(aov_combined_df, title_prefix):
     g.set_xticklabels(rotation=90)
     g.set_ylabels(fontsize=12)
         # Adjust layout and save the figure
+    newtitle = title_prefix.split("_")[0]
+    g.fig.suptitle(f"ANOVA F-statistics for {newtitle} F1 scores", fontsize=16, fontweight='bold')
+
     plt.tight_layout()
     plt.savefig(f"{title_prefix}_anova_plot.png")
     
