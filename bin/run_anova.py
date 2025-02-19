@@ -29,6 +29,7 @@ def parse_arguments():
     parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/weighted_f1_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
     parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/label_f1_results.tsv")   
+    parser.add_argument('--factor_names', type=str, nargs = "+", help="Names of factor columns", default=["study","reference","method","ref_split","region_match","subsample_ref","disease_State"])
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -94,7 +95,7 @@ def main():
 
     if not args.vars:
     # Assuming f1_results is your pandas DataFrame and factor_names is a list of column names
-        factor_names = ['study','reference','method','ref_split', 
+        factor_names = ['study','reference','method','ref_split',
                         'region_match',"subsample_ref","sex","disease_state","cutoff"] # replace with actual factor column names
 
     else:
@@ -104,7 +105,7 @@ def main():
     for factor in categoricals:
         weighted_f1_results[factor] =weighted_f1_results[factor].astype('category')
         label_f1_results[factor] =label_f1_results[factor].astype('category')
-    for factor in ["cutoff", "subsample_ref"]:
+    for factor in ["cutoff", "subsample_ref","age"]:
         weighted_f1_results[factor] =weighted_f1_results[factor].astype('float')
         label_f1_results[factor] =label_f1_results[factor].astype('float')
    

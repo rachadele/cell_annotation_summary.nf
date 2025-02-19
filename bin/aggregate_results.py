@@ -198,7 +198,8 @@ def map_development_stage(stage):
         "HsapDv_0000085": "child",
         "HsapDv_0000086": "adolescent",
         "HsapDv_0000088": "adult",
-        "HsapDv_0000091": "late adult"
+        "HsapDv_0000091": "late adult",
+        np.nan: "late adult"
     }
     return dev_stage_mapping_dict[stage]
     
@@ -232,12 +233,14 @@ def main():
     
     # replace rosmap infant with rosmap late adult
     f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
+    f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
+    f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
     
     
     # Boxplots: Show the effect of categorical parameters
     categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
     outdir = "weighted_f1_distributions"
-    label_columns = ["label", "f1_score","ref_support"]
+    label_columns = ["label", "f1_score","ref_support","label_accuracy"]
     os.makedirs(outdir, exist_ok=True)
     
     # Drop duplicates, but exclude 'ref_split' column (so duplicates in 'ref_split' are allowed)

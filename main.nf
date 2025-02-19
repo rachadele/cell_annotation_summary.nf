@@ -97,14 +97,14 @@ process plotComptime {
     publishDir "${params.outdir}/comptime_plots", mode: 'copy'
 
     input:
-    path reports_ch
+    path all_runs_dir
 
     output:
-    path "**png"
+    path "comptime.png"
 
     script:
     """
-    python $projectDir/bin/plot_comptime.py --reports_dir ${reports_ch}
+    python $projectDir/bin/plot_comptime.py --all_runs ${all_runs_dir}
     """
 }
 
@@ -163,7 +163,6 @@ workflow {
     }
 
     .set { all_pipeline_results } 
-    all_pipeline_results.view()
     // add parameters to files  addParams(all_pipeline_results) 
     addParams(all_pipeline_results)
 
@@ -180,13 +179,8 @@ workflow {
     labelSupportCorr(label_f1_results_aggregated)
     
     // plot comptime
-   // Channel
-   // .fromPath("${params.reports_dir}")
-   // .set { reports_ch }
-    //plotComptime(reports_ch)
-   // reports_ch.view()
-
-    // plotComptime(reports_ch) 
+    all_runs_dir = "${params.results}"
+    plotComptime(all_runs_dir) 
 
     // model evaluation
     modelEval(weighted_f1_results_aggregated, label_f1_results_aggregated)
