@@ -103,19 +103,35 @@ def main():
     trace_subset = reports[reports["name"].isin(["rfPredict", "predictSeurat"])]
     
     #get median and mean for each method
-    
-    print("mean:", trace_subset.groupby("name")["duration (hours)"].mean())
-    print("median:",trace_subset.groupby("name")["duration (hours)"].median())
-    
-    print(trace_subset.groupby("name")["realtime (hours)"].mean())
-    print(trace_subset.groupby("name")["realtime (hours)"].median())
-    
-    print("mean: ",trace_subset.groupby("name")["%cpu"].mean())
-    print("median: ",trace_subset.groupby("name")["%cpu"].median())
-    
-    print(trace_subset.groupby("name")["peak virtual memory (GB)"].mean())
-    print(trace_subset.groupby("name")["peak virtual memory (GB)"].median())
-    
+   
+    # turn this into a file
+    with open("comptime_summary.txt", "w") as f:
+        f.write("mean duration:\n")
+        f.write(str(trace_subset.groupby("name")["duration (hours)"].mean()))
+        f.write("\n")
+        f.write("median duration:\n")
+        f.write(str(trace_subset.groupby("name")["duration (hours)"].median()))
+        f.write("\n")
+        f.write("mean realtime:\n")
+        f.write(str(trace_subset.groupby("name")["realtime (hours)"].mean()))
+        f.write("\n")
+        f.write("median realtime:\n")
+        f.write(str(trace_subset.groupby("name")["realtime (hours)"].median()))
+        f.write("\n")
+        f.write("mean %cpu:\n")
+        f.write(str(trace_subset.groupby("name")["%cpu"].mean()))
+        f.write("\n")
+        f.write("median %cpu:\n")
+        f.write(str(trace_subset.groupby("name")["%cpu"].median()))
+        f.write("\n")
+        f.write("mean peak virtual memory:\n")
+        f.write(str(trace_subset.groupby("name")["peak virtual memory (GB)"].mean()))
+        f.write("\n")
+        f.write("median peak virtual memory:\n")
+        f.write(str(trace_subset.groupby("name")["peak virtual memory (GB)"].median()))
+        f.write("\n")
+        
+       
     # Melt data for FacetGrid
     trace_melted = trace_subset.melt(id_vars=["name","subsample_ref","subsample_query","cutoff"], value_vars=["duration (hours)","%cpu"], var_name="Metric", value_name="Value")
 

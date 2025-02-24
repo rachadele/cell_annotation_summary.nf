@@ -250,18 +250,39 @@ def main():
     weighted_f1_results = weighted_f1_results[weighted_f1_results["weighted_f1"].notnull()] 
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
 
-
-    
-    # plot distribution of label_f1 across different splits
-    outdir = "label_distributions"
-    os.makedirs(outdir, exist_ok=True)
     label_results = f1_df[f1_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
     label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_support']))
     #label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_split']))
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
     
+    # plot distribution of label_f1 across different splits
+    outdir = "label_distributions"
+    os.makedirs(outdir, exist_ok=True)
+
     
+    # Example: adding hue and faceting to the weighted F1 scores distribution plot
+    sns.histplot(weighted_f1_results, x='weighted_f1', hue='key', multiple="fill", palette="Set1")
+    plt.xlabel("Weighted F1")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Weighted F1 Scores by Key")
+    plt.savefig("weighted_f1_distribution.png")
+    #plt.show()
+
+    # Create the FacetGrid
+    g = sns.FacetGrid(label_results, col="key", hue="label", height=4, aspect=1.5)
+    # Map the KDE plot to the FacetGrid
+    g.map(sns.histplot, 'f1_score', multiple="layer", bins=40, binrange=(0, 1))
+    # Set axis labels and titles
+    g.set_axis_labels("F1 Scores", "Frequency")
+    g.set_titles("F1 Score Distribution by {col_name}")
+    # Add a legend
+    g.add_legend()
+    # Save and display the plot
+    g.savefig("label_f1_distribution_facet.png")
+    #plt.show()
+
+  
 if __name__ == "__main__":
     main()
     

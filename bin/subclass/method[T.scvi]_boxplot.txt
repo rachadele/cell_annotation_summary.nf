@@ -1,0 +1,7 @@
+Key: subclass
+Contrast: method[T.scvi]
+p-value: 7.339e-41
+Mean seurat: 0.829
+Mean [T.scvi: nan
+SD seurat: 0.131
+SD [T.scvi: nan

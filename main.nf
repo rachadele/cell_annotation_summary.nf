@@ -28,8 +28,7 @@ process aggregateResults {
    // path "f1_results_all_pipeline_runs.tsv", emit: f1_results_aggregated
     path "weighted_f1_results.tsv", emit: weighted_f1_results_aggregated
     path "label_f1_results.tsv", emit: label_f1_results_aggregated
-  //  path "label_distributions/*"
-   // path "weighted_f1_distributions/*"
+    path "**png"
 
     script:
     """
@@ -101,6 +100,7 @@ process plotComptime {
 
     output:
     path "comptime.png"
+    path "comptime_summary.txt"
 
     script:
     """
@@ -135,13 +135,32 @@ process modelEval {
 
     output:
     path "**png"
-    path "**tsv"
+    path "**model_summary_coefs_combined.tsv", emit: f1_model_summary_coefs
+
 
     script:
     """
     python $projectDir/bin/model_performance.py --weighted_f1_results ${weighted_f1_results_aggregated} --label_f1_results ${label_f1_results_aggregated}
     """
 }
+
+process plotContrasts {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/contrasts", mode: 'copy'
+
+    input:
+    tuple path(f1_model_summary_coefs), val(f1_type)
+
+    output:
+    path "**png"
+    path "**tsv"
+
+    script:
+    """
+    python $projectDir/bin/plot_contrasts.py --model_summary_coefs ${f1_model_summary_coefs} --f1_type ${f1_type}
+    """
+}
+
 workflow {
 
     Channel
@@ -184,6 +203,18 @@ workflow {
 
     // model evaluation
     modelEval(weighted_f1_results_aggregated, label_f1_results_aggregated)
+
+    f1_model_summary_coefs = modelEval.out.f1_model_summary_coefs
+
+    // get types of f1 score
+
+    f1_model_summary_coefs.map { path ->
+        def f1_type = path.getName().toString().split('/')[0]
+        [path, f1_type]
+    }.set { f1_model_summary_coefs_types }
+    f1_model_summary_coefs_types.view()
+
+    plotContrasts(f1_model_summary_coefs_types)
 
 }
 
