@@ -1,7 +1,7 @@
 mean duration:
 name
-predictSeurat    0.032712
-rfPredict        0.017568
+predictSeurat    0.033935
+rfPredict        0.017524
 Name: duration (hours), dtype: float64
 median duration:
 name
@@ -10,31 +10,31 @@ rfPredict        0.018056
 Name: duration (hours), dtype: float64
 mean realtime:
 name
-predictSeurat    0.022442
-rfPredict        0.003486
+predictSeurat    0.023724
+rfPredict        0.003805
 Name: realtime (hours), dtype: float64
 median realtime:
 name
-predictSeurat    0.022778
-rfPredict        0.003194
+predictSeurat    0.023611
+rfPredict        0.003417
 Name: realtime (hours), dtype: float64
 mean %cpu:
 name
-predictSeurat    524.300401
-rfPredict        102.136360
+predictSeurat    505.177189
+rfPredict        102.086923
 Name: %cpu, dtype: float64
 median %cpu:
 name
-predictSeurat    466.8
-rfPredict        101.7
+predictSeurat    451.30
+rfPredict        101.85
 Name: %cpu, dtype: float64
 mean peak virtual memory:
 name
-predictSeurat    0.020526
-rfPredict        0.013160
+predictSeurat    0.020533
+rfPredict        0.013109
 Name: peak virtual memory (GB), dtype: float64
 median peak virtual memory:
 name
-predictSeurat    0.009961
+predictSeurat    0.011914
 rfPredict        0.012793
 Name: peak virtual memory (GB), dtype: float64

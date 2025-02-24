@@ -69,7 +69,7 @@ def plot_contrasts(model_contrasts, f1_results, output_prefix="f1_scores"):
                 f1_data_subset = f1_results[(f1_results['key'] == key) & (f1_results[group] == val)]
 
                 # Plot violin plot for F1 scores
-                sns.violinplot(x=group, y='weighted_f1', data=f1_data_subset, hue=facet, palette='Set3', ax=ax)
+                sns.boxplot(x=group, y='weighted_f1', data=f1_data_subset, hue=facet, palette='Set3', ax=ax)
 # Collect legend handles & labels
                 handles, labels = ax.get_legend_handles_labels()
                 for h, l in zip(handles, labels):
@@ -85,7 +85,7 @@ def plot_contrasts(model_contrasts, f1_results, output_prefix="f1_scores"):
         plt.title(f"F1 Scores for {key} - {model}", fontsize=16)
         plt.xlabel(group, fontsize=14)
         plt.ylabel('F1 Score', fontsize=14)
-        plt.xticks(fontsize=10, rotation=45)
+        plt.xticks(fontsize=10, rotation=90)
         handles, labels = ax.get_legend_handles_labels()
         if handles and len(labels) > 1:  # Ensure there are multiple categories
             ax.legend(handles, labels, title=facet.capitalize(), bbox_to_anchor=(1, 1))
@@ -112,7 +112,7 @@ def get_contrast_stats(f1_results, model_summary_coefs, model_contrasts, value='
             for contrast in model_contrasts[key][model]:
                 group = contrast['group']
                 facet = contrast['facet']
-
+                FDR = contrast['FDR']
                 # Group by `facet` and `group`, then compute mean & std
                 grouped_stats = (
                     f1_results
@@ -125,7 +125,7 @@ def get_contrast_stats(f1_results, model_summary_coefs, model_contrasts, value='
                 grouped_stats['key'] = key
                 grouped_stats['model'] = model
                 grouped_stats['contrast'] = contrast
-
+                grouped_stats['FDR'] = FDR
                 stats_list.append(grouped_stats)
 
     pd.concat(stats_list, ignore_index=True).to_csv('contrast_stats.tsv', sep='\t', index=False)
