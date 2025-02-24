@@ -1,0 +1,40 @@
+mean duration:
+name
+predictSeurat    0.044488
+rfPredict        0.017490
+Name: duration (hours), dtype: float64
+median duration:
+name
+predictSeurat    0.044444
+rfPredict        0.018056
+Name: duration (hours), dtype: float64
+mean realtime:
+name
+predictSeurat    0.033935
+rfPredict        0.003982
+Name: realtime (hours), dtype: float64
+median realtime:
+name
+predictSeurat    0.031944
+rfPredict        0.003667
+Name: realtime (hours), dtype: float64
+mean %cpu:
+name
+predictSeurat    518.461449
+rfPredict        101.491863
+Name: %cpu, dtype: float64
+median %cpu:
+name
+predictSeurat    453.7
+rfPredict        101.0
+Name: %cpu, dtype: float64
+mean peak virtual memory:
+name
+predictSeurat    0.022476
+rfPredict        0.013066
+Name: peak virtual memory (GB), dtype: float64
+median peak virtual memory:
+name
+predictSeurat    0.011523
+rfPredict        0.012793
+Name: peak virtual memory (GB), dtype: float64

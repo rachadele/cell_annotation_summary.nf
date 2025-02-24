@@ -1,0 +1,7 @@
+Key: class
+Contrast: method[T.scvi]
+p-value: 4.441e-01
+Mean seurat: 0.885
+Mean scvi: 0.904
+SD seurat: 0.092
+SD scvi: 0.093
