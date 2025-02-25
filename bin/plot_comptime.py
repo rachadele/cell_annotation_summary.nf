@@ -101,7 +101,8 @@ def main():
     # plot boxplots for duration, realtime and %cpu for rows wehre name==rfPredict vs name==predictSeurat
     # use a facetmap to plot the boxplots
     trace_subset = reports[reports["name"].isin(["rfPredict", "predictSeurat"])]
-    
+    # replace rfPredict with SCVI Random Forest and predictSeurat with Seurat TransferData
+    trace_subset["name"] = trace_subset["name"].replace({"rfPredict": "SCVI Random Forest", "predictSeurat": "Seurat TransferData"})
     #get median and mean for each method
    
     # turn this into a file
@@ -140,7 +141,8 @@ def main():
 
     # Map the violin plot while keeping 'subsample_ref' and 'subsample_query' in the hue
     g.map_dataframe(sns.stripplot, x="name", y="Value", hue="subsample_ref",palette="Set3", order=["rfPredict", "predictSeurat"], dodge=True, jitter=True, legend=True)
-
+    # set xlabels 90 degree rotation
+    g.set_xticklabels(rotation=90)
     # Adjust legend
     g.add_legend(title="Number of cells subsampled from reference per cell type")
     plt.savefig("comptime.png",bbox_inches='tight')
