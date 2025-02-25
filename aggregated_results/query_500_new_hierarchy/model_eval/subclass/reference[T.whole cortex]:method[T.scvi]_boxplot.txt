@@ -1,7 +1,0 @@
-Key: subclass
-Contrast: reference[T.whole cortex]:method[T.scvi]
-p-value: 1.137e-57
-Mean seurat: 0.815
-Mean scvi: 0.893
-SD seurat: 0.125
-SD scvi: 0.101

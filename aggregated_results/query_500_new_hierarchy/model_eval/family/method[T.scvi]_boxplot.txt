@@ -1,7 +1,0 @@
-Key: family
-Contrast: method[T.scvi]
-p-value: 9.791e-04
-Mean seurat: 0.933
-Mean scvi: 0.946
-SD seurat: 0.081
-SD scvi: 0.084
