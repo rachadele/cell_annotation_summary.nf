@@ -1,7 +1,0 @@
-Key: family
-Contrast: reference[T.whole cortex]:method[T.scvi]
-p-value: 2.061e-22
-Mean seurat: 0.914
-Mean scvi: 0.955
-SD seurat: 0.085
-SD scvi: 0.079
