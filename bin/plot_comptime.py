@@ -140,7 +140,7 @@ def main():
     g = sns.FacetGrid(trace_melted, col="Metric", sharey=False, height=5, aspect=1)
 
     # Map the violin plot while keeping 'subsample_ref' and 'subsample_query' in the hue
-    g.map_dataframe(sns.stripplot, x="name", y="Value", hue="subsample_ref",palette="Set3", order=["rfPredict", "predictSeurat"], dodge=True, jitter=True, legend=True)
+    g.map_dataframe(sns.stripplot, x="name", y="Value", hue="subsample_ref",palette="Set3", order=["SCVI Random Forest", "Seurat TransferData"], dodge=True, jitter=True, legend=True)
     # set xlabels 90 degree rotation
     g.set_xticklabels(rotation=90)
     # Adjust legend

@@ -31,8 +31,8 @@ import itertools
 # Function to parse command line arguments
 def parse_arguments():
   parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-  parser.add_argument('--weighted_f1_results', type=str, default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/weighted_f1_results.tsv", help="Aggregated weighted results")
-  parser.add_argument('--label_f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/label_f1_results.tsv", help="Label level f1 results")                                            
+  parser.add_argument('--weighted_f1_results', type=str, default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_new_hierarchy/weighted_f1_results.tsv", help="Aggregated weighted results")
+  parser.add_argument('--label_f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_new_hierarchy/label_f1_results.tsv", help="Label level f1 results")                                            
   if __name__ == "__main__":
       known_args, _ = parser.parse_known_args()
       return known_args
@@ -63,7 +63,6 @@ def run_lm_regressed(df, formula, control_vars=['study']):
   # Step 1: Regress out the effects of "Study" and "Cutoff"
   # Create a formula that includes both control variables
   control_formula = f"{formula.split('~')[0]} ~ " + ' + '.join(control_vars)
-  # f1_score ~ study
   control_model = ols(control_formula, data=df).fit()
     
   # Get residuals (this is the outcome with the "Study" effects removed)
@@ -72,7 +71,6 @@ def run_lm_regressed(df, formula, control_vars=['study']):
   # Step 2: Fit the main model using the residualized outcome
   # Replace the original outcome with the residualized outcome in the formula
   main_formula = formula.replace(formula.split('~')[0], 'residualized_outcome')
-  # f1 
   model = ols(main_formula, data=df).fit()
 
   # Get model summary
@@ -169,13 +167,7 @@ def main():
     
   args = parse_arguments()
   weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
-  
-  weighted_f1_results = weighted_f1_results[weighted_f1_results["cutoff"] == 0] 
-  
   label_results = pd.read_csv(args.label_f1_results, sep="\t")
-  label_results = label_results[label_results["cutoff"] == 0]
-  
-  
   factor_names = ["study", "reference", "method"]
   formulas = ["weighted_f1 ~ " + " + ".join(factor_names),
               "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method"]
@@ -193,8 +185,8 @@ def main():
           model_summary_coefs_combined.append(model_summary_coefs)
           
   model_summary_coefs_combined = pd.concat(model_summary_coefs_combined)
-  f1_type = "weighted"
-  model_summary_coefs_combined.to_csv(f"{f1_type}_model_summary_coefs_combined.tsv", sep="\t", index=False)
+  outdir = "weighted_f1"
+  model_summary_coefs_combined.to_csv(os.path.join(outdir,"model_summary_coefs_combined.tsv"), sep="\t", index=False)
 
       
     

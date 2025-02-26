@@ -32,9 +32,9 @@ from collections import defaultdict
 
 # Function to parse command line arguments
 def parse_arguments():
-  parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-  parser.add_argument('--f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_lognormalize/weighted_f1_results.tsv", help="Aggregated weighted results")
-  parser.add_argument('--model_summary_coefs', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_lognormalize/model_eval/weighted_f1/model_summary_coefs_combined.tsv", help="Model summary coefficients")
+  parser = argparse.ArgumentParser(description="Plot contrasts for referend:method and save mean and SD of F1 scores for each contrast.")
+  parser.add_argument('--f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/weighted_f1_results.tsv", help="Aggregated weighted results")
+  parser.add_argument('--model_summary_coefs', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/model_eval/weighted_f1/model_summary_coefs_combined.tsv", help="Model summary coefficients")
   parser.add_argument('--type', type=str, default="weighted", help="Type of f1 results")
   if __name__ == "__main__":
       known_args, _ = parser.parse_known_args()
@@ -103,7 +103,7 @@ def plot_contrasts(model_contrasts, f1_results, output_prefix="f1_scores"):
         plt.close()
 
 
-def get_contrast_stats(f1_results, model_summary_coefs, model_contrasts, value='weighted_f1'):
+def get_contrast_stats(f1_results, model_summary_coefs, model_contrasts, metric='weighted_f1'):
     stats_list = []
 
     for key in model_summary_coefs['key'].unique():
@@ -113,18 +113,20 @@ def get_contrast_stats(f1_results, model_summary_coefs, model_contrasts, value='
                 group = contrast['group']
                 facet = contrast['facet']
                 FDR = contrast['FDR']
+                formula = contrast['contrast']
+                val = contrast['value']
                 # Group by `facet` and `group`, then compute mean & std
+                f1_data_subset = f1_results[(f1_results['key'] == key) & (f1_results[group] == val)]
                 grouped_stats = (
-                    f1_results
-                    .groupby([facet, group])[value]
+                    f1_data_subset.groupby([facet])[metric]
                     .agg(['mean', 'std'])
                     .reset_index()
                 )
-
+                grouped_stats[group] = val
                 # Store key, model, contrast info
                 grouped_stats['key'] = key
                 grouped_stats['model'] = model
-                grouped_stats['contrast'] = contrast
+                grouped_stats['contrast'] = formula
                 grouped_stats['FDR'] = FDR
                 stats_list.append(grouped_stats)
 
@@ -145,6 +147,7 @@ def main():
   model_summary_coefs_list = [group for _, group in model_summary_coefs.groupby('key')]
   model_contrasts = defaultdict(dict)
 
+  f1_results = f1_results[f1_results['cutoff'] == 0]
   for df in model_summary_coefs_list:
     key = df['key'].unique()[0]
     model_contrasts[key] = {}
@@ -157,14 +160,16 @@ def main():
       if len(method_interaction_contrasts) == 0:
         continue
       structured_data = []
+      facet = model.split('~')[1].strip().split(":")[1]
+      group = model.split('~')[1].strip().split(":")[0].split(" ")[-1]
       for item in method_interaction_contrasts:
         reference = item.split(':')[0].split('[')[1][:-1]  # Extracts the text inside 'reference[...]'
         method = item.split(':')[1].split('[')[1][:-1]  # Extracts the text inside 'method[...]'
         # Create a dictionary for each item
         structured_data.append({
-            'group': 'reference',
+            'group': group,
             'value': reference,
-            'facet': "method",
+            'facet': facet,
             'contrast': item,
             'FDR': model_summary_coefs_subset[model_summary_coefs_subset['Term'] == item]['FDR'].values[0]
         })
