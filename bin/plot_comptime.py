@@ -100,9 +100,12 @@ def main():
     reports["peak virtual memory (GB)"] = reports["peak_vmem"].astype(str).str.split(" ", expand=True)[0].replace("-",np.nan).astype(float) / 1024  # Convert to GB
     # plot boxplots for duration, realtime and %cpu for rows wehre name==rfPredict vs name==predictSeurat
     # use a facetmap to plot the boxplots
-    trace_subset = reports[reports["name"].isin(["rfPredict", "predictSeurat"])]
+    processes = ["rfPredict", "predictSeurat", "mapQuery","queryProcessSeurat","refProcessSeurat"]
+    trace_subset = reports[reports["name"].isin(processes)]
     # replace rfPredict with SCVI Random Forest and predictSeurat with Seurat TransferData
-    trace_subset["name"] = trace_subset["name"].replace({"rfPredict": "SCVI Random Forest", "predictSeurat": "Seurat TransferData"})
+    trace_subset["name"] = trace_subset["name"].replace({"rfPredict": "SCVI Random Forest", "predictSeurat": "Seurat TransferData", 
+                                                         "mapQuery": "SCVI pre-process query", "queryProcessSeurat": "Seurat pre-process query", 
+                                                         "refProcessSeurat": "Seurat pre-process reference"})
     #get median and mean for each method
    
     # turn this into a file
@@ -134,13 +137,14 @@ def main():
         
        
     # Melt data for FacetGrid
-    trace_melted = trace_subset.melt(id_vars=["name","subsample_ref","subsample_query","cutoff"], value_vars=["duration (hours)","%cpu"], var_name="Metric", value_name="Value")
+    trace_melted = trace_subset.melt(id_vars=["name","subsample_ref","subsample_query","cutoff"], 
+                                     value_vars=["duration (hours)","%cpu"], var_name="Metric", value_name="Value")
 
     # Create FacetGrid
     g = sns.FacetGrid(trace_melted, col="Metric", sharey=False, height=5, aspect=1)
 
     # Map the violin plot while keeping 'subsample_ref' and 'subsample_query' in the hue
-    g.map_dataframe(sns.stripplot, x="name", y="Value", hue="subsample_ref",palette="Set3", order=["SCVI Random Forest", "Seurat TransferData"], dodge=True, jitter=True, legend=True)
+    g.map_dataframe(sns.stripplot, x="name", y="Value", hue="subsample_ref",palette="Set3", dodge=True, jitter=True, legend=True)
     # set xlabels 90 degree rotation
     g.set_xticklabels(rotation=90)
     # Adjust legend
