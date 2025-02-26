@@ -1,40 +1,40 @@
 mean duration:
 name
-predictSeurat    0.044488
-rfPredict        0.017490
+SCVI Random Forest     0.017490
+Seurat TransferData    0.044488
 Name: duration (hours), dtype: float64
 median duration:
 name
-predictSeurat    0.044444
-rfPredict        0.018056
+SCVI Random Forest     0.018056
+Seurat TransferData    0.044444
 Name: duration (hours), dtype: float64
 mean realtime:
 name
-predictSeurat    0.033935
-rfPredict        0.003982
+SCVI Random Forest     0.003982
+Seurat TransferData    0.033935
 Name: realtime (hours), dtype: float64
 median realtime:
 name
-predictSeurat    0.031944
-rfPredict        0.003667
+SCVI Random Forest     0.003667
+Seurat TransferData    0.031944
 Name: realtime (hours), dtype: float64
 mean %cpu:
 name
-predictSeurat    518.461449
-rfPredict        101.491863
+SCVI Random Forest     101.491863
+Seurat TransferData    518.461449
 Name: %cpu, dtype: float64
 median %cpu:
 name
-predictSeurat    453.7
-rfPredict        101.0
+SCVI Random Forest     101.0
+Seurat TransferData    453.7
 Name: %cpu, dtype: float64
 mean peak virtual memory:
 name
-predictSeurat    0.022476
-rfPredict        0.013066
+SCVI Random Forest     0.013066
+Seurat TransferData    0.022476
 Name: peak virtual memory (GB), dtype: float64
 median peak virtual memory:
 name
-predictSeurat    0.011523
-rfPredict        0.012793
+SCVI Random Forest     0.012793
+Seurat TransferData    0.011523
 Name: peak virtual memory (GB), dtype: float64

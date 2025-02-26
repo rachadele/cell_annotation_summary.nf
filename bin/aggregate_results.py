@@ -245,7 +245,6 @@ def main():
     
     # Drop duplicates, but exclude 'ref_split' column (so duplicates in 'ref_split' are allowed)
     weighted_f1_results = f1_df.drop(columns=label_columns)
-    weighted_f1_results = weighted_f1_results.drop_duplicates(subset=weighted_f1_results.columns.difference(['ref_split']))
     # Keep only rows where 'weighted_f1' is not null
     weighted_f1_results = weighted_f1_results[weighted_f1_results["weighted_f1"].notnull()] 
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)

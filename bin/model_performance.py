@@ -170,7 +170,7 @@ def main():
   args = parse_arguments()
   weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
   
-  weighted_f1_results = weighted_f1_results[weighted_f1_results["cutoff"] == 0] 
+  weighted_f1_results = weighted_f1_results[weighted_f1_results["cutoff"] == 0]
   
   label_results = pd.read_csv(args.label_f1_results, sep="\t")
   label_results = label_results[label_results["cutoff"] == 0]
