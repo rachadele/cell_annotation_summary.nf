@@ -25,9 +25,9 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_new_hierarchy/weighted_f1_results.tsv")
+    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/weighted_f1_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_new_hierarchy/label_f1_results.tsv")   
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/label_f1_results.tsv")   
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -35,25 +35,28 @@ def parse_arguments():
 
 
 def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
-
+    # change figure size
+    plt.figure(figsize=(20, 10))
     g = sns.relplot(
         data=df, x=x, y=y,
         col=col, hue=hue, style=style,
         kind="line", height=4, aspect=0.75, legend="full"  # Adjust figure size
     )
     title = title.replace("_", " ").title()  # Capitalize and substitute "_" with " " 
-    g.figure.suptitle(title, y=1.5, x = 0.5)  # Add title above plots
+    g.figure.suptitle(title, y=1, x = 0.5)  # Add title above plots
     g.set_axis_labels(xlabel, ylabel)  # Set axis labels
     # set titles with capitalization and substitute "_" with " "
     g.set(xticks=[0,0.25,0.5,0.75])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
+    # make legend fontzie smaller
+    plt.setp(g._legend.get_texts(), fontsize=12)  # Adjust legend font size
    # plt.tight_layout()
     plt.savefig(save_path, bbox_inches="tight")
 
  
 def main():
-    plt.rcParams.update({'font.size': 12})  # Set default font size for all plot elements
+    plt.rcParams.update({'font.size': 15})  # Set default font size for all plot elements
 
     args = parse_arguments()
     weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
@@ -101,6 +104,7 @@ def main():
                                     var_name='category', value_name='category_value')
         
         g = sns.FacetGrid(label_long, col="method", row="subsample_ref", height=6, sharey=False)
+        
             # Use map_dataframe to allow hue
         g.map_dataframe(sns.lineplot, x="cutoff", y="f1_score", hue="label")
         # Set axis labels and titles
@@ -108,11 +112,11 @@ def main():
         # capitalize titled
 
         # Adjust layout
-        g.fig.subplots_adjust(top=0.95)
+        g.fig.subplots_adjust(top=0.85)
         # Extract legend handles and labels
         handles, labels = g.axes[0, 0].get_legend_handles_labels()
         # Create a separate legend figure
-        fig_legend, ax_legend = plt.subplots(figsize=(15, 10))
+        fig_legend, ax_legend = plt.subplots(figsize=(25, 10))
         ax_legend.legend(handles, labels, loc="center", ncol=2, frameon=False, fontsize=12)
         ax_legend.axis("off")
         plt.show()
@@ -135,14 +139,14 @@ def main():
             if weighted_subset[category].dtype == "object":
                 weighted_subset[category] = weighted_subset[category].str.replace("_", " ")
 
-        #plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="reference", xlabel="Cutoff", style="ref_split",
-              #    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_ref.png"))
+        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="reference", xlabel="Cutoff", style=None,
+                  ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_ref.png"))
    
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method",hue="ref_split", xlabel="Cutoff", style=None,
+        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method",hue="reference", xlabel="Cutoff", style=None,
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_ref_split.png"))
         
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="study", style=None, xlabel="Cutoff",
-                  ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_query.png"))
+        #plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="study", style=None, xlabel="Cutoff",
+                  #ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_query.png"))
 
         plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="region_match", style=None, xlabel="Cutoff",
                     ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_region_match.png"))
@@ -150,19 +154,19 @@ def main():
         plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="disease_state", style=None, xlabel="Cutoff",
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_disease_state.png"))
         
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="dev_stage", style=None, xlabel="Cutoff",
-                  ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_dev_stage.png"))
+        #plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="dev_stage", style=None, xlabel="Cutoff",
+                  #ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_dev_stage.png"))
         
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="disease_state", style=None, xlabel="Cutoff",
-                  ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_disease_state.png"))
+        #plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="disease_state", style=None, xlabel="Cutoff",
+                  #ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_disease_state.png"))
         
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="sex", style=None, xlabel="Cutoff",
-                  ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_sex.png"))
+        #plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="sex", style=None, xlabel="Cutoff",
+                  #ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_sex.png"))
         
-        #plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="query_region", style=None, xlabel="Cutoff",
-         #         ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_query_region.png"))
+        ##plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="query_region", style=None, xlabel="Cutoff",
+         ##         ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_query_region.png"))
         
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="subsample_ref", style="ref_split", xlabel="Cutoff",
+        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="subsample_ref", xlabel="Cutoff", style=None,
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_subsample_ref.png"))
         
 

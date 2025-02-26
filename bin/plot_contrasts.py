@@ -33,8 +33,8 @@ from collections import defaultdict
 # Function to parse command line arguments
 def parse_arguments():
   parser = argparse.ArgumentParser(description="Plot contrasts for referend:method and save mean and SD of F1 scores for each contrast.")
-  parser.add_argument('--f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_lognormalize/weighted_f1_results.tsv", help="Aggregated weighted results")
-  parser.add_argument('--model_summary_coefs', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_lognormalize/model_eval/weighted_model_summary_coefs_combined.tsv", help="Model summary coefficients")
+  parser.add_argument('--f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/weighted_f1_results.tsv", help="Aggregated weighted results")
+  parser.add_argument('--model_summary_coefs', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/model_eval/weighted_model_summary_coefs_combined.tsv", help="Model summary coefficients")
   parser.add_argument('--type', type=str, default="weighted", help="Type of f1 results")
   if __name__ == "__main__":
       known_args, _ = parser.parse_known_args()
