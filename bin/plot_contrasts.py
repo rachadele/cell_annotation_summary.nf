@@ -33,8 +33,8 @@ from collections import defaultdict
 # Function to parse command line arguments
 def parse_arguments():
   parser = argparse.ArgumentParser(description="Plot contrasts for referend:method and save mean and SD of F1 scores for each contrast.")
-  parser.add_argument('--f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/weighted_f1_results.tsv", help="Aggregated weighted results")
-  parser.add_argument('--model_summary_coefs', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/model_eval/weighted_f1/model_summary_coefs_combined.tsv", help="Model summary coefficients")
+  parser.add_argument('--f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_lognormalize/weighted_f1_results.tsv", help="Aggregated weighted results")
+  parser.add_argument('--model_summary_coefs', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_lognormalize/model_eval/weighted_model_summary_coefs_combined.tsv", help="Model summary coefficients")
   parser.add_argument('--type', type=str, default="weighted", help="Type of f1 results")
   if __name__ == "__main__":
       known_args, _ = parser.parse_known_args()
@@ -51,8 +51,10 @@ def plot_contrasts(model_contrasts, f1_results, output_prefix="f1_scores"):
     - f1_results: DataFrame containing F1 scores with a 'key' column.
     - output_prefix: str, prefix for saved plot filenames.
     """
+    # set global fontsize
+    plt.rcParams.update({'font.size': 25})
     for key, contrast_data in model_contrasts.items():
-        plt.figure(figsize=(14, 8))  # Create a new figure for each key
+        plt.figure(figsize=(16, 15))  # Create a new figure for each key
         ax = plt.gca()  # Get current axis
         legend_handles = {}  # Dictionary to store unique legend handles
 
@@ -69,34 +71,40 @@ def plot_contrasts(model_contrasts, f1_results, output_prefix="f1_scores"):
                 f1_data_subset = f1_results[(f1_results['key'] == key) & (f1_results[group] == val)]
 
                 # Plot violin plot for F1 scores
-                sns.boxplot(x=group, y='weighted_f1', data=f1_data_subset, hue=facet, palette='Set3', ax=ax)
-# Collect legend handles & labels
+                sns.boxplot(x=group, y='weighted_f1', 
+                            data=f1_data_subset, hue=facet, showmeans=True, 
+                            meanprops={'marker':'o', 'markerfacecolor':'red', 'markeredgecolor':'black'},
+                            palette='Set3')
+                
+                        # Collect legend handles
                 handles, labels = ax.get_legend_handles_labels()
                 for h, l in zip(handles, labels):
                     legend_handles[l] = h  # Store unique labels
-
+                    
                 # If FDR < 0.05, add a star above the highest violin plot
                 if FDR.astype(float)< 0.05:
                     max_y = f1_data_subset['weighted_f1'].max()
                     plt.text(x=val, y=max_y, s='*', fontsize=14, ha='center', color='red')
 
           
+          
         # Customize plot appearance
-        plt.title(f"F1 Scores for {key} - {model}", fontsize=16)
-        plt.xlabel(group, fontsize=14)
-        plt.ylabel('F1 Score', fontsize=14)
+        plt.title(f"F1 Scores for {key} - {model}")
+        plt.xlabel(group)
+        plt.ylabel('F1 Score')
         plt.xticks(fontsize=10, rotation=90)
-        handles, labels = ax.get_legend_handles_labels()
-        if handles and len(labels) > 1:  # Ensure there are multiple categories
-            ax.legend(handles, labels, title=facet.capitalize(), bbox_to_anchor=(1, 1))
+        # Set unique legend
+        # make legend font
+        if legend_handles:
+            ax.legend(legend_handles.values(), 
+                      legend_handles.keys(), title=facet.capitalize(), bbox_to_anchor=(1, 1))
         else:
-            ax.get_legend().remove()  # Remove legend if it's redundant
-
+            ax.get_legend().remove()
 
         # Save and show the plot
-        plt.tight_layout()
+       # plt.tight_layout()
         filename = f"{output_prefix}_{key}.png"
-        plt.savefig(filename)
+        plt.savefig(filename, bbox_inches='tight')
         plt.show()
 
         # Close the figure after plotting
@@ -135,8 +143,7 @@ def get_contrast_stats(f1_results, model_summary_coefs, model_contrasts, metric=
 
 def main():
   args=parse_arguments()
-  f1_results = args.f1_results
-  f1_results = pd.read_csv(f1_results, sep="\t")
+  f1_results = pd.read_csv(args.f1_results, sep="\t")
   model_summary_coefs = pd.read_csv(args.model_summary_coefs, sep="\t")
   type_f1 = args.type
   # create a dict to store model and its contrasts
@@ -148,6 +155,8 @@ def main():
   model_contrasts = defaultdict(dict)
 
   f1_results = f1_results[f1_results['cutoff'] == 0]
+  # drop duplicates without ref_split
+  
   for df in model_summary_coefs_list:
     key = df['key'].unique()[0]
     model_contrasts[key] = {}

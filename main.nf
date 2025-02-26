@@ -157,7 +157,7 @@ process plotContrasts {
 
     script:
     """
-    python $projectDir/bin/plot_contrasts.py --model_summary_coefs ${f1_model_summary_coefs} --f1_type ${f1_type}
+    python $projectDir/bin/plot_contrasts.py --model_summary_coefs ${f1_model_summary_coefs} --type ${f1_type}
     """
 }
 
@@ -209,7 +209,7 @@ workflow {
     // get types of f1 score
 
     f1_model_summary_coefs.map { path ->
-        def f1_type = path.getName().toString().split('/')[0]
+        def f1_type = path.getName().toString().split('_')[0]
         [path, f1_type]
     }.set { f1_model_summary_coefs_types }
     f1_model_summary_coefs_types.view()
