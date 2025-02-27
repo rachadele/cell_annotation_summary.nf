@@ -199,7 +199,7 @@ def map_development_stage(stage):
         "HsapDv_0000086": "adolescent",
         "HsapDv_0000088": "adult",
         "HsapDv_0000091": "late adult",
-        np.nan: "late adult"
+        None: None
     }
     return dev_stage_mapping_dict[stage]
     
@@ -221,28 +221,38 @@ def main():
         temp_df = pd.read_csv(filepath,sep="\t")
         # temp_df["method"] = method
         f1_df = pd.concat([temp_df, f1_df], ignore_index=True)
-        
+     
+    organism = f1_df["organism"].unique()[0]
+    
+       
     f1_df["region_match"] = f1_df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
     f1_df["reference_acronym"] = f1_df["reference"].apply(make_acronym)
     #f1_df["query_acronym"] = f1_df["query"].apply(make_acronym)
     f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
     f1_df["study"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
+    
+    
     f1_df["disease"] = np.where(f1_df["study"]== "GSE211870", "Control", f1_df["disease"])
+    # eric queries
     f1_df["disease_state"] = np.where(f1_df["disease"] == "Control", "Control", "Disease")
-
-    f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage)
+    # handle Gemma
+    f1_df["disease_state"] = np.where(f1_df["disease"] == "No disease", "Control", "Disease")
     
-    # replace rosmap infant with rosmap late adult
-    f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
-    f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
-    f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
-    f1_df["sex"] = f1_df["sex"].str.replace("male", "M")
+    if organism == "homo_sapiens":
+        # deal with annotation mismatch between gemma queries and curated queries
+        f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage)
+    
+        # replace rosmap infant with rosmap late adult
+        f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
+        f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
+       # f1_df["dev_stage"] = np.where(f1_df["dev_stage"] == np.nan , "late adult", f1_df["dev_stage"])
  
+        f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
+        f1_df["sex"] = f1_df["sex"].str.replace("male", "M")
+        
     
-    # Boxplots: Show the effect of categorical parameters
-    categorical_columns = ['query', 'reference','method','ref_split', 
-                           'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
+
     outdir = "weighted_f1_distributions"
     label_columns = ["label", "f1_score","ref_support","label_accuracy"]
     os.makedirs(outdir, exist_ok=True)
@@ -265,27 +275,35 @@ def main():
     #plt.show()
     
     
-    # summarize by sample, key, method, mean, sd
-    weighted_summary = weighted_f1_results.groupby(["key", "query", "disease_state","sex","dev_stage","method","cutoff"]).agg(
+    if organism == "homo_sapiens":
+        order = ["subclass", "class", "family"]  # Desired order  
+        columns_to_plot=["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
+    elif organism == "mus_musculus":
+        columns_to_plot = ["method", "treatment", "genotype","strain", "age", "cutoff", "sex", "reference", "study"]
+        
+        # summarize by sample, key, method, mean, sd
+    weighted_summary = weighted_f1_results.groupby(columns_to_plot).agg(
         weighted_f1_mean=("weighted_f1", "mean"),
         weighted_f1_std=("weighted_f1", "std"),
         weighted_f1_count=("weighted_f1", "count")
     ).reset_index()
-    weighted_summary.to_csv("weighted_f1_summary.tsv", sep="\t", index=False) 
-    # plot boxplots of the raw data
-    # Loop through columns and plot a boxplot for each
-    for column in ["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]:
-        plt.figure(figsize=(10, 6))  # Set the size for each plot
-        sns.boxplot(data=weighted_f1_results, x=column, y="weighted_f1", hue="key")
-        plt.xticks(rotation=90)  # Rotate x-axis labels for better visibility
-        plt.title(f"Boxplot of Weighted F1 Score by {column.capitalize()} and Key")
-        plt.legend(title="Key", bbox_to_anchor=(1, 1))  # Improve legend
-        plt.tight_layout()  # Ensure everything fits
-        plt.savefig(f"weighted_f1_boxplot_{column}.png")
     
-        
+    
+    weighted_summary.to_csv("weighted_f1_summary.tsv", sep="\t", index=False)   
+    df_list = [group for _, group in weighted_f1_results.groupby('key')]
+    for df in df_list:
+        key = df["key"].values[0]
+        for column in columns_to_plot:
+            plt.figure(figsize=(10, 6))  # Set the size for each plot
+            sns.boxplot(data=weighted_f1_results, x=column, y="weighted_f1", hue="method")
+            plt.xticks(rotation=90)  # Rotate x-axis labels for better visibility
+            plt.title(f"{key} - Weighted F1 Score by {column.capitalize()}")
+            plt.legend(title="Key", bbox_to_anchor=(1, 1))  # Improve legend
+            plt.tight_layout()  # Ensure everything fits
+            plt.savefig(f"weighted_f1_boxplot_{column}.png")
 
-    order = ["subclass", "class", "family"]  # Desired order  
+            
+
 
 
 # -----------label f1 results----------------

@@ -86,7 +86,16 @@ target/
 # IPython
 profile_default/
 ipython_config.py
-*tsv
 inputs/
 label_f1_results
 weighted_f1_results
+integrated-work/
+lognorm-work/
+mmus/
+params.mmus_sctransform_integrated.json
+params.sctransform.json
+params.sctransform_integrated.json
+sctransform-work/
+label_f1_results.tsv
+weighted_f1_results.tsv
+params_added

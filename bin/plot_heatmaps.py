@@ -29,7 +29,7 @@ from matplotlib.cm import ScalarMappable
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/weighted_f1_results.tsv")
+    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mmus/10/b7616d81259500d38e98a4c232f5b1/weighted_f1_results.tsv")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
