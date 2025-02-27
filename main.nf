@@ -28,6 +28,8 @@ process aggregateResults {
    // path "f1_results_all_pipeline_runs.tsv", emit: f1_results_aggregated
     path "weighted_f1_results.tsv", emit: weighted_f1_results_aggregated
     path "label_f1_results.tsv", emit: label_f1_results_aggregated
+    path "weighted_f1_summary.tsv"
+    path "label_f1_summary.tsv"
     path "**png"
 
     script:
@@ -149,7 +151,7 @@ process plotContrasts {
     publishDir "${params.outdir}/contrasts", mode: 'copy'
 
     input:
-    tuple path(f1_model_summary_coefs), val(f1_type)
+    tuple path(f1_model_summary_coefs), val(f1_type), path(weighted_f1_results_aggregated)
 
     output:
     path "**png"
@@ -157,7 +159,9 @@ process plotContrasts {
 
     script:
     """
-    python $projectDir/bin/plot_contrasts.py --model_summary_coefs ${f1_model_summary_coefs} --type ${f1_type}
+    python $projectDir/bin/plot_contrasts.py --model_summary_coefs ${f1_model_summary_coefs} \\
+        --type ${f1_type} \\
+        --f1_results ${weighted_f1_results_aggregated}
     """
 }
 
@@ -213,8 +217,12 @@ workflow {
         [path, f1_type]
     }.set { f1_model_summary_coefs_types }
     f1_model_summary_coefs_types.view()
+    f1_model_summary_coefs_types.combine(weighted_f1_results_aggregated)
+    .set{f1_model_summary_coefs_results_aggregated}
 
-    plotContrasts(f1_model_summary_coefs_types)
+    f1_model_summary_coefs_results_aggregated.view()
+
+    //plotContrasts(f1_model_summary_coefs_results_aggregated)
 
 }
 

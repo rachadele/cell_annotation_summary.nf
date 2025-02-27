@@ -33,8 +33,8 @@ from collections import defaultdict
 # Function to parse command line arguments
 def parse_arguments():
   parser = argparse.ArgumentParser(description="Plot contrasts for referend:method and save mean and SD of F1 scores for each contrast.")
-  parser.add_argument('--f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/weighted_f1_results.tsv", help="Aggregated weighted results")
-  parser.add_argument('--model_summary_coefs', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/model_eval/weighted_model_summary_coefs_combined.tsv", help="Model summary coefficients")
+  parser.add_argument('--f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_dataset_id/weighted_f1_results.tsv", help="Aggregated weighted results")
+  parser.add_argument('--model_summary_coefs', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/integrated-work/49/14cf0c1ced4620c7a12f45e6ae68b2/weighted_model_summary_coefs_combined.tsv", help="Model summary coefficients")
   parser.add_argument('--type', type=str, default="weighted", help="Type of f1 results")
   if __name__ == "__main__":
       known_args, _ = parser.parse_known_args()
@@ -64,29 +64,32 @@ def plot_contrasts(model_contrasts, f1_results, output_prefix="f1_scores"):
                 group = contrast_dict['group'] # "reference" string
                 facet = contrast_dict['facet'] # "method" string
                 FDR = contrast_dict['FDR']
-
+              
                 if f1_results.empty:
                     raise ValueError("No f1 results")
-                # Subset F1 data
-                f1_data_subset = f1_results[(f1_results['key'] == key) & (f1_results[group] == val)]
-
-                # Plot violin plot for F1 scores
-                sns.boxplot(x=group, y='weighted_f1', 
-                            data=f1_data_subset, hue=facet, showmeans=True, 
-                            meanprops={'marker':'o', 'markerfacecolor':'red', 'markeredgecolor':'black'},
-                            palette='Set3')
-                
-                        # Collect legend handles
-                handles, labels = ax.get_legend_handles_labels()
-                for h, l in zip(handles, labels):
-                    legend_handles[l] = h  # Store unique labels
+                if group == "reference":
                     
-                # If FDR < 0.05, add a star above the highest violin plot
-                if FDR.astype(float)< 0.05:
-                    max_y = f1_data_subset['weighted_f1'].max()
-                    plt.text(x=val, y=max_y, s='*', fontsize=14, ha='center', color='red')
+                  # Subset F1 data
+                  # the method: cutoff remove variance from the cutoff, so we can set it to 0
+                  f1_data_subset = f1_results[(f1_results['key'] == key) & (f1_results[group] == val) & f1_results['cutoff'] == 0]
 
-          
+                  # Plot violin plot for F1 scores
+                  sns.boxplot(x=group, y='weighted_f1', 
+                              data=f1_data_subset, hue=facet, showmeans=True, 
+                              meanprops={'marker':'o', 'markerfacecolor':'red', 'markeredgecolor':'black'},
+                              palette='Set3')
+                  
+                          # Collect legend handles
+                  handles, labels = ax.get_legend_handles_labels()
+                  for h, l in zip(handles, labels):
+                      legend_handles[l] = h  # Store unique labels
+                      
+                  # If FDR < 0.05, add a star above the highest violin plot
+                  if FDR.astype(float)< 0.05:
+                      max_y = f1_data_subset['weighted_f1'].max()
+                      plt.text(x=val, y=max_y, s='*', fontsize=14, ha='center', color='red')
+
+            
           
         # Customize plot appearance
         plt.title(f"F1 Scores for {key} - {model}")
@@ -123,23 +126,25 @@ def get_contrast_stats(f1_results, model_summary_coefs, model_contrasts, metric=
                 FDR = contrast['FDR']
                 formula = contrast['contrast']
                 val = contrast['value']
-                # Group by `facet` and `group`, then compute mean & std
-                f1_data_subset = f1_results[(f1_results['key'] == key) & (f1_results[group] == val)]
-                grouped_stats = (
-                    f1_data_subset.groupby([facet])[metric]
-                    .agg(['mean', 'std'])
-                    .reset_index()
-                )
-                grouped_stats[group] = val
-                # Store key, model, contrast info
-                grouped_stats['key'] = key
-                grouped_stats['model'] = model
-                grouped_stats['contrast'] = formula
-                grouped_stats['FDR'] = FDR
-                stats_list.append(grouped_stats)
+                if group == "reference":
+                  print(val)
+                  # Group by `facet` and `group`, then compute mean & std
+                  f1_data_subset = f1_results[(f1_results['key'] == key) & (f1_results[group] == val)]
+                  grouped_stats = (
+                      f1_data_subset.groupby([facet])[metric]
+                      .agg(['mean', 'std'])
+                      .reset_index()
+                  )
+                  grouped_stats[group] = val
+                  # Store key, model, contrast info
+                  grouped_stats['key'] = key
+                  grouped_stats['model'] = model
+                  grouped_stats['contrast'] = formula
+                  grouped_stats['FDR'] = FDR
+                  stats_list.append(grouped_stats)
 
     pd.concat(stats_list, ignore_index=True).to_csv('contrast_stats.tsv', sep='\t', index=False)
-       
+    return(pd.concat(stats_list, ignore_index=True)) 
 
 def main():
   args=parse_arguments()
@@ -149,32 +154,48 @@ def main():
   # create a dict to store model and its contrasts
   # get contrasts
   models = model_summary_coefs['formula'].unique()
+  # subset for only 'weighted_f1 ~  study + reference:method + method:cutoff'
+  model_summary_coefs_subset = model_summary_coefs[~model_summary_coefs['formula'].str.contains("cutoff:subsample_ref + method:subsample_ref")]
   # for each model, get the contrasts
   # split the model summary coefficients by
   model_summary_coefs_list = [group for _, group in model_summary_coefs.groupby('key')]
   model_contrasts = defaultdict(dict)
 
-  f1_results = f1_results[f1_results['cutoff'] == 0]
+  #f1_results = f1_results[f1_results['cutoff'] == 0]
   # drop duplicates without ref_split
   
   for df in model_summary_coefs_list:
     key = df['key'].unique()[0]
     model_contrasts[key] = {}
     for model in models:
-      model_summary_coefs_subset = df[df['formula'] == model]
+      model_summary_coefs = df[df['formula'] == model]
       # this doesn't apply to some models
       # we're just gonna ignore the additive model for now
       contrasts=model_summary_coefs_subset['Term'].unique()
-      method_interaction_contrasts = [contrast for contrast in contrasts if ':' in contrast]
-      if len(method_interaction_contrasts) == 0:
-        continue
+      interaction_contrasts = [contrast for contrast in contrasts if ':' in contrast]
       structured_data = []
-      facet = model.split('~')[1].strip().split(":")[1]
-      group = model.split('~')[1].strip().split(":")[0].split(" ")[-1]
-      for item in method_interaction_contrasts:
-        reference = item.split(':')[0].split('[')[1][:-1]  # Extracts the text inside 'reference[...]'
-        method = item.split(':')[1].split('[')[1][:-1]  # Extracts the text inside 'method[...]'
-        # Create a dictionary for each item
+
+      # group contrasts by the first term in the interaction
+      for item in interaction_contrasts:
+
+        group1,group2= item.split(':')
+        try :
+          facet1, value1 = group1.split('[') # deal with ending ]
+          facet2, value2 = group2.split('[')
+          reference = value1[:-1]
+          base_method = value2[:-1]
+          group = facet1
+          value = reference
+          facet = facet2
+        except:
+          facet1, value1 = group1.split('[')
+          facet = facet1
+          base_method = value1[:-1]
+          group = group2 
+          reference = None
+
+      
+           # Create a dictionary for each item
         structured_data.append({
             'group': group,
             'value': reference,
@@ -183,6 +204,7 @@ def main():
             'FDR': model_summary_coefs_subset[model_summary_coefs_subset['Term'] == item]['FDR'].values[0]
         })
         model_contrasts[key][model] = structured_data
+
 
   plot_contrasts(model_contrasts, f1_results, output_prefix=type_f1)
   get_contrast_stats(f1_results, model_summary_coefs, model_contrasts)
