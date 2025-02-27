@@ -228,7 +228,9 @@ def main():
     f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
     f1_df["study"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
+    f1_df["disease"] = np.where(f1_df["study"]== "GSE211870", "Control", f1_df["disease"])
     f1_df["disease_state"] = np.where(f1_df["disease"] == "Control", "Control", "Disease")
+
     f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage)
     
     # replace rosmap infant with rosmap late adult
@@ -236,9 +238,11 @@ def main():
     f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
     f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
     f1_df["sex"] = f1_df["sex"].str.replace("male", "M")
+ 
     
     # Boxplots: Show the effect of categorical parameters
-    categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
+    categorical_columns = ['query', 'reference','method','ref_split', 
+                           'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
     outdir = "weighted_f1_distributions"
     label_columns = ["label", "f1_score","ref_support","label_accuracy"]
     os.makedirs(outdir, exist_ok=True)
