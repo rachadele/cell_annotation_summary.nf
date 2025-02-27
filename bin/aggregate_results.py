@@ -279,8 +279,9 @@ def main():
         sns.boxplot(data=weighted_f1_results, x=column, y="weighted_f1", hue="key")
         plt.xticks(rotation=90)  # Rotate x-axis labels for better visibility
         plt.title(f"Boxplot of Weighted F1 Score by {column.capitalize()} and Key")
+        plt.legend(title="Key", bbox_to_anchor=(1, 1))  # Improve legend
         plt.tight_layout()  # Ensure everything fits
-        plt.show()
+        plt.savefig(f"weighted_f1_boxplot_{column}.png")
     
         
 
@@ -321,6 +322,19 @@ def main():
     g.savefig("label_f1_distribution_facet.png")
     #plt.show()
 
+    #for key in label_results["key"].unique():
+        #key_results = label_results[label_results["key"] == key]
+        #for column in ["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]:
+                #plt.figure(figsize=(10, 6))  # Set the size for each plot
+                #sns.violinplot(data=key_results, x=column, y="f1_score", hue="label")
+                #plt.xticks(rotation=90)  # Rotate x-axis labels for better visibility
+                #plt.title(f"Boxplot of Weighted F1 Score by {column.capitalize()} and Key")
+                #plt.legend(title="Key", bbox_to_anchor=(1, 1))  # Improve legend
+                #plt.tight_layout()  # Ensure everything fits
+                #plt.show()
+                #plt.savefig(f"weighted_f1_boxplot_{column}.png")
+            
+            
   
 if __name__ == "__main__":
     main()
