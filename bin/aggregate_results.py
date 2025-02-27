@@ -235,7 +235,7 @@ def main():
     f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
     f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
     f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
-    
+    f1_df["sex"] = f1_df["sex"].str.replace("male", "M")
     
     # Boxplots: Show the effect of categorical parameters
     categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
@@ -250,7 +250,40 @@ def main():
     # Keep only rows where 'weighted_f1' is not null
     weighted_f1_results = weighted_f1_results[weighted_f1_results["weighted_f1"].notnull()] 
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
+    
+    
+        # Example: adding hue and faceting to the weighted F1 scores distribution plot
+    sns.histplot(weighted_f1_results, x='weighted_f1', hue='key', multiple="fill", palette="Set1")
+    plt.xlabel("Weighted F1")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Weighted F1 Scores by Key")
+    plt.savefig("weighted_f1_distribution.png")
+    #plt.show()
+    
+    
+    # summarize by sample, key, method, mean, sd
+    weighted_summary = weighted_f1_results.groupby(["key", "query", "disease_state","sex","dev_stage","method","cutoff"]).agg(
+        weighted_f1_mean=("weighted_f1", "mean"),
+        weighted_f1_std=("weighted_f1", "std"),
+        weighted_f1_count=("weighted_f1", "count")
+    ).reset_index()
+    weighted_summary.to_csv("weighted_f1_summary.tsv", sep="\t", index=False) 
+    # plot boxplots of the raw data
+    # Loop through columns and plot a boxplot for each
+    for column in ["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]:
+        plt.figure(figsize=(10, 6))  # Set the size for each plot
+        sns.boxplot(data=weighted_f1_results, x=column, y="weighted_f1", hue="key")
+        plt.xticks(rotation=90)  # Rotate x-axis labels for better visibility
+        plt.title(f"Boxplot of Weighted F1 Score by {column.capitalize()} and Key")
+        plt.tight_layout()  # Ensure everything fits
+        plt.show()
+    
+        
 
+    order = ["subclass", "class", "family"]  # Desired order  
+
+
+# -----------label f1 results----------------
     label_results = f1_df[f1_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
     label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_support']))
@@ -261,15 +294,16 @@ def main():
     outdir = "label_distributions"
     os.makedirs(outdir, exist_ok=True)
 
-    
-    # Example: adding hue and faceting to the weighted F1 scores distribution plot
-    sns.histplot(weighted_f1_results, x='weighted_f1', hue='key', multiple="fill", palette="Set1")
-    plt.xlabel("Weighted F1")
-    plt.ylabel("Frequency")
-    plt.title("Distribution of Weighted F1 Scores by Key")
-    plt.savefig("weighted_f1_distribution.png")
-    #plt.show()
+    # make a count summary table for label_f1 by label, sample, disease_state, sex, dev_stage
+    label_summary = label_results.groupby(["key","label", "query", "disease_state","sex","dev_stage"]).agg(
+        label_f1_mean=("f1_score", "mean"),
+        label_f1_std=("f1_score", "std"),
+        label_f1_count=("f1_score", "count")
+    ).reset_index()
+    label_summary.to_csv("label_f1_summary.tsv", sep="\t", index=False)
+   
 
+        
     # Create the FacetGrid
     g = sns.FacetGrid(label_results, col="key", hue="label", height=4, aspect=1.5)
     # Map the KDE plot to the FacetGrid

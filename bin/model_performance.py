@@ -27,12 +27,13 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 from statsmodels.formula.api import glm
 import itertools
+import textwrap
 
 # Function to parse command line arguments
 def parse_arguments():
   parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-  parser.add_argument('--weighted_f1_results', type=str, default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/weighted_f1_results.tsv", help="Aggregated weighted results")
-  parser.add_argument('--label_f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/label_f1_results.tsv", help="Label level f1 results")                                            
+  parser.add_argument('--weighted_f1_results', type=str, default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_dataset_id/weighted_f1_results.tsv", help="Aggregated weighted results")
+  parser.add_argument('--label_f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_dataset_id/label_f1_results.tsv", help="Label level f1 results")                                            
   if __name__ == "__main__":
       known_args, _ = parser.parse_known_args()
       return known_args
@@ -56,6 +57,7 @@ def run_lm(df, formula):
   model_summary_df['Rsquared'] = r2
   model_summary_df['AIC'] = aic
   return model.summary2().tables[0], model_summary_df
+
 
 
 def run_lm_regressed(df, formula, control_vars=['study']):
@@ -94,7 +96,7 @@ def run_lm_regressed(df, formula, control_vars=['study']):
 
 
 def plot_model_summary(model_summary, outdir, key):
-  plt.rcParams.update({'font.size': 20})
+  plt.rcParams.update({'font.size': 30})
   model_summary["FDR<0.05"] = model_summary["FDR"] < 0.05
   model_summary["Term"] = model_summary["Term"].str.replace("T.", "")
   formula = model_summary["formula"].unique()[0]
@@ -112,9 +114,13 @@ def plot_model_summary(model_summary, outdir, key):
           y_center = patch.get_y() + patch.get_height() / 2  # Get center of the bar vertically
           plt.errorbar(x=x_center, y=y_center, xerr=2 * row["Std.Err."], fmt="none", color="black", capsize=5, capthick=2)
 
-      plt.title(f"Model Coefficients for {key} ({formula})", fontsize=24)
-      plt.xlabel("Coefficient", fontsize=18)
-      plt.ylabel("Term", fontsize=18)
+      title = f"{key} ({formula})"
+      wrapped_title = "\n".join(textwrap.wrap(title, width=40))  # Adjust width as needed
+
+      # Plot
+      plt.title(wrapped_title, fontsize=30)      
+      plt.xlabel("Coefficient", fontsize=30)
+      plt.ylabel("Term", fontsize=30)
       plt.tight_layout()
       plt.savefig(os.path.join(outdir,f"{key}_{formula}_lm_coefficients.png"))
 
@@ -136,7 +142,7 @@ def plot_model_metrics(df_list, formulas):
   results_df = pd.concat(results, ignore_index=True)
 
   # Plot Rsquared vs. AIC
-  plt.figure(figsize=(15, 6))
+  plt.figure(figsize=(20, 6))
   scatter = sns.scatterplot(data=results_df, x="AIC", y="Rsquared", hue="Dataset", style="Formula", palette="tab10", edgecolor="black", s=100)
     
   # Add labels
@@ -149,7 +155,7 @@ def plot_model_metrics(df_list, formulas):
   plt.grid(True, linestyle="--", alpha=0.6)
   plt.tight_layout()
     
-  plt.savefig("model_metrics.png")
+  plt.savefig("model_metrics.png", bbox_inches="tight")
   plt.show()
 
 
@@ -169,18 +175,20 @@ def main():
     
   args = parse_arguments()
   weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
-  
-  weighted_f1_results = weighted_f1_results[weighted_f1_results["cutoff"] == 0]
+  #weighted_f1_results = weighted_f1_results[weighted_f1_results["cutoff"] == 0]
   
   label_results = pd.read_csv(args.label_f1_results, sep="\t")
-  label_results = label_results[label_results["cutoff"] == 0]
+  #label_results = label_results[label_results["cutoff"] == 0]
   
   
-  factor_names = ["study", "reference", "method"]
-  formulas = ["weighted_f1 ~ " + " + ".join(factor_names),
-              "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method"]
+  factor_names = ["study", "reference", "method", "cutoff", "disease_state", "sex"]
+
+  formulas = [
+      "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method + method:cutoff"] 
+      #"weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method + method:cutoff + study:sex"]
    
   df_list = [group for _, group in weighted_f1_results.groupby('key')]
+  plot_model_metrics(df_list, formulas)
   
   model_summary_coefs_combined = [] 
   for df in df_list:
