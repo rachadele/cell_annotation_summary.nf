@@ -28,6 +28,8 @@ import statsmodels.formula.api as smf
 from statsmodels.formula.api import glm
 import itertools
 import textwrap
+from matplotlib.patches import Patch  
+from matplotlib.lines import Line2D
 
 # Function to parse command line arguments
 def parse_arguments():
@@ -95,34 +97,63 @@ def run_lm_regressed(df, formula, control_vars=['study']):
   return model, model.summary2().tables[0], model_summary_df
 
 
+
 def plot_model_summary(model_summary, outdir, key):
-  plt.rcParams.update({'font.size': 30})
-  model_summary["FDR<0.05"] = model_summary["FDR"] < 0.05
-  model_summary["Term"] = model_summary["Term"].str.replace("T.", "")
-  formula = model_summary["formula"].unique()[0]
+    plt.rcParams.update({'font.size': 30})
+    model_summary["FDR<0.05"] = model_summary["FDR"] < 0.05
+    model_summary["Term"] = model_summary["Term"].str.replace("T.", "")
+    formula = model_summary["formula"].unique()[0]
+    
+    # Use the subset directly (no need for grouping)
+    plt.figure(figsize=(30, max(10, len(model_summary) * 0.5)))  # Scale height dynamically
 
-  for key, subset in model_summary.groupby("key"):
-      plt.figure(figsize=(30, max(10, len(subset) * 0.5)))  # Scale height dynamically
-      ax = sns.barplot(
-          data=subset, y="Term", x="Coef.", hue="FDR<0.05", dodge=False, errorbar=None, palette="coolwarm"
-      )
+    ax = sns.barplot(
+        data=model_summary, 
+        y="Term", 
+        x="Coef.", 
+        hue="Term",  # Color bars by term
+        dodge=False, 
+        errorbar=None, 
+        palette="tab20"  # Ensures enough colors for multiple terms
+    )
 
-      # Set y-axis limits to remove extra space
-      ax.set_ylim(-0.5, len(subset) - 0.5)        
-      for patch, (_, row) in zip(ax.patches, subset.iterrows()):
-          x_center = patch.get_x() + patch.get_width() / 2  # Get center of the bar horizontally
-          y_center = patch.get_y() + patch.get_height() / 2  # Get center of the bar vertically
-          plt.errorbar(x=x_center, y=y_center, xerr=2 * row["Std.Err."], fmt="none", color="black", capsize=5, capthick=2)
+    # Highlight significant terms (FDR < 0.05) with black edges or transparency
+    for patch, (_, row) in zip(ax.patches, model_summary.iterrows()):
+        if row["FDR<0.05"]:
+            patch.set_edgecolor("red")  # Add red border for significant terms
+            patch.set_linewidth(2)
+        else:
+            patch.set_alpha(0.5)  # Reduce opacity for non-significant terms
 
-      title = f"{key} ({formula})"
-      wrapped_title = "\n".join(textwrap.wrap(title, width=40))  # Adjust width as needed
+        term_color = patch.get_facecolor()  # Get color of the bar
+        y_tick_label = ax.get_yticklabels()[int(patch.get_y() + patch.get_height() / 2)]  # Match tick label to bar
+        y_tick_label.set_color(term_color)
 
-      # Plot
-      plt.title(wrapped_title, fontsize=30)      
-      plt.xlabel("Coefficient", fontsize=30)
-      plt.ylabel("Term", fontsize=30)
-      plt.tight_layout()
-      plt.savefig(os.path.join(outdir,f"{key}_{formula}_lm_coefficients.png"))
+    # Set y-axis limits to remove extra space
+    ax.set_ylim(-0.5, len(model_summary) - 0.5)        
+    for patch, (_, row) in zip(ax.patches, model_summary.iterrows()):
+        x_center = patch.get_x() + patch.get_width() / 2  # Get center of the bar horizontally
+        y_center = patch.get_y() + patch.get_height() / 2  # Get center of the bar vertically
+        plt.errorbar(x=x_center, y=y_center, xerr=2 * row["Std.Err."], fmt="none", color="black", capsize=5, capthick=2)
+
+    # Add a custom legend for FDR < 0.05
+    handles, labels = ax.get_legend_handles_labels()
+
+    # Add custom legend for FDR < 0.05
+    legend_elements = [
+        Line2D([0], [0], marker='o', color='w', markerfacecolor='red', markersize=10, label='FDR < 0.05')
+    ]
+    ax.legend(handles + legend_elements, labels + ['FDR < 0.05'], loc='upper left', bbox_to_anchor=(1, 1))
+
+    title = f"{key} ({formula})"
+    wrapped_title = "\n".join(textwrap.wrap(title, width=40))  # Adjust width as needed
+
+    # Plot
+    plt.title(wrapped_title, fontsize=30)      
+    plt.xlabel("Coefficient", fontsize=30)
+    plt.ylabel("Term", fontsize=30)
+    plt.tight_layout()
+    plt.savefig(os.path.join(outdir,f"{key}_{formula}_lm_coefficients.png"))
 
 
 def plot_model_metrics(df_list, formulas):
