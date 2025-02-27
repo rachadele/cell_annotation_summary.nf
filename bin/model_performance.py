@@ -181,11 +181,12 @@ def main():
   #label_results = label_results[label_results["cutoff"] == 0]
   
   
-  factor_names = ["study", "reference", "method", "cutoff", "disease_state", "sex"]
+  factor_names = ["study", "reference", "method", "cutoff"]
 
   formulas = [
-      "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method + method:cutoff"] 
-      #"weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method + method:cutoff + study:sex"]
+      "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method + method:cutoff",
+      "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method + method:cutoff +  disease_state",
+      "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method + method:cutoff + disease_state + sex"]
    
   df_list = [group for _, group in weighted_f1_results.groupby('key')]
   plot_model_metrics(df_list, formulas)

@@ -19,7 +19,7 @@ process addParams {
 
 process aggregateResults {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${params.outdir}/aggregated_results", mode: 'copy'
 
     input:
     path f1_results_params
