@@ -93,7 +93,7 @@ plot_model_metrics <- function(df_list, formulas) {
   # Combine the results into a single data frame
   results_df <- do.call(rbind, results)
   library(patchwork)
-  results_df$formula_wrapped <- factor(str_wrap(results_df$formula, width = 20))  # Adjust width as needed
+  results_df$formula_wrapped <- factor(str_wrap(results_df$formula, width = 30))  # Adjust width as needed
   # Plot AIC vs LogLik
   p <- ggplot(results_df, aes(x = AIC, y = LogLik, color = formula_wrapped, shape = key)) +
   geom_point(size = 10, stroke = 2, position = position_jitter(width = 1, height = 1)) +
@@ -179,7 +179,8 @@ args <- parser$parse_args()
 
 # Reading the weighted_f1_results file
 weighted_f1_results <- read.table(args$weighted_f1_results, sep="\t", header=TRUE)
-
+# fill NA with none
+weighted_f1_results[is.na(weighted_f1_results)] <- "None"
 # Extract organism (assuming only one unique value in the 'organism' column)
 organism <- unique(weighted_f1_results$organism)[1]
 
