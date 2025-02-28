@@ -94,30 +94,36 @@ def main():
     args = parse_arguments()
     weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
     label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
-    categoricals = ['study','reference','method','ref_split', 'region_match',"sex","disease_state"]
-
-    if not args.vars:
-    # Assuming f1_results is your pandas DataFrame and factor_names is a list of column names
-        factor_names = ['study','reference','method','ref_split',
+    organism = weighted_f1_results["organism"].unique()[0]
+    if organism == "homo_sapiens":
+# Assuming f1_results is your pandas DataFrame and factor_names is a list of column names
+        factor_names = ['study','reference','method',
                         'region_match',"subsample_ref","sex","disease_state","cutoff"] # replace with actual factor column names
 
-    else:
-        factor_names = args.vars
+    if organism == "mus_musculus":
+        factor_names = ['study','reference','method',
+                        'strain',"age","treatment","subsample_ref",
+                        "sex","genotype","cutoff"] # replace with actual factor column names
+
+    weighted_f1_results = weighted_f1_results.fillna("None")
+    label_f1_results = label_f1_results.fillna("None")
+  #  else:
+    #    factor_names = args.vars
 
     # Convert factor columns to categorical
-    for factor in categoricals:
+    for factor in factor_names:
         weighted_f1_results[factor] =weighted_f1_results[factor].astype('category')
         label_f1_results[factor] =label_f1_results[factor].astype('category')
-    for factor in ["cutoff", "subsample_ref","age"]:
+    for factor in ["cutoff", "subsample_ref"]: # can't add age right now
         weighted_f1_results[factor] =weighted_f1_results[factor].astype('float')
         label_f1_results[factor] =label_f1_results[factor].astype('float')
    
    # change names and capitalize categories
     
-
+    
+    
     aov_combined = []
     df_list = [group for _, group in weighted_f1_results.groupby('key')]
-    factor_names = factor_names
     for df in df_list:
         aov_table = run_anova(df, factor_names, f1_column="weighted_f1")
         aov_table.to_csv(df['key'].values[0] + "_anova_global_table.tsv", sep="\t")

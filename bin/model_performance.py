@@ -1,6 +1,11 @@
 #!/user/bin/python3
 
 
+import rpy2.robjects as ro
+from rpy2.robjects import pandas2ri
+from rpy2.robjects.conversion import localconverter
+from rpy2.robjects.packages import importr
+import rpy2.robjects as robjects
 
 from pathlib import Path
 import os
@@ -34,68 +39,56 @@ from matplotlib.lines import Line2D
 # Function to parse command line arguments
 def parse_arguments():
   parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-  parser.add_argument('--weighted_f1_results', type=str, default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_dataset_id/weighted_f1_results.tsv", help="Aggregated weighted results")
-  parser.add_argument('--label_f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_dataset_id/label_f1_results.tsv", help="Label level f1 results")                                            
+  parser.add_argument('--weighted_f1_results', type=str, default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/weighted_f1_results.tsv", help="Aggregated weighted results")
+  parser.add_argument('--label_f1_results', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/label_f1_results.tsv", help="Label level f1 results")                                            
   if __name__ == "__main__":
       known_args, _ = parser.parse_known_args()
       return known_args
 
 
-def run_lm(df, formula):
-
-  model = ols(formula, data=df).fit() 
-  # Get model summary
-  model_summary = model.summary()
-  # Extract R-squared value
-  r2 = model.rsquared
-  aic = model.aic
-  # Extract coefficients and p-values table (this will typically be in model_summary.tables[1])
-  model_summary_df = model.summary2().tables[1]
-  # Apply FDR correction to p-values
-  pvals = model_summary_df['P>|t|']
-  _, fdr_corrected_pvals, _, _ = multipletests(pvals, method='fdr_bh')
-  model_summary_df['FDR'] = fdr_corrected_pvals
-  # Add R-squared value
-  model_summary_df['Rsquared'] = r2
-  model_summary_df['AIC'] = aic
-  return model.summary2().tables[0], model_summary_df
-
-
-
-def run_lm_regressed(df, formula, control_vars=['study']):
-
-  # Step 1: Regress out the effects of "Study" and "Cutoff"
-  # Create a formula that includes both control variables
-  control_formula = f"{formula.split('~')[0]} ~ " + ' + '.join(control_vars)
-  # f1_score ~ study
-  control_model = ols(control_formula, data=df).fit()
+def run_lmm_random(df, formula, group_var='study'):
+    """
+    Runs a linear mixed-effects model treating `group_var` as a random effect.
     
-  # Get residuals (this is the outcome with the "Study" effects removed)
-  df['residualized_outcome'] = control_model.resid
+    Parameters:
+        df (pd.DataFrame): The dataset.
+        formula (str): The model formula (e.g., 'f1_score ~ cutoff + variable').
+        group_var (str): The grouping variable for the random effect (default: 'study').
+    
+    Returns:
+        pd.DataFrame: Model summary with FDR-corrected p-values.
+    """
+    # Extract the outcome variable
+    outcome_var = formula.split('~')[0].strip()
+    
+    # Log-transform the outcome (avoid log(0))
+    df[outcome_var] = np.log(df[outcome_var] + 1e-6)
 
-  # Step 2: Fit the main model using the residualized outcome
-  # Replace the original outcome with the residualized outcome in the formula
-  main_formula = formula.replace(formula.split('~')[0], 'residualized_outcome')
-  # f1 
-  model = ols(main_formula, data=df).fit()
+    # Fit the model: fixed effects + study as a random effect
+    model = smf.mixedlm(formula, df, groups=df[group_var], re_formula="~1").fit()
 
-  # Get model summary
-  model_summary = model.summary()
-  # Extract R-squared and AIC values
-  r2 = model.rsquared
-  aic = model.aic
-  # Extract coefficients and p-values table
-  model_summary_df = model.summary2().tables[1]
-  # Apply FDR correction to p-values
-  pvals = model_summary_df['P>|t|']
-  _, fdr_corrected_pvals, _, _ = multipletests(pvals, method='fdr_bh')
-  model_summary_df['FDR'] = fdr_corrected_pvals
-  # Add R-squared and AIC values to the summary dataframe
-  model_summary_df['Rsquared'] = r2
-  model_summary_df['AIC'] = aic
-
-  return model, model.summary2().tables[0], model_summary_df
-
+    # Extract coefficients and p-values
+    model_summary_df = model.summary().tables[1]
+    
+    # Convert to DataFrame
+    model_summary_df = pd.DataFrame(model_summary_df.data[1:], columns=model_summary_df.data[0])
+    model_summary_df = model_summary_df.set_index(model_summary_df.columns[0])
+    model_summary_df["SE"] = model.bse
+    
+    # Ensure numeric p-values for FDR correction
+    model_summary_df["P>|z|"] = pd.to_numeric(model_summary_df["P>|z|"], errors="coerce")
+    
+    # Apply FDR correction
+    pvals = model_summary_df["P>|z|"].dropna()
+    _, fdr_corrected_pvals, _, _ = multipletests(pvals, method="fdr_bh")
+    model_summary_df.loc[pvals.index, "FDR"] = fdr_corrected_pvals
+    
+    # Add model fit statistics
+    model_summary_df["LogLik"] = model.llf
+    model_summary_df["AIC"] = model.aic
+    model_summary_df["BIC"] = model.bic
+    
+    return model, model.summary2().tables[0], model_summary_df
 
 
 def plot_model_summary(model_summary, outdir, key):
@@ -162,12 +155,12 @@ def plot_model_metrics(df_list, formulas):
     
   for df in df_list:
       for formula in formulas:
-          model_summary, model_summary_df = run_lm(df, formula)
+          model, model_summary, model_summary_df = run_lmm_random(df, formula)
           for key in df['key'].unique():
               key_df = model_summary_df.copy()
               key_df['Dataset'] = key
               key_df['Formula'] = formula
-              results.append(key_df[['Dataset', 'Formula', 'Rsquared', 'AIC']])
+              results.append(key_df[['Dataset', 'Formula', 'LogLik', 'AIC']])
 
   # Combine results into a single DataFrame
   results_df = pd.concat(results, ignore_index=True)
@@ -177,9 +170,9 @@ def plot_model_metrics(df_list, formulas):
   scatter = sns.scatterplot(data=results_df, x="AIC", y="Rsquared", hue="Dataset", style="Formula", palette="tab10", edgecolor="black", s=100)
     
   # Add labels
-  plt.title("Rsquared vs AIC Across Models")
+  plt.title("LogLik vs AIC Across Models")
   plt.xlabel("AIC")
-  plt.ylabel("R-squared")
+  plt.ylabel("LogLik")
     
   # Improve legend
   plt.legend(title="Dataset", bbox_to_anchor=(1, 1))
@@ -193,7 +186,7 @@ def plot_model_metrics(df_list, formulas):
 
 def run_and_store_model(df, formula, formula_dir, key):
   """Runs the linear model, saves results."""
-  model, model_summary, model_summary_coefs = run_lm_regressed(df, formula)
+  model, model_summary, model_summary_coefs = run_lmm_random(df, formula)
   model_summary_coefs["formula"] = formula
   model_summary_coefs["key"] = key
   model_summary_coefs["Term"] = model_summary_coefs.index
@@ -202,13 +195,20 @@ def run_and_store_model(df, formula, formula_dir, key):
   plot_model_summary(model_summary_coefs, outdir=formula_dir, key=key)
   return model_summary_coefs
  
+
+# Convert a pandas DataFrame to an R DataFrame
+def pandas_to_r(df):
+    r_df = ro.pandas2ri.py2rpy(df)
+    return r_df
+ 
+ 
 def main():
     
   args = parse_arguments()
   weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
   #weighted_f1_results = weighted_f1_results[weighted_f1_results["cutoff"] == 0]
   organism = weighted_f1_results["organism"].unique()[0]
-  label_results = pd.read_csv(args.label_f1_results, sep="\t")
+  #label_results = pd.read_csv(args.label_f1_results, sep="\t")
   #label_results = label_results[label_results["cutoff"] == 0]
   
   
@@ -220,6 +220,8 @@ def main():
       "weighted_f1 ~ " + " + ".join(factor_names) + " + reference:method + method:cutoff + disease_state + sex"]
    
   df_list = [group for _, group in weighted_f1_results.groupby('key')]
+  # use only "subclass" df
+  df_list = [df for df in df_list if df["key"].values[0] == "subclass"]
   plot_model_metrics(df_list, formulas)
   
   model_summary_coefs_combined = [] 

@@ -63,8 +63,14 @@ def main():
     weighted_f1_results["study"] = weighted_f1_results["query"].str.split(" ").str[0]
     label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
     label_f1_results["study"] = label_f1_results["query"].str.split("_").str[0]
-    categoricals = ['study','reference','method','ref_split', 'region_match',"sex","disease_state","dev_stage"]
-
+    
+    organism = weighted_f1_results["organism"].unique()[0]
+    
+    if organism == "homo_sapiens":
+        categoricals = ['study','reference','method','ref_split','region_match',"sex","disease_state","dev_stage"]
+    
+    if organism == "mus_musculus":
+        categoricals = ['study','reference','method','region_match','strain',"sex","genotype","age","treatment"]
 
     # Convert factor columns to categorical
     for factor in categoricals:
@@ -74,9 +80,13 @@ def main():
     for factor in ["cutoff", "subsample_ref"]:
         weighted_f1_results[factor] =weighted_f1_results[factor].astype('float')
         label_f1_results[factor] =label_f1_results[factor].astype('float')
-    
-    categories = ['reference', 'ref_split', 'study', 'region_match', 'disease_state', 
-                'dev_stage', 'sex', 'query_region', 'ref_region', 'subsample_ref']
+   
+    if organism == "homo_sapiens":
+        categories = ['reference', 'ref_split', 'study', 'region_match', 'disease_state', 
+                    'dev_stage', 'sex', 'query_region', 'ref_region', 'subsample_ref']
+    if organism == "mus_musculus":
+       categories = ['reference', 'ref_split', 'study', 'region_match', 'treatment', 
+                    'age', 'sex', 'query_region', 'ref_region', 'subsample_ref','genotype','strain'] 
 
     # plot cutoff vs f1
     # color by label and facet by method 
@@ -103,25 +113,6 @@ def main():
         label_long = pd.melt(subset, id_vars=['cutoff', 'f1_score', 'method','label','reference',"subsample_ref"], value_vars=categories, 
                                     var_name='category', value_name='category_value')
         
-        g = sns.FacetGrid(label_long, col="method", row="subsample_ref", height=6, sharey=False)
-        
-            # Use map_dataframe to allow hue
-        g.map_dataframe(sns.lineplot, x="cutoff", y="f1_score", hue="label")
-        # Set axis labels and titles
-        g.set_axis_labels("Cutoff", "F1 Score")
-        # capitalize titled
-
-        # Adjust layout
-        g.fig.subplots_adjust(top=0.85)
-        # Extract legend handles and labels
-        handles, labels = g.axes[0, 0].get_legend_handles_labels()
-        # Create a separate legend figure
-        fig_legend, ax_legend = plt.subplots(figsize=(25, 10))
-        ax_legend.legend(handles, labels, loc="center", ncol=2, frameon=False, fontsize=12)
-        ax_legend.axis("off")
-        plt.show()
-        g.savefig(os.path.join(outdir, f"{key_value}_label_f1_score_ref.png"))
-        fig_legend.savefig(os.path.join(outdir, f"{key_value}_label_ref_legend.png"))
 
     parent = "weighted_f1_plots"
     os.makedirs(parent, exist_ok=True)
@@ -141,56 +132,36 @@ def main():
 
         plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="reference", xlabel="Cutoff", style=None,
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_ref.png"))
-   
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method",hue="reference", xlabel="Cutoff", style=None,
-                  ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_ref_split.png"))
         
         plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="study", style=None, xlabel="Cutoff",
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_query.png"))
 
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="region_match", style=None, xlabel="Cutoff",
-                    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_region_match.png"))
-        
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="disease_state", style=None, xlabel="Cutoff",
-                  ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_disease_state.png"))
-        
-        #plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="dev_stage", style=None, xlabel="Cutoff",
-                  #ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_dev_stage.png"))
-        
-        #plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="disease_state", style=None, xlabel="Cutoff",
-                  #ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_disease_state.png"))
-        
-        #plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="sex", style=None, xlabel="Cutoff",
-                  #ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_sex.png"))
-        
-        ##plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="query_region", style=None, xlabel="Cutoff",
-         ##         ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_query_region.png"))
-        
         plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="subsample_ref", xlabel="Cutoff", style=None,
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_subsample_ref.png"))
         
-
-        # Facet by both method (columns) and ref_split (rows)
-        g = sns.FacetGrid(weighted_subset, col="method", row="ref_split", height=6, sharey=False)
-        # Use map_dataframe to allow hue
-        g.map_dataframe(sns.lineplot, x="cutoff", y="weighted_f1", hue="reference", style="ref_split")
-        # Set axis labels and titles
-        g.set_axis_labels("Cutoff", "F1 Score")
-        # capitalize titled
-
-        # Adjust layout
-        g.fig.subplots_adjust(top=0.95)
-        # Extract legend handles and labels
-        handles, labels = g.axes[0, 0].get_legend_handles_labels()
-        # Create a separate legend figure
-        fig_legend, ax_legend = plt.subplots(figsize=(15, 10))
-        ax_legend.legend(handles, labels, loc="center", ncol=2, frameon=False, fontsize=12)
-        ax_legend.axis("off")
-
-        g.savefig(os.path.join(outdir, f"{key_value}_weighted_f1_score_ref.png"))
-        fig_legend.savefig(os.path.join(outdir, f"{key_value}_ref_legend.png"))
-
-        plt.show()
+        
+        if organism == "homo_sapiens":
+            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="region_match", style=None, xlabel="Cutoff",
+                        ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_region_match.png"))
+            
+            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="disease_state", style=None, xlabel="Cutoff",
+                    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_disease_state.png"))
+            
+          
+        if organism == "mus_musculus":
+            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="genotype", style=None, xlabel="Cutoff",
+                        ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_genotype.png"))
+            
+            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="strain", style=None, xlabel="Cutoff",
+                    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_strain.png"))
+            
+            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="age", style=None, xlabel="Cutoff",
+                    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_age.png"))
+            
+            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="treatment", style=None, xlabel="Cutoff",
+                    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_treatment.png"))
+           
+            
                                               
 if __name__ == "__main__":
     main()
