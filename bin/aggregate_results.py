@@ -151,6 +151,11 @@ def map_development_stage(stage):
     
 def write_factor_summary(df, factors): 
     # summarize the number of unique levels for each item in factors
+    # make a value_counts table for each factor
+    for factor in factors:
+        value_counts = df[factor].value_counts().reset_index()
+        value_counts.columns = [factor, "count"]
+        value_counts.to_csv(f"{factor}_value_counts.tsv", sep="\t", index=False)
     factor_summary = df[factors].nunique().reset_index()
     factor_summary.columns = ["factor", "levels"]
     factor_summary.to_csv("factor_summary.tsv", sep="\t", index=False) 
@@ -255,16 +260,32 @@ def main():
     
     #-------------boxplots--------------
     df_list = [group for _, group in weighted_f1_results.groupby('key')]
+
     for df in df_list:
         key = df["key"].values[0]
+        #remove cutoff from columns_to_group
+        columns_to_group = ["cutoff"] 
+        df["cutoff"] = pd.Categorical(df["cutoff"])
         for column in columns_to_group:
-            plt.figure(figsize=(10, 6))  # Set the size for each plot
-            sns.boxplot(data=weighted_f1_results, x=column, y="weighted_f1", hue="method")
-            plt.xticks(rotation=90)  # Rotate x-axis labels for better visibility
-            plt.title(f"{key} - Weighted F1 Score by {column.capitalize()}")
-            plt.legend(title="Key", bbox_to_anchor=(1, 1))  # Improve legend
-            plt.tight_layout()  # Ensure everything fits
-            plt.savefig(f"weighted_f1_boxplot_{column}.png")
+            plt.figure(figsize=(10, 6))  # Set the figure size for the plot
+            sns.boxplot(data=df, x="method", y="weighted_f1", hue=column, dodge=True)
+
+            # Rotate x-axis labels for better visibility
+            plt.xticks(rotation=90)
+
+            # Add titles and labels
+            plt.title(f"{key}: Weighted F1 Score by Method and {column}")
+            plt.xlabel("Method")
+            plt.ylabel("Weighted F1 Score")
+
+            # Show the plot
+            plt.tight_layout()
+            plt.show()  # To display the plot
+
+            # Save the plot
+            plt.savefig(f"{key}_weighted_f1_boxplot_{column}.png", bbox_inches="tight")
+
+        # 
 
             
 

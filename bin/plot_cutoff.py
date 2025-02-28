@@ -35,8 +35,11 @@ def parse_arguments():
 
 
 def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
+    # set global fontsize
+    plt.rcParams.update({'font.size': 14})  # Set default font size for all plot elements
+
     # change figure size
-    plt.figure(figsize=(20, 10))
+    plt.figure(figsize=(22, 10))
     g = sns.relplot(
         data=df, x=x, y=y,
         col=col, hue=hue, style=style,
@@ -45,18 +48,23 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
     title = title.replace("_", " ").title()  # Capitalize and substitute "_" with " " 
     g.figure.suptitle(title, y=1, x = 0.5)  # Add title above plots
     g.set_axis_labels(xlabel, ylabel)  # Set axis labels
-    # set titles with capitalization and substitute "_" with " "
+
     g.set(xticks=[0,0.25,0.5,0.75])
+    # set xtick fontsize
+    # Rotate x-tick labels for better visibility
+    for ax in g.axes.flat:
+        plt.setp(ax.get_xticklabels(), rotation=45, ha="right", fontsize =12)  # Rotate 45 degrees and align
+    
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     # make legend fontzie smaller
     plt.setp(g._legend.get_texts(), fontsize=12)  # Adjust legend font size
+    
    # plt.tight_layout()
     plt.savefig(save_path, bbox_inches="tight")
 
  
 def main():
-    plt.rcParams.update({'font.size': 15})  # Set default font size for all plot elements
 
     args = parse_arguments()
     weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
