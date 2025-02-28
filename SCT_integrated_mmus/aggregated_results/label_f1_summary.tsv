@@ -1,1 +1,1 @@
-key	label	query	disease_state	sex	dev_stage	label_f1_mean	label_f1_std	label_f1_count
+label	method	treatment	genotype	strain	cutoff	sex	age	reference	study	label_f1_mean	label_f1_std	label_f1_count

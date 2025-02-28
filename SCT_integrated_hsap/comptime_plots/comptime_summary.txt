@@ -1,10 +1,10 @@
 mean duration:
 name
-SCVI Random Forest              0.017606
+SCVI Random Forest              0.017591
 SCVI pre-process query          0.019291
-Seurat TransferData             0.017859
+Seurat TransferData             0.017870
 Seurat pre-process query        0.043666
-Seurat pre-process reference    0.051389
+Seurat pre-process reference    0.051876
 Name: duration (hours), dtype: float64
 median duration:
 name
@@ -16,49 +16,49 @@ Seurat pre-process reference    0.043889
 Name: duration (hours), dtype: float64
 mean realtime:
 name
-SCVI Random Forest              0.003704
+SCVI Random Forest              0.003712
 SCVI pre-process query          0.011792
-Seurat TransferData             0.007532
+Seurat TransferData             0.007634
 Seurat pre-process query        0.034252
-Seurat pre-process reference    0.044880
+Seurat pre-process reference    0.045381
 Name: realtime (hours), dtype: float64
 median realtime:
 name
-SCVI Random Forest              0.003556
+SCVI Random Forest              0.003583
 SCVI pre-process query          0.012194
-Seurat TransferData             0.006917
+Seurat TransferData             0.007028
 Seurat pre-process query        0.034861
 Seurat pre-process reference    0.038750
 Name: realtime (hours), dtype: float64
 mean %cpu:
 name
-SCVI Random Forest               96.149040
+SCVI Random Forest               96.249545
 SCVI pre-process query          187.792929
-Seurat TransferData             189.660606
+Seurat TransferData             188.363494
 Seurat pre-process query        565.770707
-Seurat pre-process reference    418.776667
+Seurat pre-process reference    417.520909
 Name: %cpu, dtype: float64
 median %cpu:
 name
 SCVI Random Forest               95.2
 SCVI pre-process query          166.3
-Seurat TransferData             184.6
+Seurat TransferData             183.4
 Seurat pre-process query        496.4
 Seurat pre-process reference    372.0
 Name: %cpu, dtype: float64
 mean peak virtual memory:
 name
-SCVI Random Forest              0.012950
+SCVI Random Forest              0.012967
 SCVI pre-process query          0.015651
-Seurat TransferData             0.015749
+Seurat TransferData             0.015747
 Seurat pre-process query        0.028481
-Seurat pre-process reference    0.023350
+Seurat pre-process reference    0.022243
 Name: peak virtual memory (GB), dtype: float64
 median peak virtual memory:
 name
 SCVI Random Forest              0.012793
 SCVI pre-process query          0.015723
-Seurat TransferData             0.010742
+Seurat TransferData             0.011133
 Seurat pre-process query        0.025195
-Seurat pre-process reference    0.015137
+Seurat pre-process reference    0.015039
 Name: peak virtual memory (GB), dtype: float64
