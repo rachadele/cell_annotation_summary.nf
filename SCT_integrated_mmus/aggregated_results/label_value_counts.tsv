@@ -1,0 +1,27 @@
+label	count
+Neuron	27720
+Non-neuron	17040
+Glia	14400
+Mural	12360
+Stromal	12120
+Immune	10080
+Vascular	8640
+Endothelial	8040
+Microglia	7920
+Astrocyte	7920
+OPC	7200
+Oligodendrocyte	6960
+GABAergic	6840
+Glutamatergic	4920
+Macrophage	3120
+Cajal-Retzius cell	1920
+Pericyte	1560
+CGE	960
+Smooth muscle cell	960
+SST	960
+MGE	960
+L2/3-6 IT	960
+VIP	960
+Leptomeningeal cell	840
+deep layer non-IT	480
+L5/6 NP	480

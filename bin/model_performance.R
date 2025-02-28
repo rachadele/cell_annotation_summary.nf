@@ -32,7 +32,7 @@ run_beta_model <- function(df, formula, group_var = "study") {
 
   
   # Extract coefficients and p-values
-  summary_df <- tidy(model, effects = "fixed") %>%
+  summary_df <- tidy(model) %>%
     mutate(FDR = p.adjust(p.value, method = "fdr"))
   
   # Model fit statistics
@@ -52,7 +52,7 @@ run_and_store_model <- function(df, formula, formula_dir, key) {
   
   # Extract model summary coefficients and add additional info
   model_summary_coefs <- result$summary
-  model_summary_coefs$formula <- formula
+  model_summary_coefs$formula <- result$formula
   model_summary_coefs$key <- key
   model_summary_coefs$LogLik <- result$stats$LogLik
   model_summary_coefs$AIC <- result$stats$AIC
@@ -127,7 +127,7 @@ plot_model_summary <- function(model_summary, outdir, key) {
   model_summary$`FDR < 0.05` <- model_summary$FDR < 0.05
   #formula <- unique(model_summary$formula)
   formula <- unique(model_summary$formula)
-  formula_wrapped <- unique(factor(str_wrap(formula, width = 10)))  # Adjust width as needed
+  formula_wrapped <- unique(factor(str_wrap(formula, width = 20)))  # Adjust width as needed
 
   model_summary$term <- model_summary$term %>% gsub("reference"," ", .) %>%
                                           gsub("method"," ", .)
@@ -168,13 +168,13 @@ plot_model_summary <- function(model_summary, outdir, key) {
 
   # Save the plot to the specified directory
   ggsave(filename = file.path(outdir, paste0(key, "_", formula, "_lm_coefficients.png")), 
-  plot = p, width = 35, height = max(10, nrow(model_summary) * 0.5))
+  plot = p, width = 35, height = max(10, nrow(model_summary) * 0.7))
 }
 
 
 
 parser <- argparse::ArgumentParser()
-parser$add_argument("--weighted_f1_results", help = "Path to the weighted_f1_results file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/weighted_f1_results.tsv")
+parser$add_argument("--weighted_f1_results", help = "Path to the weighted_f1_results file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/weighted_f1_results.tsv")
 args <- parser$parse_args()
 
 
@@ -212,32 +212,32 @@ plot_model_metrics(df_list, formulas)
 formula <- formulas[[1]]
 
 for (df in df_list) {
-  for (formula in formulas) {
+ # for (formula in formulas) {
     formula_dir <- formula %>% gsub(" ", "_", .)
     dir.create(formula_dir, showWarnings = FALSE,recursive=TRUE)
     df$method <- factor(df$method, levels=c("seurat","scvi"))
-    # set baseline reference
+    
+    # set baseline
     if (organism == "homo_sapiens") {
-      df$reference <- factor(df$reference)
-        all_levels <- levels(df$reference)
-        df$reference <- factor(df$reference, levels = c("Human Multiple Cortical Areas SMART-seq", 
-                                  all_levels[!all_levels %in% "Human Multiple Cortical Areas SMART-seq"]))
 
-    } # need to set default levels for mmus
+        df$reference <- factor(df$reference)
+        # use relevel instead of this
+        ref_ref = "Human Multiple Cortical Areas SMART-seq"
+        df$reference <- relevel(df$reference, ref = ref_ref)
+         } # need to set default levels for mmus
+    
     if (organism == "mus_musculus") {
+
       df$reference <- factor(df$reference)
-      all_levels <- levels(df$reference)
       ref_ref <- "An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"
-      df$reference <- factor(df$reference, levels = c(ref_ref, 
-                                  all_levels[!all_levels %in% ref_ref]))
+      df$reference <- relevel(df$reference, ref = ref_ref)
+
       df$study <- factor(df$study)
-      study_levels <- levels(df$study)
       study_ref <- "GSE214244"
-      df$study <- factor(df$study, levels = c(study_ref,
-                                              study_levels[!study_levels %in% study_ref]))
+      df$study <- relevel(df$study, ref=study_ref)
 
     }
 
     run_and_store_model(df, formula, formula_dir = formula_dir, key = df$key[1])
   }
-}
+#
