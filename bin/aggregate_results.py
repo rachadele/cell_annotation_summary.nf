@@ -316,7 +316,7 @@ def main():
     
     label_summary.to_csv("label_f1_summary.tsv", sep="\t", index=False)
    
-    factors=columns_to_group + ["query"]
+    factors=columns_to_group + ["query"] + ["query_region"] + ["ref_region"]
     write_factor_summary(label_results, factors) 
    
         
