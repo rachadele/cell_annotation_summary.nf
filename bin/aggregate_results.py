@@ -139,27 +139,17 @@ def make_acronym(name):
 def map_development_stage(stage):
     # re write dict
     dev_stage_mapping_dict = {
-    range(0, 3): "HsapDv_0000083",
-    range(2, 6): "HsapDv_0000084",
-    range(6, 13): "HsapDv_0000085",
-    range(13, 19): "HsapDv_0000086",
-    range(19, 44): "HsapDv_0000088",
-    range(45, 999): "HsapDv_0000091",
-    #range(65, 999): "HsapDv_0000093"
-}
+        "HsapDv_0000083": "infant",
+        "HsapDv_0000084": "toddler",
+        "HsapDv_0000085": "child",
+        "HsapDv_0000086": "adolescent",
+        "HsapDv_0000088": "adult",
+        "HsapDv_0000091": "late adult",
+        np.nan: None
+    }
     return dev_stage_mapping_dict[stage]
-
-#def map_development_stage(stage):
     
-    #dev_stage_mapping_dict = {
-        #range(0, 3): "HsapDv_0000083",
-        #range(2, 6): "HsapDv_0000084",
-        #range(6, 13): "HsapDv_0000085",
-        #range(13, 19): "HsapDv_0000086",
-        #range(19, 44): "HsapDv_0000088",
-        #range(45, 999): "HsapDv_0000091",
-        ##range(65, 999): "HsapDv_0000093"
-    #}   
+        
  
 def main():
     # Parse command line arguments
@@ -204,9 +194,10 @@ def main():
         # replace rosmap infant with rosmap late adult
         f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
         f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
-        #f1_df["dev_stage"] = np.where(f1_df["query"] == "pineda" , "late adult", f1_df["dev_stage"])
-       # f1_df["dev_sage"] = np.where(f1_df["dev_stage"] == None , "late adult", f1_df["dev_stage"])
- 
+        f1_df["dev_stage"] = np.where(f1_df["study"] == "pineda" , "late adult", f1_df["dev_stage"])
+        #f1_df["dev_stage"] = np.where(f1_df["dev_stage"] == np.nan , "late adult", f1_df["dev_stage"])
+        f1_df["dev_sage"] = np.where(f1_df["dev_stage"] == None , "late adult", f1_df["dev_stage"])
+
         f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
         f1_df["sex"] = f1_df["sex"].str.replace("male", "M")
         
