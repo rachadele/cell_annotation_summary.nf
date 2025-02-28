@@ -19,7 +19,7 @@ process addParams {
 
 process aggregateResults {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${params.outdir}/aggregated_results", mode: 'copy'
 
     input:
     path f1_results_params
@@ -28,6 +28,8 @@ process aggregateResults {
    // path "f1_results_all_pipeline_runs.tsv", emit: f1_results_aggregated
     path "weighted_f1_results.tsv", emit: weighted_f1_results_aggregated
     path "label_f1_results.tsv", emit: label_f1_results_aggregated
+    path "**summary.tsv"
+    path "**value_counts.tsv"
     path "**png"
 
     script:
@@ -126,7 +128,7 @@ process labelSupportCorr {
 }
 
 process modelEval {
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    conda '/home/rschwartz/anaconda3/envs/r4.3' 
     publishDir "${params.outdir}/model_eval", mode: 'copy'
 
     input:
@@ -140,7 +142,7 @@ process modelEval {
 
     script:
     """
-    python $projectDir/bin/model_performance.py --weighted_f1_results ${weighted_f1_results_aggregated} --label_f1_results ${label_f1_results_aggregated}
+    Rscript $projectDir/bin/model_performance.R --weighted_f1_results ${weighted_f1_results_aggregated}
     """
 }
 
@@ -149,7 +151,7 @@ process plotContrasts {
     publishDir "${params.outdir}/contrasts", mode: 'copy'
 
     input:
-    tuple path(f1_model_summary_coefs), val(f1_type)
+    tuple path(f1_model_summary_coefs), val(f1_type), path(weighted_f1_results_aggregated)
 
     output:
     path "**png"
@@ -157,7 +159,9 @@ process plotContrasts {
 
     script:
     """
-    python $projectDir/bin/plot_contrasts.py --model_summary_coefs ${f1_model_summary_coefs} --type ${f1_type}
+    python $projectDir/bin/plot_contrasts.py --model_summary_coefs ${f1_model_summary_coefs} \\
+        --type ${f1_type} \\
+        --f1_results ${weighted_f1_results_aggregated}
     """
 }
 
@@ -204,17 +208,21 @@ workflow {
     // model evaluation
     modelEval(weighted_f1_results_aggregated, label_f1_results_aggregated)
 
-    f1_model_summary_coefs = modelEval.out.f1_model_summary_coefs
-
+    //f1_model_summary_coefs = modelEval.out.f1_model_summary_coefs
+    //f1_model_summary_coefs.view()
     // get types of f1 score
 
-    f1_model_summary_coefs.map { path ->
-        def f1_type = path.getName().toString().split('_')[0]
-        [path, f1_type]
-    }.set { f1_model_summary_coefs_types }
-    f1_model_summary_coefs_types.view()
+    //f1_model_summary_coefs.map { path ->
+        //def f1_type = path.getName().toString().split('_')[0]
+        //[path, f1_type]
+    //}.set { f1_model_summary_coefs_types }
+    //f1_model_summary_coefs_types.view()
+    //f1_model_summary_coefs_types.combine(weighted_f1_results_aggregated)
+    //.set{f1_model_summary_coefs_results_aggregated}
 
-    plotContrasts(f1_model_summary_coefs_types)
+    //f1_model_summary_coefs_results_aggregated.view()
+
+    //plotContrasts(f1_model_summary_coefs_results_aggregated)
 
 }
 
