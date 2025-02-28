@@ -1,8 +1,0 @@
-0	1	2	3
-Model:	OLS	Adj. R-squared:	0.096
-Dependent Variable:	residualized_outcome	AIC:	-142288.3974
-Date:	2025-02-23 15:05	BIC:	-142042.7113
-No. Observations:	136960	Log-Likelihood:	71169.
-Df Model:	24	F-statistic:	608.4
-Df Residuals:	136935	Prob (F-statistic):	0.00
-R-squared:	0.096	Scale:	0.020714

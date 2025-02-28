@@ -28,7 +28,7 @@ run_beta_model <- function(df, formula, group_var = "study") {
 
   random_effect_formula <- paste(formula, "+ (1 |", group_var, ")")
     # Add random effects directly to the formula
-  model <- glmmTMB(as.formula(formula), data = df, family = beta_family(link = "logit"))
+  model <- glmmTMB(as.formula(random_effect_formula), data = df, family = beta_family(link = "logit"))
 
   
   # Extract coefficients and p-values
@@ -123,17 +123,18 @@ plot_model_metrics <- function(df_list, formulas) {
 
 plot_model_summary <- function(model_summary, outdir, key) {
   # Add an FDR < 0.05 column
-  model_summary$FDR_05 <- model_summary$FDR < 0.05
+  model_summary$`FDR < 0.01` <- model_summary$FDR < 0.01
+  model_summary$`FDR < 0.05` <- model_summary$FDR < 0.05
   #formula <- unique(model_summary$formula)
-
+  formula <- unique(model_summary$formula)
   formula_wrapped <- unique(factor(str_wrap(formula, width = 10)))  # Adjust width as needed
 
   model_summary$term <- model_summary$term %>% gsub("reference"," ", .) %>%
                                           gsub("method"," ", .)
   model_summary <- model_summary[order(model_summary$estimate, decreasing=TRUE), ]
   # Create the base plot
-  p <- ggplot(model_summary, aes(x = estimate, y = reorder(term, estimate), fill = term)) +
-    geom_bar(stat = "identity", show.legend = FALSE) +
+  p <- ggplot(model_summary, aes(x = estimate, y = reorder(term, estimate), fill = `FDR < 0.01`)) +
+    geom_bar(stat = "identity", show.legend = TRUE) +
     theme(
       axis.text.y = element_text(color = "black"),  # Y-axis text
       axis.text.x = element_text(color = "black"),  # X-axis text
@@ -151,16 +152,16 @@ plot_model_summary <- function(model_summary, outdir, key) {
         
   
   # Highlight significant terms (FDR < 0.05)
-  p <- p + geom_bar(data = model_summary[model_summary$FDR_05, ], 
-                     stat = "identity", 
-                     color = "red", 
-                     size = 1.5,
-                     show.legend = FALSE) +
-    geom_bar(data = model_summary[!model_summary$FDR_05, ], 
-             stat = "identity", 
-             color = "lightgray", 
-              size = 1.5,
-             show.legend = FALSE)
+  #p <- p + geom_bar(data = model_summary[model_summary$FDR_05, ], 
+                     #stat = "identity", 
+                     #color = "red", 
+                     #size = 1.5,
+                     #show.legend = FALSE) +
+    #geom_bar(data = model_summary[!model_summary$FDR_05, ], 
+             #stat = "identity", 
+             #color = "lightgray", 
+              #size = 1.5,
+             #show.legend = FALSE)
   
   # Add error bars
   p <- p + geom_errorbar(aes(xmin = estimate - 2 * std.error, xmax = estimate + 2 * std.error), width = 0.2)
@@ -217,10 +218,23 @@ for (df in df_list) {
     df$method <- factor(df$method, levels=c("seurat","scvi"))
     # set baseline reference
     if (organism == "homo_sapiens") {
-    df$reference <- factor(df$reference)
-    all_levels <- levels(df$reference)
-    df$reference <- factor(df$reference, levels = c("Human Multiple Cortical Areas SMART-seq", 
-                              all_levels[!all_levels %in% "Human Multiple Cortical Areas SMART-seq"]))
+      df$reference <- factor(df$reference)
+        all_levels <- levels(df$reference)
+        df$reference <- factor(df$reference, levels = c("Human Multiple Cortical Areas SMART-seq", 
+                                  all_levels[!all_levels %in% "Human Multiple Cortical Areas SMART-seq"]))
+
+    } # need to set default levels for mmus
+    if (organism == "mus_musculus") {
+      df$reference <- factor(df$reference)
+      all_levels <- levels(df$reference)
+      ref_ref <- "An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"
+      df$reference <- factor(df$reference, levels = c(ref_ref, 
+                                  all_levels[!all_levels %in% ref_ref]))
+      df$study <- factor(df$study)
+      study_levels <- levels(df$study)
+      study_ref <- "GSE214244"
+      df$study <- factor(df$study, levels = c(study_ref,
+                                              study_levels[!study_levels %in% study_ref]))
 
     }
 

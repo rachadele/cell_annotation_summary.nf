@@ -28,6 +28,7 @@ process aggregateResults {
    // path "f1_results_all_pipeline_runs.tsv", emit: f1_results_aggregated
     path "weighted_f1_results.tsv", emit: weighted_f1_results_aggregated
     path "label_f1_results.tsv", emit: label_f1_results_aggregated
+    path "factor_summary.tsv"
     path "weighted_f1_summary.tsv"
     path "label_f1_summary.tsv"
     path "**png"

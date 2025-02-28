@@ -149,7 +149,11 @@ def map_development_stage(stage):
     }
     return dev_stage_mapping_dict[stage]
     
-        
+def write_factor_summary(df, factors): 
+    # summarize the number of unique levels for each item in factors
+    factor_summary = df[factors].nunique().reset_index()
+    factor_summary.columns = ["factor", "levels"]
+    factor_summary.to_csv("factor_summary.tsv", sep="\t", index=False) 
  
 def main():
     # Parse command line arguments
@@ -196,7 +200,7 @@ def main():
         f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
         f1_df["dev_stage"] = np.where(f1_df["study"] == "pineda" , "late adult", f1_df["dev_stage"])
         #f1_df["dev_stage"] = np.where(f1_df["dev_stage"] == np.nan , "late adult", f1_df["dev_stage"])
-        f1_df["dev_sage"] = np.where(f1_df["dev_stage"] == None , "late adult", f1_df["dev_stage"])
+       # f1_df["dev_sage"] = np.where(f1_df["dev_stage"] == None , "late adult", f1_df["dev_stage"])
 
         f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
         f1_df["sex"] = f1_df["sex"].str.replace("male", "M")
@@ -215,6 +219,8 @@ def main():
     weighted_f1_results = weighted_f1_results.drop_duplicates()
     # Keep only rows where 'weighted_f1' is not null
     weighted_f1_results = weighted_f1_results[weighted_f1_results["weighted_f1"].notnull()] 
+    # fill na with "None"
+    weighted_f1_results = weighted_f1_results.fillna("None")
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
     
 #-----------------plotting distribution ---------------- 
@@ -233,12 +239,12 @@ def main():
    #------------summaries---------------- 
     if organism == "homo_sapiens":
         order = ["subclass", "class", "family"]  # Desired order  
-        columns_to_plot=["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
+        columns_to_group=["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
     elif organism == "mus_musculus":
-        columns_to_plot = ["method", "treatment", "genotype","strain", "age", "cutoff", "sex", "reference", "study"]
+        columns_to_group = ["method", "treatment", "genotype","strain", "age", "cutoff", "sex", "reference", "study"]
         
         # summarize by sample, key, method, mean, sd
-    weighted_summary = weighted_f1_results.groupby(columns_to_plot).agg(
+    weighted_summary = weighted_f1_results.groupby(columns_to_group).agg(
         weighted_f1_mean=("weighted_f1", "mean"),
         weighted_f1_std=("weighted_f1", "std"),
         weighted_f1_count=("weighted_f1", "count")
@@ -251,7 +257,7 @@ def main():
     df_list = [group for _, group in weighted_f1_results.groupby('key')]
     for df in df_list:
         key = df["key"].values[0]
-        for column in columns_to_plot:
+        for column in columns_to_group:
             plt.figure(figsize=(10, 6))  # Set the size for each plot
             sns.boxplot(data=weighted_f1_results, x=column, y="weighted_f1", hue="method")
             plt.xticks(rotation=90)  # Rotate x-axis labels for better visibility
@@ -268,7 +274,7 @@ def main():
     label_results = f1_df[f1_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
     label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_support']))
-    #label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_split']))
+    label_results = label_results.fillna("None")
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
     
     # plot distribution of label_f1 across different splits
@@ -289,7 +295,9 @@ def main():
     
     label_summary.to_csv("label_f1_summary.tsv", sep="\t", index=False)
    
-
+    factors=columns_to_group + ["query"]
+    write_factor_summary(label_results, factors) 
+   
         
     # Create the FacetGrid
     g = sns.FacetGrid(label_results, col="key", hue="label", height=4, aspect=1.5)

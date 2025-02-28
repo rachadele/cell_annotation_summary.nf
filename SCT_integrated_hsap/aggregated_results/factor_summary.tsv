@@ -1,0 +1,10 @@
+factor	levels
+label	26
+method	2
+disease	8
+cutoff	4
+sex	2
+dev_stage	6
+reference	10
+study	7
+query	198
