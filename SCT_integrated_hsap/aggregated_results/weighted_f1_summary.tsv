@@ -509,6 +509,16 @@ scvi	Control	0.0	F	toddler	Human Multiple Cortical Areas SMART-seq	velmeshev	0.9
 scvi	Control	0.0	F	toddler	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9658752134113302	0.03516489962252056	9
 scvi	Control	0.0	F	toddler	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9661456590885599	0.03395815270950934	9
 scvi	Control	0.0	F	toddler	whole cortex	velmeshev	0.9668701893258296	0.03543525920462634	9
+scvi	Control	0.0	M	None	Dissection Angular gyrus AnG	GSE211870	0.9940534119029256	0.004199559934571562	36
+scvi	Control	0.0	M	None	Dissection Anterior cingulate cortex ACC	GSE211870	0.9943540945096194	0.004230884180552363	36
+scvi	Control	0.0	M	None	Dissection Dorsolateral prefrontal cortex DFC	GSE211870	0.9634676782243512	0.04125925083911697	36
+scvi	Control	0.0	M	None	Dissection Primary auditory cortexA1	GSE211870	0.9950723870007323	0.0035353526486819153	36
+scvi	Control	0.0	M	None	Dissection Primary somatosensory cortex S1	GSE211870	0.9948148535526641	0.003958086413346284	36
+scvi	Control	0.0	M	None	Dissection Primary visual cortexV1	GSE211870	0.9939126626734391	0.00455072999594149	36
+scvi	Control	0.0	M	None	Human Multiple Cortical Areas SMART-seq	GSE211870	0.9916054285500588	0.008454468983730774	36
+scvi	Control	0.0	M	None	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9945934598365367	0.0038845414610633945	36
+scvi	Control	0.0	M	None	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9943746988516491	0.004113076648683055	36
+scvi	Control	0.0	M	None	whole cortex	GSE211870	0.9943825980765593	0.004125497176749628	36
 scvi	Control	0.0	M	adolescent	Dissection Angular gyrus AnG	velmeshev	0.9649731915428238	0.026330984029425953	54
 scvi	Control	0.0	M	adolescent	Dissection Anterior cingulate cortex ACC	velmeshev	0.9606790844899555	0.02728114160804538	54
 scvi	Control	0.0	M	adolescent	Dissection Dorsolateral prefrontal cortex DFC	velmeshev	0.9078401154697273	0.04465693368693511	54
@@ -669,6 +679,16 @@ scvi	Control	0.25	F	toddler	Human Multiple Cortical Areas SMART-seq	velmeshev	0.
 scvi	Control	0.25	F	toddler	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9626368338238888	0.03456760878347513	9
 scvi	Control	0.25	F	toddler	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9618050810217503	0.034040559306852784	9
 scvi	Control	0.25	F	toddler	whole cortex	velmeshev	0.9625835733194467	0.03495131236718334	9
+scvi	Control	0.25	M	None	Dissection Angular gyrus AnG	GSE211870	0.99328601959368	0.004405590471395116	36
+scvi	Control	0.25	M	None	Dissection Anterior cingulate cortex ACC	GSE211870	0.9928697396195693	0.004509875864461765	36
+scvi	Control	0.25	M	None	Dissection Dorsolateral prefrontal cortex DFC	GSE211870	0.9598866863666371	0.04337687631353778	36
+scvi	Control	0.25	M	None	Dissection Primary auditory cortexA1	GSE211870	0.9939153199864411	0.0037879558312745388	36
+scvi	Control	0.25	M	None	Dissection Primary somatosensory cortex S1	GSE211870	0.9936670127738798	0.004116520171019448	36
+scvi	Control	0.25	M	None	Dissection Primary visual cortexV1	GSE211870	0.9923699474253834	0.005914122040369731	36
+scvi	Control	0.25	M	None	Human Multiple Cortical Areas SMART-seq	GSE211870	0.9805106073191452	0.02384525169476385	36
+scvi	Control	0.25	M	None	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9940181145132789	0.004073980592089887	36
+scvi	Control	0.25	M	None	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9939244454387194	0.004292069613742453	36
+scvi	Control	0.25	M	None	whole cortex	GSE211870	0.9939271563130073	0.004278215159106474	36
 scvi	Control	0.25	M	adolescent	Dissection Angular gyrus AnG	velmeshev	0.9626040230743327	0.02633268001054082	54
 scvi	Control	0.25	M	adolescent	Dissection Anterior cingulate cortex ACC	velmeshev	0.9534283644158172	0.02841248287234451	54
 scvi	Control	0.25	M	adolescent	Dissection Dorsolateral prefrontal cortex DFC	velmeshev	0.9019070854843347	0.041136411005443255	54
@@ -829,6 +849,16 @@ scvi	Control	0.5	F	toddler	Human Multiple Cortical Areas SMART-seq	velmeshev	0.6
 scvi	Control	0.5	F	toddler	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9116110379127507	0.03354908881119766	9
 scvi	Control	0.5	F	toddler	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9075829421775047	0.039879167497366176	9
 scvi	Control	0.5	F	toddler	whole cortex	velmeshev	0.9099155789331361	0.030065514145633868	9
+scvi	Control	0.5	M	None	Dissection Angular gyrus AnG	GSE211870	0.9730233024805263	0.015204599414905345	36
+scvi	Control	0.5	M	None	Dissection Anterior cingulate cortex ACC	GSE211870	0.9492461181318474	0.04173946891106011	36
+scvi	Control	0.5	M	None	Dissection Dorsolateral prefrontal cortex DFC	GSE211870	0.8923169608225994	0.06263930662336337	36
+scvi	Control	0.5	M	None	Dissection Primary auditory cortexA1	GSE211870	0.9690592245566089	0.016411147026834105	36
+scvi	Control	0.5	M	None	Dissection Primary somatosensory cortex S1	GSE211870	0.9748994419768129	0.022296770449158655	36
+scvi	Control	0.5	M	None	Dissection Primary visual cortexV1	GSE211870	0.9519781282497584	0.05957952780264881	36
+scvi	Control	0.5	M	None	Human Multiple Cortical Areas SMART-seq	GSE211870	0.8724774037465829	0.10178853130278627	36
+scvi	Control	0.5	M	None	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9771666094356376	0.02193108390119772	36
+scvi	Control	0.5	M	None	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9802497010344777	0.014764655306673485	36
+scvi	Control	0.5	M	None	whole cortex	GSE211870	0.9783347872194048	0.016799914317709726	36
 scvi	Control	0.5	M	adolescent	Dissection Angular gyrus AnG	velmeshev	0.9002336353686301	0.039652681159307236	54
 scvi	Control	0.5	M	adolescent	Dissection Anterior cingulate cortex ACC	velmeshev	0.8481356909201314	0.0609476225948074	54
 scvi	Control	0.5	M	adolescent	Dissection Dorsolateral prefrontal cortex DFC	velmeshev	0.7340386859967164	0.06675467940841857	54
@@ -989,6 +1019,16 @@ scvi	Control	0.75	F	toddler	Human Multiple Cortical Areas SMART-seq	velmeshev	0.
 scvi	Control	0.75	F	toddler	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.702534372852914	0.12824540005625792	9
 scvi	Control	0.75	F	toddler	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.6653048636552062	0.1470878375565898	9
 scvi	Control	0.75	F	toddler	whole cortex	velmeshev	0.6937815730923045	0.11355587220524102	9
+scvi	Control	0.75	M	None	Dissection Angular gyrus AnG	GSE211870	0.8232842683608694	0.10119964621293501	36
+scvi	Control	0.75	M	None	Dissection Anterior cingulate cortex ACC	GSE211870	0.7930385344889896	0.15666123404918003	36
+scvi	Control	0.75	M	None	Dissection Dorsolateral prefrontal cortex DFC	GSE211870	0.4892293509556817	0.11167805092251837	36
+scvi	Control	0.75	M	None	Dissection Primary auditory cortexA1	GSE211870	0.8446041756991953	0.06995856338448513	36
+scvi	Control	0.75	M	None	Dissection Primary somatosensory cortex S1	GSE211870	0.8252315547461992	0.12847308133016458	36
+scvi	Control	0.75	M	None	Dissection Primary visual cortexV1	GSE211870	0.7840559400759743	0.14915825484023917	36
+scvi	Control	0.75	M	None	Human Multiple Cortical Areas SMART-seq	GSE211870	0.37422935967742904	0.3295451822354501	36
+scvi	Control	0.75	M	None	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.8611077323346801	0.11787199244597327	36
+scvi	Control	0.75	M	None	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.8876861655658648	0.07959448887974506	36
+scvi	Control	0.75	M	None	whole cortex	GSE211870	0.8821304459257474	0.08674009557355869	36
 scvi	Control	0.75	M	adolescent	Dissection Angular gyrus AnG	velmeshev	0.6220471292194224	0.14730726617516693	54
 scvi	Control	0.75	M	adolescent	Dissection Anterior cingulate cortex ACC	velmeshev	0.6285177401711969	0.11864813607295974	54
 scvi	Control	0.75	M	adolescent	Dissection Dorsolateral prefrontal cortex DFC	velmeshev	0.28216228667655363	0.12711734505416905	54
@@ -1829,6 +1869,16 @@ seurat	Control	0.0	F	toddler	Human Multiple Cortical Areas SMART-seq	velmeshev	0
 seurat	Control	0.0	F	toddler	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9606605662221335	0.035266824527674594	9
 seurat	Control	0.0	F	toddler	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9557535741958166	0.0349848512988929	9
 seurat	Control	0.0	F	toddler	whole cortex	velmeshev	0.9426292790549974	0.036301668347488596	9
+seurat	Control	0.0	M	None	Dissection Angular gyrus AnG	GSE211870	0.9941841317891895	0.005597673638072033	36
+seurat	Control	0.0	M	None	Dissection Anterior cingulate cortex ACC	GSE211870	0.9939938487192533	0.005844652134585137	36
+seurat	Control	0.0	M	None	Dissection Dorsolateral prefrontal cortex DFC	GSE211870	0.9696485127253336	0.025779266792036397	36
+seurat	Control	0.0	M	None	Dissection Primary auditory cortexA1	GSE211870	0.9942747167011406	0.005543196381806844	36
+seurat	Control	0.0	M	None	Dissection Primary somatosensory cortex S1	GSE211870	0.9940529037169976	0.0056131157724504015	36
+seurat	Control	0.0	M	None	Dissection Primary visual cortexV1	GSE211870	0.9937527872248414	0.00579512181454626	36
+seurat	Control	0.0	M	None	Human Multiple Cortical Areas SMART-seq	GSE211870	0.9935685669698926	0.004996514697309664	36
+seurat	Control	0.0	M	None	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9943638756991324	0.004857448966669794	36
+seurat	Control	0.0	M	None	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9944745791005949	0.004480463614534538	36
+seurat	Control	0.0	M	None	whole cortex	GSE211870	0.9943540970320419	0.005587847469341906	36
 seurat	Control	0.0	M	adolescent	Dissection Angular gyrus AnG	velmeshev	0.9625333009642041	0.029435471285801935	54
 seurat	Control	0.0	M	adolescent	Dissection Anterior cingulate cortex ACC	velmeshev	0.9287646230836548	0.05813455873702952	54
 seurat	Control	0.0	M	adolescent	Dissection Dorsolateral prefrontal cortex DFC	velmeshev	0.8778320711101266	0.0668313552855291	54
@@ -1989,6 +2039,16 @@ seurat	Control	0.25	F	toddler	Human Multiple Cortical Areas SMART-seq	velmeshev	
 seurat	Control	0.25	F	toddler	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9608171286565741	0.03527099894111543	9
 seurat	Control	0.25	F	toddler	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.955427811597024	0.03517808186629552	9
 seurat	Control	0.25	F	toddler	whole cortex	velmeshev	0.9414925852365023	0.03617370605301788	9
+seurat	Control	0.25	M	None	Dissection Angular gyrus AnG	GSE211870	0.9940531363788345	0.005709409512231172	36
+seurat	Control	0.25	M	None	Dissection Anterior cingulate cortex ACC	GSE211870	0.9939938487192533	0.0058446521345851665	36
+seurat	Control	0.25	M	None	Dissection Dorsolateral prefrontal cortex DFC	GSE211870	0.9696485127253334	0.025779266792036397	36
+seurat	Control	0.25	M	None	Dissection Primary auditory cortexA1	GSE211870	0.9942747167011406	0.005543196381806821	36
+seurat	Control	0.25	M	None	Dissection Primary somatosensory cortex S1	GSE211870	0.9940373715807446	0.005630403237802142	36
+seurat	Control	0.25	M	None	Dissection Primary visual cortexV1	GSE211870	0.9937527872248414	0.005795121814546254	36
+seurat	Control	0.25	M	None	Human Multiple Cortical Areas SMART-seq	GSE211870	0.9935727790746393	0.005001708794252738	36
+seurat	Control	0.25	M	None	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9943164895207328	0.0048956219893538985	36
+seurat	Control	0.25	M	None	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9944548348595951	0.0044930196532177395	36
+seurat	Control	0.25	M	None	whole cortex	GSE211870	0.9943540970320419	0.0055878474693418865	36
 seurat	Control	0.25	M	adolescent	Dissection Angular gyrus AnG	velmeshev	0.9623943261215218	0.029608752123005507	54
 seurat	Control	0.25	M	adolescent	Dissection Anterior cingulate cortex ACC	velmeshev	0.9284532407352566	0.058209921617852524	54
 seurat	Control	0.25	M	adolescent	Dissection Dorsolateral prefrontal cortex DFC	velmeshev	0.877814454957661	0.06685562018518723	54
@@ -2149,6 +2209,16 @@ seurat	Control	0.5	F	toddler	Human Multiple Cortical Areas SMART-seq	velmeshev	0
 seurat	Control	0.5	F	toddler	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9465264677009405	0.03639958354047776	9
 seurat	Control	0.5	F	toddler	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.9375708947770841	0.034876978141397424	9
 seurat	Control	0.5	F	toddler	whole cortex	velmeshev	0.9304366340014548	0.0368175152321119	9
+seurat	Control	0.5	M	None	Dissection Angular gyrus AnG	GSE211870	0.9935893329545062	0.0057628293075654025	36
+seurat	Control	0.5	M	None	Dissection Anterior cingulate cortex ACC	GSE211870	0.9932054171109717	0.0060719498235318175	36
+seurat	Control	0.5	M	None	Dissection Dorsolateral prefrontal cortex DFC	GSE211870	0.964087503639209	0.030590396456745262	36
+seurat	Control	0.5	M	None	Dissection Primary auditory cortexA1	GSE211870	0.9937123367620393	0.005740469951162851	36
+seurat	Control	0.5	M	None	Dissection Primary somatosensory cortex S1	GSE211870	0.9933757468835095	0.005850900235350417	36
+seurat	Control	0.5	M	None	Dissection Primary visual cortexV1	GSE211870	0.9924925816933428	0.006250593267831501	36
+seurat	Control	0.5	M	None	Human Multiple Cortical Areas SMART-seq	GSE211870	0.9910286782093153	0.0063290332668143445	36
+seurat	Control	0.5	M	None	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9939246018220538	0.004979678875033117	36
+seurat	Control	0.5	M	None	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9938619779783965	0.0045984667710336075	36
+seurat	Control	0.5	M	None	whole cortex	GSE211870	0.9936309925469534	0.005741178122888922	36
 seurat	Control	0.5	M	adolescent	Dissection Angular gyrus AnG	velmeshev	0.9398699544399188	0.04093714308359602	54
 seurat	Control	0.5	M	adolescent	Dissection Anterior cingulate cortex ACC	velmeshev	0.9141168610203986	0.06364575949052484	54
 seurat	Control	0.5	M	adolescent	Dissection Dorsolateral prefrontal cortex DFC	velmeshev	0.8639735632899601	0.06993474090238115	54
@@ -2309,6 +2379,16 @@ seurat	Control	0.75	F	toddler	Human Multiple Cortical Areas SMART-seq	velmeshev	
 seurat	Control	0.75	F	toddler	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.8923507292975725	0.037930494895588945	9
 seurat	Control	0.75	F	toddler	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	velmeshev	0.8967711982758727	0.03599923570482298	9
 seurat	Control	0.75	F	toddler	whole cortex	velmeshev	0.8794035383214908	0.038440140776737554	9
+seurat	Control	0.75	M	None	Dissection Angular gyrus AnG	GSE211870	0.9907652379170313	0.006339849674271249	36
+seurat	Control	0.75	M	None	Dissection Anterior cingulate cortex ACC	GSE211870	0.9901104521327669	0.006724477983405986	36
+seurat	Control	0.75	M	None	Dissection Dorsolateral prefrontal cortex DFC	GSE211870	0.9336090108299937	0.045447505556144345	36
+seurat	Control	0.75	M	None	Dissection Primary auditory cortexA1	GSE211870	0.9888853781695537	0.009131045535880601	36
+seurat	Control	0.75	M	None	Dissection Primary somatosensory cortex S1	GSE211870	0.9910017999918223	0.006262372379120262	36
+seurat	Control	0.75	M	None	Dissection Primary visual cortexV1	GSE211870	0.9851764859129418	0.013456034740479265	36
+seurat	Control	0.75	M	None	Human Multiple Cortical Areas SMART-seq	GSE211870	0.9580172133257803	0.038246474362464686	36
+seurat	Control	0.75	M	None	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9916475258133476	0.005475377484924051	36
+seurat	Control	0.75	M	None	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	GSE211870	0.9906908055334692	0.005330750950551631	36
+seurat	Control	0.75	M	None	whole cortex	GSE211870	0.9868779784342406	0.012134509902946504	36
 seurat	Control	0.75	M	adolescent	Dissection Angular gyrus AnG	velmeshev	0.8922018242759026	0.06027306528615018	54
 seurat	Control	0.75	M	adolescent	Dissection Anterior cingulate cortex ACC	velmeshev	0.8688225897440327	0.0643368281462977	54
 seurat	Control	0.75	M	adolescent	Dissection Dorsolateral prefrontal cortex DFC	velmeshev	0.7720800792588144	0.12423443528582173	54

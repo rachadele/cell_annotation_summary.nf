@@ -63,26 +63,24 @@ def plot_heatmap_human(weighted_f1_results):
     column_metadata = pd.DataFrame(heatmap_data.columns.tolist(), columns=["reference", "cutoff", "subsample_ref", "method"])
     row_metadata = pd.DataFrame(heatmap_data.index.tolist(), columns=["query", "study","sex", "dev_stage", "disease","key"])
 
-    # Select appropriate color palettes based on the organism
-    if organism == "homo_sapiens":
-        reference_colors = sns.color_palette("Set1", n_colors=len(column_metadata["reference"].unique()))
-        method_colors = sns.color_palette("husl", n_colors=len(column_metadata["method"].unique()))
-       # ref_split_colors = sns.color_palette("Set2", n_colors=len(column_metadata["ref_split"].unique()))
-        
-        # For continuous variables, use a continuous colormap
-        cutoff_cmap = sns.color_palette("coolwarm", as_cmap=True)
-        subsample_ref_cmap = sns.color_palette("viridis", as_cmap=True)
+# Select appropriate color palettes based on the organism
+    reference_colors = sns.color_palette("Set1", n_colors=len(column_metadata["reference"].unique()))
+    method_colors = sns.color_palette("husl", n_colors=len(column_metadata["method"].unique()))
+    # ref_split_colors = sns.color_palette("Set2", n_colors=len(column_metadata["ref_split"].unique()))
+    
+    # For continuous variables, use a continuous colormap
+  #  cutoff_cmap = sns.color_palette("coolwarm", as_cmap=True)
+   # subsample_ref_cmap = sns.color_palette("viridis", as_cmap=True)
 
-        # Define colors for the row categories
-        study_colors = sns.color_palette("Set1", n_colors=len(row_metadata["study"].unique()))
-        sex_colors = sns.color_palette("Set1", n_colors=len(row_metadata["sex"].unique()))
-        dev_stage_colors = sns.color_palette("Set2", n_colors=len(row_metadata["dev_stage"].unique()))
-        disease_colors = sns.color_palette("Set3", n_colors=len(row_metadata["disease"].unique()))
-        key_colors = sns.color_palette("Set3", n_colors=len(row_metadata["key"].unique()))
-    else:
-        # Default or additional color palettes can be added for other organisms
-        pass
-
+    # Define colors for the row categories
+    study_colors = sns.color_palette("Set1", n_colors=len(row_metadata["study"].unique()))
+    sex_colors = sns.color_palette("Set1", n_colors=len(row_metadata["sex"].unique()))
+    dev_stage_colors = sns.color_palette("Set2", n_colors=len(row_metadata["dev_stage"].unique()))
+    disease_colors = sns.color_palette("Set3", n_colors=len(row_metadata["disease"].unique()))
+    key_colors = sns.color_palette("Set3", n_colors=len(row_metadata["key"].unique()))
+    cutoff_colors = sns.color_palette("coolwarm", n_colors=len(column_metadata["cutoff"].unique()))
+    subsample_ref_colors = sns.color_palette("viridis", n_colors=len(column_metadata["subsample_ref"].unique()))
+    
     # Map color palettes to the rows (categorical)
     row_colors = pd.DataFrame({
         'Query': row_metadata['study'].map(dict(zip(row_metadata["study"].unique(), study_colors))),
@@ -96,15 +94,17 @@ def plot_heatmap_human(weighted_f1_results):
     col_colors = pd.DataFrame({
         'Reference': column_metadata['reference'].map(dict(zip(column_metadata["reference"].unique(), reference_colors))),
         'Method': column_metadata['method'].map(dict(zip(column_metadata["method"].unique(), method_colors))),
-       # 'Split': column_metadata['ref_split'].map(dict(zip(column_metadata["ref_split"].unique(), ref_split_colors))),
-        'Cutoff': [cutoff_cmap(value) for value in column_metadata['cutoff']], 
-        'Subsample': [subsample_ref_cmap(value) for value in column_metadata['subsample_ref']]  
+        'Cutoff': column_metadata['cutoff'].map(dict(zip(column_metadata["cutoff"].unique(), cutoff_colors))),
+        'Subsample': column_metadata['subsample_ref'].map(dict(zip(column_metadata["subsample_ref"].unique(), subsample_ref_colors)))
     }, index=column_metadata.index)
-
+    
+    heatmap_data.columns = range(heatmap_data.shape[1])
+    heatmap_data.index = range(heatmap_data.shape[0])
     # Adjust the heatmap data (handle NaNs and create plot title)
     heatmap_data = heatmap_data.fillna(0)
     n_rows, n_cols = heatmap_data.shape
-    title = f"Classification of {n_rows} query samples across {n_cols} parameter combinations"
+    n_samples = n_rows // 3
+    title = f"Classification of {n_samples} query samples across {n_cols} parameter combinations"
 
     # Create and plot the heatmap with cluster map
     g = sns.clustermap(
@@ -133,17 +133,10 @@ def plot_heatmap_human(weighted_f1_results):
         "Dev Stage": zip(row_metadata["dev_stage"].unique(), dev_stage_colors),
         "Study": zip(row_metadata["study"].unique(), study_colors),
         "Disease": zip(row_metadata["disease"].unique(), disease_colors),
-        "Level": zip(row_metadata["key"].unique(), key_colors)
+        "Level": zip(row_metadata["key"].unique(), key_colors),
+        "Cutoff": zip(column_metadata["cutoff"].unique(), cutoff_colors),
+        "Subsample": zip(column_metadata["subsample_ref"].unique(), subsample_ref_colors)
     }
-
-    # For continuous variables, use ScalarMappable to create a legend
-    cutoff_norm = Normalize(vmin=column_metadata["cutoff"].min(), vmax=column_metadata["cutoff"].max())
-    cutoff_sm = ScalarMappable(norm=cutoff_norm, cmap=cutoff_cmap)
-    legend_dict["Cutoff"] = [(f"{val:.2f}", cutoff_sm.to_rgba(val)) for val in column_metadata["cutoff"].unique()]
-
-    subsample_ref_norm = Normalize(vmin=column_metadata["subsample_ref"].min(), vmax=column_metadata["subsample_ref"].max())
-    subsample_ref_sm = ScalarMappable(norm=subsample_ref_norm, cmap=subsample_ref_cmap)
-    legend_dict["Subsample"] = [(f"{val:.2f}", subsample_ref_sm.to_rgba(val)) for val in column_metadata["subsample_ref"].unique()]
 
     # Create a figure for the legends
     fig, axes = plt.subplots(len(legend_dict), 1, figsize=(6, len(legend_dict) * 1.5))
@@ -184,8 +177,8 @@ def plot_heatmap_mouse(weighted_f1_results):
    # ref_split_colors = sns.color_palette("Set2", n_colors=len(column_metadata["ref_split"].unique()))
 
     # For continuous variables, use a continuous colormap
-    cutoff_cmap = sns.color_palette("coolwarm", as_cmap=True)  # Use a continuous colormap
-    subsample_ref_cmap = sns.color_palette("viridis", as_cmap=True)  # Another continuous colormap
+   # cutoff_cmap = sns.color_palette("coolwarm", as_cmap=True)  # Use a continuous colormap
+   # subsample_ref_cmap = sns.color_palette("viridis", as_cmap=True)  # Another continuous colormap
 
     # Define colors for the row categories
     study_colors = sns.color_palette("Set1", n_colors=len(row_metadata["study"].unique()))
@@ -195,6 +188,8 @@ def plot_heatmap_mouse(weighted_f1_results):
     strain_colors = sns.color_palette("Set3", n_colors=len(row_metadata["strain"].unique()))
     treatment_colors = sns.color_palette("Set1", n_colors=len(row_metadata["treatment"].unique()))
     key_colors = sns.color_palette("Set3", n_colors=len(row_metadata["key"].unique()))
+    cutoff_colors = sns.color_palette("coolwarm", n_colors=len(column_metadata["cutoff"].unique()))
+    subsample_ref_colors = sns.color_palette("viridis", n_colors=len(column_metadata["subsample_ref"].unique()))
 
     # Map color palettes to the rows (categorical)
     row_colors = pd.DataFrame({
@@ -212,9 +207,8 @@ def plot_heatmap_mouse(weighted_f1_results):
         'Reference': column_metadata['reference'].map(dict(zip(column_metadata["reference"].unique(), reference_colors))),
         'Method': column_metadata['method'].map(dict(zip(column_metadata["method"].unique(), method_colors))),
        # 'Split': column_metadata['ref_split'].map(dict(zip(column_metadata["ref_split"].unique(), ref_split_colors))),
-        # Map continuous variables using a colormap
-        'Cutoff': [cutoff_cmap(value) for value in column_metadata['cutoff']],  # Apply colormap to each value
-        'Subsample': [subsample_ref_cmap(value) for value in column_metadata['subsample_ref']]  # Apply colormap to each value
+        'Cutoff': column_metadata['cutoff'].map(dict(zip(column_metadata["cutoff"].unique(), cutoff_colors))),
+        'Subsample': column_metadata['subsample_ref'].map(dict(zip(column_metadata["subsample_ref"].unique(), subsample_ref_colors)))
     }, index=column_metadata.index)
 
     heatmap_data.columns = range(heatmap_data.shape[1])
@@ -222,11 +216,10 @@ def plot_heatmap_mouse(weighted_f1_results):
 
     # Handle NaN or infinite values
     heatmap_data = heatmap_data.fillna(0)
-
     n_rows, n_cols = heatmap_data.shape
-
+    n_samples = n_rows // 4
     # Create the title string
-    title = f"Classification of {n_rows} query samples across {n_cols} parameter combinations"
+    title = f"Classification of {n_samples} query samples across {n_cols} parameter combinations"
 
     g = sns.clustermap(
         heatmap_data, 
@@ -254,20 +247,13 @@ def plot_heatmap_mouse(weighted_f1_results):
         "Genotype": zip(row_metadata["genotype"].unique(), genotype_colors),
         "Strain": zip(row_metadata["strain"].unique(), strain_colors),
         "Treatment": zip(row_metadata["treatment"].unique(), treatment_colors),
-        "Level": zip(row_metadata["key"].unique(), key_colors)
+        "Level": zip(row_metadata["key"].unique(), key_colors),
+        "Cutoff": zip(column_metadata["cutoff"].unique(), cutoff_colors),
+        "Subsample": zip(column_metadata["subsample_ref"].unique(), subsample_ref_colors)
     }
 
-    # For continuous variables, we use ScalarMappable to create a legend
-    # For "Cutoff"
-    cutoff_norm = Normalize(vmin=column_metadata["cutoff"].min(), vmax=column_metadata["cutoff"].max())
-    cutoff_sm = ScalarMappable(norm=cutoff_norm, cmap=cutoff_cmap)
-    legend_dict["Cutoff"] = [(f"{val:.2f}", cutoff_sm.to_rgba(val)) for val in column_metadata["cutoff"].unique()]
-
-    # For "Subsample"
-    subsample_ref_norm = Normalize(vmin=column_metadata["subsample_ref"].min(), vmax=column_metadata["subsample_ref"].max())
-    subsample_ref_sm = ScalarMappable(norm=subsample_ref_norm, cmap=subsample_ref_cmap)
-    legend_dict["Subsample"] = [(f"{val:.2f}", subsample_ref_sm.to_rgba(val)) for val in column_metadata["subsample_ref"].unique()]
-
+    # For continuous variables, we use ScalarMappable 
+    
     # Create a figure for the legends
     fig, axes = plt.subplots(len(legend_dict), 1, figsize=(6, len(legend_dict) * 1.5))
 

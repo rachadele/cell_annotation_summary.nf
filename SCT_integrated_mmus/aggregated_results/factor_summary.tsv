@@ -1,0 +1,12 @@
+factor	levels
+label	26
+method	2
+treatment	5
+genotype	5
+strain	5
+cutoff	4
+sex	3
+age	4
+reference	5
+study	7
+query	71
