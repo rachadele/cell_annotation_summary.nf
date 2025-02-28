@@ -1,0 +1,64 @@
+mean duration:
+name
+SCVI Random Forest              0.014927
+SCVI pre-process query          0.016299
+Seurat TransferData             0.017606
+Seurat pre-process query        0.037692
+Seurat pre-process reference    0.052000
+Name: duration (hours), dtype: float64
+median duration:
+name
+SCVI Random Forest              0.017778
+SCVI pre-process query          0.017778
+Seurat TransferData             0.018056
+Seurat pre-process query        0.034722
+Seurat pre-process reference    0.040278
+Name: duration (hours), dtype: float64
+mean realtime:
+name
+SCVI Random Forest              0.004494
+SCVI pre-process query          0.010460
+Seurat TransferData             0.007804
+Seurat pre-process query        0.030554
+Seurat pre-process reference    0.044787
+Name: realtime (hours), dtype: float64
+median realtime:
+name
+SCVI Random Forest              0.003889
+SCVI pre-process query          0.010833
+Seurat TransferData             0.007194
+Seurat pre-process query        0.023333
+Seurat pre-process reference    0.028333
+Name: realtime (hours), dtype: float64
+mean %cpu:
+name
+SCVI Random Forest               86.074648
+SCVI pre-process query          264.595775
+Seurat TransferData             202.372864
+Seurat pre-process query        734.746479
+Seurat pre-process reference    475.240000
+Name: %cpu, dtype: float64
+median %cpu:
+name
+SCVI Random Forest               92.2
+SCVI pre-process query          244.5
+Seurat TransferData             196.0
+Seurat pre-process query        806.0
+Seurat pre-process reference    435.0
+Name: %cpu, dtype: float64
+mean peak virtual memory:
+name
+SCVI Random Forest              0.012678
+SCVI pre-process query          0.015277
+Seurat TransferData             0.015628
+Seurat pre-process query        0.025948
+Seurat pre-process reference    0.021816
+Name: peak virtual memory (GB), dtype: float64
+median peak virtual memory:
+name
+SCVI Random Forest              0.012793
+SCVI pre-process query          0.015234
+Seurat TransferData             0.010449
+Seurat pre-process query        0.023438
+Seurat pre-process reference    0.017090
+Name: peak virtual memory (GB), dtype: float64

@@ -126,60 +126,6 @@ def save_plot(var, split, facet, outdir):
     plt.savefig(save_path, bbox_inches="tight")
     plt.close()
 
-def plot_distribution(df, var, outdir, split=None, facet=None, acronym_mapping=None, add_region_match=True):
-    """
-    Create a violin and strip plot for the given variable across groups.
-    
-    Parameters:
-        df (pd.DataFrame): Data to plot.
-        var (str): Column name for the variable to plot.
-        outdir (str): Directory to save the plot.
-        split (str): Column name to split the x-axis.
-        facet (str): Column name for facet grouping (optional).
-        acronym_mapping (dict): Mapping for acronyms to add as a legend (optional).
-    """
-    setup_plot(var, split)
-    add_violin_plot(df, var, split, facet)
-    if add_region_match:
-        add_strip_plot(df, var, split, facet)
-    #plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1), borderaxespad=0)
-    plt.xticks(rotation=90, ha="right", fontsize=25)
-    plt.yticks(fontsize=25)
-
-    # Add the custom legend to the plot
-    #plt.legend(handles=[red_patch, grey_patch], title="Match region", loc='upper left', bbox_to_anchor=(1, 1.02))
-    
-    handles, labels = plt.gca().get_legend_handles_labels()
-    facet_legend = plt.legend(
-    handles=handles,  # Use all the handles
-    labels=labels,    # Ensure that we provide all the labels too
-    title=facet.replace("_", " ").capitalize() if facet else "Group",  # Title formatting
-    loc='upper left',
-    bbox_to_anchor=(1.05, 1),
-    borderaxespad=0,
-    fontsize=15
-    )
-
-
-    if add_region_match:
-        red_patch = mlines.Line2D([], [], color='red', marker='o', markersize=7, label='Matching region')
-        grey_patch = mlines.Line2D([], [], color='grey', marker='o', markersize=7, label='Non-Matching region')
-        # Add custom legend for match_region
-        plt.gca().add_artist(facet_legend)  # Add facet legend separately
-        plt.legend(
-            handles=[red_patch, grey_patch],
-            #title="Match region",
-            loc='upper left',
-            bbox_to_anchor=(1.05, 0.3),
-            fontsize=15
-        )
-
-    # Move the legend to the desired location
-    #sns.move_legend(plt, bbox_to_anchor=(1, 1.02), loc='upper left')
-
-    add_acronym_legend(acronym_mapping, title=split.split("_")[0].capitalize())
-    plt.tight_layout()
-    save_plot(var, split, facet, outdir)
 
  
         
@@ -199,11 +145,20 @@ def map_development_stage(stage):
         "HsapDv_0000086": "adolescent",
         "HsapDv_0000088": "adult",
         "HsapDv_0000091": "late adult",
-        np.nan: "late adult"
+        np.nan: None
     }
     return dev_stage_mapping_dict[stage]
     
-        
+def write_factor_summary(df, factors): 
+    # summarize the number of unique levels for each item in factors
+    # make a value_counts table for each factor
+    for factor in factors:
+        value_counts = df[factor].value_counts().reset_index()
+        value_counts.columns = [factor, "count"]
+        value_counts.to_csv(f"{factor}_value_counts.tsv", sep="\t", index=False)
+    factor_summary = df[factors].nunique().reset_index()
+    factor_summary.columns = ["factor", "levels"]
+    factor_summary.to_csv("factor_summary.tsv", sep="\t", index=False) 
  
 def main():
     # Parse command line arguments
@@ -221,24 +176,44 @@ def main():
         temp_df = pd.read_csv(filepath,sep="\t")
         # temp_df["method"] = method
         f1_df = pd.concat([temp_df, f1_df], ignore_index=True)
-        
+     
+    organism = f1_df["organism"].unique()[0]
+    
+    #----------weighted f1 results----------------
+    # fix errors and add factors
+    
+       
     f1_df["region_match"] = f1_df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
     f1_df["reference_acronym"] = f1_df["reference"].apply(make_acronym)
     #f1_df["query_acronym"] = f1_df["query"].apply(make_acronym)
     f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
     f1_df["study"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
+    
+    
+    f1_df["disease"] = np.where(f1_df["study"]== "GSE211870", "Control", f1_df["disease"])
+    # eric queries
     f1_df["disease_state"] = np.where(f1_df["disease"] == "Control", "Control", "Disease")
-    f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage)
+    # handle Gemma
     
-    # replace rosmap infant with rosmap late adult
-    f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
-    f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
-    f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
+    if organism == "homo_sapiens":
+        # deal with annotation mismatch between gemma queries and curated queries
+        f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage)
     
-    
-    # Boxplots: Show the effect of categorical parameters
-    categorical_columns = ['query', 'reference','method','ref_split', 'region_match',"subsample_ref","sex","disease_state","dev_stage","cutoff"] #organism, other categoricals
+        # replace rosmap infant with rosmap late adult
+        f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
+        f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
+        f1_df["dev_stage"] = np.where(f1_df["study"] == "pineda" , "late adult", f1_df["dev_stage"])
+        #f1_df["dev_stage"] = np.where(f1_df["dev_stage"] == np.nan , "late adult", f1_df["dev_stage"])
+       # f1_df["dev_sage"] = np.where(f1_df["dev_stage"] == None , "late adult", f1_df["dev_stage"])
+
+        f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
+        f1_df["sex"] = f1_df["sex"].str.replace("male", "M")
+        
+    if organism == "mus_musculus":
+        f1_df["disease_state"] = np.where(f1_df["disease"] == "No disease", "Control", "Disease")
+
+#----------------drop label columns and save---------------
     outdir = "weighted_f1_distributions"
     label_columns = ["label", "f1_score","ref_support","label_accuracy"]
     os.makedirs(outdir, exist_ok=True)
@@ -249,27 +224,102 @@ def main():
     weighted_f1_results = weighted_f1_results.drop_duplicates()
     # Keep only rows where 'weighted_f1' is not null
     weighted_f1_results = weighted_f1_results[weighted_f1_results["weighted_f1"].notnull()] 
+    # fill na with "None"
+    weighted_f1_results = weighted_f1_results.fillna("None")
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
+    
+#-----------------plotting distribution ---------------- 
+    g = sns.FacetGrid(weighted_f1_results, col="key", hue="study", height=4, aspect=1.5)
+    # Map the KDE plot to the FacetGrid
+    g.map(sns.histplot, 'weighted_f1', multiple="layer", bins=40, binrange=(0, 1))
+    # Set axis labels and titles
+    g.set_axis_labels("F1 Scores", "Frequency")
+    g.set_titles("F1 Score Distribution by {col_name}")
+    # Add a legend
+    g.add_legend()
+    # Save and display the plot
+    g.savefig("weighted_f1_distribution.png")
+    #plt.show()
+    
+   #------------summaries---------------- 
+    if organism == "homo_sapiens":
+        order = ["subclass", "class", "family"]  # Desired order  
+        columns_to_group=["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
+    elif organism == "mus_musculus":
+        columns_to_group = ["method", "treatment", "genotype","strain", "age", "cutoff", "sex", "reference", "study"]
+        
+        # summarize by sample, key, method, mean, sd
+    weighted_summary = weighted_f1_results.groupby(columns_to_group).agg(
+        weighted_f1_mean=("weighted_f1", "mean"),
+        weighted_f1_std=("weighted_f1", "std"),
+        weighted_f1_count=("weighted_f1", "count")
+    ).reset_index()
+    
+    
+    weighted_summary.to_csv("weighted_f1_summary.tsv", sep="\t", index=False)   
+    
+    #-------------boxplots--------------
+    df_list = [group for _, group in weighted_f1_results.groupby('key')]
 
+    for df in df_list:
+        key = df["key"].values[0]
+        #remove cutoff from columns_to_group
+        columns_to_group = ["cutoff"] 
+        df["cutoff"] = pd.Categorical(df["cutoff"])
+        for column in columns_to_group:
+            plt.figure(figsize=(10, 6))  # Set the figure size for the plot
+            sns.boxplot(data=df, x="method", y="weighted_f1", hue=column, dodge=True)
+
+            # Rotate x-axis labels for better visibility
+            plt.xticks(rotation=90)
+
+            # Add titles and labels
+            plt.title(f"{key}: Weighted F1 Score by Method and {column}")
+            plt.xlabel("Method")
+            plt.ylabel("Weighted F1 Score")
+
+            # Show the plot
+            plt.tight_layout()
+            plt.show()  # To display the plot
+
+            # Save the plot
+            plt.savefig(f"{key}_weighted_f1_boxplot_{column}.png", bbox_inches="tight")
+
+        # 
+
+            
+
+
+
+# -----------label f1 results----------------
     label_results = f1_df[f1_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
     label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_support']))
-    #label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_split']))
+    label_results = label_results.fillna("None")
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
     
     # plot distribution of label_f1 across different splits
     outdir = "label_distributions"
     os.makedirs(outdir, exist_ok=True)
 
+    if organism == "homo_sapiens":
+        columns_to_group=["label","method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
+    if organism == "mus_musculus":
+       columns_to_group=["label","method", "treatment", "genotype","strain","cutoff", "sex", "age", "reference", "study"] 
+    # make a count summary table for label_f1 by label, sample, disease_state, sex, dev_stage
+    label_summary = label_results.groupby(columns_to_group).agg(
+        label_f1_mean=("f1_score", "mean"),
+        label_f1_std=("f1_score", "std"),
+        label_f1_count=("f1_score", "count")
+    ).reset_index()
+        
     
-    # Example: adding hue and faceting to the weighted F1 scores distribution plot
-    sns.histplot(weighted_f1_results, x='weighted_f1', hue='key', multiple="fill", palette="Set1")
-    plt.xlabel("Weighted F1")
-    plt.ylabel("Frequency")
-    plt.title("Distribution of Weighted F1 Scores by Key")
-    plt.savefig("weighted_f1_distribution.png")
-    #plt.show()
-
+    label_summary.to_csv("label_f1_summary.tsv", sep="\t", index=False)
+   
+    factors=columns_to_group + ["query"]
+    write_factor_summary(label_results, factors) 
+   
+        
     # Create the FacetGrid
     g = sns.FacetGrid(label_results, col="key", hue="label", height=4, aspect=1.5)
     # Map the KDE plot to the FacetGrid
@@ -283,6 +333,9 @@ def main():
     g.savefig("label_f1_distribution_facet.png")
     #plt.show()
 
+
+            
+            
   
 if __name__ == "__main__":
     main()
