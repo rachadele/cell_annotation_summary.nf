@@ -22,7 +22,7 @@ import yaml
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument("--all_runs", type=str, help="Path to trace results directory", default="/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/test_new_hierarchy/homo_sapiens")
+    parser.add_argument("--all_runs", type=str, help="Path to trace results directory", default="/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/mus_musculus/sample/SCT")
        # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -106,37 +106,38 @@ def main():
     trace_subset["name"] = trace_subset["name"].replace({"rfPredict": "SCVI Random Forest", "predictSeurat": "Seurat TransferData", 
                                                          "mapQuery": "SCVI pre-process query", "queryProcessSeurat": "Seurat pre-process query", 
                                                          "refProcessSeurat": "Seurat pre-process reference"})
-    #get median and mean for each method
+    #get std and mean for each method and make a table
+    
+    mean_duration = trace_subset.groupby("name")["duration (hours)"].mean()
+    std_duration = trace_subset.groupby("name")["duration (hours)"].std()
+    mean_realtime = trace_subset.groupby("name")["realtime (hours)"].mean()
+    std_realtime = trace_subset.groupby("name")["realtime (hours)"].std()
+    mean_cpu = trace_subset.groupby("name")["%cpu"].mean()
+    std_cpu = trace_subset.groupby("name")["%cpu"].std()
+    mean_peak_vmem = trace_subset.groupby("name")["peak virtual memory (GB)"].mean()
+    std_peak_vmem = trace_subset.groupby("name")["peak virtual memory (GB)"].std()
    
-    # turn this into a file
-    with open("comptime_summary.txt", "w") as f:
-        f.write("mean duration:\n")
-        f.write(str(trace_subset.groupby("name")["duration (hours)"].mean()))
-        f.write("\n")
-        f.write("median duration:\n")
-        f.write(str(trace_subset.groupby("name")["duration (hours)"].median()))
-        f.write("\n")
-        f.write("mean realtime:\n")
-        f.write(str(trace_subset.groupby("name")["realtime (hours)"].mean()))
-        f.write("\n")
-        f.write("median realtime:\n")
-        f.write(str(trace_subset.groupby("name")["realtime (hours)"].median()))
-        f.write("\n")
-        f.write("mean %cpu:\n")
-        f.write(str(trace_subset.groupby("name")["%cpu"].mean()))
-        f.write("\n")
-        f.write("median %cpu:\n")
-        f.write(str(trace_subset.groupby("name")["%cpu"].median()))
-        f.write("\n")
-        f.write("mean peak virtual memory:\n")
-        f.write(str(trace_subset.groupby("name")["peak virtual memory (GB)"].mean()))
-        f.write("\n")
-        f.write("median peak virtual memory:\n")
-        f.write(str(trace_subset.groupby("name")["peak virtual memory (GB)"].median()))
-        f.write("\n")
-        
-       
-    # Melt data for FacetGrid
+        # Ensure consistent order
+    methods = ["SCVI Random Forest", "SCVI pre-process query", 
+            "Seurat TransferData", "Seurat pre-process query", "Seurat pre-process reference"]
+
+    # Create a table with mean and std for each method
+    table = pd.DataFrame({
+        "mean duration (hours)": mean_duration,
+        "std duration (hours)": std_duration,
+        "mean realtime (hours)": mean_realtime,
+        "std realtime (hours)": std_realtime,
+        "mean %cpu": mean_cpu,
+        "std %cpu": std_cpu,
+        "mean peak virtual memory (GB)": mean_peak_vmem,
+        "std peak virtual memory (GB)": std_peak_vmem
+    })
+
+    # Reorder rows
+    table = table.loc[methods]
+
+    # Save table
+    table.to_csv("comptime_summary.tsv", sep="\t", index=True)    # Melt data for FacetGrid
     trace_melted = trace_subset.melt(id_vars=["name","subsample_ref","subsample_query","cutoff"], 
                                      value_vars=["duration (hours)","%cpu"], var_name="Metric", value_name="Value")
 
@@ -144,11 +145,12 @@ def main():
     g = sns.FacetGrid(trace_melted, col="Metric", sharey=False, height=5, aspect=1)
 
     # Map the violin plot while keeping 'subsample_ref' and 'subsample_query' in the hue
-    g.map_dataframe(sns.stripplot, x="name", y="Value", hue="subsample_ref",palette="Set3", dodge=True, jitter=True, legend=True)
+    g.map_dataframe(sns.violinplot, x="name", y="Value", palette="Set3", legend=True)
     # set xlabels 90 degree rotation
     g.set_xticklabels(rotation=90)
     # Adjust legend
-    g.add_legend(title="Number of cells subsampled from reference per cell type")
+    #g.add_legend(title="Number of cells subsampled from reference per cell type")
+    
     plt.savefig("comptime.png",bbox_inches='tight')
     
 if __name__ == "__main__":

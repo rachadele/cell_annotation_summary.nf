@@ -186,22 +186,24 @@ weighted_f1_results[is.na(weighted_f1_results)] <- "None"
 organism <- unique(weighted_f1_results$organism)[1]
 
 # Defining factor names
-factor_names <- c("study", "reference", "method", "cutoff")
+factor_names <- c("reference", "method", "cutoff")
 
 if (organism == "homo_sapiens") {
   # Defining the formulas
   formulas <- list(
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
     paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff"), collapse = " + ")),
     paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "disease_state"), collapse = " + ")),
     paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "disease_state", "sex"), collapse = " + "))
   )
 } else if (organism == "mus_musculus") {
   formulas <- list(
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
     paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain","age"), collapse = " + "))
+    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "sex"), collapse = " + "))
+   # paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype"), collapse = " + ")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain"), collapse = " + ")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain","sex"), collapse = " + "))
   )
 }
 # Grouping the data by 'key' column and creating a list of data frames
@@ -209,10 +211,10 @@ df_list <- split(weighted_f1_results, weighted_f1_results$key)
 
 plot_model_metrics(df_list, formulas)
 
-formula <- formulas[[1]]
+#formula <- formulas[[1]]
 
 for (df in df_list) {
- # for (formula in formulas) {
+  for (formula in formulas) {
     formula_dir <- formula %>% gsub(" ", "_", .)
     dir.create(formula_dir, showWarnings = FALSE,recursive=TRUE)
     df$method <- factor(df$method, levels=c("seurat","scvi"))
@@ -222,22 +224,22 @@ for (df in df_list) {
 
         df$reference <- factor(df$reference)
         # use relevel instead of this
-        ref_ref = "Human Multiple Cortical Areas SMART-seq"
+        ref_ref = "Dissection Dorsolateral prefrontal cortex DFC"
         df$reference <- relevel(df$reference, ref = ref_ref)
          } # need to set default levels for mmus
     
     if (organism == "mus_musculus") {
 
       df$reference <- factor(df$reference)
-      ref_ref <- "An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"
+      ref_ref <- "Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"
       df$reference <- relevel(df$reference, ref = ref_ref)
 
       df$study <- factor(df$study)
-      study_ref <- "GSE214244"
+      study_ref <- "GSE152715.2"
       df$study <- relevel(df$study, ref=study_ref)
 
     }
 
     run_and_store_model(df, formula, formula_dir = formula_dir, key = df$key[1])
   }
-#
+}

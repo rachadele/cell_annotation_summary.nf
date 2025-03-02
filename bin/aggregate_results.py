@@ -152,13 +152,15 @@ def map_development_stage(stage):
 def write_factor_summary(df, factors): 
     # summarize the number of unique levels for each item in factors
     # make a value_counts table for each factor
-    for factor in factors:
-        value_counts = df[factor].value_counts().reset_index()
-        value_counts.columns = [factor, "count"]
-        value_counts.to_csv(f"{factor}_value_counts.tsv", sep="\t", index=False)
+    #for factor in factors:
+        #value_counts = df[factor].value_counts().reset_index()
+        #value_counts.columns = [factor, "count"]
+        #value_counts.to_csv(f"{factor}_value_counts.tsv", sep="\t", index=False)
     factor_summary = df[factors].nunique().reset_index()
     factor_summary.columns = ["factor", "levels"]
     factor_summary.to_csv("factor_summary.tsv", sep="\t", index=False) 
+    value_counts = df[["study","query","query_region"]].value_counts().reset_index()
+    value_counts.to_csv(f"region_study_value_counts.tsv", sep="\t", index=False)
  
 def main():
     # Parse command line arguments
@@ -215,7 +217,7 @@ def main():
 
 #----------------drop label columns and save---------------
     outdir = "weighted_f1_distributions"
-    label_columns = ["label", "f1_score","ref_support","label_accuracy"]
+    label_columns = ["label", "f1_score","label_accuracy"]
     os.makedirs(outdir, exist_ok=True)
     
     # Drop duplicates, but exclude 'ref_split' column (so duplicates in 'ref_split' are allowed)
@@ -242,14 +244,14 @@ def main():
     #plt.show()
     
    #------------summaries---------------- 
-    if organism == "homo_sapiens":
-        order = ["subclass", "class", "family"]  # Desired order  
-        columns_to_group=["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
-    elif organism == "mus_musculus":
-        columns_to_group = ["method", "treatment", "genotype","strain", "age", "cutoff", "sex", "reference", "study"]
+    #if organism == "homo_sapiens":
+        #order = ["subclass", "class", "family"]  # Desired order  
+        #columns_to_group=["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
+    #elif organism == "mus_musculus":
+        #columns_to_group = ["method", "treatment", "genotype","strain", "age", "cutoff", "sex", "reference", "study"]
         
         # summarize by sample, key, method, mean, sd
-    weighted_summary = weighted_f1_results.groupby(columns_to_group).agg(
+    weighted_summary = weighted_f1_results.groupby(["method","cutoff","reference","key"]).agg(
         weighted_f1_mean=("weighted_f1", "mean"),
         weighted_f1_std=("weighted_f1", "std"),
         weighted_f1_count=("weighted_f1", "count")
@@ -294,20 +296,15 @@ def main():
 # -----------label f1 results----------------
     label_results = f1_df[f1_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
-    label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_support']))
+    #label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_support']))
     label_results = label_results.fillna("None")
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
     
     # plot distribution of label_f1 across different splits
     outdir = "label_distributions"
     os.makedirs(outdir, exist_ok=True)
-
-    if organism == "homo_sapiens":
-        columns_to_group=["label","method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
-    if organism == "mus_musculus":
-       columns_to_group=["label","method", "treatment", "genotype","strain","cutoff", "sex", "age", "reference", "study"] 
     # make a count summary table for label_f1 by label, sample, disease_state, sex, dev_stage
-    label_summary = label_results.groupby(columns_to_group).agg(
+    label_summary = label_results.groupby(["label","method","cutoff","reference","key"]).agg(
         label_f1_mean=("f1_score", "mean"),
         label_f1_std=("f1_score", "std"),
         label_f1_count=("f1_score", "count")
@@ -316,6 +313,11 @@ def main():
     
     label_summary.to_csv("label_f1_summary.tsv", sep="\t", index=False)
    
+
+    if organism == "homo_sapiens":
+        columns_to_group=["label","method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
+    if organism == "mus_musculus":
+       columns_to_group=["label","method", "treatment", "genotype","strain","cutoff", "sex", "age", "reference", "study"] 
     factors=columns_to_group + ["query"] + ["query_region"] + ["ref_region"]
     write_factor_summary(label_results, factors) 
    
@@ -334,7 +336,7 @@ def main():
     #plt.show()
 
 
-            
+ 
             
   
 if __name__ == "__main__":

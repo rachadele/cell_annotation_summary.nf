@@ -1,761 +1,321 @@
-method	treatment	genotype	strain	age	cutoff	sex	reference	study	weighted_f1_mean	weighted_f1_std	weighted_f1_count
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.7719666232005362	0.13091234892102016	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9637592684402665	0.03129704377148657	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.7442919749183571	0.2570307059807498	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.7002048732062431	0.2546542878149545	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	whole cortex	GSE214244	0.8185394155024567	0.17863216133016455	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.7710374332969804	0.12985063081781606	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9635360438666832	0.031069340067376515	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.6888436538882676	0.20830451604385622	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.5756832373502677	0.2104066000816135	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	whole cortex	GSE214244	0.7064394484273948	0.1471683306227106	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.5701358230790243	0.06876528255449565	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9479576286758952	0.033364470504727545	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.560913589281659	0.12108601925239847	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.1470451743780576	0.11066351456480673	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	whole cortex	GSE214244	0.5433357562411953	0.08360531405383982	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.19963568405505144	0.12997188041482696	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.8395088201118819	0.10719113303774289	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.43414469731152233	0.11194471589641983	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.025820733287042288	0.020125868178624766	36
-scvi	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	whole cortex	GSE214244	0.4388012965213049	0.12106313388165604	36
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8106124296443694	0.07532445306424629	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5101109742266886	0.3754300828910421	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8322347218636801	0.07744124166794478	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5124463040496475	0.36959373361898945	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8463463019880505	0.05765873218434262	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.6316477568900659	0.24552146742688338	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8031250342342441	0.05609876267173331	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.5770818953069087	0.26828904012066723	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	whole cortex	GSE152715.1	0.8492802516413964	0.06418349422437011	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	whole cortex	GSE152715.2	0.6426995073271226	0.23538983344518424	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8137548650589154	0.07619469084686678	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5221559247884547	0.3539775796553005	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8346441432019098	0.07986041546885693	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5240622678783103	0.35067099410863034	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.855717936971354	0.05790706806283275	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.6263160626340274	0.23885325799875828	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8149876685001042	0.056800978236499225	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.5743714704042039	0.25717973651222087	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	whole cortex	GSE152715.1	0.8549003386281023	0.06514918862138411	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	whole cortex	GSE152715.2	0.6364088558761288	0.23215858956830987	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8099245681141384	0.07530016727173187	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5095200888680286	0.3755849550021234	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8304549409817569	0.07770262447996022	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5114387762038883	0.36985269417307687	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.5352230429226983	0.09478550995805166	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.410217495847778	0.1561928574680194	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.4029974100793374	0.055890761066175486	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.30633135669338984	0.15085552660978682	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	whole cortex	GSE152715.1	0.5088401503622245	0.0749199397538296	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	whole cortex	GSE152715.2	0.3665407418417969	0.12554327001840027	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8130273053801919	0.07610832827447636	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.521422582782601	0.35399818758047336	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8328428609108834	0.07993972722227673	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5229469902043035	0.3508128921220179	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.5789252301849139	0.08036706371854958	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.3870722753375811	0.14628186356704104	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.4519407810552048	0.05751569263077901	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.28525644153054663	0.13721849316349027	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	whole cortex	GSE152715.1	0.5513749323579688	0.07122798361722572	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	whole cortex	GSE152715.2	0.3452506786362028	0.12108078652681205	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.7437441235745035	0.07787224467957844	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.4518612792594652	0.3792501152127554	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.7810668123577611	0.07786526904980928	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.45799056511847214	0.366370463569071	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.04767280172234775	0.01689300810988386	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.03366440184267083	0.01681712727745266	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.011488732922544492	0.007712367366951964	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.0084451422541525	0.004508618078506654	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	whole cortex	GSE152715.1	0.06824068754678074	0.0330883050127406	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	whole cortex	GSE152715.2	0.03838506560180888	0.011769384264242221	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.742326295570808	0.07719564539796608	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.4560258097955761	0.3574633996775699	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.7898907164626227	0.08062718556311892	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.4729707758221848	0.34788569424724436	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.07377746107246679	0.0228004580817228	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.038430364551824026	0.016113789146496242	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.017509457075866118	0.011355622996750076	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.01097800598697655	0.006405633320132143	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	whole cortex	GSE152715.1	0.09021575551545201	0.03867278701170242	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	whole cortex	GSE152715.2	0.038758912888349734	0.013883056342275985	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.5647183743706975	0.16771388253480052	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.3604180604926703	0.33832782659899113	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.5120134787450097	0.16717386150196414	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.34769770964393015	0.30378576778071853	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.002780748789855717	0.0018793834042042299	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.0038085670271303163	0.0013374870588913437	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	6.402836906678334e-05	0.00014953805314462545	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.0007296038043375833	0.000761658882934005	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	whole cortex	GSE152715.1	0.005622651307301299	0.003932388506571609	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	whole cortex	GSE152715.2	0.0038215095151253996	0.0017891497736457636	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.5715523024296865	0.15202645272330167	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.35181992597014644	0.31603793711988487	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.519290788054975	0.16463496991312976	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.34417786292784464	0.28130597204733576	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.00891453045657955	0.005132861867039907	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.004389942963797692	0.00202706765388105	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.0004317221339872333	0.0006884231612880042	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.00025086858686136664	0.00037384429399405726	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	whole cortex	GSE152715.1	0.0111447884602667	0.007843296608291729	12
-scvi	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	whole cortex	GSE152715.2	0.0038797178345019085	0.0025179150318795696	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8154561051830321	0.07178863054522464	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.51412515064411	0.34933286356731946	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8403124487791972	0.07509716133599696	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5161570656267237	0.3467574343894542	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8514393982794485	0.05557544162179419	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.6097938358833532	0.24310684630362628	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8024709496521858	0.05383395032326665	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.555702273443043	0.2569447359373483	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	whole cortex	GSE152715.1	0.8535122583121485	0.06221703508980225	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	whole cortex	GSE152715.2	0.6205705385206867	0.23696670456396832	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8142406191769666	0.07599489741710605	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5164994842271172	0.34474367396216127	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8280614616675995	0.07894668961251705	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5134568887255675	0.3393709816927195	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8502867712615806	0.056496244068006	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.6085262146421144	0.24034710953685928	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8075486883131434	0.05492005864215574	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.56443837081352	0.2546972302143684	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	whole cortex	GSE152715.1	0.850592570933847	0.06461498521729622	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	whole cortex	GSE152715.2	0.614634358808362	0.23734439605099208	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8147529699591557	0.0718681088478883	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5135956596483533	0.3494453437712599	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8383558684534113	0.0754189937900731	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5154127438540259	0.34674741445013035	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.5801190507679972	0.08420483563775201	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.37808828533573097	0.15032859041339836	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.43330614273432566	0.04899410848514726	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.2793228669995194	0.13583441744334443	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	whole cortex	GSE152715.1	0.5554664865693486	0.06927472825251949	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	whole cortex	GSE152715.2	0.3313160045459781	0.12441247244552626	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8132017474966505	0.07614126521345022	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5157030141024448	0.3449621420963459	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8264563475581875	0.07917213198948098	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5122772069144225	0.3397280867322876	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.5700633126948498	0.07958244621542905	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.3947159604051498	0.15526713664936767	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.4105188351666589	0.0562842856266935	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.28800163440219684	0.13962019607983792	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	whole cortex	GSE152715.1	0.5512233425920535	0.07551398601040145	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	whole cortex	GSE152715.2	0.3518805775561365	0.13011623809739975	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.7422708893435425	0.07435045649812812	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.44387613777167284	0.35435286135164545	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.7886446201029723	0.07533188956724947	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.4587786227661586	0.34488013031041875	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.06551915050777994	0.026143862257588173	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.03975997765378832	0.016180059152090184	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.014319047444298709	0.009503835033958664	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.0115728547140966	0.005941729289186845	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	whole cortex	GSE152715.1	0.07666165650912522	0.03605841486574657	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	whole cortex	GSE152715.2	0.044521576210092374	0.01647372205287992	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.7406917581839441	0.07970874283556259	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.45847913945332214	0.3485217755338716	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.7849840112302308	0.07992657460165876	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.47061942005585017	0.33865303441252576	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.07174962845709044	0.024375057223387356	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.042273862580684364	0.021348166911527165	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.012474117030395025	0.00906775967274986	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.007820319385475226	0.004615495129932352	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	whole cortex	GSE152715.1	0.10070641090676125	0.04751385818315021	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	whole cortex	GSE152715.2	0.04212624807318399	0.011606266755203001	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.5750792358640299	0.1495041916901946	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.34293182187710175	0.3144700245838491	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.507784920062779	0.17090215857817798	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.3316127491473691	0.2796024832739954	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.003238773598814717	0.00203787347735986	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.00434849402050185	0.0022980896800112375	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.00028870558877312503	0.00032484424586718715	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.0010094668625074668	0.0005381516133071281	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	whole cortex	GSE152715.1	0.00561776766792255	0.003948199667744796	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	whole cortex	GSE152715.2	0.00195064452377875	0.001587540548766015	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.574304810938684	0.15217651163085985	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.35123701537533103	0.3084854271632873	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.516908380111218	0.15001420720000125	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.3542754515458159	0.28034363071908136	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.005426207284760808	0.004041942085910429	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.004121279796535858	0.0019691511654173588	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.00024699715208313335	0.0003939529055273918	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.0007339748801328166	0.00041260986471653495	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	whole cortex	GSE152715.1	0.011384518177280591	0.008237912711709226	12
-scvi	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	whole cortex	GSE152715.2	0.0031026910964873588	0.0016630609282557907	12
-scvi	None	None	C57BL/6N	8-10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.8831771783958652	0.08991573217336701	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.9356503363018001	0.05703931487328797	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.7782893287416184	0.2389739093265462	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.7444394528442494	0.23809332983792705	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.0	male	whole cortex	GSE181021.2	0.8304646628825813	0.18044572557659538	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.8824896092048412	0.08917148184053597	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.9325821732927174	0.05650675998582779	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.7357787583159906	0.2235718356829416	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.6211797013872454	0.22998419231355063	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.25	male	whole cortex	GSE181021.2	0.7591796649411043	0.1661910561603262	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.6379320546232199	0.03985442183948061	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.833095412555083	0.05190350937108591	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.4654546185918633	0.1269771171871699	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.31461370159001467	0.15725684587647182	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.5	male	whole cortex	GSE181021.2	0.4664414794816521	0.11714942096497676	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.2914152834458206	0.07393605063428298	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.6268685044646005	0.07681750392148713	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.2601092350448109	0.06387386030701528	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.07590514757249826	0.05869212690764276	24
-scvi	None	None	C57BL/6N	8-10 weeks	0.75	male	whole cortex	GSE181021.2	0.2798741255768465	0.057012493813693964	24
-scvi	None	None	None	None	0.0	None	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE199460	0.7705324909036158	0.19246831861729607	132
-scvi	None	None	None	None	0.0	None	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE199460	0.8289577408546855	0.18601972806045902	132
-scvi	None	None	None	None	0.0	None	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE199460	0.8352240623104421	0.17817888057874517	132
-scvi	None	None	None	None	0.0	None	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE199460	0.8379499548214342	0.185459748681014	132
-scvi	None	None	None	None	0.0	None	whole cortex	GSE199460	0.8513294636211605	0.15207515072679886	132
-scvi	None	None	None	None	0.25	None	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE199460	0.7678239442299372	0.19183868377372768	132
-scvi	None	None	None	None	0.25	None	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE199460	0.822252590343315	0.18647126477970963	132
-scvi	None	None	None	None	0.25	None	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE199460	0.8220053993246877	0.18209887708879172	132
-scvi	None	None	None	None	0.25	None	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE199460	0.808271861864339	0.20186870283373493	132
-scvi	None	None	None	None	0.25	None	whole cortex	GSE199460	0.8021753992550545	0.18297779079341148	132
-scvi	None	None	None	None	0.5	None	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE199460	0.5807454868646228	0.25245297791643706	132
-scvi	None	None	None	None	0.5	None	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE199460	0.6887141579413818	0.2684629621011619	132
-scvi	None	None	None	None	0.5	None	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE199460	0.696455487095487	0.24847640689108794	132
-scvi	None	None	None	None	0.5	None	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE199460	0.7031901548141777	0.2483140274625417	132
-scvi	None	None	None	None	0.5	None	whole cortex	GSE199460	0.6701411760624144	0.2700102246616394	132
-scvi	None	None	None	None	0.75	None	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE199460	0.228804723100907	0.1518910923668995	132
-scvi	None	None	None	None	0.75	None	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE199460	0.5836598005753711	0.28244423259003	132
-scvi	None	None	None	None	0.75	None	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE199460	0.5656541131400489	0.2931619905166889	132
-scvi	None	None	None	None	0.75	None	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE199460	0.3485104707965775	0.24307773575502245	132
-scvi	None	None	None	None	0.75	None	whole cortex	GSE199460	0.5571673656397265	0.2863899206197881	132
-scvi	None	wild type genotype	C57BL/6J	7 months	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.8364738757506095	0.09308004268076729	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9736844680523111	0.02730875056454677	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.6739400426857939	0.32920347193487304	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.6361143766060623	0.32790798288504924	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.0	male	whole cortex	GSE214244	0.7473666247693623	0.2577654307092471	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.8358185150023143	0.09242534990823774	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9735430650593341	0.027138003909515627	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.6288668591052923	0.28991256536483034	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.5061644279751832	0.2711326214228238	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.25	male	whole cortex	GSE214244	0.635128325426176	0.2331068027872975	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.7011460115899015	0.08057213502510062	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9641790323915544	0.027538509867485447	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.46819218250451633	0.1854004380687319	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.1436796342402519	0.15281986292630872	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.5	male	whole cortex	GSE214244	0.4394245803735593	0.15215335989747716	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.3089699698216035	0.20515411868211278	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.8897033636110115	0.06693193818821949	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.3312839955582099	0.11085490126460691	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.025262161385655565	0.03545576503670183	48
-scvi	None	wild type genotype	C57BL/6J	7 months	0.75	male	whole cortex	GSE214244	0.32732040515986655	0.08796707531957287	48
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.8738728218739386	0.08802838319475662	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.9402207938333982	0.050721673429058436	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.7129207818441237	0.2974352710898889	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.6867272128185674	0.2860709617131541	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	whole cortex	GSE181021.2	0.7754964659113069	0.22904783898698677	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.8729245379518892	0.08742092149275293	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.9359410300685759	0.049899583799437965	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.6653439410438018	0.27156583698410414	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.5840329288860097	0.25046419870283687	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	whole cortex	GSE181021.2	0.6706885927921332	0.20099163027937245	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.6808564602063321	0.0304207167600257	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.8176118490412988	0.03504617883930574	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.4256484606597875	0.15576620868591323	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.28941238489637006	0.142918410926313	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	whole cortex	GSE181021.2	0.3575850559423915	0.11457985797985172	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.3969639111465344	0.059290566031636904	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.6310815725143213	0.08110090693022197	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.21266244209744922	0.06851418238829668	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.05867381395260512	0.049072259018848756	24
-scvi	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	whole cortex	GSE181021.2	0.18973698756555335	0.06206092203076719	24
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.5757288863697038	0.18406803405024	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.5841552958539025	0.17890505681082403	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.8374332138408422	0.10287366686010228	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.8293282897047854	0.11695497634348453	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8377254375870798	0.1149869330585268	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8295998660578044	0.13834198900675587	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.7728440790632519	0.14253347558509846	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.7642370315183022	0.1570985013504362	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.1	0.852324308412002	0.11045078378104727	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.2	0.8433466877674407	0.13114539173828402	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.567085316156689	0.1781398424281155	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.5761759846374713	0.17158852989914244	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.8298435061239607	0.10314232618856893	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.8220792468292011	0.11655140512992522	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.7233418731200296	0.11875915749808374	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.7199436003252143	0.1383484001919023	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.5032746441560797	0.16047098596992115	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.5226252037247382	0.17354028288185955	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.1	0.7406598181675846	0.11303611022234582	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.2	0.7322130133554365	0.13165345044750332	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.24987351963330898	0.0734414736010159	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.23878943667660912	0.07053934387892379	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.6727387816659295	0.11474376104095856	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.6609435656304767	0.11430447518073446	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.4421314436941755	0.11747188183473041	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.463901786138027	0.13177136997733171	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.1836458915778114	0.11581183983907813	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.23828947075955068	0.14876527386519597	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.1	0.4350891585410994	0.14969240281609544	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.2	0.44239336678180186	0.1493290424924513	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.04182654792379419	0.02384606620193809	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.03460135115159146	0.020949268264881037	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.38367739052541155	0.1367955000859189	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.3398524387494159	0.11959826159145008	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.18901279420515057	0.09907787448531807	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.21228146794694802	0.10707613266877522	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.02718367535528891	0.03807953810815022	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.03886149405857565	0.04951877383505245	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.1	0.16983357882782815	0.11847231398012266	96
-scvi	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.2	0.18243750751204493	0.11432996612349146	96
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.5892475664243793	0.1839606117768551	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.6194764647636585	0.1714137828372115	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.8353394859073561	0.11675572609643133	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.8341721395725494	0.12010823320884971	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8246992103678322	0.12947631128023313	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8296784965984891	0.13911679106507668	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.7669953417808971	0.15425845821402043	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.7657484196431404	0.16499228733403679	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.1	0.8426573753529366	0.12270448256372711	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.2	0.8488172809775854	0.1300828120138302	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.5817150949242602	0.17828340088898273	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.6129315364404073	0.16553539734639375	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.8290379401874796	0.11721861242046458	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.8285256561270815	0.11991473206256718	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.7022754464340331	0.13695524301003403	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.7261428519443928	0.13858899419673398	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.5044606675564272	0.16960710793996545	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.534937836217558	0.1842047760467607	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.1	0.7182744061907926	0.12930001487739468	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.2	0.7420436640723217	0.1268683381931852	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.2646765989989448	0.08836767144379988	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.279112988414009	0.0963511757388299	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.6819141409861911	0.12389451222202748	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.6725080452635195	0.12414786210193364	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.430738619708224	0.12889431229534684	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.4918896838594036	0.14516369133917148	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.20013239354479256	0.12645203620226117	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.25162801590456646	0.16026363441614436	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.1	0.4245118739516514	0.15415069737857612	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.2	0.47515525267734954	0.15502105412042444	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.048633289874356604	0.030642476664596817	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.03597635635174281	0.020471325320320397	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.3833101378930977	0.1365284136828885	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.3545824132754433	0.12915894428558547	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.203884839618508	0.11222064330352825	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.23722317260036316	0.1255885249538274	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.033863764595149476	0.044557398765587765	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.04786971887942168	0.060569694064696415	108
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.1	0.17817209677111942	0.12159222521237209	120
-scvi	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.2	0.20317109548871978	0.13257352927068614	108
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.5619122880037395	0.18689524799477472	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.5856522059371815	0.18192896705665423	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.8312113074037654	0.11093658127244621	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.842518152155131	0.1207162049927164	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8344195786408029	0.13608210730693862	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8432686247448068	0.14254541051383784	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.769138938400123	0.15240407636859124	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.784056541240771	0.16068818312813785	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.1	0.8512150450088529	0.12360780252317492	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.2	0.8542569796019269	0.13582142860875984	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.5528914116064373	0.17970423421046425	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.5775311572272601	0.1739562757410668	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.823394921613271	0.11137084271344631	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.8356440512850614	0.12050608685243266	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.7288567515137285	0.13900272766837676	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.7557005081605949	0.14550743808482744	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.5482167837889315	0.16861337927651743	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.5645735485120211	0.19329121556375406	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.1	0.7384405844994919	0.12669267121419991	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.2	0.7642665982491774	0.13603958808601593	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.24455033985366448	0.08438648684628931	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.22995056503757505	0.05600999105529213	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.6619540195957083	0.12346689073274231	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.6897802842288898	0.11698548145351438	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.48044680569406556	0.1494398271926962	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.5105199939524565	0.15001094397137213	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.25089118826614615	0.1357192481252047	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.2595287924000846	0.1559650657150561	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.1	0.45845789084682637	0.17172219065405464	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.2	0.49440073289819864	0.15854707949246347	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.04093374955970797	0.027321283901902898	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.027445079710950882	0.012504694514051581	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.3721084164601569	0.13102895469090575	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.39179010845006534	0.12183746361914145	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.2450040479147625	0.12728431620809993	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.2541593416391829	0.12794779656904742	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.042998277215586085	0.05687868139742225	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.04352620269296975	0.0570528068002676	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.1	0.21023808191079912	0.1378864122541102	36
-scvi	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.2	0.22168134780939472	0.1374242743282484	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.9540700709797698	0.017412854056701902	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9021390271011275	0.09745007186931622	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.7717553511643446	0.23391689107547972	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.7196251298434475	0.2427208282200526	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.0	male	whole cortex	GSE214244	0.7530262561023338	0.24256626928818895	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.9540700709797698	0.017412854056701878	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9021390271011275	0.09745007186931619	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.7703110872269815	0.23328513498828632	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.7185637962579237	0.24190924530618566	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.25	male	whole cortex	GSE214244	0.7518846361069705	0.24154096415020046	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.95415841923016	0.017135910620775126	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9020263875586151	0.09744031968074521	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.7131474603104884	0.21116935983029433	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.6651307809296918	0.20547549179726474	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.5	male	whole cortex	GSE214244	0.7047142697568904	0.20570883484505872	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.9473836957863485	0.01971825363656262	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.8523890636020873	0.12008719383069748	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.6430899763742779	0.18707884775613098	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.5795444033066973	0.1568291899601523	36
-seurat	None	AppNL-G-F/NL-G-F	C57BL/6J	7 months	0.75	male	whole cortex	GSE214244	0.6143667362553384	0.14650893409446225	36
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8622533572061272	0.0833060603067378	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5610428486310993	0.3831732024528124	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.857944010227398	0.07961147384117118	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5646324637869666	0.3809110536825808	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8858475635946954	0.05411141600527359	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.7177043452750528	0.24717986976664752	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8834367446907376	0.06258120752615387	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.6310734535763116	0.2894689112688515	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	whole cortex	GSE152715.1	0.8082434367219515	0.07209725415775577	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	female	whole cortex	GSE152715.2	0.6219328276105822	0.22420653115962544	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8582025215596164	0.08265659378999075	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5792685859338135	0.3551351385871164	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8587674758751837	0.0783439194237905	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5780388045264625	0.3507555234943785	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8904014276766788	0.05679521265127359	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.7104731782098738	0.2132806576263945	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8823235965058892	0.06046205351441004	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.6460250695605156	0.2760514148149163	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	whole cortex	GSE152715.1	0.68651044199246	0.04416186148980842	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.0	male	whole cortex	GSE152715.2	0.6573221567356354	0.2197724300575214	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8622533572061272	0.0833060603067378	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5610428486310992	0.38317320245281233	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8579540257502112	0.07961888898097463	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5646324637869666	0.3809110536825808	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8717286091613708	0.06109462194401549	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.7106671679285274	0.24508485828023796	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8795978629408688	0.0618329998429193	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.6235179324889245	0.2847846808016617	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	whole cortex	GSE152715.1	0.7882358953668699	0.0678573880057222	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	female	whole cortex	GSE152715.2	0.6094325538701207	0.2197308807730494	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8582025215596164	0.08265659378999077	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5792685859338136	0.3551351385871163	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8587674758751837	0.0783439194237905	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5780053174235029	0.3507724284397424	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8815725940968635	0.05754322149117249	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.7060744891361682	0.2123093891101167	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8782974473913717	0.06002290260257598	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.6365835832440346	0.27257414778955974	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	whole cortex	GSE152715.1	0.6741255309642128	0.036503951520930146	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.25	male	whole cortex	GSE152715.2	0.6424123023345009	0.21720419007085068	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8596971832343884	0.08377988603463063	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.55973409918899	0.38289934905146683	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.853209481490263	0.08015526508780998	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5614263138096666	0.38124979801629777	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.6360615280759551	0.09072559327518727	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.5165495005257473	0.18954557390570814	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.6874144168905767	0.061376440124973355	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.4274464631031774	0.19620971288543285	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	whole cortex	GSE152715.1	0.5249565394298306	0.0688803965949594	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	female	whole cortex	GSE152715.2	0.40258494887863144	0.14029188980873947	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8548351947087771	0.08237580017796915	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5745390656864074	0.35458074745716117	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8524558198092517	0.07927655572747576	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5724373287308119	0.3509352280744132	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.6836498011653912	0.0735768806515908	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.5122148013563517	0.1629483504145365	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.6613976657538048	0.07659747760611026	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.43797324056542547	0.18908965235152528	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	whole cortex	GSE152715.1	0.3855222663363697	0.01825252237281075	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.5	male	whole cortex	GSE152715.2	0.4147828550316767	0.14649199608242597	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8357163112316921	0.07923781664311295	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5360132379858399	0.3757155295122083	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.7899146555549215	0.07474439573527382	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5128303640133808	0.36973885933468326	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.36445968591362726	0.05696803801813606	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.2698442651177636	0.09264311732893887	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.3613608446557981	0.05077754509273722	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.22147989737938742	0.14003114939464287	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	whole cortex	GSE152715.1	0.2265523546961594	0.048693436281493654	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	female	whole cortex	GSE152715.2	0.18902144879289726	0.06079292202342884	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8313960999895286	0.07577963105154509	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5408763774839399	0.34853262537782836	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.7954918144799649	0.07914733636171344	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.4994955200312549	0.33437760761470586	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.4190759576193554	0.07078893816532292	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.2857900602394777	0.08253361020532644	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.3100735947510867	0.06065353875758239	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.20946617745746035	0.11068881179716694	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	whole cortex	GSE152715.1	0.1877445344265547	0.019541977475740588	12
-seurat	None	Hnrnpu+/+	C57BL/6NJ	None	0.75	male	whole cortex	GSE152715.2	0.20043813654496878	0.061542816811229605	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8629739433092704	0.07712499342542255	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5677977426136539	0.3515279766137857	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8600034773008844	0.07412398621750356	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5697860872614902	0.3490699698383241	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8858531106960932	0.053208241493904296	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.6872323766761036	0.20913281778827952	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8772424506431253	0.06113886338477336	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.632822389584652	0.2682645298101822	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	whole cortex	GSE152715.1	0.6595007145073741	0.034314597721578674	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	female	whole cortex	GSE152715.2	0.6144806374292523	0.18957933425701026	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8619155938050641	0.08052488564064185	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5873386005372775	0.34328067722003475	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8438393768629063	0.07962418188252966	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5763559976102731	0.33756308390923	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8964858467045717	0.05130642974630787	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.6478664293754054	0.2314043727834763	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8832614766287675	0.05996068699671709	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.6193451748854265	0.2876423871415556	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	whole cortex	GSE152715.1	0.7490308642407143	0.06457760282948913	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.0	male	whole cortex	GSE152715.2	0.580963836415313	0.22174480007254166	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8629739433092704	0.07712499342542249	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5677977426136539	0.3515279766137857	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8600034773008844	0.07412398621750356	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5697860872614902	0.34906996983832406	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.874724141909077	0.05684952049535808	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.6806022886447046	0.20704149483835277	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8749397995002713	0.060639011920689406	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.6232224247616117	0.2634696217121599	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	whole cortex	GSE152715.1	0.650988517866249	0.029490249449309648	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	female	whole cortex	GSE152715.2	0.6066962500619889	0.1880045690134099	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8619155938050641	0.08052488564064186	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5873386005372776	0.3432806772200348	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8438393768629063	0.07962418188252963	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5763718438207966	0.3375623943368735	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.8832730125307928	0.05411344912604596	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.6428018064111694	0.23017898581861615	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.8811839888880592	0.059575564528073534	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.6061561637737398	0.2817738631839339	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	whole cortex	GSE152715.1	0.7404677438986272	0.06095810610669979	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.25	male	whole cortex	GSE152715.2	0.5723818357197977	0.21913707391473505	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8614889020325203	0.07729949102240793	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.566365601859553	0.35162627060614066	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8540780509832514	0.07628975513545126	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5655520136454382	0.349325854689198	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.6568412464623594	0.08590033030685525	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.49754688163011185	0.16880722572736526	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.6894044445530082	0.07503413867826476	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.42604509351408154	0.1898288573127725	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	whole cortex	GSE152715.1	0.39145811794994967	0.04193536955501486	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	female	whole cortex	GSE152715.2	0.3619156179780916	0.11365241921173608	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8591415464956973	0.08051952953108545	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5850143407267583	0.34373333091879366	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.838762552161446	0.08104674875738886	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5656524003213164	0.338173281308744	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.6880557805454485	0.12254331260621507	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.485699033612013	0.19532318407678376	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.7046679474926599	0.06835297332461719	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.40331507940397	0.1971130629513248	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	whole cortex	GSE152715.1	0.4921148421825369	0.06184055739123133	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.5	male	whole cortex	GSE152715.2	0.36054380800549896	0.12800548567682687	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8291547162581222	0.0732249877174783	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5314604374247307	0.3436578146773858	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.8078832631099635	0.08125718771032482	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.5031286823404647	0.3373520133563384	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.38243861661922746	0.08798777727121804	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.2794937831809724	0.088698908425015	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.3761000185510653	0.0616534720884449	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.20401482486585176	0.12099089869041917	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	whole cortex	GSE152715.1	0.17832921404622745	0.012778008942027493	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	female	whole cortex	GSE152715.2	0.1811920690085339	0.05104034012819542	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.1	0.8331447453753125	0.07739630990969772	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE152715.2	0.5460474124251228	0.33937750080272555	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.1	0.786436009614763	0.08375002737690053	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE152715.2	0.48555424586132884	0.3202583213197774	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.1	0.42248591039741373	0.09185224122323073	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE152715.2	0.2551523026780478	0.10386136832166064	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.1	0.35751731744706333	0.09264005776464751	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE152715.2	0.20817669360856775	0.14369621926268536	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	whole cortex	GSE152715.1	0.2326747667311051	0.053538302019818	12
-seurat	None	Hnrnpu+/-	C57BL/6NJ	None	0.75	male	whole cortex	GSE152715.2	0.16624957648565913	0.04981331081143038	12
-seurat	None	None	C57BL/6N	8-10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.9971522596456794	0.003213934946244036	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.9862408729196157	0.015054043150803036	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.7847892520368442	0.23987279885540494	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.7668098243794073	0.25595566343725623	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.0	male	whole cortex	GSE181021.2	0.8363298866967194	0.1755820220422665	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.9971522596456794	0.003213934946244117	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.9862408729196157	0.015054043150803038	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.7847892520368442	0.23987279885540488	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.7667821669971827	0.25592942377835576	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.25	male	whole cortex	GSE181021.2	0.836219101018077	0.175474794808577	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.9967274771325392	0.002939358408018101	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.9860325530908621	0.01500754363637093	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.7817716676061006	0.23708215616075431	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.7629031415143935	0.2522920500535267	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.5	male	whole cortex	GSE181021.2	0.8219358264769739	0.1671579203652221	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.9631528852690271	0.015576249996080751	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.9687524601650214	0.014846794191517746	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.763121381181794	0.22215339153748956	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.7329181193257313	0.23641082604992567	24
-seurat	None	None	C57BL/6N	8-10 weeks	0.75	male	whole cortex	GSE181021.2	0.6694330683100596	0.14759316541152415	24
-seurat	None	None	None	None	0.0	None	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE199460	0.8504490011057663	0.1905761501948993	132
-seurat	None	None	None	None	0.0	None	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE199460	0.8800705850441409	0.14651885797649908	132
-seurat	None	None	None	None	0.0	None	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE199460	0.8448296213929116	0.1764835912702264	132
-seurat	None	None	None	None	0.0	None	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE199460	0.7999942414469957	0.1877330453405704	132
-seurat	None	None	None	None	0.0	None	whole cortex	GSE199460	0.8387228170354364	0.1928542147715951	132
-seurat	None	None	None	None	0.25	None	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE199460	0.8504000089462879	0.19051228544788662	132
-seurat	None	None	None	None	0.25	None	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE199460	0.8800705850441409	0.14651885797649908	132
-seurat	None	None	None	None	0.25	None	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE199460	0.8447601266198486	0.17650808646115923	132
-seurat	None	None	None	None	0.25	None	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE199460	0.7995991210299086	0.18791101568328009	132
-seurat	None	None	None	None	0.25	None	whole cortex	GSE199460	0.8383834710237803	0.192896189673084	132
-seurat	None	None	None	None	0.5	None	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE199460	0.846821059656721	0.18840632876450017	132
-seurat	None	None	None	None	0.5	None	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE199460	0.8772605594089613	0.14542407903382149	132
-seurat	None	None	None	None	0.5	None	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE199460	0.8388329775755571	0.17878313246715247	132
-seurat	None	None	None	None	0.5	None	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE199460	0.7900992314196523	0.19057842649614282	132
-seurat	None	None	None	None	0.5	None	whole cortex	GSE199460	0.826580654623719	0.19356761435037692	132
-seurat	None	None	None	None	0.75	None	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE199460	0.833778001135786	0.18603697701953026	132
-seurat	None	None	None	None	0.75	None	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE199460	0.8363629021844196	0.16121796104894345	132
-seurat	None	None	None	None	0.75	None	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE199460	0.8267367468658503	0.18244662668856335	132
-seurat	None	None	None	None	0.75	None	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE199460	0.775670301404901	0.19471706446523374	132
-seurat	None	None	None	None	0.75	None	whole cortex	GSE199460	0.8015178356649659	0.20043399640435788	132
-seurat	None	wild type genotype	C57BL/6J	7 months	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.9730840422933253	0.011475753001175247	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.904534200275199	0.1101392122676892	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.6920142145597498	0.3080003032824392	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.6849541174470097	0.30109931318906796	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.0	male	whole cortex	GSE214244	0.6853753887538624	0.31168630088421867	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.9730840422933253	0.011475753001175258	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.904534200275199	0.11013921226768918	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.6896960643974146	0.30686315753486654	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.6823935758451612	0.29948634376097083	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.25	male	whole cortex	GSE214244	0.6831986025530113	0.30964372041209326	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.9732405412067159	0.010865319843372303	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.9042774270956988	0.1100065354378447	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.6204986570969687	0.28126599630430826	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.6014583689728079	0.267266404683217	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.5	male	whole cortex	GSE214244	0.6205669661323339	0.2686577072917608	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE214244	0.9683307463552638	0.011592757967368006	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE214244	0.8461640681829866	0.14927276757938396	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE214244	0.5469069971990868	0.26659301832951304	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE214244	0.5007276128912058	0.23667699802903217	48
-seurat	None	wild type genotype	C57BL/6J	7 months	0.75	male	whole cortex	GSE214244	0.5014316676041614	0.20697247363661772	48
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.994924627037979	0.005967085402199044	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.976711619755242	0.024832558132205296	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.7197010495385682	0.30088854384976943	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.6938020938909876	0.3248056907663793	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.0	male	whole cortex	GSE181021.2	0.7849388926468531	0.2245510839054468	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.994924627037979	0.0059670854021990315	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.976711619755242	0.02483255813220532	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.7196698986219539	0.30085840120832513	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.693724154845489	0.32472936324814483	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.25	male	whole cortex	GSE181021.2	0.7848609470813815	0.2244736805998772	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.9941412075217029	0.005393392419045847	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.976144016059743	0.024896978595046713	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.7144824130896913	0.2959240943938768	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.6872269927201922	0.31911052423080505	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.5	male	whole cortex	GSE181021.2	0.7600983039723562	0.21304884736473365	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE181021.2	0.9749557941945226	0.009637789488718145	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE181021.2	0.9522362665402081	0.025739983498754376	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE181021.2	0.6847524801958139	0.2745920300203123	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE181021.2	0.6510054368137149	0.29694812653840086	24
-seurat	Setd1a CRISPR-Cas9	None	C57BL/6N	8-10 weeks	0.75	male	whole cortex	GSE181021.2	0.5495231234663969	0.16583419824634488	24
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.8319547993638513	0.07008121969952832	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.8209499768602934	0.0641507536100845	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.9193577357131159	0.03854952826219385	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.9208950569167432	0.043286112927209776	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8566459090240194	0.11428823579688946	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8391467273386243	0.13240185431514404	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.7143287787078454	0.14156031322114165	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.6472380727590653	0.1578346982399111	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.1	0.9052244293000077	0.07470858877239453	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.2	0.8764178261834573	0.09055746900529595	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.8319547993638513	0.07008121969952832	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.8209499768602934	0.06415075361008458	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.9193577357131159	0.03854952826219383	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.9208956768560381	0.04328683672015324	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8559480840868666	0.11446103207900725	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8378407581552935	0.132620605122417	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.7129599096996553	0.14118710768702283	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.646397095494568	0.15763155099905915	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.1	0.9031457362073257	0.07454152198434821	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.2	0.87276651564735	0.09092397667168033	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.8226833482795052	0.06779981827465893	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.8126024917548457	0.06139102948020851	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.9144495882622835	0.038361984146470844	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.9155731884440949	0.04363429247537358	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8347681124979713	0.1145608182995263	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8072408364614182	0.1349567089900664	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.6714444767551285	0.14039943115328593	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.6076847092862373	0.1608484916974688	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.1	0.8549421825199883	0.06956385305169333	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.2	0.8216821904513419	0.0920347137526495	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.7699831396631458	0.0673242315607619	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.7590234596033102	0.06280843206251531	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.8673407067991783	0.03995157305121303	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.8535442927456763	0.04868469166576637	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.7871768932912723	0.11366102576391246	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.7565467844761026	0.1359796806164529	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.5912689226259841	0.1394010006560688	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.5230317226849241	0.1631664610024341	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.1	0.7015932907443198	0.09088597756104033	96
-seurat	T4	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.2	0.6643332692302412	0.10934111280262526	96
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.8243547958610107	0.07740289163953425	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.8313932243486704	0.06619076432417764	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.907023106354016	0.062369964162574544	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.930305435404182	0.038467027290089814	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.844192564593259	0.13613879148598898	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8407744189446227	0.13228951120029808	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.687985746237521	0.16062340273566628	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.669412624903993	0.15642772085568699	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.1	0.8893414915023247	0.09018526158749682	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.2	0.8750845007315631	0.09235599124187267	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.8243547958610107	0.07740289163953425	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.8313944201301641	0.06619161430581069	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.9070158244710823	0.06236682755210029	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.9303064615664834	0.038467106997978756	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8434332480878207	0.13624881135717262	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8391240787503805	0.13250299421070022	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.6863547721129613	0.16033007021337356	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.6681440463042047	0.15597465481131165	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.1	0.8867305782115787	0.09071013488614676	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.2	0.871456074171093	0.09253545486148336	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.8152859439349858	0.07420838106591003	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.8223032534675203	0.06312474732964304	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.9022425194846464	0.06227131270693987	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.9248180107972014	0.038530602598704375	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8137229009134724	0.1379018400950485	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8080178815956958	0.13386903193011165	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.6414557540504604	0.1594124856179708	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.632248626724862	0.15829921496468152	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.1	0.8275108284375958	0.09191698838461286	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.2	0.8190490317830572	0.09120774259768012	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.7592003113506609	0.07468553321076829	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.7718169595873083	0.061785649275070006	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.8442767176806301	0.06528446024249249	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.8578776100144071	0.04142363682502295	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.7559890816220192	0.13927538971866024	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.7579821106640791	0.1342041270095744	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.5575308178936853	0.16167826361795556	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.5566004255794147	0.15664164360239322	108
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.1	0.6676527210906075	0.11088916241237476	120
-seurat	TBI	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.2	0.6758499214721274	0.10795947839386545	108
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.8167578360300873	0.0771294978677907	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.8035413868547803	0.07076194915807509	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.9177043778603158	0.04387437749869325	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.9240247449906747	0.04491454936059112	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8412896275796987	0.12900914815890618	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.837852693832273	0.13695623310921468	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.6906503595461331	0.14394886817412086	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.6562351456195439	0.1544662164440926	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.1	0.887817767819842	0.08517348015323646	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.0	male	whole cortex	GSE247339.2	0.8775919918167925	0.0912895212216675	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.8167534573193181	0.0771179666633103	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.8035413868547803	0.0707619491580751	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.917699585646943	0.04386531556936626	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.9240247449906747	0.04491454936059111	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8404453768751794	0.12930484363851447	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8367015033830033	0.1370579516161117	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.6892061849833874	0.14324668357553014	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.6555314537675687	0.15444732182892934	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.1	0.8850498034267518	0.0853212006754325	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.25	male	whole cortex	GSE247339.2	0.8753672406928898	0.09146357027167955	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.8054723232921878	0.06984309031829655	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.7913862545607069	0.0685236823633138	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.9112646796597268	0.04320319755326091	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.9174316585739466	0.04572004710040737	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.8193384795326583	0.13011986180310886	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.8110437996082327	0.13904179298095617	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.6529973828055431	0.13979069235293806	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.6171128692168943	0.15759302496386332	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.1	0.8375316737547095	0.08049987220195663	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.5	male	whole cortex	GSE247339.2	0.8268748138623532	0.09527719199482007	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.1	0.7558586295845243	0.06443263047848755	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	GSE247339.2	0.7364408078943548	0.06954833139426204	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.1	0.8453524197019002	0.04500100514640915	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	GSE247339.2	0.8530132614613655	0.05388634978900566	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.1	0.77249576634703	0.12698421642321547	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions 10x	GSE247339.2	0.7583944646361214	0.13995174367152283	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.1	0.5726781945492144	0.13780516244277077	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	GSE247339.2	0.5323494646285831	0.16463311740884792	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.1	0.6809403761106857	0.1100360187824627	36
-seurat	sham	None	C57BL/6J (B6)	10 weeks	0.75	male	whole cortex	GSE247339.2	0.6872216930220674	0.11073632859954169	36
+method	cutoff	reference	key	weighted_f1_mean	weighted_f1_std	weighted_f1_count
+scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6336031196814399	0.20069341265640356	213
+scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7510365488956323	0.17457224182162107	213
+scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7244003685294281	0.20654232542161663	213
+scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.5477621664293538	0.20463242596239564	213
+scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7668390303480923	0.17112798753719294	213
+scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9373887498140844	0.06527502114561434	213
+scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9366639479413047	0.042225762112519154	213
+scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6984825204183686	0.18022799525826133	213
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7324556765884146	0.14527668622284895	213
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9400033567887053	0.0781626364696203	213
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9441986016769054	0.042478797466418076	213
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5982359363834518	0.15607826583460574	213
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6729782795017666	0.14007382570516677	213
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9096793545727568	0.0848748141892606	213
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.9054860282959993	0.05717961023126319	213
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5396031449108345	0.1676782250448294	213
+scvi	0.0	whole cortex	class	0.7547196755476746	0.1182786415584854	213
+scvi	0.0	whole cortex	family	0.9458320237327816	0.07483976520366153	213
+scvi	0.0	whole cortex	global	0.9521364369621071	0.03579185775371655	213
+scvi	0.0	whole cortex	subclass	0.6539002079066575	0.1329806586589512	213
+scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6336031196814399	0.20069341265640356	213
+scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7510365488956323	0.17457224182162104	213
+scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7244003685294281	0.20654232542161663	213
+scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.5477621664293538	0.2046324259623957	213
+scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7668390303480923	0.171127987537193	213
+scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9373887498140844	0.06527502114561438	213
+scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9366639479413047	0.04222576211251915	213
+scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6984825204183686	0.18022799525826128	213
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7324556765884146	0.1452766862228489	213
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9400033567887053	0.07816263646962024	213
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9441986016769054	0.04247879746641804	213
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5982359363834518	0.15607826583460577	213
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6729782795017666	0.14007382570516677	213
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9096793545727568	0.08487481418926054	213
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.9054860282959993	0.057179610231263084	213
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5396031449108345	0.16767822504482932	213
+scvi	0.05	whole cortex	class	0.7547196755476746	0.11827864155848539	213
+scvi	0.05	whole cortex	family	0.9458320237327816	0.07483976520366155	213
+scvi	0.05	whole cortex	global	0.9521364369621071	0.03579185775371652	213
+scvi	0.05	whole cortex	subclass	0.6539002079066575	0.13298065865895117	213
+scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6572865547450707	0.1937000893664795	180
+scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7764935548108789	0.16370623272385806	180
+scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7508675728553298	0.19242919833777233	180
+scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.5641859000954415	0.2014294483068311	180
+scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7698955182560959	0.1658789499466673	178
+scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9388289848659795	0.0636973198302956	178
+scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9368888189052264	0.04183344140291131	178
+scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6988807601406515	0.17670300950101842	178
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.73438008267462	0.13900280334687595	179
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9421255917765915	0.07438988886690795	179
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9445840829279443	0.041173716738533	179
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5961443637111985	0.15307226574139715	179
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6713468979745649	0.1333987300738663	176
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9082517486019483	0.08295308740842074	176
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.9018661276335116	0.05894711695113025	176
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5324295136880349	0.16148517361906772	176
+scvi	0.1	whole cortex	class	0.7542624212750897	0.11228994624278518	176
+scvi	0.1	whole cortex	family	0.9459305350673103	0.07217968652172634	176
+scvi	0.1	whole cortex	global	0.9505536958018479	0.03558795699969342	176
+scvi	0.1	whole cortex	subclass	0.6481943140937966	0.12831357159801599	176
+scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6278031371429769	0.20649921366072427	181
+scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7490128568113242	0.18149341630909227	181
+scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7245497505032905	0.21356640795448664	181
+scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.538262523499624	0.2056036225532967	181
+scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7614877646771483	0.1762323278836695	182
+scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9341859089294667	0.06615311859630592	182
+scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9344584620534573	0.04283327847620629	182
+scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6920638450175507	0.18434943646136803	182
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7211986604925376	0.14640904612068406	179
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9306808514908892	0.08027113002259725	179
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9365125375706984	0.04549171867179197	179
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5909845917458426	0.1543722617242182	179
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6397999394791354	0.14204736503751042	180
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8819273070735014	0.0946320992296379	180
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.884909162735897	0.06999676292207727	180
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5159449947897911	0.16894673696878212	180
+scvi	0.15	whole cortex	class	0.7368479496116681	0.12087366525807453	182
+scvi	0.15	whole cortex	family	0.92955966684138	0.07980297371351014	182
+scvi	0.15	whole cortex	global	0.9396401300029709	0.038902283337086126	182
+scvi	0.15	whole cortex	subclass	0.6398241218899277	0.13427665607021813	182
+scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6336373488160398	0.20070491269412719	213
+scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7509556357728375	0.17452146962992993	213
+scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7243223601551128	0.20650298997054597	213
+scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.5477660969538641	0.20463115308440977	213
+scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7663704538766897	0.17119328902918474	213
+scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.936379501112938	0.06523171552778984	213
+scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9358420066721093	0.04256354155484666	213
+scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6979678912188793	0.18040088964323453	213
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6909888332100445	0.13565434757408137	213
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8917904178309307	0.09949041507659531	213
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9004982225966652	0.06171541918839379	213
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.567757593273845	0.15104073670692006	213
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.5443092970179553	0.15088084569762275	213
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.794018732098326	0.13003103107772107	213
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.7997737396563744	0.11364055394677038	213
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.45672701057637877	0.17321350201360927	213
+scvi	0.2	whole cortex	class	0.69575067472159	0.12363052988887252	213
+scvi	0.2	whole cortex	family	0.8764409788299143	0.10721389423926007	213
+scvi	0.2	whole cortex	global	0.8873098521762743	0.0660055464679696	213
+scvi	0.2	whole cortex	subclass	0.6064218979489582	0.1392310936130011	213
+scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6312359591751671	0.20091009558695613	213
+scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7424879969171507	0.1715888494678958	213
+scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7167595513427747	0.20508946474731243	213
+scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.545872485080692	0.2050873916506905	213
+scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7620075737880053	0.1716557317708285	213
+scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9305391382740823	0.06536390371881286	213
+scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.931295992450079	0.04498495772410883	213
+scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6942643533332494	0.18145371966728008	213
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6270864925257204	0.1379218908964868	213
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8242797896770612	0.14165367936016265	213
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8333242896668066	0.11167950006336143	213
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.521998078344418	0.15308532778495096	213
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.4420953361738881	0.16783756951091228	213
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6935643088984798	0.17263912987361946	213
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6975201567545409	0.16266132615492868	213
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.38177319057526865	0.1804229226196325	213
+scvi	0.25	whole cortex	class	0.6365748577352975	0.14242463906465486	213
+scvi	0.25	whole cortex	family	0.807631126251026	0.14932742093324086	213
+scvi	0.25	whole cortex	global	0.8168713029110484	0.11970817196950898	213
+scvi	0.25	whole cortex	subclass	0.5590709783257083	0.15304573606044758	213
+scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.38005337064543343	0.21528514187283418	213
+scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.44286028577956005	0.2316629297654098	213
+scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.44551158825064213	0.26292557325788746	213
+scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.3547653798081988	0.21676998816006113	213
+scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.6451326593517558	0.19772747569217713	213
+scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7862138179729037	0.13312045508317663	213
+scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8012673752945463	0.1353281027893148	213
+scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.5943822221490619	0.2090209935473143	213
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.38940621780780243	0.18733110515349186	213
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.5449677799167707	0.22757173732929042	213
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.5453784522902525	0.2276052293816061	213
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.3437480148989441	0.1902846969463367	213
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.16612501913640904	0.20444152176961064	213
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.37585959606713115	0.25222762206964505	213
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.3767522192493746	0.25210416818619374	213
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.16443637862451177	0.2043366621750276	213
+scvi	0.5	whole cortex	class	0.38780556035581154	0.19874676593345056	213
+scvi	0.5	whole cortex	family	0.5108885135375267	0.2355146986675068	213
+scvi	0.5	whole cortex	global	0.5111258273512848	0.23555895273425098	213
+scvi	0.5	whole cortex	subclass	0.3539479859911497	0.20033727011154964	213
+scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.13423043428228365	0.16446353191144572	213
+scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.17359698124209405	0.2090404203516049	213
+scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.18232279997611703	0.22858797077509277	213
+scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.13222379060592304	0.1632884837822442	213
+scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.43825988789446624	0.22982513776914137	213
+scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.5113551966376444	0.22622424655274478	213
+scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.5262160541381146	0.23292906394101837	213
+scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.4143962710562431	0.23112531112977552	213
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.2271399464314861	0.19777190953879517	213
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.3058712136634798	0.22739108412167552	213
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.3063251684178474	0.2276463980677378	213
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.21497569584760445	0.1960206851763251	213
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.050830274717046105	0.12827968608214535	213
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.1134905174126646	0.17228228148950098	213
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.11386554657804482	0.1722645249103089	213
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.05096516695404344	0.129187183089516	213
+scvi	0.75	whole cortex	class	0.219827947876676	0.20360335564081344	213
+scvi	0.75	whole cortex	family	0.27680648595596785	0.23326461090670575	213
+scvi	0.75	whole cortex	global	0.27682222005546886	0.23326979607353712	213
+scvi	0.75	whole cortex	subclass	0.21045663366665218	0.2001226091605596	213
+seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7681074167906009	0.17552531166309443	213
+seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9209871921746388	0.05267214209629622	213
+seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.9047940710197945	0.07111770472419478	213
+seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7663735857859619	0.17483262805384825	213
+seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8370554432377638	0.17142362374877385	213
+seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9510193707145995	0.05357735175995016	213
+seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9547656523370496	0.03417649055492226	213
+seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8250915161590745	0.17033219880592423	213
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7567523472896169	0.13426378326342528	213
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9580751626599865	0.04540581780161366	213
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.955447615086499	0.03222855339489939	213
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.615356260878524	0.15102261343654566	213
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6395952860977637	0.14052202891665802	213
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8486883353160164	0.12762632545968414	213
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.831381133708116	0.15379463231553706	213
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.52614623764402	0.16107500660926435	213
+seurat	0.0	whole cortex	class	0.7455072579130431	0.14770579035702514	213
+seurat	0.0	whole cortex	family	0.945991559403055	0.08670560920959026	213
+seurat	0.0	whole cortex	global	0.950824613008002	0.06982260446674032	213
+seurat	0.0	whole cortex	subclass	0.6909496135878782	0.16995109844990466	213
+seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7681074167906009	0.1755253116630944	213
+seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9209871921746388	0.05267214209629605	213
+seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.9047940710197945	0.07111770472419472	213
+seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7663735857859619	0.17483262805384825	213
+seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8370554432377638	0.17142362374877385	213
+seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9510193707145995	0.05357735175995019	213
+seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9547656523370496	0.03417649055492225	213
+seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8250915161590745	0.1703321988059243	213
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7567523472896169	0.1342637832634253	213
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9580751626599865	0.04540581780161367	213
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.955447615086499	0.03222855339489939	213
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.615356260878524	0.15102261343654563	213
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6395952860977637	0.14052202891665797	213
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8486883353160164	0.12762632545968414	213
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.831381133708116	0.15379463231553706	213
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.52614623764402	0.1610750066092643	213
+seurat	0.05	whole cortex	class	0.7455156022941056	0.14771213576172385	213
+seurat	0.05	whole cortex	family	0.9459740275464166	0.08669724208564265	213
+seurat	0.05	whole cortex	global	0.9508048074450837	0.0698124545031166	213
+seurat	0.05	whole cortex	subclass	0.6909649560341169	0.16996386369264344	213
+seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.773223739450607	0.1765131856296135	148
+seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9309253212643388	0.04359097635318478	148
+seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.9164523465871453	0.05878437120366457	148
+seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7720997193260343	0.17521212988993237	148
+seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8340930340231979	0.1764686517522084	142
+seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.954205753322744	0.04654699447424893	142
+seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9556839483231633	0.031685081667785504	142
+seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8236865331311121	0.1745921896780018	142
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7551579759126325	0.13351199994266622	168
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9577881828084612	0.04679751959238259	168
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9539522242988561	0.0323899240034885	168
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6128513786737468	0.14819105864872192	168
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6720390187822192	0.12691227985377238	142
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8964543292675321	0.06444253549297388	142
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.8785803732246571	0.08778665956088577	142
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5447364675842187	0.1593124064828734	142
+seurat	0.1	whole cortex	class	0.7437448190015462	0.146988297134232	170
+seurat	0.1	whole cortex	family	0.9438299706514348	0.08859198449902234	170
+seurat	0.1	whole cortex	global	0.9495991028701092	0.07142426518671877	170
+seurat	0.1	whole cortex	subclass	0.6907857843233777	0.16956346464714792	170
+seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7703235809178386	0.17085980857275163	154
+seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9198853036967028	0.05516519551803974	154
+seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.9015181609943551	0.07424004867438808	154
+seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7679991837097938	0.1704319673018672	154
+seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8419103645130154	0.16683964233662263	144
+seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9493161115916313	0.058158453213466486	144
+seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9539538515399825	0.03587901425601589	144
+seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8277985483459256	0.1665598728824253	144
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.756871998322477	0.13544217710956974	160
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9587132184742264	0.045813251745367524	160
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9551885193779996	0.03279682539172196	160
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6139690582877732	0.14802178475888783	160
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6284431456967294	0.14221181177082923	160
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8354848535222272	0.1397692936743426	160
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.8165039168838509	0.16670506859315085	160
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5175457600436364	0.15595297623033322	160
+seurat	0.15	whole cortex	class	0.7422446140184389	0.1488447275238975	160
+seurat	0.15	whole cortex	family	0.9455094858592223	0.08880058912001314	160
+seurat	0.15	whole cortex	global	0.9493187524101276	0.07262137745281032	160
+seurat	0.15	whole cortex	subclass	0.6869179621526403	0.16928349708046564	160
+seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7681074167906009	0.1755253116630944	213
+seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9209871921746388	0.05267214209629614	213
+seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.9047940710197945	0.07111770472419478	213
+seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7663735857859619	0.17483262805384822	213
+seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8370554432377638	0.17142362374877387	213
+seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9510193707145995	0.053577351759950154	213
+seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9547656523370496	0.034176490554922265	213
+seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8250915161590745	0.17033219880592423	213
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7564971958452914	0.13416410321565003	213
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9577921800679216	0.04563693796723252	213
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9552285292684193	0.03236302557323953	213
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.61511860032478	0.15092111776797446	213
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6394292258204006	0.1404778650362742	213
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8484470661620552	0.12757270122960457	213
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.831117150546931	0.15360087156729135	213
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5259690710389806	0.16112101456070435	213
+seurat	0.2	whole cortex	class	0.7450310068756113	0.1475292631197403	213
+seurat	0.2	whole cortex	family	0.9454115955793823	0.08693958747050202	213
+seurat	0.2	whole cortex	global	0.9504277142380501	0.07014493332809349	213
+seurat	0.2	whole cortex	subclass	0.6905236948578579	0.16992036226632337	213
+seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.768119047513613	0.17550459633745508	213
+seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9209652573253616	0.052674213537881126	213
+seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.9047729569934669	0.07111658156967825	213
+seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7663745088482374	0.17483108295792	213
+seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.837056261067823	0.17142479206494093	213
+seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9510158510759182	0.05357680231654833	213
+seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9547656020606967	0.03417758184762236	213
+seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8250897259418519	0.17033415347854852	213
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7549305924092947	0.1337776529092014	213
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.955934456509712	0.04729599511681551	213
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9538726294215321	0.03314212673526274	213
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6136083437196681	0.15049635541798898	213
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.638078934503265	0.14019506392885125	213
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8466523829086403	0.1273039589781717	213
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.8295282035048971	0.15263186424180117	213
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5246858856089296	0.16117949141974458	213
+seurat	0.25	whole cortex	class	0.7423771509418002	0.14709668610306922	213
+seurat	0.25	whole cortex	family	0.9421029527049666	0.08927954846940937	213
+seurat	0.25	whole cortex	global	0.9478140562296472	0.07275457306063594	213
+seurat	0.25	whole cortex	subclass	0.6880735484575455	0.1699352862555625	213
+seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7666784461085728	0.1754346598593716	213
+seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9101391348744885	0.05737386626793149	213
+seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.8957665605453153	0.07664045614271048	213
+seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7625974672814193	0.17551312806180666	213
+seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8335220103721429	0.17175724425289	213
+seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9456102696301925	0.05342975893193953	213
+seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9507875941350948	0.03618398953413349	213
+seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.821237345253172	0.17088667783065958	213
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7122917284648561	0.14224263888040795	213
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9028063388006572	0.10850418667604911	213
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.90506308200973	0.09108660805196339	213
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5758577166407686	0.1539129490130865	213
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.5894907774288051	0.13960297881746858	213
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.7799399162927836	0.14966531583058093	213
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.7713858767798623	0.15690121629199769	213
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.48331872017285665	0.1566812038300559	213
+seurat	0.5	whole cortex	class	0.6847152102772417	0.163882621164316	213
+seurat	0.5	whole cortex	family	0.8637663977131054	0.15935534680716276	213
+seurat	0.5	whole cortex	global	0.8688657236767163	0.14884783293077639	213
+seurat	0.5	whole cortex	subclass	0.6383996626088503	0.18150489853996798	213
+seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7376185396264754	0.1782605481858256	213
+seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8622341034233765	0.07830953501153255	213
+seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.8556041383405427	0.09328596157074424	213
+seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7273243813552845	0.18032471598789354	213
+seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7852392115586517	0.17776609441658422	213
+seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8855999943612851	0.07653207632928465	213
+seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8943451989055325	0.059663182625436836	213
+seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.769484333358639	0.1768956501682993	213
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6522496061821891	0.1691752084872976	213
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8209502645227477	0.18694007180261418	213
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8245593312186231	0.17809492301464774	213
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5253213820341862	0.16908331675944535	213
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.5095001178675911	0.16508168726708378	213
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6680575504428923	0.2088070764808786	213
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6655799010579266	0.2097521497405009	213
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.4162513662432093	0.16489012562816746	213
+seurat	0.75	whole cortex	class	0.5666134701528082	0.17653494891795998	213
+seurat	0.75	whole cortex	family	0.713996399476755	0.21013049146060814	213
+seurat	0.75	whole cortex	global	0.715909557722986	0.20655665343163845	213
+seurat	0.75	whole cortex	subclass	0.5080841076971564	0.18194074352670472	213

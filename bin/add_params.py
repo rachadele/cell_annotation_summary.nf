@@ -88,11 +88,11 @@ def main():
     
     
     #add ref label support
-    ref_support = combine_ref_obs(ref_obs) 
-    # merge on a combination of "subclass" and "ref_name"
-    f1_results_df = f1_results_df.merge(ref_support, how='left', left_on=["label", "reference"], right_on=["subclass", "reference"])
-    f1_results_df = f1_results_df.drop(columns=["subclass"])
-    f1_results_df = f1_results_df.rename(columns={"count": "ref_support"})
+    #ref_support = combine_ref_obs(ref_obs) 
+    ## merge on a combination of "subclass" and "ref_name"
+    #f1_results_df = f1_results_df.merge(ref_support, how='left', left_on=["label", "reference"], right_on=["subclass", "reference"])
+    #f1_results_df = f1_results_df.drop(columns=["subclass"])
+    #f1_results_df = f1_results_df.rename(columns={"count": "ref_support"})
     # Save the DataFrame to a .tsv file
     f1_results_df.to_csv(f"{run_name}_f1_results.tsv", sep="\t", index=False)
     
