@@ -102,7 +102,7 @@ process plotComptime {
 
     output:
     path "comptime.png"
-    path "comptime_summary.txt"
+    path "comptime_summary.tsv"
 
     script:
     """
@@ -199,7 +199,7 @@ workflow {
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
     runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
     plotHeatmap(weighted_f1_results_aggregated)
-    labelSupportCorr(label_f1_results_aggregated)
+    // labelSupportCorr(label_f1_results_aggregated)
     
     // plot comptime
     all_runs_dir = "${params.results}"
