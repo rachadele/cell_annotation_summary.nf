@@ -110,9 +110,9 @@ process plotComptime {
     """
 }
 
-process labelSupportCorr {
+process plotLabelDist {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/label_support_corr", mode: 'copy'
+    publishDir "${params.outdir}/label_dists", mode: 'copy'
 
     input:
     path label_f1_results_aggregated
@@ -122,7 +122,7 @@ process labelSupportCorr {
 
     script:
     """
-    python $projectDir/bin/label_support_corr.py --label_f1_results ${label_f1_results_aggregated}
+    python $projectDir/bin/label_dists.py --label_f1_results ${label_f1_results_aggregated} --mapping_file ${params.mapping_file}
     """
 
 }
@@ -199,7 +199,7 @@ workflow {
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
     runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
     plotHeatmap(weighted_f1_results_aggregated)
-    // labelSupportCorr(label_f1_results_aggregated)
+    plotLabelDist(label_f1_results_aggregated)
     
     // plot comptime
     all_runs_dir = "${params.results}"
