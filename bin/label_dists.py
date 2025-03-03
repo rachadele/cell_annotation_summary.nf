@@ -37,66 +37,41 @@ def parse_arguments():
     return parser.parse_args()
 
 def plot_f1_score_distribution(label_f1_results, mapping_df, levels, level="global", methods=None):
-    """
-    Plots the F1 score distribution for each subclass and method (cutoff) for each level.
     
-    Args:
-    - label_f1_results (pd.DataFrame): Data containing F1 scores, labels, and methods/cutoffs.
-    - mapping_df (pd.DataFrame): DataFrame mapping each label to its subclass and method.
-    - levels (dict): Dictionary of levels (e.g., "subclass", "class", "family").
-    - level (str): The level to plot at (default is "global").
-    - methods (list): List of methods to compare (optional, default is None).
-
-    Returns:
-    - None
-    """
     # Set global fontsize for matplotlib
     plt.rcParams.update({'font.size': 15})
-
     # If no methods are provided, use the unique cutoffs from the data
     if methods is None:
         methods = label_f1_results["cutoff"].unique()
-    
     # Ensure methods are sorted in increasing order
     methods = sorted(methods)
-
     # Set up the plot (stack facets vertically, two columns for method comparison)
     fig, ax = plt.subplots(len(levels[level]), len(methods), figsize=(10 * len(methods), 5 * len(levels[level])))
-
     # If there's only one row or column, make sure ax is a list
     if len(levels[level]) == 1:
         ax = [ax]
     if len(methods) == 1:
         ax = [ax]
-
     # get the order in levels["subclass"]
     all_subclasses = sorted(levels["subclass"])
-
     # Loop over each celltype or level
     for i, celltype in enumerate(levels[level]):
-        print(f"Plotting for {celltype}")
-        
         # Get the subclasses for the current celltype
         group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique()
         if len(group_subclasses) == 0:
             group_subclasses = [celltype]
-
         # Ensure subclasses are consistently ordered across all methods
         group_subclasses = [subclass for subclass in all_subclasses if subclass in group_subclasses]
-
         # Filter the data for the current group
         filtered_df = label_f1_results[label_f1_results["label"].isin(group_subclasses)]
-
         # Loop over each method (cutoff or other method)
         for j, method in enumerate(methods):
             # Filter the data based on the method (cutoff or method)
             method_df = filtered_df[filtered_df["cutoff"] == method] if "cutoff" in filtered_df else filtered_df
-
             # sort by order of subclasses
             method_df["label"] = pd.Categorical(method_df["label"], categories=group_subclasses, ordered=True)
             # Create a sideways violin plot for the f1_score distribution
             sns.boxplot(x="f1_score", y="label", data=method_df, ax=ax[i][j], orient="h", hue="label", palette="Set2")
-            
             # Add a title for each subplot
             ax[i][j].set_title(f"{celltype} F1 Score Distribution - {method}")
           #  ax[i][j].set_xlim(0, 1)  # Set the x-axis limits to 0 and 1

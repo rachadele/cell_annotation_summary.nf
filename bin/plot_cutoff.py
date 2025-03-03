@@ -25,9 +25,10 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/weighted_f1_results.tsv")
+    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/SCT_integrated_mmus/aggregated_results/weighted_f1_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/query_500_sctransform/label_f1_results.tsv")   
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/SCT_integrated_mmus/aggregated_results/label_f1_results.tsv")   
+    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse.tsv")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -63,6 +64,40 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
    # plt.tight_layout()
     plt.savefig(save_path, bbox_inches="tight")
 
+
+
+def plot_f1_by_celltype(label_f1_results, levels, mapping_df, outdir="label_f1_plots", level="family"):
+    os.makedirs(outdir, exist_ok=True)
+    new_outdir = os.path.join(outdir, level)
+    os.makedirs(new_outdir, exist_ok=True)
+    plt.rcParams.update({'font.size': 25})
+
+    all_subclasses = sorted(levels["subclass"])
+    for i, celltype in enumerate(levels[level]):
+        # Get the subclasses for the current celltype
+        group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique()
+        if len(group_subclasses) == 0:
+            group_subclasses = [celltype]
+        # Ensure subclasses are consistently ordered across all methods
+        group_subclasses = [subclass for subclass in all_subclasses if subclass in group_subclasses]
+        # Filter the data for the current group
+        filtered_df = label_f1_results[label_f1_results["label"].isin(group_subclasses)]
+        g = sns.FacetGrid(filtered_df, col="method", sharey=True, col_wrap=3, height=5)
+        g.map_dataframe(sns.lineplot, x="cutoff", y="f1_score", hue="label", marker="o")
+
+        g.set_axis_labels("Cutoff", "F1 Score")
+        g.set_titles("{col_name}")
+        g.add_legend(title="Label")
+        plt.suptitle(f"{celltype} F1 Score vs. Cutoff", y=1.05)
+
+        # Save plot
+        celltype= celltype.replace(" ", "_").replace("/", "_")
+        save_path = os.path.join(new_outdir, f"{celltype}_f1_score.png")
+        g.savefig(save_path, bbox_inches="tight")
+        plt.close() 
+    
+   
+
  
 def main():
 
@@ -71,6 +106,7 @@ def main():
     weighted_f1_results["study"] = weighted_f1_results["query"].str.split(" ").str[0]
     label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
     label_f1_results["study"] = label_f1_results["query"].str.split("_").str[0]
+    mapping_df = pd.read_csv(args.mapping_file, sep="\t")
     
     organism = weighted_f1_results["organism"].unique()[0]
     
@@ -96,32 +132,27 @@ def main():
        categories = ['reference', 'ref_split', 'study', 'region_match', 'treatment', 
                     'age', 'sex', 'query_region', 'ref_region', 'subsample_ref','genotype','strain'] 
 
-    # plot cutoff vs f1
-    # color by label and facet by method 
 
-    outdir="label_f1_plots"
-    os.makedirs(outdir,exist_ok=True) 
-    for key_value in label_f1_results["key"].unique():
-        subset = label_f1_results[label_f1_results["key"] == key_value]
-        weighted_subset = weighted_f1_results[weighted_f1_results["key"] == key_value]
-        weighted_subset["label"] = "Weighted F1"
+#--------plot label vs cutoff-------------
+  # Define the levels for each category
+    subclasses = label_f1_results[label_f1_results["key"] == "subclass"]["label"].unique()
+    classes = label_f1_results[label_f1_results["key"] == "class"]["label"].unique()
+    families = label_f1_results[label_f1_results["key"] == "family"]["label"].unique()
+    globals = label_f1_results[label_f1_results["key"] == "global"]["label"].unique()
 
-        # Merge the data
-        subset["Metric"] = "Label F1 Score"
-        weighted_subset["Metric"] = "Weighted F1 Score"
-        combined_df = pd.concat([subset.rename(columns={"f1_score": "score"}), 
-                                weighted_subset.rename(columns={"weighted_f1": "score"})])
-
-        plot_line(combined_df, x="cutoff", 
-                  y="score", col="method", hue="label",
-                  style="Metric", title=f"{key_value}", 
-                  xlabel="Cutoff", ylabel="F1 Score", 
-                  save_path=os.path.join(outdir,f"{key_value}_f1_score.png"))
-        
-        label_long = pd.melt(subset, id_vars=['cutoff', 'f1_score', 'method','label','reference',"subsample_ref"], value_vars=categories, 
-                                    var_name='category', value_name='category_value')
-        
-
+    levels = {
+        "subclass": subclasses,
+        "class": classes,
+        "family": families,
+        "global": globals
+    }
+    
+    plot_f1_by_celltype(label_f1_results, levels, mapping_df, outdir="label_f1_plots", level="family")
+    plot_f1_by_celltype(label_f1_results, levels, mapping_df, outdir="label_f1_plots", level="class") 
+    
+    
+    
+    #-----------------plot weighted f1 score-------------------
     parent = "weighted_f1_plots"
     os.makedirs(parent, exist_ok=True)
     for key_value in weighted_f1_results["key"].unique():
