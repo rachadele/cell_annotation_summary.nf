@@ -120,7 +120,7 @@ def main():
     }
 
     # Set the level you want to plot
-    level = "global"
+    level = "class"
 
 
     # Example usage
