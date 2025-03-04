@@ -26,8 +26,8 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
 
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/label_f1_results.tsv")   
-    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse.tsv")
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/label_f1_results.tsv")   
+    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv")
     
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
@@ -36,59 +36,81 @@ def parse_arguments():
     
     return parser.parse_args()
 
-def plot_f1_score_distribution(label_f1_results, mapping_df, levels, level="global", methods=None):
+
+def plot_f1_score_distribution(label_f1_results, mapping_df, levels, level="global", methods=None, method_col="cutoff"):
     
     # Set global fontsize for matplotlib
     plt.rcParams.update({'font.size': 15})
-    # If no methods are provided, use the unique cutoffs from the data
+    
+    # If no methods are provided, use the unique values from the specified method column
     if methods is None:
-        methods = label_f1_results["cutoff"].unique()
+        methods = label_f1_results[method_col].unique()
+    
     # Ensure methods are sorted in increasing order
     methods = sorted(methods)
-    # Set up the plot (stack facets vertically, two columns for method comparison)
-    fig, ax = plt.subplots(len(levels[level]), len(methods), figsize=(10 * len(methods), 5 * len(levels[level])))
-    # If there's only one row or column, make sure ax is a list
+    
+    # Get the order in levels["subclass"]
+    all_subclasses = sorted(levels["subclass"])
+    
+    # Generate unique colors for each subclass
+    color_palette = sns.color_palette("tab20", n_colors=len(all_subclasses))
+    subclass_colors = dict(zip(all_subclasses, color_palette))
+    
+    # Set up the plot grid with shared x-axis
+    fig, ax = plt.subplots(len(levels[level]), len(methods), figsize=(10 * len(methods), 5 * len(levels[level])), sharex=True)
+    
+    # Ensure ax is always a list for consistent indexing
     if len(levels[level]) == 1:
         ax = [ax]
     if len(methods) == 1:
         ax = [ax]
-    # get the order in levels["subclass"]
-    all_subclasses = sorted(levels["subclass"])
-    # Loop over each celltype or level
+    
+    # Loop over each cell type (higher-level grouping)
     for i, celltype in enumerate(levels[level]):
-        # Get the subclasses for the current celltype
+        # Get the subclasses for the current cell type
         group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique()
         if len(group_subclasses) == 0:
             group_subclasses = [celltype]
-        # Ensure subclasses are consistently ordered across all methods
+        
+        # Ensure subclasses are consistently ordered
         group_subclasses = [subclass for subclass in all_subclasses if subclass in group_subclasses]
+        
         # Filter the data for the current group
         filtered_df = label_f1_results[label_f1_results["label"].isin(group_subclasses)]
-        # Loop over each method (cutoff or other method)
+        
+        # Loop over each method
         for j, method in enumerate(methods):
-            # Filter the data based on the method (cutoff or method)
-            method_df = filtered_df[filtered_df["cutoff"] == method] if "cutoff" in filtered_df else filtered_df
-            # sort by order of subclasses
+            # Filter data by the specified method column
+            method_df = filtered_df[filtered_df[method_col] == method] if method_col in filtered_df else filtered_df
             method_df["label"] = pd.Categorical(method_df["label"], categories=group_subclasses, ordered=True)
-            # Create a sideways violin plot for the f1_score distribution
-            sns.boxplot(x="f1_score", y="label", data=method_df, ax=ax[i][j], orient="h", hue="label", palette="Set2")
-            # Add a title for each subplot
-            ax[i][j].set_title(f"{celltype} F1 Score Distribution - {method}")
-          #  ax[i][j].set_xlim(0, 1)  # Set the x-axis limits to 0 and 1
-            # Only label the y-axis on the left-most column
+            
+            # Create a boxplot with unique colors
+            sns.boxplot(
+                x="f1_score", 
+                y="label", 
+                data=method_df, 
+                ax=ax[i][j], 
+                orient="h", 
+                showfliers=False,  # Remove outliers
+                width=0.3,         # Make boxes thinner
+                palette=[subclass_colors[label] for label in group_subclasses]  # Apply unique colors
+            )
+            
+            # Titles and axis labels
+            ax[i][j].set_title(f"{celltype} F1 Score - {method}")
             if j == 0:
                 ax[i][j].set_ylabel('Subclass')
             else:
                 ax[i][j].set_ylabel('')
                 
-            # Only label the x-axis on the bottom row
+            # Share x-axis labels: only show on the bottom row
             if i == len(levels[level]) - 1:
-                ax[i][j].set_xlabel('F1 Score')  # Only show once for the last row
+                ax[i][j].set_xlabel('F1 Score')
             else:
                 ax[i][j].set_xlabel('')
-                
+                ax[i][j].set_xticklabels([])  # Hide tick labels for upper rows
+    
     plt.tight_layout()
-    # Adjust layout for better visualization
     plt.savefig(f"{level}_f1_score_distribution.png")
 
 
@@ -117,14 +139,12 @@ def main():
         "class": classes,
         "family": families,
         "global": globals
-    }
+    } 
 
-    # Set the level you want to plot
-    level = "class"
-
+    label_f1_results_filtered = label_f1_results[label_f1_results["cutoff"] == 0]
 
     # Example usage
-    plot_f1_score_distribution(label_f1_results, mapping_df, levels, level="family")
+    plot_f1_score_distribution(label_f1_results_filtered, mapping_df, levels, level="family", method_col="method")
 
   
 
