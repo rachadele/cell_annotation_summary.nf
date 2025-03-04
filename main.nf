@@ -72,7 +72,11 @@ process plotCutoff {
 
     script:
     """
-    python $projectDir/bin/plot_cutoff.py --weighted_f1_results ${weighted_f1_results_aggregated} --label_f1_results ${label_f1_results_aggregated}
+    python $projectDir/bin/plot_cutoff.py \\
+            --weighted_f1_results ${weighted_f1_results_aggregated} \\
+            --label_f1_results ${label_f1_results_aggregated} \\
+            --mapping_file ${params.mapping_file} \\
+            --color_mapping_file ${params.color_mapping_file}
     """
 }
 
@@ -122,7 +126,9 @@ process plotLabelDist {
 
     script:
     """
-    python $projectDir/bin/label_dists.py --label_f1_results ${label_f1_results_aggregated} --mapping_file ${params.mapping_file}
+    python $projectDir/bin/label_dists.py --label_f1_results ${label_f1_results_aggregated} \\
+                --mapping_file ${params.mapping_file} \\
+                --color_mapping_file ${params.color_mapping_file}
     """
 
 }
