@@ -40,7 +40,7 @@ def parse_arguments():
 def plot_f1_score_distribution(label_f1_results, mapping_df, levels, level="global", methods=None, method_col="cutoff"):
     
     # Set global fontsize for matplotlib
-    plt.rcParams.update({'font.size': 15})
+    plt.rcParams.update({'font.size': 25})
     
     # If no methods are provided, use the unique values from the specified method column
     if methods is None:
@@ -57,8 +57,11 @@ def plot_f1_score_distribution(label_f1_results, mapping_df, levels, level="glob
     subclass_colors = dict(zip(all_subclasses, color_palette))
     
     # Set up the plot grid with shared x-axis
-    fig, ax = plt.subplots(len(levels[level]), len(methods), figsize=(10 * len(methods), 5 * len(levels[level])), sharex=True)
-    
+    fig, ax = plt.subplots(
+            len(levels[level]), len(methods), figsize=(10 * len(methods), 5 * len(levels[level])),
+            sharex=True  # Ensures all subplots have the same x-axis limits
+        )
+
     # Ensure ax is always a list for consistent indexing
     if len(levels[level]) == 1:
         ax = [ax]
@@ -83,28 +86,39 @@ def plot_f1_score_distribution(label_f1_results, mapping_df, levels, level="glob
             # Filter data by the specified method column
             method_df = filtered_df[filtered_df[method_col] == method] if method_col in filtered_df else filtered_df
             method_df["label"] = pd.Categorical(method_df["label"], categories=group_subclasses, ordered=True)
-            
-            # Create a boxplot with unique colors
+                        # Calculate the SD for each group
+            method_df['sd'] = method_df['f1_score'].std()
+
+            # Clamp negative SD values to 0
+            method_df['sd'] = method_df['sd'].apply(lambda x: max(x, 0))
+
             sns.boxplot(
                 x="f1_score", 
                 y="label", 
                 data=method_df, 
                 ax=ax[i][j], 
                 orient="h", 
-                showfliers=False,  # Remove outliers
-                width=0.3,         # Make boxes thinner
-                palette=[subclass_colors[label] for label in group_subclasses]  # Apply unique colors
+                width=0.6,  # Controls the width of the boxes
+                palette=[subclass_colors[label] for label in group_subclasses],
+                showfliers=False,  # Hide outliers
+                whis=[5, 95],  # Limits the whiskers to the 5th and 95th percentiles (effectively limiting the IQR)
+                linewidth=2  # Optional: Makes the box edges thicker
             )
             
             # Titles and axis labels
-            ax[i][j].set_title(f"{celltype} F1 Score - {method}")
+            if i == 0:
+                ax[i][j].set_title(f"{method}")
+            else:
+                ax[i][j].set_title('')
             if j == 0:
-                ax[i][j].set_ylabel('Subclass')
+                ax[i][j].set_ylabel(f"{celltype}")
             else:
                 ax[i][j].set_ylabel('')
                 
             # Share x-axis labels: only show on the bottom row
             if i == len(levels[level]) - 1:
+                ax[i][j].set_xticks(np.linspace(0, 1, 11))
+               # ax[i][j].set_xticklabels(np.linspace(0, 1, 11))
                 ax[i][j].set_xlabel('F1 Score')
             else:
                 ax[i][j].set_xlabel('')
@@ -141,7 +155,7 @@ def main():
         "global": globals
     } 
 
-    label_f1_results_filtered = label_f1_results[label_f1_results["cutoff"] == 0]
+    label_f1_results_filtered = label_f1_results[label_f1_results["cutoff"].isin([0, 0.05, 0.1, 0.2])]
 
     # Example usage
     plot_f1_score_distribution(label_f1_results_filtered, mapping_df, levels, level="family", method_col="method")
