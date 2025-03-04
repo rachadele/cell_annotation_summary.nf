@@ -20,30 +20,46 @@ from scipy import stats
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
-
+import random
+random.seed(42)
 
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/SCT_integrated_mmus/aggregated_results/weighted_f1_results.tsv")
+    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/weighted_f1_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/SCT_integrated_mmus/aggregated_results/label_f1_results.tsv")   
-    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse.tsv")
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/label_f1_results.tsv")   
+    parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
+    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv")
+    
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
         return known_args
 
-
+def make_stable_colors(color_mapping_df):
+    
+    all_subclasses = sorted(color_mapping_df["subclass"])
+    # i need to hardcode a separate color palette based on the hsap mapping file
+    # Generate unique colors for each subclass
+    color_palette = sns.color_palette("husl", n_colors=len(all_subclasses))
+    subclass_colors = dict(zip(all_subclasses, color_palette))
+    return subclass_colors
+    
+    
 def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
     # set global fontsize
     plt.rcParams.update({'font.size': 14})  # Set default font size for all plot elements
+    
+    all_levels = df[hue].unique()
+    
+    colors = {subclass: color for subclass, color in zip(all_levels, sns.hls_palette(len(all_levels)))}
 
     # change figure size
     plt.figure(figsize=(22, 10))
     g = sns.relplot(
         data=df, x=x, y=y,
-        col=col, hue=hue, style=style,
+        col=col, hue=hue, style=style, palette=colors,
         kind="line", height=4, aspect=0.75, legend="full"  # Adjust figure size
     )
     title = title.replace("_", " ").title()  # Capitalize and substitute "_" with " " 
@@ -66,36 +82,51 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
 
 
 
-def plot_f1_by_celltype(label_f1_results, levels, mapping_df, outdir="label_f1_plots", level="family"):
+
+def plot_f1_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family"):
     os.makedirs(outdir, exist_ok=True)
     new_outdir = os.path.join(outdir, level)
     os.makedirs(new_outdir, exist_ok=True)
     plt.rcParams.update({'font.size': 25})
 
     all_subclasses = sorted(levels["subclass"])
+    
+    # Create a consistent color palette based on all possible subclasses
+    subclass_colors = make_stable_colors(color_mapping_df)
+
     for i, celltype in enumerate(levels[level]):
         # Get the subclasses for the current celltype
         group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique()
         if len(group_subclasses) == 0:
             group_subclasses = [celltype]
+        
         # Ensure subclasses are consistently ordered across all methods
-        group_subclasses = [subclass for subclass in all_subclasses if subclass in group_subclasses]
+        subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
+        
         # Filter the data for the current group
-        filtered_df = label_f1_results[label_f1_results["label"].isin(group_subclasses)]
+        filtered_df = label_f1_results[label_f1_results["label"].isin(subclasses_to_plot)]
+        
+        # Initialize the FacetGrid
         g = sns.FacetGrid(filtered_df, col="method", sharey=True, col_wrap=3, height=5)
-        g.map_dataframe(sns.lineplot, x="cutoff", y="f1_score", hue="label", marker="o")
-
+        
+        # Map the lineplot with consistent colors across all facets
+        g.map_dataframe(sns.lineplot, x="cutoff", 
+                        y="f1_score",
+                        hue="label", 
+                        marker="o", 
+                        palette={label: subclass_colors[label] for label in subclasses_to_plot}
+)
+        
         g.set_axis_labels("Cutoff", "F1 Score")
         g.set_titles("{col_name}")
         g.add_legend(title="Label")
         plt.suptitle(f"{celltype} F1 Score vs. Cutoff", y=1.05)
 
         # Save plot
-        celltype= celltype.replace(" ", "_").replace("/", "_")
+        celltype = celltype.replace(" ", "_").replace("/", "_")
         save_path = os.path.join(new_outdir, f"{celltype}_f1_score.png")
         g.savefig(save_path, bbox_inches="tight")
-        plt.close() 
-    
+        plt.close()
    
 
  
@@ -106,8 +137,8 @@ def main():
     weighted_f1_results["study"] = weighted_f1_results["query"].str.split(" ").str[0]
     label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
     label_f1_results["study"] = label_f1_results["query"].str.split("_").str[0]
+    color_mapping_df = pd.read_csv(args.color_mapping_file, sep="\t")
     mapping_df = pd.read_csv(args.mapping_file, sep="\t")
-    
     organism = weighted_f1_results["organism"].unique()[0]
     
     if organism == "homo_sapiens":
@@ -147,8 +178,8 @@ def main():
         "global": globals
     }
     
-    plot_f1_by_celltype(label_f1_results, levels, mapping_df, outdir="label_f1_plots", level="family")
-    plot_f1_by_celltype(label_f1_results, levels, mapping_df, outdir="label_f1_plots", level="class") 
+    plot_f1_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family")
+    plot_f1_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="class") 
     
     
     
