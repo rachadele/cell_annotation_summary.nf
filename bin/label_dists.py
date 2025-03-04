@@ -111,7 +111,7 @@ def plot_f1_score_distribution(label_f1_results, mapping_df, levels, level="glob
                 ax[i][j].set_xticklabels([])  # Hide tick labels for upper rows
     
     plt.tight_layout()
-    plt.savefig(f"{level}_f1_score_distribution.png")
+    plt.savefig(f"{level}_{method_col}_f1_score_distribution.png")
 
 
 def main():
@@ -146,6 +146,7 @@ def main():
     # Example usage
     plot_f1_score_distribution(label_f1_results_filtered, mapping_df, levels, level="family", method_col="method")
 
+    plot_f1_score_distribution(label_f1_results, mapping_df, levels, level="family", method_col="cutoff")
   
 
 if __name__ == "__main__":
