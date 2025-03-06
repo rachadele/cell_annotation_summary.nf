@@ -54,12 +54,9 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
     
     # Set global fontsize for matplotlib
     plt.rcParams.update({'font.size': 25})
-
     methods = label_f1_results[method_col].unique()
-    
     # Ensure methods are sorted in increasing order
     methods = sorted(methods)
-    
     # Get the order in levels["subclass"]
     all_subclasses = sorted(levels["subclass"])
     subclass_colors = make_stable_colors(color_mapping_df)
@@ -68,20 +65,20 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
             len(levels[level]), len(methods), figsize=(10 * len(methods), 5 * len(levels[level])),
             sharex=True  # Ensures all subplots have the same x-axis limits
         )
-
     # Ensure ax is always a list for consistent indexing
     if len(levels[level]) == 1:
         ax = [ax]
     if len(methods) == 1:
         ax = [ax]
-    
     # Loop over each cell type (higher-level grouping)
     for i, celltype in enumerate(levels[level]):
         # Get the subclasses for the current cell type
         group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique()
-        if len(group_subclasses) == 0:
-            group_subclasses = [celltype]
-        
+        if celltype == "Neuron":
+            group_subclasses = "Ambiguous Neuron"
+        else:
+            group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique() 
+      
         # Ensure subclasses are consistently ordered
         subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
         

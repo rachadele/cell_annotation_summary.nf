@@ -62,8 +62,9 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
         col=col, hue=hue, style=style, palette=colors,
         kind="line", height=4, aspect=0.75, legend="full"  # Adjust figure size
     )
-    title = title.replace("_", " ").title()  # Capitalize and substitute "_" with " " 
-    g.figure.suptitle(title, y=1, x = 0.5)  # Add title above plots
+   # title = ""
+    #title.replace("_", " ").title()  # Capitalize and substitute "_" with " " 
+    g.figure.suptitle("", y=1, x = 0.5)  # Add title above plots
     g.set_axis_labels(xlabel, ylabel)  # Set axis labels
 
     g.set(xticks=[0,0.25,0.5,0.75])
@@ -82,26 +83,28 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
 
 
 def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, 
-                           outdir="label_f1_plots", level="family", score_col="f1_score"):
+                           outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col = "subclass"):
     os.makedirs(outdir, exist_ok=True)
     new_outdir = os.path.join(outdir, level)
     os.makedirs(new_outdir, exist_ok=True)
     plt.rcParams.update({'font.size': 20})
 
-    all_subclasses = sorted(levels["subclass"])
+    all_subclasses = sorted(levels[subclass_col])
     subclass_colors = make_stable_colors(color_mapping_df)
 
     celltypes = levels[level]
     methods = sorted(label_f1_results["method"].unique())
 
     rows, cols = len(celltypes), len(methods)
-    fig, axes = plt.subplots(rows, cols, figsize=(cols * 6, rows * 5), squeeze=False, sharex=True, sharey=True)
+    fig, axes = plt.subplots(rows, cols, 
+                             figsize=(cols * 6, rows * 5), squeeze=False, sharex=True, sharey=True)
 
     for i, celltype in enumerate(celltypes):
         if celltype == "Neuron":
             group_subclasses = "Ambiguous Neuron"
         else:
-            group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique() 
+            # add option to change
+            group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique() 
        # if len(group_subclasses) == 0:
         #    group_subclasses = [celltype]
         subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
@@ -112,7 +115,8 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
             method_df = filtered_df[filtered_df["method"] == method]
             
             sns.lineplot(data=method_df, x="cutoff", y=score_col, hue="label", 
-                         marker="o", palette={label: subclass_colors[label] for label in subclasses_to_plot}, ax=ax)
+                         marker="o", 
+                         palette={label: subclass_colors[label] for label in subclasses_to_plot}, ax=ax)
             if i == 0:
                 ax.set_title(method)
            # ax.set_xlabel("Cutoff")
@@ -130,7 +134,7 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
     fig.tight_layout(rect=[0, 0, 1, 1])  # Adjust layout to fit legends
 
     # Save single figure
-    save_path = os.path.join(new_outdir, f"all_celltypes_{score_col}.png")
+    save_path = os.path.join(new_outdir, f"all_celltypes_{score_col}_{subclass_col}.png")
     plt.savefig(save_path, bbox_inches="tight")
     plt.close()
 
@@ -188,6 +192,8 @@ def main():
     plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="precision")
     plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="recall")
    
+   
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col="class")
     #-----------------plot weighted f1 score-------------------
     parent = "weighted_f1_plots"
     os.makedirs(parent, exist_ok=True)

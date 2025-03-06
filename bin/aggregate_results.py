@@ -299,7 +299,8 @@ def main():
 
     label_results = label_results.fillna("None")
     # fill "Neuron" ,"Glutamatergic", and "GABAergic" in "subclass" column with "ambigious {label}"
-  
+    # eventually add all ambiguous labels?
+    # This way we can represent ambiguous author labels
     label_results["label"] = label_results.apply(
         lambda row: f"Ambiguous {row['label']}" if row["key"] == "subclass" and row["label"] in ["Neuron", "Glutamatergic", "GABAergic"] else row["label"], 
         axis=1
