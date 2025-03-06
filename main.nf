@@ -203,7 +203,7 @@ workflow {
     
     // run ANOVA on aggregated results
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
-    runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
+    // runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
     plotHeatmap(weighted_f1_results_aggregated)
     plotLabelDist(label_f1_results_aggregated)
     

@@ -152,10 +152,7 @@ def map_development_stage(stage):
 def write_factor_summary(df, factors): 
     # summarize the number of unique levels for each item in factors
     # make a value_counts table for each factor
-    #for factor in factors:
-        #value_counts = df[factor].value_counts().reset_index()
-        #value_counts.columns = [factor, "count"]
-        #value_counts.to_csv(f"{factor}_value_counts.tsv", sep="\t", index=False)
+
     factor_summary = df[factors].nunique().reset_index()
     factor_summary.columns = ["factor", "levels"]
     factor_summary.to_csv("factor_summary.tsv", sep="\t", index=False) 
@@ -180,7 +177,8 @@ def main():
         f1_df = pd.concat([temp_df, f1_df], ignore_index=True)
      
     organism = f1_df["organism"].unique()[0]
-    
+    # replace "nan" with None
+    f1_df = f1_df.replace("nan", None)
     #----------weighted f1 results----------------
     # fix errors and add factors
     
@@ -217,7 +215,7 @@ def main():
 
 #----------------drop label columns and save---------------
     outdir = "weighted_f1_distributions"
-    label_columns = ["label", "f1_score","label_accuracy"]
+    label_columns = ["label", "f1_score","precision","recall","support", "accuracy"]
     os.makedirs(outdir, exist_ok=True)
     
     # Drop duplicates, but exclude 'ref_split' column (so duplicates in 'ref_split' are allowed)
@@ -244,17 +242,17 @@ def main():
     #plt.show()
     
    #------------summaries---------------- 
-    #if organism == "homo_sapiens":
-        #order = ["subclass", "class", "family"]  # Desired order  
-        #columns_to_group=["method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
-    #elif organism == "mus_musculus":
-        #columns_to_group = ["method", "treatment", "genotype","strain", "age", "cutoff", "sex", "reference", "study"]
-        
+
         # summarize by sample, key, method, mean, sd
     weighted_summary = weighted_f1_results.groupby(["method","cutoff","reference","key"]).agg(
         weighted_f1_mean=("weighted_f1", "mean"),
         weighted_f1_std=("weighted_f1", "std"),
-        weighted_f1_count=("weighted_f1", "count")
+        weighted_f1_count=("weighted_f1", "count"),
+        #add precision and recall
+        weighted_precision_mean=("weighted_precision", "mean"),
+        weighted_precision_std=("weighted_precision", "std"),
+        weighted_recall_mean=("weighted_recall", "mean"),
+        weighted_recall_std=("weighted_recall", "std")
     ).reset_index()
     
     
@@ -296,10 +294,24 @@ def main():
 # -----------label f1 results----------------
     label_results = f1_df[f1_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
-    #label_results = label_results.drop_duplicates(subset=label_results.columns.difference(['ref_support']))
+    print(label_results)
+
+
     label_results = label_results.fillna("None")
-    label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
+    # fill "Neuron" ,"Glutamatergic", and "GABAergic" in "subclass" column with "ambigious {label}"
+  
+    label_results["label"] = label_results.apply(
+        lambda row: f"Ambiguous {row['label']}" if row["key"] == "subclass" and row["label"] in ["Neuron", "Glutamatergic", "GABAergic"] else row["label"], 
+        axis=1
+    )
+
     
+    
+    label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
+   # Ensure precision and recall are numeric and handle 'nan' strings (if needed)
+    label_results['precision'] = pd.to_numeric(label_results['precision'], errors='coerce')
+    label_results['recall'] = pd.to_numeric(label_results['recall'], errors='coerce')
+ 
     # plot distribution of label_f1 across different splits
     outdir = "label_distributions"
     os.makedirs(outdir, exist_ok=True)
@@ -308,6 +320,11 @@ def main():
         label_f1_mean=("f1_score", "mean"),
         label_f1_std=("f1_score", "std"),
         label_f1_count=("f1_score", "count")
+        # add precision and recall
+       # label_precision_mean=("precision", "mean"),
+        #label_precision_std=("precision", "std"),
+      #  label_recall_mean=("recall", "mean"),
+       # label_recall_std=("recall", "std")
     ).reset_index()
         
     
