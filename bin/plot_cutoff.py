@@ -26,11 +26,11 @@ random.seed(42)
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/weighted_f1_results.tsv")
+    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/weighted_f1_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/label_f1_results.tsv")   
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/label_f1_results.tsv")   
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
-    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv")
+    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse.tsv")
     
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
@@ -40,7 +40,7 @@ def parse_arguments():
 def make_stable_colors(color_mapping_df):
     
     all_subclasses = sorted(color_mapping_df["subclass"])
-    # i need to hardcode a separate color palette based on the hsap mapping file
+    # i need to hardcode a separate color palette based on the mmus mapping file
     # Generate unique colors for each subclass
     color_palette = sns.color_palette("husl", n_colors=len(all_subclasses))
     subclass_colors = dict(zip(all_subclasses, color_palette))
@@ -62,8 +62,9 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
         col=col, hue=hue, style=style, palette=colors,
         kind="line", height=4, aspect=0.75, legend="full"  # Adjust figure size
     )
-    title = title.replace("_", " ").title()  # Capitalize and substitute "_" with " " 
-    g.figure.suptitle(title, y=1, x = 0.5)  # Add title above plots
+   # title = ""
+    #title.replace("_", " ").title()  # Capitalize and substitute "_" with " " 
+    g.figure.suptitle("", y=1, x = 0.5)  # Add title above plots
     g.set_axis_labels(xlabel, ylabel)  # Set axis labels
 
     g.set(xticks=[0,0.25,0.5,0.75])
@@ -81,53 +82,62 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
     plt.savefig(save_path, bbox_inches="tight")
 
 
-
-
-def plot_f1_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family"):
+def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, 
+                           outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col = "subclass"):
     os.makedirs(outdir, exist_ok=True)
     new_outdir = os.path.join(outdir, level)
     os.makedirs(new_outdir, exist_ok=True)
-    plt.rcParams.update({'font.size': 25})
+    plt.rcParams.update({'font.size': 20})
 
-    all_subclasses = sorted(levels["subclass"])
-    
-    # Create a consistent color palette based on all possible subclasses
+    all_subclasses = sorted(levels[subclass_col])
     subclass_colors = make_stable_colors(color_mapping_df)
 
-    for i, celltype in enumerate(levels[level]):
-        # Get the subclasses for the current celltype
-        group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique()
-        if len(group_subclasses) == 0:
-            group_subclasses = [celltype]
-        
-        # Ensure subclasses are consistently ordered across all methods
-        subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
-        
-        # Filter the data for the current group
-        filtered_df = label_f1_results[label_f1_results["label"].isin(subclasses_to_plot)]
-        
-        # Initialize the FacetGrid
-        g = sns.FacetGrid(filtered_df, col="method", sharey=True, col_wrap=3, height=5)
-        
-        # Map the lineplot with consistent colors across all facets
-        g.map_dataframe(sns.lineplot, x="cutoff", 
-                        y="f1_score",
-                        hue="label", 
-                        marker="o", 
-                        palette={label: subclass_colors[label] for label in subclasses_to_plot}
-)
-        
-        g.set_axis_labels("Cutoff", "F1 Score")
-        g.set_titles("{col_name}")
-        g.add_legend(title="Label")
-        plt.suptitle(f"{celltype} F1 Score vs. Cutoff", y=1.05)
+    celltypes = levels[level]
+    methods = sorted(label_f1_results["method"].unique())
 
-        # Save plot
-        celltype = celltype.replace(" ", "_").replace("/", "_")
-        save_path = os.path.join(new_outdir, f"{celltype}_f1_score.png")
-        g.savefig(save_path, bbox_inches="tight")
-        plt.close()
-   
+    rows, cols = len(celltypes), len(methods)
+    fig, axes = plt.subplots(rows, cols, 
+                             figsize=(cols * 6, rows * 5), squeeze=False, sharex=True, sharey=True)
+
+    for i, celltype in enumerate(celltypes):
+        if celltype == "Neuron":
+            group_subclasses = "Ambiguous Neuron"
+        else:
+            # add option to change
+            group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique() 
+       # if len(group_subclasses) == 0:
+        #    group_subclasses = [celltype]
+        subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
+        filtered_df = label_f1_results[label_f1_results["label"].isin(subclasses_to_plot)]
+
+        for j, method in enumerate(methods):
+            ax = axes[i, j]
+            method_df = filtered_df[filtered_df["method"] == method]
+            
+            sns.lineplot(data=method_df, x="cutoff", y=score_col, hue="label", 
+                         marker="o", 
+                         palette={label: subclass_colors[label] for label in subclasses_to_plot}, ax=ax)
+            if i == 0:
+                ax.set_title(method)
+           # ax.set_xlabel("Cutoff")
+           # move y label to the left
+           
+            ax.set_ylabel(celltype, rotation=90, labelpad=20)
+
+            # Add legend only for the first subplot in each row
+            if j == len(methods) - 1:
+                ax.legend(title="Label", bbox_to_anchor=(1, 0.5), loc="center left", fontsize=14)
+            else:
+                ax.legend_.remove()  # Remove legend from other subplots in the row
+
+    plt.suptitle(f"{score_col.replace('_', ' ').title()} vs. Cutoff Across Cell Types", y=1)
+    fig.tight_layout(rect=[0, 0, 1, 1])  # Adjust layout to fit legends
+
+    # Save single figure
+    save_path = os.path.join(new_outdir, f"all_celltypes_{score_col}_{subclass_col}.png")
+    plt.savefig(save_path, bbox_inches="tight")
+    plt.close()
+
 
  
 def main():
@@ -178,11 +188,12 @@ def main():
         "global": globals
     }
     
-    plot_f1_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family")
-    plot_f1_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="class") 
-    
-    
-    
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="f1_score")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="precision")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="recall")
+   
+   
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col="class")
     #-----------------plot weighted f1 score-------------------
     parent = "weighted_f1_plots"
     os.makedirs(parent, exist_ok=True)

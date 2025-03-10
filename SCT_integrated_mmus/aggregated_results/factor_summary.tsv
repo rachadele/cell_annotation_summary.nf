@@ -1,5 +1,5 @@
 factor	levels
-label	27
+label	29
 method	2
 treatment	9
 genotype	6
@@ -8,7 +8,7 @@ cutoff	8
 sex	3
 age	6
 reference	5
-study	15
-query	111
-query_region	12
+study	10
+query	81
+query_region	8
 ref_region	3
