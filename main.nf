@@ -133,12 +133,29 @@ process plotLabelDist {
 
 }
 
-process modelEval {
+process modelEvalWeighted {
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
     publishDir "${params.outdir}/model_eval", mode: 'copy'
 
     input:
     path weighted_f1_results_aggregated
+
+    output:
+    path "**png"
+    path "**model_summary_coefs_combined.tsv", emit: f1_model_summary_coefs
+
+
+    script:
+    """
+    Rscript $projectDir/bin/model_performance_weighted.R --weighted_f1_results ${weighted_f1_results_aggregated}
+    """
+}
+
+process modelEvalLabel {
+    conda '/home/rschwartz/anaconda3/envs/r4.3' 
+    publishDir "${params.outdir}/model_eval", mode: 'copy'
+
+    input:
     path label_f1_results_aggregated
 
     output:
@@ -148,7 +165,7 @@ process modelEval {
 
     script:
     """
-    Rscript $projectDir/bin/model_performance.R --weighted_f1_results ${weighted_f1_results_aggregated}
+    Rscript $projectDir/bin/model_performance_label.R --label_f1_results ${label_f1_results_aggregated}
     """
 }
 
@@ -203,7 +220,7 @@ workflow {
     
     // run ANOVA on aggregated results
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
-    runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
+    // runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
     plotHeatmap(weighted_f1_results_aggregated)
     plotLabelDist(label_f1_results_aggregated)
     
@@ -212,8 +229,9 @@ workflow {
     plotComptime(all_runs_dir) 
 
     // model evaluation
-    modelEval(weighted_f1_results_aggregated, label_f1_results_aggregated)
-
+    modelEvalWeighted(weighted_f1_results_aggregated)
+    modelEvalLabel(label_f1_results_aggregated)
+    
     //f1_model_summary_coefs = modelEval.out.f1_model_summary_coefs
     //f1_model_summary_coefs.view()
     // get types of f1 score
