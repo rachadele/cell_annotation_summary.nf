@@ -247,12 +247,12 @@ def main():
     weighted_summary = weighted_f1_results.groupby(["method","cutoff","reference","key"]).agg(
         weighted_f1_mean=("weighted_f1", "mean"),
         weighted_f1_std=("weighted_f1", "std"),
-        weighted_f1_count=("weighted_f1", "count"),
+        weighted_f1_count=("weighted_f1", "count")
         #add precision and recall
-        weighted_precision_mean=("weighted_precision", "mean"),
-        weighted_precision_std=("weighted_precision", "std"),
-        weighted_recall_mean=("weighted_recall", "mean"),
-        weighted_recall_std=("weighted_recall", "std")
+        #weighted_precision_mean=("weighted_precision", "mean"),
+        #weighted_precision_std=("weighted_precision", "std"),
+        #weighted_recall_mean=("weighted_recall", "mean"),
+        #weighted_recall_std=("weighted_recall", "std")
     ).reset_index()
     
     
