@@ -203,6 +203,8 @@ def plot_glutamatergic_analysis(adata, markers, groupby, prefix="glutamatergic")
     glut = adata[(adata.obs["subclass"] == "Glutamatergic") & 
                  (adata.obs["predicted_family"] == "Glutamatergic")].copy()
     glut.obs_names_make_unique()
+    
+
     # Annotated heatmap
     plot_annotated_heatmap(glut, markers, prefix="glutamatergic", groupby=groupby)
  #   sc.pl.heatmap(glut, markers, dendrogram=True,
@@ -244,12 +246,16 @@ def main():
 
   
   combined = combined[~combined.obs["predicted_subclass"].isin(["Ambiguous Glutamatergic neuron","Hippocampal neuron","Ambiguous GABAergic neuron"])]
+
 # find NaN in predicted_subclass
   combined = combined[combined.obs["predicted_subclass"].notna()]
+  combined.obs["author cell type"] = combined.obs["subclass"]
+  combined.obs["predicted cell type"] = combined.obs["predicted_subclass"]
+# 
   combined_subsample = subsample_cells(combined, n_cells=2000)
   
   #groupby = ["predicted_subclass", "subclass"]
-  groupby = ["subclass", "predicted_subclass"]
+  groupby = ["author cell type", "predicted cell type"]
   markers = ["CUX2","RORB","BCL11B","ETV1","TLE4","FOXP2","POU6F2"]
   if organism == "mus_musculus":
     markers = [marker.lower().capitalize() for marker in markers]
@@ -257,7 +263,7 @@ def main():
   plot_glutamatergic_analysis(combined_subsample, markers, groupby)
   
   
-  markers = ["PVALB","LAMP5","VIP","SST","SNCG"]
+  markers = ["PVALB","LAMP5","SST","VIP", "SNCG"]
   if organism == "mus_musculus":
     markers = [marker.lower().capitalize() for marker in markers]
   #make markers lowercase then capitalize
