@@ -28,10 +28,10 @@ random.seed(42)
 
 def parse_arguments():
   parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-  parser.add_argument('--query_paths', type=str, help="path to query file", default = "/space/grp/rschwartz/rschwartz/evaluation_data_wrangling/plotting_tests_hsap")
-  parser.add_argument('--new_meta_paths', type=str, help="path to relabeled query metadata file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/new_homo_sapiens/sample/SCT/ref_50_query_null_cutoff_0_refsplit_dataset_id/scvi/predicted_meta")
-  parser.add_argument('--organism', type=str, help="organism", default = "homo_sapiens")
-  parser.add_argument('--ref_keys', type=str, help="keys to add", default = ["subclass","class","family"])
+  parser.add_argument('--query_paths', type=str, help="path to query file", default = "/space/grp/rschwartz/rschwartz/evaluation_data_wrangling/plotting_tests_mmus")
+  parser.add_argument('--new_meta_paths', type=str, help="path to relabeled query metadata file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/mus_musculus/sample/SCT/ref_50_query_null_cutoff_0_refsplit_dataset_id/scvi/predicted_meta")
+  parser.add_argument('--organism', type=str, help="organism", default = "mus_musculus")
+  parser.add_argument('--ref_keys', type=str, help="keys to add", default = ["subclass","class","family","global"])
   parser.add_argument('--gene_mapping', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/gemma_genes.tsv")
   # deal with jupyter kernel arguments
   if __name__ == "__main__":
@@ -206,7 +206,7 @@ def plot_glutamatergic_analysis(adata, markers, groupby, prefix="glutamatergic")
     
 
     # Annotated heatmap
-    plot_annotated_heatmap(glut, markers, prefix="glutamatergic", groupby=groupby)
+    plot_annotated_heatmap(glut, markers, prefix=prefix, groupby=groupby)
  #   sc.pl.heatmap(glut, markers, dendrogram=True,
   #                groupby="predicted_subclass", use_raw=False)
 
@@ -256,18 +256,18 @@ def main():
   
   #groupby = ["predicted_subclass", "subclass"]
   groupby = ["author cell type", "predicted cell type"]
-  markers = ["CUX2","RORB","BCL11B","ETV1","TLE4","FOXP2","POU6F2"]
+  markers = ["SLC30A3","CUX2","RORB","ETV1","FEZF2","BCL11B","TLE4","FOXP2"]
   if organism == "mus_musculus":
     markers = [marker.lower().capitalize() for marker in markers]
   #make markers lowercase then capitalize
-  plot_glutamatergic_analysis(combined_subsample, markers, groupby)
+  plot_glutamatergic_analysis(combined_subsample, markers, groupby, f"{organism}_glutamatergic")
   
   
-  markers = ["PVALB","LAMP5","SST","VIP", "SNCG"]
+  markers = ["LAMP5","PVALB","SNCG","SST","VIP"]
   if organism == "mus_musculus":
     markers = [marker.lower().capitalize() for marker in markers]
   #make markers lowercase then capitalize
-  plot_GABAergic_analysis(combined_subsample, markers, groupby, prefix="GABAergic")
+  plot_GABAergic_analysis(combined_subsample, markers, groupby, prefix=f"{organism}_GABAergic")
   
 
   
