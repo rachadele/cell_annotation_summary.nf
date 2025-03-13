@@ -135,13 +135,14 @@ process plotLabelDist {
 
 process modelEvalWeighted {
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/model_eval", mode: 'copy'
+    publishDir "${params.outdir}/model_eval/weighted", mode: 'copy'
 
     input:
     path weighted_f1_results_aggregated
 
     output:
     path "**png"
+    path "**tsv"
     path "**model_summary_coefs_combined.tsv", emit: f1_model_summary_coefs
 
 
@@ -153,38 +154,20 @@ process modelEvalWeighted {
 
 process modelEvalLabel {
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/model_eval", mode: 'copy'
+    publishDir "${params.outdir}/model_eval/label", mode: 'copy'
 
     input:
     path label_f1_results_aggregated
 
     output:
     path "**png"
+    path "**tsv"
     path "**model_summary_coefs_combined.tsv", emit: f1_model_summary_coefs
 
 
     script:
     """
     Rscript $projectDir/bin/model_performance_label.R --label_f1_results ${label_f1_results_aggregated}
-    """
-}
-
-process plotContrasts {
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/contrasts", mode: 'copy'
-
-    input:
-    tuple path(f1_model_summary_coefs), val(f1_type), path(weighted_f1_results_aggregated)
-
-    output:
-    path "**png"
-    path "**tsv"
-
-    script:
-    """
-    python $projectDir/bin/plot_contrasts.py --model_summary_coefs ${f1_model_summary_coefs} \\
-        --type ${f1_type} \\
-        --f1_results ${weighted_f1_results_aggregated}
     """
 }
 
@@ -232,21 +215,7 @@ workflow {
     modelEvalWeighted(weighted_f1_results_aggregated)
     modelEvalLabel(label_f1_results_aggregated)
     
-    //f1_model_summary_coefs = modelEval.out.f1_model_summary_coefs
-    //f1_model_summary_coefs.view()
-    // get types of f1 score
 
-    //f1_model_summary_coefs.map { path ->
-        //def f1_type = path.getName().toString().split('_')[0]
-        //[path, f1_type]
-    //}.set { f1_model_summary_coefs_types }
-    //f1_model_summary_coefs_types.view()
-    //f1_model_summary_coefs_types.combine(weighted_f1_results_aggregated)
-    //.set{f1_model_summary_coefs_results_aggregated}
-
-    //f1_model_summary_coefs_results_aggregated.view()
-
-    //plotContrasts(f1_model_summary_coefs_results_aggregated)
 
 }
 

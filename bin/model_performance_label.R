@@ -10,6 +10,8 @@ library(tidyr)
 library(ggplot2)
 library(gridExtra)
 library(stringr)
+library(DHARMa)
+
 
 # Set global theme for background
 theme_set(
@@ -20,6 +22,20 @@ theme_set(
       legend.background = element_rect(fill = "white", color = NA) # Legend background color
     )
 )
+
+plot_qq <- function(model, key_dir) {
+  # Create a QQ plot using the DHARMa package
+  qq_residuals <- simulateResiduals(model, plot = FALSE)
+  
+  png(file.path(key_dir, "qq_plot.png"), width = 800, height = 800)
+  plot(qq_residuals, quantreg = TRUE)
+  dev.off()
+
+  png(file.path(key_dir, "dispersion_plot.png"), width = 800, height = 800)
+  testDispersion(qq_residuals,plot = TRUE)
+  dev.off()
+
+}
 
 run_beta_model <- function(df, formula, group_var = "study") {
   # Ensure the outcome is within (0,1) for Beta regression
@@ -46,7 +62,7 @@ run_beta_model <- function(df, formula, group_var = "study") {
 }
 
 
-run_and_store_model <- function(df, formula, formula_dir, key) {
+run_and_store_model <- function(df, formula, key_dir, key) {
   # Run the beta model using the run_beta_model function
   result <- run_beta_model(df, formula, group_var = "study")  # Adjust group_var as needed
   
@@ -58,12 +74,17 @@ run_and_store_model <- function(df, formula, formula_dir, key) {
   model_summary_coefs$AIC <- result$stats$AIC
   model_summary_coefs$BIC <- result$stats$BIC
 
+  model <- result$model
+  # Plot QQ plot
+  plot_qq(model, key_dir)
+
+
   # Save the model summary and coefficients summary to files
-  write.table(model_summary_coefs, file = file.path(formula_dir, paste0(key,"_model_summary_coefs_combined.tsv")), sep = "\t", row.names = FALSE)
- # write.table(result$stats, file = file.path(formula_dir, paste0(key,"_model_stats_.tsv")), sep = "\t", row.names = FALSE)
+  write.table(model_summary_coefs, file = file.path(key_dir, paste0(key,"_model_summary_coefs_combined.tsv")), sep = "\t", row.names = FALSE)
+ # write.table(result$stats, file = file.path(key_dir, paste0(key,"_model_stats_.tsv")), sep = "\t", row.names = FALSE)
   
   # Plot the model summary (assuming plot_model_summary is defined)
-  plot_model_summary(model_summary = model_summary_coefs, outdir = formula_dir, key = key)
+  plot_model_summary(model_summary = model_summary_coefs, outdir = key_dir, key = key)
   
   # Return the model summary coefficients
   return(model_summary_coefs)
@@ -151,18 +172,6 @@ plot_model_summary <- function(model_summary, outdir, key) {
          y = "Term")
         
   
-  # Highlight significant terms (FDR < 0.05)
-  #p <- p + geom_bar(data = model_summary[model_summary$FDR_05, ], 
-                     #stat = "identity", 
-                     #color = "red", 
-                     #size = 1.5,
-                     #show.legend = FALSE) +
-    #geom_bar(data = model_summary[!model_summary$FDR_05, ], 
-             #stat = "identity", 
-             #color = "lightgray", 
-              #size = 1.5,
-             #show.legend = FALSE)
-  
   # Add error bars
   p <- p + geom_errorbar(aes(xmin = estimate - 2 * std.error, xmax = estimate + 2 * std.error), width = 0.2)
 
@@ -187,7 +196,7 @@ label_f1_results[is.na(label_f1_results)] <- "None"
 organism <- unique(label_f1_results$organism)[1]
 
 # restrict to "class" level results
-label_f1_results <- label_f1_results %>% filter(key == "family")
+label_f1_results <- label_f1_results %>% filter(key == "class")
 # Defining factor names
 factor_names <- c("method", "cutoff","label")
 
@@ -195,17 +204,16 @@ if (organism == "homo_sapiens") {
   # Defining the formulas
   formulas <- list(
     paste("f1_score ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
+    paste("f1_score ~", paste(c(factor_names, "method:cutoff", "disease_state", "sex"), collapse = " + ")),
     paste("f1_score ~", paste(c(factor_names, "reference", "reference:method", "method:cutoff"), collapse = " + ")),
-    paste("f1_score ~", paste(c(factor_names, "reference", "reference:method", "method:cutoff", "disease_state"), collapse = " + ")),
-    paste("f1_score ~", paste(c(factor_names, "reference:method", "method:cutoff", "disease_state", "sex"), collapse = " + "))
+    paste("f1_score ~", paste(c(factor_names, "reference", "reference:method", "method:cutoff", "disease_state"), collapse = " + "))
   )
 } else if (organism == "mus_musculus") {
   formulas <- list(
   	paste("f1_score ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
+    paste("f1_score ~", paste(c(factor_names, "method:cutoff", "treatment", "sex"), collapse = " + ")),
     paste("f1_score ~", paste(c(factor_names, "reference", "reference:method", "method:cutoff"), collapse = " + "))
-   # paste("f1_score ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype"), collapse = " + ")),
-    #paste("f1_score ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain"), collapse = " + ")),
-    #paste("f1_score ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain","sex"), collapse = " + "))
+
   )
 }
 # Grouping the data by 'key' column and creating a list of data frames
@@ -218,7 +226,9 @@ plot_model_metrics(df_list, formulas)
 for (df in df_list) {
   for (formula in formulas) {
     formula_dir <- formula %>% gsub(" ", "_", .)
+    key_dir <- file.path(formula_dir, df$key[1])
     dir.create(formula_dir, showWarnings = FALSE,recursive=TRUE)
+    dir.create(key_dir, showWarnings = FALSE,recursive=TRUE)
     df$method <- factor(df$method, levels=c("seurat","scvi"))
     
     # set baseline
@@ -242,6 +252,6 @@ for (df in df_list) {
 
     }
 
-    run_and_store_model(df, formula, formula_dir = formula_dir, key = df$key[1])
+    run_and_store_model(df, formula, key_dir = key_dir, key = df$key[1])
   }
 }
