@@ -211,8 +211,12 @@ def main():
         f1_df["sex"] = f1_df["sex"].str.replace("male", "M")
         
     if organism == "mus_musculus":
-        f1_df["disease_state"] = np.where(f1_df["disease"] == "No disease", "Control", "Disease")
-
+        f1_df["disease_state"] = np.where(f1_df["disease"].isnull(), "Control", "Disease")
+        
+        f1_df["treatment_state"] = np.where(f1_df["treatment"].isnull(), "No treatment", "treatment")
+        f1_df["genotype"] = np.where(f1_df["genotype"].isnull(), "wild type genotype", f1_df["genotype"])
+        
+        
 #----------------drop label columns and save---------------
     outdir = "weighted_f1_distributions"
     label_columns = ["label", "f1_score","precision","recall","support", "accuracy"]
