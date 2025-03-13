@@ -13,7 +13,7 @@ library(stringr)
 library(DHARMa)
 library(effects)
 library(emmeans)
-library(multcomp)
+#library(multcomp)
 # Set global theme for background
 theme_set(
   theme_minimal(base_size =30 ) +  # Base theme
@@ -23,6 +23,21 @@ theme_set(
       legend.background = element_rect(fill = "white", color = NA) # Legend background color
     )
 )
+
+plot_qq <- function(model, key_dir) {
+  # Create a QQ plot using the DHARMa package
+  qq_residuals <- simulateResiduals(model, plot = FALSE)
+  
+  png(file.path(key_dir, "qq_plot.png"), width = 800, height = 800)
+  plot(qq_residuals, quantreg = TRUE)
+  dev.off()
+
+  png(file.path(key_dir, "dispersion_plot.png"), width = 800, height = 800)
+  testDispersion(qq_residuals,plot = TRUE)
+  dev.off()
+
+}
+
 
 run_beta_model <- function(df, formula, group_var = "study") {
   # Ensure the outcome is within (0,1) for Beta regression
@@ -47,36 +62,56 @@ run_beta_model <- function(df, formula, group_var = "study") {
 }
 
 
-run_multcomp <- function(model, contrast) {
-  # Run the multcomp analysis
-  contrast_var <- as.name(contrast)  # Convert string to symbol
-  mc <- glht(model, linfct = mcp(method = "Tukey", interaction_average=TRUE))
-  summary_mc <- summary(mc)
-  return(summary_mc)
-}
-
 run_emmeans <- function(model, model_summary_coefs, key_dir) {
 
-  terms <- model_summary_coefs$term
 
+  # Estimate for reference * method * cutoff
+  emm_reference_method_cutoff <- emmeans(model, specs = ~ reference * method * cutoff, at = list(cutoff = 0), type = "response")
+  summary_emm_reference_method_cutoff_df <- as.data.frame(summary(emm_reference_method_cutoff))
+  estimate_reference_method_cutoff_df <- as.data.frame(pairs(emm_reference_method_cutoff))
 
-  # After running the model:
-  emm <- emmeans(model, specs = ~ reference * method * cutoff, at = list(cutoff = 0), type = "response")
-  
-  
-  summary_emm <- summary(emm)
-  estimate <- pairs(emm)
+  # Save emmeans summary and estimates for reference * method * cutoff
+  write.table(summary_emm_reference_method_cutoff_df, file = file.path(key_dir, "reference_method_cutoff_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+  write.table(estimate_reference_method_cutoff_df, file = file.path(key_dir, "reference_method_cutoff_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
 
-  estimate_df <- as.data.frame(estimate)
-  summary_emm_df <- as.data.frame(summary_emm) 
+  # Estimate for method * cutoff
+  emm_method_cutoff <- emmeans(model, specs = ~ method * cutoff, at = list(cutoff = 0), type = "response")
+  summary_emm_method_cutoff_df <- as.data.frame(summary(emm_method_cutoff))
+  estimate_method_cutoff_df <- as.data.frame(pairs(emm_method_cutoff))
 
-   # Save the emmeans summary to a file
-  write.table(summary_emm_df, file = file.path(key_dir, "emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  # save emmeans estimates
-  write.table(estimate_df, file = file.path(key_dir, "emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  # Save emmeans summary and estimates for method * cutoff
+  write.table(summary_emm_method_cutoff_df, file = file.path(key_dir, "method_cutoff_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+  write.table(estimate_method_cutoff_df, file = file.path(key_dir, "method_cutoff_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
 
+  if ("sex" %in% colnames(model$frame) ) {
+    emm_sex <- emmeans(model, specs = ~ sex, at = list(cutoff = 0), type = "response")
+    summary_emm_sex_df <- as.data.frame(summary(emm_sex))
+    estimate_sex_df <- as.data.frame(pairs(emm_sex))
 
+    # Save emmeans summary and estimates for sex
+    write.table(summary_emm_sex_df, file = file.path(key_dir, "sex_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+    write.table(estimate_sex_df, file = file.path(key_dir, "sex_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  }
+
+  if ("disease_state" %in% colnames(model$frame) ) {
+    emm_disease_state <- emmeans(model, specs = ~ disease_state, at = list(cutoff = 0), type = "response")
+    summary_emm_disease_state_df <- as.data.frame(summary(emm_disease_state))
+    estimate_disease_state_df <- as.data.frame(pairs(emm_disease_state))
+    write.table(summary_emm_disease_state_df, file = file.path(key_dir, "disease_state_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+    write.table(estimate_disease_state_df, file = file.path(key_dir, "disease_state_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  }
+
+  if ("treatment_state" %in% colnames(model$frame) ) {
+    emm_treatment <- emmeans(model, specs = ~ treatment_state, at = list(cutoff = 0), type = "response")
+    summary_emm_treatment_df <- as.data.frame(summary(emm_treatment))
+    estimate_treatment_df <- as.data.frame(pairs(emm_treatment))
+    write.table(summary_emm_treatment_df, file = file.path(key_dir, "treatment_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+    write.table(estimate_treatment_df, file = file.path(key_dir, "treatment_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+    
+  }
 }
+
+
 
 plot_contrasts <- function(ae, key_dir, key) {
 
@@ -175,6 +210,7 @@ run_and_store_model <- function(df, formula, key_dir, key) {
 
   model = result$model
   run_drop1(model, key_dir) 
+  plot_qq(model, key_dir)
   run_emmeans(model, model_summary_coefs, key_dir)
 
   ae <- allEffects(model)
@@ -279,7 +315,8 @@ plot_model_summary <- function(model_summary, outdir, key) {
 
 
 parser <- argparse::ArgumentParser()
-parser$add_argument("--weighted_f1_results", help = "Path to the weighted_f1_results file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/weighted_f1_results.tsv")
+parser$add_argument("--weighted_f1_results", help = "Path to the weighted_f1_results file", 
+  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/weighted_f1_results.tsv")
 args <- parser$parse_args()
 
 
@@ -308,10 +345,10 @@ if (organism == "homo_sapiens") {
     )
 } else if (organism == "mus_musculus") {
     # full interactive model
-  all_factors <- c(factor_names, "treatment","sex")
+  all_factors <- c(factor_names, "treatment_state","sex")
   formulas <- list(
     paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","treatment"),collapse = " + ")),
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","treatment_state"),collapse = " + ")),
     paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","sex"),collapse = " + ")),
     paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff", "reference:method"), collapse = " + ")),
     paste("weighted_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
