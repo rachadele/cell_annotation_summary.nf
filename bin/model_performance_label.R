@@ -187,7 +187,7 @@ label_f1_results[is.na(label_f1_results)] <- "None"
 organism <- unique(label_f1_results$organism)[1]
 
 # restrict to "class" level results
-label_f1_results <- label_f1_results %>% filter(key == "family")
+label_f1_results <- label_f1_results %>% filter(key == "class")
 # Defining factor names
 factor_names <- c("method", "cutoff","label")
 
@@ -195,17 +195,16 @@ if (organism == "homo_sapiens") {
   # Defining the formulas
   formulas <- list(
     paste("f1_score ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
+    paste("f1_score ~", paste(c(factor_names, "method:cutoff", "disease_state", "sex"), collapse = " + ")),
     paste("f1_score ~", paste(c(factor_names, "reference", "reference:method", "method:cutoff"), collapse = " + ")),
-    paste("f1_score ~", paste(c(factor_names, "reference", "reference:method", "method:cutoff", "disease_state"), collapse = " + ")),
-    paste("f1_score ~", paste(c(factor_names, "reference:method", "method:cutoff", "disease_state", "sex"), collapse = " + "))
+    paste("f1_score ~", paste(c(factor_names, "reference", "reference:method", "method:cutoff", "disease_state"), collapse = " + "))
   )
 } else if (organism == "mus_musculus") {
   formulas <- list(
   	paste("f1_score ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
+    paste("f1_score ~", paste(c(factor_names, "method:cutoff", "treatment", "sex"), collapse = " + ")),
     paste("f1_score ~", paste(c(factor_names, "reference", "reference:method", "method:cutoff"), collapse = " + "))
-   # paste("f1_score ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype"), collapse = " + ")),
-    #paste("f1_score ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain"), collapse = " + ")),
-    #paste("f1_score ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain","sex"), collapse = " + "))
+
   )
 }
 # Grouping the data by 'key' column and creating a list of data frames

@@ -10,7 +10,10 @@ library(tidyr)
 library(ggplot2)
 library(gridExtra)
 library(stringr)
-
+library(DHARMa)
+library(effects)
+library(emmeans)
+library(multcomp)
 # Set global theme for background
 theme_set(
   theme_minimal(base_size =30 ) +  # Base theme
@@ -24,7 +27,6 @@ theme_set(
 run_beta_model <- function(df, formula, group_var = "study") {
   # Ensure the outcome is within (0,1) for Beta regression
   outcome_var <- all.vars(as.formula(formula))[1]
-  df[[outcome_var]] <- pmax(pmin(df[[outcome_var]], 1 - 1e-6), 1e-6)
 
   random_effect_formula <- paste(formula, "+ (1 |", group_var, ")")
     # Add random effects directly to the formula
@@ -41,12 +43,125 @@ run_beta_model <- function(df, formula, group_var = "study") {
     AIC = AIC(model),
     BIC = BIC(model)
   )
-  
   return(list(model = model, summary = summary_df, stats = model_stats, formula = random_effect_formula))
 }
 
 
-run_and_store_model <- function(df, formula, formula_dir, key) {
+run_multcomp <- function(model, contrast) {
+  # Run the multcomp analysis
+  contrast_var <- as.name(contrast)  # Convert string to symbol
+  mc <- glht(model, linfct = mcp(method = "Tukey", interaction_average=TRUE))
+  summary_mc <- summary(mc)
+  return(summary_mc)
+}
+
+run_emmeans <- function(model, model_summary_coefs, key_dir) {
+
+  terms <- model_summary_coefs$term
+
+
+  # After running the model:
+  emm <- emmeans(model, specs = ~ reference * method * cutoff, at = list(cutoff = 0), type = "response")
+  
+  
+  summary_emm <- summary(emm)
+  estimate <- pairs(emm)
+
+  estimate_df <- as.data.frame(estimate)
+  summary_emm_df <- as.data.frame(summary_emm) 
+
+   # Save the emmeans summary to a file
+  write.table(summary_emm_df, file = file.path(key_dir, "emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+  # save emmeans estimates
+  write.table(estimate_df, file = file.path(key_dir, "emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+
+
+}
+
+plot_contrasts <- function(ae, key_dir, key) {
+
+
+  for (contrast in names(ae)) {
+    contrast_df = as.data.frame(ae[[contrast]])
+
+    # Checking the number of factors (columns before 'fit')
+    factor_columns <- colnames(contrast_df)[1:(which(colnames(contrast_df) == "fit") - 1)]
+    num_factors <- length(factor_columns)
+
+    # Handling different cases based on the number of factors
+    if (num_factors == 1) {
+      
+      group_var <- contrast_df[[factor_columns[1]]]
+      contrast_df$group_var <- group_var
+
+      p2 <- ggplot(contrast_df, aes(x = group_var, 
+          y = fit, ymin = 
+          lower, 
+          ymax = upper, group=1)) +
+          geom_point(size=7) 
+          
+    } else if (num_factors > 1) {
+      # facet should always be "method"
+      # group var should be any column that isn't method
+        group_var_columns <- factor_columns[factor_columns != "method"]
+        contrast_df$group_var <- contrast_df[[group_var_columns[1]]]
+
+        # If there are more than one factor, dynamically map them to different aesthetics
+        p2 <- ggplot(contrast_df, aes(x = group_var, 
+          y = fit, ymin = 
+          lower, 
+          ymax = upper, group = method, color=method)) +
+          geom_point(size = 7) +
+          facet_wrap(~ method) 
+    } 
+      p2 <- p2 + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 20)) +
+        labs(y = "Fitted weighted F1", title = "", x = "") +
+        theme(legend.position = "right") 
+      if (is.factor(contrast_df$group_var )) {
+        
+        p2 <- p2 + scale_x_discrete(labels = function(x) str_wrap(x, width = 20)) +
+          geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2, size =2)         
+      } else if (is.numeric(contrast_df$group_var)) {
+        p2 <- p2 + geom_line(size=2) +
+        geom_ribbon(aes(ymin = lower, ymax = upper, fill = method), alpha = 0.2) 
+      }
+        
+      ggsave(file.path(key_dir, paste0(key, "_", contrast, "_effects.png")), p2, width = 25, height = 15, dpi = 250)
+    }
+}
+
+
+run_drop1 <- function(model, key_dir) {
+  d1 <- drop1(model, test = "Chisq")
+
+  # Convert drop1 output to a data frame for plotting
+  d1_df <- as.data.frame(d1)
+  d1_df$Term <- rownames(d1_df)
+
+  # pivot longer to plot all columns
+  d1_df$logChiSquared <- log10(d1_df[["Pr(>Chi)"]])
+
+  d1_df <- d1_df %>% 
+  pivot_longer(cols = -c(Term,`Pr(>Chi)`),
+         names_to = "metric", values_to = "value")
+
+  # Plot
+  p <- ggplot(d1_df, aes(x = Term, y = value, fill = metric)) +
+    geom_col(position = "dodge") +  # Using geom_col for better clarity with bars
+    coord_flip() +
+    facet_wrap(~metric, scales = "free_x") +  # Facet by metric
+    labs(x = "Term", y = "Value", title = "Drop1 Analysis: Term Metrics") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 15)) +  # Rotate x-axis labels
+    scale_fill_brewer(palette = "Set1")  # Color palette for better distinction
+
+
+  # Save plot
+  ggsave(file.path(key_dir, "drop1.png"), p, width = 20, height = 20, dpi = 300)
+}
+
+run_and_store_model <- function(df, formula, key_dir, key) {
+
   # Run the beta model using the run_beta_model function
   result <- run_beta_model(df, formula, group_var = "study")  # Adjust group_var as needed
   
@@ -58,13 +173,16 @@ run_and_store_model <- function(df, formula, formula_dir, key) {
   model_summary_coefs$AIC <- result$stats$AIC
   model_summary_coefs$BIC <- result$stats$BIC
 
+  model = result$model
+  run_drop1(model, key_dir) 
+  run_emmeans(model, model_summary_coefs, key_dir)
+
+  ae <- allEffects(model)
+  plot_contrasts(ae, key_dir, key)
   # Save the model summary and coefficients summary to files
-  write.table(model_summary_coefs, file = file.path(formula_dir, paste0(key,"_model_summary_coefs_combined.tsv")), sep = "\t", row.names = FALSE)
- # write.table(result$stats, file = file.path(formula_dir, paste0(key,"_model_stats_.tsv")), sep = "\t", row.names = FALSE)
-  
+  write.table(model_summary_coefs, file = file.path(key_dir, paste0(key,"_model_summary_coefs_combined.tsv")), sep = "\t", row.names = FALSE)
   # Plot the model summary (assuming plot_model_summary is defined)
-  plot_model_summary(model_summary = model_summary_coefs, outdir = formula_dir, key = key)
-  
+  plot_model_summary(model_summary = model_summary_coefs, outdir = key_dir, key = key)
   # Return the model summary coefficients
   return(model_summary_coefs)
 }
@@ -150,19 +268,6 @@ plot_model_summary <- function(model_summary, outdir, key) {
          x = "Coefficient",
          y = "Term")
         
-  
-  # Highlight significant terms (FDR < 0.05)
-  #p <- p + geom_bar(data = model_summary[model_summary$FDR_05, ], 
-                     #stat = "identity", 
-                     #color = "red", 
-                     #size = 1.5,
-                     #show.legend = FALSE) +
-    #geom_bar(data = model_summary[!model_summary$FDR_05, ], 
-             #stat = "identity", 
-             #color = "lightgray", 
-              #size = 1.5,
-             #show.legend = FALSE)
-  
   # Add error bars
   p <- p + geom_errorbar(aes(xmin = estimate - 2 * std.error, xmax = estimate + 2 * std.error), width = 0.2)
 
@@ -179,7 +284,7 @@ args <- parser$parse_args()
 
 
 # Reading the weighted_f1_results file
-weighted_f1_results <- read.table(args$weighted_f1_results, sep="\t", header=TRUE)
+weighted_f1_results <- read.table(args$weighted_f1_results, sep="\t", header=TRUE, stringsAsFactors = TRUE)
 # fill NA with none
 weighted_f1_results[is.na(weighted_f1_results)] <- "None"
 # Extract organism (assuming only one unique value in the 'organism' column)
@@ -188,34 +293,47 @@ organism <- unique(weighted_f1_results$organism)[1]
 # Defining factor names
 factor_names <- c("reference", "method", "cutoff")
 
+
+
 if (organism == "homo_sapiens") {
+  all_factors = c(factor_names, "disease_state","sex","region_match")
   # Defining the formulas
   formulas <- list(
     paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "disease_state"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "disease_state", "sex"), collapse = " + "))
-  )
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","disease_state"),collapse = "+")),
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","sex"),collapse = "+")),
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","region_match"),collapse = "+")),
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff", "reference:method"), collapse = " + ")),
+    paste("weighted_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
+    )
 } else if (organism == "mus_musculus") {
+    # full interactive model
+  all_factors <- c(factor_names, "treatment","sex")
   formulas <- list(
     paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "sex"), collapse = " + "))
-   # paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype"), collapse = " + ")),
-    #paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain"), collapse = " + ")),
-    #paste("weighted_f1 ~", paste(c(factor_names, "reference:method", "method:cutoff", "treatment", "genotype", "strain","sex"), collapse = " + "))
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","treatment"),collapse = " + ")),
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","sex"),collapse = " + ")),
+    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff", "reference:method"), collapse = " + ")),
+    paste("weighted_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
+
+    
   )
 }
+
+weighted_f1_results$weighted_f1 <-  pmax(pmin(weighted_f1_results$weighted_f1, 1 - 1e-6), 1e-6)
+
+
 # Grouping the data by 'key' column and creating a list of data frames
 df_list <- split(weighted_f1_results, weighted_f1_results$key)
 
 plot_model_metrics(df_list, formulas)
 
-#formula <- formulas[[1]]
+
 
 for (df in df_list) {
   for (formula in formulas) {
     formula_dir <- formula %>% gsub(" ", "_", .)
+
     dir.create(formula_dir, showWarnings = FALSE,recursive=TRUE)
     df$method <- factor(df$method, levels=c("seurat","scvi"))
     
@@ -238,8 +356,13 @@ for (df in df_list) {
       study_ref <- "GSE152715.2"
       df$study <- relevel(df$study, ref=study_ref)
 
-    }
 
-    run_and_store_model(df, formula, formula_dir = formula_dir, key = df$key[1])
+    }
+    key = df$key[1]
+    key_dir = file.path(formula_dir, key)
+    # make dir
+    dir.create(key_dir, showWarnings = FALSE,recursive=TRUE)
+
+    run_and_store_model(df, formula, key_dir = key_dir, key = key)
   }
 }

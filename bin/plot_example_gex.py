@@ -178,6 +178,9 @@ def plot_annotated_heatmap(adata, markers, groupby=["subclass",
 
     g.ax_heatmap.set_yticks([])
     g.ax_heatmap.set_yticklabels([])
+    g.ax_heatmap.set_xlabel("")
+    for label in g.ax_heatmap.get_xticklabels():
+      label.set_rotation(90)
 
   #  plt.tight_layout()
     plt.savefig(f"{prefix}_heatmap.png", bbox_inches="tight")
@@ -256,7 +259,7 @@ def main():
   
   #groupby = ["predicted_subclass", "subclass"]
   groupby = ["author cell type", "predicted cell type"]
-  markers = ["SLC30A3","CUX2","RORB","ETV1","FEZF2","BCL11B","TLE4","FOXP2"]
+  markers = ["SLC30A3","CUX2","RORB","FEZF2","BCL11B","TLE4","FOXP2"]
   if organism == "mus_musculus":
     markers = [marker.lower().capitalize() for marker in markers]
   #make markers lowercase then capitalize

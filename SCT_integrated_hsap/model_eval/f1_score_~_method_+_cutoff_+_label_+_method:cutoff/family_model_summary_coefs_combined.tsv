@@ -1,8 +1,0 @@
-"effect"	"component"	"group"	"term"	"estimate"	"std.error"	"statistic"	"p.value"	"FDR"	"formula"	"key"	"LogLik"	"AIC"	"BIC"
-"fixed"	"cond"	NA	"(Intercept)"	2.46641637359318	0.283633006586505	8.6958016744111	3.44389521379172e-18	3.44389521379172e-18	"f1_score ~ method + cutoff + label + method:cutoff + (1 | study )"	"family"	872557.478380571	-1745098.95676114	-1745014.53906284
-"fixed"	"cond"	NA	"methodscvi"	0.455240027763748	0.00553505472271682	82.2467076784921	0	0	"f1_score ~ method + cutoff + label + method:cutoff + (1 | study )"	"family"	872557.478380571	-1745098.95676114	-1745014.53906284
-"fixed"	"cond"	NA	"cutoff"	-0.938325316538369	0.0111721873852745	-83.9876099621391	0	0	"f1_score ~ method + cutoff + label + method:cutoff + (1 | study )"	"family"	872557.478380571	-1745098.95676114	-1745014.53906284
-"fixed"	"cond"	NA	"labelGlutamatergic"	-0.06615104677864	0.0043358444406843	-15.2567850815699	1.48380945868986e-52	1.78057135042783e-52	"f1_score ~ method + cutoff + label + method:cutoff + (1 | study )"	"family"	872557.478380571	-1745098.95676114	-1745014.53906284
-"fixed"	"cond"	NA	"labelNon-neuron"	0.275270034620264	0.00450340380206422	61.1248839142714	0	0	"f1_score ~ method + cutoff + label + method:cutoff + (1 | study )"	"family"	872557.478380571	-1745098.95676114	-1745014.53906284
-"fixed"	"cond"	NA	"methodscvi:cutoff"	-2.83591999431958	0.0154622641730573	-183.409102481971	0	0	"f1_score ~ method + cutoff + label + method:cutoff + (1 | study )"	"family"	872557.478380571	-1745098.95676114	-1745014.53906284
-"ran_pars"	"cond"	"study"	"sd__(Intercept)"	0.750283850460537	NA	NA	NA	NA	"f1_score ~ method + cutoff + label + method:cutoff + (1 | study )"	"family"	872557.478380571	-1745098.95676114	-1745014.53906284
