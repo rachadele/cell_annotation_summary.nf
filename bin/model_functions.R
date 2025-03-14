@@ -155,12 +155,9 @@ plot_contrasts <- function(emm_summary_df, emm_pairs_df, key_dir, key, contrast)
       title = paste0("Pairwise Contrasts for ", contrast),
       x = "Contrast",
       y = "Odds Ratio"
-    ) +
-    theme() + 
-    theme(
-      axis.text.y = element_text(hjust = 1)) +
+    ) + theme() +
       # wrap x-axis labels
-      scale_x_discrete(labels = function(x) str_wrap(x, width = 50)) + 
+      scale_x_discrete(labels = function(x) str_wrap(x, width = 0)) + 
       coord_flip() +
       # use SE for errorbar
       geom_errorbar(aes(ymin = odds.ratio - 2 * SE, ymax = odds.ratio + 2 * SE), width = 0.2)
