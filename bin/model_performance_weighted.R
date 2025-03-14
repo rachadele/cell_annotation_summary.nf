@@ -83,6 +83,18 @@ run_emmeans <- function(model, model_summary_coefs, key_dir) {
   write.table(summary_emm_method_cutoff_df, file = file.path(key_dir, "method_cutoff_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
   write.table(estimate_method_cutoff_df, file = file.path(key_dir, "method_cutoff_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
 
+# subsample ref 
+  if ("subsample_ref" %in% colnames(model$frame) ) {
+    emm_subsample_ref <- emmeans(model, specs = ~ subsample_ref, at = list(cutoff = 0), type = "response")
+    summary_emm_subsample_ref_df <- as.data.frame(summary(emm_subsample_ref))
+    estimate_subsample_ref_df <- as.data.frame(pairs(emm_subsample_ref))
+
+    # Save emmeans summary and estimates for subsample_ref
+    write.table(summary_emm_subsample_ref_df, file = file.path(key_dir, "subsample_ref_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+    write.table(estimate_subsample_ref_df, file = file.path(key_dir, "subsample_ref_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  }
+
+
   if ("sex" %in% colnames(model$frame) ) {
     emm_sex <- emmeans(model, specs = ~ sex, at = list(cutoff = 0), type = "response")
     summary_emm_sex_df <- as.data.frame(summary(emm_sex))
@@ -328,7 +340,7 @@ weighted_f1_results[is.na(weighted_f1_results)] <- "None"
 organism <- unique(weighted_f1_results$organism)[1]
 
 # Defining factor names
-factor_names <- c("reference", "method", "cutoff")
+factor_names <- c("reference", "method", "cutoff", "subsample_ref")
 
 
 
@@ -336,21 +348,21 @@ if (organism == "homo_sapiens") {
   all_factors = c(factor_names, "disease_state","sex","region_match")
   # Defining the formulas
   formulas <- list(
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","disease_state"),collapse = "+")),
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","sex"),collapse = "+")),
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","region_match"),collapse = "+")),
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff", "reference:method"), collapse = " + ")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","disease_state"),collapse = "+")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","sex"),collapse = "+")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","region_match"),collapse = "+")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff", "reference:method"), collapse = " + ")),
     paste("weighted_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
     )
 } else if (organism == "mus_musculus") {
     # full interactive model
   all_factors <- c(factor_names, "treatment_state","sex")
   formulas <- list(
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","treatment_state"),collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","sex"),collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff", "reference:method"), collapse = " + ")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","treatment_state"),collapse = " + ")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","sex"),collapse = " + ")),
+    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff", "reference:method"), collapse = " + ")),
     paste("weighted_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
 
     
@@ -358,12 +370,12 @@ if (organism == "homo_sapiens") {
 }
 
 weighted_f1_results$weighted_f1 <-  pmax(pmin(weighted_f1_results$weighted_f1, 1 - 1e-6), 1e-6)
-
+weighted_f1_results$subsample_ref <- weighted_f1_results$subsample_ref %>% factor(levels = c("500","100","50"))
 
 # Grouping the data by 'key' column and creating a list of data frames
 df_list <- split(weighted_f1_results, weighted_f1_results$key)
 
-plot_model_metrics(df_list, formulas)
+#plot_model_metrics(df_list, formulas)
 
 
 
