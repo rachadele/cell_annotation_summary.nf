@@ -105,6 +105,16 @@ run_emmeans <- function(model, key_dir) {
     write.table(estimate_treatment_df, file = file.path(key_dir, "treatment_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
     
   }
+
+  if ("region_match" %in% colnames(model$frame)) {
+    emm_region_match <- emmeans(model, specs = ~ region_match , at = list(cutoff = 0, subsample_ref="500"), type = "response")
+    summary_emm_region_match_df <- as.data.frame(summary(emm_region_match))
+    estimate_region_match_df <- as.data.frame(pairs(emm_region_match))
+    plot_contrasts(summary_emm_region_match_df, estimate_region_match_df, key_dir, key, contrast="region_match")
+    write.table(summary_emm_region_match_df, file = file.path(key_dir, "region_match_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+    write.table(estimate_region_match_df, file = file.path(key_dir, "region_match_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  
+  }
 }
 
 
