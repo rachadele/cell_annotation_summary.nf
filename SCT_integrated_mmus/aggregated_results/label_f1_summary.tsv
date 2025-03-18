@@ -1,243 +1,563 @@
 label	method	cutoff	reference	key	label_f1_mean	label_f1_std	label_f1_count
+Ambiguous GABAergic	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.682402477286994	0.37256779814793967	114
 Ambiguous GABAergic	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.682402477286994	0.37256779814793967	114
+Ambiguous GABAergic	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7162567756261554	0.3894903221675791	114
 Ambiguous GABAergic	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7162567756261554	0.3894903221675791	114
+Ambiguous GABAergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6942052673993405	0.3880852608577726	114
 Ambiguous GABAergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6942052673993405	0.3880852608577726	114
+Ambiguous GABAergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7087548446301681	0.3967214178947303	114
 Ambiguous GABAergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7087548446301681	0.3967214178947303	114
+Ambiguous GABAergic	scvi	0.0	whole cortex	class	0.6971275092817562	0.3867542326625456	114
 Ambiguous GABAergic	scvi	0.0	whole cortex	subclass	0.6971275092817562	0.3867542326625456	114
+Ambiguous GABAergic	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.682402477286994	0.37256779814793956	114
 Ambiguous GABAergic	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.682402477286994	0.37256779814793956	114
+Ambiguous GABAergic	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7162567756261554	0.3894903221675791	114
 Ambiguous GABAergic	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7162567756261554	0.3894903221675791	114
+Ambiguous GABAergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6942052673993405	0.3880852608577726	114
 Ambiguous GABAergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6942052673993405	0.3880852608577726	114
+Ambiguous GABAergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7087548446301681	0.3967214178947303	114
 Ambiguous GABAergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7087548446301681	0.3967214178947303	114
+Ambiguous GABAergic	scvi	0.05	whole cortex	class	0.6971275092817562	0.3867542326625457	114
 Ambiguous GABAergic	scvi	0.05	whole cortex	subclass	0.6971275092817562	0.3867542326625457	114
+Ambiguous GABAergic	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.682402477286994	0.37256779814793967	114
 Ambiguous GABAergic	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.682402477286994	0.37256779814793967	114
+Ambiguous GABAergic	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7162567756261554	0.3894903221675791	114
 Ambiguous GABAergic	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7162567756261554	0.3894903221675791	114
+Ambiguous GABAergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6941908014504938	0.38809630572812304	114
 Ambiguous GABAergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6941908014504938	0.38809630572812304	114
+Ambiguous GABAergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.708759542340501	0.396724751380159	114
 Ambiguous GABAergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.708759542340501	0.396724751380159	114
+Ambiguous GABAergic	scvi	0.1	whole cortex	class	0.6969046153907289	0.3868342654404921	114
 Ambiguous GABAergic	scvi	0.1	whole cortex	subclass	0.6969046153907289	0.3868342654404921	114
+Ambiguous GABAergic	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.682402477286994	0.37256779814793967	114
 Ambiguous GABAergic	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.682402477286994	0.37256779814793967	114
+Ambiguous GABAergic	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7162567756261554	0.38949032216757906	114
 Ambiguous GABAergic	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7162567756261554	0.38949032216757906	114
+Ambiguous GABAergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.689463236404923	0.3890811274509848	114
 Ambiguous GABAergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.689463236404923	0.3890811274509848	114
+Ambiguous GABAergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.703980029071098	0.3964707462133113	114
 Ambiguous GABAergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.703980029071098	0.3964707462133113	114
+Ambiguous GABAergic	scvi	0.15	whole cortex	class	0.6798479018143361	0.3842651242652683	114
 Ambiguous GABAergic	scvi	0.15	whole cortex	subclass	0.6798479018143361	0.3842651242652683	114
+Ambiguous GABAergic	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6824205174245057	0.3725626197866424	114
 Ambiguous GABAergic	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.6824205174245057	0.3725626197866424	114
+Ambiguous GABAergic	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7163134812312385	0.38952371261305013	114
 Ambiguous GABAergic	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7163134812312385	0.38952371261305013	114
+Ambiguous GABAergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6536368626012051	0.3838234808950232	114
 Ambiguous GABAergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6536368626012051	0.3838234808950232	114
+Ambiguous GABAergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6867289009418921	0.39302965052315464	114
 Ambiguous GABAergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.6867289009418921	0.39302965052315464	114
+Ambiguous GABAergic	scvi	0.2	whole cortex	class	0.6225429919372082	0.37404016876014334	114
 Ambiguous GABAergic	scvi	0.2	whole cortex	subclass	0.6225429919372082	0.37404016876014334	114
+Ambiguous GABAergic	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6827382022661569	0.3725082639296286	114
 Ambiguous GABAergic	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.6827382022661569	0.3725082639296286	114
+Ambiguous GABAergic	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.71673512246157	0.3897528715181214	114
 Ambiguous GABAergic	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.71673512246157	0.3897528715181214	114
+Ambiguous GABAergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.5944227778658489	0.3735280848103717	114
 Ambiguous GABAergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5944227778658489	0.3735280848103717	114
+Ambiguous GABAergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6498095135541465	0.38159618579106025	114
 Ambiguous GABAergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.6498095135541465	0.38159618579106025	114
+Ambiguous GABAergic	scvi	0.25	whole cortex	class	0.5604474341332584	0.36228611756909185	114
 Ambiguous GABAergic	scvi	0.25	whole cortex	subclass	0.5604474341332584	0.36228611756909185	114
+Ambiguous GABAergic	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7068913492292594	0.37595926213362624	114
 Ambiguous GABAergic	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7068913492292594	0.37595926213362624	114
+Ambiguous GABAergic	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7019033954889926	0.3863558304573999	114
 Ambiguous GABAergic	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7019033954889926	0.3863558304573999	114
+Ambiguous GABAergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.3370403007297386	0.3003688158125788	114
 Ambiguous GABAergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.3370403007297386	0.3003688158125788	114
+Ambiguous GABAergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.4312546218200911	0.30834644447240384	114
 Ambiguous GABAergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.4312546218200911	0.30834644447240384	114
+Ambiguous GABAergic	scvi	0.5	whole cortex	class	0.1670411225035414	0.2346027206821686	114
 Ambiguous GABAergic	scvi	0.5	whole cortex	subclass	0.1670411225035414	0.2346027206821686	114
+Ambiguous GABAergic	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.48357014111025604	0.36676037904751435	114
 Ambiguous GABAergic	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.48357014111025604	0.36676037904751435	114
+Ambiguous GABAergic	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.35232250679556787	0.3349250783836478	114
 Ambiguous GABAergic	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.35232250679556787	0.3349250783836478	114
+Ambiguous GABAergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.10959287547110047	0.20209966049805136	114
 Ambiguous GABAergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.10959287547110047	0.20209966049805136	114
+Ambiguous GABAergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.15751483819916506	0.16976386015135478	114
 Ambiguous GABAergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.15751483819916506	0.16976386015135478	114
+Ambiguous GABAergic	scvi	0.75	whole cortex	class	0.02150946448768606	0.049477918753514705	114
 Ambiguous GABAergic	scvi	0.75	whole cortex	subclass	0.02150946448768606	0.049477918753514705	114
+Ambiguous GABAergic	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.29812101372068367	114
 Ambiguous GABAergic	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.8173238073261696	0.29812101372068367	114
+Ambiguous GABAergic	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.30639639321198125	114
 Ambiguous GABAergic	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8088163207891906	0.30639639321198125	114
+Ambiguous GABAergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7591160676271228	0.35422457956298614	114
 Ambiguous GABAergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.7591160676271228	0.35422457956298614	114
+Ambiguous GABAergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7670035611322017	0.3654604048840592	114
 Ambiguous GABAergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7670035611322017	0.3654604048840592	114
+Ambiguous GABAergic	seurat	0.0	whole cortex	class	0.6907404096905461	0.3751746102413459	114
 Ambiguous GABAergic	seurat	0.0	whole cortex	subclass	0.6907404096905461	0.3751746102413459	114
+Ambiguous GABAergic	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206837	114
 Ambiguous GABAergic	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.8173238073261696	0.2981210137206837	114
+Ambiguous GABAergic	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.30639639321198103	114
 Ambiguous GABAergic	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8088163207891906	0.30639639321198103	114
+Ambiguous GABAergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7591160676271228	0.35422457956298614	114
 Ambiguous GABAergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.7591160676271228	0.35422457956298614	114
+Ambiguous GABAergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7670035611322017	0.3654604048840592	114
 Ambiguous GABAergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7670035611322017	0.3654604048840592	114
+Ambiguous GABAergic	seurat	0.05	whole cortex	class	0.6907404096905461	0.37517461024134596	114
 Ambiguous GABAergic	seurat	0.05	whole cortex	subclass	0.6907404096905461	0.37517461024134596	114
+Ambiguous GABAergic	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206836	114
 Ambiguous GABAergic	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.8173238073261696	0.2981210137206836	114
+Ambiguous GABAergic	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.30639639321198125	114
 Ambiguous GABAergic	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8088163207891906	0.30639639321198125	114
+Ambiguous GABAergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7591160676271228	0.3542245795629862	114
 Ambiguous GABAergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.7591160676271228	0.3542245795629862	114
+Ambiguous GABAergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7670035611322017	0.3654604048840592	114
 Ambiguous GABAergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7670035611322017	0.3654604048840592	114
+Ambiguous GABAergic	seurat	0.1	whole cortex	class	0.6907404096905461	0.3751746102413459	114
 Ambiguous GABAergic	seurat	0.1	whole cortex	subclass	0.6907404096905461	0.3751746102413459	114
+Ambiguous GABAergic	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206836	114
 Ambiguous GABAergic	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.8173238073261696	0.2981210137206836	114
+Ambiguous GABAergic	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.3063963932119812	114
 Ambiguous GABAergic	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8088163207891906	0.3063963932119812	114
+Ambiguous GABAergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7591160676271228	0.3542245795629862	114
 Ambiguous GABAergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.7591160676271228	0.3542245795629862	114
+Ambiguous GABAergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7669518257672906	0.3655384544964176	114
 Ambiguous GABAergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7669518257672906	0.3655384544964176	114
+Ambiguous GABAergic	seurat	0.15	whole cortex	class	0.6907233870204964	0.3752230344751545	114
 Ambiguous GABAergic	seurat	0.15	whole cortex	subclass	0.6907233870204964	0.3752230344751545	114
+Ambiguous GABAergic	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206837	114
 Ambiguous GABAergic	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.8173238073261696	0.2981210137206837	114
+Ambiguous GABAergic	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.30639639321198114	114
 Ambiguous GABAergic	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8088163207891906	0.30639639321198114	114
+Ambiguous GABAergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7589488296573556	0.35441566194344154	114
 Ambiguous GABAergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.7589488296573556	0.35441566194344154	114
+Ambiguous GABAergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7661839451610767	0.36622219676444484	114
 Ambiguous GABAergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7661839451610767	0.36622219676444484	114
+Ambiguous GABAergic	seurat	0.2	whole cortex	class	0.6897883486535134	0.37596708990193817	114
 Ambiguous GABAergic	seurat	0.2	whole cortex	subclass	0.6897883486535134	0.37596708990193817	114
+Ambiguous GABAergic	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206838	114
 Ambiguous GABAergic	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.8173238073261696	0.2981210137206838	114
+Ambiguous GABAergic	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088030275521791	0.30640049249086115	114
 Ambiguous GABAergic	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8088030275521791	0.30640049249086115	114
+Ambiguous GABAergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7580604411668602	0.35549312026584023	114
 Ambiguous GABAergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.7580604411668602	0.35549312026584023	114
+Ambiguous GABAergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7630131100789411	0.36940866735719036	114
 Ambiguous GABAergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7630131100789411	0.36940866735719036	114
+Ambiguous GABAergic	seurat	0.25	whole cortex	class	0.6845641590536012	0.37741549297117566	114
 Ambiguous GABAergic	seurat	0.25	whole cortex	subclass	0.6845641590536012	0.37741549297117566	114
+Ambiguous GABAergic	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8151381160979991	0.30188425606928065	114
 Ambiguous GABAergic	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.8151381160979991	0.30188425606928065	114
+Ambiguous GABAergic	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8029929685314717	0.3133514913543211	114
 Ambiguous GABAergic	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.8029929685314717	0.3133514913543211	114
+Ambiguous GABAergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7207694274557748	0.3860625718535258	114
 Ambiguous GABAergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.7207694274557748	0.3860625718535258	114
+Ambiguous GABAergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7239398104104506	0.3934911077271562	114
 Ambiguous GABAergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7239398104104506	0.3934911077271562	114
+Ambiguous GABAergic	seurat	0.5	whole cortex	class	0.5499492124133064	0.3759436292359346	114
 Ambiguous GABAergic	seurat	0.5	whole cortex	subclass	0.5499492124133064	0.3759436292359346	114
+Ambiguous GABAergic	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7912854349066855	0.32837473836549563	114
 Ambiguous GABAergic	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7912854349066855	0.32837473836549563	114
+Ambiguous GABAergic	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7709045240983609	0.3501985857770219	114
 Ambiguous GABAergic	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7709045240983609	0.3501985857770219	114
+Ambiguous GABAergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.638784801011584	0.3943188151390865	114
 Ambiguous GABAergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.638784801011584	0.3943188151390865	114
+Ambiguous GABAergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6444124300361898	0.3941671844728318	114
 Ambiguous GABAergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.6444124300361898	0.3941671844728318	114
+Ambiguous GABAergic	seurat	0.75	whole cortex	class	0.26714054495259104	0.24976899471279876	114
 Ambiguous GABAergic	seurat	0.75	whole cortex	subclass	0.26714054495259104	0.24976899471279876	114
+Ambiguous Glutamatergic	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607160218610894	0.05924992506562641	90
 Ambiguous Glutamatergic	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9607160218610894	0.05924992506562641	90
+Ambiguous Glutamatergic	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693446226510335	0.06794200888113423	90
 Ambiguous Glutamatergic	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9693446226510335	0.06794200888113423	90
+Ambiguous Glutamatergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9653450380811778	0.07593365081621167	90
 Ambiguous Glutamatergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9653450380811778	0.07593365081621167	90
+Ambiguous Glutamatergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9668215789127	0.07630178141127497	90
 Ambiguous Glutamatergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9668215789127	0.07630178141127497	90
+Ambiguous Glutamatergic	scvi	0.0	whole cortex	class	0.9663874492580029	0.07336638764864993	90
 Ambiguous Glutamatergic	scvi	0.0	whole cortex	subclass	0.9663874492580029	0.07336638764864993	90
+Ambiguous Glutamatergic	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607160218610894	0.0592499250656264	90
 Ambiguous Glutamatergic	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9607160218610894	0.0592499250656264	90
+Ambiguous Glutamatergic	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693446226510335	0.06794200888113423	90
 Ambiguous Glutamatergic	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9693446226510335	0.06794200888113423	90
+Ambiguous Glutamatergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9653450380811778	0.07593365081621169	90
 Ambiguous Glutamatergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9653450380811778	0.07593365081621169	90
+Ambiguous Glutamatergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9668215789127	0.07630178141127497	90
 Ambiguous Glutamatergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9668215789127	0.07630178141127497	90
+Ambiguous Glutamatergic	scvi	0.05	whole cortex	class	0.9663874492580029	0.07336638764864992	90
 Ambiguous Glutamatergic	scvi	0.05	whole cortex	subclass	0.9663874492580029	0.07336638764864992	90
+Ambiguous Glutamatergic	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607160218610894	0.059249925065626444	90
 Ambiguous Glutamatergic	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9607160218610894	0.059249925065626444	90
+Ambiguous Glutamatergic	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693446226510335	0.06794200888113425	90
 Ambiguous Glutamatergic	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9693446226510335	0.06794200888113425	90
+Ambiguous Glutamatergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9653592877586834	0.07586734900121819	90
 Ambiguous Glutamatergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9653592877586834	0.07586734900121819	90
+Ambiguous Glutamatergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9668029527225449	0.0762714016175366	90
 Ambiguous Glutamatergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9668029527225449	0.0762714016175366	90
+Ambiguous Glutamatergic	scvi	0.1	whole cortex	class	0.9664923056691563	0.07309105400309138	90
 Ambiguous Glutamatergic	scvi	0.1	whole cortex	subclass	0.9664923056691563	0.07309105400309138	90
+Ambiguous Glutamatergic	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607160218610894	0.05924992506562645	90
 Ambiguous Glutamatergic	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9607160218610894	0.05924992506562645	90
+Ambiguous Glutamatergic	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693446226510335	0.06794200888113426	90
 Ambiguous Glutamatergic	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9693446226510335	0.06794200888113426	90
+Ambiguous Glutamatergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9620751363008903	0.07136811398013558	90
 Ambiguous Glutamatergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9620751363008903	0.07136811398013558	90
+Ambiguous Glutamatergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.959746760920831	0.06792241630023743	90
 Ambiguous Glutamatergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.959746760920831	0.06792241630023743	90
+Ambiguous Glutamatergic	scvi	0.15	whole cortex	class	0.9583577496219241	0.0671976896971902	90
 Ambiguous Glutamatergic	scvi	0.15	whole cortex	subclass	0.9583577496219241	0.0671976896971902	90
+Ambiguous Glutamatergic	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607127287939132	0.05925103425536533	90
 Ambiguous Glutamatergic	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9607127287939132	0.05925103425536533	90
+Ambiguous Glutamatergic	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693490243253935	0.0678719604120708	90
 Ambiguous Glutamatergic	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9693490243253935	0.0678719604120708	90
+Ambiguous Glutamatergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9283363273183648	0.07098379291434843	90
 Ambiguous Glutamatergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9283363273183648	0.07098379291434843	90
+Ambiguous Glutamatergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9041837232663795	0.05479821193526182	90
 Ambiguous Glutamatergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9041837232663795	0.05479821193526182	90
+Ambiguous Glutamatergic	scvi	0.2	whole cortex	class	0.8886496290937972	0.07785336165465391	90
 Ambiguous Glutamatergic	scvi	0.2	whole cortex	subclass	0.8886496290937972	0.07785336165465391	90
+Ambiguous Glutamatergic	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9606807284067127	0.05918646477259507	90
 Ambiguous Glutamatergic	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9606807284067127	0.05918646477259507	90
+Ambiguous Glutamatergic	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693199010873568	0.06778793834726614	90
 Ambiguous Glutamatergic	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9693199010873568	0.06778793834726614	90
+Ambiguous Glutamatergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.847451376312684	0.09608714625540891	90
 Ambiguous Glutamatergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.847451376312684	0.09608714625540891	90
+Ambiguous Glutamatergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7734537471140966	0.09860019553549655	90
 Ambiguous Glutamatergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7734537471140966	0.09860019553549655	90
+Ambiguous Glutamatergic	scvi	0.25	whole cortex	class	0.736963503460991	0.11908028174220721	90
 Ambiguous Glutamatergic	scvi	0.25	whole cortex	subclass	0.736963503460991	0.11908028174220721	90
+Ambiguous Glutamatergic	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9348385447715272	0.0976211002731272	90
 Ambiguous Glutamatergic	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9348385447715272	0.0976211002731272	90
+Ambiguous Glutamatergic	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9668565519395135	0.06281369111231104	90
 Ambiguous Glutamatergic	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9668565519395135	0.06281369111231104	90
+Ambiguous Glutamatergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.2615051747064964	0.16729355219048045	90
 Ambiguous Glutamatergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.2615051747064964	0.16729355219048045	90
+Ambiguous Glutamatergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.14433428671339432	0.12871187424108602	90
 Ambiguous Glutamatergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.14433428671339432	0.12871187424108602	90
+Ambiguous Glutamatergic	scvi	0.5	whole cortex	class	0.1454949083986288	0.1499809798081117	90
 Ambiguous Glutamatergic	scvi	0.5	whole cortex	subclass	0.1454949083986288	0.1499809798081117	90
+Ambiguous Glutamatergic	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6999765117252896	0.3154401684390307	90
 Ambiguous Glutamatergic	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.6999765117252896	0.3154401684390307	90
+Ambiguous Glutamatergic	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7939748178735145	0.155033401560574	90
 Ambiguous Glutamatergic	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7939748178735145	0.155033401560574	90
+Ambiguous Glutamatergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.03778337962938484	0.06497299664123313	90
 Ambiguous Glutamatergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.03778337962938484	0.06497299664123313	90
+Ambiguous Glutamatergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.005737362439855049	0.016595122777606587	90
 Ambiguous Glutamatergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.005737362439855049	0.016595122777606587	90
+Ambiguous Glutamatergic	scvi	0.75	whole cortex	class	0.020130132935184588	0.0425397172599446	90
 Ambiguous Glutamatergic	scvi	0.75	whole cortex	subclass	0.020130132935184588	0.0425397172599446	90
+Ambiguous Glutamatergic	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.03362051013187769	90
 Ambiguous Glutamatergic	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9852057433559515	0.03362051013187769	90
+Ambiguous Glutamatergic	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.06101911844771102	90
 Ambiguous Glutamatergic	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9746084738794131	0.06101911844771102	90
+Ambiguous Glutamatergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9679148654263013	0.07819099795084711	90
 Ambiguous Glutamatergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9679148654263013	0.07819099795084711	90
+Ambiguous Glutamatergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791652831785729	0.05222130343726516	90
 Ambiguous Glutamatergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9791652831785729	0.05222130343726516	90
+Ambiguous Glutamatergic	seurat	0.0	whole cortex	class	0.9497424440262867	0.10717468987939767	90
 Ambiguous Glutamatergic	seurat	0.0	whole cortex	subclass	0.9497424440262867	0.10717468987939767	90
+Ambiguous Glutamatergic	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.03362051013187772	90
 Ambiguous Glutamatergic	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9852057433559515	0.03362051013187772	90
+Ambiguous Glutamatergic	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.06101911844771104	90
 Ambiguous Glutamatergic	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9746084738794131	0.06101911844771104	90
+Ambiguous Glutamatergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9679148654263013	0.07819099795084712	90
 Ambiguous Glutamatergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9679148654263013	0.07819099795084712	90
+Ambiguous Glutamatergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791652831785729	0.052221303437265165	90
 Ambiguous Glutamatergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9791652831785729	0.052221303437265165	90
+Ambiguous Glutamatergic	seurat	0.05	whole cortex	class	0.9497424440262867	0.10717468987939766	90
 Ambiguous Glutamatergic	seurat	0.05	whole cortex	subclass	0.9497424440262867	0.10717468987939766	90
+Ambiguous Glutamatergic	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.03362051013187773	90
 Ambiguous Glutamatergic	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9852057433559515	0.03362051013187773	90
+Ambiguous Glutamatergic	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.061019118447711025	90
 Ambiguous Glutamatergic	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9746084738794131	0.061019118447711025	90
+Ambiguous Glutamatergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9679148654263013	0.07819099795084712	90
 Ambiguous Glutamatergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9679148654263013	0.07819099795084712	90
+Ambiguous Glutamatergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791652831785729	0.05222130343726515	90
 Ambiguous Glutamatergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9791652831785729	0.05222130343726515	90
+Ambiguous Glutamatergic	seurat	0.1	whole cortex	class	0.9497424440262867	0.1071746898793977	90
 Ambiguous Glutamatergic	seurat	0.1	whole cortex	subclass	0.9497424440262867	0.1071746898793977	90
+Ambiguous Glutamatergic	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.0336205101318777	90
 Ambiguous Glutamatergic	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9852057433559515	0.0336205101318777	90
+Ambiguous Glutamatergic	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.06101911844771101	90
 Ambiguous Glutamatergic	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9746084738794131	0.06101911844771101	90
+Ambiguous Glutamatergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9679148654263013	0.07819099795084712	90
 Ambiguous Glutamatergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9679148654263013	0.07819099795084712	90
+Ambiguous Glutamatergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791652831785729	0.05222130343726517	90
 Ambiguous Glutamatergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9791652831785729	0.05222130343726517	90
+Ambiguous Glutamatergic	seurat	0.15	whole cortex	class	0.9497392044619256	0.10712172896105782	90
 Ambiguous Glutamatergic	seurat	0.15	whole cortex	subclass	0.9497392044619256	0.10712172896105782	90
+Ambiguous Glutamatergic	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.033620510131877716	90
 Ambiguous Glutamatergic	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9852057433559515	0.033620510131877716	90
+Ambiguous Glutamatergic	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.06101911844771104	90
 Ambiguous Glutamatergic	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9746084738794131	0.06101911844771104	90
+Ambiguous Glutamatergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9676470015669231	0.07916549092648648	90
 Ambiguous Glutamatergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9676470015669231	0.07916549092648648	90
+Ambiguous Glutamatergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791791462741661	0.05222836528002131	90
 Ambiguous Glutamatergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9791791462741661	0.05222836528002131	90
+Ambiguous Glutamatergic	seurat	0.2	whole cortex	class	0.949204492566253	0.10761537712090717	90
 Ambiguous Glutamatergic	seurat	0.2	whole cortex	subclass	0.949204492566253	0.10761537712090717	90
+Ambiguous Glutamatergic	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.03362051013187772	90
 Ambiguous Glutamatergic	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9852057433559515	0.03362051013187772	90
+Ambiguous Glutamatergic	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9745892096683794	0.06107893802041657	90
 Ambiguous Glutamatergic	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9745892096683794	0.06107893802041657	90
+Ambiguous Glutamatergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9663531795178366	0.08276473524365685	90
 Ambiguous Glutamatergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9663531795178366	0.08276473524365685	90
+Ambiguous Glutamatergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9788343141177609	0.05304233330360299	90
 Ambiguous Glutamatergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9788343141177609	0.05304233330360299	90
+Ambiguous Glutamatergic	seurat	0.25	whole cortex	class	0.9454641248615314	0.10958303822556421	90
 Ambiguous Glutamatergic	seurat	0.25	whole cortex	subclass	0.9454641248615314	0.10958303822556421	90
+Ambiguous Glutamatergic	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852160781936192	0.033429156344781386	90
 Ambiguous Glutamatergic	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9852160781936192	0.033429156344781386	90
+Ambiguous Glutamatergic	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9705686062881634	0.07281115567895081	90
 Ambiguous Glutamatergic	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9705686062881634	0.07281115567895081	90
+Ambiguous Glutamatergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9030829437136467	0.17074151930766626	90
 Ambiguous Glutamatergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9030829437136467	0.17074151930766626	90
+Ambiguous Glutamatergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9124616155337623	0.1447496668359441	90
 Ambiguous Glutamatergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9124616155337623	0.1447496668359441	90
+Ambiguous Glutamatergic	seurat	0.5	whole cortex	class	0.7683625772774886	0.16857311683158735	90
 Ambiguous Glutamatergic	seurat	0.5	whole cortex	subclass	0.7683625772774886	0.16857311683158735	90
+Ambiguous Glutamatergic	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9825652720060764	0.03330412160499732	90
 Ambiguous Glutamatergic	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9825652720060764	0.03330412160499732	90
+Ambiguous Glutamatergic	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9482691391001051	0.11374597964219658	90
 Ambiguous Glutamatergic	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9482691391001051	0.11374597964219658	90
+Ambiguous Glutamatergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7499738300590816	0.2490542035056549	90
 Ambiguous Glutamatergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.7499738300590816	0.2490542035056549	90
+Ambiguous Glutamatergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7518690768778055	0.24791028988517383	90
 Ambiguous Glutamatergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.7518690768778055	0.24791028988517383	90
+Ambiguous Glutamatergic	seurat	0.75	whole cortex	class	0.4609432404779698	0.214059522579777	90
 Ambiguous Glutamatergic	seurat	0.75	whole cortex	subclass	0.4609432404779698	0.214059522579777	90
+Ambiguous Neuron	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326876	159
+Ambiguous Neuron	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326876	159
 Ambiguous Neuron	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9922949443581068	0.013861647651326876	159
+Ambiguous Neuron	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9935566237852295	0.006484495772974156	159
+Ambiguous Neuron	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9935566237852295	0.006484495772974156	159
 Ambiguous Neuron	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9935566237852295	0.006484495772974156	159
+Ambiguous Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9913254506054244	0.009215667062585652	159
+Ambiguous Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9913254506054244	0.009215667062585652	159
 Ambiguous Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9913254506054244	0.009215667062585652	159
+Ambiguous Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9915168067240346	0.009004541687173868	159
+Ambiguous Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9915168067240346	0.009004541687173868	159
 Ambiguous Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9915168067240346	0.009004541687173868	159
+Ambiguous Neuron	scvi	0.0	whole cortex	class	0.9820851240195752	0.01822094616327292	159
+Ambiguous Neuron	scvi	0.0	whole cortex	family	0.9820851240195752	0.01822094616327292	159
 Ambiguous Neuron	scvi	0.0	whole cortex	subclass	0.9820851240195752	0.01822094616327292	159
+Ambiguous Neuron	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326837	159
+Ambiguous Neuron	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326837	159
 Ambiguous Neuron	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9922949443581068	0.013861647651326837	159
+Ambiguous Neuron	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9935566237852295	0.0064844957729741585	159
+Ambiguous Neuron	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9935566237852295	0.0064844957729741585	159
 Ambiguous Neuron	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9935566237852295	0.0064844957729741585	159
+Ambiguous Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9913254506054244	0.009215667062585673	159
+Ambiguous Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9913254506054244	0.009215667062585673	159
 Ambiguous Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9913254506054244	0.009215667062585673	159
+Ambiguous Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9915168067240346	0.00900454168717387	159
+Ambiguous Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9915168067240346	0.00900454168717387	159
 Ambiguous Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9915168067240346	0.00900454168717387	159
+Ambiguous Neuron	scvi	0.05	whole cortex	class	0.9820851240195752	0.018220946163272807	159
+Ambiguous Neuron	scvi	0.05	whole cortex	family	0.9820851240195752	0.018220946163272807	159
 Ambiguous Neuron	scvi	0.05	whole cortex	subclass	0.9820851240195752	0.018220946163272807	159
+Ambiguous Neuron	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326811	159
+Ambiguous Neuron	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326811	159
 Ambiguous Neuron	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9922949443581068	0.013861647651326811	159
+Ambiguous Neuron	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9935566237852295	0.0064844957729741515	159
+Ambiguous Neuron	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9935566237852295	0.0064844957729741515	159
 Ambiguous Neuron	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9935566237852295	0.0064844957729741515	159
+Ambiguous Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9905011440494256	0.009711017740518335	159
+Ambiguous Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9905011440494256	0.009711017740518335	159
 Ambiguous Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9905011440494256	0.009711017740518335	159
+Ambiguous Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9909550422222966	0.00925527597184039	159
+Ambiguous Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9909550422222966	0.00925527597184039	159
 Ambiguous Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9909550422222966	0.00925527597184039	159
+Ambiguous Neuron	scvi	0.1	whole cortex	class	0.9798990687041549	0.018710158064609267	159
+Ambiguous Neuron	scvi	0.1	whole cortex	family	0.9798990687041549	0.018710158064609267	159
 Ambiguous Neuron	scvi	0.1	whole cortex	subclass	0.9798990687041549	0.018710158064609267	159
+Ambiguous Neuron	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326843	159
+Ambiguous Neuron	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326843	159
 Ambiguous Neuron	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9922949443581068	0.013861647651326843	159
+Ambiguous Neuron	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9935566237852295	0.006484495772974148	159
+Ambiguous Neuron	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9935566237852295	0.006484495772974148	159
 Ambiguous Neuron	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9935566237852295	0.006484495772974148	159
+Ambiguous Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9300595554163489	0.03989384960381651	159
+Ambiguous Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9300595554163489	0.03989384960381651	159
 Ambiguous Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9300595554163489	0.03989384960381651	159
+Ambiguous Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9165963223653226	0.04183204820428024	159
+Ambiguous Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9165963223653226	0.04183204820428024	159
 Ambiguous Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9165963223653226	0.04183204820428024	159
+Ambiguous Neuron	scvi	0.15	whole cortex	class	0.8744451870707106	0.04498875659145598	159
+Ambiguous Neuron	scvi	0.15	whole cortex	family	0.8744451870707106	0.04498875659145598	159
 Ambiguous Neuron	scvi	0.15	whole cortex	subclass	0.8744451870707106	0.04498875659145598	159
+Ambiguous Neuron	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326798	159
+Ambiguous Neuron	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326798	159
 Ambiguous Neuron	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9922949443581068	0.013861647651326798	159
+Ambiguous Neuron	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9932982566357937	0.006619019210769131	159
+Ambiguous Neuron	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9932982566357937	0.006619019210769131	159
 Ambiguous Neuron	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9932982566357937	0.006619019210769131	159
+Ambiguous Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.714457083371648	0.11444247811938964	159
+Ambiguous Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.714457083371648	0.11444247811938964	159
 Ambiguous Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.714457083371648	0.11444247811938964	159
+Ambiguous Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6434412382842809	0.12622791888565463	159
+Ambiguous Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6434412382842809	0.12622791888565463	159
 Ambiguous Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.6434412382842809	0.12622791888565463	159
+Ambiguous Neuron	scvi	0.2	whole cortex	class	0.5928317178048835	0.10485150417912725	159
+Ambiguous Neuron	scvi	0.2	whole cortex	family	0.5928317178048835	0.10485150417912725	159
 Ambiguous Neuron	scvi	0.2	whole cortex	subclass	0.5928317178048835	0.10485150417912725	159
+Ambiguous Neuron	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.991280086815432	0.015375348725682827	159
+Ambiguous Neuron	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.991280086815432	0.015375348725682827	159
 Ambiguous Neuron	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.991280086815432	0.015375348725682827	159
+Ambiguous Neuron	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.99158250693873	0.008024020977365067	159
+Ambiguous Neuron	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.99158250693873	0.008024020977365067	159
 Ambiguous Neuron	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.99158250693873	0.008024020977365067	159
+Ambiguous Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.4515603156338381	0.14122015786674322	159
+Ambiguous Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.4515603156338381	0.14122015786674322	159
 Ambiguous Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.4515603156338381	0.14122015786674322	159
+Ambiguous Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.3684405435571802	0.1241528590221098	159
+Ambiguous Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.3684405435571802	0.1241528590221098	159
 Ambiguous Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.3684405435571802	0.1241528590221098	159
+Ambiguous Neuron	scvi	0.25	whole cortex	class	0.3237488667887901	0.11978817350349293	159
+Ambiguous Neuron	scvi	0.25	whole cortex	family	0.3237488667887901	0.11978817350349293	159
 Ambiguous Neuron	scvi	0.25	whole cortex	subclass	0.3237488667887901	0.11978817350349293	159
+Ambiguous Neuron	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8599569645744576	0.09919802960966001	159
+Ambiguous Neuron	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8599569645744576	0.09919802960966001	159
 Ambiguous Neuron	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.8599569645744576	0.09919802960966001	159
+Ambiguous Neuron	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9064898313337921	0.048207828461215005	159
+Ambiguous Neuron	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9064898313337921	0.048207828461215005	159
 Ambiguous Neuron	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9064898313337921	0.048207828461215005	159
+Ambiguous Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.026593472222954363	0.02738353572996422	159
+Ambiguous Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.026593472222954363	0.02738353572996422	159
 Ambiguous Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.026593472222954363	0.02738353572996422	159
+Ambiguous Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.02136446915399504	0.023963715993038388	159
+Ambiguous Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.02136446915399504	0.023963715993038388	159
 Ambiguous Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.02136446915399504	0.023963715993038388	159
+Ambiguous Neuron	scvi	0.5	whole cortex	class	0.024958363914975294	0.027819498046288114	159
+Ambiguous Neuron	scvi	0.5	whole cortex	family	0.024958363914975294	0.027819498046288114	159
 Ambiguous Neuron	scvi	0.5	whole cortex	subclass	0.024958363914975294	0.027819498046288114	159
+Ambiguous Neuron	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.4008802566623504	0.23218542379247864	159
+Ambiguous Neuron	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.4008802566623504	0.23218542379247864	159
 Ambiguous Neuron	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.4008802566623504	0.23218542379247864	159
+Ambiguous Neuron	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.4867774776651676	0.21906388678207284	159
+Ambiguous Neuron	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.4867774776651676	0.21906388678207284	159
 Ambiguous Neuron	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.4867774776651676	0.21906388678207284	159
+Ambiguous Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.0032463338551642286	0.0069189929015670264	159
+Ambiguous Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.0032463338551642286	0.0069189929015670264	159
 Ambiguous Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.0032463338551642286	0.0069189929015670264	159
+Ambiguous Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.0018886695556176421	0.0051043745305087386	159
+Ambiguous Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.0018886695556176421	0.0051043745305087386	159
 Ambiguous Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.0018886695556176421	0.0051043745305087386	159
+Ambiguous Neuron	scvi	0.75	whole cortex	class	0.002694598588823893	0.0061119281381068905	159
+Ambiguous Neuron	scvi	0.75	whole cortex	family	0.002694598588823893	0.0061119281381068905	159
 Ambiguous Neuron	scvi	0.75	whole cortex	subclass	0.002694598588823893	0.0061119281381068905	159
+Ambiguous Neuron	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730102	159
+Ambiguous Neuron	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730102	159
 Ambiguous Neuron	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9545084101236606	0.11067498288730102	159
+Ambiguous Neuron	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.1864835052905703	159
+Ambiguous Neuron	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.1864835052905703	159
 Ambiguous Neuron	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9326128769334548	0.1864835052905703	159
+Ambiguous Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.910196972570498	0.23751565370778388	159
+Ambiguous Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.910196972570498	0.23751565370778388	159
 Ambiguous Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.910196972570498	0.23751565370778388	159
+Ambiguous Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9754895610050406	0.06373179922312056	159
+Ambiguous Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9754895610050406	0.06373179922312056	159
 Ambiguous Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9754895610050406	0.06373179922312056	159
+Ambiguous Neuron	seurat	0.0	whole cortex	class	0.8661127470447639	0.19535417897519997	159
+Ambiguous Neuron	seurat	0.0	whole cortex	family	0.8661127470447639	0.19535417897519997	159
 Ambiguous Neuron	seurat	0.0	whole cortex	subclass	0.8661127470447639	0.19535417897519997	159
+Ambiguous Neuron	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730104	159
+Ambiguous Neuron	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730104	159
 Ambiguous Neuron	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9545084101236606	0.11067498288730104	159
+Ambiguous Neuron	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.18648350529057028	159
+Ambiguous Neuron	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.18648350529057028	159
 Ambiguous Neuron	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9326128769334548	0.18648350529057028	159
+Ambiguous Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.910196972570498	0.23751565370778396	159
+Ambiguous Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.910196972570498	0.23751565370778396	159
 Ambiguous Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.910196972570498	0.23751565370778396	159
+Ambiguous Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9754895610050406	0.06373179922312058	159
+Ambiguous Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9754895610050406	0.06373179922312058	159
 Ambiguous Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9754895610050406	0.06373179922312058	159
+Ambiguous Neuron	seurat	0.05	whole cortex	class	0.8661127470447639	0.19535417897520005	159
+Ambiguous Neuron	seurat	0.05	whole cortex	family	0.8661127470447639	0.19535417897520005	159
 Ambiguous Neuron	seurat	0.05	whole cortex	subclass	0.8661127470447639	0.19535417897520005	159
+Ambiguous Neuron	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730103	159
+Ambiguous Neuron	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730103	159
 Ambiguous Neuron	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9545084101236606	0.11067498288730103	159
+Ambiguous Neuron	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.18648350529057028	159
+Ambiguous Neuron	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.18648350529057028	159
 Ambiguous Neuron	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9326128769334548	0.18648350529057028	159
+Ambiguous Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.910196972570498	0.237515653707784	159
+Ambiguous Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.910196972570498	0.237515653707784	159
 Ambiguous Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.910196972570498	0.237515653707784	159
+Ambiguous Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9754895610050406	0.06373179922312058	159
+Ambiguous Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9754895610050406	0.06373179922312058	159
 Ambiguous Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9754895610050406	0.06373179922312058	159
+Ambiguous Neuron	seurat	0.1	whole cortex	class	0.8661127470447639	0.19535417897520005	159
+Ambiguous Neuron	seurat	0.1	whole cortex	family	0.8661127470447639	0.19535417897520005	159
 Ambiguous Neuron	seurat	0.1	whole cortex	subclass	0.8661127470447639	0.19535417897520005	159
+Ambiguous Neuron	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730104	159
+Ambiguous Neuron	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730104	159
 Ambiguous Neuron	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9545084101236606	0.11067498288730104	159
+Ambiguous Neuron	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.18648350529057023	159
+Ambiguous Neuron	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.18648350529057023	159
 Ambiguous Neuron	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9326128769334548	0.18648350529057023	159
+Ambiguous Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9101949429741375	0.23751541205420787	159
+Ambiguous Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9101949429741375	0.23751541205420787	159
 Ambiguous Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9101949429741375	0.23751541205420787	159
+Ambiguous Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.975446384161546	0.06373765692010976	159
+Ambiguous Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.975446384161546	0.06373765692010976	159
 Ambiguous Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.975446384161546	0.06373765692010976	159
+Ambiguous Neuron	seurat	0.15	whole cortex	class	0.8659027955515431	0.195287434538636	159
+Ambiguous Neuron	seurat	0.15	whole cortex	family	0.8659027955515431	0.195287434538636	159
 Ambiguous Neuron	seurat	0.15	whole cortex	subclass	0.8659027955515431	0.195287434538636	159
+Ambiguous Neuron	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730104	159
+Ambiguous Neuron	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730104	159
 Ambiguous Neuron	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9545084101236606	0.11067498288730104	159
+Ambiguous Neuron	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.1864835052905702	159
+Ambiguous Neuron	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.1864835052905702	159
 Ambiguous Neuron	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9326128769334548	0.1864835052905702	159
+Ambiguous Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9087096459164448	0.23720353501175181	159
+Ambiguous Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9087096459164448	0.23720353501175181	159
 Ambiguous Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9087096459164448	0.23720353501175181	159
+Ambiguous Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9739370236096673	0.06422263846686149	159
+Ambiguous Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9739370236096673	0.06422263846686149	159
 Ambiguous Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9739370236096673	0.06422263846686149	159
+Ambiguous Neuron	seurat	0.2	whole cortex	class	0.8607249845187566	0.1952011881075013	159
+Ambiguous Neuron	seurat	0.2	whole cortex	family	0.8607249845187566	0.1952011881075013	159
 Ambiguous Neuron	seurat	0.2	whole cortex	subclass	0.8607249845187566	0.1952011881075013	159
+Ambiguous Neuron	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.110674982887301	159
+Ambiguous Neuron	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.110674982887301	159
 Ambiguous Neuron	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9545084101236606	0.110674982887301	159
+Ambiguous Neuron	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326057243517226	0.18648732141268762	159
+Ambiguous Neuron	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326057243517226	0.18648732141268762	159
 Ambiguous Neuron	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9326057243517226	0.18648732141268762	159
+Ambiguous Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8991007428024563	0.23619889619472087	159
+Ambiguous Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8991007428024563	0.23619889619472087	159
 Ambiguous Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.8991007428024563	0.23619889619472087	159
+Ambiguous Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9631357760837114	0.06994473927339716	159
+Ambiguous Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9631357760837114	0.06994473927339716	159
 Ambiguous Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.9631357760837114	0.06994473927339716	159
+Ambiguous Neuron	seurat	0.25	whole cortex	class	0.836629718112352	0.19309514745243117	159
+Ambiguous Neuron	seurat	0.25	whole cortex	family	0.836629718112352	0.19309514745243117	159
 Ambiguous Neuron	seurat	0.25	whole cortex	subclass	0.836629718112352	0.19309514745243117	159
+Ambiguous Neuron	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9496930533227201	0.11671378798776166	159
+Ambiguous Neuron	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9496930533227201	0.11671378798776166	159
 Ambiguous Neuron	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.9496930533227201	0.11671378798776166	159
+Ambiguous Neuron	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9218722274608129	0.20002011825969854	159
+Ambiguous Neuron	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9218722274608129	0.20002011825969854	159
 Ambiguous Neuron	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9218722274608129	0.20002011825969854	159
+Ambiguous Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6703870225824466	0.23021147299201353	159
+Ambiguous Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.6703870225824466	0.23021147299201353	159
 Ambiguous Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6703870225824466	0.23021147299201353	159
+Ambiguous Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6835485926167205	0.18173274202527345	159
+Ambiguous Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6835485926167205	0.18173274202527345	159
 Ambiguous Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.6835485926167205	0.18173274202527345	159
+Ambiguous Neuron	seurat	0.5	whole cortex	class	0.5018520178015826	0.16637771459277775	159
+Ambiguous Neuron	seurat	0.5	whole cortex	family	0.5018520178015826	0.16637771459277775	159
 Ambiguous Neuron	seurat	0.5	whole cortex	subclass	0.5018520178015826	0.16637771459277775	159
+Ambiguous Neuron	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8313632491337274	0.1564207617166468	159
+Ambiguous Neuron	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8313632491337274	0.1564207617166468	159
 Ambiguous Neuron	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.8313632491337274	0.1564207617166468	159
+Ambiguous Neuron	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7453476061053307	0.2282744656146445	159
+Ambiguous Neuron	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7453476061053307	0.2282744656146445	159
 Ambiguous Neuron	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7453476061053307	0.2282744656146445	159
+Ambiguous Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.37487070840630216	0.19045709211482711	159
+Ambiguous Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.37487070840630216	0.19045709211482711	159
 Ambiguous Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.37487070840630216	0.19045709211482711	159
+Ambiguous Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.31243162665985363	0.19325979326821915	159
+Ambiguous Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.31243162665985363	0.19325979326821915	159
 Ambiguous Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.31243162665985363	0.19325979326821915	159
+Ambiguous Neuron	seurat	0.75	whole cortex	class	0.19209965442665033	0.11376803664976563	159
+Ambiguous Neuron	seurat	0.75	whole cortex	family	0.19209965442665033	0.11376803664976563	159
 Ambiguous Neuron	seurat	0.75	whole cortex	subclass	0.19209965442665033	0.11376803664976563	159
 Astrocyte	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.7653205062155974	0.1627090538957495	225
 Astrocyte	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.9365927108477891	0.04979374674900951	225
@@ -639,165 +959,85 @@ Endothelial	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mou
 Endothelial	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.9155357021774807	0.07061354287667793	207
 Endothelial	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5366014717062042	0.24076988714998251	207
 Endothelial	seurat	0.75	whole cortex	subclass	0.8828913172466966	0.10409614120205299	207
-GABAergic	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.682402477286994	0.37256779814793967	114
 GABAergic	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.6371684523348353	0.20735386442283701	114
-GABAergic	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7162567756261554	0.3894903221675791	114
 GABAergic	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7701001476552372	0.19822411147602834	114
-GABAergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6942052673993405	0.3880852608577726	114
 GABAergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.7655160014884489	0.24986457743958237	114
-GABAergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7087548446301681	0.3967214178947303	114
 GABAergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6727668702720656	0.2306513435548676	114
-GABAergic	scvi	0.0	whole cortex	class	0.6971275092817562	0.3867542326625456	114
 GABAergic	scvi	0.0	whole cortex	family	0.77655495075737	0.2402510697884897	114
-GABAergic	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.682402477286994	0.37256779814793956	114
 GABAergic	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.6371684523348353	0.2073538644228371	114
-GABAergic	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7162567756261554	0.3894903221675791	114
 GABAergic	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7701001476552372	0.19822411147602836	114
-GABAergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6942052673993405	0.3880852608577726	114
 GABAergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.7655160014884489	0.24986457743958243	114
-GABAergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7087548446301681	0.3967214178947303	114
 GABAergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6727668702720656	0.23065134355486763	114
-GABAergic	scvi	0.05	whole cortex	class	0.6971275092817562	0.3867542326625457	114
 GABAergic	scvi	0.05	whole cortex	family	0.77655495075737	0.2402510697884897	114
-GABAergic	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.682402477286994	0.37256779814793967	114
 GABAergic	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.6371684523348353	0.20735386442283718	114
-GABAergic	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7162567756261554	0.3894903221675791	114
 GABAergic	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7701001476552372	0.19822411147602825	114
-GABAergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6941908014504938	0.38809630572812304	114
 GABAergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.7654891286802762	0.24989847177271662	114
-GABAergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.708759542340501	0.396724751380159	114
 GABAergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.672821838272695	0.23070104158210705	114
-GABAergic	scvi	0.1	whole cortex	class	0.6969046153907289	0.3868342654404921	114
 GABAergic	scvi	0.1	whole cortex	family	0.7763444246134279	0.24055521270101585	114
-GABAergic	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.682402477286994	0.37256779814793967	114
 GABAergic	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.6371684523348353	0.20735386442283704	114
-GABAergic	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7162567756261554	0.38949032216757906	114
 GABAergic	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7701163558181867	0.19823580388881604	114
-GABAergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.689463236404923	0.3890811274509848	114
 GABAergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.7573839421274167	0.259693096326283	114
-GABAergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.703980029071098	0.3964707462133113	114
 GABAergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6695568229181	0.2404132220584941	114
-GABAergic	scvi	0.15	whole cortex	class	0.6798479018143361	0.3842651242652683	114
 GABAergic	scvi	0.15	whole cortex	family	0.755886454203344	0.25301812168936694	114
-GABAergic	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6824205174245057	0.3725626197866424	114
 GABAergic	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.6372258032670941	0.20735954364478182	114
-GABAergic	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7163134812312385	0.38952371261305013	114
 GABAergic	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.77088365708214	0.19834816690585683	114
-GABAergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6536368626012051	0.3838234808950232	114
 GABAergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.703724047800212	0.296847035636037	114
-GABAergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6867289009418921	0.39302965052315464	114
 GABAergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6796977970606068	0.26950794603821593	114
-GABAergic	scvi	0.2	whole cortex	class	0.6225429919372082	0.37404016876014334	114
 GABAergic	scvi	0.2	whole cortex	family	0.6707852125401313	0.29796243010058954	114
-GABAergic	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6827382022661569	0.3725082639296286	114
 GABAergic	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.6404059779398567	0.20786650226810507	114
-GABAergic	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.71673512246157	0.3897528715181214	114
 GABAergic	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7807282158115398	0.19785176938736532	114
-GABAergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.5944227778658489	0.3735280848103717	114
 GABAergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.6204171827239893	0.33230044463960434	114
-GABAergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6498095135541465	0.38159618579106025	114
 GABAergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6614437749740927	0.29682968824621864	114
-GABAergic	scvi	0.25	whole cortex	class	0.5604474341332584	0.36228611756909185	114
 GABAergic	scvi	0.25	whole cortex	family	0.5767210270428813	0.3371393350498086	114
-GABAergic	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7068913492292594	0.37595926213362624	114
 GABAergic	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8040316186521985	0.1693939596548885	114
-GABAergic	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7019033954889926	0.3863558304573999	114
 GABAergic	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7948311722705415	0.226226818026259	114
-GABAergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.3370403007297386	0.3003688158125788	114
 GABAergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.33706074811860703	0.30034574745159714	114
-GABAergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.4312546218200911	0.30834644447240384	114
 GABAergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.43417993152979345	0.3041520276712121	114
-GABAergic	scvi	0.5	whole cortex	class	0.1670411225035414	0.2346027206821686	114
 GABAergic	scvi	0.5	whole cortex	family	0.1670971648078404	0.23456271298164594	114
-GABAergic	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.48357014111025604	0.36676037904751435	114
 GABAergic	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.5851910303655026	0.28002811497845953	114
-GABAergic	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.35232250679556787	0.3349250783836478	114
 GABAergic	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.37420479676339746	0.32003202921788276	114
-GABAergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.10959287547110047	0.20209966049805136	114
 GABAergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.10959287547110047	0.20209966049805136	114
-GABAergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.15751483819916506	0.16976386015135478	114
 GABAergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.15756794195656088	0.16971445607249827	114
-GABAergic	scvi	0.75	whole cortex	class	0.02150946448768606	0.049477918753514705	114
 GABAergic	scvi	0.75	whole cortex	family	0.02150946448768606	0.049477918753514705	114
-GABAergic	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.29812101372068367	114
 GABAergic	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9114819352002135	0.10053584880901018	114
-GABAergic	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.30639639321198125	114
 GABAergic	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9113156431857393	0.09854424136238941	114
-GABAergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7591160676271228	0.35422457956298614	114
 GABAergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8857697491054453	0.1488521445815212	114
-GABAergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7670035611322017	0.3654604048840592	114
 GABAergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.864567557196304	0.20112276379427488	114
-GABAergic	seurat	0.0	whole cortex	class	0.6907404096905461	0.3751746102413459	114
 GABAergic	seurat	0.0	whole cortex	family	0.8092209313848776	0.1955154770399531	114
-GABAergic	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206837	114
 GABAergic	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9114819352002135	0.10053584880901015	114
-GABAergic	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.30639639321198103	114
 GABAergic	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9113156431857393	0.09854424136238946	114
-GABAergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7591160676271228	0.35422457956298614	114
 GABAergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8857697491054453	0.14885214458152118	114
-GABAergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7670035611322017	0.3654604048840592	114
 GABAergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.864567557196304	0.20112276379427488	114
-GABAergic	seurat	0.05	whole cortex	class	0.6907404096905461	0.37517461024134596	114
 GABAergic	seurat	0.05	whole cortex	family	0.8092209313848776	0.195515477039953	114
-GABAergic	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206836	114
 GABAergic	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9114819352002135	0.10053584880901015	114
-GABAergic	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.30639639321198125	114
 GABAergic	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9113156431857393	0.09854424136238947	114
-GABAergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7591160676271228	0.3542245795629862	114
 GABAergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8857697491054453	0.1488521445815212	114
-GABAergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7670035611322017	0.3654604048840592	114
 GABAergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.864567557196304	0.20112276379427488	114
-GABAergic	seurat	0.1	whole cortex	class	0.6907404096905461	0.3751746102413459	114
 GABAergic	seurat	0.1	whole cortex	family	0.8092209313848776	0.19551547703995312	114
-GABAergic	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206836	114
 GABAergic	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9114819352002135	0.10053584880901018	114
-GABAergic	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.3063963932119812	114
 GABAergic	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9113156431857393	0.09854424136238947	114
-GABAergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7591160676271228	0.3542245795629862	114
 GABAergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8857697491054453	0.14885214458152116	114
-GABAergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7669518257672906	0.3655384544964176	114
 GABAergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8645522788635219	0.20114081443740184	114
-GABAergic	seurat	0.15	whole cortex	class	0.6907233870204964	0.3752230344751545	114
 GABAergic	seurat	0.15	whole cortex	family	0.8092039007139231	0.19558572557566392	114
-GABAergic	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206837	114
 GABAergic	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9114819352002135	0.10053584880901018	114
-GABAergic	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088163207891906	0.30639639321198114	114
 GABAergic	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9113156431857394	0.09854424136238946	114
-GABAergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7589488296573556	0.35441566194344154	114
 GABAergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8856538619477116	0.14896797435479417	114
-GABAergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7661839451610767	0.36622219676444484	114
 GABAergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8640740873072571	0.20149691638727596	114
-GABAergic	seurat	0.2	whole cortex	class	0.6897883486535134	0.37596708990193817	114
 GABAergic	seurat	0.2	whole cortex	family	0.8078302112542826	0.19788491058730132	114
-GABAergic	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8173238073261696	0.2981210137206838	114
 GABAergic	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9114819352002135	0.10053584880901022	114
-GABAergic	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8088030275521791	0.30640049249086115	114
 GABAergic	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9113021413303771	0.0985721645152814	114
-GABAergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7580604411668602	0.35549312026584023	114
 GABAergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8850631175186876	0.1498408882607901	114
-GABAergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7630131100789411	0.36940866735719036	114
 GABAergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8620889226134552	0.2032348250373982	114
-GABAergic	seurat	0.25	whole cortex	class	0.6845641590536012	0.37741549297117566	114
 GABAergic	seurat	0.25	whole cortex	family	0.8006740050227845	0.20450548162708493	114
-GABAergic	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8151381160979991	0.30188425606928065	114
 GABAergic	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.91095846637	0.10205231565536814	114
-GABAergic	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8029929685314717	0.3133514913543211	114
 GABAergic	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9086346406419606	0.10433269341734958	114
-GABAergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7207694274557748	0.3860625718535258	114
 GABAergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.842651588585331	0.20058297181302998	114
-GABAergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7239398104104506	0.3934911077271562	114
 GABAergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8085586469908989	0.25750601058515854	114
-GABAergic	seurat	0.5	whole cortex	class	0.5499492124133064	0.3759436292359346	114
 GABAergic	seurat	0.5	whole cortex	family	0.6215775480447739	0.295207792995292	114
-GABAergic	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7912854349066855	0.32837473836549563	114
 GABAergic	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8936881018845322	0.12986389430121378	114
-GABAergic	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7709045240983609	0.3501985857770219	114
 GABAergic	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8868513546274993	0.1428971454189841	114
-GABAergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.638784801011584	0.3943188151390865	114
 GABAergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.7149227944211293	0.2870545608015952	114
-GABAergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6444124300361898	0.3941671844728318	114
 GABAergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6902831045612353	0.32483468004705157	114
-GABAergic	seurat	0.75	whole cortex	class	0.26714054495259104	0.24976899471279876	114
 GABAergic	seurat	0.75	whole cortex	family	0.2951238053646117	0.23076053148094156	114
 Glia	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.7374382147257961	0.19684079770070256	237
 Glia	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.25459055634654393	0.30820466971961386	156
@@ -959,165 +1199,85 @@ Glia	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART
 Glia	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.2244139666331735	0.33968559422181516	156
 Glia	seurat	0.75	whole cortex	class	0.8406264521886471	0.10806646488556657	237
 Glia	seurat	0.75	whole cortex	subclass	0.3118947050577447	0.32490364927115417	156
-Glutamatergic	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607160218610894	0.05924992506562641	90
 Glutamatergic	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8344936864929674	0.24809200010654786	114
-Glutamatergic	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693446226510335	0.06794200888113423	90
 Glutamatergic	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8592571653856517	0.2406395758767859	114
-Glutamatergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9653450380811778	0.07593365081621167	90
 Glutamatergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8573871043577932	0.2487644574556474	114
-Glutamatergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9668215789127	0.07630178141127497	90
 Glutamatergic	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8477424119178729	0.25348026914657446	114
-Glutamatergic	scvi	0.0	whole cortex	class	0.9663874492580029	0.07336638764864993	90
 Glutamatergic	scvi	0.0	whole cortex	family	0.8618635750179054	0.24484384154692715	114
-Glutamatergic	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607160218610894	0.0592499250656264	90
 Glutamatergic	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8344936864929674	0.24809200010654783	114
-Glutamatergic	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693446226510335	0.06794200888113423	90
 Glutamatergic	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8592571653856517	0.2406395758767859	114
-Glutamatergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9653450380811778	0.07593365081621169	90
 Glutamatergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8573871043577932	0.2487644574556474	114
-Glutamatergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9668215789127	0.07630178141127497	90
 Glutamatergic	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8477424119178729	0.2534802691465745	114
-Glutamatergic	scvi	0.05	whole cortex	class	0.9663874492580029	0.07336638764864992	90
 Glutamatergic	scvi	0.05	whole cortex	family	0.8618635750179054	0.244843841546927	114
-Glutamatergic	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607160218610894	0.059249925065626444	90
 Glutamatergic	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8344936864929674	0.24809200010654783	114
-Glutamatergic	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693446226510335	0.06794200888113425	90
 Glutamatergic	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8592571653856517	0.24063957587678583	114
-Glutamatergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9653592877586834	0.07586734900121819	90
 Glutamatergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.857411986018681	0.2487388880051711	114
-Glutamatergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9668029527225449	0.0762714016175366	90
 Glutamatergic	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8478146187328869	0.2534416651607121	114
-Glutamatergic	scvi	0.1	whole cortex	class	0.9664923056691563	0.07309105400309138	90
 Glutamatergic	scvi	0.1	whole cortex	family	0.8621181898694201	0.24468231490643316	114
-Glutamatergic	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607160218610894	0.05924992506562645	90
 Glutamatergic	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8344936864929674	0.2480920001065478	114
-Glutamatergic	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693446226510335	0.06794200888113426	90
 Glutamatergic	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8592571653856517	0.24063957587678594	114
-Glutamatergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9620751363008903	0.07136811398013558	90
 Glutamatergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8544365643443386	0.2485405610128817	114
-Glutamatergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.959746760920831	0.06792241630023743	90
 Glutamatergic	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8457685967787889	0.24736869524163005	114
-Glutamatergic	scvi	0.15	whole cortex	class	0.9583577496219241	0.0671976896971902	90
 Glutamatergic	scvi	0.15	whole cortex	family	0.8575320106787293	0.23656329959073716	114
-Glutamatergic	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9607127287939132	0.05925103425536533	90
 Glutamatergic	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8344933388372419	0.24809217330132322	114
-Glutamatergic	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693490243253935	0.0678719604120708	90
 Glutamatergic	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8595592909207164	0.2407454683997213	114
-Glutamatergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9283363273183648	0.07098379291434843	90
 Glutamatergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8203712783962873	0.24802405381027365	114
-Glutamatergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9041837232663795	0.05479821193526182	90
 Glutamatergic	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.804367202275956	0.2284058272532319	114
-Glutamatergic	scvi	0.2	whole cortex	class	0.8886496290937972	0.07785336165465391	90
 Glutamatergic	scvi	0.2	whole cortex	family	0.7873299867075046	0.221523280633683	114
-Glutamatergic	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9606807284067127	0.05918646477259507	90
 Glutamatergic	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8347136353104484	0.24796366334265624	114
-Glutamatergic	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9693199010873568	0.06778793834726614	90
 Glutamatergic	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8613657988399038	0.24136999769482195	114
-Glutamatergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.847451376312684	0.09608714625540891	90
 Glutamatergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.7361000852412714	0.24908822771795225	114
-Glutamatergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7734537471140966	0.09860019553549655	90
 Glutamatergic	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6835159336788249	0.2100903421506354	114
-Glutamatergic	scvi	0.25	whole cortex	class	0.736963503460991	0.11908028174220721	90
 Glutamatergic	scvi	0.25	whole cortex	family	0.6480693427911985	0.2040760389770469	114
-Glutamatergic	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9348385447715272	0.0976211002731272	90
 Glutamatergic	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8378266324787016	0.2602597138759588	114
-Glutamatergic	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9668565519395135	0.06281369111231104	90
 Glutamatergic	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.865540507880856	0.24479486251055527	114
-Glutamatergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.2615051747064964	0.16729355219048045	90
 Glutamatergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.21144110264418928	0.17764689431897576	114
-Glutamatergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.14433428671339432	0.12871187424108602	90
 Glutamatergic	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.11513432236852228	0.12774803910553548	114
-Glutamatergic	scvi	0.5	whole cortex	class	0.1454949083986288	0.1499809798081117	90
 Glutamatergic	scvi	0.5	whole cortex	family	0.11983704060548667	0.14267725578092444	114
-Glutamatergic	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6999765117252896	0.3154401684390307	90
 Glutamatergic	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.6429576147165411	0.35115741651717763	114
-Glutamatergic	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7939748178735145	0.155033401560574	90
 Glutamatergic	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7205639808390579	0.25157596253825404	114
-Glutamatergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.03778337962938484	0.06497299664123313	90
 Glutamatergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.03018238750868514	0.0595798185927308	114
-Glutamatergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.005737362439855049	0.016595122777606587	90
 Glutamatergic	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.00452949666304346	0.014913950123683828	114
-Glutamatergic	scvi	0.75	whole cortex	class	0.020130132935184588	0.0425397172599446	90
 Glutamatergic	scvi	0.75	whole cortex	family	0.01624784992718248	0.03858295431969393	114
-Glutamatergic	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.03362051013187769	90
 Glutamatergic	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9060276087450564	0.19527414770959817	114
-Glutamatergic	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.06101911844771102	90
 Glutamatergic	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9002642692607686	0.19518601994427995	114
-Glutamatergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9679148654263013	0.07819099795084711	90
 Glutamatergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8957629806921722	0.19585563519718371	114
-Glutamatergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791652831785729	0.05222130343726516	90
 Glutamatergic	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8839672912411438	0.22119621269417328	114
-Glutamatergic	seurat	0.0	whole cortex	class	0.9497424440262867	0.10717468987939767	90
 Glutamatergic	seurat	0.0	whole cortex	family	0.8705509910885678	0.20864289642533987	114
-Glutamatergic	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.03362051013187772	90
 Glutamatergic	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9060276087450564	0.19527414770959822	114
-Glutamatergic	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.06101911844771104	90
 Glutamatergic	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9002642692607686	0.1951860199442799	114
-Glutamatergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9679148654263013	0.07819099795084712	90
 Glutamatergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8957629806921722	0.19585563519718374	114
-Glutamatergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791652831785729	0.052221303437265165	90
 Glutamatergic	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8839672912411438	0.22119621269417333	114
-Glutamatergic	seurat	0.05	whole cortex	class	0.9497424440262867	0.10717468987939766	90
 Glutamatergic	seurat	0.05	whole cortex	family	0.8705509910885678	0.20864289642533987	114
-Glutamatergic	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.03362051013187773	90
 Glutamatergic	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9060276087450564	0.1952741477095982	114
-Glutamatergic	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.061019118447711025	90
 Glutamatergic	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9002642692607686	0.19518601994427998	114
-Glutamatergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9679148654263013	0.07819099795084712	90
 Glutamatergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8957629806921722	0.19585563519718366	114
-Glutamatergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791652831785729	0.05222130343726515	90
 Glutamatergic	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8839672912411438	0.22119621269417325	114
-Glutamatergic	seurat	0.1	whole cortex	class	0.9497424440262867	0.1071746898793977	90
 Glutamatergic	seurat	0.1	whole cortex	family	0.8705509910885678	0.20864289642533984	114
-Glutamatergic	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.0336205101318777	90
 Glutamatergic	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9060276087450564	0.19527414770959817	114
-Glutamatergic	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.06101911844771101	90
 Glutamatergic	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9002642692607686	0.19518601994427995	114
-Glutamatergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9679148654263013	0.07819099795084712	90
 Glutamatergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8957629806921722	0.19585563519718371	114
-Glutamatergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791652831785729	0.05222130343726517	90
 Glutamatergic	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8839734669247513	0.2211950343252389	114
-Glutamatergic	seurat	0.15	whole cortex	class	0.9497392044619256	0.10712172896105782	90
 Glutamatergic	seurat	0.15	whole cortex	family	0.8705841058666374	0.2085280165765866	114
-Glutamatergic	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.033620510131877716	90
 Glutamatergic	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9060276087450564	0.19527414770959817	114
-Glutamatergic	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9746084738794131	0.06101911844771104	90
 Glutamatergic	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9002642692607686	0.19518601994427998	114
-Glutamatergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9676470015669231	0.07916549092648648	90
 Glutamatergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.895712118928118	0.1956246495382609	114
-Glutamatergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9791791462741661	0.05222836528002131	90
 Glutamatergic	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.88410798983715	0.2210676183947679	114
-Glutamatergic	seurat	0.2	whole cortex	class	0.949204492566253	0.10761537712090717	90
 Glutamatergic	seurat	0.2	whole cortex	family	0.8702561656968169	0.20772726410754308	114
-Glutamatergic	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852057433559515	0.03362051013187772	90
 Glutamatergic	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9060276087450564	0.19527414770959817	114
-Glutamatergic	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9745892096683794	0.06107893802041657	90
 Glutamatergic	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.900249179010498	0.19519565083870102	114
-Glutamatergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9663531795178366	0.08276473524365685	90
 Glutamatergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8944496743392406	0.19559790697943075	114
-Glutamatergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9788343141177609	0.05304233330360299	90
 Glutamatergic	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8839266785504629	0.22048477106499337	114
-Glutamatergic	seurat	0.25	whole cortex	class	0.9454641248615314	0.10958303822556421	90
 Glutamatergic	seurat	0.25	whole cortex	family	0.8670862257788824	0.20481192141084054	114
-Glutamatergic	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9852160781936192	0.033429156344781386	90
 Glutamatergic	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9071904461060196	0.19272661713732844	114
-Glutamatergic	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9705686062881634	0.07281115567895081	90
 Glutamatergic	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9003431224282427	0.1899005253621437	114
-Glutamatergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9030829437136467	0.17074151930766626	90
 Glutamatergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8302705362050223	0.21315066983134603	114
-Glutamatergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9124616155337623	0.1447496668359441	90
 Glutamatergic	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8216586967822946	0.22438425387895264	114
-Glutamatergic	seurat	0.5	whole cortex	class	0.7683625772774886	0.16857311683158735	90
 Glutamatergic	seurat	0.5	whole cortex	family	0.7146278579480054	0.18727460356869913	114
-Glutamatergic	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9825652720060764	0.03330412160499732	90
 Glutamatergic	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.913688377627049	0.17430118515742862	114
-Glutamatergic	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9482691391001051	0.11374597964219658	90
 Glutamatergic	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.885898984857231	0.19494957667074372	114
-Glutamatergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7499738300590816	0.2490542035056549	90
 Glutamatergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.6969928121266481	0.25118836737425637	114
-Glutamatergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7518690768778055	0.24791028988517383	90
 Glutamatergic	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6992414930803184	0.27123080880312195	114
-Glutamatergic	seurat	0.75	whole cortex	class	0.4609432404779698	0.214059522579777	90
 Glutamatergic	seurat	0.75	whole cortex	family	0.4558996385167161	0.21705581179535713	114
 Immune	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.6492036946873734	0.3236930052986191	231
 Immune	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.07407407407407407	0.11475506210984938	6
@@ -1999,245 +2159,85 @@ Mural	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMAR
 Mural	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.6177027851516067	0.25543823696410434	123
 Mural	seurat	0.75	whole cortex	class	0.3586683774488906	0.22528062000524074	156
 Mural	seurat	0.75	whole cortex	subclass	0.3894902526284151	0.1460983708524705	123
-Neuron	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326876	159
-Neuron	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326876	159
 Neuron	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.6265870566280313	0.3179707315712873	237
-Neuron	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9935566237852295	0.006484495772974156	159
-Neuron	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9935566237852295	0.006484495772974156	159
 Neuron	scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.806307558142151	0.18005892597540496	237
-Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9913254506054244	0.009215667062585652	159
-Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9913254506054244	0.009215667062585652	159
 Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.833786609368729	0.16475382381247677	237
-Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9915168067240346	0.009004541687173868	159
-Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9915168067240346	0.009004541687173868	159
 Neuron	scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.7562107679562436	0.2163400667245178	237
-Neuron	scvi	0.0	whole cortex	class	0.9820851240195752	0.01822094616327292	159
-Neuron	scvi	0.0	whole cortex	family	0.9820851240195752	0.01822094616327292	159
 Neuron	scvi	0.0	whole cortex	global	0.8651705167084315	0.13597110042326369	237
-Neuron	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326837	159
-Neuron	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326837	159
 Neuron	scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.6265870566280313	0.3179707315712873	237
-Neuron	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9935566237852295	0.0064844957729741585	159
-Neuron	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9935566237852295	0.0064844957729741585	159
 Neuron	scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.806307558142151	0.1800589259754049	237
-Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9913254506054244	0.009215667062585673	159
-Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9913254506054244	0.009215667062585673	159
 Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.833786609368729	0.16475382381247677	237
-Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9915168067240346	0.00900454168717387	159
-Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9915168067240346	0.00900454168717387	159
 Neuron	scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.7562107679562436	0.21634006672451783	237
-Neuron	scvi	0.05	whole cortex	class	0.9820851240195752	0.018220946163272807	159
-Neuron	scvi	0.05	whole cortex	family	0.9820851240195752	0.018220946163272807	159
 Neuron	scvi	0.05	whole cortex	global	0.8651705167084315	0.1359711004232637	237
-Neuron	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326811	159
-Neuron	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326811	159
 Neuron	scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.6265870566280313	0.31797073157128725	237
-Neuron	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9935566237852295	0.0064844957729741515	159
-Neuron	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9935566237852295	0.0064844957729741515	159
 Neuron	scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.806307558142151	0.180058925975405	237
-Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9905011440494256	0.009711017740518335	159
-Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9905011440494256	0.009711017740518335	159
 Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8334009259253274	0.1650126504579372	237
-Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9909550422222966	0.00925527597184039	159
-Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9909550422222966	0.00925527597184039	159
 Neuron	scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.7567381529543197	0.21582906589015582	237
-Neuron	scvi	0.1	whole cortex	class	0.9798990687041549	0.018710158064609267	159
-Neuron	scvi	0.1	whole cortex	family	0.9798990687041549	0.018710158064609267	159
 Neuron	scvi	0.1	whole cortex	global	0.864846464703874	0.13591330993530842	237
-Neuron	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326843	159
-Neuron	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326843	159
 Neuron	scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.6265870566280313	0.31797073157128736	237
-Neuron	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9935566237852295	0.006484495772974148	159
-Neuron	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9935566237852295	0.006484495772974148	159
 Neuron	scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8063466794583113	0.18002301724796702	237
-Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9300595554163489	0.03989384960381651	159
-Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9300595554163489	0.03989384960381651	159
 Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8065199375210483	0.18020837597535996	237
-Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9165963223653226	0.04183204820428024	159
-Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9165963223653226	0.04183204820428024	159
 Neuron	scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.7604084168348169	0.19477830576612173	237
-Neuron	scvi	0.15	whole cortex	class	0.8744451870707106	0.04498875659145598	159
-Neuron	scvi	0.15	whole cortex	family	0.8744451870707106	0.04498875659145598	159
 Neuron	scvi	0.15	whole cortex	global	0.8241689859891292	0.1511348008529779	237
-Neuron	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9922949443581068	0.013861647651326798	159
-Neuron	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9922949443581068	0.013861647651326798	159
 Neuron	scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.6266681802998323	0.317944702424173	237
-Neuron	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9932982566357937	0.006619019210769131	159
-Neuron	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9932982566357937	0.006619019210769131	159
 Neuron	scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8082594710517512	0.17844071407069684	237
-Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.714457083371648	0.11444247811938964	159
-Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.714457083371648	0.11444247811938964	159
 Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.7061787867078609	0.2190862690704962	237
-Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6434412382842809	0.12622791888565463	159
-Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6434412382842809	0.12622791888565463	159
 Neuron	scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6699126488369829	0.20852988865878136	237
-Neuron	scvi	0.2	whole cortex	class	0.5928317178048835	0.10485150417912725	159
-Neuron	scvi	0.2	whole cortex	family	0.5928317178048835	0.10485150417912725	159
 Neuron	scvi	0.2	whole cortex	global	0.6683855435366818	0.19867239406944462	237
-Neuron	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.991280086815432	0.015375348725682827	159
-Neuron	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.991280086815432	0.015375348725682827	159
 Neuron	scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.635270838658642	0.31387664408233606	237
-Neuron	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.99158250693873	0.008024020977365067	159
-Neuron	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.99158250693873	0.008024020977365067	159
 Neuron	scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8205222875599828	0.16905985631325632	237
-Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.4515603156338381	0.14122015786674322	159
-Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.4515603156338381	0.14122015786674322	159
 Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.561220378439295	0.25232668529026286	237
-Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.3684405435571802	0.1241528590221098	159
-Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.3684405435571802	0.1241528590221098	159
 Neuron	scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.5069009213266097	0.23268092766667073	237
-Neuron	scvi	0.25	whole cortex	class	0.3237488667887901	0.11978817350349293	159
-Neuron	scvi	0.25	whole cortex	family	0.3237488667887901	0.11978817350349293	159
 Neuron	scvi	0.25	whole cortex	global	0.4724016238538765	0.23139375257017314	237
-Neuron	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8599569645744576	0.09919802960966001	159
-Neuron	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8599569645744576	0.09919802960966001	159
 Neuron	scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7914898673275776	0.18919896620992624	237
-Neuron	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9064898313337921	0.048207828461215005	159
-Neuron	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9064898313337921	0.048207828461215005	159
 Neuron	scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9043821464106322	0.08163231979239206	237
-Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.026593472222954363	0.02738353572996422	159
-Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.026593472222954363	0.02738353572996422	159
 Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.12207763500765813	0.16606874248171422	237
-Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.02136446915399504	0.023963715993038388	159
-Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.02136446915399504	0.023963715993038388	159
 Neuron	scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.08763997842564002	0.12059549482029773	237
-Neuron	scvi	0.5	whole cortex	class	0.024958363914975294	0.027819498046288114	159
-Neuron	scvi	0.5	whole cortex	family	0.024958363914975294	0.027819498046288114	159
 Neuron	scvi	0.5	whole cortex	global	0.07483026184575425	0.11834505475222687	237
-Neuron	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.4008802566623504	0.23218542379247864	159
-Neuron	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.4008802566623504	0.23218542379247864	159
 Neuron	scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.5285910673555391	0.28865264356208453	237
-Neuron	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.4867774776651676	0.21906388678207284	159
-Neuron	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.4867774776651676	0.21906388678207284	159
 Neuron	scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.6150263948013636	0.21325110482102724	237
-Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.0032463338551642286	0.0069189929015670264	159
-Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.0032463338551642286	0.0069189929015670264	159
 Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.021618904598520637	0.05795815011095874	237
-Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.0018886695556176421	0.0051043745305087386	159
-Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.0018886695556176421	0.0051043745305087386	159
 Neuron	scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.012420642035482392	0.026639995310434414	237
-Neuron	scvi	0.75	whole cortex	class	0.002694598588823893	0.0061119281381068905	159
-Neuron	scvi	0.75	whole cortex	family	0.002694598588823893	0.0061119281381068905	159
 Neuron	scvi	0.75	whole cortex	global	0.009790026296346718	0.028224769276220304	237
-Neuron	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730102	159
-Neuron	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730102	159
 Neuron	seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7468348281457616	0.24902249919034994	237
-Neuron	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.1864835052905703	159
-Neuron	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.1864835052905703	159
 Neuron	seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8517674139921415	0.14084748748306686	237
-Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.910196972570498	0.23751565370778388	159
-Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.910196972570498	0.23751565370778388	159
 Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8419523102579152	0.1462267261644078	237
-Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9754895610050406	0.06373179922312056	159
-Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9754895610050406	0.06373179922312056	159
 Neuron	seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6844901247022499	0.30887432369851553	237
-Neuron	seurat	0.0	whole cortex	class	0.8661127470447639	0.19535417897519997	159
-Neuron	seurat	0.0	whole cortex	family	0.8661127470447639	0.19535417897519997	159
 Neuron	seurat	0.0	whole cortex	global	0.8540061245796263	0.11965540728872398	237
-Neuron	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730104	159
-Neuron	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730104	159
 Neuron	seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7468348281457616	0.2490224991903499	237
-Neuron	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.18648350529057028	159
-Neuron	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.18648350529057028	159
 Neuron	seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8517674139921415	0.14084748748306689	237
-Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.910196972570498	0.23751565370778396	159
-Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.910196972570498	0.23751565370778396	159
 Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8419523102579152	0.14622672616440785	237
-Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9754895610050406	0.06373179922312058	159
-Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9754895610050406	0.06373179922312058	159
 Neuron	seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6844901247022499	0.3088743236985156	237
-Neuron	seurat	0.05	whole cortex	class	0.8661127470447639	0.19535417897520005	159
-Neuron	seurat	0.05	whole cortex	family	0.8661127470447639	0.19535417897520005	159
 Neuron	seurat	0.05	whole cortex	global	0.8540061245796263	0.11965540728872398	237
-Neuron	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730103	159
-Neuron	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730103	159
 Neuron	seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7468348281457616	0.24902249919034988	237
-Neuron	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.18648350529057028	159
-Neuron	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.18648350529057028	159
 Neuron	seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8517674139921415	0.14084748748306686	237
-Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.910196972570498	0.237515653707784	159
-Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.910196972570498	0.237515653707784	159
 Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8419523102579152	0.14622672616440782	237
-Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9754895610050406	0.06373179922312058	159
-Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9754895610050406	0.06373179922312058	159
 Neuron	seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6844901247022499	0.30887432369851564	237
-Neuron	seurat	0.1	whole cortex	class	0.8661127470447639	0.19535417897520005	159
-Neuron	seurat	0.1	whole cortex	family	0.8661127470447639	0.19535417897520005	159
 Neuron	seurat	0.1	whole cortex	global	0.8540061245796263	0.11965540728872401	237
-Neuron	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730104	159
-Neuron	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730104	159
 Neuron	seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7468348281457616	0.24902249919035002	237
-Neuron	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.18648350529057023	159
-Neuron	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.18648350529057023	159
 Neuron	seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8517674139921415	0.14084748748306689	237
-Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9101949429741375	0.23751541205420787	159
-Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9101949429741375	0.23751541205420787	159
 Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8419512479890088	0.1462260073858046	237
-Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.975446384161546	0.06373765692010976	159
-Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.975446384161546	0.06373765692010976	159
 Neuron	seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6844784261476886	0.3088758473352887	237
-Neuron	seurat	0.15	whole cortex	class	0.8659027955515431	0.195287434538636	159
-Neuron	seurat	0.15	whole cortex	family	0.8659027955515431	0.195287434538636	159
 Neuron	seurat	0.15	whole cortex	global	0.8539577184257808	0.11958530262096856	237
-Neuron	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.11067498288730104	159
-Neuron	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.11067498288730104	159
 Neuron	seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7468348281457616	0.24902249919034997	237
-Neuron	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326128769334548	0.1864835052905702	159
-Neuron	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326128769334548	0.1864835052905702	159
 Neuron	seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8517674139921415	0.14084748748306689	237
-Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.9087096459164448	0.23720353501175181	159
-Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9087096459164448	0.23720353501175181	159
 Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8418154110139864	0.14614060894076747	237
-Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9739370236096673	0.06422263846686149	159
-Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9739370236096673	0.06422263846686149	159
 Neuron	seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.684083053284024	0.30871921551360076	237
-Neuron	seurat	0.2	whole cortex	class	0.8607249845187566	0.1952011881075013	159
-Neuron	seurat	0.2	whole cortex	family	0.8607249845187566	0.1952011881075013	159
 Neuron	seurat	0.2	whole cortex	global	0.8531685895372207	0.11893192390329702	237
-Neuron	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9545084101236606	0.110674982887301	159
-Neuron	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9545084101236606	0.110674982887301	159
 Neuron	seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7468403991232269	0.24901920164743935	237
-Neuron	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9326057243517226	0.18648732141268762	159
-Neuron	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9326057243517226	0.18648732141268762	159
 Neuron	seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8517779428876688	0.14083463033542404	237
-Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8991007428024563	0.23619889619472087	159
-Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8991007428024563	0.23619889619472087	159
 Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8421088816755312	0.1446541036241599	237
-Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.9631357760837114	0.06994473927339716	159
-Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.9631357760837114	0.06994473927339716	159
 Neuron	seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6821921468462046	0.30786311197897465	237
-Neuron	seurat	0.25	whole cortex	class	0.836629718112352	0.19309514745243117	159
-Neuron	seurat	0.25	whole cortex	family	0.836629718112352	0.19309514745243117	159
 Neuron	seurat	0.25	whole cortex	global	0.8446789082480465	0.12009155915584199	237
-Neuron	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.9496930533227201	0.11671378798776166	159
-Neuron	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.9496930533227201	0.11671378798776166	159
 Neuron	seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7610836605785645	0.23718267274766666	237
-Neuron	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.9218722274608129	0.20002011825969854	159
-Neuron	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9218722274608129	0.20002011825969854	159
 Neuron	seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.862391551791786	0.12922387216720496	237
-Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.6703870225824466	0.23021147299201353	159
-Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.6703870225824466	0.23021147299201353	159
 Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.7511946219168987	0.17509270092385049	237
-Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6835485926167205	0.18173274202527345	159
-Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6835485926167205	0.18173274202527345	159
 Neuron	seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6223974539006967	0.28057681230384823	237
-Neuron	seurat	0.5	whole cortex	class	0.5018520178015826	0.16637771459277775	159
-Neuron	seurat	0.5	whole cortex	family	0.5018520178015826	0.16637771459277775	159
 Neuron	seurat	0.5	whole cortex	global	0.6189526700383048	0.1730442712762817	237
-Neuron	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.8313632491337274	0.1564207617166468	159
-Neuron	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.8313632491337274	0.1564207617166468	159
 Neuron	seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7664927463853017	0.2205463889231693	237
-Neuron	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7453476061053307	0.2282744656146445	159
-Neuron	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7453476061053307	0.2282744656146445	159
 Neuron	seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8129057803909847	0.15684766188845678	237
-Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.37487070840630216	0.19045709211482711	159
-Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.37487070840630216	0.19045709211482711	159
 Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.5474795033760376	0.24184837866240735	237
-Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.31243162665985363	0.19325979326821915	159
-Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.31243162665985363	0.19325979326821915	159
 Neuron	seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.45127016874774045	0.2984220473088954	237
-Neuron	seurat	0.75	whole cortex	class	0.19209965442665033	0.11376803664976563	159
-Neuron	seurat	0.75	whole cortex	family	0.19209965442665033	0.11376803664976563	159
 Neuron	seurat	0.75	whole cortex	global	0.30859756570868035	0.1888781976285843	237
 Non-neuron	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7266658415010222	0.19396454889518208	243
 Non-neuron	scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7266658415010222	0.19396454889518208	243
