@@ -105,8 +105,8 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
         else:
             # add option to change
             group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique() 
-       # if len(group_subclasses) == 0:
-        #    group_subclasses = [celltype]
+        if len(group_subclasses) == 0:
+            group_subclasses = celltype
         subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
         filtered_df = label_f1_results[label_f1_results["label"].isin(subclasses_to_plot)]
 
@@ -179,21 +179,24 @@ def main():
     subclasses = label_f1_results[label_f1_results["key"] == "subclass"]["label"].unique()
     classes = label_f1_results[label_f1_results["key"] == "class"]["label"].unique()
     families = label_f1_results[label_f1_results["key"] == "family"]["label"].unique()
-    globals = label_f1_results[label_f1_results["key"] == "global"]["label"].unique()
+    globalss = label_f1_results[label_f1_results["key"] == "global"]["label"].unique()
 
     levels = {
         "subclass": subclasses,
         "class": classes,
         "family": families,
-        "global": globals
+        "global": globalss
     }
     
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="f1_score")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col="subclass")
     plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="precision")
     plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="recall")
    
-   
     plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col="class")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="precision", subclass_col="class")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="recall", subclass_col="class")
+     
+    
     #-----------------plot weighted f1 score-------------------
     parent = "weighted_f1_plots"
     os.makedirs(parent, exist_ok=True)

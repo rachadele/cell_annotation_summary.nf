@@ -76,9 +76,8 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
         group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique()
         if celltype == "Neuron":
             group_subclasses = "Ambiguous Neuron"
-        else:
-            group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique() 
-      
+        if len(group_subclasses) == 0:
+            group_subclasses = celltype
         # Ensure subclasses are consistently ordered
         subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
         
@@ -161,16 +160,19 @@ def main():
         "global": globals
     } 
 
-    label_f1_results_filtered = label_f1_results[label_f1_results["cutoff"].isin([0, 0.05, 0.1, 0.2])]
-
+    label_f1_results_filtered = label_f1_results[label_f1_results["cutoff"].isin([0])]
+    # add a column for support across the whole dataset
+    
+    #label_f1_results_filtered["inter_dataset_support"] = label_f1_results_filtered["label"].map(label_f1_results_filtered["label"].value_counts())
+    
+    
+    
     # Example usage
     plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score")
     plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision")
     plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall")
     
-    plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, levels, level="family", method_col="cutoff", score_col="f1_score")
-    plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, levels, level="family", method_col="cutoff", score_col="precision")
-    plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, levels, level="family", method_col="cutoff", score_col="recall")
-
+    
+ 
 if __name__ == "__main__":
     main()
