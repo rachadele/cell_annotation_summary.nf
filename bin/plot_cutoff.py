@@ -104,11 +104,12 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
             group_subclasses = "Ambiguous Neuron"
         else:
             # add option to change
-            group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique() 
-        if len(group_subclasses) == 0:
-            group_subclasses = celltype
+            group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
         subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
-        filtered_df = label_f1_results[label_f1_results["label"].isin(subclasses_to_plot)]
+        if len(subclasses_to_plot) == 0:
+           subclasses_to_plot = [celltype]
+        
+        filtered_df = label_f1_results[(label_f1_results["label"].isin(subclasses_to_plot)) & (label_f1_results["key"] == subclass_col)]
 
         for j, method in enumerate(methods):
             ax = axes[i, j]
@@ -122,14 +123,15 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
            # ax.set_xlabel("Cutoff")
            # move y label to the left
            
-            ax.set_ylabel(celltype, rotation=90, labelpad=20)
-
             # Add legend only for the first subplot in each row
             if j == len(methods) - 1:
                 ax.legend(title="Label", bbox_to_anchor=(1, 0.5), loc="center left", fontsize=14)
             else:
                 ax.legend_.remove()  # Remove legend from other subplots in the row
-
+    for ax in axes.flat:
+        ax.set_xticks([0, 0.25, 0.5, 0.75])
+        ax.set_ylim(0, 1.05)
+        ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1])
     plt.suptitle(f"{score_col.replace('_', ' ').title()} vs. Cutoff Across Cell Types", y=1)
     fig.tight_layout(rect=[0, 0, 1, 1])  # Adjust layout to fit legends
 

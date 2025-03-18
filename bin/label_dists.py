@@ -31,7 +31,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
 
     parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/label_f1_results.tsv")   
-    parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv")
+    parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
     parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
@@ -50,7 +50,7 @@ def make_stable_colors(color_mapping_df):
     return subclass_colors
     
 
-def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, levels, level="global", method_col="cutoff", score_col="f1_score"):
+def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, levels, level="global", method_col="cutoff", score_col="f1_score", subclass_col="subclass"):
     
     # Set global fontsize for matplotlib
     plt.rcParams.update({'font.size': 25})
@@ -58,7 +58,7 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
     # Ensure methods are sorted in increasing order
     methods = sorted(methods)
     # Get the order in levels["subclass"]
-    all_subclasses = sorted(levels["subclass"])
+    all_subclasses = sorted(levels[subclass_col])
     subclass_colors = make_stable_colors(color_mapping_df)
     # Set up the plot grid with shared x-axis
     fig, ax = plt.subplots(
@@ -73,16 +73,18 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
     # Loop over each cell type (higher-level grouping)
     for i, celltype in enumerate(levels[level]):
         # Get the subclasses for the current cell type
-        group_subclasses = mapping_df[mapping_df[level] == celltype]["subclass"].unique()
+        group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
         if celltype == "Neuron":
             group_subclasses = "Ambiguous Neuron"
-        if len(group_subclasses) == 0:
-            group_subclasses = celltype
-        # Ensure subclasses are consistently ordered
+        else:
+            # add option to change
+            group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
         subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
-        
+        if len(subclasses_to_plot) == 0:
+           subclasses_to_plot = [celltype]
+     
         # Filter the data for the current group
-        filtered_df = label_f1_results[label_f1_results["label"].isin(subclasses_to_plot)]
+        filtered_df = label_f1_results[(label_f1_results["label"].isin(subclasses_to_plot)) & (label_f1_results["key"] == subclass_col)]
         
         # Loop over each method
         for j, method in enumerate(methods):
@@ -166,13 +168,18 @@ def main():
     #label_f1_results_filtered["inter_dataset_support"] = label_f1_results_filtered["label"].map(label_f1_results_filtered["label"].value_counts())
     
     
-    
-    # Example usage
     plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score")
     plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision")
     plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall")
-    
-    
+   
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score", subclass_col="class")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision", subclass_col="class")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall", subclass_col="class")
+   
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score", subclass_col="family")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision", subclass_col="family")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall", subclass_col="family")
+      
  
 if __name__ == "__main__":
     main()

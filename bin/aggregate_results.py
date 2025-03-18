@@ -306,11 +306,14 @@ def main():
     # eventually add all ambiguous labels?
     # This way we can represent ambiguous author labels
     label_results["label"] = label_results.apply(
-        lambda row: f"Ambiguous {row['label']}" if row["key"] == "subclass" and row["label"] in ["Neuron", "Glutamatergic", "GABAergic"] else row["label"], 
+        lambda row: f"Ambiguous {row['label']}" if row["key"] in ["subclass","class"] and row["label"] in ["Neuron", "Glutamatergic", "GABAergic"] else row["label"], 
         axis=1
     )
 
-    
+    label_results["label"] = label_results.apply(
+        lambda row: f"Ambiguous {row['label']}" if row["key"] in ["family"] and row["label"] in ["Neuron"] else row["label"], 
+        axis=1
+    ) 
     
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
    # Ensure precision and recall are numeric and handle 'nan' strings (if needed)
