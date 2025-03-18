@@ -72,7 +72,11 @@ process plotCutoff {
 
     script:
     """
-    python $projectDir/bin/plot_cutoff.py --weighted_f1_results ${weighted_f1_results_aggregated} --label_f1_results ${label_f1_results_aggregated}
+    python $projectDir/bin/plot_cutoff.py \\
+            --weighted_f1_results ${weighted_f1_results_aggregated} \\
+            --label_f1_results ${label_f1_results_aggregated} \\
+            --mapping_file ${params.mapping_file} \\
+            --color_mapping_file ${params.color_mapping_file}
     """
 }
 
@@ -122,47 +126,73 @@ process plotLabelDist {
 
     script:
     """
-    python $projectDir/bin/label_dists.py --label_f1_results ${label_f1_results_aggregated} --mapping_file ${params.mapping_file}
+    python $projectDir/bin/label_dists.py --label_f1_results ${label_f1_results_aggregated} \\
+                --mapping_file ${params.mapping_file} \\
+                --color_mapping_file ${params.color_mapping_file}
     """
 
 }
 
-process modelEval {
+process modelEvalWeighted {
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/model_eval", mode: 'copy'
+    publishDir "${params.outdir}/model_eval/weighted", mode: 'copy'
 
     input:
     path weighted_f1_results_aggregated
-    path label_f1_results_aggregated
 
     output:
     path "**png"
+    path "**tsv"
+    path "**emmeans_estimates.tsv", emit: emmeans_estimates
+    path "**emmeans_summary.tsv", emit: emmeans_summary
     path "**model_summary_coefs_combined.tsv", emit: f1_model_summary_coefs
 
 
     script:
     """
-    Rscript $projectDir/bin/model_performance.R --weighted_f1_results ${weighted_f1_results_aggregated}
+    Rscript $projectDir/bin/model_performance_weighted.R --weighted_f1_results ${weighted_f1_results_aggregated}
     """
 }
 
-process plotContrasts {
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/contrasts", mode: 'copy'
+process modelEvalLabel {
+    conda '/home/rschwartz/anaconda3/envs/r4.3' 
+    publishDir "${params.outdir}/model_eval/label", mode: 'copy'
 
     input:
-    tuple path(f1_model_summary_coefs), val(f1_type), path(weighted_f1_results_aggregated)
+    path label_f1_results_aggregated
 
     output:
     path "**png"
     path "**tsv"
+    path "**model_summary_coefs_combined.tsv", emit: f1_model_summary_coefs
+
 
     script:
     """
-    python $projectDir/bin/plot_contrasts.py --model_summary_coefs ${f1_model_summary_coefs} \\
-        --type ${f1_type} \\
-        --f1_results ${weighted_f1_results_aggregated}
+    Rscript $projectDir/bin/model_performance_label.R --label_f1_results ${label_f1_results_aggregated}
     """
+}
+
+
+process plotContrasts {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/model_eval/weighted/contrast_figs", mode: 'copy'
+
+    input:
+    tuple val(key), val(contrast), path(emmeans_estimates), path(emmeans_summary)
+    path weighted_f1_results_aggregated
+
+    output:
+    path "**png"
+
+    script:
+    """
+    python $projectDir/bin/plot_contrasts.py --emmeans_estimates ${emmeans_estimates} \\
+                    --emmeans_summary ${emmeans_summary} \\
+                    --key ${key} \\
+                    --weighted_f1_results ${weighted_f1_results_aggregated}
+    """
+
 }
 
 workflow {
@@ -197,7 +227,7 @@ workflow {
     
     // run ANOVA on aggregated results
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
-    runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
+    // runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
     plotHeatmap(weighted_f1_results_aggregated)
     plotLabelDist(label_f1_results_aggregated)
     
@@ -206,23 +236,47 @@ workflow {
     plotComptime(all_runs_dir) 
 
     // model evaluation
-    modelEval(weighted_f1_results_aggregated, label_f1_results_aggregated)
+    modelEvalWeighted(weighted_f1_results_aggregated)
+    modelEvalLabel(label_f1_results_aggregated)
+    
+    
+    emmeans_estimates = modelEvalWeighted.out.emmeans_estimates
+    emmeans_summary = modelEvalWeighted.out.emmeans_summary
+// need to get individual files in order to plot contrasts
 
-    //f1_model_summary_coefs = modelEval.out.f1_model_summary_coefs
-    //f1_model_summary_coefs.view()
-    // get types of f1 score
 
-    //f1_model_summary_coefs.map { path ->
-        //def f1_type = path.getName().toString().split('_')[0]
-        //[path, f1_type]
-    //}.set { f1_model_summary_coefs_types }
-    //f1_model_summary_coefs_types.view()
-    //f1_model_summary_coefs_types.combine(weighted_f1_results_aggregated)
-    //.set{f1_model_summary_coefs_results_aggregated}
+    emmeans_estimates
+        .flatMap { list ->
+            // Iterate through each file in the ArrayList
+            list.collect { file ->
+                // def key = parent dir name two dirs up
+                def key = file.getParent().getParent().getName()
+ 
+                // Split the file name to extract the factors before "_emmeans_estimates.tsv"
+                def factors = file.getName().toString().split("_emmeans_estimates.tsv")[0]
+                // Return a map with factors and the file itself
+                return [key, factors, file]
+            }
+        }
+        .set { emmeans_estimates_map }
 
-    //f1_model_summary_coefs_results_aggregated.view()
+    emmeans_summary
+        .flatMap { list ->
+            // Iterate through each file in the ArrayList
+            list.collect { file ->
+                def key = file.getParent().getParent().getName()
 
-    //plotContrasts(f1_model_summary_coefs_results_aggregated)
+                // Split the file name to extract the factors before "_emmeans_estimates.tsv"
+                def factors = file.getName().toString().split("_emmeans_summary.tsv")[0]
+                // Return a map with factors and the file itself
+                return [key, factors, file]
+            }
+        }
+        .set { emmeans_summary_map }
+
+    emmeans_all = emmeans_estimates_map.join(emmeans_summary_map, by: [0,1])
+    plotContrasts(emmeans_all, weighted_f1_results_aggregated)
+
 
 }
 
