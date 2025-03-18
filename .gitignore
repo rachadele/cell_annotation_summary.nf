@@ -101,3 +101,5 @@ weighted_f1_results.tsv
 params_added
 hsap/
 mmus/
+meta/
+.vscode
