@@ -275,6 +275,8 @@ workflow {
         .set { emmeans_summary_map }
 
     emmeans_all = emmeans_estimates_map.join(emmeans_summary_map, by: [0,1])
+    emmeans_all.view()
+
     plotContrasts(emmeans_all, weighted_f1_results_aggregated)
 
 
