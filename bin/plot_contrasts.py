@@ -25,16 +25,28 @@ random.seed(42)
 from collections import defaultdict
 import matplotlib.ticker as ticker
 import textwrap
+import re
 
+
+SMALL_SIZE = 15
+MEDIUM_SIZE = 35
+BIGGER_SIZE = 40
+
+plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
+plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
+plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
 
 
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
     parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/weighted_f1_results.tsv")
-  #  parser.add_argument('--label_f1_results', type=str, help="Label key f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/label_f1_results.tsv")   
-    parser.add_argument('--estimates', type=str, help = "OR and pvalues from emmeans", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/reference_method_emmeans_estimates.tsv")
-    parser.add_argument('--emmeans_summary', type = str, help = "emmeans summary", default= "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/reference_method_emmeans_summary.tsv")
+    parser.add_argument('--emmeans_estimates', type=str, help = "OR and pvalues from emmeans", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/subsample_ref_emmeans_estimates.tsv" )
+    parser.add_argument('--emmeans_summary', type = str, help = "emmeans summary", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/subsample_ref_emmeans_summary.tsv")
     parser.add_argument('--key', type = str, help = "key of factor to plot", default = "subclass")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
@@ -53,9 +65,7 @@ def wrap_labels(ax, width=10):
   ax.set_xticklabels(tick_labels, rotation=0, ha="center")
 
 
-def plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir):
-
-    # Set the aesthetic style and context
+def plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir, contrast_results):
     sns.set(style="whitegrid", palette="colorblind", context="talk")
 
     # Calculate the positions for the point plot
@@ -70,9 +80,9 @@ def plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir):
     for factor in [factor1, factor2]:
       weighted_f1_results[factor] = weighted_f1_results[factor].astype(str)
     # Create a figure and axis
-    fig, ax = plt.subplots(figsize=(30, 10))
-
-    # Plot the boxplot
+    fig, ax = plt.subplots(figsize=(30, 15))
+    # Axis label size
+        # Plot the boxplot
     sns.boxplot(
         y=factor1,
         x="weighted_f1",
@@ -107,27 +117,66 @@ def plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir):
             capthick=3,
             elinewidth=3,
             label=f'estimated marginal mean (95% CI) for {f2}'
+            
         )
-    wrap_labels(ax, width=2)
+        
+         # Add ORs and p-values only for same `factor1`
+    for f1 in unique_factor1:
+        contrasts = contrast_results[(contrast_results["group1"] == f1) & (contrast_results["group2"] == f1)]
+        #if len(contrasts) > 1:
+        for idx, contrast in enumerate(contrasts.index):
+          print(idx)
+          f2a = contrasts["level1"].iloc[idx]
+          f2b = contrasts["level2"].iloc[idx]
+          odds_ratio = contrasts['odds.ratio'].iloc[idx]
+          p_value = contrasts['p.value'].iloc[idx]
+
+        
+          y1 = unique_factor1.tolist().index(f1) + offsets[f2a] +0.15
+          y2 = unique_factor1.tolist().index(f1) + offsets[f2b] +0.15
+          
+          # Draw contrast line
+          bar_x = max(x, subset['response'].values[0]) + 0.05
+         # ax.plot([bar_x, bar_x], [y1, y2], color='black', linewidth=2)
+
+          # Add OR and p-value text
+         # ax.text(
+          #    bar_x, (y1 + y2) / 2,
+            #  f'OR = {odds_ratio:.2f}, p = {p_value:.2e}',
+            #  ha='center', va='bottom', fontsize=40, fontweight='bold'
+         # )
+          # Add star for p < 0.001
+          if p_value < 0.001:
+              ax.text(bar_x, (y1 + y2) / 2, '*', ha='center', va='bottom', fontsize=20, fontweight='bold', color='red')
+          else:
+              ax.text(bar_x, (y1 + y2) / 2, '*', ha='center', va='bottom', fontsize=20, fontweight='bold', color='black')
+
+
+    ax.set_title(f'{factor1.capitalize()}, Cutoff = 0', fontsize=40)
+    ax.set_ylabel(factor1, fontsize=40)
+    ax.set_xlabel('Weighted F1', fontsize=40)
+    ax.tick_params(axis='x', labelsize=35)
+    ax.tick_params(axis='y', labelsize=35)
+
     # Customize the legend to avoid duplication
     handles, labels = ax.get_legend_handles_labels()
     unique_labels = dict(zip(labels, handles))
-    ax.legend(unique_labels.values(), unique_labels.keys(), loc="upper left", bbox_to_anchor=(1.01, 1.01))
+    ax.legend(unique_labels.values(), unique_labels.keys(), loc="lower left", bbox_to_anchor=(-1, -0.25), fontsize=35)
     plt.grid(False)  # Disables gridlines completely
 
     # Set the title for the plot
-    ax.set_title(f'{factor1.capitalize()} vs. {factor2.capitalize()} at Cutoff = 0')
+    #ax.set_title(f'{factor1.capitalize()} vs. {factor2.capitalize()} at Cutoff = 0', fontsize=40)
 
     # Adjust layout to accommodate the title
-    plt.tight_layout()
+   # plt.tight_layout()
 
     # Show the plot
-    plt.savefig(os.path.join(outdir,f"{factor1}_{factor2}_boxplot.png"))
+    plt.savefig(os.path.join(outdir,f"{factor1}_{factor2}_boxplot.png"), bbox_inches='tight')
 
  
 
-def plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key):
-    # Set the aesthetic style and context
+
+def plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key, contrast_results):
     sns.set(style="whitegrid", palette="colorblind", context="talk")
 
     # Calculate the positions for the point plot
@@ -143,8 +192,8 @@ def plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key):
 
     # Plot the boxplot
     sns.boxplot(
-        y=factor1,
-        x="weighted_f1",
+        x=factor1,
+        y="weighted_f1",
         data=weighted_f1_results,
         ax=ax,
         linewidth=2.5,
@@ -155,78 +204,133 @@ def plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key):
         palette=boxplot_palette
     )
 
-    # Plot the point plot with error bars
+    # Point plot with error bars
+    x_positions = []
+    y_positions = []
     for i, f1 in enumerate(unique_factor1):
         subset = weighted_f1_results[weighted_f1_results[factor1] == f1]
-        y = i
-        x = subset['response'].values[0]
-        lower_err = x - subset['asymp.LCL'].values[0]
-        upper_err = subset['asymp.UCL'].values[0] - x
-
+        x = i
+        y = subset['response'].values[0]
+        lower_err = y - subset['asymp.LCL'].values[0]
+        upper_err = subset['asymp.UCL'].values[0] - y
+        x_positions.append(x)
+        y_positions.append(y)
         ax.errorbar(
             x=x,
             y=y,
-            xerr=[[lower_err], [upper_err]],
+            yerr=[[lower_err], [upper_err]],
             fmt='o',
             color=color_map[f1],
             capsize=5,
-            capthick=3,
-            elinewidth=3,
+            capthick=5,
+            elinewidth=5,
             label=f'estimated marginal mean (95% CI) for {f1}'
         )
+
+    # Add contrast bar and odds ratio for pairwise contrasts
+    for idx, contrast in contrast_results.iterrows():
+        f2a = contrast['group1'].replace("subsample_ref", "")
+        f2b = contrast['group2'].replace("subsample_ref", "")
+    
+        p_value = contrast['p.value']
+
+        # Get x positions for the two levels
+        x1 = unique_factor1.tolist().index(f2a)
+        x2 = unique_factor1.tolist().index(f2b)
+
+        y1 = weighted_f1_results[weighted_f1_results[factor1] == f2a]['response'].values[0]
+        y2 = weighted_f1_results[weighted_f1_results[factor1] == f2b]['response'].values[0]
+
+        # Draw contrast line with vertical stacking for multiple levels
+        bar_y = max(y1, y2) + 0.1 + (idx * 0.15)  # Offset each contrast line
+        ax.plot([x1, x2], [bar_y, bar_y], color='black', linewidth=2)
+
+        # Add stars with colors based on p-value
+        star_color = 'red' if p_value < 0.001 else 'black'
+        ax.text((x1 + x2) / 2, bar_y + 0.05, '*', ha='center', va='bottom', 
+                fontsize=20, fontweight='bold', color=star_color)
+
+    # Manually set font sizes
+   # ax.set_title(f'{factor1.capitalize()} at {key} level, Cutoff = 0', fontsize=40)
+    ax.set_xlabel(factor1.replace("_"," "), fontsize=40)
+    ax.set_ylabel('Weighted F1', fontsize=40)
+    ax.tick_params(axis='x', labelsize=35)
+    ax.tick_params(axis='y', labelsize=35)
+
     wrap_labels(ax, width=2)
+
     # Customize the legend to avoid duplication
     handles, labels = ax.get_legend_handles_labels()
     unique_labels = dict(zip(labels, handles))
-    ax.legend(unique_labels.values(), unique_labels.keys(), loc="upper left", bbox_to_anchor=(1.01, 1.01))
-    
+    ax.legend(unique_labels.values(), unique_labels.keys(), loc="upper left", bbox_to_anchor=(1.01, 1.01), fontsize=35)
+
     # Rotate x-axis labels for better readability
     plt.xticks(rotation=90)
-
-    # Set the title for the plot
-    ax.set_title(f'{factor1.capitalize()} at {key} level, Cutoff = 0')
+    plt.grid(False)  # Disables gridlines completely
 
     # Adjust layout to accommodate the title
     plt.tight_layout()
 
-    # Show the plot
-    plt.savefig(os.path.join(outdir,f"{factor1}_boxplot.png"))
+    # Save the plot
+    plt.savefig(os.path.join(outdir, f"{factor1}_boxplot.png"))
+    
 
+def split_contrast(contrast):
+    # Replace slashes inside parentheses with dashes
+    contrast = re.sub(r'(?<=\()[^)]*?/', lambda match: match.group(0).replace('/', '-'), contrast)
+    
+    # Now split by slashes outside of parentheses
+    groups = re.split(r'\s*/\s*(?![^\(]*\))', contrast)
+    
+    # Remove parentheses from the groups
+    groups = [group.replace('(', '').replace(')', '') for group in groups]
+    
+    return groups
 
-
-def make_contrast_dict(estimates, n_factors=2):
-  contrast_dict = defaultdict(lambda: defaultdict(dict))
-  for index,row in estimates.iterrows():
+  
+def reformat_contrast_df(contrast_results, n_factors=2):
+  rows = []
+  
+  for _, row in contrast_results.iterrows():
       contrast = row["contrast"]
-      contrast = contrast.replace("(","").replace(")","")
-      group1, group2 = contrast.split(" / ")
-      
+      # Use the split_contrast function to properly split the contrast
+      groups = split_contrast(contrast)
+      # Ensure that the contrast splits correctly
+      if len(groups) == 2:
+          group1, group2 = groups
+
       if n_factors == 2:
-         level1 = group1.split(" ")[-1]
-         level2 =  group2.split(" ")[-1]
-         group1 = group1.replace(f" {level1}", "")
-         group2 = group2.replace(f" {level2}", "")
+          level1 = group1.split(" ")[-1]
+          level2 = group2.split(" ")[-1]
+          group1 = group1.replace(f" {level1}", "")
+          group2 = group2.replace(f" {level2}", "")
       else:
           level1 = None
           level2 = None
-    # Store the odds ratio, SE, and p-value in the dictionary
-      contrast_dict[contrast] = {
-          'odds_ratio': float(row['odds.ratio']),
-          'SE': float(row['SE']),
-          'p_value': float(row['p.value']),
+      
+      rows.append({
+          'contrast': contrast,
           'group1': group1,
           'group2': group2,
           'level1': level1,
-          'level2': level2
-      }
-  return contrast_dict
+          'level2': level2,
+          'odds.ratio': float(row['odds.ratio']),
+          'SE': float(row['SE']),
+          'p.value': float(row['p.value'])
+      })
+  
+  return pd.DataFrame(rows)
+
       
 def main():
+  
   args = parse_arguments()
+  print(args)
   weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep = "\t")
   # label_f1_results = pd.read_csv(args.label_f1_results, sep = "\t")
-  estimates = pd.read_csv(args.estimates, sep = "\t")
+  contrast_results = pd.read_csv(args.emmeans_estimates, sep = "\t")
   emmeans_summary = pd.read_csv(args.emmeans_summary, sep = "\t")
+  
   factors = emmeans_summary.loc[:, :"response"].iloc[:, :-1].columns.tolist()
   key = args.key
  # make_contrast_dict(estimates, n_factors = len(factors))
@@ -239,7 +343,6 @@ def main():
   outdir = key
   os.makedirs(outdir, exist_ok=True)
   # merge means with weighted_f1_results
-  
   if len(factors) == 1:
     factor1 = factors[0]
     factor2=None
@@ -249,25 +352,17 @@ def main():
   for factor in factors:
     weighted_f1_results[factor] = weighted_f1_results[factor].astype(str)
     emmeans_summary[factor] = emmeans_summary[factor].astype(str)
-    
+  
+  contrast_results=reformat_contrast_df(contrast_results, n_factors = len(factors))
+  print(contrast_results)
   if factor2:
+
     weighted_f1_results = weighted_f1_results.merge(emmeans_summary, on = [factor1, factor2])
-    plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir)
+    plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir, contrast_results)
   else:
     weighted_f1_results = weighted_f1_results.merge(emmeans_summary, on = factor1)
-    plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key)
+    plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key, contrast_results)
     
-
-  
-
-  ## Plot all at once
-  #plt.figure(figsize=(8, 20))
-  #plt.errorbar(y="contrast", x="odds.ratio", xerr="SE", fmt='o', color='blue',
-              #capsize=5, capthick=3, elinewidth=3, data=estimates)
-
-  #plt.tight_layout()
-  #plt.show()
-
   
 if __name__ == "__main__":  
     main()

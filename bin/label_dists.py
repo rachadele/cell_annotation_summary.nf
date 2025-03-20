@@ -53,7 +53,7 @@ def make_stable_colors(color_mapping_df):
 def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, levels, level="global", method_col="cutoff", score_col="f1_score", subclass_col="subclass"):
     
     # Set global fontsize for matplotlib
-    plt.rcParams.update({'font.size': 25})
+    plt.rcParams['font.size'] = 25 
     methods = label_f1_results[method_col].unique()
     # Ensure methods are sorted in increasing order
     methods = sorted(methods)
@@ -132,7 +132,9 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
                 ax[i][j].set_xticklabels([])  # Hide tick labels for upper rows
     
     plt.tight_layout()
-    plt.savefig(f"{level}_{method_col}_{score_col}_distribution.png")
+    outdir = subclass_col
+    os.makedirs(outdir, exist_ok=True)
+    plt.savefig(os.path.join(outdir,f"{level}_{method_col}_{score_col}_distribution.png"))
 
 
 def main():
