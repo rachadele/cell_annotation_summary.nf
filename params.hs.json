@@ -1,0 +1,5 @@
+{
+    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/homo_sapiens/sample/SCT",
+    "outdir": "SCT_integrated_hsap",
+    "mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv"
+}

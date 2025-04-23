@@ -85,7 +85,7 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
 def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, 
                            outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col = "subclass"):
     os.makedirs(outdir, exist_ok=True)
-    new_outdir = os.path.join(outdir, level)
+    new_outdir = os.path.join(outdir, subclass_col)
     os.makedirs(new_outdir, exist_ok=True)
     plt.rcParams.update({'font.size': 20})
 
@@ -100,11 +100,11 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
                              figsize=(cols * 6, rows * 5), squeeze=False, sharex=True, sharey=True)
 
     for i, celltype in enumerate(celltypes):
-        if celltype == "Neuron":
-            group_subclasses = "Ambiguous Neuron"
-        else:
+       # if celltype == "Neuron":
+       #     group_subclasses = "Ambiguous Neuron"
+        #else:
             # add option to change
-            group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
+        group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
         subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
         if len(subclasses_to_plot) == 0:
            subclasses_to_plot = [celltype]
@@ -130,13 +130,13 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
                 ax.legend_.remove()  # Remove legend from other subplots in the row
     for ax in axes.flat:
         ax.set_xticks([0, 0.25, 0.5, 0.75])
-        ax.set_ylim(0, 1.05)
+        ax.set_ylim(-0.05, 1.05)
         ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1])
     plt.suptitle(f"{score_col.replace('_', ' ').title()} vs. Cutoff Across Cell Types", y=1)
     fig.tight_layout(rect=[0, 0, 1, 1])  # Adjust layout to fit legends
 
     # Save single figure
-    save_path = os.path.join(new_outdir, f"all_celltypes_{score_col}_{subclass_col}.png")
+    save_path = os.path.join(new_outdir, f"all_celltypes_{score_col}.png")
     plt.savefig(save_path, bbox_inches="tight")
     plt.close()
 
