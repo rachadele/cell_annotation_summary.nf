@@ -293,27 +293,15 @@ def main():
 
             
 
-
-
 # -----------label f1 results----------------
     label_results = f1_df[f1_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
-    print(label_results)
 
+    # rename "support" to "intra-dataset support"
+    #label_results = label_results.rename(columns={"support": "intra-dataset support"})
 
     label_results = label_results.fillna("None")
-    # fill "Neuron" ,"Glutamatergic", and "GABAergic" in "subclass" column with "ambigious {label}"
-    # eventually add all ambiguous labels?
-    # This way we can represent ambiguous author labels
-    label_results["label"] = label_results.apply(
-        lambda row: f"Ambiguous {row['label']}" if row["key"] in ["subclass","class"] and row["label"] in ["Neuron", "Glutamatergic", "GABAergic"] else row["label"], 
-        axis=1
-    )
-
-    label_results["label"] = label_results.apply(
-        lambda row: f"Ambiguous {row['label']}" if row["key"] in ["family"] and row["label"] in ["Neuron"] else row["label"], 
-        axis=1
-    ) 
+    label_results = label_results[label_results["label"] != "unkown"]
     
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
    # Ensure precision and recall are numeric and handle 'nan' strings (if needed)
@@ -346,21 +334,22 @@ def main():
     factors=columns_to_group + ["query"] + ["query_region"] + ["ref_region"]
     write_factor_summary(label_results, factors) 
    
-        
-    # Create the FacetGrid
-    g = sns.FacetGrid(label_results, col="key", hue="label", height=4, aspect=1.5)
-    # Map the KDE plot to the FacetGrid
-    g.map(sns.histplot, 'f1_score', multiple="layer", bins=40, binrange=(0, 1))
-    # Set axis labels and titles
+
+    # F1 Score distribution by key
+    g = sns.FacetGrid(label_results, col="key", height=4, aspect=1.5)
+    g.map(sns.histplot, 'f1_score', bins=40, binrange=(0, 1))
     g.set_axis_labels("F1 Scores", "Frequency")
     g.set_titles("F1 Score Distribution by {col_name}")
-    # Add a legend
-    g.add_legend()
-    # Save and display the plot
     g.savefig("label_f1_distribution_facet.png")
-    #plt.show()
 
+    # Support distribution by key
+    g = sns.FacetGrid(label_results, col="key", height=4, aspect=1.5)
+    g.map(sns.histplot, 'support', bins=40, binrange=(0, 1))
+    g.set_axis_labels("Support proportion", "Frequency")
+    g.set_titles("Support Distribution by {col_name}")
+    g.savefig("label_support_distribution_facet.png")
 
+        
  
             
   

@@ -1,0 +1,5 @@
+{
+    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/mus_musculus/sample/SCT",
+    "outdir": "mmus_new_hierarchy",
+    "mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author.tsv"
+}

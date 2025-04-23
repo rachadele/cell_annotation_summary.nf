@@ -30,9 +30,9 @@ random.seed(42)
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
 
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_hsap/aggregated_results/label_f1_results.tsv")   
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mmus_new_hierarchy/aggregated_results/label_f1_results.tsv")   
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
-    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv")
+    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse.tsv")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -74,11 +74,11 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
     for i, celltype in enumerate(levels[level]):
         # Get the subclasses for the current cell type
         group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
-        if celltype == "Neuron":
-            group_subclasses = "Ambiguous Neuron"
-        else:
+       # if celltype == "Neuron":
+        #    group_subclasses = "Ambiguous Neuron"
+        #else:
             # add option to change
-            group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
+        group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
         subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
         if len(subclasses_to_plot) == 0:
            subclasses_to_plot = [celltype]
