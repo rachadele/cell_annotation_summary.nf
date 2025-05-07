@@ -1,0 +1,4 @@
+"contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"
+"GABAergic / Glutamatergic"	1.07185068836406	0.0037883196702617	Inf	1	19.6319907889053	0
+"GABAergic / (Non-neuron)"	0.737483503746913	0.00289256325857259	Inf	1	-77.6378012352203	0
+"Glutamatergic / (Non-neuron)"	0.688046863012715	0.00211522978237507	Inf	1	-121.622517879867	0

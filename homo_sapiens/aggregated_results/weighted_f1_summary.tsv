@@ -1,0 +1,481 @@
+method	cutoff	reference	key	weighted_f1_mean	weighted_f1_std	weighted_f1_count
+scvi	0.0	Dissection Angular gyrus AnG	class	0.9484154338793488	0.08563849493439198	1353
+scvi	0.0	Dissection Angular gyrus AnG	family	0.9769791866918519	0.08074340841982934	1353
+scvi	0.0	Dissection Angular gyrus AnG	subclass	0.930718565161574	0.10313812080804474	1353
+scvi	0.0	Dissection Anterior cingulate cortex ACC	class	0.9513421884963793	0.06262553312691613	1353
+scvi	0.0	Dissection Anterior cingulate cortex ACC	family	0.9812745768827116	0.05335387471132907	1353
+scvi	0.0	Dissection Anterior cingulate cortex ACC	subclass	0.9333851427681978	0.0873033832922391	1353
+scvi	0.0	Dissection Dorsolateral prefrontal cortex DFC	class	0.9200793136669073	0.11090954611811116	1353
+scvi	0.0	Dissection Dorsolateral prefrontal cortex DFC	family	0.9464498342122417	0.10848505793168753	1353
+scvi	0.0	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.902560611530618	0.12031555767092889	1353
+scvi	0.0	Dissection Primary auditory cortexA1	class	0.9483821636008539	0.07693529159450804	1353
+scvi	0.0	Dissection Primary auditory cortexA1	family	0.9795123679398525	0.0694337287621259	1353
+scvi	0.0	Dissection Primary auditory cortexA1	subclass	0.930969257401422	0.09371341375221572	1353
+scvi	0.0	Dissection Primary somatosensory cortex S1	class	0.9508920289342997	0.07236013849082801	1353
+scvi	0.0	Dissection Primary somatosensory cortex S1	family	0.9804886983613585	0.06421451627957386	1353
+scvi	0.0	Dissection Primary somatosensory cortex S1	subclass	0.9307137625900428	0.09743591168220793	1353
+scvi	0.0	Dissection Primary visual cortexV1	class	0.9477394131218844	0.07662326388515107	1353
+scvi	0.0	Dissection Primary visual cortexV1	family	0.9788203677219446	0.06971715058292195	1353
+scvi	0.0	Dissection Primary visual cortexV1	subclass	0.9270625399750064	0.0996934356949005	1353
+scvi	0.0	Human Multiple Cortical Areas SMART-seq	class	0.9357747865864436	0.057132514260367924	1353
+scvi	0.0	Human Multiple Cortical Areas SMART-seq	family	0.9773098064499196	0.03915779833986263	1353
+scvi	0.0	Human Multiple Cortical Areas SMART-seq	subclass	0.9165631410369753	0.07308926753745161	1353
+scvi	0.0	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9533576008663089	0.061735889503719034	1353
+scvi	0.0	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9823727096320541	0.05196157047328736	1353
+scvi	0.0	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9357657449946961	0.0880362614320564	1353
+scvi	0.0	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9504979068185303	0.08044064073625153	1353
+scvi	0.0	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.978875525784772	0.07443577235091085	1353
+scvi	0.0	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.932708176564264	0.10439090722696041	1353
+scvi	0.0	whole cortex	class	0.9538192651406815	0.06240071420684717	1353
+scvi	0.0	whole cortex	family	0.9826956853889757	0.05287310976694362	1353
+scvi	0.0	whole cortex	subclass	0.9364322613417878	0.08372828892694259	1353
+scvi	0.05	Dissection Angular gyrus AnG	class	0.9484154338793488	0.08563849493439199	1353
+scvi	0.05	Dissection Angular gyrus AnG	family	0.9769791866918519	0.08074340841982933	1353
+scvi	0.05	Dissection Angular gyrus AnG	subclass	0.930718565161574	0.10313812080804477	1353
+scvi	0.05	Dissection Anterior cingulate cortex ACC	class	0.9513421884963793	0.06262553312691613	1353
+scvi	0.05	Dissection Anterior cingulate cortex ACC	family	0.9812745768827116	0.05335387471132908	1353
+scvi	0.05	Dissection Anterior cingulate cortex ACC	subclass	0.9333851427681978	0.08730338329223919	1353
+scvi	0.05	Dissection Dorsolateral prefrontal cortex DFC	class	0.9200793136669073	0.11090954611811131	1353
+scvi	0.05	Dissection Dorsolateral prefrontal cortex DFC	family	0.9464498342122417	0.10848505793168746	1353
+scvi	0.05	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.902560611530618	0.12031555767092887	1353
+scvi	0.05	Dissection Primary auditory cortexA1	class	0.9483821636008539	0.07693529159450808	1353
+scvi	0.05	Dissection Primary auditory cortexA1	family	0.9795123679398525	0.06943372876212585	1353
+scvi	0.05	Dissection Primary auditory cortexA1	subclass	0.930969257401422	0.09371341375221558	1353
+scvi	0.05	Dissection Primary somatosensory cortex S1	class	0.9508920289342997	0.07236013849082801	1353
+scvi	0.05	Dissection Primary somatosensory cortex S1	family	0.9804886983613585	0.06421451627957381	1353
+scvi	0.05	Dissection Primary somatosensory cortex S1	subclass	0.9307137625900428	0.09743591168220794	1353
+scvi	0.05	Dissection Primary visual cortexV1	class	0.9477394131218844	0.07662326388515109	1353
+scvi	0.05	Dissection Primary visual cortexV1	family	0.9788203677219446	0.06971715058292202	1353
+scvi	0.05	Dissection Primary visual cortexV1	subclass	0.9270625399750064	0.09969343569490041	1353
+scvi	0.05	Human Multiple Cortical Areas SMART-seq	class	0.9357747865864436	0.057132514260367896	1353
+scvi	0.05	Human Multiple Cortical Areas SMART-seq	family	0.9773098064499196	0.03915779833986259	1353
+scvi	0.05	Human Multiple Cortical Areas SMART-seq	subclass	0.9165631410369753	0.07308926753745167	1353
+scvi	0.05	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9533576008663089	0.061735889503719006	1353
+scvi	0.05	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9823727096320541	0.05196157047328733	1353
+scvi	0.05	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9357657449946961	0.08803626143205642	1353
+scvi	0.05	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9504979068185303	0.08044064073625158	1353
+scvi	0.05	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.978875525784772	0.0744357723509108	1353
+scvi	0.05	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.932708176564264	0.10439090722696048	1353
+scvi	0.05	whole cortex	class	0.9538192651406815	0.06240071420684721	1353
+scvi	0.05	whole cortex	family	0.9826956853889757	0.05287310976694362	1353
+scvi	0.05	whole cortex	subclass	0.9364322613417878	0.08372828892694259	1353
+scvi	0.1	Dissection Angular gyrus AnG	class	0.9484156584652292	0.08563846017682795	1353
+scvi	0.1	Dissection Angular gyrus AnG	family	0.9769792033374292	0.08074332463154894	1353
+scvi	0.1	Dissection Angular gyrus AnG	subclass	0.9307186979331104	0.10313810701125528	1353
+scvi	0.1	Dissection Anterior cingulate cortex ACC	class	0.9513422299273105	0.0626255049181676	1353
+scvi	0.1	Dissection Anterior cingulate cortex ACC	family	0.9812749048857486	0.053352382150596976	1353
+scvi	0.1	Dissection Anterior cingulate cortex ACC	subclass	0.9333852149843783	0.08730337900110849	1353
+scvi	0.1	Dissection Dorsolateral prefrontal cortex DFC	class	0.9200792464724197	0.11090959481565447	1353
+scvi	0.1	Dissection Dorsolateral prefrontal cortex DFC	family	0.9464497674379858	0.10848515218015647	1353
+scvi	0.1	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.9025605443361305	0.1203155944454246	1353
+scvi	0.1	Dissection Primary auditory cortexA1	class	0.9483817420077557	0.07693709411466547	1353
+scvi	0.1	Dissection Primary auditory cortexA1	family	0.9795123968877038	0.06943418807426212	1353
+scvi	0.1	Dissection Primary auditory cortexA1	subclass	0.9309688305546313	0.09371516655782594	1353
+scvi	0.1	Dissection Primary somatosensory cortex S1	class	0.9508923328965037	0.07235990738504969	1353
+scvi	0.1	Dissection Primary somatosensory cortex S1	family	0.9804886113395257	0.06421433575723803	1353
+scvi	0.1	Dissection Primary somatosensory cortex S1	subclass	0.9307138646755075	0.09743576532150076	1353
+scvi	0.1	Dissection Primary visual cortexV1	class	0.9477395690394328	0.07662310046753497	1353
+scvi	0.1	Dissection Primary visual cortexV1	family	0.9788206975924426	0.06971635352698252	1353
+scvi	0.1	Dissection Primary visual cortexV1	subclass	0.9270626824906554	0.09969328432569177	1353
+scvi	0.1	Human Multiple Cortical Areas SMART-seq	class	0.9357748877244099	0.057132257231447846	1353
+scvi	0.1	Human Multiple Cortical Areas SMART-seq	family	0.9773099198942738	0.039157194241199594	1353
+scvi	0.1	Human Multiple Cortical Areas SMART-seq	subclass	0.9165631328270782	0.07308924113539209	1353
+scvi	0.1	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9533576853958428	0.06173585623610614	1353
+scvi	0.1	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9823729313841225	0.051961576315309885	1353
+scvi	0.1	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.935765818486656	0.08803623324786579	1353
+scvi	0.1	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.950497499377598	0.08044149875262435	1353
+scvi	0.1	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9788750394103681	0.07443705242186993	1353
+scvi	0.1	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9327078103081005	0.10439149925899453	1353
+scvi	0.1	whole cortex	class	0.9538183604861669	0.0624017072113939	1353
+scvi	0.1	whole cortex	family	0.9826947909042387	0.052874853883176504	1353
+scvi	0.1	whole cortex	subclass	0.9364317503752229	0.08372889815608855	1353
+scvi	0.15	Dissection Angular gyrus AnG	class	0.9483779854330733	0.0857228221166357	1353
+scvi	0.15	Dissection Angular gyrus AnG	family	0.9769196679263233	0.0808575879273398	1353
+scvi	0.15	Dissection Angular gyrus AnG	subclass	0.9306883245514	0.10320039421792156	1353
+scvi	0.15	Dissection Anterior cingulate cortex ACC	class	0.9512734463319448	0.06276692854416197	1353
+scvi	0.15	Dissection Anterior cingulate cortex ACC	family	0.9811985935362418	0.05351863185025198	1353
+scvi	0.15	Dissection Anterior cingulate cortex ACC	subclass	0.9333265354233605	0.08740724305811855	1353
+scvi	0.15	Dissection Dorsolateral prefrontal cortex DFC	class	0.9200598605169087	0.11098952916346318	1353
+scvi	0.15	Dissection Dorsolateral prefrontal cortex DFC	family	0.9464085471545427	0.10858373671292317	1353
+scvi	0.15	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.9025610675126539	0.12034019992162961	1353
+scvi	0.15	Dissection Primary auditory cortexA1	class	0.9483352787960478	0.07704257890392996	1353
+scvi	0.15	Dissection Primary auditory cortexA1	family	0.9794560406220043	0.06957246808485103	1353
+scvi	0.15	Dissection Primary auditory cortexA1	subclass	0.9309289989815288	0.0938015927694288	1353
+scvi	0.15	Dissection Primary somatosensory cortex S1	class	0.9508532772181242	0.07245004672153495	1353
+scvi	0.15	Dissection Primary somatosensory cortex S1	family	0.9804395141054896	0.06434248772224056	1353
+scvi	0.15	Dissection Primary somatosensory cortex S1	subclass	0.9306930972758822	0.09748779763117935	1353
+scvi	0.15	Dissection Primary visual cortexV1	class	0.9476453249544627	0.07674718615857085	1353
+scvi	0.15	Dissection Primary visual cortexV1	family	0.9787260467957974	0.06988028550636857	1353
+scvi	0.15	Dissection Primary visual cortexV1	subclass	0.9269696596695997	0.09978962446987603	1353
+scvi	0.15	Human Multiple Cortical Areas SMART-seq	class	0.9356672221953524	0.057230727707717796	1353
+scvi	0.15	Human Multiple Cortical Areas SMART-seq	family	0.9771763735624619	0.039285490378828135	1353
+scvi	0.15	Human Multiple Cortical Areas SMART-seq	subclass	0.9164423343786812	0.07318159736117925	1353
+scvi	0.15	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9533166949163361	0.06182930237684686	1353
+scvi	0.15	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9823262152326646	0.052066726769200114	1353
+scvi	0.15	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9357299311838712	0.08810607696583206	1353
+scvi	0.15	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9504687183490275	0.08050986898074754	1353
+scvi	0.15	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9788448555405932	0.07449397994239393	1353
+scvi	0.15	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9326867211397355	0.10444495544628045	1353
+scvi	0.15	whole cortex	class	0.953777200440693	0.06249237139739548	1353
+scvi	0.15	whole cortex	family	0.9826484002109664	0.052979047738180296	1353
+scvi	0.15	whole cortex	subclass	0.9363946400060025	0.08381465383138517	1353
+scvi	0.2	Dissection Angular gyrus AnG	class	0.9478588452927443	0.08619584040705007	1353
+scvi	0.2	Dissection Angular gyrus AnG	family	0.9762214297099376	0.08149909759389791	1353
+scvi	0.2	Dissection Angular gyrus AnG	subclass	0.9302786648302018	0.10356583380597076	1353
+scvi	0.2	Dissection Anterior cingulate cortex ACC	class	0.9502469214120202	0.06410330418721383	1353
+scvi	0.2	Dissection Anterior cingulate cortex ACC	family	0.980054671436467	0.055224716616120294	1353
+scvi	0.2	Dissection Anterior cingulate cortex ACC	subclass	0.9323519419664466	0.0884941226658422	1353
+scvi	0.2	Dissection Dorsolateral prefrontal cortex DFC	class	0.9194167208455436	0.11250259287578333	1353
+scvi	0.2	Dissection Dorsolateral prefrontal cortex DFC	family	0.9453095670111148	0.11033885077129663	1353
+scvi	0.2	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.9022765271322527	0.12092493995624352	1353
+scvi	0.2	Dissection Primary auditory cortexA1	class	0.9476797854446127	0.07795202488466052	1353
+scvi	0.2	Dissection Primary auditory cortexA1	family	0.9786505678898497	0.07077177366525192	1353
+scvi	0.2	Dissection Primary auditory cortexA1	subclass	0.9304168883490834	0.0945225531124668	1353
+scvi	0.2	Dissection Primary somatosensory cortex S1	class	0.9501922714245989	0.07330428661301906	1353
+scvi	0.2	Dissection Primary somatosensory cortex S1	family	0.979625306447728	0.06547204474682121	1353
+scvi	0.2	Dissection Primary somatosensory cortex S1	subclass	0.930204305139419	0.09811772278243984	1353
+scvi	0.2	Dissection Primary visual cortexV1	class	0.9463827649874684	0.07823002694825372	1353
+scvi	0.2	Dissection Primary visual cortexV1	family	0.977306243286518	0.0715537148830964	1353
+scvi	0.2	Dissection Primary visual cortexV1	subclass	0.9258397234186699	0.10075224180664676	1353
+scvi	0.2	Human Multiple Cortical Areas SMART-seq	class	0.9324460059565812	0.058928526305029386	1353
+scvi	0.2	Human Multiple Cortical Areas SMART-seq	family	0.972374389677838	0.04187571205582026	1353
+scvi	0.2	Human Multiple Cortical Areas SMART-seq	subclass	0.9124936190667872	0.07483815222915315	1353
+scvi	0.2	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9527558855998352	0.06257162496756424	1353
+scvi	0.2	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9815780703482573	0.05306775932175807	1353
+scvi	0.2	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9352147669592318	0.08861918935374519	1353
+scvi	0.2	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9499657444194298	0.08102647280868014	1353
+scvi	0.2	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.978228520868762	0.07509938353816227	1353
+scvi	0.2	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.932328355417891	0.10477616069778298	1353
+scvi	0.2	whole cortex	class	0.9531852387065306	0.06354876244180907	1353
+scvi	0.2	whole cortex	family	0.9819396929113589	0.05433699543082783	1353
+scvi	0.2	whole cortex	subclass	0.9358995430801039	0.08483038592280409	1353
+scvi	0.25	Dissection Angular gyrus AnG	class	0.9457896068573385	0.08954435015603669	1353
+scvi	0.25	Dissection Angular gyrus AnG	family	0.9737283391957551	0.08520566351967294	1353
+scvi	0.25	Dissection Angular gyrus AnG	subclass	0.9288161503988777	0.10478219522289371	1353
+scvi	0.25	Dissection Anterior cingulate cortex ACC	class	0.9468853638797503	0.06821350038230797	1353
+scvi	0.25	Dissection Anterior cingulate cortex ACC	family	0.9762641102131036	0.059928511309100964	1353
+scvi	0.25	Dissection Anterior cingulate cortex ACC	subclass	0.9292432366352659	0.09212030355590384	1353
+scvi	0.25	Dissection Dorsolateral prefrontal cortex DFC	class	0.9161060976916672	0.1161135213380438	1353
+scvi	0.25	Dissection Dorsolateral prefrontal cortex DFC	family	0.9413680636629834	0.11412862790169409	1353
+scvi	0.25	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.8995661947926334	0.12316518413133176	1353
+scvi	0.25	Dissection Primary auditory cortexA1	class	0.945143123804507	0.08144738017043399	1353
+scvi	0.25	Dissection Primary auditory cortexA1	family	0.9755489936589601	0.07502721934154441	1353
+scvi	0.25	Dissection Primary auditory cortexA1	subclass	0.9283709056753068	0.09740841725034895	1353
+scvi	0.25	Dissection Primary somatosensory cortex S1	class	0.9479013339885533	0.07659829815357232	1353
+scvi	0.25	Dissection Primary somatosensory cortex S1	family	0.9768260391723103	0.06927742197296788	1353
+scvi	0.25	Dissection Primary somatosensory cortex S1	subclass	0.9284466323960272	0.10082624101252549	1353
+scvi	0.25	Dissection Primary visual cortexV1	class	0.941587238697125	0.0842955254489698	1353
+scvi	0.25	Dissection Primary visual cortexV1	family	0.9717847768007378	0.07810678739154713	1353
+scvi	0.25	Dissection Primary visual cortexV1	subclass	0.9215908229807902	0.10447890591614549	1353
+scvi	0.25	Human Multiple Cortical Areas SMART-seq	class	0.9203308935707745	0.06447168830320661	1353
+scvi	0.25	Human Multiple Cortical Areas SMART-seq	family	0.9548061629728953	0.05139808918621744	1353
+scvi	0.25	Human Multiple Cortical Areas SMART-seq	subclass	0.8989187694057291	0.07965105529743587	1353
+scvi	0.25	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9503695946990617	0.06550330255494538	1353
+scvi	0.25	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9787010321825113	0.0568264154544477	1353
+scvi	0.25	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9332580815460885	0.09086829960670247	1353
+scvi	0.25	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9481649558304232	0.08282370385675304	1353
+scvi	0.25	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9761028112976642	0.07711161284849463	1353
+scvi	0.25	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9308719914132139	0.10600355152794012	1353
+scvi	0.25	whole cortex	class	0.9510737456253887	0.06663270789889265	1353
+scvi	0.25	whole cortex	family	0.9794659796534839	0.05800921150969361	1353
+scvi	0.25	whole cortex	subclass	0.9341769691984704	0.08736907477637518	1353
+scvi	0.5	Dissection Angular gyrus AnG	class	0.9017202481268893	0.12448901128213954	1353
+scvi	0.5	Dissection Angular gyrus AnG	family	0.9265581140444267	0.12110681766617806	1353
+scvi	0.5	Dissection Angular gyrus AnG	subclass	0.8903036952592845	0.129660220065586	1353
+scvi	0.5	Dissection Anterior cingulate cortex ACC	class	0.8641434819889673	0.12552316199701288	1353
+scvi	0.5	Dissection Anterior cingulate cortex ACC	family	0.8874518898984048	0.12131171917000597	1353
+scvi	0.5	Dissection Anterior cingulate cortex ACC	subclass	0.8527600635682967	0.13025451054138892	1353
+scvi	0.5	Dissection Dorsolateral prefrontal cortex DFC	class	0.8086529689050207	0.14306741645793994	1353
+scvi	0.5	Dissection Dorsolateral prefrontal cortex DFC	family	0.8341528802074463	0.13761977863274627	1353
+scvi	0.5	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.7905083948419355	0.14663336197806823	1353
+scvi	0.5	Dissection Primary auditory cortexA1	class	0.8920432556416521	0.1263184953240727	1353
+scvi	0.5	Dissection Primary auditory cortexA1	family	0.9165900255596116	0.12237214884261141	1353
+scvi	0.5	Dissection Primary auditory cortexA1	subclass	0.8805303434854113	0.13143452821004942	1353
+scvi	0.5	Dissection Primary somatosensory cortex S1	class	0.895765869755686	0.12372006252844066	1353
+scvi	0.5	Dissection Primary somatosensory cortex S1	family	0.9205360342198902	0.11992202987840607	1353
+scvi	0.5	Dissection Primary somatosensory cortex S1	subclass	0.8842015882216094	0.128467027381914	1353
+scvi	0.5	Dissection Primary visual cortexV1	class	0.8488710816185686	0.14914395990431345	1353
+scvi	0.5	Dissection Primary visual cortexV1	family	0.8716298086306202	0.14783440608210957	1353
+scvi	0.5	Dissection Primary visual cortexV1	subclass	0.8356606530242261	0.15289218870307408	1353
+scvi	0.5	Human Multiple Cortical Areas SMART-seq	class	0.7600605728187697	0.15424127730738832	1353
+scvi	0.5	Human Multiple Cortical Areas SMART-seq	family	0.7783120331823312	0.15193457559043533	1353
+scvi	0.5	Human Multiple Cortical Areas SMART-seq	subclass	0.7400202528276771	0.15782041249553036	1353
+scvi	0.5	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.8951238322316759	0.12360023482448872	1353
+scvi	0.5	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9189602157727439	0.12112823365748344	1353
+scvi	0.5	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.883854198094409	0.1299078196356361	1353
+scvi	0.5	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9049035237558093	0.12327179199597796	1353
+scvi	0.5	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9289400969535196	0.11922417599356144	1353
+scvi	0.5	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.8938376316002264	0.12875803733803004	1353
+scvi	0.5	whole cortex	class	0.9031329217746478	0.11656793118319875	1353
+scvi	0.5	whole cortex	family	0.9263992484635551	0.11248478400339033	1353
+scvi	0.5	whole cortex	subclass	0.892013114340553	0.12269113202421997	1353
+scvi	0.75	Dissection Angular gyrus AnG	class	0.703973511418283	0.1792848781257904	1353
+scvi	0.75	Dissection Angular gyrus AnG	family	0.7195457077494715	0.1803881033200448	1353
+scvi	0.75	Dissection Angular gyrus AnG	subclass	0.6951276539494602	0.18041725135055214	1353
+scvi	0.75	Dissection Anterior cingulate cortex ACC	class	0.6355530677174585	0.208086952065544	1353
+scvi	0.75	Dissection Anterior cingulate cortex ACC	family	0.6488511224024732	0.2085175028110402	1353
+scvi	0.75	Dissection Anterior cingulate cortex ACC	subclass	0.6265269512277793	0.20802701646649935	1353
+scvi	0.75	Dissection Dorsolateral prefrontal cortex DFC	class	0.38188396259542434	0.1996159648749622	1353
+scvi	0.75	Dissection Dorsolateral prefrontal cortex DFC	family	0.39288027856204993	0.20065261838681406	1353
+scvi	0.75	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.3702487727731494	0.19640561269508258	1353
+scvi	0.75	Dissection Primary auditory cortexA1	class	0.7149669633693647	0.17874662190265414	1353
+scvi	0.75	Dissection Primary auditory cortexA1	family	0.7318407591419617	0.17914724190937115	1353
+scvi	0.75	Dissection Primary auditory cortexA1	subclass	0.7065032805089202	0.17963993222291952	1353
+scvi	0.75	Dissection Primary somatosensory cortex S1	class	0.6869187862256123	0.19661902281568472	1353
+scvi	0.75	Dissection Primary somatosensory cortex S1	family	0.7022581992872853	0.1992795142791777	1353
+scvi	0.75	Dissection Primary somatosensory cortex S1	subclass	0.6781788705615261	0.19705602727454347	1353
+scvi	0.75	Dissection Primary visual cortexV1	class	0.6201924841084232	0.20585791063527817	1353
+scvi	0.75	Dissection Primary visual cortexV1	family	0.6340402882446848	0.207458092461556	1353
+scvi	0.75	Dissection Primary visual cortexV1	subclass	0.6102781891304777	0.20580633185736968	1353
+scvi	0.75	Human Multiple Cortical Areas SMART-seq	class	0.3392521719980919	0.25440898139655393	1353
+scvi	0.75	Human Multiple Cortical Areas SMART-seq	family	0.35109096820761826	0.25606345669205627	1353
+scvi	0.75	Human Multiple Cortical Areas SMART-seq	subclass	0.3271635897828198	0.24985452088432253	1353
+scvi	0.75	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.721179847403923	0.19102472056675956	1353
+scvi	0.75	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.7360710689012938	0.19277047066318115	1353
+scvi	0.75	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.7135977984779075	0.1917496475597528	1353
+scvi	0.75	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.7253230152577217	0.1822806758888634	1353
+scvi	0.75	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.7390611670991171	0.18232813231234746	1353
+scvi	0.75	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.7177714723287717	0.18302978115798235	1353
+scvi	0.75	whole cortex	class	0.7305581983771864	0.17943003230018337	1353
+scvi	0.75	whole cortex	family	0.7450958604758096	0.18021148449305865	1353
+scvi	0.75	whole cortex	subclass	0.7229674060566174	0.1801813680884069	1353
+seurat	0.0	Dissection Angular gyrus AnG	class	0.9487684154205156	0.06674173763544233	1353
+seurat	0.0	Dissection Angular gyrus AnG	family	0.9812186172549474	0.0439264318482983	1353
+seurat	0.0	Dissection Angular gyrus AnG	subclass	0.9339535479623313	0.07991072062002089	1353
+seurat	0.0	Dissection Anterior cingulate cortex ACC	class	0.9446304239516556	0.06827413603122522	1353
+seurat	0.0	Dissection Anterior cingulate cortex ACC	family	0.974499860318349	0.05253488322187646	1353
+seurat	0.0	Dissection Anterior cingulate cortex ACC	subclass	0.9287733941036745	0.08252073484861938	1353
+seurat	0.0	Dissection Dorsolateral prefrontal cortex DFC	class	0.9109466630994041	0.10360734468770921	1353
+seurat	0.0	Dissection Dorsolateral prefrontal cortex DFC	family	0.9629920174219888	0.056858882256874854	1353
+seurat	0.0	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.890141503457051	0.11160102730692116	1353
+seurat	0.0	Dissection Primary auditory cortexA1	class	0.948734512008854	0.06340646429736872	1353
+seurat	0.0	Dissection Primary auditory cortexA1	family	0.9792097152799559	0.04526135282909815	1353
+seurat	0.0	Dissection Primary auditory cortexA1	subclass	0.9330862136036765	0.07725372902518692	1353
+seurat	0.0	Dissection Primary somatosensory cortex S1	class	0.9471012415968681	0.06843601837530698	1353
+seurat	0.0	Dissection Primary somatosensory cortex S1	family	0.9777084780340338	0.04680384590093558	1353
+seurat	0.0	Dissection Primary somatosensory cortex S1	subclass	0.9314341250001824	0.08186367193388835	1353
+seurat	0.0	Dissection Primary visual cortexV1	class	0.9489599147822175	0.06146072515688769	1353
+seurat	0.0	Dissection Primary visual cortexV1	family	0.9819367058358651	0.041610397493949645	1353
+seurat	0.0	Dissection Primary visual cortexV1	subclass	0.934052643809978	0.07634719495213668	1353
+seurat	0.0	Human Multiple Cortical Areas SMART-seq	class	0.9048633205226706	0.08499414295754337	1353
+seurat	0.0	Human Multiple Cortical Areas SMART-seq	family	0.9801903231217438	0.04161605785708579	1353
+seurat	0.0	Human Multiple Cortical Areas SMART-seq	subclass	0.8911811930275402	0.09575990984401825	1353
+seurat	0.0	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9443080542468879	0.06886189994832197	1353
+seurat	0.0	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9767837340239394	0.04873866592068537	1353
+seurat	0.0	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9305933500707649	0.08164932328111375	1353
+seurat	0.0	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9417728896787574	0.06982784700549508	1353
+seurat	0.0	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9730679506423238	0.052822648406677566	1353
+seurat	0.0	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9281253143969359	0.08192089577968123	1353
+seurat	0.0	whole cortex	class	0.941268954944469	0.0736796151377287	1353
+seurat	0.0	whole cortex	family	0.9750760414950272	0.051315528295529676	1353
+seurat	0.0	whole cortex	subclass	0.9274211390997797	0.08496988298537005	1353
+seurat	0.05	Dissection Angular gyrus AnG	class	0.9487684154205156	0.06674173763544226	1353
+seurat	0.05	Dissection Angular gyrus AnG	family	0.9812186172549474	0.04392643184829836	1353
+seurat	0.05	Dissection Angular gyrus AnG	subclass	0.9339535479623313	0.07991072062002093	1353
+seurat	0.05	Dissection Anterior cingulate cortex ACC	class	0.9446304239516556	0.06827413603122523	1353
+seurat	0.05	Dissection Anterior cingulate cortex ACC	family	0.974499860318349	0.05253488322187652	1353
+seurat	0.05	Dissection Anterior cingulate cortex ACC	subclass	0.9287733941036745	0.08252073484861935	1353
+seurat	0.05	Dissection Dorsolateral prefrontal cortex DFC	class	0.9109466630994041	0.10360734468770928	1353
+seurat	0.05	Dissection Dorsolateral prefrontal cortex DFC	family	0.9629920174219888	0.05685888225687487	1353
+seurat	0.05	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.890141503457051	0.11160102730692119	1353
+seurat	0.05	Dissection Primary auditory cortexA1	class	0.948734512008854	0.06340646429736871	1353
+seurat	0.05	Dissection Primary auditory cortexA1	family	0.9792097152799559	0.045261352829098135	1353
+seurat	0.05	Dissection Primary auditory cortexA1	subclass	0.9330862136036765	0.07725372902518689	1353
+seurat	0.05	Dissection Primary somatosensory cortex S1	class	0.9471012415968681	0.068436018375307	1353
+seurat	0.05	Dissection Primary somatosensory cortex S1	family	0.9777084780340338	0.046803845900935594	1353
+seurat	0.05	Dissection Primary somatosensory cortex S1	subclass	0.9314341250001824	0.08186367193388827	1353
+seurat	0.05	Dissection Primary visual cortexV1	class	0.9489599147822175	0.06146072515688772	1353
+seurat	0.05	Dissection Primary visual cortexV1	family	0.9819367058358651	0.0416103974939496	1353
+seurat	0.05	Dissection Primary visual cortexV1	subclass	0.934052643809978	0.07634719495213659	1353
+seurat	0.05	Human Multiple Cortical Areas SMART-seq	class	0.9048633205226706	0.0849941429575434	1353
+seurat	0.05	Human Multiple Cortical Areas SMART-seq	family	0.9801903231217438	0.0416160578570858	1353
+seurat	0.05	Human Multiple Cortical Areas SMART-seq	subclass	0.8911811930275402	0.09575990984401817	1353
+seurat	0.05	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9443080542468879	0.068861899948322	1353
+seurat	0.05	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9767837340239394	0.048738665920685355	1353
+seurat	0.05	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9305933500707649	0.08164932328111368	1353
+seurat	0.05	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9417728896787574	0.0698278470054952	1353
+seurat	0.05	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9730679506423238	0.05282264840667756	1353
+seurat	0.05	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9281253143969359	0.08192089577968127	1353
+seurat	0.05	whole cortex	class	0.941268954944469	0.07367961513772867	1353
+seurat	0.05	whole cortex	family	0.9750760414950272	0.051315528295529676	1353
+seurat	0.05	whole cortex	subclass	0.9274211390997797	0.0849698829853701	1353
+seurat	0.1	Dissection Angular gyrus AnG	class	0.9487684154205156	0.06674173763544228	1353
+seurat	0.1	Dissection Angular gyrus AnG	family	0.9812186172549474	0.04392643184829832	1353
+seurat	0.1	Dissection Angular gyrus AnG	subclass	0.9339535479623313	0.07991072062002093	1353
+seurat	0.1	Dissection Anterior cingulate cortex ACC	class	0.9446304239516556	0.06827413603122522	1353
+seurat	0.1	Dissection Anterior cingulate cortex ACC	family	0.974499860318349	0.0525348832218765	1353
+seurat	0.1	Dissection Anterior cingulate cortex ACC	subclass	0.9287733941036745	0.08252073484861946	1353
+seurat	0.1	Dissection Dorsolateral prefrontal cortex DFC	class	0.9109466630994041	0.10360734468770928	1353
+seurat	0.1	Dissection Dorsolateral prefrontal cortex DFC	family	0.9629920174219888	0.056858882256874924	1353
+seurat	0.1	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.890141503457051	0.11160102730692102	1353
+seurat	0.1	Dissection Primary auditory cortexA1	class	0.948734512008854	0.0634064642973687	1353
+seurat	0.1	Dissection Primary auditory cortexA1	family	0.9792097152799559	0.04526135282909816	1353
+seurat	0.1	Dissection Primary auditory cortexA1	subclass	0.9330862136036765	0.07725372902518697	1353
+seurat	0.1	Dissection Primary somatosensory cortex S1	class	0.9471012415968681	0.068436018375307	1353
+seurat	0.1	Dissection Primary somatosensory cortex S1	family	0.9777084780340338	0.04680384590093554	1353
+seurat	0.1	Dissection Primary somatosensory cortex S1	subclass	0.9314341250001824	0.08186367193388826	1353
+seurat	0.1	Dissection Primary visual cortexV1	class	0.9489599147822175	0.06146072515688775	1353
+seurat	0.1	Dissection Primary visual cortexV1	family	0.9819367058358651	0.04161039749394969	1353
+seurat	0.1	Dissection Primary visual cortexV1	subclass	0.934052643809978	0.07634719495213672	1353
+seurat	0.1	Human Multiple Cortical Areas SMART-seq	class	0.9048633205226706	0.0849941429575434	1353
+seurat	0.1	Human Multiple Cortical Areas SMART-seq	family	0.9801903231217438	0.04161605785708577	1353
+seurat	0.1	Human Multiple Cortical Areas SMART-seq	subclass	0.8911811930275402	0.09575990984401825	1353
+seurat	0.1	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9443080542468879	0.06886189994832202	1353
+seurat	0.1	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9767837340239394	0.048738665920685396	1353
+seurat	0.1	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9305933500707649	0.08164932328111371	1353
+seurat	0.1	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9417728896787574	0.06982784700549509	1353
+seurat	0.1	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9730679506423238	0.052822648406677525	1353
+seurat	0.1	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9281253143969359	0.08192089577968131	1353
+seurat	0.1	whole cortex	class	0.941268954944469	0.07367961513772862	1353
+seurat	0.1	whole cortex	family	0.9750760414950272	0.05131552829552969	1353
+seurat	0.1	whole cortex	subclass	0.9274211390997797	0.08496988298537013	1353
+seurat	0.15	Dissection Angular gyrus AnG	class	0.9487684436361067	0.0667417330412656	1353
+seurat	0.15	Dissection Angular gyrus AnG	family	0.9812187365710638	0.04392612558156306	1353
+seurat	0.15	Dissection Angular gyrus AnG	subclass	0.9339535761779224	0.07991072163166951	1353
+seurat	0.15	Dissection Anterior cingulate cortex ACC	class	0.9446304239516556	0.06827413603122517	1353
+seurat	0.15	Dissection Anterior cingulate cortex ACC	family	0.9745001097267812	0.05253413176508596	1353
+seurat	0.15	Dissection Anterior cingulate cortex ACC	subclass	0.9287733941036745	0.08252073484861935	1353
+seurat	0.15	Dissection Dorsolateral prefrontal cortex DFC	class	0.9109466630994041	0.10360734468770931	1353
+seurat	0.15	Dissection Dorsolateral prefrontal cortex DFC	family	0.9629920174219888	0.056858882256874854	1353
+seurat	0.15	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.890141503457051	0.11160102730692109	1353
+seurat	0.15	Dissection Primary auditory cortexA1	class	0.948734512008854	0.06340646429736868	1353
+seurat	0.15	Dissection Primary auditory cortexA1	family	0.9792101139645448	0.045260671437939104	1353
+seurat	0.15	Dissection Primary auditory cortexA1	subclass	0.9330862136036765	0.07725372902518692	1353
+seurat	0.15	Dissection Primary somatosensory cortex S1	class	0.9471012024390117	0.06843603593064194	1353
+seurat	0.15	Dissection Primary somatosensory cortex S1	family	0.9777089412215112	0.04680351264626911	1353
+seurat	0.15	Dissection Primary somatosensory cortex S1	subclass	0.9314340855859029	0.08186368111278138	1353
+seurat	0.15	Dissection Primary visual cortexV1	class	0.9489599201318528	0.06146071121686838	1353
+seurat	0.15	Dissection Primary visual cortexV1	family	0.9819367612608314	0.041610287844580825	1353
+seurat	0.15	Dissection Primary visual cortexV1	subclass	0.9340526532715292	0.07634717205045967	1353
+seurat	0.15	Human Multiple Cortical Areas SMART-seq	class	0.9048633205226706	0.08499414295754341	1353
+seurat	0.15	Human Multiple Cortical Areas SMART-seq	family	0.9801903231217438	0.0416160578570858	1353
+seurat	0.15	Human Multiple Cortical Areas SMART-seq	subclass	0.8911811930275402	0.09575990984401817	1353
+seurat	0.15	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9443079784879078	0.06886184031947974	1353
+seurat	0.15	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9767839000016929	0.0487387784796495	1353
+seurat	0.15	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9305932746060146	0.08164925992232258	1353
+seurat	0.15	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9417729379177181	0.06982782975933223	1353
+seurat	0.15	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.97306801654577	0.05282254355082602	1353
+seurat	0.15	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9281253448093139	0.08192088961949541	1353
+seurat	0.15	whole cortex	class	0.9412688968771719	0.07367969702138108	1353
+seurat	0.15	whole cortex	family	0.9750760089626933	0.05131559038234656	1353
+seurat	0.15	whole cortex	subclass	0.9274211531674617	0.08496985572059984	1353
+seurat	0.2	Dissection Angular gyrus AnG	class	0.9487635804844928	0.06674311031086992	1353
+seurat	0.2	Dissection Angular gyrus AnG	family	0.9812185136582852	0.04392512275283226	1353
+seurat	0.2	Dissection Angular gyrus AnG	subclass	0.9339486134244805	0.0799109544212229	1353
+seurat	0.2	Dissection Anterior cingulate cortex ACC	class	0.9446240709945283	0.06829759896267097	1353
+seurat	0.2	Dissection Anterior cingulate cortex ACC	family	0.9745063421930134	0.05252651125119371	1353
+seurat	0.2	Dissection Anterior cingulate cortex ACC	subclass	0.928766754929192	0.08254026026519373	1353
+seurat	0.2	Dissection Dorsolateral prefrontal cortex DFC	class	0.9109468493724338	0.10360612770050644	1353
+seurat	0.2	Dissection Dorsolateral prefrontal cortex DFC	family	0.9629927535253237	0.05685633013458616	1353
+seurat	0.2	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.890141091165022	0.11160002980845128	1353
+seurat	0.2	Dissection Primary auditory cortexA1	class	0.9487320168381852	0.06340829586465042	1353
+seurat	0.2	Dissection Primary auditory cortexA1	family	0.979215121838382	0.04524969213884578	1353
+seurat	0.2	Dissection Primary auditory cortexA1	subclass	0.9330834675190987	0.07725544471650339	1353
+seurat	0.2	Dissection Primary somatosensory cortex S1	class	0.9470954728906165	0.06843908777411936	1353
+seurat	0.2	Dissection Primary somatosensory cortex S1	family	0.9777080187570198	0.046801385815911166	1353
+seurat	0.2	Dissection Primary somatosensory cortex S1	subclass	0.9314282993975729	0.08186477791363372	1353
+seurat	0.2	Dissection Primary visual cortexV1	class	0.9489589604409914	0.061462690207221934	1353
+seurat	0.2	Dissection Primary visual cortexV1	family	0.9819376222726713	0.04161159316050444	1353
+seurat	0.2	Dissection Primary visual cortexV1	subclass	0.9340520340137579	0.07634896049294	1353
+seurat	0.2	Human Multiple Cortical Areas SMART-seq	class	0.9048626985084919	0.0849939044729728	1353
+seurat	0.2	Human Multiple Cortical Areas SMART-seq	family	0.9801899743967553	0.041616251449103504	1353
+seurat	0.2	Human Multiple Cortical Areas SMART-seq	subclass	0.8911807539511899	0.09575951502994982	1353
+seurat	0.2	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9443071591389448	0.06886749413622185	1353
+seurat	0.2	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9767904486484414	0.04873795449667139	1353
+seurat	0.2	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9305919770554799	0.08165425530300173	1353
+seurat	0.2	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9417635731840711	0.06984110793846252	1353
+seurat	0.2	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9730675974653568	0.05283458077456	1353
+seurat	0.2	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9281154943240416	0.08193126216982526	1353
+seurat	0.2	whole cortex	class	0.9412647646219258	0.07368448753863892	1353
+seurat	0.2	whole cortex	family	0.9750751016448846	0.051322019162155216	1353
+seurat	0.2	whole cortex	subclass	0.9274174796815322	0.08497237868709635	1353
+seurat	0.25	Dissection Angular gyrus AnG	class	0.9487164323353201	0.06676181345045937	1353
+seurat	0.25	Dissection Angular gyrus AnG	family	0.9812045441511155	0.043935917026389	1353
+seurat	0.25	Dissection Angular gyrus AnG	subclass	0.9339033857518028	0.07992561399100764	1353
+seurat	0.25	Dissection Anterior cingulate cortex ACC	class	0.9444950598009877	0.06855999158021005	1353
+seurat	0.25	Dissection Anterior cingulate cortex ACC	family	0.9744826918533455	0.05264823196822111	1353
+seurat	0.25	Dissection Anterior cingulate cortex ACC	subclass	0.9286355856552978	0.08274236164344012	1353
+seurat	0.25	Dissection Dorsolateral prefrontal cortex DFC	class	0.9109315952357575	0.10362442965008542	1353
+seurat	0.25	Dissection Dorsolateral prefrontal cortex DFC	family	0.9629925365854152	0.056870525838047685	1353
+seurat	0.25	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.8901151771121342	0.11162538548435838	1353
+seurat	0.25	Dissection Primary auditory cortexA1	class	0.9486865520970538	0.0634495737371311	1353
+seurat	0.25	Dissection Primary auditory cortexA1	family	0.9792229207346612	0.04522494056615712	1353
+seurat	0.25	Dissection Primary auditory cortexA1	subclass	0.9330359545343356	0.07728644883827511	1353
+seurat	0.25	Dissection Primary somatosensory cortex S1	class	0.9470322132060308	0.06847687722238434	1353
+seurat	0.25	Dissection Primary somatosensory cortex S1	family	0.9776997731161652	0.04677253295872419	1353
+seurat	0.25	Dissection Primary somatosensory cortex S1	subclass	0.9313598195956775	0.08189966849604466	1353
+seurat	0.25	Dissection Primary visual cortexV1	class	0.9489416586509404	0.06147689490208085	1353
+seurat	0.25	Dissection Primary visual cortexV1	family	0.9819480310759531	0.04161101140913359	1353
+seurat	0.25	Dissection Primary visual cortexV1	subclass	0.9340361194898879	0.0763584386140326	1353
+seurat	0.25	Human Multiple Cortical Areas SMART-seq	class	0.9048528945898833	0.0849952014419852	1353
+seurat	0.25	Human Multiple Cortical Areas SMART-seq	family	0.9801880661840491	0.041621839603099106	1353
+seurat	0.25	Human Multiple Cortical Areas SMART-seq	subclass	0.8911734271818476	0.09575980702471057	1353
+seurat	0.25	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9442300897750654	0.06889892751804273	1353
+seurat	0.25	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9768056143890299	0.04873419402570507	1353
+seurat	0.25	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9305125335157909	0.08168203703481443	1353
+seurat	0.25	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9416222845877277	0.07000819002515082	1353
+seurat	0.25	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9730119003527866	0.05300997049017278	1353
+seurat	0.25	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9279706436839621	0.08206403926888241	1353
+seurat	0.25	whole cortex	class	0.9411715506221103	0.07377095280139717	1353
+seurat	0.25	whole cortex	family	0.9750444629490997	0.051394852578403025	1353
+seurat	0.25	whole cortex	subclass	0.9273245745047122	0.08504880586460237	1353
+seurat	0.5	Dissection Angular gyrus AnG	class	0.9429615881162867	0.07052302550958779	1353
+seurat	0.5	Dissection Angular gyrus AnG	family	0.9753574937826791	0.0489815062292468	1353
+seurat	0.5	Dissection Angular gyrus AnG	subclass	0.9281841095495961	0.08271962204913126	1353
+seurat	0.5	Dissection Anterior cingulate cortex ACC	class	0.938796139047143	0.07489801066077928	1353
+seurat	0.5	Dissection Anterior cingulate cortex ACC	family	0.9701729845265942	0.05694465590405519	1353
+seurat	0.5	Dissection Anterior cingulate cortex ACC	subclass	0.9231938413673693	0.08771332970931062	1353
+seurat	0.5	Dissection Dorsolateral prefrontal cortex DFC	class	0.9035616452044651	0.10882184709110096	1353
+seurat	0.5	Dissection Dorsolateral prefrontal cortex DFC	family	0.9548432318655522	0.06109644055972929	1353
+seurat	0.5	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.8822751566120101	0.11583929545881266	1353
+seurat	0.5	Dissection Primary auditory cortexA1	class	0.9441423685749172	0.0668685178249755	1353
+seurat	0.5	Dissection Primary auditory cortexA1	family	0.9754594322796577	0.048447101640153395	1353
+seurat	0.5	Dissection Primary auditory cortexA1	subclass	0.9285035783212984	0.07990761658818131	1353
+seurat	0.5	Dissection Primary somatosensory cortex S1	class	0.9414777634502512	0.07329069007781634	1353
+seurat	0.5	Dissection Primary somatosensory cortex S1	family	0.9731462072321252	0.05200716346317761	1353
+seurat	0.5	Dissection Primary somatosensory cortex S1	subclass	0.9258869431858834	0.08548865028498309	1353
+seurat	0.5	Dissection Primary visual cortexV1	class	0.943292182862237	0.06531775845077231	1353
+seurat	0.5	Dissection Primary visual cortexV1	family	0.9761049292149375	0.046382321919968154	1353
+seurat	0.5	Dissection Primary visual cortexV1	subclass	0.9285716920181116	0.07860127585001225	1353
+seurat	0.5	Human Multiple Cortical Areas SMART-seq	class	0.9002629344730639	0.08503758849250324	1353
+seurat	0.5	Human Multiple Cortical Areas SMART-seq	family	0.9745137903930807	0.042882891602484804	1353
+seurat	0.5	Human Multiple Cortical Areas SMART-seq	subclass	0.8865003242491737	0.09555131747936114	1353
+seurat	0.5	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9343134580514072	0.07525148074591183	1353
+seurat	0.5	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9678309468133776	0.05626861967791746	1353
+seurat	0.5	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.9204096613551727	0.08681422796735701	1353
+seurat	0.5	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9337157889902736	0.07692793845509928	1353
+seurat	0.5	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9662739346298183	0.05981225836559211	1353
+seurat	0.5	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.919915320611637	0.08781656680114659	1353
+seurat	0.5	whole cortex	class	0.9323750522152247	0.08025790649035809	1353
+seurat	0.5	whole cortex	family	0.9662423091503141	0.05862237015736907	1353
+seurat	0.5	whole cortex	subclass	0.9183413660551009	0.09060689011998758	1353
+seurat	0.75	Dissection Angular gyrus AnG	class	0.9211569430974156	0.0868629834069171	1353
+seurat	0.75	Dissection Angular gyrus AnG	family	0.9502129487086193	0.07023480732221386	1353
+seurat	0.75	Dissection Angular gyrus AnG	subclass	0.9080677547054606	0.09642882772378548	1353
+seurat	0.75	Dissection Anterior cingulate cortex ACC	class	0.9176774121421165	0.0930482064331032	1353
+seurat	0.75	Dissection Anterior cingulate cortex ACC	family	0.9463976745459987	0.07753825474587782	1353
+seurat	0.75	Dissection Anterior cingulate cortex ACC	subclass	0.9042237591384197	0.10298929210015977	1353
+seurat	0.75	Dissection Dorsolateral prefrontal cortex DFC	class	0.8597480520751848	0.1369380141071308	1353
+seurat	0.75	Dissection Dorsolateral prefrontal cortex DFC	family	0.9023857430097052	0.09639187281465308	1353
+seurat	0.75	Dissection Dorsolateral prefrontal cortex DFC	subclass	0.8361245057350027	0.14102608911292705	1353
+seurat	0.75	Dissection Primary auditory cortexA1	class	0.9246189609646577	0.08226703498793896	1353
+seurat	0.75	Dissection Primary auditory cortexA1	family	0.9542499418945062	0.06487860480969246	1353
+seurat	0.75	Dissection Primary auditory cortexA1	subclass	0.9106505697931725	0.09286785375566367	1353
+seurat	0.75	Dissection Primary somatosensory cortex S1	class	0.9229919551718888	0.0876027691776197	1353
+seurat	0.75	Dissection Primary somatosensory cortex S1	family	0.9533802265121889	0.0660341861738218	1353
+seurat	0.75	Dissection Primary somatosensory cortex S1	subclass	0.9093438480439727	0.09727080295236742	1353
+seurat	0.75	Dissection Primary visual cortexV1	class	0.9214348014165483	0.07945681678678454	1353
+seurat	0.75	Dissection Primary visual cortexV1	family	0.950771244101854	0.06418939684607308	1353
+seurat	0.75	Dissection Primary visual cortexV1	subclass	0.9083837418089123	0.08954401060676079	1353
+seurat	0.75	Human Multiple Cortical Areas SMART-seq	class	0.8614376291130651	0.09731611950636342	1353
+seurat	0.75	Human Multiple Cortical Areas SMART-seq	family	0.9243050329174075	0.05987428739939929	1353
+seurat	0.75	Human Multiple Cortical Areas SMART-seq	subclass	0.8478026873102231	0.10513484289858416	1353
+seurat	0.75	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	class	0.9095957294297434	0.093121664036385	1353
+seurat	0.75	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	family	0.9397905769439957	0.07924047772422116	1353
+seurat	0.75	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.8966621114756903	0.10235161040703054	1353
+seurat	0.75	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	class	0.9128155634916446	0.0914286431505446	1353
+seurat	0.75	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	family	0.9431215156860538	0.07646488507888995	1353
+seurat	0.75	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	subclass	0.90000813269601	0.10069799236300894	1353
+seurat	0.75	whole cortex	class	0.9087778501500471	0.09672107857509696	1353
+seurat	0.75	whole cortex	family	0.9376299719461997	0.08011263905444654	1353
+seurat	0.75	whole cortex	subclass	0.8960224426169265	0.10540329927407299	1353

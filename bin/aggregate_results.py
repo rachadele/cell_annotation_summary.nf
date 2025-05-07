@@ -180,42 +180,50 @@ def main():
     # replace "nan" with None
     f1_df = f1_df.replace("nan", None)
     #----------weighted f1 results----------------
-    # fix errors and add factors
-    
-       
+    # miscellaneous data wrangling
+      
     f1_df["region_match"] = f1_df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
     f1_df["reference_acronym"] = f1_df["reference"].apply(make_acronym)
-    #f1_df["query_acronym"] = f1_df["query"].apply(make_acronym)
     f1_df["reference"] = f1_df["reference"].str.replace("_", " ")
     f1_df["study"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
     
+           
+
     
-    f1_df["disease"] = np.where(f1_df["study"]== "GSE211870", "Control", f1_df["disease"])
-    # eric queries
     f1_df["disease_state"] = np.where(f1_df["disease"] == "Control", "Control", "Disease")
-    # handle Gemma
+    
     
     if organism == "homo_sapiens":
-        # deal with annotation mismatch between gemma queries and curated queries
-        f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage)
+        # data wrangling for missing disease (all controls)
+        f1_df["disease"] = np.where(f1_df["study"]=="GSE211870", "Control", f1_df["disease"]) 
     
-        # replace rosmap infant with rosmap late adult
-        f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
-        f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
-        f1_df["dev_stage"] = np.where(f1_df["study"] == "pineda" , "late adult", f1_df["dev_stage"])
-        #f1_df["dev_stage"] = np.where(f1_df["dev_stage"] == np.nan , "late adult", f1_df["dev_stage"])
-       # f1_df["dev_sage"] = np.where(f1_df["dev_stage"] == None , "late adult", f1_df["dev_stage"])
-
-        f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "M", f1_df["sex"])
-        f1_df["sex"] = f1_df["sex"].str.replace("male", "M")
+        # deal with annotation mismatch between gemma queries and curated queries
+        f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage) 
         
+    # Data wrangling for Rosmap error (dev stage mistakely mapped as "infant")
+        f1_df["dev_stage"] = np.where(f1_df["study"] == "rosmap" , "late adult", f1_df["dev_stage"])
+        
+    # data wrangling for missing Pineda dev stage   
+        f1_df["dev_stage"] = np.where(f1_df["study"] == "pineda" , "late adult", f1_df["dev_stage"])
+
+    # data wrangling for Lim sample missing from original metadata
+        f1_df["sex"] = np.where(f1_df["query"]=="lim C5382Cd", "male", f1_df["sex"])
+        f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
+
+
+    # data wrangling for sex (Gemmma data uses male:female, conform to this naming scheme)
+        f1_df["sex"] = f1_df["sex"].str.replace("M", "male")
+        f1_df["sex"] = f1_df["sex"].str.replace("F", "female")
+        # don't know why this is in the data
+        f1_df["sex"] = f1_df["sex"].str.replace("feM","female")
+         
     if organism == "mus_musculus":
         f1_df["disease_state"] = np.where(f1_df["disease"].isnull(), "Control", "Disease")
-        
         f1_df["treatment_state"] = np.where(f1_df["treatment"].isnull(), "No treatment", "treatment")
         f1_df["genotype"] = np.where(f1_df["genotype"].isnull(), "wild type genotype", f1_df["genotype"])
-        
+
+
         
 #----------------drop label columns and save---------------
     outdir = "weighted_f1_distributions"
@@ -293,24 +301,15 @@ def main():
 
             
 
-
-
 # -----------label f1 results----------------
     label_results = f1_df[f1_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
-    print(label_results)
 
+    # rename "support" to "intra-dataset support"
+    #label_results = label_results.rename(columns={"support": "intra-dataset support"})
 
     label_results = label_results.fillna("None")
-    # fill "Neuron" ,"Glutamatergic", and "GABAergic" in "subclass" column with "ambigious {label}"
-    # eventually add all ambiguous labels?
-    # This way we can represent ambiguous author labels
-    label_results["label"] = label_results.apply(
-        lambda row: f"Ambiguous {row['label']}" if row["key"] == "subclass" and row["label"] in ["Neuron", "Glutamatergic", "GABAergic"] else row["label"], 
-        axis=1
-    )
-
-    
+    label_results = label_results[label_results["label"] != "unkown"]
     
     label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
    # Ensure precision and recall are numeric and handle 'nan' strings (if needed)
@@ -343,21 +342,22 @@ def main():
     factors=columns_to_group + ["query"] + ["query_region"] + ["ref_region"]
     write_factor_summary(label_results, factors) 
    
-        
-    # Create the FacetGrid
-    g = sns.FacetGrid(label_results, col="key", hue="label", height=4, aspect=1.5)
-    # Map the KDE plot to the FacetGrid
-    g.map(sns.histplot, 'f1_score', multiple="layer", bins=40, binrange=(0, 1))
-    # Set axis labels and titles
+
+    # F1 Score distribution by key
+    g = sns.FacetGrid(label_results, col="key", height=4, aspect=1.5)
+    g.map(sns.histplot, 'f1_score', bins=40, binrange=(0, 1))
     g.set_axis_labels("F1 Scores", "Frequency")
     g.set_titles("F1 Score Distribution by {col_name}")
-    # Add a legend
-    g.add_legend()
-    # Save and display the plot
     g.savefig("label_f1_distribution_facet.png")
-    #plt.show()
 
+    # Support distribution by key
+    g = sns.FacetGrid(label_results, col="key", height=4, aspect=1.5)
+    g.map(sns.histplot, 'support', bins=40, binrange=(0, 1))
+    g.set_axis_labels("Support proportion", "Frequency")
+    g.set_titles("Support Distribution by {col_name}")
+    g.savefig("label_support_distribution_facet.png")
 
+        
  
             
   

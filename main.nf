@@ -1,3 +1,44 @@
+
+process aggregateMeta {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/meta_aggregation", mode: 'copy'
+
+    input:
+    tuple val(run_name), val(params_file), val(ref_obs), val(results_dirs)
+ 
+
+    output:
+    path "**combined_meta.tsv", emit: combined_meta
+
+    script:
+    """
+    python $projectDir/bin/aggregate_meta.py --run_name ${run_name} --params_file ${params_file} \\
+            --ref_obs ${ref_obs} --results_dirs ${results_dirs}
+    """
+}
+
+
+process individualCells {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/cell_level_analysis", mode: 'copy'
+
+    input:
+    path(combined_meta)
+
+    output:
+    "**tsv"
+    "**png"
+
+    script:
+
+
+    """
+    python $projectDir/bin/cell_level_analysis.py --combined_meta ${combined_meta} \\
+    """
+
+}
+
+
 process addParams {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
     publishDir "${params.outdir}/params_added", mode: 'copy'
@@ -215,12 +256,12 @@ workflow {
         [pipeline_run_dirname, params_file, ref_obs, pipeline_results.flatten().join(' ')] // Return collected results for this pipeline_run_dir
     }
 
-    .set { all_pipeline_results } 
+    .set { all_pipeline_results }
+
     // add parameters to files  addParams(all_pipeline_results) 
     addParams(all_pipeline_results)
 
     aggregateResults(addParams.out.f1_results_params.flatten().toList())
-
     // plot aggregated results  aggregateResults(addParams.out.f1_results_params.flatten().toList())
     weighted_f1_results_aggregated = aggregateResults.out.weighted_f1_results_aggregated   
     label_f1_results_aggregated = aggregateResults.out.label_f1_results_aggregated 
@@ -237,7 +278,6 @@ workflow {
 
     // model evaluation
     modelEvalWeighted(weighted_f1_results_aggregated)
-    modelEvalLabel(label_f1_results_aggregated)
     
     
     emmeans_estimates = modelEvalWeighted.out.emmeans_estimates
@@ -275,7 +315,10 @@ workflow {
         .set { emmeans_summary_map }
 
     emmeans_all = emmeans_estimates_map.join(emmeans_summary_map, by: [0,1])
+
     plotContrasts(emmeans_all, weighted_f1_results_aggregated)
+
+    modelEvalLabel(label_f1_results_aggregated)
 
 
 }
