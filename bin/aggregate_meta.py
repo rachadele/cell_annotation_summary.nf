@@ -93,12 +93,6 @@ def main():
     
     #add ref label support
     ref_support = combine_ref_obs(ref_obs) 
-    ## merge on a combination of "subclass" and "ref_name"
-    #f1_results_df = f1_results_df.merge(ref_support, how='left', left_on=["label", "reference"], right_on=["subclass", "reference"])
-    #f1_results_df = f1_results_df.drop(columns=["subclass"])
-    #f1_results_df = f1_results_df.rename(columns={"count": "ref_support"})
-    # Save the DataFrame to a .tsv file
-    
     
     # plot "correct" for each "subclass" label and facet by "outlier"
     plt.figure(figsize=(10, 6))
