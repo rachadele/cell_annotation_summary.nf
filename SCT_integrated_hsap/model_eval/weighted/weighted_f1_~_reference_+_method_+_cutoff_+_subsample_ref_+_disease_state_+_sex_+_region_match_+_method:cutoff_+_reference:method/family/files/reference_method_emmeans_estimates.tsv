@@ -1,191 +1,191 @@
 "contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Angular gyrus AnG seurat"	0.659978623094717	0.0113152186965109	Inf	1	-24.2375065383461	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Anterior cingulate cortex ACC seurat"	0.769959486250632	0.0127353458092995	Inf	1	-15.8048941280807	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary auditory cortexA1 seurat"	0.679486982616259	0.011618350565483	Inf	1	-22.599202677755	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary somatosensory cortex S1 seurat"	0.70427295592016	0.011989761765478	Inf	1	-20.5934488856363	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary visual cortexV1 seurat"	0.64964438682025	0.0111707024156304	Inf	1	-25.0844762340063	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	0.672286715284071	0.0115738261068106	Inf	1	-23.0645537774831	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / whole cortex seurat"	0.725036761186743	0.0122565049331796	Inf	1	-19.0203641609335	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	0.796752873923031	0.0130548646168112	Inf	1	-13.8669222830873	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	0.803105077930185	0.0135410972494162	Inf	1	-13.0046051536402	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.0240830430012	0.0164950741156907	Inf	1	1.47745556916684	0.995938022044602
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Angular gyrus AnG scvi"	0.327846406245082	0.0059265826679031	Inf	1	-61.6911344820405	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Anterior cingulate cortex ACC scvi"	0.367547430441736	0.00638750402306713	Inf	1	-57.5935905446323	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary auditory cortexA1 scvi"	0.309323068324669	0.00561002672318351	Inf	1	-64.6966803123916	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary somatosensory cortex S1 scvi"	0.311702714168598	0.00561620569104293	Inf	1	-64.6973334479477	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary visual cortexV1 scvi"	0.372477113885042	0.00658026401647219	Inf	1	-55.902138404798	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	0.721497415953118	0.0119150765883781	Inf	1	-19.7662064282626	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / whole cortex scvi"	0.278515293124562	0.00509460313098105	Inf	1	-69.8820227474812	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.309820202697941	0.00546811422672583	Inf	1	-66.3914246894836	0
-"Dissection Dorsolateral prefrontal cortex DFC seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.288854729457862	0.00526041813959737	Inf	1	-68.1901816147554	0
-"Dissection Angular gyrus AnG seurat / Dissection Anterior cingulate cortex ACC seurat"	1.16664306889245	0.0196630118118121	Inf	1	9.14484649507992	2.44138043115072e-13
-"Dissection Angular gyrus AnG seurat / Dissection Primary auditory cortexA1 seurat"	1.02955907788356	0.0173759185250704	Inf	1	1.72605007371629	0.975825646265542
-"Dissection Angular gyrus AnG seurat / Dissection Primary somatosensory cortex S1 seurat"	1.06711479929114	0.0179472282299804	Inf	1	3.8623366733295	0.0163921967639811
-"Dissection Angular gyrus AnG seurat / Dissection Primary visual cortexV1 seurat"	0.984341559085644	0.0166633493750558	Inf	1	-0.932297718046839	0.999994874971557
-"Dissection Angular gyrus AnG seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	1.01864922856386	0.0172343959630826	Inf	1	1.09212150061474	0.999938859881517
-"Dissection Angular gyrus AnG seurat / whole cortex seurat"	1.09857612931001	0.0183926729201612	Inf	1	5.61541762409796	3.67174869642106e-06
-"Dissection Angular gyrus AnG seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.20724042573828	0.0210315313177077	Inf	1	10.8108237856989	1.7785772854495e-13
-"Dissection Angular gyrus AnG seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.21686528900638	0.0202352596319099	Inf	1	11.8033586778373	0
-"Dissection Angular gyrus AnG seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.55169123236016	0.027419942901348	Inf	1	24.8625057684737	0
-"Dissection Angular gyrus AnG seurat / Dissection Angular gyrus AnG scvi"	0.496753068618755	0.00882426995132859	Inf	1	-39.3867545743059	0
-"Dissection Angular gyrus AnG seurat / Dissection Anterior cingulate cortex ACC scvi"	0.556908083959239	0.00976050061762019	Inf	1	-33.3987962943147	0
-"Dissection Angular gyrus AnG seurat / Dissection Primary auditory cortexA1 scvi"	0.468686496047731	0.00835900779420299	Inf	1	-42.4907554854617	0
-"Dissection Angular gyrus AnG seurat / Dissection Primary somatosensory cortex S1 scvi"	0.472292136837687	0.00837052363749069	Inf	1	-42.3263260476033	0
-"Dissection Angular gyrus AnG seurat / Dissection Primary visual cortexV1 scvi"	0.564377543227769	0.00980082730704777	Inf	1	-32.9402732256574	0
-"Dissection Angular gyrus AnG seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	1.09321331131898	0.0177246987476217	Inf	1	5.49677312638199	7.21580696216861e-06
-"Dissection Angular gyrus AnG seurat / whole cortex scvi"	0.422006536845953	0.00759324190855094	Inf	1	-47.9478452496425	0
-"Dissection Angular gyrus AnG seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.469439754344099	0.00885247822245818	Inf	1	-40.1014856156873	0
-"Dissection Angular gyrus AnG seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.437672856892528	0.00783854498789838	Inf	1	-46.1363534150498	0
-"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary auditory cortexA1 seurat"	0.882497059585647	0.0148439587729614	Inf	1	-7.43143908807372	2.05296890598561e-11
-"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary somatosensory cortex S1 seurat"	0.914688329056978	0.0153248359504407	Inf	1	-5.32237294760451	1.89717824746749e-05
-"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary visual cortexV1 seurat"	0.843738402371969	0.0142557617639152	Inf	1	-10.0564208207725	2.27817764653082e-13
-"Dissection Anterior cingulate cortex ACC seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	0.873145571019347	0.014753273627989	Inf	1	-8.02837455266607	4.48086012738713e-13
-"Dissection Anterior cingulate cortex ACC seurat / whole cortex seurat"	0.941655728819391	0.0156930998944059	Inf	1	-3.60719950738953	0.0405279430962701
-"Dissection Anterior cingulate cortex ACC seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.03479843829559	0.0174234830095219	Inf	1	2.03156857594927	0.889948353961673
-"Dissection Anterior cingulate cortex ACC seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.0430484879678	0.017289919405394	Inf	1	2.5426409488668	0.550168824348051
-"Dissection Anterior cingulate cortex ACC seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.33004795874136	0.0224798202699887	Inf	1	16.8751184415107	0
-"Dissection Anterior cingulate cortex ACC seurat / Dissection Angular gyrus AnG scvi"	0.425796956982179	0.00757664671812755	Inf	1	-47.981955031105	0
-"Dissection Anterior cingulate cortex ACC seurat / Dissection Anterior cingulate cortex ACC scvi"	0.477359441639627	0.00828364591952015	Inf	1	-42.614134037165	0
-"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary auditory cortexA1 scvi"	0.401739408174497	0.00717428150505966	Inf	1	-51.0667042337361	0
-"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary somatosensory cortex S1 scvi"	0.404830019935795	0.00718300143253155	Inf	1	-50.9651757778472	0
-"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary visual cortexV1 scvi"	0.483761964800048	0.00841280513625738	Inf	1	-41.7565480302015	0
-"Dissection Anterior cingulate cortex ACC seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	0.937058934706417	0.0152123279567886	Inf	1	-4.00447318524363	0.00951489572961961
-"Dissection Anterior cingulate cortex ACC seurat / whole cortex scvi"	0.361727205259604	0.00651663683610127	Inf	1	-56.4444080183827	0
-"Dissection Anterior cingulate cortex ACC seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.402385071202422	0.00734242495892555	Inf	1	-49.8894500957415	0
-"Dissection Anterior cingulate cortex ACC seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.375155751199921	0.00672817440374209	Inf	1	-54.6668278200217	0
-"Dissection Primary auditory cortexA1 seurat / Dissection Primary somatosensory cortex S1 seurat"	1.03647748071415	0.0174056629071222	Inf	1	2.13349178785514	0.839658164361663
-"Dissection Primary auditory cortexA1 seurat / Dissection Primary visual cortexV1 seurat"	0.956080695348859	0.0161686669465652	Inf	1	-2.6557794959443	0.461604324151788
-"Dissection Primary auditory cortexA1 seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	0.989403377082422	0.0167249309252233	Inf	1	-0.630213624535706	0.999999993374407
-"Dissection Primary auditory cortexA1 seurat / whole cortex seurat"	1.06703554260172	0.0178375337160115	Inf	1	3.88135695961438	0.0152658004677709
-"Dissection Primary auditory cortexA1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.17258004098218	0.0203807612408163	Inf	1	9.15973371195541	2.36366481942696e-13
-"Dissection Primary auditory cortexA1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.18192857034281	0.0196288274050805	Inf	1	10.0646047295039	2.25597318603832e-13
-"Dissection Primary auditory cortexA1 seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.5071415188237	0.0266494490369259	Inf	1	23.1994211342177	0
-"Dissection Primary auditory cortexA1 seurat / Dissection Angular gyrus AnG scvi"	0.482491077287103	0.00858918072473873	Inf	1	-40.9394165855928	0
-"Dissection Primary auditory cortexA1 seurat / Dissection Anterior cingulate cortex ACC scvi"	0.54091901661832	0.00949614963115817	Inf	1	-35.0022920127647	0
-"Dissection Primary auditory cortexA1 seurat / Dissection Primary auditory cortexA1 scvi"	0.455230307920939	0.00813530573352003	Inf	1	-44.0357534962637	0
-"Dissection Primary auditory cortexA1 seurat / Dissection Primary somatosensory cortex S1 scvi"	0.458732429234237	0.00814643216714304	Inf	1	-43.8823712454919	0
-"Dissection Primary auditory cortexA1 seurat / Dissection Primary visual cortexV1 scvi"	0.54817402454257	0.00954020215429529	Inf	1	-34.5424185372509	0
-"Dissection Primary auditory cortexA1 seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	1.06182669339022	0.0172595946833629	Inf	1	3.6906862335179	0.0304533849103652
-"Dissection Primary auditory cortexA1 seurat / whole cortex scvi"	0.409890550150324	0.0073898228100722	Inf	1	-49.468991105913	0
-"Dissection Primary auditory cortexA1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.455961939852073	0.00860319188036149	Inf	1	-41.6226747480183	0
-"Dissection Primary auditory cortexA1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.425107083502426	0.00762919380949532	Inf	1	-47.6646204811544	0
-"Dissection Primary somatosensory cortex S1 seurat / Dissection Primary visual cortexV1 seurat"	0.922432675228122	0.0155489635868325	Inf	1	-4.78990329681764	0.000297199095917522
-"Dissection Primary somatosensory cortex S1 seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	0.954582608394642	0.0160856823752308	Inf	1	-2.75835629847999	0.384991207113258
-"Dissection Primary somatosensory cortex S1 seurat / whole cortex seurat"	1.02948261053054	0.0171404217888967	Inf	1	1.74517370482467	0.972891973266487
-"Dissection Primary somatosensory cortex S1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.13131260717237	0.019588769073699	Inf	1	7.12549713734887	1.97053706685324e-10
-"Dissection Primary somatosensory cortex S1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.14033212716637	0.0188678471883026	Inf	1	7.9366719073399	6.74016398249933e-13
-"Dissection Primary somatosensory cortex S1 seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.4540996276979	0.0256123376657896	Inf	1	21.2552190245587	0
-"Dissection Primary somatosensory cortex S1 seurat / Dissection Angular gyrus AnG scvi"	0.465510429570219	0.00826225261252004	Inf	1	-43.0801336209094	0
-"Dissection Primary somatosensory cortex S1 seurat / Dissection Anterior cingulate cortex ACC scvi"	0.521882073352541	0.00912986387166198	Inf	1	-37.1732843105424	0
-"Dissection Primary somatosensory cortex S1 seurat / Dissection Primary auditory cortexA1 scvi"	0.439209067627091	0.00782549456170198	Inf	1	-46.178847998966	0
-"Dissection Primary somatosensory cortex S1 seurat / Dissection Primary somatosensory cortex S1 scvi"	0.442587936322709	0.00783563580486055	Inf	1	-46.0410061343668	0
-"Dissection Primary somatosensory cortex S1 seurat / Dissection Primary visual cortexV1 scvi"	0.528881750682001	0.00917459992672272	Inf	1	-36.7201407881027	0
-"Dissection Primary somatosensory cortex S1 seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	1.02445708001162	0.016585383964853	Inf	1	1.49250362054051	0.995396511980167
-"Dissection Primary somatosensory cortex S1 seurat / whole cortex scvi"	0.395464983829559	0.0071086568988051	Inf	1	-51.6089206699172	0
-"Dissection Primary somatosensory cortex S1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.43991495072127	0.0082734346637037	Inf	1	-43.6634450925433	0
-"Dissection Primary somatosensory cortex S1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.410145991024831	0.00733850288160152	Inf	1	-49.8111649083494	0
-"Dissection Primary visual cortexV1 seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	1.03485341969111	0.0175387016160421	Inf	1	2.02146458318584	0.894311421343704
-"Dissection Primary visual cortexV1 seurat / whole cortex seurat"	1.11605175984897	0.0187325801206057	Inf	1	6.54151244125629	1.15472161832386e-08
-"Dissection Primary visual cortexV1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.22644463661545	0.0214186524179492	Inf	1	11.6879994545069	0
-"Dissection Primary visual cortexV1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.2362226076655	0.0206029167310388	Inf	1	12.7241167400104	0
-"Dissection Primary visual cortexV1 seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.57637480408886	0.0279437438242695	Inf	1	25.6748692765197	0
-"Dissection Primary visual cortexV1 seurat / Dissection Angular gyrus AnG scvi"	0.50465518196772	0.00898521204393479	Inf	1	-38.410170968056	0
-"Dissection Primary visual cortexV1 seurat / Dissection Anterior cingulate cortex ACC scvi"	0.565767114899174	0.0099432320225249	Inf	1	-32.4085294329168	0
-"Dissection Primary visual cortexV1 seurat / Dissection Primary auditory cortexA1 scvi"	0.476142139607612	0.008511811025734	Inf	1	-41.5089066046674	0
-"Dissection Primary visual cortexV1 seurat / Dissection Primary somatosensory cortex S1 scvi"	0.479805137229397	0.00852401396080178	Inf	1	-41.3369810987456	0
-"Dissection Primary visual cortexV1 seurat / Dissection Primary visual cortexV1 scvi"	0.573355394800174	0.00998193600247941	Inf	1	-31.950581796479	0
-"Dissection Primary visual cortexV1 seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	1.11060363268058	0.0180621992899458	Inf	1	6.45028919446761	2.11574774366952e-08
-"Dissection Primary visual cortexV1 seurat / whole cortex scvi"	0.428719617647715	0.00773195926672585	Inf	1	-46.9615769457295	0
-"Dissection Primary visual cortexV1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.476907380381422	0.00901720417296181	Inf	1	-39.1604698240424	0
-"Dissection Primary visual cortexV1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.444635150119114	0.0079821379530852	Inf	1	-45.1479708767283	0
-"(Human Multiple Cortical Areas SMART-seq seurat) / whole cortex seurat"	1.0784636148587	0.018103076882892	Inf	1	4.5000300968568	0.00116441714185589
-"(Human Multiple Cortical Areas SMART-seq seurat) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.18513850684431	0.0207150208741413	Inf	1	9.71793437155672	2.33590924381133e-13
-"(Human Multiple Cortical Areas SMART-seq seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.19458716001972	0.0198979872205903	Inf	1	10.6743649320583	2.00284233642378e-13
-"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.523283176239	0.0270036413962724	Inf	1	23.7412843287437	0
-"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Angular gyrus AnG scvi"	0.487658611707881	0.00867143252626078	Inf	1	-40.3862914582798	0
-"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Anterior cingulate cortex ACC scvi"	0.546712320927583	0.00960086576004225	Inf	1	-34.384679016722	0
-"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Primary auditory cortexA1 scvi"	0.460105876395261	0.00821490941905065	Inf	1	-43.4794289796272	0
-"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Primary somatosensory cortex S1 scvi"	0.463645505826914	0.00822704091897399	Inf	1	-43.3174179815998	0
-"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Primary visual cortexV1 scvi"	0.554045030813458	0.00963386328816242	Inf	1	-33.9602857590242	0
-"(Human Multiple Cortical Areas SMART-seq seurat) / (Human Multiple Cortical Areas SMART-seq scvi)"	1.07319897827856	0.0174307047645907	Inf	1	4.3495055965565	0.00227615417118165
-"(Human Multiple Cortical Areas SMART-seq seurat) / whole cortex scvi"	0.414280524652159	0.0074624339064051	Inf	1	-48.9208948357042	0
-"(Human Multiple Cortical Areas SMART-seq seurat) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.460845344187752	0.00871667711897616	Inf	1	-40.9575291061603	0
-"(Human Multiple Cortical Areas SMART-seq seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.429660028810487	0.0077040576912573	Inf	1	-47.1128405344218	0
-"whole cortex seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.09891376075732	0.018913348660807	Inf	1	5.48036031299312	7.91368557173655e-06
-"whole cortex seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.10767497721862	0.0182393927991993	Inf	1	6.21042557602353	9.99686595726246e-08
-"whole cortex seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.41245671643598	0.0246600634391541	Inf	1	19.7795290467951	0
-"whole cortex seurat / Dissection Angular gyrus AnG scvi"	0.452179011873082	0.00797197415630131	Inf	1	-45.0182269755901	0
-"whole cortex seurat / Dissection Anterior cingulate cortex ACC scvi"	0.506936268776403	0.0088004585406365	Inf	1	-39.1340160495036	0
-"whole cortex seurat / Dissection Primary auditory cortexA1 scvi"	0.426630875679142	0.00755091454506804	Inf	1	-48.1292138648135	0
-"whole cortex seurat / Dissection Primary somatosensory cortex S1 scvi"	0.429912979389351	0.0075591770550479	Inf	1	-48.0106096996537	0
-"whole cortex seurat / Dissection Primary visual cortexV1 scvi"	0.513735487391522	0.00884684824818286	Inf	1	-38.6772609047313	0
-"whole cortex seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	0.995118392027692	0.0159656130557624	Inf	1	-0.305010115893578	1
-"whole cortex seurat / whole cortex scvi"	0.384139547170942	0.00686031271596585	Inf	1	-53.5726711013456	0
-"whole cortex seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.42731654349612	0.00797506152392861	Inf	1	-45.5566942034371	0
-"whole cortex seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.398400115581813	0.00708105872774769	Inf	1	-51.7785585726999	0
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.007972615117	0.0172890214803396	Inf	1	0.462970810527039	0.99999999997421
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.28532080211879	0.0210580732289914	Inf	1	15.3207862683243	0
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Angular gyrus AnG scvi"	0.411478159634166	0.00753799914954019	Inf	1	-48.4733846461553	0
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Anterior cingulate cortex ACC scvi"	0.461306689277461	0.00813723504971633	Inf	1	-43.8612599242274	0
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary auditory cortexA1 scvi"	0.388229623574035	0.00713593866305904	Inf	1	-51.475593949512	0
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary somatosensory cortex S1 scvi"	0.391216303536935	0.00714582911945589	Inf	1	-51.3802398541758	0
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary visual cortexV1 scvi"	0.467493906926308	0.00837951326652658	Inf	1	-42.4210626818518	0
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Human Multiple Cortical Areas SMART-seq scvi)"	0.905547302767328	0.0152193667191199	Inf	1	-5.90330523000012	6.71426257814467e-07
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / whole cortex scvi"	0.34956296016005	0.00647787155467213	Inf	1	-56.7185831401638	0
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.388853574098147	0.00695661148647919	Inf	1	-52.7976279971007	0
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.362539927889568	0.00669065762701744	Inf	1	-54.9782283261501	0
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.27515448618571	0.0222224576024092	Inf	1	13.9475304958015	0
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Angular gyrus AnG scvi"	0.408223550385248	0.00716461066264165	Inf	1	-51.048683945716	0
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Anterior cingulate cortex ACC scvi"	0.457657958518956	0.00791795885277114	Inf	1	-45.178392107483	0
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary auditory cortexA1 scvi"	0.385158899906195	0.00678706735498624	Inf	1	-54.1441271542703	0
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary somatosensory cortex S1 scvi"	0.388121956558834	0.00679477610380823	Inf	1	-54.061010620565	0
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary visual cortexV1 scvi"	0.463796238027799	0.00795015525862505	Inf	1	-44.8216745452704	0
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Human Multiple Cortical Areas SMART-seq scvi)"	0.898384826320123	0.0143378365614681	Inf	1	-6.71426345488535	3.58646468079371e-09
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / whole cortex scvi"	0.346798072603861	0.00616726054801529	Inf	1	-59.55051239085	0
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.385777915259146	0.00719395968597021	Inf	1	-51.0777017820261	0
-"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.359672398289794	0.00636548869760278	Inf	1	-57.778314359353	0
-"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Angular gyrus AnG scvi"	0.320136544087564	0.00518214663933883	Inf	1	-70.364272915715	0
-"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Anterior cingulate cortex ACC scvi"	0.358903931623155	0.00549337401298737	Inf	1	-66.9477531904064	0
-"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Primary auditory cortexA1 scvi"	0.302048813754556	0.00491249819130087	Inf	1	-73.6087321180625	0
-"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Primary somatosensory cortex S1 scvi"	0.304372498205921	0.00491820983229102	Inf	1	-73.6145901633338	0
-"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Primary visual cortexV1 scvi"	0.363717685231318	0.0057615213332543	Inf	1	-63.8469928355505	0
-"Dissection Dorsolateral prefrontal cortex DFC scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	0.70453018520713	0.0104148191831885	Inf	1	-23.6915732574263	0
-"Dissection Dorsolateral prefrontal cortex DFC scvi / whole cortex scvi"	0.271965535439722	0.00446485220455739	Inf	1	-79.3130094252416	0
-"Dissection Dorsolateral prefrontal cortex DFC scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.302534257173104	0.0045159333726809	Inf	1	-80.0937606705396	0
-"Dissection Dorsolateral prefrontal cortex DFC scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.282061822458594	0.00461056197187208	Inf	1	-77.4277898139102	0
-"Dissection Angular gyrus AnG scvi / Dissection Anterior cingulate cortex ACC scvi"	1.12109641417565	0.017680516579845	Inf	1	7.248053686969	8.0424000792334e-11
-"Dissection Angular gyrus AnG scvi / Dissection Primary auditory cortexA1 scvi"	0.943499951295591	0.0150537039214188	Inf	1	-3.64514817622161	0.0356364553475044
-"Dissection Angular gyrus AnG scvi / Dissection Primary somatosensory cortex S1 scvi"	0.950758368037698	0.0150835072989398	Inf	1	-3.18287101657999	0.146260461382938
-"Dissection Angular gyrus AnG scvi / Dissection Primary visual cortexV1 scvi"	1.13613297809523	0.0176833440771437	Inf	1	8.20009346555104	2.76667577736589e-13
-"Dissection Angular gyrus AnG scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	2.20071778189254	0.0321285341046003	Inf	1	54.0295435371992	0
-"Dissection Angular gyrus AnG scvi / whole cortex scvi"	0.84952980364945	0.0136794170185771	Inf	1	-10.1272400976023	2.01061389759616e-13
-"Dissection Angular gyrus AnG scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.94501631494577	0.0161867702727583	Inf	1	-3.30168335693805	0.105201556742835
-"Dissection Angular gyrus AnG scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.881067243549189	0.0141249690627032	Inf	1	-7.89820532156626	8.21565038222616e-13
-"Dissection Anterior cingulate cortex ACC scvi / Dissection Primary auditory cortexA1 scvi"	0.841586806777318	0.0133434274710518	Inf	1	-10.8776553876612	1.82520665248376e-13
-"Dissection Anterior cingulate cortex ACC scvi / Dissection Primary somatosensory cortex S1 scvi"	0.848061197962883	0.0133640952738085	Inf	1	-10.4580657637518	1.90847337933064e-13
-"Dissection Anterior cingulate cortex ACC scvi / Dissection Primary visual cortexV1 scvi"	1.01341237357416	0.0156565771395574	Inf	1	0.862380064444318	0.999998566016011
-"Dissection Anterior cingulate cortex ACC scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	1.96300492452359	0.0283485589482947	Inf	1	46.7043331595827	0
-"Dissection Anterior cingulate cortex ACC scvi / whole cortex scvi"	0.757766943955585	0.0121278873617645	Inf	1	-17.3310433891025	0
-"Dissection Anterior cingulate cortex ACC scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.842939378805028	0.0138510981914865	Inf	1	-10.398079503764	1.70308211977499e-13
-"Dissection Anterior cingulate cortex ACC scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.785897833949492	0.0125215110144796	Inf	1	-15.1215910117911	0
-"Dissection Primary auditory cortexA1 scvi / Dissection Primary somatosensory cortex S1 scvi"	1.00769307590545	0.016073941129257	Inf	1	0.480441726057806	0.999999999949323
-"Dissection Primary auditory cortexA1 scvi / Dissection Primary visual cortexV1 scvi"	1.20416856040651	0.0188509106568238	Inf	1	11.8679507350546	0
-"Dissection Primary auditory cortexA1 scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	2.33250439374223	0.0342850602426597	Inf	1	57.6197672061927	0
-"Dissection Primary auditory cortexA1 scvi / whole cortex scvi"	0.90040259406786	0.0145749370452102	Inf	1	-6.4812765377738	1.72397913722477e-08
-"Dissection Primary auditory cortexA1 scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	1.0016071687636	0.0172273056284787	Inf	1	0.0933668678477733	1
-"Dissection Primary auditory cortexA1 scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.93382860522603	0.0150506769530443	Inf	1	-4.24778990829215	0.0035247583199669
-"Dissection Primary somatosensory cortex S1 scvi / Dissection Primary visual cortexV1 scvi"	1.19497552300289	0.0185920193552451	Inf	1	11.4487754254146	0
-"Dissection Primary somatosensory cortex S1 scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	2.31469725208381	0.0337638612538603	Inf	1	57.5371564997155	0
-"Dissection Primary somatosensory cortex S1 scvi / whole cortex scvi"	0.893528610642495	0.0143849257821694	Inf	1	-6.99278564539264	5.11755082754917e-10
-"Dissection Primary somatosensory cortex S1 scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.993960554768737	0.0170060929991591	Inf	1	-0.354059627702024	1
-"Dissection Primary somatosensory cortex S1 scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.926699436122401	0.0148530624059786	Inf	1	-4.74958754617306	0.000361432965429787
-"Dissection Primary visual cortexV1 scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	1.93702482396219	0.0275265276172416	Inf	1	46.5249441805347	0
-"Dissection Primary visual cortexV1 scvi / whole cortex scvi"	0.747738002530058	0.011821332914329	Inf	1	-18.3878926971456	0
-"Dissection Primary visual cortexV1 scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.831783191902526	0.0140115237214365	Inf	1	-10.9339075664737	1.96509475358653e-13
-"Dissection Primary visual cortexV1 scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.775496584058615	0.0122011342559076	Inf	1	-16.16008164782	0
-"(Human Multiple Cortical Areas SMART-seq scvi) / whole cortex scvi"	0.386023964835183	0.00574252104058905	Inf	1	-63.9856880720635	0
-"(Human Multiple Cortical Areas SMART-seq scvi) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.429412768289211	0.00686056325134936	Inf	1	-52.910867736282	0
-"(Human Multiple Cortical Areas SMART-seq scvi) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.400354489248276	0.0059197035830084	Inf	1	-61.909596746393	0
-"whole cortex scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	1.11239924825018	0.0192764681864844	Inf	1	6.14696845922024	1.49321752407339e-07
-"whole cortex scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	1.03712340610566	0.0168652374502006	Inf	1	2.24154019599699	0.774516614325301
-"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.932330193262059	0.0161011561724013	Inf	1	-4.05727000606421	0.00772065354046381
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Angular gyrus AnG seurat"	0.668266276284345	0.0108481289457531	Inf	1	-24.8298238486817	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Anterior cingulate cortex ACC seurat"	0.783891012760114	0.0124395320029177	Inf	1	-15.3434972271935	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary auditory cortexA1 seurat"	0.668671281165971	0.0108560413693232	Inf	1	-24.7894456928613	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary somatosensory cortex S1 seurat"	0.665150418460555	0.0108350377635319	Inf	1	-25.0308134488541	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary visual cortexV1 seurat"	0.679729393499011	0.0110386376941075	Inf	1	-23.7725599932998	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	0.721038539193513	0.0117243830524981	Inf	1	-20.1140481061143	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / whole cortex seurat"	0.70656155818412	0.0113917111972334	Inf	1	-21.543786045187	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	0.819509396391941	0.0129266635056498	Inf	1	-12.6191004934195	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	0.827788585193137	0.0132734860639428	Inf	1	-11.7866522288733	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.17565262563571	0.0179026079459886	Inf	1	10.6268387584407	1.83186799063151e-13
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Angular gyrus AnG scvi"	0.409580968253843	0.00682219474922573	Inf	1	-53.5898566327202	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Anterior cingulate cortex ACC scvi"	0.418177973758776	0.00682186325927014	Inf	1	-53.4440055709325	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary auditory cortexA1 scvi"	0.378382558615869	0.00632264070238858	Inf	1	-58.1609696127295	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary somatosensory cortex S1 scvi"	0.378870267756547	0.00629840053029328	Inf	1	-58.3825796056388	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / Dissection Primary visual cortexV1 scvi"	0.451081004540575	0.0073924399870791	Inf	1	-48.5779191250546	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	0.741975048436304	0.0116319410376239	Inf	1	-19.0367870078833	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / whole cortex scvi"	0.337429111760305	0.0056803763122993	Inf	1	-64.5349725943475	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.368627535005213	0.00607353524323889	Inf	1	-60.5707658419298	0
+"Dissection Dorsolateral prefrontal cortex DFC seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.360448279562539	0.00604011763409069	Inf	1	-60.8934954941268	0
+"Dissection Angular gyrus AnG seurat / Dissection Anterior cingulate cortex ACC seurat"	1.1730219533427	0.0188229108542831	Inf	1	9.94504506754847	1.69420033557799e-13
+"Dissection Angular gyrus AnG seurat / Dissection Primary auditory cortexA1 seurat"	1.00060605314977	0.0161335119277067	Inf	1	0.0375762428915496	1
+"Dissection Angular gyrus AnG seurat / Dissection Primary somatosensory cortex S1 seurat"	0.995337400772168	0.0161130879107081	Inf	1	-0.288691553370431	1
+"Dissection Angular gyrus AnG seurat / Dissection Primary visual cortexV1 seurat"	1.01715351742482	0.0163688977032387	Inf	1	1.056870489538	0.999962951482619
+"Dissection Angular gyrus AnG seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	1.07896891520935	0.0173611019429046	Inf	1	4.72366206340539	0.000409500626658788
+"Dissection Angular gyrus AnG seurat / whole cortex seurat"	1.05730542339006	0.0169653519629641	Inf	1	3.47277697968013	0.0627991719557714
+"Dissection Angular gyrus AnG seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.22632164075154	0.0200864558838246	Inf	1	12.4558112033615	0
+"Dissection Angular gyrus AnG seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.23871069747191	0.0197101551842142	Inf	1	13.4535792634872	0
+"Dissection Angular gyrus AnG seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.75925775002818	0.0283632520846065	Inf	1	35.0379640307344	0
+"Dissection Angular gyrus AnG seurat / Dissection Angular gyrus AnG scvi"	0.612900849241071	0.0101022915364052	Inf	1	-29.7008751451888	0
+"Dissection Angular gyrus AnG seurat / Dissection Anterior cingulate cortex ACC scvi"	0.625765489894096	0.0102653456331719	Inf	1	-28.5763483575633	0
+"Dissection Angular gyrus AnG seurat / Dissection Primary auditory cortexA1 scvi"	0.566215252877536	0.00936820377945901	Inf	1	-34.3771833966732	0
+"Dissection Angular gyrus AnG seurat / Dissection Primary somatosensory cortex S1 scvi"	0.566945065465699	0.00933390023849851	Inf	1	-34.4697577633785	0
+"Dissection Angular gyrus AnG seurat / Dissection Primary visual cortexV1 scvi"	0.675001897520027	0.0109509150792085	Inf	1	-24.2265229287715	0
+"Dissection Angular gyrus AnG seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	1.11029850640046	0.0172353432620447	Inf	1	6.74017998428795	3.00178915058069e-09
+"Dissection Angular gyrus AnG seurat / whole cortex scvi"	0.504932126212411	0.00841699973799493	Inf	1	-40.9927430094471	0
+"Dissection Angular gyrus AnG seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.551617742937493	0.00947729314692843	Inf	1	-34.6256438553552	0
+"Dissection Angular gyrus AnG seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.539378227443532	0.0089484779565571	Inf	1	-37.2106635038089	0
+"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary auditory cortexA1 seurat"	0.853015623704564	0.0136985764128371	Inf	1	-9.89958482758606	1.80633286106513e-13
+"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary somatosensory cortex S1 seurat"	0.848524103010866	0.0136793223416048	Inf	1	-10.1887973910032	1.7874590696465e-13
+"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary visual cortexV1 seurat"	0.867122319856244	0.0139125952240593	Inf	1	-8.88620423226491	1.44662060108658e-13
+"Dissection Anterior cingulate cortex ACC seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	0.919819882428177	0.0147632236325458	Inf	1	-5.20727475132741	3.52863405482795e-05
+"Dissection Anterior cingulate cortex ACC seurat / whole cortex seurat"	0.901351778095128	0.0143951036219486	Inf	1	-6.50319010071657	1.49070636945581e-08
+"Dissection Anterior cingulate cortex ACC seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.04543792829875	0.016752456444267	Inf	1	2.77302267294914	0.37448462419953
+"Dissection Anterior cingulate cortex ACC seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.05599958631808	0.0167367934767824	Inf	1	3.43787999279407	0.070036965542252
+"Dissection Anterior cingulate cortex ACC seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.49976540934713	0.0235144889397118	Inf	1	25.8507838757909	0
+"Dissection Anterior cingulate cortex ACC seurat / Dissection Angular gyrus AnG scvi"	0.522497339026367	0.00861163687017221	Inf	1	-39.3852548561748	0
+"Dissection Anterior cingulate cortex ACC seurat / Dissection Anterior cingulate cortex ACC scvi"	0.533464431855589	0.00869076551179195	Inf	1	-38.5707388227026	0
+"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary auditory cortexA1 scvi"	0.482697916491692	0.00798323289570597	Inf	1	-44.0397908732594	0
+"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary somatosensory cortex S1 scvi"	0.483320080967032	0.00795318137538604	Inf	1	-44.184897556	0
+"Dissection Anterior cingulate cortex ACC seurat / Dissection Primary visual cortexV1 scvi"	0.575438418348872	0.00933274668155092	Inf	1	-34.0736282257818	0
+"Dissection Anterior cingulate cortex ACC seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	0.946528326461835	0.0146822384386424	Inf	1	-3.54277576130797	0.050167267771525
+"Dissection Anterior cingulate cortex ACC seurat / whole cortex scvi"	0.43045411449763	0.00717269382007632	Inf	1	-50.585741447882	0
+"Dissection Anterior cingulate cortex ACC seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.470253554390501	0.00791185432870141	Inf	1	-44.8439033872404	0
+"Dissection Anterior cingulate cortex ACC seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.459819380111765	0.00762647148022036	Inf	1	-46.8425761475823	0
+"Dissection Primary auditory cortexA1 seurat / Dissection Primary somatosensory cortex S1 seurat"	0.994734538771762	0.016120681715186	Inf	1	-0.325766266271956	1
+"Dissection Primary auditory cortexA1 seurat / Dissection Primary visual cortexV1 seurat"	1.01653744170642	0.0163835423091463	Inf	1	1.01769429692489	0.999979373098436
+"Dissection Primary auditory cortexA1 seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	1.07831539876549	0.0173789986402168	Inf	1	4.67834716650706	0.000508441887362987
+"Dissection Primary auditory cortexA1 seurat / whole cortex seurat"	1.05666502822146	0.016974601731473	Inf	1	3.43106709331894	0.071528249138254
+"Dissection Primary auditory cortexA1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.22557887481417	0.0200800669198429	Inf	1	12.4152486045491	0
+"Dissection Primary auditory cortexA1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.23796042765544	0.0197249074431302	Inf	1	13.3973496303051	0
+"Dissection Primary auditory cortexA1 seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.75819219211226	0.0284232451629286	Inf	1	34.905354415567	0
+"Dissection Primary auditory cortexA1 seurat / Dissection Angular gyrus AnG scvi"	0.612529623733281	0.0101358070502874	Inf	1	-29.6213490398476	0
+"Dissection Primary auditory cortexA1 seurat / Dissection Anterior cingulate cortex ACC scvi"	0.625386472452644	0.0102948048114794	Inf	1	-28.5141219471999	0
+"Dissection Primary auditory cortexA1 seurat / Dissection Primary auditory cortexA1 scvi"	0.565872304185218	0.00939775925003375	Inf	1	-34.2847941699895	0
+"Dissection Primary auditory cortexA1 seurat / Dissection Primary somatosensory cortex S1 scvi"	0.566601674736061	0.00936355338893556	Inf	1	-34.3764468214256	0
+"Dissection Primary auditory cortexA1 seurat / Dissection Primary visual cortexV1 scvi"	0.674593058272249	0.0109884460166407	Inf	1	-24.1663489247904	0
+"Dissection Primary auditory cortexA1 seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	1.10962601405957	0.0173019638529987	Inf	1	6.67130424506979	4.80997341956169e-09
+"Dissection Primary auditory cortexA1 seurat / whole cortex scvi"	0.504626295856352	0.00844284886098781	Inf	1	-40.8786971232529	0
+"Dissection Primary auditory cortexA1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.551283635753628	0.00949368695982027	Inf	1	-34.5800977256163	0
+"Dissection Primary auditory cortexA1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.539051533563728	0.00897714873633687	Inf	1	-37.105736598147	0
+"Dissection Primary somatosensory cortex S1 seurat / Dissection Primary visual cortexV1 seurat"	1.02191831296175	0.0165393932895925	Inf	1	1.33963699921427	0.998855326246411
+"Dissection Primary somatosensory cortex S1 seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	1.0840232813238	0.0175436877447326	Inf	1	4.98517344471941	0.000112286708168319
+"Dissection Primary somatosensory cortex S1 seurat / whole cortex seurat"	1.06225830815744	0.0171283546722452	Inf	1	3.74568048595342	0.0250867703065362
+"Dissection Primary somatosensory cortex S1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.23206627200001	0.0202567200386863	Inf	1	12.693228816087	0
+"Dissection Primary somatosensory cortex S1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.24451336452437	0.0199142891698821	Inf	1	13.6701115939384	0
+"Dissection Primary somatosensory cortex S1 seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.76749888898315	0.0286824856088547	Inf	1	35.0982960428645	0
+"Dissection Primary somatosensory cortex S1 seurat / Dissection Angular gyrus AnG scvi"	0.615771947045888	0.0102287984244944	Inf	1	-29.1896102657798	0
+"Dissection Primary somatosensory cortex S1 seurat / Dissection Anterior cingulate cortex ACC scvi"	0.628696851347731	0.0103855827274632	Inf	1	-28.0949125593959	0
+"Dissection Primary somatosensory cortex S1 seurat / Dissection Primary auditory cortexA1 scvi"	0.568867654765383	0.00948232520938326	Inf	1	-33.8421730251272	0
+"Dissection Primary somatosensory cortex S1 seurat / Dissection Primary somatosensory cortex S1 scvi"	0.569600886117483	0.00944770807978169	Inf	1	-33.9322939803649	0
+"Dissection Primary somatosensory cortex S1 seurat / Dissection Primary visual cortexV1 scvi"	0.678163904015232	0.0110898179418664	Inf	1	-23.7493518732035	0
+"Dissection Primary somatosensory cortex S1 seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	1.11549963413321	0.0174689714195499	Inf	1	6.979620722081	5.62048074748134e-10
+"Dissection Primary somatosensory cortex S1 seurat / whole cortex scvi"	0.507297450915331	0.00851704055343419	Inf	1	-40.4226502317287	0
+"Dissection Primary somatosensory cortex S1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.554201763652763	0.00957039437275762	Inf	1	-34.1787950092742	0
+"Dissection Primary somatosensory cortex S1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.541904912871846	0.00905814307238506	Inf	1	-36.6527691951024	0
+"Dissection Primary visual cortexV1 seurat / (Human Multiple Cortical Areas SMART-seq seurat)"	1.06077292829998	0.017055296765311	Inf	1	3.66943426392473	0.0327835904008743
+"Dissection Primary visual cortexV1 seurat / whole cortex seurat"	1.03947477472908	0.0166767351862044	Inf	1	2.41317313596179	0.651489292961149
+"Dissection Primary visual cortexV1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.20564066263692	0.0197514140429721	Inf	1	11.4152931574307	0
+"Dissection Primary visual cortexV1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.21782078737535	0.0193674751657762	Inf	1	12.3912612328965	0
+"Dissection Primary visual cortexV1 seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.72958921135345	0.0279196447734453	Inf	1	33.9407661697652	0
+"Dissection Primary visual cortexV1 seurat / Dissection Angular gyrus AnG scvi"	0.602564744398448	0.00993445349423665	Inf	1	-30.7249204391916	0
+"Dissection Primary visual cortexV1 seurat / Dissection Anterior cingulate cortex ACC scvi"	0.615212432709643	0.0100988833144352	Inf	1	-29.5936286939822	0
+"Dissection Primary visual cortexV1 seurat / Dissection Primary auditory cortexA1 scvi"	0.556666464970843	0.00921303202356946	Inf	1	-35.3943310617388	0
+"Dissection Primary visual cortexV1 seurat / Dissection Primary somatosensory cortex S1 scvi"	0.557383969826955	0.00917944455071601	Inf	1	-35.4914116131538	0
+"Dissection Primary visual cortexV1 seurat / Dissection Primary visual cortexV1 scvi"	0.663618505915372	0.0107696175781431	Inf	1	-25.2669446164262	0
+"Dissection Primary visual cortexV1 seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	1.09157416985732	0.0169518162427563	Inf	1	5.64214783109737	3.14704444559499e-06
+"Dissection Primary visual cortexV1 seurat / whole cortex scvi"	0.496416831444256	0.00827797073400777	Inf	1	-41.9982429206389	0
+"Dissection Primary visual cortexV1 seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.542315130890025	0.00932751707430351	Inf	1	-35.5772042646872	0
+"Dissection Primary visual cortexV1 seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.5302820254794	0.00880050410888413	Inf	1	-38.2230871750104	0
+"(Human Multiple Cortical Areas SMART-seq seurat) / whole cortex seurat"	0.979922042689167	0.0157259013804631	Inf	1	-1.26384058704531	0.999485052109148
+"(Human Multiple Cortical Areas SMART-seq seurat) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.13656809150391	0.018639418519794	Inf	1	7.8058124219382	1.23601129331519e-12
+"(Human Multiple Cortical Areas SMART-seq seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.14805040257491	0.0182540528116744	Inf	1	8.68332155777311	1.65534252971611e-13
+"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.63049901181522	0.0263426689901268	Inf	1	30.2599679571187	0
+"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Angular gyrus AnG scvi"	0.568043101707105	0.00935991826534186	Inf	1	-34.3230891513631	0
+"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Anterior cingulate cortex ACC scvi"	0.579966189084028	0.00951896652022564	Inf	1	-33.1923800016032	0
+"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Primary auditory cortexA1 scvi"	0.524774388674277	0.00868030846202203	Inf	1	-38.9810596808711	0
+"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Primary somatosensory cortex S1 scvi"	0.525450786833553	0.00864873267958214	Inf	1	-39.0955453799626	0
+"(Human Multiple Cortical Areas SMART-seq seurat) / Dissection Primary visual cortexV1 scvi"	0.625599021440814	0.0101468314165838	Inf	1	-28.9188309209199	0
+"(Human Multiple Cortical Areas SMART-seq seurat) / (Human Multiple Cortical Areas SMART-seq scvi)"	1.02903660221298	0.0159712694259621	Inf	1	1.84419544515848	0.953102308568575
+"(Human Multiple Cortical Areas SMART-seq seurat) / whole cortex scvi"	0.467976527492861	0.00779911513448182	Inf	1	-45.5631121603078	0
+"(Human Multiple Cortical Areas SMART-seq seurat) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.511245259396989	0.00880074679828033	Inf	1	-38.9736735111039	0
+"(Human Multiple Cortical Areas SMART-seq seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.499901544743646	0.00829196959028573	Inf	1	-41.7999352367326	0
+"whole cortex seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.15985562319311	0.0188899401307039	Inf	1	9.10545023006525	2.54241072639161e-13
+"whole cortex seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.17157319925609	0.018573041979073	Inf	1	9.98843597903788	1.60094160150948e-13
+"whole cortex seurat / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.66390686277522	0.0266385715121993	Inf	1	31.803835389737	0
+"whole cortex seurat / Dissection Angular gyrus AnG scvi"	0.579681930766905	0.0095186824079615	Inf	1	-33.2069575659103	0
+"whole cortex seurat / Dissection Anterior cingulate cortex ACC scvi"	0.591849314352034	0.00966174432993395	Inf	1	-32.1294847418529	0
+"whole cortex seurat / Dissection Primary auditory cortexA1 scvi"	0.53552667029936	0.00882619678549483	Inf	1	-37.8916162393597	0
+"whole cortex seurat / Dissection Primary somatosensory cortex S1 scvi"	0.536216927411467	0.00879261999758813	Inf	1	-38.0067862030337	0
+"whole cortex seurat / Dissection Primary visual cortexV1 scvi"	0.638417133391554	0.0103142633370613	Inf	1	-27.776897967798	0
+"whole cortex seurat / (Human Multiple Cortical Areas SMART-seq scvi)"	1.05012088450325	0.0162200188978834	Inf	1	3.16623933286234	0.152866140882152
+"whole cortex seurat / whole cortex scvi"	0.477565058347508	0.00793081245588699	Inf	1	-44.5032320570344	0
+"whole cortex seurat / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.521720338073012	0.00890977959527953	Inf	1	-38.0978623934117	0
+"whole cortex seurat / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.510144198177014	0.00843089525994021	Inf	1	-40.7262322772042	0
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat)"	1.0101026160745	0.0163543152659504	Inf	1	0.620843878065605	0.99999999491525
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.43458101982938	0.0220677224671858	Inf	1	23.4596623860443	0
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Angular gyrus AnG scvi"	0.499788007382353	0.00839507835512044	Inf	1	-41.2906921415151	0
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Anterior cingulate cortex ACC scvi"	0.510278436830488	0.00839905372969218	Inf	1	-40.8754014812988	0
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary auditory cortexA1 scvi"	0.461718389419056	0.00778066774683564	Inf	1	-45.8593064981424	0
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary somatosensory cortex S1 scvi"	0.462313512724322	0.00775210505499001	Inf	1	-46.0107840537612	0
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary visual cortexV1 scvi"	0.550428105555046	0.00910314590028658	Inf	1	-36.1015872129861	0
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Human Multiple Cortical Areas SMART-seq scvi)"	0.905389311828518	0.0143451909861382	Inf	1	-6.27296417323708	6.70537172453578e-08
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / whole cortex scvi"	0.411745262770514	0.00698825760888289	Inf	1	-52.2823213287293	0
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.449814897337568	0.00747072061258242	Inf	1	-48.1032206423857	0
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.439834224170567	0.00743280708555835	Inf	1	-48.6035873952741	0
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Dorsolateral prefrontal cortex DFC scvi"	1.42023295158317	0.0226617350252647	Inf	1	21.9862871884544	0
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Angular gyrus AnG scvi"	0.494789340636149	0.00808264866865709	Inf	1	-43.0731637965525	0
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Anterior cingulate cortex ACC scvi"	0.50517484927774	0.00821163010288425	Inf	1	-42.0085880284188	0
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary auditory cortexA1 scvi"	0.457100478774525	0.00749555808729499	Inf	1	-47.7405472644871	0
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary somatosensory cortex S1 scvi"	0.457689649910007	0.00746696408895343	Inf	1	-47.9061803478312	0
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / Dissection Primary visual cortexV1 scvi"	0.544922958118987	0.00875647440245522	Inf	1	-37.7810324239211	0
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Human Multiple Cortical Areas SMART-seq scvi)"	0.896333993616484	0.0137614191360167	Inf	1	-7.1283884734936	1.92961979728068e-10
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / whole cortex scvi"	0.407627162050775	0.00673648431244616	Inf	1	-54.3021481917129	0
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.445316040350093	0.00759036561916466	Inf	1	-47.461189746809	0
+"(Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD seurat) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.435435189624462	0.00716037373048449	Inf	1	-50.5594938318361	0
+"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Angular gyrus AnG scvi"	0.348386044757371	0.0049571052085785	Inf	1	-74.1064775688459	0
+"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Anterior cingulate cortex ACC scvi"	0.355698583612362	0.00491677621259063	Inf	1	-74.7797950818151	0
+"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Primary auditory cortexA1 scvi"	0.321848946164065	0.00460644773493762	Inf	1	-79.2088539350206	0
+"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Primary somatosensory cortex S1 scvi"	0.322263787359536	0.00458925496933432	Inf	1	-79.5176197545557	0
+"Dissection Dorsolateral prefrontal cortex DFC scvi / Dissection Primary visual cortexV1 scvi"	0.383685618272373	0.00537597412713052	Inf	1	-68.368007823566	0
+"Dissection Dorsolateral prefrontal cortex DFC scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	0.631117587165763	0.00842889289956904	Inf	1	-34.4624294146192	0
+"Dissection Dorsolateral prefrontal cortex DFC scvi / whole cortex scvi"	0.287014296912617	0.00415066948807193	Inf	1	-86.3132849668248	0
+"Dissection Dorsolateral prefrontal cortex DFC scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.313551407079864	0.00427696817582749	Inf	1	-85.0262111571075	0
+"Dissection Dorsolateral prefrontal cortex DFC scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.306594202830648	0.00440225217381278	Inf	1	-82.3362492084471	0
+"Dissection Angular gyrus AnG scvi / Dissection Anterior cingulate cortex ACC scvi"	1.02098975824386	0.0146772852131087	Inf	1	1.44498915453024	0.996925189068503
+"Dissection Angular gyrus AnG scvi / Dissection Primary auditory cortexA1 scvi"	0.923828468468686	0.0133139386115621	Inf	1	-5.49753780037534	7.18478843697579e-06
+"Dissection Angular gyrus AnG scvi / Dissection Primary somatosensory cortex S1 scvi"	0.925019219940261	0.0132758343547933	Inf	1	-5.43067216786141	1.04477118303414e-05
+"Dissection Angular gyrus AnG scvi / Dissection Primary visual cortexV1 scvi"	1.10132315586747	0.0155732295707654	Inf	1	6.82525476591429	1.66592839523361e-09
+"Dissection Angular gyrus AnG scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	1.81154669270779	0.0246206181159801	Inf	1	43.7189120334664	0
+"Dissection Angular gyrus AnG scvi / whole cortex scvi"	0.823839821461575	0.0119881576407776	Inf	1	-13.316724126102	0
+"Dissection Angular gyrus AnG scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.900011386214487	0.0136568219634258	Inf	1	-6.94263114192179	7.30751459343537e-10
+"Dissection Angular gyrus AnG scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.88004157297452	0.0127136763329273	Inf	1	-8.84536497869158	1.49324996812084e-13
+"Dissection Anterior cingulate cortex ACC scvi / Dissection Primary auditory cortexA1 scvi"	0.904836175886531	0.0130865872797737	Inf	1	-6.9143205789855	8.92538931651643e-10
+"Dissection Anterior cingulate cortex ACC scvi / Dissection Primary somatosensory cortex S1 scvi"	0.90600244759686	0.0130460552463936	Inf	1	-6.85528796333579	1.35096189790573e-09
+"Dissection Anterior cingulate cortex ACC scvi / Dissection Primary visual cortexV1 scvi"	1.07868188390233	0.0153034790302613	Inf	1	5.33860106409648	1.73629667994391e-05
+"Dissection Anterior cingulate cortex ACC scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	1.7743044708144	0.0241560515272443	Inf	1	42.1178627521403	0
+"Dissection Anterior cingulate cortex ACC scvi / whole cortex scvi"	0.806903120045603	0.0117817769009335	Inf	1	-14.6940831858156	0
+"Dissection Anterior cingulate cortex ACC scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.881508731059694	0.0131056189415909	Inf	1	-8.48309491876406	1.96509475358653e-13
+"Dissection Anterior cingulate cortex ACC scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.86194946214566	0.0124988118455968	Inf	1	-10.2449769028765	1.64868119156836e-13
+"Dissection Primary auditory cortexA1 scvi / Dissection Primary somatosensory cortex S1 scvi"	1.00128893134626	0.01446078656408	Inf	1	0.0891902840753451	1
+"Dissection Primary auditory cortexA1 scvi / Dissection Primary visual cortexV1 scvi"	1.19212948448427	0.0169696635416318	Inf	1	12.3459286342397	0
+"Dissection Primary auditory cortexA1 scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	1.96091239287155	0.0268482760101162	Inf	1	49.1837078104747	0
+"Dissection Primary auditory cortexA1 scvi / whole cortex scvi"	0.891767086185545	0.013055102984213	Inf	1	-7.82469373060092	1.07880371302826e-12
+"Dissection Primary auditory cortexA1 scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.97421915099274	0.0148573192812187	Inf	1	-1.71266627323523	0.977726955945357
+"Dissection Primary auditory cortexA1 scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.952602786135455	0.01384839047495	Inf	1	-3.34015615891382	0.0940703897965759
+"Dissection Primary somatosensory cortex S1 scvi / Dissection Primary visual cortexV1 scvi"	1.19059488941061	0.0168717228167785	Inf	1	12.3107141335464	0
+"Dissection Primary somatosensory cortex S1 scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	1.95838816497757	0.0266683764713267	Inf	1	49.3571598337747	0
+"Dissection Primary somatosensory cortex S1 scvi / whole cortex scvi"	0.890619139259376	0.012986159608429	Inf	1	-7.9444497583575	6.46260822634304e-13
+"Dissection Primary somatosensory cortex S1 scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.97296506582059	0.0147806940739291	Inf	1	-1.80412040944977	0.962100365849015
+"Dissection Primary somatosensory cortex S1 scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.951376527107571	0.0137744577762637	Inf	1	-3.44272806560159	0.068991617257616
+"Dissection Primary visual cortexV1 scvi / (Human Multiple Cortical Areas SMART-seq scvi)"	1.64488205215381	0.021975724055828	Inf	1	37.2504805272403	0
+"Dissection Primary visual cortexV1 scvi / whole cortex scvi"	0.74804549152757	0.010756311181632	Inf	1	-20.188262792487	0
+"Dissection Primary visual cortexV1 scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.817209173728473	0.0122634603068283	Inf	1	-13.4515051374646	0
+"Dissection Primary visual cortexV1 scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.799076609155056	0.01140404494779	Inf	1	-15.7164980401839	0
+"(Human Multiple Cortical Areas SMART-seq scvi) / whole cortex scvi"	0.454771508113958	0.00629846660713065	Inf	1	-56.8935036793395	0
+"(Human Multiple Cortical Areas SMART-seq scvi) / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.496819314587583	0.00720239873238526	Inf	1	-48.2532927153129	0
+"(Human Multiple Cortical Areas SMART-seq scvi) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.485795688577636	0.00667175146468056	Inf	1	-52.5691828410726	0
+"whole cortex scvi / (Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi)"	1.09245919263502	0.0167977359251048	Inf	1	5.75122633085444	1.66470216111936e-06
+"whole cortex scvi / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	1.06821927035918	0.0156758577356448	Inf	1	4.49704419698533	0.00118031292978693
+"(Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD scvi) / (Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD scvi)"	0.977811599335469	0.0149476572966848	Inf	1	-1.46781509264132	0.996255795586781

@@ -1,4 +1,6 @@
 #library(multcomp)
+`%||%` <- function(a, b) if (!is.null(a)) a else b
+
 # Set global theme for background
 theme_set(
   theme_minimal(base_size =30 ) +  # Base theme
@@ -25,12 +27,15 @@ plot_qq <- function(model, key_dir) {
 
 
 run_beta_model <- function(df, formula, group_var = "study") {
+  nt <- min(parallel::detectCores(),10)
+
   # Ensure the outcome is within (0,1) for Beta regression
   outcome_var <- all.vars(as.formula(formula))[1]
 
   random_effect_formula <- paste(formula, "+ (1 |", group_var, ")")
     # Add random effects directly to the formula
-  model <- glmmTMB(as.formula(random_effect_formula), data = df, family = beta_family(link = "logit"))
+  model <- glmmTMB(as.formula(random_effect_formula), data = df, family = beta_family(link = "logit"),
+              control=glmmTMBControl(parallel = nt))
 
   
   # Extract coefficients and p-values
@@ -47,7 +52,7 @@ run_beta_model <- function(df, formula, group_var = "study") {
 }
 
 
-run_emmeans <- function(model, key_dir) {
+run_emmeans_weighted <- function(model, key_dir) {
 
   fig.dir <- file.path(key_dir, "figures")
   if (!dir.exists(fig.dir)) {
@@ -130,6 +135,26 @@ run_emmeans <- function(model, key_dir) {
 }
 
 
+run_emmeans_label <- function(model, key_dir) {
+
+  fig.dir <- file.path(key_dir, "figures")
+  if (!dir.exists(fig.dir)) {
+    dir.create(fig.dir)
+  }
+  file.dir <- file.path(key_dir, "files")
+  if (!dir.exists(file.dir)) {
+    dir.create(file.dir)
+  }
+  emm_label <- emmeans(model, specs = ~ label, at = list(cutoff = 0), type = "response")
+  summary_emm_label_df <- as.data.frame(summary(emm_label))
+  write.table(summary_emm_label_df, file = file.path(file.dir, "label_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+  estimate_label_df <- as.data.frame(pairs(emm_label))
+  write.table(estimate_label_df, file = file.path(file.dir, "label_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  plot_contrasts(summary_emm_label_df, key_dir=fig.dir, contrast="label")
+}
+
+
+
 plot_contrasts <- function(emm_summary_df, key_dir, contrast) {
   
   factors = colnames(emm_summary_df)[1:(which(colnames(emm_summary_df) == "response") - 1)]
@@ -189,14 +214,13 @@ plot_continuous_effects <- function(ae_contrast, key_dir) {
         ymax = upper, group = method, color=method)) +
         geom_point(size = 7) +
         facet_wrap(~ method) +
-      theme(legend.position = "right", base_size=30) +     
+      theme(legend.position = "right") +     
       theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 20),
             panel.grid.major = element_blank(),
             panel.grid.minor = element_blank()) +
-      labs(y = "Fitted weighted F1", title = "", x = "") +
+      labs(y = "F1", title = "", x = colnames(contrast_df)[1]) +
       geom_line(size=2) +
-      geom_ribbon(aes(ymin = lower, ymax = upper, fill = method), alpha = 0.2) 
-    
+      geom_ribbon(aes(ymin = lower, ymax = upper, fill = method), alpha = 0.2)    
       
     ggsave(file.path(key_dir, paste0(key, "_", contrast, "_effects.png")), p2, width = 25, height = 15, dpi = 250)
     }
@@ -232,7 +256,7 @@ run_drop1 <- function(model, key_dir) {
   ggsave(file.path(key_dir, "drop1.png"), p, width = 20, height = 20, dpi = 300)
 }
 
-run_and_store_model <- function(df, formula, key_dir, key) {
+run_and_store_model <- function(df, formula, key_dir, key, type="weighted", group_var="study") {
   fig.dir <- file.path(key_dir, "figures")
   if (!dir.exists(fig.dir)) {
     dir.create(fig.dir)
@@ -242,7 +266,7 @@ run_and_store_model <- function(df, formula, key_dir, key) {
     dir.create(file.dir)
   }
   # Run the beta model using the run_beta_model function
-  result <- run_beta_model(df, formula, group_var = "study")  # Adjust group_var as needed
+  result <- run_beta_model(df, formula, group_var = group_var)  # Adjust group_var as needed
   
   # Extract model summary coefficients and add additional info
   model_summary_coefs <- result$summary
@@ -255,12 +279,31 @@ run_and_store_model <- function(df, formula, key_dir, key) {
 
   run_drop1(model, fig.dir) 
   plot_qq(model, fig.dir)
-  run_emmeans(model, key_dir)
+  if (type == "weighted") {
+    # Run emmeans for weighted F1
+    run_emmeans_weighted(model, key_dir)
+    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
 
-  ae_method_cutoff <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.2, 0.25, 0.5, 0.75)))["method:cutoff"]
-  plot_continuous_effects(ae_method_cutoff, fig.dir)
-  ae_method_cutoff <- as.data.frame(ae_method_cutoff[[1]])
-  write.table(ae_method_cutoff, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
+    ae_contrast <- alleffects["method:cutoff"]
+
+  } else if (type == "label") {
+    # Run emmeans for label F1
+    run_emmeans_label(model, key_dir)
+    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05)))
+ 
+    ae_contrast <- alleffects["support:method"]
+    plot_continuous_effects(ae_contrast, fig.dir)
+    ae_support <- as.data.frame(ae_contrast[[1]])
+    write.table(ae_support, file = file.path(file.dir, "label_support_effects.tsv"), sep = "\t", row.names = FALSE)
+    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
+    ae_contrast <- alleffects["cutoff:method"]
+  }
+
+
+  plot_continuous_effects(ae_contrast, fig.dir)
+  ae_contrast <- as.data.frame(ae_contrast[[1]])
+  write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
+
 
   # Save the model summary and coefficients summary to files
   write.table(model_summary_coefs, file = file.path(file.dir, paste0(key,"_model_summary_coefs_combined.tsv")), sep = "\t", row.names = FALSE)
@@ -269,6 +312,8 @@ run_and_store_model <- function(df, formula, key_dir, key) {
   # Return the model summary coefficients
   return(model_summary_coefs)
 }
+
+
 
 # Function to plot model metrics
 plot_model_metrics <- function(df_list, formulas) {

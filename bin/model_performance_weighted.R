@@ -27,7 +27,7 @@ theme_set(
 
 parser <- argparse::ArgumentParser()
 parser$add_argument("--weighted_f1_results", help = "Path to the weighted_f1_results file", 
-  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/weighted_f1_results.tsv")
+  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mmus_new_hierarchy/aggregated_results/weighted_f1_results.tsv")
 args <- parser$parse_args()
 
 
@@ -109,6 +109,6 @@ for (df in df_list) {
     # make dir
     dir.create(key_dir, showWarnings = FALSE,recursive=TRUE)
 
-    run_and_store_model(df, formula, key_dir = key_dir, key = key)
+    run_and_store_model(df, formula, key_dir = key_dir, key = key, type="weighted")
   }
 }
