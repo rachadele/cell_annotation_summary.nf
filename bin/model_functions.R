@@ -266,7 +266,7 @@ run_and_store_model <- function(df, formula, key_dir, key, type="weighted", grou
     dir.create(file.dir)
   }
   # Run the beta model using the run_beta_model function
-  result <- run_beta_model(df, formula, group_var = group_var)  # Adjust group_var as needed
+  result <- run_beta_model(df, formula, group_var = group_var, type=type)  # Adjust group_var as needed
   
   # Extract model summary coefficients and add additional info
   model_summary_coefs <- result$summary
