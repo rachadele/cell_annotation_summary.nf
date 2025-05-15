@@ -26,17 +26,30 @@ plot_qq <- function(model, key_dir) {
 }
 
 
-run_beta_model <- function(df, formula, group_var = "study") {
+run_beta_model <- function(df, formula, group_var = "study", type="weighted") {
   nt <- min(parallel::detectCores(),10)
 
   # Ensure the outcome is within (0,1) for Beta regression
   outcome_var <- all.vars(as.formula(formula))[1]
 
+# add study as a random effect (slope and intercept may very)
   random_effect_formula <- paste(formula, "+ (1 |", group_var, ")")
+
     # Add random effects directly to the formula
+
+  if (type == "weighted") {
   model <- glmmTMB(as.formula(random_effect_formula), data = df, family = beta_family(link = "logit"),
               control=glmmTMBControl(parallel = nt))
-
+  }
+  else if (type == "label") {
+    model <- glmmTMB(as.formula(random_effect_formula), data = df, 
+              family = beta_family(link = "logit"),
+              # add 0 inflation
+              ziformula = ~label, # model 0 inflation separately for each label with free intercept
+              control=glmmTMBControl(parallel = nt))
+  } else {
+    stop("Invalid type specified. Use 'weighted' or 'label'.")
+  }
   
   # Extract coefficients and p-values
   summary_df <- tidy(model) %>%
