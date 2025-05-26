@@ -3,10 +3,10 @@ label	31
 method	2
 disease	14
 cutoff	8
-sex	4
+sex	3
 dev_stage	7
 reference	10
 study	14
 query	451
-query_region	8
+query_region	7
 ref_region	8

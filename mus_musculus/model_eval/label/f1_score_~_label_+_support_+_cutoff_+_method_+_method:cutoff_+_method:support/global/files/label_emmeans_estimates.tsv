@@ -1,0 +1,4 @@
+"contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"
+"Neuroglioblast / Neuron"	0.0740435372440695	0.00151943516807376	Inf	1	-126.851665173764	0
+"Neuroglioblast / (Non-neuron)"	0.0447197886131382	0.00113304838674112	Inf	1	-122.642203786557	0
+"Neuron / (Non-neuron)"	0.603966129626255	0.00989850403293562	Inf	1	-30.7664839617861	0
