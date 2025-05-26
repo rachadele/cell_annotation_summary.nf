@@ -45,7 +45,10 @@ run_beta_model <- function(df, formula, group_var = "study", type="weighted") {
     model <- glmmTMB(as.formula(random_effect_formula), data = df, 
               family = beta_family(link = "logit"),
               # add 0 inflation
-              ziformula = ~label, # model 0 inflation separately for each label with free intercept
+             # ziformula = ~, # model 0 inflation separately for each label with free intercept
+              # this makes it takeforever
+              # potentially add support to zero inflation
+              #ziformula = ~label + support,
               control=glmmTMBControl(parallel = nt))
   } else {
     stop("Invalid type specified. Use 'weighted' or 'label'.")
