@@ -27,7 +27,7 @@ theme_set(
 
 parser <- argparse::ArgumentParser()
 parser$add_argument("--label_f1_results", help = "Path to the label_f1_results file", 
-  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mmus_new_hierarchy/aggregated_results/label_f1_results.tsv")
+  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/ef/7e406e6954ed440d9dcecc05ec0e13/label_f1_results.tsv")
 args <- parser$parse_args()
 
 
