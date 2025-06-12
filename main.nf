@@ -187,7 +187,7 @@ process modelEvalWeighted {
     path "**emmeans_estimates.tsv", emit: emmeans_estimates
     path "**emmeans_summary.tsv", emit: emmeans_summary
     path "**model_summary_coefs_combined.tsv", emit: f1_model_summary_coefs
-
+    path "**effects.tsv", emit: continuous_effects
 
     script:
     """
@@ -206,7 +206,7 @@ process modelEvalLabel {
     path "**png"
     path "**tsv"
     path "**model_summary_coefs_combined.tsv", emit: f1_model_summary_coefs
-
+    path "**effects.tsv", emit: continuous_effects
 
     script:
     """
@@ -236,6 +236,21 @@ process plotContrasts {
 
 }
 
+process plot_continuous_contrast {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/model_eval/${mode}/contrast_figs/${key}/continuous_contrasts", mode: 'copy'
+
+    input:
+    tuple val(key), val(mode), path(continuous_effects) // mode can be 'weighted' or 'label'
+
+    output:
+    path "**png"
+
+    script:
+    """
+    python $projectDir/bin/plot_continuous_contrasts.py --key ${key} --contrast ${continuous_effects} 
+    """
+}
 workflow {
 
     Channel
@@ -278,8 +293,8 @@ workflow {
 
     // model evaluation
     modelEvalWeighted(weighted_f1_results_aggregated)
-    
-    
+
+    continuous_effects_weighted = modelEvalWeighted.out.continuous_effects
     emmeans_estimates = modelEvalWeighted.out.emmeans_estimates
     emmeans_summary = modelEvalWeighted.out.emmeans_summary
 // need to get individual files in order to plot contrasts
@@ -319,8 +334,34 @@ workflow {
     plotContrasts(emmeans_all, weighted_f1_results_aggregated)
 
     modelEvalLabel(label_f1_results_aggregated)
+    
+    continuous_effects_label = modelEvalLabel.out.continuous_effects
 
+    // flatMap the mode onto continuous_effects_label
+    continuous_effects_label
+        .flatMap { list ->
+            list.collect { file ->
+                def key = file.getParent().getParent().getName()
+                def mode = 'label' // or 'weighted' based on the process
+                return [key, mode, file]
+            }
+        }
+        .set { continuous_effects_label_map }
+    
+    continuous_effects_weighted
+        .flatMap { list ->
+            list.collect { file ->
+                // def key = parent dir name two dirs up
+                def key = file.getParent().getParent().getName()
+                def mode = 'weighted' // or 'label' based on the process
+                return [key, mode, file]
+            }
+        }
+        .set { continuous_effects_weighted_map }
 
+    continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
+    continuous_effects_all.view()
+    plot_continuous_contrast(continuous_effects_all)
 }
 
 workflow.onError = {

@@ -1,13 +1,15 @@
 #library(multcomp)
+library(patchwork)
 `%||%` <- function(a, b) if (!is.null(a)) a else b
 
 # Set global theme for background
-theme_set(
-  theme_minimal(base_size =30 ) +  # Base theme
+theme <- theme_set(
+  theme_bw(base_size = 45) +  # Base theme
     theme(
       plot.background = element_rect(fill = "white", color = NA),  # Plot background color
       panel.background = element_rect(fill = "white", color = NA), # Panel background color
       legend.background = element_rect(fill = "white", color = NA) # Legend background color
+
     )
 )
 
@@ -28,7 +30,7 @@ plot_qq <- function(model, key_dir) {
 
 run_beta_model <- function(df, formula, group_var = "study", type="weighted") {
   nt <- min(parallel::detectCores(),10)
-
+  #nt <- as.integer(nt) # Set the number of threads to use for parallel processing
   # Ensure the outcome is within (0,1) for Beta regression
   outcome_var <- all.vars(as.formula(formula))[1]
 
@@ -185,8 +187,8 @@ plot_contrasts <- function(emm_summary_df, key_dir, contrast) {
                                     group = method, color = method)) +
       geom_point(size = 7) +
       geom_errorbar(width = 0.2, size = 2) +
-      theme() +
-      theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 20)) +
+      theme + 
+      theme(axis.text.x = element_text(angle = 90, hjust = 1, size=45)) +
       labs(y = "Estimate", title = paste0("Marginal Means for ", contrast), x = "") +
       theme(legend.position = "right") +
       scale_x_discrete(labels = function(x) str_wrap(x, width = 20))
@@ -202,8 +204,8 @@ plot_contrasts <- function(emm_summary_df, key_dir, contrast) {
                                    ymin = asymp.LCL, ymax = asymp.UCL)) +
     geom_point(size = 7) +
     geom_errorbar(width = 0.2, size = 2) +
-    theme() +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 20)) +
+    theme +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, size=45)) +
     labs(y = "Estimate", title = paste0("Marginal Means for ", contrast), x = "") +
     theme(legend.position = "right") +
     scale_x_discrete(labels = function(x) str_wrap(x, width = 20)) 
@@ -230,10 +232,9 @@ plot_continuous_effects <- function(ae_contrast, key_dir) {
         ymax = upper, group = method, color=method)) +
         geom_point(size = 7) +
         facet_wrap(~ method) +
+      theme +
       theme(legend.position = "right") +     
-      theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 20),
-            panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank()) +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1, size=45)) +
       labs(y = "F1", title = "", x = colnames(contrast_df)[1]) +
       geom_line(size=2) +
       geom_ribbon(aes(ymin = lower, ymax = upper, fill = method), alpha = 0.2)    
@@ -265,8 +266,8 @@ run_drop1 <- function(model, key_dir) {
     facet_wrap(~metric, scales = "free_x") +  # Facet by metric
     labs(x = "Term", y = "Value", title = "Drop1 Analysis: Term Metrics") +
     theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 15)) +  # Rotate x-axis labels
-    scale_fill_brewer(palette = "Set1")  # Color palette for better distinction
-
+    scale_fill_brewer(palette = "Set1") +  # Color palette for better distinction
+    theme
 
   # Save plot
   ggsave(file.path(key_dir, "drop1.png"), p, width = 20, height = 20, dpi = 300)
@@ -283,7 +284,7 @@ run_and_store_model <- function(df, formula, key_dir, key, type="weighted", grou
   }
   # Run the beta model using the run_beta_model function
   result <- run_beta_model(df, formula, group_var = group_var, type=type)  # Adjust group_var as needed
-  
+  #plot_model_metrics(result, formula, key)
   # Extract model summary coefficients and add additional info
   model_summary_coefs <- result$summary
   model_summary_coefs$formula <- result$formula
@@ -300,25 +301,30 @@ run_and_store_model <- function(df, formula, key_dir, key, type="weighted", grou
     run_emmeans_weighted(model, key_dir)
     alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
 
-    ae_contrast <- alleffects["method:cutoff"]
+    ae_contrast<- alleffects["method:cutoff"]
+    plot_continuous_effects(ae_contrast, fig.dir)
+    ae_contrast <- as.data.frame(ae_contrast[[1]])
+    write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
 
   } else if (type == "label") {
     # Run emmeans for label F1
     run_emmeans_label(model, key_dir)
+
+    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
+    ae_contrast<- alleffects["cutoff:method"]
+    plot_continuous_effects(ae_contrast, fig.dir)
+    ae_contrast <- as.data.frame(ae_contrast[[1]])
+    write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
+
     alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05)))
- 
     ae_contrast <- alleffects["support:method"]
     plot_continuous_effects(ae_contrast, fig.dir)
     ae_support <- as.data.frame(ae_contrast[[1]])
     write.table(ae_support, file = file.path(file.dir, "label_support_effects.tsv"), sep = "\t", row.names = FALSE)
-    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
-    ae_contrast <- alleffects["cutoff:method"]
+
   }
 
 
-  plot_continuous_effects(ae_contrast, fig.dir)
-  ae_contrast <- as.data.frame(ae_contrast[[1]])
-  write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
 
 
   # Save the model summary and coefficients summary to files
@@ -332,28 +338,16 @@ run_and_store_model <- function(df, formula, key_dir, key, type="weighted", grou
 
 
 # Function to plot model metrics
-plot_model_metrics <- function(df_list, formulas) {
+plot_model_metrics <- function(model, formula, key) {
   # Initialize an empty list to store results
-  results <- list()
-  
-  # Iterate over the data frames in df_list and formulas
-  for (df in df_list) {
-    for (formula in formulas) {
-      # Run the model (replace with your function to fit the model)
-      model_output <- run_beta_model(df, formula)
-      stats <- model_output$stats
+      stats <- model$stats
       # Add key column for each unique 'key' in df
-      for (key in unique(df$key)) {
-        key_df <- stats %>% 
+        results_df <- stats %>% 
           mutate(key = key) %>% 
-          mutate(formula = model_output$formula)
-        
-        results <- append(results, list(key_df))
-      }
-    }
-  }
+          mutate(formula = model$formula)
+  
   # Combine the results into a single data frame
-  results_df <- do.call(rbind, results)
+  #results_df <- do.call(rbind, results)
   library(patchwork)
   results_df$formula_wrapped <- factor(str_wrap(results_df$formula, width = 30))  # Adjust width as needed
   # Plot AIC vs LogLik
@@ -366,6 +360,7 @@ plot_model_metrics <- function(df_list, formulas) {
       color = "formula",
       shape = "key"
     ) +
+    theme +
     theme(
       legend.title = element_text(size = 30),
       legend.text = element_text(size = 15),
@@ -377,9 +372,10 @@ plot_model_metrics <- function(df_list, formulas) {
     theme(legend.position = "right") + plot_annotation()
    # guides(color = guide_legend(title = "key"), shape = guide_legend(title = "Formula"))
     
-
+  outdir = key
+  dir.create(outdir, recursive = TRUE)
   # Save the plot
-  ggsave("model_metrics.png", p, width = 20, height = 15, dpi = 250)
+  ggsave(file.path(ourdir,"model_metrics.png"), p, width = 20, height = 15, dpi = 250)
 }
 
 

@@ -27,7 +27,7 @@ theme_set(
 
 parser <- argparse::ArgumentParser()
 parser$add_argument("--label_f1_results", help = "Path to the label_f1_results file", 
-  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/ef/7e406e6954ed440d9dcecc05ec0e13/label_f1_results.tsv")
+  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/8b/c346da8db7b29ed2f3f3564a0700d2/label_f1_results.tsv")
 args <- parser$parse_args()
 
 
@@ -53,7 +53,7 @@ label_f1_results$subsample_ref <- label_f1_results$subsample_ref %>% factor(leve
 # Grouping the data by 'key' column and creating a list of data frames
 df_list <- split(label_f1_results, label_f1_results$key)
 
-plot_model_metrics(df_list, formulas)
+#plot_model_metrics(df_list, formulas)
 
 for (df in df_list) {
   for (formula in formulas) {
