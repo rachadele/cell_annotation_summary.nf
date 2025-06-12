@@ -44,9 +44,9 @@ plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/weighted_f1_results.tsv")
-    parser.add_argument('--emmeans_estimates', type=str, help = "OR and pvalues from emmeans", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/subsample_ref_emmeans_estimates.tsv" )
-    parser.add_argument('--emmeans_summary', type = str, help = "emmeans summary", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/subsample_ref_emmeans_summary.tsv")
+    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/aggregated_results/weighted_f1_results.tsv")
+    parser.add_argument('--emmeans_estimates', type=str, help = "OR and pvalues from emmeans", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/subsample_ref_emmeans_estimates.tsv" )
+    parser.add_argument('--emmeans_summary', type = str, help = "emmeans summary", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/subsample_ref_emmeans_summary.tsv")
     parser.add_argument('--key', type = str, help = "key of factor to plot", default = "subclass")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
@@ -321,20 +321,21 @@ def reformat_contrast_df(contrast_results, n_factors=2):
   
   return pd.DataFrame(rows)
 
-      
+
+
 def main():
   
   args = parse_arguments()
-  print(args)
+
   weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep = "\t")
   # label_f1_results = pd.read_csv(args.label_f1_results, sep = "\t")
   contrast_results = pd.read_csv(args.emmeans_estimates, sep = "\t")
   emmeans_summary = pd.read_csv(args.emmeans_summary, sep = "\t")
   
+  
   factors = emmeans_summary.loc[:, :"response"].iloc[:, :-1].columns.tolist()
   key = args.key
- # make_contrast_dict(estimates, n_factors = len(factors))
-  
+
   # filter to cutoff=0 
   # replace np.nan with "None"
   emmeans_summary = emmeans_summary.replace({np.nan: "None"})
@@ -342,6 +343,8 @@ def main():
   weighted_f1_results = weighted_f1_results[(weighted_f1_results["cutoff"] == 0 ) & (weighted_f1_results["key"] == key)]
   outdir = key
   os.makedirs(outdir, exist_ok=True)
+
+  
   # merge means with weighted_f1_results
   if len(factors) == 1:
     factor1 = factors[0]

@@ -27,7 +27,7 @@ theme_set(
 
 parser <- argparse::ArgumentParser()
 parser$add_argument("--weighted_f1_results", help = "Path to the weighted_f1_results file", 
-  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mmus_new_hierarchy/aggregated_results/weighted_f1_results.tsv")
+  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/7e/8d905cdf25ac0d4b7ab33975b41088/weighted_f1_results.tsv")
 args <- parser$parse_args()
 
 
@@ -74,7 +74,7 @@ weighted_f1_results$subsample_ref <- weighted_f1_results$subsample_ref %>% facto
 # Grouping the data by 'key' column and creating a list of data frames
 df_list <- split(weighted_f1_results, weighted_f1_results$key)
 
-plot_model_metrics(df_list, formulas)
+#plot_model_metrics(df_list, formulas)
 
 for (df in df_list) {
   for (formula in formulas) {
