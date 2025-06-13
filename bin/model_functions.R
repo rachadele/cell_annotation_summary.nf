@@ -163,7 +163,7 @@ run_emmeans_label <- function(model, key_dir) {
   if (!dir.exists(file.dir)) {
     dir.create(file.dir)
   }
-  emm_label <- emmeans(model, specs = ~ label, at = list(cutoff = 0), type = "response")
+  emm_label <- emmeans(model, specs = ~ label * method, at = list(cutoff = 0), type = "response")
   summary_emm_label_df <- as.data.frame(summary(emm_label))
   write.table(summary_emm_label_df, file = file.path(file.dir, "label_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
   estimate_label_df <- as.data.frame(pairs(emm_label))
