@@ -76,11 +76,14 @@ def plot_fit_with_ci(df, x_col="cutoff", group_col="method",
 def main():
   args = parse_arguments()
   contrast = pd.read_csv(args.contrast, sep = "\t")
-  x_col = contrast.columns[0]
+  if "cutoff" in contrast.columns:
+    x_col = "cutoff"
+  elif "support" in contrast.columns:    
+    x_col = "support"
   outdir = x_col
   if not os.path.exists(outdir):
       os.makedirs(outdir)
-  group_col = contrast.columns[1]
+  group_col = "method"
   plot_fit_with_ci(df=contrast, x_col=x_col, group_col=group_col,
                     fit_col="fit", lower_col="lower", upper_col="upper", outdir=outdir)
 

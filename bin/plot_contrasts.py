@@ -134,23 +134,35 @@ def plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir, cont
         
           y1 = unique_factor1.tolist().index(f1) + offsets[f2a] +0.15
           y2 = unique_factor1.tolist().index(f1) + offsets[f2b] +0.15
-          
-          # Draw contrast line
-          bar_x = max(x, subset['response'].values[0]) + 0.05
-         # ax.plot([bar_x, bar_x], [y1, y2], color='black', linewidth=2)
 
-          # Add OR and p-value text
-         # ax.text(
-          #    bar_x, (y1 + y2) / 2,
-            #  f'OR = {odds_ratio:.2f}, p = {p_value:.2e}',
-            #  ha='center', va='bottom', fontsize=40, fontweight='bold'
-         # )
-          # Add star for p < 0.001
-          if p_value < 0.001:
-              ax.text(bar_x, (y1 + y2) / 2, '*', ha='center', va='bottom', fontsize=20, fontweight='bold', color='red')
+          y_low, y_high = sorted([y1, y2])
+
+          # Bracket dimensions
+          x_base = max(x, subset['response'].values[0]) + 0.1
+          arm_length = 0.02  # horizontal length of the arms
+          arm_height = 0.05  # vertical height of the arms
+
+          # Draw short horizontal arms
+          plt.plot([x_base, x_base + arm_length], [y_low, y_low], color='black')   # bottom
+          plt.plot([x_base, x_base + arm_length], [y_high, y_high], color='black') # top
+
+          # Draw vertical connector between them
+          plt.plot([x_base + arm_length, x_base + arm_length], [y_low, y_high], color='black')
+
+          star_y = (y1 + y2) / 2
+          star_x = x_base + arm_length + 0.01
+        
+          if p_value < 1e-4:
+              stars = '***'
+          elif p_value < 1e-3:
+              stars = '**'
+          elif p_value < 0.01:
+              stars = '*'
           else:
-              ax.text(bar_x, (y1 + y2) / 2, '*', ha='center', va='bottom', fontsize=20, fontweight='bold', color='black')
-
+              stars = None
+          if stars:
+                ax.text(star_x, star_y, '*', ha='left', va='center',
+                        fontsize=20, fontweight='bold', color='red')
 
     ax.set_title(f'{factor1.capitalize()}, Cutoff = 0', fontsize=40)
     ax.set_ylabel(factor1, fontsize=40)
@@ -240,15 +252,35 @@ def plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key, contrast_
 
         y1 = weighted_f1_results[weighted_f1_results[factor1] == f2a]['response'].values[0]
         y2 = weighted_f1_results[weighted_f1_results[factor1] == f2b]['response'].values[0]
+        
+        # Set top y position for the bracket
+        y_top = max(y1, y2) + 0.1 + (idx * 0.15)
 
-        # Draw contrast line with vertical stacking for multiple levels
-        bar_y = max(y1, y2) + 0.1 + (idx * 0.15)  # Offset each contrast line
-        ax.plot([x1, x2], [bar_y, bar_y], color='black', linewidth=2)
+        # Height of the short vertical arms
+        arm_height = 0.05
+
+        # Draw short vertical arms
+        ax.plot([x1, x1], [y_top - arm_height, y_top], color='black', linewidth=1)
+        ax.plot([x2, x2], [y_top - arm_height, y_top], color='black', linewidth=1)
+
+        # Draw horizontal connector
+        ax.plot([x1, x2], [y_top, y_top], color='black', linewidth=1)
 
         # Add stars with colors based on p-value
-        star_color = 'red' if p_value < 0.001 else 'black'
-        ax.text((x1 + x2) / 2, bar_y + 0.05, '*', ha='center', va='bottom', 
-                fontsize=20, fontweight='bold', color=star_color)
+        # don't add stars for p-values > 0.05
+        
+        if p_value < 1e-4:
+            stars = '***'
+        elif p_value < 1e-3:
+            stars = '**'
+        elif p_value < 0.01:
+            stars = '*'
+        else:
+            stars = None
+        if stars:
+            ax.text((x1 + x2) / 2, y_top + 0.02, stars, ha='center', va='bottom',
+                    fontsize=14, fontweight='bold', color="red")
+
 
     # Manually set font sizes
    # ax.set_title(f'{factor1.capitalize()} at {key} level, Cutoff = 0', fontsize=40)
