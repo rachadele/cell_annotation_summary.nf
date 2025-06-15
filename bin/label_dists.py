@@ -113,6 +113,11 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
             # Titles and axis labels
             if i == 0:
                 ax[i][j].set_title(f"{method}")
+                # set fontsize
+                ax[i][j].title.set_fontsize(10)
+                # wrap title text
+                # rotate title 90 degrees
+                ax[i][j].title.set_rotation(45)
             else:
                 ax[i][j].set_title('')
             if j == 0:
@@ -125,6 +130,7 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
             # Share x-axis labels: only show on the bottom row
             if i == len(levels[level]) - 1:
                 ax[i][j].set_xticks(np.linspace(0, 1, 11))
+                                ax[i][j].set_xticklabels([f"{x:.1f}" for x in np.linspace(0, 1, 11)])
                 score_col_name = score_col.replace("_", " ").title()
                 ax[i][j].set_xlabel(score_col_name)
             else:
@@ -182,6 +188,22 @@ def main():
     plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision", subclass_col="family")
     plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall", subclass_col="family")
       
- 
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="subclass")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="precision", subclass_col="subclass")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="recall", subclass_col="subclass")
+    
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="class")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="precision", subclass_col="class")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="recall", subclass_col="class")
+    
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="family")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="precision", subclass_col="family")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="recall", subclass_col="family")
+    
+    
+    # plot only results for the "whole cortex" reference at subsample_ref=500 and cutoff=0
+    #label_f1_results_filtered = label_f1_results[(label_f1_results["cutoff"] == 0) & (label_f1_results["reference"] == "whole cortex") & (label_f1_results["subsample_ref"] == 500)]
+    #plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method", score_col="f1_score", subclass_col="subclass")
+    
 if __name__ == "__main__":
     main()
