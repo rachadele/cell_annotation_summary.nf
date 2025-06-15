@@ -163,12 +163,23 @@ run_emmeans_label <- function(model, key_dir) {
   if (!dir.exists(file.dir)) {
     dir.create(file.dir)
   }
-  emm_label <- emmeans(model, specs = ~ label * method, at = list(cutoff = 0), type = "response")
+
+  # interaction between label and method
+  emm_label_ref <- emmeans(model, specs = ~ label * method, at = list(cutoff = 0), type = "response")
+  summary_emm_label_df <- as.data.frame(summary(emm_label_ref))
+  write.table(summary_emm_label_df, file = file.path(file.dir, "label_ref_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+  estimate_label_ref_df <- as.data.frame(pairs(emm_label_ref))
+  write.table(estimate_label_ref_df, file = file.path(file.dir, "label_ref_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  #plot_contrasts(summary_emm_label_df, key_dir=fig.dir, contrast="label")
+
+  # only label
+  emm_label <- emmeans(model, specs = ~ label, at = list(cutoff = 0), type = "response")
   summary_emm_label_df <- as.data.frame(summary(emm_label))
   write.table(summary_emm_label_df, file = file.path(file.dir, "label_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
   estimate_label_df <- as.data.frame(pairs(emm_label))
-  write.table(estimate_label_df, file = file.path(file.dir, "label_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
   plot_contrasts(summary_emm_label_df, key_dir=fig.dir, contrast="label")
+
+
 }
 
 
