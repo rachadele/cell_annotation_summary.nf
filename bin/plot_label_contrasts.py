@@ -32,7 +32,7 @@ def parse_arguments():
 
     parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/aggregated_results/label_f1_results.tsv")   
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
-    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse.tsv")
+    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author.tsv")
    # parser.add_argument('--emmeans_estimates', type=str, help = "OR and pvalues from emmeans", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/model_eval/label/f1_score_~_label_+_support_+_cutoff_+_method_+_method:cutoff_+_method:support/subclass/files/label_emmeans_estimates.tsv" )
     parser.add_argument('--emmeans_summary', type = str, help = "emmeans summary", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/model_eval/label/f1_score_~_label_+_support_+_cutoff_+_method_+_method:cutoff_+_method:support/subclass/files/label_emmeans_summary.tsv")
     parser.add_argument('--key', type = str, help = "key of factor to plot", default = "subclass")
@@ -182,7 +182,7 @@ def main():
         "global": globals
     } 
 
-    label_f1_results_filtered = label_f1_results[label_f1_results["cutoff"].isin([0,0.05,0.1,0.15,0.2])]
+    label_f1_results_filtered = label_f1_results[(label_f1_results["cutoff"].isin([0])) & (label_f1_results["reference"].isin(["whole cortex"]))]
     # add a column for support across the whole dataset
     
     #label_f1_results_filtered["inter_dataset_support"] = label_f1_results_filtered["label"].map(label_f1_results_filtered["label"].value_counts())
