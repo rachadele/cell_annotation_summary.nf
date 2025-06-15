@@ -33,7 +33,7 @@ def parse_arguments():
     parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/aggregated_results/label_f1_results.tsv")   
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
     parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author.tsv")
-   # parser.add_argument('--emmeans_estimates', type=str, help = "OR and pvalues from emmeans", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/model_eval/label/f1_score_~_label_+_support_+_cutoff_+_method_+_method:cutoff_+_method:support/subclass/files/label_emmeans_estimates.tsv" )
+    parser.add_argument('--emmeans_estimates', type=str, help = "OR and pvalues from emmeans", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/model_eval/label/f1_score_~_label_+_support_+_cutoff_+_method_+_method:cutoff_+_method:support/subclass/files/label_emmeans_estimates.tsv" )
     parser.add_argument('--emmeans_summary', type = str, help = "emmeans summary", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/model_eval/label/f1_score_~_label_+_support_+_cutoff_+_method_+_method:cutoff_+_method:support/subclass/files/label_emmeans_summary.tsv")
     parser.add_argument('--key', type = str, help = "key of factor to plot", default = "subclass")
    
@@ -117,6 +117,13 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
             # Titles and axis labels
             if i == 0:
                 ax[i][j].set_title(f"{method}")
+                # set fontsize
+                ax[i][j].title.set_fontsize(10)
+                # wrap title text
+                #ax[i][j].title.set_wrap(True)
+                # rotate title 90 degrees
+                ax[i][j].title.set_rotation(45)
+                
             else:
                 ax[i][j].set_title('')
             if j == 0:
@@ -129,23 +136,14 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
             # Share x-axis labels: only show on the bottom row
             if i == len(levels[level]) - 1:
                 ax[i][j].set_xticks(np.linspace(0, 1, 11))
+                # show xtick values
+                ax[i][j].set_xticklabels([f"{x:.1f}" for x in np.linspace(0, 1, 11)])
                 score_col_name = score_col.replace("_", " ").title()
                 ax[i][j].set_xlabel(score_col_name)
             else:
                 ax[i][j].set_xlabel('')
                 ax[i][j].set_xticklabels([])  # Hide tick labels for upper rows
                 
-            # add bars for "response" and "asymp.LCL" and "asymp.UCL"
-            for idx, row in method_df.iterrows():
-                ax[i][j].errorbar(
-                    x=row['response'], 
-                    y=row['label'], 
-                    xerr=[[row['response'] - row['asymp.LCL']], [row['asymp.UCL'] - row['response']]], 
-                    fmt='o', 
-                    color='black', 
-                    capsize=5, 
-                    elinewidth=2
-                )
     
     plt.tight_layout()
     outdir = subclass_col
@@ -160,13 +158,13 @@ def main():
     args = parse_arguments()
     label_f1_results = args.label_f1_results
     emmeans_summary = args.emmeans_summary
-
+    emmeans_estimates = args.emmeans_estimates
     # Read in data
     label_f1_results = pd.read_csv(args.label_f1_results, sep = "\t")
     color_mapping_df = pd.read_csv(args.color_mapping_file, sep = "\t")
     mapping_df = pd.read_csv(args.mapping_file, sep = "\t") 
   
-  
+    
     emmeans_summary = pd.read_csv(args.emmeans_summary, sep = "\t")
 
     # Define the levels for each category
@@ -182,24 +180,18 @@ def main():
         "global": globals
     } 
 
-    label_f1_results_filtered = label_f1_results[(label_f1_results["cutoff"].isin([0])) & (label_f1_results["reference"].isin(["whole cortex"]))]
+    label_f1_results_filtered = label_f1_results[(label_f1_results["cutoff"].isin([0]))] #& (label_f1_results["reference"].isin(["whole cortex"]))]
     # add a column for support across the whole dataset
     
     #label_f1_results_filtered["inter_dataset_support"] = label_f1_results_filtered["label"].map(label_f1_results_filtered["label"].value_counts())
     # merge with emmeans_summary to get estimated marginal mean and SE for each label
     label_f1_results_filtered = label_f1_results_filtered.merge(emmeans_summary, on="label", how="left")
     
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score")
    
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score", subclass_col="class")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision", subclass_col="class")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall", subclass_col="class")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="class")
    
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score", subclass_col="family")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision", subclass_col="family")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall", subclass_col="family")
+    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="family")
       
  
 if __name__ == "__main__":
