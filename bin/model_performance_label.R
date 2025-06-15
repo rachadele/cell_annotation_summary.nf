@@ -40,10 +40,10 @@ organism <- unique(label_f1_results$organism)[1]
 
 # Defining factor names
 #factor_names <- c("reference", "method", "cutoff", "subsample_ref")
-factor_names <- c("label", "support", "cutoff", "method")
+factor_names <- c("label", "cutoff", "method", "reference")
 
 formulas <- list(
-  paste("f1_score ~", paste(c(factor_names, "method:cutoff", "method:support", "method:label"), collapse = " + "))
+  paste("f1_score ~", paste(c(factor_names, "method:cutoff"), collapse = " + "))
 )
 
 

@@ -49,8 +49,6 @@ run_beta_model <- function(df, formula, group_var = "study", type="weighted") {
               # add 0 inflation
              # ziformula = ~, # model 0 inflation separately for each label with free intercept
               # this makes it takeforever
-              # potentially add support to zero inflation
-              #ziformula = ~label + support,
               control=glmmTMBControl(parallel = nt))
   } else {
     stop("Invalid type specified. Use 'weighted' or 'label'.")
@@ -165,15 +163,15 @@ run_emmeans_label <- function(model, key_dir) {
   }
 
   # interaction between label and method
-  emm_label_ref <- emmeans(model, specs = ~ label * method, at = list(cutoff = 0), type = "response")
-  summary_emm_label_df <- as.data.frame(summary(emm_label_ref))
-  write.table(summary_emm_label_df, file = file.path(file.dir, "label_ref_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  estimate_label_ref_df <- as.data.frame(pairs(emm_label_ref))
-  write.table(estimate_label_ref_df, file = file.path(file.dir, "label_ref_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
-  #plot_contrasts(summary_emm_label_df, key_dir=fig.dir, contrast="label")
+  #emm_label_ref <- emmeans(model, specs = ~ label * method, at = list(cutoff = 0), type = "response")
+  #summary_emm_label_df <- as.data.frame(summary(emm_label_ref))
+  #write.table(summary_emm_label_df, file = file.path(file.dir, "label_ref_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+  #estimate_label_ref_df <- as.data.frame(pairs(emm_label_ref))
+  #write.table(estimate_label_ref_df, file = file.path(file.dir, "label_ref_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  ##plot_contrasts(summary_emm_label_df, key_dir=fig.dir, contrast="label")
 
   # only label
-  emm_label <- emmeans(model, specs = ~ label, at = list(cutoff = 0), type = "response")
+  emm_label <- emmeans(model, specs = ~ label, at = list(cutoff = 0, method="scvi", reference = "whole cortex"), type = "response")
   summary_emm_label_df <- as.data.frame(summary(emm_label))
   write.table(summary_emm_label_df, file = file.path(file.dir, "label_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
   estimate_label_df <- as.data.frame(pairs(emm_label))
@@ -328,10 +326,10 @@ run_and_store_model <- function(df, formula, key_dir, key, type="weighted", grou
     write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
 
     alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05)))
-    ae_contrast <- alleffects["support:method"]
-    plot_continuous_effects(ae_contrast, fig.dir)
-    ae_support <- as.data.frame(ae_contrast[[1]])
-    write.table(ae_support, file = file.path(file.dir, "label_support_effects.tsv"), sep = "\t", row.names = FALSE)
+   # ae_contrast <- alleffects["support:method"]
+   # plot_continuous_effects(ae_contrast, fig.dir)
+   # ae_support <- as.data.frame(ae_contrast[[1]])
+   # write.table(ae_support, file = file.path(file.dir, "label_support_effects.tsv"), sep = "\t", row.names = FALSE)
 
   }
 
