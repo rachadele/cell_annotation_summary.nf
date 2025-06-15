@@ -138,9 +138,9 @@ def plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir, cont
           y_low, y_high = sorted([y1, y2])
 
           # Bracket dimensions
-          x_base = max(x, subset['response'].values[0]) + 0.1
-          arm_length = 0.02  # horizontal length of the arms
-          arm_height = 0.05  # vertical height of the arms
+          x_base = max(x, subset['response'].values[0]) + 0.4
+          arm_length = 0.01  # horizontal length of the arms
+          arm_height = 0.05 # vertical height of the arms
 
           # Draw short horizontal arms
           plt.plot([x_base, x_base + arm_length], [y_low, y_low], color='black')   # bottom
@@ -254,10 +254,10 @@ def plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key, contrast_
         y2 = weighted_f1_results[weighted_f1_results[factor1] == f2b]['response'].values[0]
         
         # Set top y position for the bracket
-        y_top = max(y1, y2) + 0.1 + (idx * 0.15)
+        y_top = max(y1, y2) + 0.15 + (idx * 0.15)
 
         # Height of the short vertical arms
-        arm_height = 0.05
+        arm_height = 0.02
 
         # Draw short vertical arms
         ax.plot([x1, x1], [y_top - arm_height, y_top], color='black', linewidth=1)
