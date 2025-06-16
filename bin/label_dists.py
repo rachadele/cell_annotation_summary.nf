@@ -130,7 +130,7 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
             # Share x-axis labels: only show on the bottom row
             if i == len(levels[level]) - 1:
                 ax[i][j].set_xticks(np.linspace(0, 1, 11))
-                                ax[i][j].set_xticklabels([f"{x:.1f}" for x in np.linspace(0, 1, 11)])
+                ax[i][j].set_xticklabels([f"{x:.1f}" for x in np.linspace(0, 1, 11)])
                 score_col_name = score_col.replace("_", " ").title()
                 ax[i][j].set_xlabel(score_col_name)
             else:

@@ -333,8 +333,7 @@ workflow {
 
     plotContrasts(emmeans_all, weighted_f1_results_aggregated)
 
-    modelEvalLabel(label_f1_results_aggregated)
-    
+    modelEvalLabel(label_f1_results_aggregated) 
     continuous_effects_label = modelEvalLabel.out.continuous_effects
 
     // flatMap the mode onto continuous_effects_label
