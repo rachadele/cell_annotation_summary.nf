@@ -30,9 +30,9 @@ random.seed(42)
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
 
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/aggregated_results/label_f1_results.tsv")   
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/14/a9e48688ba370b7a8596e407f02f76/label_f1_results.tsv")   
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
-    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse.tsv")
+    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author2.tsv")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -96,7 +96,13 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
 
             # Clamp negative SD values to 0
             method_df['sd'] = method_df['sd'].apply(lambda x: max(x, 0))
-
+            
+            if method_df[score_col].isnull().all():
+                print(f"No data for {method} in {celltype} at {level} level.")
+                # remove ax[i][j] from the plot
+               # ax[i][j].remove()
+                continue
+            
             sns.boxplot(
                 x=score_col, 
                 y="label", 
@@ -203,7 +209,7 @@ def main():
     
     # plot only results for the "whole cortex" reference at subsample_ref=500 and cutoff=0
     #label_f1_results_filtered = label_f1_results[(label_f1_results["cutoff"] == 0) & (label_f1_results["reference"] == "whole cortex") & (label_f1_results["subsample_ref"] == 500)]
-    #plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method", score_col="f1_score", subclass_col="subclass")
+   # plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method", score_col="f1_score", subclass_col="subclass")
     
 if __name__ == "__main__":
     main()

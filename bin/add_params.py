@@ -62,7 +62,7 @@ def main():
 
     with open(params_file, "r") as file:
         parameters_dict = yaml.safe_load(file)  # Parse the YAML file into a Python dictionary
-    # Convert the dictionary to a pandas DataFrame
+
 
     keys_to_drop = ["ref_collections", "ref_keys", "outdir", 
                     "batch_keys", "relabel_r", "relabel_q", "tree_file","queries_adata"]
@@ -70,7 +70,6 @@ def main():
     # Use a loop to remove keys
     for key in keys_to_drop:
         parameters_dict.pop(key, None)
-    # Optionally, convert the DataFrame back to a dictionary
             
     # Process f1_results
     for result_path in f1_results:  # Assuming f1_results is a list of paths
