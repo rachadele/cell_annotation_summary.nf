@@ -80,25 +80,6 @@ process aggregateResults {
 
 }
 
-process runAnova {
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/anova_results", mode: 'copy'
-
-    input:
-    path weighted_f1_results_aggregated
-    path label_f1_results_aggregated
-
-    output:
-
-    path "*anova_*.tsv"
-    path "*png"
-
-    script:
-    """
-    python $projectDir/bin/run_anova.py --weighted_f1_results ${weighted_f1_results_aggregated} --label_f1_results ${label_f1_results_aggregated}
-    """
-
-}
 
 process plotCutoff {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
@@ -176,7 +157,8 @@ process plotLabelDist {
 
 process modelEvalWeighted {
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/model_eval/weighted", mode: 'copy'
+    publishDir "${params.outdir}/weighted_models", mode: 'copy', pattern="*tsv"
+    publishDir "${params.outdir}/contrast_figs/weighted/", mode: 'copy', pattern="*png"
 
     input:
     path weighted_f1_results_aggregated
@@ -194,13 +176,31 @@ process modelEvalWeighted {
     Rscript $projectDir/bin/model_performance_weighted.R --weighted_f1_results ${weighted_f1_results_aggregated}
     """
 }
-
-process modelEvalLabel {
-    conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/model_eval/label", mode: 'copy'
+process split_by_label {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/label_results", mode: 'copy'
 
     input:
     path label_f1_results_aggregated
+
+    output:
+    path "**tsv", emit: label_f1_results_split
+    path "**png"
+
+    script:
+    """
+    python $projectDir/bin/split_by_label.py --label_f1_results ${label_f1_results_aggregated}
+    """
+}
+
+process modelEvalLabel {
+    beforeScript 'ulimit -Ss unlimited' // Increase stack size limit for R script
+    conda '/home/rschwartz/anaconda3/envs/r4.3' 
+    publishDir "${params.outdir}/label_models/", mode: 'copy', pattern="*tsv"
+    publishDir "${params.outdir}/contrast_figs/label/", mode: 'copy', pattern="*png"
+
+    input:
+    tuple val(key), val(label), path(label_f1_results_split)
 
     output:
     path "**png"
@@ -210,7 +210,8 @@ process modelEvalLabel {
 
     script:
     """
-    Rscript $projectDir/bin/model_performance_label.R --label_f1_results ${label_f1_results_aggregated}
+    Rscript $projectDir/bin/model_performance_label.R --label_f1_results ${label_f1_results_split} \\
+            --key ${key} --label ${label}
     """
 }
 
@@ -238,7 +239,7 @@ process plotContrasts {
 
 process plot_continuous_contrast {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/model_eval/${mode}/contrast_figs/${key}/continuous_contrasts", mode: 'copy'
+    publishDir "${params.outdir}/contrast_figs/${mode}/${key}/continuous_contrasts", mode: 'copy'
 
     input:
     tuple val(key), val(mode), path(continuous_effects) // mode can be 'weighted' or 'label'
@@ -251,6 +252,7 @@ process plot_continuous_contrast {
     python $projectDir/bin/plot_continuous_contrasts.py --key ${key} --contrast ${continuous_effects} 
     """
 }
+
 workflow {
 
     Channel
@@ -281,9 +283,7 @@ workflow {
     weighted_f1_results_aggregated = aggregateResults.out.weighted_f1_results_aggregated   
     label_f1_results_aggregated = aggregateResults.out.label_f1_results_aggregated 
     
-    // run ANOVA on aggregated results
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
-    // runAnova(weighted_f1_results_aggregated, label_f1_results_aggregated)
     plotHeatmap(weighted_f1_results_aggregated)
     plotLabelDist(label_f1_results_aggregated)
     
@@ -332,20 +332,6 @@ workflow {
     emmeans_all = emmeans_estimates_map.join(emmeans_summary_map, by: [0,1])
 
     plotContrasts(emmeans_all, weighted_f1_results_aggregated)
-
-    modelEvalLabel(label_f1_results_aggregated) 
-    continuous_effects_label = modelEvalLabel.out.continuous_effects
-
-    // flatMap the mode onto continuous_effects_label
-    continuous_effects_label
-        .flatMap { list ->
-            list.collect { file ->
-                def key = file.getParent().getParent().getName()
-                def mode = 'label' // or 'weighted' based on the process
-                return [key, mode, file]
-            }
-        }
-        .set { continuous_effects_label_map }
     
     continuous_effects_weighted
         .flatMap { list ->
@@ -358,8 +344,38 @@ workflow {
         }
         .set { continuous_effects_weighted_map }
 
+    // split label results
+    split_by_label(label_f1_results_aggregated)
+    split_by_label.out.label_f1_results_split
+    // label_f1_results_split = split_by_label.out.label_f
+    .set { label_f1_results_split }
+
+    // split label_f1_results_split into individual files
+    label_f1_results_split.flatMap { list ->
+            // Iterate through each file in the ArrayList
+            list.collect { file ->
+                def key = file.getParent().getParent().getName()
+                def label = file.getParent().getName() // Assuming the label is the parent directory name
+                def filepath = file
+                return [key, label, filepath]
+            }
+        }.set { label_f1_results_split_map }
+
+
+    modelEvalLabel(label_f1_results_split_map) 
+    continuous_effects_label = modelEvalLabel.out.continuous_effects
+    // flatMap the mode onto continuous_effects_label
+    continuous_effects_label.map { file ->
+                def key = file.getParent().getParent().getName()
+                def mode = 'label' // or 'weighted' based on the process
+                return [key, mode, file]
+            }
+        
+        .set { continuous_effects_label_map }
+    
+
     continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
-    continuous_effects_all.view()
+    //continuous_effects_all.view()
     plot_continuous_contrast(continuous_effects_all)
 }
 

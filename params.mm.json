@@ -1,5 +1,5 @@
 {
-    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/mus_musculus/sample/SCT",
-    "outdir": "mus_musculus",
+    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2025-01-30/mus_musculus/100/dataset_id/SCT",
+    "outdir": "2025-01-20/mus_musculus/100/dataset_id/SCT",
     "mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author.tsv"
 }
