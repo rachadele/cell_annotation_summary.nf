@@ -26,11 +26,11 @@ random.seed(42)
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/weighted_f1_results.tsv")
+    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/5b/29f2854382695f65aacd5c8bd0a914/weighted_f1_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/SCT_integrated_mmus/aggregated_results/label_f1_results.tsv")   
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/5b/29f2854382695f65aacd5c8bd0a914/label_f1_results.tsv")   
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
-    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse.tsv")
+    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author2.tsv")
     
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
@@ -110,7 +110,15 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
            subclasses_to_plot = [celltype]
         
         filtered_df = label_f1_results[(label_f1_results["label"].isin(subclasses_to_plot)) & (label_f1_results["key"] == subclass_col)]
-
+        
+        if filtered_df.empty:
+            print(f"No data available for cell type '{celltype}' with subclasses {subclasses_to_plot}. Skipping this cell type.")
+            # remove ax from the grid
+           # for j in range(len(methods)):
+              #  axes[i, j].remove()
+            continue
+        
+        
         for j, method in enumerate(methods):
             ax = axes[i, j]
             method_df = filtered_df[filtered_df["method"] == method]
@@ -120,9 +128,7 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
                          palette={label: subclass_colors[label] for label in subclasses_to_plot}, ax=ax)
             if i == 0:
                 ax.set_title(method)
-           # ax.set_xlabel("Cutoff")
-           # move y label to the left
-           
+
             # Add legend only for the first subplot in each row
             if j == len(methods) - 1:
                 ax.legend(title="Label", bbox_to_anchor=(1, 0.5), loc="center left", fontsize=14)
@@ -130,6 +136,7 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
                 ax.legend_.remove()  # Remove legend from other subplots in the row
     for ax in axes.flat:
         ax.set_xticks([0, 0.25, 0.5, 0.75])
+        ax.set_xticklabels([0, 0.25, 0.5, 0.75])
         ax.set_ylim(-0.05, 1.05)
         ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1])
     plt.suptitle(f"{score_col.replace('_', ' ').title()} vs. Cutoff Across Cell Types", y=1)

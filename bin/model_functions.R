@@ -162,21 +162,26 @@ run_emmeans_label <- function(model, key_dir) {
     dir.create(file.dir)
   }
 
-  # interaction between label and method
-  #emm_label_ref <- emmeans(model, specs = ~ label * method, at = list(cutoff = 0), type = "response")
-  #summary_emm_label_df <- as.data.frame(summary(emm_label_ref))
-  #write.table(summary_emm_label_df, file = file.path(file.dir, "label_ref_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  #estimate_label_ref_df <- as.data.frame(pairs(emm_label_ref))
-  #write.table(estimate_label_ref_df, file = file.path(file.dir, "label_ref_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
-  ##plot_contrasts(summary_emm_label_df, key_dir=fig.dir, contrast="label")
+ # Estimate for reference * method * cutoff
+  emm_reference_method <- emmeans(model, specs = ~ reference * method, at = list(cutoff = 0), type = "response")
+  summary_emm_reference_method_df <- as.data.frame(summary(emm_reference_method))
+  estimate_reference_method_df <- as.data.frame(pairs(emm_reference_method))
+  write.table(summary_emm_reference_method_df, file = file.path(file.dir, "reference_method_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+  write.table(estimate_reference_method_df, file = file.path(file.dir, "reference_method_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
 
-  # only label
-  emm_label <- emmeans(model, specs = ~ label, at = list(cutoff = 0, method="scvi", reference = "whole cortex"), type = "response")
-  summary_emm_label_df <- as.data.frame(summary(emm_label))
-  write.table(summary_emm_label_df, file = file.path(file.dir, "label_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  estimate_label_df <- as.data.frame(pairs(emm_label))
-  plot_contrasts(summary_emm_label_df, key_dir=fig.dir, contrast="label")
+# subsample ref 
+  emm_subsample_ref <- emmeans(model, specs = ~ subsample_ref, at = list(cutoff = 0), type = "response")
+  summary_emm_subsample_ref_df <- as.data.frame(summary(emm_subsample_ref))
+  estimate_subsample_ref_df <- as.data.frame(pairs(emm_subsample_ref))
+  write.table(summary_emm_subsample_ref_df, file = file.path(file.dir, "subsample_ref_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+  write.table(estimate_subsample_ref_df, file = file.path(file.dir, "subsample_ref_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
 
+  # Estimate for method * cutoff
+  emm_method <- emmeans(model, specs = ~ method, at = list(cutoff = 0, reference="whole cortex"), type = "response")
+  summary_emm_method_df <- as.data.frame(summary(emm_method))
+  estimate_method_df <- as.data.frame(pairs(emm_method))
+  write.table(summary_emm_method_df, file = file.path(file.dir, "method_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
+  write.table(estimate_method_df, file = file.path(file.dir, "method_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
 
 }
 
@@ -282,7 +287,7 @@ run_drop1 <- function(model, key_dir) {
   ggsave(file.path(key_dir, "drop1.png"), p, width = 20, height = 20, dpi = 300)
 }
 
-run_and_store_model <- function(df, formula, key_dir, key, type="weighted", group_var="study") {
+run_and_store_model <- function(df, formula, key_dir, key, type="label", group_var="study") {
   fig.dir <- file.path(key_dir, "figures")
   if (!dir.exists(fig.dir)) {
     dir.create(fig.dir)
@@ -303,7 +308,7 @@ run_and_store_model <- function(df, formula, key_dir, key, type="weighted", grou
   model_summary_coefs$BIC <- result$stats$BIC
   model = result$model
 
-  run_drop1(model, fig.dir) 
+ # run_drop1(model, fig.dir) 
   plot_qq(model, fig.dir)
   if (type == "weighted") {
     # Run emmeans for weighted F1
@@ -325,17 +330,13 @@ run_and_store_model <- function(df, formula, key_dir, key, type="weighted", grou
     ae_contrast <- as.data.frame(ae_contrast[[1]])
     write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
 
-    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05)))
+    #alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05)))
    # ae_contrast <- alleffects["support:method"]
    # plot_continuous_effects(ae_contrast, fig.dir)
    # ae_support <- as.data.frame(ae_contrast[[1]])
    # write.table(ae_support, file = file.path(file.dir, "label_support_effects.tsv"), sep = "\t", row.names = FALSE)
 
   }
-
-
-
-
   # Save the model summary and coefficients summary to files
   write.table(model_summary_coefs, file = file.path(file.dir, paste0(key,"_model_summary_coefs_combined.tsv")), sep = "\t", row.names = FALSE)
   # Plot the model summary (assuming plot_model_summary is defined)
@@ -357,7 +358,6 @@ plot_model_metrics <- function(model, formula, key) {
   
   # Combine the results into a single data frame
   #results_df <- do.call(rbind, results)
-  library(patchwork)
   results_df$formula_wrapped <- factor(str_wrap(results_df$formula, width = 30))  # Adjust width as needed
   # Plot AIC vs LogLik
   p <- ggplot(results_df, aes(x = AIC, y = LogLik, color = formula_wrapped, shape = key)) +
