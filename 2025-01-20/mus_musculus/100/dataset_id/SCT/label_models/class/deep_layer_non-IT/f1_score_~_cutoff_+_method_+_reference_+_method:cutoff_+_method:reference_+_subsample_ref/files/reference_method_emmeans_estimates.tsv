@@ -1,0 +1,67 @@
+"contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat"	1.50716981839839	0.217051969549593	Inf	1	2.84858829537888	0.159887030877483
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / BrainAgingSpatialAtlas snRNAseq seurat"	28.2083005294474	4.33183797144916	Inf	1	21.7470967959259	0
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / (Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat)"	1.94898544641193	0.282456387472558	Inf	1	4.60451770929905	0.000259001220243915
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat)"	1.41665369824487	0.204745567196894	Inf	1	2.40990320304021	0.399071572873124
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / whole cortex seurat"	0.819028672362478	0.117261505936648	Inf	1	-1.3943856484289	0.964890801053492
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi"	21.9645781342875	3.70808820711413	Inf	1	18.3000096973712	0
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi"	36.3944576093891	5.99577815238453	Inf	1	21.8181586441959	0
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / BrainAgingSpatialAtlas snRNAseq scvi"	36.3944464421428	5.9957759847329	Inf	1	21.8181579749228	0
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / (Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi)"	36.3942545419205	5.99573873539008	Inf	1	21.8181464739319	0
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	36.3944237912238	5.99577158800821	Inf	1	21.8181566174148	0
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics seurat / whole cortex scvi"	33.6735153420543	5.57101909721121	Inf	1	21.2564417887328	0
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / BrainAgingSpatialAtlas snRNAseq seurat"	18.7160731226846	2.81890725502754	Inf	1	19.4495722924642	0
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / (Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat)"	1.2931425660335	0.183292174501671	Inf	1	1.81368944593416	0.810884381525792
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat)"	0.939942985157638	0.133199474763836	Inf	1	-0.437061519161899	0.999999420499822
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / whole cortex seurat"	0.543421625330071	0.0764045310428235	Inf	1	-4.3376541425692	0.000877571846173542
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi"	14.5733930351846	2.4497458977441	Inf	1	15.9383868358851	0
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi"	24.1475493770597	3.95529751788204	Inf	1	19.4398053377298	0
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / BrainAgingSpatialAtlas snRNAseq scvi"	24.1475419676449	3.95529608486517	Inf	1	19.43980454265	0
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / (Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi)"	24.1474146427609	3.95527145963163	Inf	1	19.4397908797443	0
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	24.147526938868	3.95529317822675	Inf	1	19.4398029299605	0
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types seurat / whole cortex scvi"	22.3422171350525	3.67596896612694	Inf	1	18.8809011707861	0
+"BrainAgingSpatialAtlas snRNAseq seurat / (Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat)"	0.069092622023696	0.0103878032474292	Inf	1	-17.7743759323691	0
+"BrainAgingSpatialAtlas snRNAseq seurat / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat)"	0.0502211643968409	0.00758365206664435	Inf	1	-19.8093885195095	0
+"BrainAgingSpatialAtlas snRNAseq seurat / whole cortex seurat"	0.0290350236274416	0.00442944398245733	Inf	1	-23.1998145574087	0
+"BrainAgingSpatialAtlas snRNAseq seurat / Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi"	0.778656555766556	0.125812932134254	Inf	1	-1.54839689041622	0.92694866146352
+"BrainAgingSpatialAtlas snRNAseq seurat / An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi"	1.29020383810063	0.20249202789399	Inf	1	1.62349216960077	0.900840066670069
+"BrainAgingSpatialAtlas snRNAseq seurat / BrainAgingSpatialAtlas snRNAseq scvi"	1.29020344221552	0.202491953274707	Inf	1	1.62349031464881	0.900840777357444
+"BrainAgingSpatialAtlas snRNAseq seurat / (Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi)"	1.29019663924551	0.202490671002921	Inf	1	1.6234584386499	0.90085298948966
+"BrainAgingSpatialAtlas snRNAseq seurat / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	1.29020263922779	0.202491801921812	Inf	1	1.62348655218184	0.90084221886058
+"BrainAgingSpatialAtlas snRNAseq seurat / whole cortex scvi"	1.19374491585913	0.188273596451529	Inf	1	1.12286949551256	0.99373995311462
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat) / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat)"	0.726867253346053	0.103662972778157	Inf	1	-2.236854139101	0.522486373246652
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat) / whole cortex seurat"	0.420233344415323	0.0595573243580182	Inf	1	-6.11711925529786	6.26992274765925e-08
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat) / Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi"	11.2697496919354	1.89121182483661	Inf	1	14.4334493001369	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat) / An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi"	18.6735399571049	3.04748595232144	Inf	1	17.9359185175544	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat) / BrainAgingSpatialAtlas snRNAseq scvi"	18.6735342273308	3.04748484656935	Inf	1	17.9359176418293	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat) / (Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi)"	18.6734357657324	3.04746584511597	Inf	1	17.9359025930984	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat) / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	18.6735226054282	3.04748260373358	Inf	1	17.9359158655644	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x seurat) / whole cortex scvi"	17.2774585895687	2.83274785352048	Inf	1	17.3790394901981	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat) / whole cortex seurat"	0.57814317880029	0.0816540951920578	Inf	1	-3.8795867597096	0.00589884025990051
+"(Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat) / Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi"	15.5045500262343	2.60282065009322	Inf	1	16.3284558070994	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat) / An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi"	25.6904405462528	4.20711940476943	Inf	1	19.8221676430666	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat) / BrainAgingSpatialAtlas snRNAseq scvi"	25.6904326634186	4.20711788045822	Inf	1	19.8221668690692	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat) / (Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi)"	25.6902972031981	4.20709168640553	Inf	1	19.822153568449	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat) / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	25.6904166743882	4.20711478864429	Inf	1	19.8221652991421	0
+"(Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 seurat) / whole cortex scvi"	23.769757834094	3.90929182872467	Inf	1	19.2649817457539	0
+"whole cortex seurat / Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi"	26.8178378553353	4.5463624651626	Inf	1	19.4013726553656	0
+"whole cortex seurat / An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi"	44.4361215150255	7.35550875747044	Inf	1	22.920642441306	0
+"whole cortex seurat / BrainAgingSpatialAtlas snRNAseq scvi"	44.4361078802815	7.35550610312833	Inf	1	22.9206418259231	0
+"whole cortex seurat / (Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi)"	44.4358735780784	7.35546049040749	Inf	1	22.9206312509795	0
+"whole cortex seurat / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	44.43608022445	7.35550071923269	Inf	1	22.9206405777208	0
+"whole cortex seurat / whole cortex scvi"	41.1139639897141	6.83341775604478	Inf	1	22.3597906507896	0
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi / An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi"	1.65696137603372	0.246624684133444	Inf	1	3.39277211275843	0.0336680297264189
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi / BrainAgingSpatialAtlas snRNAseq scvi"	1.65696086761301	0.246624591490335	Inf	1	3.39277028468154	0.0336682301536544
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi / (Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi)"	1.65695213080864	0.246622999493898	Inf	1	3.3927388705013	0.0336716745131109
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	1.65695983636539	0.24662440357909	Inf	1	3.39276657672601	0.0336686366907734
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics scvi / whole cortex scvi"	1.53308272693336	0.227943995006146	Inf	1	2.87376050386909	0.150252820690377
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi / BrainAgingSpatialAtlas snRNAseq scvi"	0.9999996931608	0.147445751968283	Inf	1	-2.08103081491196e-06	1
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi / (Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi)"	0.999994420373817	0.147444796757883	Inf	1	-3.78420313226555e-05	1
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	0.999999070788041	0.147445639220055	Inf	1	-6.30206178168587e-06	1
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types scvi / whole cortex scvi"	0.925237455204366	0.136533771813848	Inf	1	-0.526576330515112	0.999995891402997
+"BrainAgingSpatialAtlas snRNAseq scvi / (Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi)"	0.999994727211399	0.147444831655339	Inf	1	-3.57610005077553e-05	1
+"BrainAgingSpatialAtlas snRNAseq scvi / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	0.99999937762705	0.147445674117733	Inf	1	-4.22103096677414e-06	1
+"BrainAgingSpatialAtlas snRNAseq scvi / whole cortex scvi"	0.925237739103574	0.136533804144865	Inf	1	-0.526574288063781	0.999995891569007
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi) / (Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi)"	1.00000465044017	0.147446273809725	Inf	1	3.15399695410012e-05	1
+"(Single-cell RNA-seq for all cortical  hippocampal regions 10x scvi) / whole cortex scvi"	0.925242617712301	0.136534359730599	Inf	1	-0.526539190022372	0.999995894420837
+"(Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4 scvi) / whole cortex scvi"	0.925238314946873	0.136533869723064	Inf	1	-0.52657014528497	0.999995891905714

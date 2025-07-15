@@ -157,8 +157,7 @@ process plotLabelDist {
 
 process modelEvalWeighted {
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/weighted_models", mode: 'copy', pattern="*tsv"
-    publishDir "${params.outdir}/contrast_figs/weighted/", mode: 'copy', pattern="*png"
+    publishDir "${params.outdir}/weighted_models", mode: 'copy'
 
     input:
     path weighted_f1_results_aggregated
@@ -196,8 +195,8 @@ process split_by_label {
 process modelEvalLabel {
     beforeScript 'ulimit -Ss unlimited' // Increase stack size limit for R script
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/label_models/", mode: 'copy', pattern="*tsv"
-    publishDir "${params.outdir}/contrast_figs/label/", mode: 'copy', pattern="*png"
+    publishDir "${params.outdir}/label_models/", mode: 'copy'
+    //publishDir "${params.outdir}/label_models/", mode: 'copy', pattern: "**png"
 
     input:
     tuple val(key), val(label), path(label_f1_results_split)
@@ -218,7 +217,7 @@ process modelEvalLabel {
 
 process plotContrasts {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/model_eval/weighted/contrast_figs", mode: 'copy'
+    publishDir "${params.outdir}/contrast_figs/discrete/weighted/${key}", mode: 'copy'
 
     input:
     tuple val(key), val(contrast), path(emmeans_estimates), path(emmeans_summary)
@@ -239,7 +238,7 @@ process plotContrasts {
 
 process plot_continuous_contrast {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/contrast_figs/${mode}/${key}/continuous_contrasts", mode: 'copy'
+    publishDir "${params.outdir}/contrast_figs/continuous/${mode}/${key}", mode: 'copy'
 
     input:
     tuple val(key), val(mode), path(continuous_effects) // mode can be 'weighted' or 'label'
@@ -375,7 +374,6 @@ workflow {
     
 
     continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
-    //continuous_effects_all.view()
     plot_continuous_contrast(continuous_effects_all)
 }
 
