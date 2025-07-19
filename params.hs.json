@@ -1,5 +1,7 @@
 {
-    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/homo_sapiens/sample/SCT",
-    "outdir": "homo_sapiens",
-    "mapping_file": "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/census_map_human.tsv"
+    "organism": "homo_sapiens",
+    "mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv",
+    "census_version": "2025-01-30",
+    "outdir": "2025-01-30/homo_sapiens/100/dataset_id/SCT",
+    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2025-01-30/homo_sapiens/100/dataset_id/SCT/"
 }

@@ -177,7 +177,7 @@ process modelEvalWeighted {
 }
 process split_by_label {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/label_results", mode: 'copy'
+    publishDir "${params.outdir}/label_splits", mode: 'copy'
 
     input:
     path label_f1_results_aggregated
