@@ -220,7 +220,7 @@ def main():
          
     if organism == "mus_musculus":
         f1_df["disease_state"] = np.where(f1_df["disease"].isnull(), "Control", "Disease")
-        f1_df["treatment_state"] = np.where(f1_df["treatment"].isnull(), "No treatment", "treatment")
+        f1_df["treatment_state"] = np.where(f1_df["treatment"].isnull(), "no treatment", "treatment")
         f1_df["genotype"] = np.where(f1_df["genotype"].isnull(), "wild type genotype", f1_df["genotype"])
 
 
