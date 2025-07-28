@@ -29,7 +29,7 @@ random.seed(42)
 def parse_arguments():
   parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
   parser.add_argument('--query_paths', type=str, help="path to query file", default = "/space/grp/rschwartz/rschwartz/evaluation_data_wrangling/plotting_tests_mmus")
-  parser.add_argument('--new_meta_paths', type=str, help="path to relabeled query metadata file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/mus_musculus/sample/SCT/ref_50_query_null_cutoff_0_refsplit_dataset_id/scvi/predicted_meta")
+  parser.add_argument('--new_meta_paths', type=str, help="path to relabeled query metadata file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2024-07-30/mus_musculus/sample/SCT/ref_500_query_null_cutoff_0_refsplit_dataset_id/scvi/GSE124952/whole_cortex")
   parser.add_argument('--organism', type=str, help="organism", default = "mus_musculus")
   parser.add_argument('--ref_keys', type=str, help="keys to add", default = ["subclass","class","family","global"])
   parser.add_argument('--gene_mapping', type=str, default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/gemma_genes.tsv")
@@ -39,12 +39,12 @@ def parse_arguments():
       return known_args
 
 
-def assemble_meta(new_meta_paths, ref="whole_cortex"):
+def assemble_meta(new_meta_paths, pattern = "predictions"):
   # restrict only to "whole cortex"
   new_meta = {}
   for root, dirs, files in os.walk(new_meta_paths):
     for file in files:
-      if re.search(ref, file):  # Use regex search for flexibilit
+      if re.search(pattern, file):  # Use regex search for flexibilit
         filepath=os.path.join(root,file)
         query_name = "_".join(os.path.basename(file).split("_")[:2])
         new_meta[query_name] = pd.read_csv(filepath, sep="\t")
@@ -217,7 +217,7 @@ def plot_glutamatergic_analysis(adata, markers, groupby, prefix="glutamatergic")
     plot_umap(glut, groupby=groupby, markers=markers, prefix=prefix)
 
 def plot_GABAergic_analysis(adata, markers, groupby, prefix="GABAergic"):
-    gaba = adata[(adata.obs["subclass"] == "GABAergic") & 
+    gaba = adata[(adata.obs["family"] == "GABAergic") & 
                  (adata.obs["predicted_family"] == "GABAergic")].copy()
     gaba.obs_names_make_unique()
 
@@ -248,7 +248,7 @@ def main():
 
 
   
-  combined = combined[~combined.obs["predicted_subclass"].isin(["Ambiguous Glutamatergic neuron","Hippocampal neuron","Ambiguous GABAergic neuron"])]
+  #combined = combined[~combined.obs["predicted_subclass"].isin(["Ambiguous Glutamatergic neuron","Hippocampal neuron","Ambiguous GABAergic neuron"])]
 
 # find NaN in predicted_subclass
   combined = combined[combined.obs["predicted_subclass"].notna()]
@@ -263,14 +263,14 @@ def main():
   if organism == "mus_musculus":
     markers = [marker.lower().capitalize() for marker in markers]
   #make markers lowercase then capitalize
-  plot_glutamatergic_analysis(combined_subsample, markers, groupby, f"{organism}_glutamatergic")
+  plot_glutamatergic_analysis(combined, markers, groupby, f"{organism}_glutamatergic")
   
   
   markers = ["LAMP5","PVALB","SNCG","SST","VIP"]
   if organism == "mus_musculus":
     markers = [marker.lower().capitalize() for marker in markers]
   #make markers lowercase then capitalize
-  plot_GABAergic_analysis(combined_subsample, markers, groupby, prefix=f"{organism}_GABAergic")
+  plot_GABAergic_analysis(combined, markers, groupby, prefix=f"{organism}_GABAergic")
   
 
   
