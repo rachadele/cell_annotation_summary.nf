@@ -153,9 +153,9 @@ def write_factor_summary(df, factors):
     # summarize the number of unique levels for each item in factors
     # make a value_counts table for each factor
 
-    factor_summary = df[factors].nunique().reset_index()
-    factor_summary.columns = ["factor", "levels"]
-    factor_summary.to_csv("factor_summary.tsv", sep="\t", index=False) 
+    factor_summary = df[[factors]].value_counts().reset_index()
+    factor_summary.to_csv("factor_summary.tsv", sep="\t", index=False)
+     
     value_counts = df[["study","query","query_region"]].value_counts().reset_index()
     value_counts.to_csv(f"region_study_value_counts.tsv", sep="\t", index=False)
  
