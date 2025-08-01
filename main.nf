@@ -60,7 +60,8 @@ process addParams {
 
 process aggregateResults {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/aggregated_results", mode: 'copy'
+    publishDir "${params.outdir}/aggregated_results/figs", mode: 'copy', pattern: "**png"
+    publishDir "${params.outdir}/aggregated_results/files", mode: 'copy', pattern: "**tsv"
 
     input:
     path f1_results_params
@@ -69,8 +70,8 @@ process aggregateResults {
    // path "f1_results_all_pipeline_runs.tsv", emit: f1_results_aggregated
     path "weighted_f1_results.tsv", emit: weighted_f1_results_aggregated
     path "label_f1_results.tsv", emit: label_f1_results_aggregated
+    path "**factor**tsv"
     path "**summary.tsv"
-    path "**value_counts.tsv"
     path "**png"
 
     script:
@@ -157,8 +158,8 @@ process plotLabelDist {
 
 process modelEvalWeighted {
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/weighted_models", mode: 'copy', pattern="*tsv"
-    publishDir "${params.outdir}/contrast_figs/weighted/", mode: 'copy', pattern="*png"
+    publishDir "${params.outdir}/models/weighted/files", mode: 'copy', pattern: "**tsv"
+    publishDir "${params.outdir}/models/weighted/figs", mode: 'copy', pattern: "**png"
 
     input:
     path weighted_f1_results_aggregated
@@ -196,8 +197,8 @@ process split_by_label {
 process modelEvalLabel {
     beforeScript 'ulimit -Ss unlimited' // Increase stack size limit for R script
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/label_models/", mode: 'copy', pattern="*tsv"
-    publishDir "${params.outdir}/contrast_figs/label/", mode: 'copy', pattern="*png"
+    publishDir "${params.outdir}/models/label/files", mode: 'copy', pattern: "**tsv"
+    publishDir "${params.outdir}/models/label/figs", mode: 'copy', pattern: "**png"
 
     input:
     tuple val(key), val(label), path(label_f1_results_split)
@@ -218,7 +219,7 @@ process modelEvalLabel {
 
 process plotContrasts {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/model_eval/weighted/contrast_figs", mode: 'copy'
+    publishDir "${params.outdir}/contrast_figs/weighted", mode: 'copy'
 
     input:
     tuple val(key), val(contrast), path(emmeans_estimates), path(emmeans_summary)
@@ -362,21 +363,21 @@ workflow {
         }.set { label_f1_results_split_map }
 
 
-    modelEvalLabel(label_f1_results_split_map) 
-    continuous_effects_label = modelEvalLabel.out.continuous_effects
-    // flatMap the mode onto continuous_effects_label
-    continuous_effects_label.map { file ->
-                def key = file.getParent().getParent().getName()
-                def mode = 'label' // or 'weighted' based on the process
-                return [key, mode, file]
-            }
+    //modelEvalLabel(label_f1_results_split_map) 
+    //continuous_effects_label = modelEvalLabel.out.continuous_effects
+    //// flatMap the mode onto continuous_effects_label
+    //continuous_effects_label.map { file ->
+                //def key = file.getParent().getParent().getName()
+                //def mode = 'label' // or 'weighted' based on the process
+                //return [key, mode, file]
+            //}
         
-        .set { continuous_effects_label_map }
+        //.set { continuous_effects_label_map }
     
 
-    continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
-    //continuous_effects_all.view()
-    plot_continuous_contrast(continuous_effects_all)
+    //continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
+    ////continuous_effects_all.view()
+    //plot_continuous_contrast(continuous_effects_all)
 }
 
 workflow.onError = {

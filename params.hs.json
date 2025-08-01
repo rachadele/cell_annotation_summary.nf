@@ -1,5 +1,5 @@
 {
-    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/homo_sapiens/sample/SCT",
-    "outdir": "homo_sapiens",
+    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2024-07-30/homo_sapiens/sample/SCT",
+    "outdir": "homo_sapiens_2",
     "mapping_file": "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/census_map_human.tsv"
 }
