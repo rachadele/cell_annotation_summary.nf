@@ -149,16 +149,30 @@ def map_development_stage(stage):
     }
     return dev_stage_mapping_dict[stage]
     
-def write_factor_summary(df, factors): 
-    # summarize the number of unique levels for each item in factors
-    # make a value_counts table for each factor
+def write_factor_summary(df, factors):
+    # 1. Summarize the number of unique levels for each factor
+    unique_counts_df = df[factors].nunique().reset_index()
+    unique_counts_df.to_csv("factor_unique_counts.tsv", sep="\t", index=False)
 
-    factor_summary = df[[factors]].value_counts().reset_index()
-    factor_summary.to_csv("factor_summary.tsv", sep="\t", index=False)
-     
-    value_counts = df[["study","query","query_region"]].value_counts().reset_index()
-    value_counts.to_csv(f"region_study_value_counts.tsv", sep="\t", index=False)
- 
+    cols = ['disease_state', 'treatment_state', 'sex']
+    dfs = []
+
+    for col in cols:
+        if col in df.columns:
+            # Group by factor column, then count unique sample_id
+            unique_counts = (
+                df.groupby(col)['query']
+                .nunique()
+                .reset_index()
+                .rename(columns={col: 'level', 'sample': 'unique_sample_count'})
+            )
+            unique_counts['factor'] = col
+            dfs.append(unique_counts)
+
+    result_df = pd.concat(dfs, ignore_index=True) 
+    result_df.to_csv("factor_unique_sample_counts.tsv", sep="\t", index=False)
+    
+    
 def main():
     # Parse command line arguments
     args = parse_arguments()
