@@ -1,0 +1,8 @@
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/plot_heatmaps.py:283: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep = "\t")
+/home/rschwartz/anaconda3/envs/scanpyenv/lib/python3.11/site-packages/seaborn/matrix.py:560: UserWarning: Clustering large matrix with scipy. Installing `fastcluster` may give better performance.
+  warnings.warn(msg)
+/home/rschwartz/anaconda3/envs/scanpyenv/lib/python3.11/site-packages/seaborn/matrix.py:560: UserWarning: Clustering large matrix with scipy. Installing `fastcluster` may give better performance.
+  warnings.warn(msg)
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/plot_heatmaps.py:151: UserWarning: Tight layout not applied. The left and right margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()
