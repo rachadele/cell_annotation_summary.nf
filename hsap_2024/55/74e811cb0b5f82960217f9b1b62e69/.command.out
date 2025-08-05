@@ -1,0 +1,4 @@
+                              contrast            group1            group2 level1 level2  odds.ratio        SE  p.value
+0  subsample_ref500 / subsample_ref100  subsample_ref500  subsample_ref100   None   None    1.123170  0.004417      0.0
+1   subsample_ref500 / subsample_ref50  subsample_ref500   subsample_ref50   None   None    1.276795  0.004964      0.0
+2   subsample_ref100 / subsample_ref50  subsample_ref100   subsample_ref50   None   None    1.136779  0.004277      0.0

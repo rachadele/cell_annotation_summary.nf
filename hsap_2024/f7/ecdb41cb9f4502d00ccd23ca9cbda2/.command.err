@@ -1,0 +1,48 @@
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (14,15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (14,15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (14,15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")
+/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/aggregate_results.py:189: DtypeWarning: Columns (15,18,19) have mixed types. Specify dtype option on import or set low_memory=False.
+  temp_df = pd.read_csv(filepath,sep="\t")

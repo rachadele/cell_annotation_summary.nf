@@ -1,0 +1,8 @@
+level	query	factor
+Control	88	disease_state
+Disease	7	disease_state
+No treatment	34	treatment_state
+treatment	61	treatment_state
+None	16	sex
+female	4	sex
+male	75	sex

@@ -1,0 +1,60 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: mvtnorm
+Loading required package: survival
+Loading required package: TH.data
+Loading required package: MASS
+
+Attaching package: ‘MASS’
+
+The following object is masked from ‘package:dplyr’:
+
+    select
+
+
+Attaching package: ‘TH.data’
+
+The following object is masked from ‘package:MASS’:
+
+    geyser
+
+
+Attaching package: ‘gridExtra’
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+This is DHARMa 0.4.7. For overview type '?DHARMa'. For recent changes, type news(package = 'DHARMa')
+Loading required package: carData
+lattice theme set by effectsTheme()
+See ?effectsTheme for details.
+Welcome to emmeans.
+Caution: You lose important information if you filter this package's results.
+See '? untidy'
+
+Attaching package: ‘patchwork’
+
+The following object is masked from ‘package:MASS’:
+
+    area
+
+NOTE: Results may be misleading due to involvement in interactions
+qu = 0.25, log(sigma) = -1.690114 : outer Newton did not converge fully.
+NOTE: Results may be misleading due to involvement in interactions
+qu = 0.75, log(sigma) = -2.464248 : outer Newton did not converge fully.
+NOTE: Results may be misleading due to involvement in interactions
+Warning messages:
+1: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead. 
+2: The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
+ℹ Please use the `linewidth` argument instead. 

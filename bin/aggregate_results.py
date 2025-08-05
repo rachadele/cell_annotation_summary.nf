@@ -193,6 +193,13 @@ def main():
     organism = f1_df["organism"].unique()[0]
     # replace "nan" with None
     f1_df = f1_df.replace("nan", None)
+    
+    
+    # deal with control/disease state
+        # catch controls that are lower or upper case
+    f1_df["disease"] = np.where(f1_df["disease"] == "Control", "control", f1_df["disease"])
+    # fill None with "control"
+    f1_df["disease"] = np.where(f1_df["disease"].isnull(), "control", f1_df["disease"])    
     #----------weighted f1 results----------------
     # miscellaneous data wrangling
       
@@ -202,15 +209,13 @@ def main():
     f1_df["study"] = f1_df["query"].apply(lambda x: x.split("_")[0])
     f1_df["query"] = f1_df["query"].str.replace("_", " ")
     
-           
-
+        
     
-    f1_df["disease_state"] = np.where(f1_df["disease"] == "Control", "Control", "Disease")
-    
-    
+    f1_df["disease_state"] = np.where(f1_df["disease"] == "control", "control", "disease")
+ 
     if organism == "homo_sapiens":
         # data wrangling for missing disease (all controls)
-        f1_df["disease"] = np.where(f1_df["study"]=="GSE211870", "Control", f1_df["disease"]) 
+        f1_df["disease"] = np.where(f1_df["study"]=="GSE211870", "control", f1_df["disease"]) 
     
         # deal with annotation mismatch between gemma queries and curated queries
         f1_df["dev_stage"] = f1_df["dev_stage"].apply(map_development_stage) 
@@ -233,11 +238,17 @@ def main():
         f1_df["sex"] = f1_df["sex"].str.replace("feM","female")
          
     if organism == "mus_musculus":
-        f1_df["disease_state"] = np.where(f1_df["disease"].isnull(), "Control", "Disease")
+
         f1_df["treatment_state"] = np.where(f1_df["treatment"].isnull(), "No treatment", "treatment")
         f1_df["genotype"] = np.where(f1_df["genotype"].isnull(), "wild type genotype", f1_df["genotype"])
+        f1_df["treatment_state"] = f1_df["treatment_state"].str.lower()
 
 
+    # make everything lowercase
+    f1_df["disease_state"] = f1_df["disease_state"].str.lower()
+    f1_df["sex"] = f1_df["sex"].str.lower()
+    f1_df["dev_stage"] = f1_df["dev_stage"].str.lower()
+    
         
 #----------------drop label columns and save---------------
     outdir = "weighted_f1_distributions"
