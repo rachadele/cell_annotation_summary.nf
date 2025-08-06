@@ -21,6 +21,8 @@ import json
 import ast
 import sys
 import matplotlib.lines as mlines
+# set global font size for plots
+plt.rcParams.update({'font.size': 25})
 
 # Function to parse command line arguments
 def parse_arguments():
