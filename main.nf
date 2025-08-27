@@ -1,44 +1,4 @@
 
-process aggregateMeta {
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/meta_aggregation", mode: 'copy'
-
-    input:
-    tuple val(run_name), val(params_file), val(ref_obs), val(results_dirs)
- 
-
-    output:
-    path "**combined_meta.tsv", emit: combined_meta
-
-    script:
-    """
-    python $projectDir/bin/aggregate_meta.py --run_name ${run_name} --params_file ${params_file} \\
-            --ref_obs ${ref_obs} --results_dirs ${results_dirs}
-    """
-}
-
-
-process individualCells {
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/cell_level_analysis", mode: 'copy'
-
-    input:
-    path(combined_meta)
-
-    output:
-    "**tsv"
-    "**png"
-
-    script:
-
-
-    """
-    python $projectDir/bin/cell_level_analysis.py --combined_meta ${combined_meta} \\
-    """
-
-}
-
-
 process addParams {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
     publishDir "${params.outdir}/params_added", mode: 'copy'
