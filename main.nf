@@ -30,7 +30,6 @@ process aggregateResults {
     path "weighted_f1_results.tsv", emit: weighted_f1_results_aggregated
     path "label_f1_results.tsv", emit: label_f1_results_aggregated
     path "**summary.tsv"
-    path "**value_counts.tsv"
     path "**png"
 
     script:
