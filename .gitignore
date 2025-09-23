@@ -103,3 +103,6 @@ hsap/
 mmus/
 meta/
 *f1_results.tsv
+
+hsap*
+mmus*

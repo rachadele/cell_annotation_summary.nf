@@ -26,11 +26,11 @@ random.seed(42)
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/5b/29f2854382695f65aacd5c8bd0a914/weighted_f1_results.tsv")
+    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2025-01-30/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/5b/29f2854382695f65aacd5c8bd0a914/label_f1_results.tsv")   
+    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2025-01-30/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")   
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
-    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author2.tsv")
+    parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author.tsv")
     
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
@@ -90,9 +90,12 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
     plt.rcParams.update({'font.size': 20})
 
     all_subclasses = sorted(levels[subclass_col])
+    # remove unknown
+    all_subclasses = [subclass for subclass in all_subclasses]
     subclass_colors = make_stable_colors(color_mapping_df)
 
     celltypes = levels[level]
+    celltypes = [ct for ct in celltypes if ct != "unknown"]
     methods = sorted(label_f1_results["method"].unique())
 
     rows, cols = len(celltypes), len(methods)
@@ -100,22 +103,19 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
                              figsize=(cols * 6, rows * 5), squeeze=False, sharex=True, sharey=True)
 
     for i, celltype in enumerate(celltypes):
-       # if celltype == "Neuron":
-       #     group_subclasses = "Ambiguous Neuron"
-        #else:
-            # add option to change
+
         group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
         subclasses_to_plot = [subclass for subclass in all_subclasses if subclass in group_subclasses]
         if len(subclasses_to_plot) == 0:
            subclasses_to_plot = [celltype]
-        
+
         filtered_df = label_f1_results[(label_f1_results["label"].isin(subclasses_to_plot)) & (label_f1_results["key"] == subclass_col)]
         
         if filtered_df.empty:
             print(f"No data available for cell type '{celltype}' with subclasses {subclasses_to_plot}. Skipping this cell type.")
-            # remove ax from the grid
-           # for j in range(len(methods)):
-              #  axes[i, j].remove()
+            # remove the row from the axes
+            for j in range(cols):
+                axes[i, j].remove()  # Remove the subplot for this cell type
             continue
         
         
