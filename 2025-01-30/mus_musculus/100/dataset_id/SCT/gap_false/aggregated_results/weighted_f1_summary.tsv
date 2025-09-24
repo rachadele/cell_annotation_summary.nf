@@ -1,0 +1,321 @@
+method	cutoff	reference	key	weighted_f1_mean	weighted_f1_std	weighted_f1_count
+scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.4111985841022292	0.2567617102874455	279
+scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.530961737902222	0.24982582613664012	279
+scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.5317014036981004	0.2541341134856791	279
+scvi	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.36353662924820357	0.2570012033385129	279
+scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8014326921875927	0.22360131902987157	279
+scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8878632333414226	0.1418819374086593	279
+scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9142977623460703	0.0877773800866169	279
+scvi	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6763163473021736	0.2182394054738282	279
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8431650806416662	0.17131834182663497	279
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9008108134936819	0.154701850746786	279
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9391129151977345	0.08417497800411486	279
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6322093967894578	0.2058768893107586	279
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7566575045250227	0.14875461562831024	279
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8392145227912264	0.13370753101950283	279
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.8513672829132534	0.09520704705752354	279
+scvi	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5382566912656928	0.21971090948366975	279
+scvi	0.0	whole cortex	class	0.8451700203537185	0.16130569149983384	279
+scvi	0.0	whole cortex	family	0.8899311511256914	0.15017756575697655	279
+scvi	0.0	whole cortex	global	0.9219753589075796	0.09264810563968232	279
+scvi	0.0	whole cortex	subclass	0.7483170968260127	0.19709526718569642	279
+scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.4111985841022292	0.25676171028744543	279
+scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.530961737902222	0.2498258261366403	279
+scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.5317014036981004	0.2541341134856791	279
+scvi	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.36353662924820357	0.2570012033385129	279
+scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8014326921875927	0.22360131902987163	279
+scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8878632333414226	0.14188193740865937	279
+scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9142977623460703	0.08777738008661695	279
+scvi	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6763163473021736	0.21823940547382817	279
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8431650806416662	0.17131834182663494	279
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9008108134936819	0.15470185074678602	279
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9391129151977345	0.08417497800411493	279
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6322093967894578	0.2058768893107586	279
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7566575045250227	0.14875461562831016	279
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8392145227912264	0.13370753101950286	279
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.8513672829132534	0.09520704705752356	279
+scvi	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5382566912656929	0.21971090948366984	279
+scvi	0.05	whole cortex	class	0.8451700203537185	0.1613056914998339	279
+scvi	0.05	whole cortex	family	0.8899311511256914	0.15017756575697652	279
+scvi	0.05	whole cortex	global	0.9219753589075796	0.09264810563968232	279
+scvi	0.05	whole cortex	subclass	0.7483170968260127	0.1970952671856964	279
+scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.4111985841022292	0.25676171028744543	279
+scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.530961737902222	0.24982582613664028	279
+scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.5317014036981004	0.2541341134856791	279
+scvi	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.36353662924820357	0.25700120333851284	279
+scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8013121644734192	0.22354782004848614	279
+scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8877425393703907	0.14182917530806327	279
+scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9142100626246396	0.0877279860247175	279
+scvi	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6763092866744407	0.21827656990838215	279
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8428501974352935	0.17126851870410043	279
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9005095840079255	0.15465638848978552	279
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9386588610262023	0.08403743174409521	279
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6319972229680508	0.20558193565366328	279
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7560723803318361	0.14920925367104598	279
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.8385126305026424	0.1341166352730909	279
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.850548570724608	0.09607475806454932	279
+scvi	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5378431908951196	0.21966502018745968	279
+scvi	0.1	whole cortex	class	0.8442207547652897	0.1619085406549014	279
+scvi	0.1	whole cortex	family	0.8887757200637746	0.15077769763046475	279
+scvi	0.1	whole cortex	global	0.9206398052878104	0.09408169277249415	279
+scvi	0.1	whole cortex	subclass	0.7474973369443895	0.19717540886856397	279
+scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.4111985841022292	0.2567617102874455	279
+scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.530961737902222	0.24982582613664026	279
+scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.5317014036981004	0.25413411348567916	279
+scvi	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.36353662924820357	0.25700120333851295	279
+scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7961871995958901	0.22313077865999514	279
+scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8818259728791713	0.1422977202701602	279
+scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9069960188466676	0.08879581454005218	279
+scvi	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6740353568343316	0.2185171009189295	279
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8310536359525303	0.17676395141902912	279
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.888421916401718	0.15917638340586193	279
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.924075020479711	0.09295497599349684	279
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6227610549881317	0.2024187376776146	279
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.723602022213241	0.16254466566399606	279
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.800253751015996	0.1485929856739003	279
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.8136194971705724	0.11317430740944469	279
+scvi	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5165726628122662	0.21733860416116613	279
+scvi	0.15	whole cortex	class	0.8252131219575155	0.16995091829131656	279
+scvi	0.15	whole cortex	family	0.8656870480132443	0.16135513385876593	279
+scvi	0.15	whole cortex	global	0.8955869087493422	0.11503371072539897	279
+scvi	0.15	whole cortex	subclass	0.7329129444276746	0.19785727741403913	279
+scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.40911012427871923	0.25679547053613866	279
+scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.5259868544781142	0.25030204372592046	279
+scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.5274244108953391	0.2548372875818974	279
+scvi	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.36356005258695284	0.25677781237317626	279
+scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7772536998078654	0.2242837407927422	279
+scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8577626759587074	0.15072558368416578	279
+scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.875241987776811	0.11094337782841324	279
+scvi	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6587157203476752	0.21957970663219561	279
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7938814334197342	0.19386084510766455	279
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8430389478682099	0.18012236079750893	279
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8736405565433902	0.1343875282771352	279
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5929270989445397	0.1964387060040803	279
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6266775014936513	0.19766353448902937	279
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6865924774794001	0.19177566932522702	279
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6992319937424133	0.16825467423003432	279
+scvi	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.44520889166264804	0.21868675169692833	279
+scvi	0.2	whole cortex	class	0.7716634334431699	0.18891401977840455	279
+scvi	0.2	whole cortex	family	0.8034780405845966	0.18809280287958757	279
+scvi	0.2	whole cortex	global	0.8298793409054231	0.1596406356742619	279
+scvi	0.2	whole cortex	subclass	0.6900834343784138	0.20032291521117837	279
+scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.39573098517534133	0.2564002682148822	279
+scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.4879900859724105	0.2533795586604726	279
+scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.4916027746709399	0.25795431928062373	279
+scvi	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.36014714947991167	0.25377739203022215	279
+scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7411637982776237	0.22568737604440556	279
+scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8117036299988973	0.1689085093902008	279
+scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.822545325256475	0.14901371495344742	279
+scvi	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6269783225850457	0.2201320057036465	279
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7415642270960252	0.21191244120785097	279
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.7768356236011217	0.2070805910564102	279
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.801597564048854	0.18183920912281645	279
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5497072837694679	0.19263602988495002	279
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.5091254183725221	0.21839084649689453	279
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.5639889106818454	0.2191063968039835	279
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.5717334180045223	0.20844530867604832	279
+scvi	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.3574988679896024	0.2200765132817477	279
+scvi	0.25	whole cortex	class	0.7068791735145153	0.20755606038838556	279
+scvi	0.25	whole cortex	family	0.7322470097134772	0.2121880647177091	279
+scvi	0.25	whole cortex	global	0.7562264325374272	0.19439585038316062	279
+scvi	0.25	whole cortex	subclass	0.6354333851099441	0.20286627500778273	279
+scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.15150049710516758	0.15574856997669573	279
+scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.15546240656969512	0.16244894900586584	279
+scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.15887481022004293	0.16506525129066313	279
+scvi	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.1426161938208152	0.15295659850845092	279
+scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.47351385122111517	0.21988373254700389	279
+scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.5103675957607772	0.22105852295955364	279
+scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.5115735045106045	0.22120441250996115	279
+scvi	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.40442335388721207	0.1959204341708361	279
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.40649998963348466	0.22303317680266807	279
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.4364579304056871	0.22995006090354167	279
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.4468222942582255	0.22979962531120038	279
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.29613595660197023	0.1880076288966631	279
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.12548254688011448	0.1324425902168026	279
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.1401929762190826	0.14292909389953634	279
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.14258527325455359	0.14423801263015065	279
+scvi	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.08039724145388663	0.0915852051521561	279
+scvi	0.5	whole cortex	class	0.43221542293168863	0.222399977321156	279
+scvi	0.5	whole cortex	family	0.4501102347430625	0.22870856014511778	279
+scvi	0.5	whole cortex	global	0.46057920373551536	0.22615709923979202	279
+scvi	0.5	whole cortex	subclass	0.3944524019489936	0.20904916686573605	279
+scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.016680641115331015	0.0342025123293526	279
+scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.017611102699286646	0.035070268995269244	279
+scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.01816669069602258	0.03629142227570536	279
+scvi	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.016386161459707307	0.033613139881948806	279
+scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.23939242703978178	0.1758015529064086	279
+scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.26146426001039286	0.18375228598016072	279
+scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.26240422423403725	0.18456862050356615	279
+scvi	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.2151176395903924	0.15965866936048156	279
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.1716801433960306	0.16625366830859856	279
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.19626622574189545	0.17873827385546398	279
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.19839438325518613	0.17922681990025882	279
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.11448586679694032	0.14332844846291792	279
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.01207425245465136	0.036980734049274176	279
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.01286329423584818	0.03849922949461461	279
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.013328308620764315	0.0400870869484603	279
+scvi	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.01060942846055648	0.03175951154984263	279
+scvi	0.75	whole cortex	class	0.21256632653280078	0.18631540919217032	279
+scvi	0.75	whole cortex	family	0.2248965510818598	0.19399066439348875	279
+scvi	0.75	whole cortex	global	0.22665437443721898	0.19501219475200038	279
+scvi	0.75	whole cortex	subclass	0.1989525843097886	0.17658873880890752	279
+seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.49371320670342056	0.22525839449268545	279
+seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7721951023480642	0.173192676211601	279
+seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7937598920791195	0.16221025331976738	279
+seurat	0.0	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.42765128858115053	0.2266835062246013	279
+seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.830903134954787	0.21052307455189226	279
+seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9110563353765775	0.12479020019886748	279
+seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9284009519287468	0.10788125722951965	279
+seurat	0.0	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7818960212400614	0.22481257852457245	279
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8671005014431343	0.14639845240492447	279
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9104694001482109	0.13265285042072333	279
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9361214372856625	0.08827757412149005	279
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6676733086779714	0.18888095006662323	279
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7209417835034011	0.2497663072023626	279
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.7642329864394872	0.24109044993868492	279
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.805581342506398	0.22367511813435592	279
+seurat	0.0	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5796033929836207	0.2380245624632764	279
+seurat	0.0	whole cortex	class	0.7930582810321826	0.2102478565137144	279
+seurat	0.0	whole cortex	family	0.8378590827337276	0.1906801613245668	279
+seurat	0.0	whole cortex	global	0.87213097002654	0.14179909291550227	279
+seurat	0.0	whole cortex	subclass	0.7060955992795009	0.20778901908543382	279
+seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.49371320670342056	0.22525839449268534	279
+seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7721951023480642	0.17319267621160092	279
+seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7937598920791195	0.1622102533197673	279
+seurat	0.05	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.42765128858115053	0.2266835062246013	279
+seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.830903134954787	0.2105230745518922	279
+seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9110563353765775	0.1247902001988675	279
+seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9284009519287468	0.10788125722951972	279
+seurat	0.05	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7818960212400614	0.22481257852457254	279
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8671005014431343	0.14639845240492447	279
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9104694001482109	0.1326528504207234	279
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9361214372856625	0.08827757412149012	279
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6676733086779714	0.18888095006662328	279
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7209417835034011	0.24976630720236265	279
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.7642329864394872	0.2410904499386849	279
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.805581342506398	0.2236751181343559	279
+seurat	0.05	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5796033929836207	0.23802456246327636	279
+seurat	0.05	whole cortex	class	0.7930582810321826	0.21024785651371433	279
+seurat	0.05	whole cortex	family	0.8378590827337276	0.19068016132456683	279
+seurat	0.05	whole cortex	global	0.87213097002654	0.14179909291550238	279
+seurat	0.05	whole cortex	subclass	0.7060955992795009	0.20778901908543382	279
+seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.49371320670342056	0.2252583944926853	279
+seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7721951023480642	0.173192676211601	279
+seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7937598920791195	0.16221025331976738	279
+seurat	0.1	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.42765128858115053	0.22668350622460132	279
+seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.830903134954787	0.21052307455189218	279
+seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9110563353765775	0.12479020019886748	279
+seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9284009519287468	0.10788125722951966	279
+seurat	0.1	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7818960212400614	0.22481257852457256	279
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8671005014431343	0.14639845240492452	279
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9104694001482109	0.13265285042072336	279
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9361214372856625	0.08827757412149004	279
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6676733086779714	0.18888095006662328	279
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7209417835034011	0.2497663072023626	279
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.7642329864394872	0.24109044993868506	279
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.805581342506398	0.223675118134356	279
+seurat	0.1	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5796033929836207	0.2380245624632764	279
+seurat	0.1	whole cortex	class	0.7930582810321826	0.21024785651371433	279
+seurat	0.1	whole cortex	family	0.8378590827337276	0.19068016132456686	279
+seurat	0.1	whole cortex	global	0.87213097002654	0.1417990929155024	279
+seurat	0.1	whole cortex	subclass	0.7060955992795009	0.20778901908543393	279
+seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.49371320670342056	0.2252583944926853	279
+seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7721951023480642	0.17319267621160092	279
+seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7937598920791195	0.1622102533197675	279
+seurat	0.15	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.42765128858115053	0.22668350622460132	279
+seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.830903134954787	0.21052307455189231	279
+seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9110563353765775	0.12479020019886751	279
+seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9284009519287468	0.10788125722951974	279
+seurat	0.15	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7818960212400614	0.22481257852457254	279
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8671005014431343	0.14639845240492438	279
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9104694001482109	0.13265285042072328	279
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9361214372856625	0.0882775741214901	279
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6676733086779714	0.18888095006662328	279
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.7209417835034011	0.2497663072023627	279
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.7642329864394872	0.24109044993868495	279
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.805581342506398	0.22367511813435595	279
+seurat	0.15	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5796033929836207	0.2380245624632764	279
+seurat	0.15	whole cortex	class	0.7928378058467815	0.21021283383419181	279
+seurat	0.15	whole cortex	family	0.8376733435564404	0.19078907977662093	279
+seurat	0.15	whole cortex	global	0.87187409480261	0.14197349053518005	279
+seurat	0.15	whole cortex	subclass	0.7058925021759941	0.20773623564931268	279
+seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.49371320670342056	0.22525839449268528	279
+seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7721951023480642	0.17319267621160098	279
+seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7937598920791195	0.16221025331976738	279
+seurat	0.2	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.42765128858115053	0.22668350622460132	279
+seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8307378479225129	0.2105652112170168	279
+seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9109023151545201	0.12494943142601395	279
+seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9281879646338304	0.10804271518906092	279
+seurat	0.2	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7817124132854202	0.22483792086999038	279
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8671005014431343	0.14639845240492447	279
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9104514868614098	0.13270235036629835	279
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9360273460169697	0.08833291930317516	279
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6676733086779714	0.18888095006662328	279
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.72090492206478	0.2497393815220635	279
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.7641997236399432	0.2410642429432741	279
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.805528891762699	0.22363183248241547	279
+seurat	0.2	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5795665315449996	0.23797975813797334	279
+seurat	0.2	whole cortex	class	0.7912297332498093	0.21011860461252557	279
+seurat	0.2	whole cortex	family	0.8361725186358705	0.19138894913830623	279
+seurat	0.2	whole cortex	global	0.8701409541298861	0.14299345591532475	279
+seurat	0.2	whole cortex	subclass	0.704273013069709	0.20750022986701044	279
+seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.4937154704272463	0.2252590062325048	279
+seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7721973660718899	0.17319113426318872	279
+seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7937749595402523	0.16219828595572278	279
+seurat	0.25	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.4276632360124528	0.22668827776467199	279
+seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.8293087083877684	0.21146847840821814	279
+seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.9091093391385586	0.12735005071070424	279
+seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.9261570341169184	0.11037213623292862	279
+seurat	0.25	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7801535738665848	0.22554597502180435	279
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8668371368491973	0.14655070382191515	279
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.9102889948388849	0.13277396470559916	279
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.935626578633179	0.08864150111613187	279
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6673381034573888	0.18900171576770003	279
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.72049807557648	0.24972098117781727	279
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.7638417817517873	0.24101984104521698	279
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.804865495854125	0.2232612208660636	279
+seurat	0.25	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5791115032414142	0.2378155705483131	279
+seurat	0.25	whole cortex	class	0.7858041271485834	0.2110666436341356	279
+seurat	0.25	whole cortex	family	0.8312933007238097	0.19427061651356575	279
+seurat	0.25	whole cortex	global	0.8637930954252183	0.14764516092947064	279
+seurat	0.25	whole cortex	subclass	0.6987970416229905	0.208009287755123	279
+seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.4932313642368437	0.2227051599497289	279
+seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.7588371362946634	0.17825560277378952	279
+seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.7804229287368745	0.16728696136705962	279
+seurat	0.5	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.4257795720167949	0.22418986174731412	279
+seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.7845653748157266	0.21854736050095874	279
+seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.8541980043451729	0.17244735725046684	279
+seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.8654394481572002	0.15762980964183015	279
+seurat	0.5	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.7341358264632939	0.22870015522373605	279
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.8435466676675487	0.16049747299901534	279
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8861275935844042	0.15036050538932244	279
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.9041123296884308	0.11585924752902794	279
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.6446408122851527	0.18975752241940835	279
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6948663032054125	0.2451821188699766	279
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.739126320221955	0.23212155888339306	279
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.7686551125413201	0.21437264630803066	279
+seurat	0.5	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.5542268529586312	0.22851092305851667	279
+seurat	0.5	whole cortex	class	0.7177282924735798	0.22685975330480926	279
+seurat	0.5	whole cortex	family	0.7636965615599777	0.22189992958341742	279
+seurat	0.5	whole cortex	global	0.7839735410784031	0.1951682685523725	279
+seurat	0.5	whole cortex	subclass	0.6318192492375412	0.21605960088238899	279
+seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	class	0.47925503559431903	0.20809803764007692	279
+seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	family	0.6601813770602042	0.18092801312971413	279
+seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	global	0.6813079397336379	0.17273706566297975	279
+seurat	0.75	Adult mouse cortical cell taxonomy revealed by single cell transcriptomics	subclass	0.4069848193071367	0.2069663190256211	279
+seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	class	0.6794701301077167	0.21915109358283918	279
+seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	family	0.7366031331266594	0.21269621935139835	279
+seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	global	0.7411230585954764	0.20838435032754726	279
+seurat	0.75	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	subclass	0.6367120571815401	0.21828960547050405	279
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	class	0.7765564222828509	0.19011432845931492	279
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	family	0.8142174066271088	0.1865742494065219	279
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	global	0.8256313118564389	0.1662117640792998	279
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions 10x	subclass	0.5848891193367314	0.18840914226214317	279
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	class	0.6139195991833755	0.23277273025476883	279
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	family	0.6573753017411926	0.21950943832175224	279
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	global	0.6723517592091052	0.20782280537229472	279
+seurat	0.75	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	subclass	0.478630038237149	0.20031828516067912	279
+seurat	0.75	whole cortex	class	0.5472895215558419	0.21171048531075026	279
+seurat	0.75	whole cortex	family	0.5996119214399618	0.22067073233568674	279
+seurat	0.75	whole cortex	global	0.6107451298767559	0.2082605971219723	279
+seurat	0.75	whole cortex	subclass	0.4860564431079765	0.20352598765738236	279

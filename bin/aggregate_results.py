@@ -174,7 +174,25 @@ def write_factor_summary(df, factors):
     result_df = pd.concat(dfs, ignore_index=True) 
     result_df.to_csv("factor_unique_sample_counts.tsv", sep="\t", index=False)
     
-    
+def update_metrics(df):
+    # set metrics to nan when support is 0
+    metrics = ['f1_score', 'precision', 
+               'recall', 'accuracy', 
+               'weighted_f1', 
+               'weighted_precision', 
+               'weighted_recall',
+               'macro_f1',
+               'macro_precision',
+               'macro_recall',
+               'nmi',
+               'overall_accuracy',
+               'ari']
+                
+    df.loc[df['support'] == 0, metrics] = None
+    return df
+
+
+ 
 def main():
     # Parse command line arguments
     args = parse_arguments()
@@ -194,6 +212,8 @@ def main():
      
     organism = f1_df["organism"].unique()[0]
     # replace "nan" with None
+    # deal with 0 support
+    f1_df = update_metrics(f1_df)
     f1_df = f1_df.replace("nan", None)
     
     
