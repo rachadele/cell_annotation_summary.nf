@@ -291,48 +291,48 @@ workflow {
 
     plotContrasts(emmeans_all, weighted_f1_results_aggregated)
     
-    //continuous_effects_weighted
-        //.flatMap { list ->
-            //list.collect { file ->
-                //// def key = parent dir name two dirs up
-                //def key = file.getParent().getParent().getName()
-                //def mode = 'weighted' // or 'label' based on the process
-                //return [key, mode, file]
-            //}
-        //}
-        //.set { continuous_effects_weighted_map }
+    continuous_effects_weighted
+        .flatMap { list ->
+            list.collect { file ->
+                // def key = parent dir name two dirs up
+                def key = file.getParent().getParent().getName()
+                def mode = 'weighted' // or 'label' based on the process
+                return [key, mode, file]
+            }
+        }
+        .set { continuous_effects_weighted_map }
 
-    //// split label results
-    //split_by_label(label_f1_results_aggregated)
-    //split_by_label.out.label_f1_results_split
-    //.set { label_f1_results_split }
+    // split label results
+    split_by_label(label_f1_results_aggregated)
+    split_by_label.out.label_f1_results_split
+    .set { label_f1_results_split }
 
-    //// split label_f1_results_split into individual files
-    //label_f1_results_split.flatMap { list ->
-            //// Iterate through each file in the ArrayList
-            //list.collect { file ->
-                //def key = file.getParent().getParent().getName()
-                //def label = file.getParent().getName() // Assuming the label is the parent directory name
-                //def filepath = file
-                //return [key, label, filepath]
-            //}
-        //}.set { label_f1_results_split_map }
+    // split label_f1_results_split into individual files
+    label_f1_results_split.flatMap { list ->
+            // Iterate through each file in the ArrayList
+            list.collect { file ->
+                def key = file.getParent().getParent().getName()
+                def label = file.getParent().getName() // Assuming the label is the parent directory name
+                def filepath = file
+                return [key, label, filepath]
+            }
+        }.set { label_f1_results_split_map }
 
 
-    //modelEvalLabel(label_f1_results_split_map) 
-    //continuous_effects_label = modelEvalLabel.out.continuous_effects
-    //// flatMap the mode onto continuous_effects_label
-    //continuous_effects_label.map { file ->
-                //def key = file.getParent().getParent().getName()
-                //def mode = 'label' // or 'weighted' based on the process
-                //return [key, mode, file]
-            //}
+    modelEvalLabel(label_f1_results_split_map) 
+    continuous_effects_label = modelEvalLabel.out.continuous_effects
+    // flatMap the mode onto continuous_effects_label
+    continuous_effects_label.map { file ->
+                def key = file.getParent().getParent().getName()
+                def mode = 'label' // or 'weighted' based on the process
+                return [key, mode, file]
+            }
         
-        //.set { continuous_effects_label_map }
+        .set { continuous_effects_label_map }
     
 
-    //continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
-    //plot_continuous_contrast(continuous_effects_all)
+    continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
+    plot_continuous_contrast(continuous_effects_all)
 }
 
 workflow.onError = {
