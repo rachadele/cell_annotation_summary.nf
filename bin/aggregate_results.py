@@ -128,9 +128,6 @@ def save_plot(var, split, facet, outdir):
     plt.savefig(save_path, bbox_inches="tight")
     plt.close()
 
-
- 
-        
 def make_acronym(name):
     # Split on "_" and replace with spaces
     words = name.split("_")
