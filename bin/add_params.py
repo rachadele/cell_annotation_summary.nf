@@ -76,7 +76,7 @@ def main():
         method = result_path.split("/")[-1]  # Extract the method from the path
         for root, dirs, files in os.walk(result_path):
             for file in files:
-                if file.endswith("f1.scores.tsv"):
+                if file.endswith("summary.scores.tsv"):
                     print(f"Processing file: {root}")
                     # Check for .tsv files
                     tempdf = pd.read_csv(os.path.join(root, file), sep="\t")  # Read the .tsv file

@@ -1,0 +1,23 @@
+"reference"	"method"	"response"	"SE"	"df"	"asymp.LCL"	"asymp.UCL"
+"Dissection Angular gyrus AnG"	"seurat"	0.426179412579294	NA	Inf	NA	NA
+"Dissection Anterior cingulate cortex ACC"	"seurat"	0.426363832297341	NA	Inf	NA	NA
+"Dissection Dorsolateral prefrontal cortex DFC"	"seurat"	0.426363832297249	NA	Inf	NA	NA
+"Dissection Primary auditory cortexA1"	"seurat"	0.42636383229725	NA	Inf	NA	NA
+"Dissection Primary somatosensory cortex S1"	"seurat"	0.426363832297267	NA	Inf	NA	NA
+"Dissection Primary visual cortexV1"	"seurat"	0.426363832297297	NA	Inf	NA	NA
+"Human Multiple Cortical Areas SMART-seq"	"seurat"	0.426363832297284	NA	Inf	NA	NA
+"Single-nucleus transcriptome data from the dlPFC"	"seurat"	0.426363832297314	NA	Inf	NA	NA
+"whole cortex"	"seurat"	0.426363832297246	NA	Inf	NA	NA
+"Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD"	"seurat"	0.426363832297293	NA	Inf	NA	NA
+"Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD"	"seurat"	0.426363832297164	NA	Inf	NA	NA
+"Dissection Angular gyrus AnG"	"scvi"	0.426480217304577	NA	Inf	NA	NA
+"Dissection Anterior cingulate cortex ACC"	"scvi"	0.426336808719671	NA	Inf	NA	NA
+"Dissection Dorsolateral prefrontal cortex DFC"	"scvi"	0.426336808719521	NA	Inf	NA	NA
+"Dissection Primary auditory cortexA1"	"scvi"	0.426336808719523	NA	Inf	NA	NA
+"Dissection Primary somatosensory cortex S1"	"scvi"	0.42633680871955	NA	Inf	NA	NA
+"Dissection Primary visual cortexV1"	"scvi"	0.426336808719599	NA	Inf	NA	NA
+"Human Multiple Cortical Areas SMART-seq"	"scvi"	0.426336808719579	NA	Inf	NA	NA
+"Single-nucleus transcriptome data from the dlPFC"	"scvi"	0.426336808719628	NA	Inf	NA	NA
+"whole cortex"	"scvi"	0.426336808719516	NA	Inf	NA	NA
+"Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD"	"scvi"	0.426336808719593	NA	Inf	NA	NA
+"Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD"	"scvi"	0.426336808719384	NA	Inf	NA	NA

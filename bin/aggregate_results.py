@@ -22,7 +22,11 @@ import ast
 import sys
 import matplotlib.lines as mlines
 # set global font size for plots
+<<<<<<< HEAD
 plt.rcParams.update({'font.size': 25})
+=======
+plt.rcParams.update({'font.size': 20})
+>>>>>>> census-2025
 
 # Function to parse command line arguments
 def parse_arguments():
@@ -128,9 +132,6 @@ def save_plot(var, split, facet, outdir):
     plt.savefig(save_path, bbox_inches="tight")
     plt.close()
 
-
- 
-        
 def make_acronym(name):
     # Split on "_" and replace with spaces
     words = name.split("_")
@@ -174,7 +175,25 @@ def write_factor_summary(df, factors):
     result_df = pd.concat(dfs, ignore_index=True) 
     result_df.to_csv("factor_unique_sample_counts.tsv", sep="\t", index=False)
     
-    
+def update_metrics(df):
+    # set metrics to nan when support is 0
+    metrics = ['f1_score', 'precision', 
+               'recall', 'accuracy', 
+               'weighted_f1', 
+               'weighted_precision', 
+               'weighted_recall',
+               'macro_f1',
+               'macro_precision',
+               'macro_recall',
+               'nmi',
+               'overall_accuracy',
+               'ari']
+                
+    df.loc[df['support'] == 0, metrics] = None
+    return df
+
+
+ 
 def main():
     # Parse command line arguments
     args = parse_arguments()
@@ -194,6 +213,8 @@ def main():
      
     organism = f1_df["organism"].unique()[0]
     # replace "nan" with None
+    # deal with 0 support
+    f1_df = update_metrics(f1_df)
     f1_df = f1_df.replace("nan", None)
     
     
@@ -249,7 +270,11 @@ def main():
     # make everything lowercase
     f1_df["disease_state"] = f1_df["disease_state"].str.lower()
     f1_df["sex"] = f1_df["sex"].str.lower()
+<<<<<<< HEAD
     f1_df["dev_stage"] = f1_df["dev_stage"].str.lower()
+=======
+    #f1_df["dev_stage"] = f1_df["dev_stage"].str.lower()
+>>>>>>> census-2025
     
         
 #----------------drop label columns and save---------------
