@@ -60,9 +60,11 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
     # Get the order in levels["subclass"]
     all_subclasses = sorted(levels[subclass_col])
     subclass_colors = make_stable_colors(color_mapping_df)
+    celltypes = levels[level]
+    celltypes = [ct for ct in celltypes if ct != "unknown"]
     # Set up the plot grid with shared x-axis
     fig, ax = plt.subplots(
-            len(levels[level]), len(methods), figsize=(10 * len(methods), 5 * len(levels[level])),
+            len(celltypes), len(methods), figsize=(10 * len(methods), 5 * len(levels[level])),
             sharex=True  # Ensures all subplots have the same x-axis limits
         )
     # Ensure ax is always a list for consistent indexing
@@ -71,7 +73,7 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
     if len(methods) == 1:
         ax = [ax]
     # Loop over each cell type (higher-level grouping)
-    for i, celltype in enumerate(levels[level]):
+    for i, celltype in enumerate(celltypes):
         # Get the subclasses for the current cell type
         group_subclasses = mapping_df[mapping_df[level] == celltype][subclass_col].unique()
        # if celltype == "Neuron":

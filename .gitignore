@@ -105,4 +105,7 @@ hsap/
 mmus/
 meta/
 *f1_results.tsv
-mmus_2024/
+
+hsap*
+mmus*
+params.*

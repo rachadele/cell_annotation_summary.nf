@@ -1,44 +1,4 @@
 
-process aggregateMeta {
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/meta_aggregation", mode: 'copy'
-
-    input:
-    tuple val(run_name), val(params_file), val(ref_obs), val(results_dirs)
- 
-
-    output:
-    path "**combined_meta.tsv", emit: combined_meta
-
-    script:
-    """
-    python $projectDir/bin/aggregate_meta.py --run_name ${run_name} --params_file ${params_file} \\
-            --ref_obs ${ref_obs} --results_dirs ${results_dirs}
-    """
-}
-
-
-process individualCells {
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/cell_level_analysis", mode: 'copy'
-
-    input:
-    path(combined_meta)
-
-    output:
-    "**tsv"
-    "**png"
-
-    script:
-
-
-    """
-    python $projectDir/bin/cell_level_analysis.py --combined_meta ${combined_meta} \\
-    """
-
-}
-
-
 process addParams {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
     publishDir "${params.outdir}/params_added", mode: 'copy'
@@ -158,8 +118,7 @@ process plotLabelDist {
 
 process modelEvalWeighted {
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-    publishDir "${params.outdir}/models/weighted/files", mode: 'copy', pattern: "**tsv"
-    publishDir "${params.outdir}/models/weighted/figs", mode: 'copy', pattern: "**png"
+    publishDir "${params.outdir}/weighted_models", mode: 'copy'
 
     input:
     path weighted_f1_results_aggregated
@@ -179,7 +138,7 @@ process modelEvalWeighted {
 }
 process split_by_label {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/label_results", mode: 'copy'
+    publishDir "${params.outdir}/label_splits", mode: 'copy'
 
     input:
     path label_f1_results_aggregated
@@ -197,8 +156,13 @@ process split_by_label {
 process modelEvalLabel {
     beforeScript 'ulimit -Ss unlimited' // Increase stack size limit for R script
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
+<<<<<<< HEAD
     publishDir "${params.outdir}/models/label/files", mode: 'copy', pattern: "**tsv"
     publishDir "${params.outdir}/models/label/figs", mode: 'copy', pattern: "**png"
+=======
+    publishDir "${params.outdir}/label_models/", mode: 'copy'
+    //publishDir "${params.outdir}/label_models/", mode: 'copy', pattern: "**png"
+>>>>>>> census-2025
 
     input:
     tuple val(key), val(label), path(label_f1_results_split)
@@ -219,7 +183,11 @@ process modelEvalLabel {
 
 process plotContrasts {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+<<<<<<< HEAD
     publishDir "${params.outdir}/contrast_figs/weighted", mode: 'copy'
+=======
+    publishDir "${params.outdir}/contrast_figs/discrete/weighted/${key}", mode: 'copy'
+>>>>>>> census-2025
 
     input:
     tuple val(key), val(contrast), path(emmeans_estimates), path(emmeans_summary)
@@ -240,7 +208,7 @@ process plotContrasts {
 
 process plot_continuous_contrast {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/contrast_figs/${mode}/${key}/continuous_contrasts", mode: 'copy'
+    publishDir "${params.outdir}/contrast_figs/continuous/${mode}/${key}", mode: 'copy'
 
     input:
     tuple val(key), val(mode), path(continuous_effects) // mode can be 'weighted' or 'label'
@@ -298,7 +266,7 @@ workflow {
     continuous_effects_weighted = modelEvalWeighted.out.continuous_effects
     emmeans_estimates = modelEvalWeighted.out.emmeans_estimates
     emmeans_summary = modelEvalWeighted.out.emmeans_summary
-// need to get individual files in order to plot contrasts
+//// need to get individual files in order to plot contrasts
 
 
     emmeans_estimates
@@ -348,7 +316,6 @@ workflow {
     // split label results
     split_by_label(label_f1_results_aggregated)
     split_by_label.out.label_f1_results_split
-    // label_f1_results_split = split_by_label.out.label_f
     .set { label_f1_results_split }
 
     // split label_f1_results_split into individual files
@@ -363,23 +330,27 @@ workflow {
         }.set { label_f1_results_split_map }
 
 
-    modelEvalLabel(label_f1_results_split_map) 
-    continuous_effects_label = modelEvalLabel.out.continuous_effects
-    // flatMap the mode onto continuous_effects_label
-    continuous_effects_label.map { file ->
-                def key = file.getParent().getParent().getName()
-                def mode = 'label' // or 'weighted' based on the process
-                return [key, mode, file]
-            }
+    //modelEvalLabel(label_f1_results_split_map) 
+    //continuous_effects_label = modelEvalLabel.out.continuous_effects
+    //// flatMap the mode onto continuous_effects_label
+    //continuous_effects_label.map { file ->
+                //def key = file.getParent().getParent().getName()
+                //def mode = 'label' // or 'weighted' based on the process
+                //return [key, mode, file]
+            //}
         
-        .set { continuous_effects_label_map }
+        //.set { continuous_effects_label_map }
     
 
-    continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
-    //continuous_effects_all.view()
-    plot_continuous_contrast(continuous_effects_all)
+    //continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
+    //plot_continuous_contrast(continuous_effects_all)
 }
 
 workflow.onError = {
 println "Error: something went wrong, check the pipeline log at '.nextflow.log"
+}
+
+workflow.onComplete = {
+    println "Pipeline completed successfully!"
+    println "Results are available in: ${params.outdir}"
 }

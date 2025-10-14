@@ -1,0 +1,12 @@
+factor	levels
+label	34
+method	2
+disease	14
+cutoff	8
+sex	3
+dev_stage	7
+reference	11
+study	14
+query	451
+query_region	7
+ref_region	8
