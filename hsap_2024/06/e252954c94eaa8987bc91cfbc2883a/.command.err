@@ -1,2 +1,0 @@
-/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/plot_contrasts.py:362: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
-  weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep = "\t")

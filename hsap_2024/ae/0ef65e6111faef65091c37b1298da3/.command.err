@@ -1,7 +1,0 @@
-/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/plot_contrasts.py:362: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
-  weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep = "\t")
-/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/plot_contrasts.py:206: FutureWarning: 
-
-Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
-
-  sns.boxplot(
