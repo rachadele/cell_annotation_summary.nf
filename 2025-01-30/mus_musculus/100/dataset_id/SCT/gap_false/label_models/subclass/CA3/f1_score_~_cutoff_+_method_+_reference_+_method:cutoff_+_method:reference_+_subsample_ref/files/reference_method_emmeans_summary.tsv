@@ -1,0 +1,11 @@
+"reference"	"method"	"response"	"SE"	"df"	"asymp.LCL"	"asymp.UCL"
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics"	"seurat"	0.0438044209454595	0.0177412645274654	Inf	0.019581398879027	0.0950861945226493
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"	"seurat"	0.0438051085414219	0.0177415256644124	Inf	0.0195817181563944	0.0950875885605691
+"Single-cell RNA-seq for all cortical  hippocampal regions 10x"	"seurat"	0.740270314593213	0.0813132124472889	Inf	0.554404568852991	0.867181495986308
+"Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"	"seurat"	0.685074898514633	0.0906961552689673	Inf	0.488317335061781	0.83217567770205
+"whole cortex"	"seurat"	0.288802577965438	0.0867009201036788	Inf	0.150774408747234	0.481540063137379
+"Adult mouse cortical cell taxonomy revealed by single cell transcriptomics"	"scvi"	0.0614504331665621	0.0243463353565704	Inf	0.0278284250099584	0.13025168682822
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"	"scvi"	0.0614502737101251	0.0243462773627299	Inf	0.0278283492504034	0.130251377642684
+"Single-cell RNA-seq for all cortical  hippocampal regions 10x"	"scvi"	0.30752899248685	0.0899142737955316	Inf	0.162568890525553	0.503960702757071
+"Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"	"scvi"	0.249979932308042	0.0788158359075235	Inf	0.127567853180665	0.431728553507503
+"whole cortex"	"scvi"	0.273436584296377	0.083765742059764	Inf	0.141407968519825	0.462354548490889
