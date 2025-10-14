@@ -1,4 +1,0 @@
-        contrast  group1 group2 level1 level2  odds.ratio        SE       p.value
-0  female / male  female   male   None   None    0.970157  0.004116  2.810974e-12
-1  female / None  female   None   None   None    1.427962  0.859440  8.244674e-01
-2    male / None    male   None   None   None    1.471887  0.885869  7.967464e-01
