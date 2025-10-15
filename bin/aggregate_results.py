@@ -22,11 +22,7 @@ import ast
 import sys
 import matplotlib.lines as mlines
 # set global font size for plots
-<<<<<<< HEAD
 plt.rcParams.update({'font.size': 25})
-=======
-plt.rcParams.update({'font.size': 20})
->>>>>>> census-2025
 
 # Function to parse command line arguments
 def parse_arguments():
@@ -270,11 +266,7 @@ def main():
     # make everything lowercase
     f1_df["disease_state"] = f1_df["disease_state"].str.lower()
     f1_df["sex"] = f1_df["sex"].str.lower()
-<<<<<<< HEAD
-    f1_df["dev_stage"] = f1_df["dev_stage"].str.lower()
-=======
     #f1_df["dev_stage"] = f1_df["dev_stage"].str.lower()
->>>>>>> census-2025
     
         
 #----------------drop label columns and save---------------
