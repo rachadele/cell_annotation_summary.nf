@@ -61,23 +61,6 @@ process plotCutoff {
     """
 }
 
-process plotHeatmap {
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/heatmap_plots", mode: 'copy'
-
-    input:
-    path weighted_f1_results_aggregated
-
-    output:
-    path "**png"
-    path "na_values.tsv"
-
-    script:
-    """
-    python $projectDir/bin/plot_heatmaps.py --weighted_f1_results ${weighted_f1_results_aggregated}
-    """
-}
-
 process plotComptime {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
     publishDir "${params.outdir}/comptime_plots", mode: 'copy'
@@ -242,7 +225,7 @@ workflow {
     label_f1_results_aggregated = aggregateResults.out.label_f1_results_aggregated 
     
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
-    plotHeatmap(weighted_f1_results_aggregated)
+
     plotLabelDist(label_f1_results_aggregated)
     
     // plot comptime
