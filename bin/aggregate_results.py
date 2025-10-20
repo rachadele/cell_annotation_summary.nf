@@ -210,8 +210,10 @@ def main():
     organism = f1_df["organism"].unique()[0]
     # replace "nan" with None
     # deal with 0 support
-    f1_df = update_metrics(f1_df)
-    f1_df = f1_df.replace("nan", None)
+    # drop rows with 0 support
+    f1_df = f1_df[f1_df['support'] > 0]
+    #f1_df = update_metrics(f1_df)
+    #f1_df = f1_df.replace("nan", None)
     
     
     # deal with control/disease state
