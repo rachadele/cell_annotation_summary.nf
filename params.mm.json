@@ -1,6 +1,5 @@
 {
-  "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_true",
-  "outdir": "2024-07-01/mus_musculus/100/dataset_id/SCT/gap_true",
+  "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false",
   "census_version": "2024-07-01",
   "mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author.tsv",
   "color_mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/color_mapping.tsv"
