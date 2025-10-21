@@ -9,20 +9,9 @@ import pandas as pd
 import anndata as ad
 from scipy.sparse import csr_matrix
 import warnings
-#import adata_functions
-#from adata_functions import *
-from pathlib import Path
-import matplotlib.pyplot as plt
-import seaborn as sns
 import json
 import argparse
-import os
-import json
 import ast
-import sys
-import matplotlib.lines as mlines
-# set global font size for plots
-plt.rcParams.update({'font.size': 20})
 
 # Function to parse command line arguments
 def parse_arguments():
@@ -32,101 +21,6 @@ def parse_arguments():
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
         return known_args
-
-    
-def setup_plot(var, split, facet=None):
-    """Set up the basic plot structure."""
-    
-    plt.figure(figsize=(17, 10))
-    plt.xlabel(split.replace("_"," ").capitalize(), fontsize=25)
-    var = var.replace("_", " ")
-    #plt.ylabel(f"{var}", fontsize=25)
-    plt.ylabel("Performance (weighted F1)", fontsize=25)
-    #plt.title(f'Distribution of {var} across {split}', fontsize=25)
-
-
-def add_violin_plot(df, var, split, facet):
-    """Add a violin plot to the figure."""
-    # remove extra weighted f1 values
-    
-    #df = df.drop_duplicates(subset=[split, facet, var])
-    sns.violinplot(
-        data=df, 
-        y=var, 
-        x=split, 
-        palette="Set2", 
-        hue=facet, 
-        split=False, 
-        dodge=True
-    )
-
-def add_strip_plot(df, var, split, facet, add_region_match=True):
-    """Add a strip plot to the figure."""
-    # remove extra weighted f1 values
-    # doesn't change overall values
-    #df = df.drop_duplicates(subset=[split, facet, var])
-    df['match_region'] = df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
-    # Map match_region to colors before plotting
-    df['color'] = df['match_region'].map({True: 'red', False: 'grey'})
-    
-    # Separate data into two groups based on 'match_region'
-    mask = df['match_region']
-    match_region_df = df[mask]
-    non_match_region_df = df[~mask]
-    
-    # Create the strip plot for non-matching region data
-    ax = sns.stripplot(
-        data=non_match_region_df,
-        y=var,
-        x=split,
-        hue=facet,
-        dodge=True,          
-        palette="Set2",      
-        size=2,
-        alpha=0.8,           
-        jitter=True,
-        marker="o",
-        edgecolor='grey',    # Grey edge color for non-match region
-        linewidth=0.5
-    )
-    # Create the strip plot for matching region data with customized edgecolor
-    sns.stripplot(
-        data=match_region_df,
-        y=var,
-        x=split,
-        hue=facet,
-        dodge=True,          
-        palette="Set2",      
-        size=2,
-        alpha=0.8,           
-        jitter=True,
-        marker="o",
-        edgecolor='r',       # Red edge color for match region
-        linewidth=0.5,         
-        legend=None,         # Disable legend for second plot
-        ax=ax                # Add to same axis
-    )
-    # Create custom legend handles for edge color
-          
-
-def add_acronym_legend(acronym_mapping, figure=None, x=1.05, y=0.5, title=None):
-    if acronym_mapping:
-        legend_text = f"{title}\n" + "\n".join([f"{k}: {v}" for k, v in acronym_mapping.items()])        
-        figure = figure or plt.gcf()
-        figure.text(
-            x, y, legend_text,
-            fontsize=14,
-            verticalalignment='center',
-            bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.1')
-        )
-
-def save_plot(var, split, facet, outdir):
-    """Save the plot to the specified directory."""
-    os.makedirs(outdir, exist_ok=True)
-    var = var.replace(" ", "_")
-    save_path = os.path.join(outdir, f"{var}_{split}_{facet}_distribution.png")
-    plt.savefig(save_path, bbox_inches="tight")
-    plt.close()
 
 def make_acronym(name):
     # Split on "_" and replace with spaces
@@ -286,19 +180,7 @@ def main():
     weighted_f1_results = weighted_f1_results.fillna("None")
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
     
-#-----------------plotting distribution ---------------- 
-    g = sns.FacetGrid(weighted_f1_results, col="key", hue="study", height=4, aspect=1.5)
-    # Map the KDE plot to the FacetGrid
-    g.map(sns.histplot, 'weighted_f1', multiple="layer", bins=40, binrange=(0, 1))
-    # Set axis labels and titles
-    g.set_axis_labels("F1 Scores", "Frequency")
-    g.set_titles("F1 Score Distribution by {col_name}")
-    # Add a legend
-    g.add_legend()
-    # Save and display the plot
-    g.savefig("weighted_f1_distribution.png")
-    #plt.show()
-    
+
    #------------summaries---------------- 
 
         # summarize by sample, key, method, mean, sd
@@ -316,32 +198,6 @@ def main():
     
     weighted_summary.to_csv("weighted_f1_summary.tsv", sep="\t", index=False)   
     
-    #-------------boxplots--------------
-    df_list = [group for _, group in weighted_f1_results.groupby('key')]
-
-    for df in df_list:
-        key = df["key"].values[0]
-        #remove cutoff from columns_to_group
-        columns_to_group = ["cutoff"] 
-        df["cutoff"] = pd.Categorical(df["cutoff"])
-        for column in columns_to_group:
-            plt.figure(figsize=(10, 6))  # Set the figure size for the plot
-            sns.boxplot(data=df, x="method", y="weighted_f1", hue=column, dodge=True)
-
-            # Rotate x-axis labels for better visibility
-            plt.xticks(rotation=90)
-
-            # Add titles and labels
-            plt.title(f"{key}: Weighted F1 Score by Method and {column}")
-            plt.xlabel("Method")
-            plt.ylabel("Weighted F1 Score")
-
-            # Show the plot
-            plt.tight_layout()
-            plt.show()  # To display the plot
-
-            # Save the plot
-            plt.savefig(f"{key}_weighted_f1_boxplot_{column}.png", bbox_inches="tight")
 
         # 
 
@@ -380,28 +236,12 @@ def main():
     
     label_summary.to_csv("label_f1_summary.tsv", sep="\t", index=False)
    
-
     if organism == "homo_sapiens":
         columns_to_group=["label","method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
     if organism == "mus_musculus":
        columns_to_group=["label","method", "treatment", "genotype","strain","cutoff", "sex", "age", "reference", "study"] 
     factors=columns_to_group + ["query"] + ["query_region"] + ["ref_region"]
     write_factor_summary(label_results, factors) 
-   
-
-    # F1 Score distribution by key
-    g = sns.FacetGrid(label_results, col="key", height=4, aspect=1.5)
-    g.map(sns.histplot, 'f1_score', bins=40, binrange=(0, 1))
-    g.set_axis_labels("F1 Scores", "Frequency")
-    g.set_titles("F1 Score Distribution by {col_name}")
-    g.savefig("label_f1_distribution_facet.png")
-
-    # Support distribution by key
-    g = sns.FacetGrid(label_results, col="key", height=4, aspect=1.5)
-    g.map(sns.histplot, 'support', bins=40, binrange=(0, 1))
-    g.set_axis_labels("Support proportion", "Frequency")
-    g.set_titles("Support Distribution by {col_name}")
-    g.savefig("label_support_distribution_facet.png")
 
         
  
