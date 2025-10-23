@@ -1,4 +1,5 @@
 
+
 process addParams {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
     publishDir "${params.outdir}/params_added", mode: 'copy'
@@ -30,7 +31,7 @@ process aggregateResults {
     path "weighted_f1_results.tsv", emit: weighted_f1_results_aggregated
     path "label_f1_results.tsv", emit: label_f1_results_aggregated
     path "**summary.tsv"
-    path "**png"
+
 
     script:
     """
@@ -52,12 +53,14 @@ process plotCutoff {
     path "**png"
 
     script:
+    ref_keys = params.ref_keys.join(' ')
     """
     python $projectDir/bin/plot_cutoff.py \\
             --weighted_f1_results ${weighted_f1_results_aggregated} \\
             --label_f1_results ${label_f1_results_aggregated} \\
             --mapping_file ${params.mapping_file} \\
-            --color_mapping_file ${params.color_mapping_file}
+            --color_mapping_file ${params.color_mapping_file} \\
+            --ref_keys ${ref_keys}
     """
 }
 
@@ -194,6 +197,38 @@ process plot_continuous_contrast {
     """
 }
 
+process getGrantSummary {
+    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
+    publishDir "${params.outdir}/grant_summary", mode: 'copy'
+
+    input:
+    path weighted_f1_results_aggregated
+    path label_f1_results_aggregated
+
+    output:
+    path "**.png"
+    path "**.tsv"
+
+    script:
+    ref_keys = params.ref_keys.join(' ')
+    def outlier_arg = ''
+    if (params.remove_outliers && params.remove_outliers != null) {
+        outlier_arg = '--remove_outliers ' + params.remove_outliers.join(' ')
+    }
+    
+    """
+    python $projectDir/bin/grant_summary.py \\
+        --weighted_metrics ${weighted_f1_results_aggregated} \\
+        --label_metrics ${label_f1_results_aggregated} \\
+        --ref_keys ${ref_keys} \\
+        --subsample_ref 500 \\
+        --cutoff 0 \\
+        --reference 'whole cortex' \\
+        --method 'scvi' \\
+        ${outlier_arg}
+    """
+}
+
 workflow {
 
     Channel
@@ -225,6 +260,7 @@ workflow {
     label_f1_results_aggregated = aggregateResults.out.label_f1_results_aggregated 
     
     plotCutoff(weighted_f1_results_aggregated, label_f1_results_aggregated)
+    getGrantSummary(weighted_f1_results_aggregated, label_f1_results_aggregated)
 
     plotLabelDist(label_f1_results_aggregated)
     
@@ -285,37 +321,34 @@ workflow {
         }
         .set { continuous_effects_weighted_map }
 
-    // split label results
-    split_by_label(label_f1_results_aggregated)
-    split_by_label.out.label_f1_results_split
-    .set { label_f1_results_split }
+    // split label results (DISABLED: label modeling causes seg fault)
+    // split_by_label(label_f1_results_aggregated)
+    // split_by_label.out.label_f1_results_split
+    // .set { label_f1_results_split }
 
     // split label_f1_results_split into individual files
-    label_f1_results_split.flatMap { list ->
-            // Iterate through each file in the ArrayList
-            list.collect { file ->
-                def key = file.getParent().getParent().getName()
-                def label = file.getParent().getName() // Assuming the label is the parent directory name
-                def filepath = file
-                return [key, label, filepath]
-            }
-        }.set { label_f1_results_split_map }
+    // label_f1_results_split.flatMap { list ->
+    //         // Iterate through each file in the ArrayList
+    //         list.collect { file ->
+    //             def key = file.getParent().getParent().getName()
+    //             def label = file.getParent().getName() // Assuming the label is the parent directory name
+    //             def filepath = file
+    //             return [key, label, filepath]
+    //         }
+    //     }.set { label_f1_results_split_map }
 
+    // modelEvalLabel(label_f1_results_split_map) 
+    // continuous_effects_label = modelEvalLabel.out.continuous_effects
+    // // flatMap the mode onto continuous_effects_label
+    // continuous_effects_label.map { file ->
+    //             def key = file.getParent().getParent().getName()
+    //             def mode = 'label' // or 'weighted' based on the process
+    //             return [key, mode, file]
+    //         }
+    //     .set { continuous_effects_label_map }
 
-    //modelEvalLabel(label_f1_results_split_map) 
-    //continuous_effects_label = modelEvalLabel.out.continuous_effects
-    //// flatMap the mode onto continuous_effects_label
-    //continuous_effects_label.map { file ->
-                //def key = file.getParent().getParent().getName()
-                //def mode = 'label' // or 'weighted' based on the process
-                //return [key, mode, file]
-            //}
-        
-        //.set { continuous_effects_label_map }
-    
-
-    //continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
-    //plot_continuous_contrast(continuous_effects_all)
+    // continuous_effects_all = continuous_effects_weighted_map.concat(continuous_effects_label_map)
+    // plot_continuous_contrast(continuous_effects_all)
 }
 
 workflow.onError = {
