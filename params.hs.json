@@ -2,5 +2,10 @@
     "organism": "homo_sapiens",
     "mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv",
     "census_version": "2024-07-01",
-    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2024-07-01/2024-07-1-old-refs/homo_sapiens/sample/SCT"
+    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false",
+    "ref_keys": [
+        "subclass",
+        "class",
+        "family"
+    ]
 }
