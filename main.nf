@@ -199,7 +199,9 @@ process plot_continuous_contrast {
 
 process getGrantSummary {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-    publishDir "${params.outdir}/grant_summary", mode: 'copy'
+    // split up files and figures by pattern
+    publishDir "${params.outdir}/grant_summary/files", mode: 'copy', pattern: "**.tsv"
+    publishDir "${params.outdir}/grant_summary/figures", mode: 'copy', pattern: "**.png"
 
     input:
     path weighted_f1_results_aggregated
@@ -221,10 +223,10 @@ process getGrantSummary {
         --weighted_metrics ${weighted_f1_results_aggregated} \\
         --label_metrics ${label_f1_results_aggregated} \\
         --ref_keys ${ref_keys} \\
-        --subsample_ref 500 \\
-        --cutoff 0 \\
-        --reference 'whole cortex' \\
-        --method 'scvi' \\
+        --subsample_ref ${params.subsample_ref} \\
+        --cutoff ${params.cutoff} \\
+        --reference '${params.reference}' \\
+        --method ${params.method} \\
         ${outlier_arg}
     """
 }
