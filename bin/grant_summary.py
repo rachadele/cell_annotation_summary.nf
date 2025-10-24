@@ -62,6 +62,7 @@ def aggregate_metrics_long(df, groupby_col, metrics_to_agg):
     df_long = df_long.pivot_table(index=group_cols + ['metric'], columns='stat', values='value').reset_index()
     return df_long
 
+
 def plot_metrics(filtered_df, metric, ref_keys, group_col='study'):
     levels = ref_keys
     n_levels = len(levels)
@@ -106,6 +107,7 @@ def plot_metrics(filtered_df, metric, ref_keys, group_col='study'):
 
 
 def main():
+
     args = parse_arguments()
     
     weighted_df = pd.read_csv(args.weighted_metrics, sep='\t')
@@ -167,6 +169,15 @@ def main():
     # computing overall precision and recall per cell type across samples addresses this
     # stored in another repo
 
+    # Summary of means and SDs for all metrics across all studies (weighted)
+    weighted_summary = weighted_filtered[metrics_to_agg_weighted].agg(['mean', 'std']).T.reset_index()
+    weighted_summary.columns = ['metric', 'mean', 'std']
+    weighted_summary.to_csv('weighted_metrics_summary_overall.tsv', sep='\t', index=False)
+
+    # Summary of means and SDs for all metrics across all cell types (label)
+    label_summary = label_filtered[metrics_to_agg_label].agg(['mean', 'std']).T.reset_index()
+    label_summary.columns = ['metric', 'mean', 'std']
+    label_summary.to_csv('label_metrics_summary_overall.tsv', sep='\t', index=False)
 
 if __name__ == "__main__":
     main()
