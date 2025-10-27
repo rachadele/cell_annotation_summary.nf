@@ -12,7 +12,7 @@ import os
 warnings.filterwarnings('ignore', category=FutureWarning)
 # Set plotting style similar to other scripts
 SMALL_SIZE = 15
-MEDIUM_SIZE = 35
+MEDIUM_SIZE = 20
 BIGGER_SIZE = 40
 plt.rc('font', size=SMALL_SIZE)
 plt.rc('axes', titlesize=SMALL_SIZE)
@@ -26,7 +26,7 @@ plt.rc('figure', titlesize=BIGGER_SIZE)
 def parse_arguments():
 
     parser = argparse.ArgumentParser(description="Plot metrics for chosen pipeline parameters per study and celltype.")
-    parser.add_argument('--remove_outliers', type=str, nargs='*', default=["GSE180670"],
+    parser.add_argument('--remove_outliers', type=str, nargs='*', default=["GSE180670"], 
                         help="List of study names to remove as outliers")
     parser.add_argument('--weighted_metrics', type=str, help="Path to weighted metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
     parser.add_argument('--label_metrics', type=str, help="Path to label metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")
@@ -64,57 +64,50 @@ def aggregate_metrics_long(df, groupby_col, metrics_to_agg):
     return df_long
 
 
-def plot_metrics_box(filtered_df, metric, ref_keys, group_col='study', outdir="outliers_kept"):
+def plot_metrics_box(filtered_df, metric, ref_keys, group_col='study', outdir="outliers_kept", metric_label="Weighted F1", group_col_label="study"):
     levels = ref_keys
-    n_levels = len(levels)
-    fig, axes = plt.subplots(n_levels, 1, figsize=(12, 6 * n_levels))
-    if n_levels == 1:
-        axes = [axes]
-    mean_handle = None
-    for idx, level in enumerate(levels):
-        ax = axes[idx]
+    for level in levels:
         level_df = filtered_df[filtered_df['key'] == level]
-        # Add a label to the subplot indicating the level
-        ax.set_title(f"Level: {level}", fontsize=16, loc='left')
+        if group_col in level_df.columns:
+            #level_df[group_col] = level_df[group_col].str.strip().str.title()
+            level_df = level_df.sort_values(by=group_col, key=lambda x: x.str.lower())
         if not level_df.empty:
-            # Use a palette with enough colors for all unique groups
-           # unique_groups = level_df[group_col].unique()
-           # n_colors = len(unique_groups)
-           # palette = sns.color_palette('tab20', n_colors=n_colors) if n_colors > 10 else sns.color_palette('tab10', n_colors=n_colors)
+            fig, ax = plt.subplots(figsize=(8, 8))
+            ax.set_title(f"Level: {level}", fontsize=16, loc='left')
             sns.boxplot(data=level_df, y=group_col, x=metric, ax=ax, showfliers=False)
             means = level_df.groupby(group_col)[metric].mean().reset_index()
+            mean_handle = None
             for i, row in means.iterrows():
                 sc = ax.scatter(row[metric], row[group_col], color='black', marker='o', s=60, zorder=3)
                 if mean_handle is None:
                     mean_handle = sc
-            # No y-axis label needed
-            ax.set_ylabel('')
+            #if mean_handle is not None:
+            #    ax.legend([mean_handle], ['Mean'], loc='upper left', bbox_to_anchor=(1.05, 1))
+            ax.set_ylabel('', fontsize=MEDIUM_SIZE)
             ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
-        # Set x-axis label and enforce range/ticks for every subplot
-        ax.set_xlim(-0.05, 1.05)
-        ax.set_xticks(np.arange(-0.05, 1.05, 0.2))
-        if idx == n_levels - 1:
-            ax.set_xlabel(f'{metric} ± SD', fontsize=MEDIUM_SIZE)
-        else:
-            ax.set_xlabel('', fontsize=MEDIUM_SIZE)
-        ax.set_ylabel('', fontsize=MEDIUM_SIZE)
-        ax.tick_params(axis='both', labelsize=SMALL_SIZE)
-        
-    # Add a single legend for the mean to the last axis if any mean was plotted
-    if mean_handle is not None:
-        axes[-1].legend([mean_handle], ['Mean'], loc='upper left', bbox_to_anchor=(1.05, 1))
-    plt.suptitle(f'{metric} grouped by {group_col}', fontsize=25)
-    plt.tight_layout()
-    plt.savefig(os.path.join(outdir,f"{metric}_per_{group_col}.png"))
-    plt.close()
+            ax.set_xlim(-0.05, 1.05)
+            ax.set_xticks(np.arange(0, 1.01, 0.2))
+          #  metric_label = metric.replace('_', ' ').capitalize()
+           # group_col_label = group_col.replace('_', ' ').capitalize()
+            ax.set_xlabel(f'Agreement with author labels\n({metric_label})', fontsize=MEDIUM_SIZE)
+            ax.legend().set_visible(False)
+            ax.tick_params(axis='both', labelsize=SMALL_SIZE)
+            plt.suptitle(f'{metric_label} grouped by {group_col_label}', fontsize=MEDIUM_SIZE)
+            plt.tight_layout()
+            plt.savefig(os.path.join(outdir, f"{metric}_per_{group_col}_box_{level}.png"))
+            plt.close()
 
 
-def plot_metrics_strip(filtered_df, metric, ref_keys, group_col='study', outdir="outliers_kept", hue_color='label'):
+
+def plot_metrics_strip(filtered_df, metric, ref_keys, group_col='study', outdir="outliers_kept", hue_color='label', metric_label="F1 Score", group_col_label="study"):
     levels = ref_keys
     for level in levels:
         level_df = filtered_df[filtered_df['key'] == level]
+        if group_col in level_df.columns:
+            #level_df[group_col] = level_df[group_col].str.strip().str.title()
+            level_df = level_df.sort_values(by=group_col, key=lambda x: x.str.lower())
         if not level_df.empty:
-            fig, ax = plt.subplots(figsize=(12, 10))
+            fig, ax = plt.subplots(figsize=(8, 8))
             ax.set_title(f"Level: {level}", fontsize=16, loc='left')
             # Only stripplot for every point, colored by study, with jitter for visibility
             strip = sns.stripplot(data=level_df, y=group_col, x=metric, hue=hue_color, dodge=False, palette='tab10', size=8, alpha=0.8, jitter=True, ax=ax)
@@ -125,15 +118,20 @@ def plot_metrics_strip(filtered_df, metric, ref_keys, group_col='study', outdir=
             if handles:
                 ax.legend(handles, labels, title='Study', bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
             ax.set_xlim(-0.05, 1.05)
-            ax.set_xticks(np.arange(-0.05, 1.05, 0.2))
-            ax.set_xlabel(f'{metric}', fontsize=MEDIUM_SIZE)
+            ax.set_xticks(np.arange(0, 1.01, 0.2))
+          #  metric_label = metric.replace('_', ' ').capitalize()
+          #  group_col_label = group_col.replace('_', ' ').capitalize()
+            ax.set_xlabel(f'Agreement with author labels\n({metric_label})', fontsize=MEDIUM_SIZE)
+          #  ax.legend().set_visible(False)
             ax.tick_params(axis='both', labelsize=SMALL_SIZE)
-            plt.suptitle(f'{metric} grouped by {group_col}', fontsize=25)
+            plt.suptitle(f'{metric_label} grouped by {group_col_label}', fontsize=MEDIUM_SIZE)
             plt.tight_layout()
-            plt.subplots_adjust(top=0.9)
             plt.savefig(os.path.join(outdir, f"{metric}_per_{group_col}_strip_{level}.png"))
             plt.close()
 
+def smart_capitalize(s):
+    s = s.strip()
+    return s.capitalize() if s.islower() else s
 
 def main():
 
@@ -154,12 +152,15 @@ def main():
 
     weighted_filtered = filter_metrics(weighted_df, args.subsample_ref, args.cutoff, args.reference, args.method)
     label_filtered = filter_metrics(label_df, args.subsample_ref, args.cutoff, args.reference, args.method)
-    
-    
+
+    # Clean and capitalize study names for display
 
     # drop "Glia" and "VLMCeuron" - hack for now
     label_filtered = label_filtered[~label_filtered['label'].isin(["Glia", "VLMCeuron"])]
     
+    # apply smart capitalization 
+    label_filtered['study'] = label_filtered['study'].apply(smart_capitalize)
+    weighted_filtered['study'] = weighted_filtered['study'].apply(smart_capitalize)
 
 
     metrics_to_agg_weighted = ['weighted_f1', 
@@ -173,6 +174,10 @@ def main():
                                'micro_precision',
                                'micro_recall']
     
+    # check if these columns exist in the dataframe
+    available_metrics = [metric for metric in metrics_to_agg_weighted if metric in weighted_filtered.columns]
+    metrics_to_agg_weighted = available_metrics
+    
     metrics_to_agg_label = ['f1_score', 'precision', 'recall']
     
     
@@ -182,9 +187,13 @@ def main():
     # change this to a loop over metrics
     # plot weighted metrics
     for metric in metrics_to_agg_weighted:
-        if metric in weighted_filtered.columns:
-            plot_metrics_box(weighted_filtered, metric=metric, ref_keys=ref_keys, group_col='study', outdir=outdir)
-            plt.close()
+        
+        metric_label=metric.replace('_', ' ').capitalize()
+        # replace f1 with F1
+        metric_label = metric_label.replace('f1', 'F1')
+        group_col_label='study'
+        plot_metrics_box(weighted_filtered, metric=metric, ref_keys=ref_keys, group_col='study', outdir=outdir, metric_label=metric_label, group_col_label=group_col_label)
+        plt.close()
 
 
 
@@ -194,20 +203,23 @@ def main():
     
     # Plot dots for label-level metrics, grouped by study, colored by label
   #  plot_metrics_box(label_filtered, metric="f1_score", ref_keys=ref_keys, group_col='study', outdir=outdir)
-    plot_metrics_strip(label_filtered, metric="f1_score", ref_keys=ref_keys, group_col='study', outdir=outdir, hue_color='label')
+    plot_metrics_strip(label_filtered, metric="f1_score", ref_keys=ref_keys, group_col='study', outdir=outdir, hue_color='label', metric_label="F1", group_col_label="study")
     plt.close()
     
     
     # ------------------------ file summaries ------------------------
     
     # Summary of means and SDs for all metrics across all studies (weighted)
-    weighted_summary = weighted_filtered[metrics_to_agg_weighted].agg(['mean', 'std']).T.reset_index()
-    weighted_summary.columns = ['metric', 'mean', 'std']
+    weighted_summary = weighted_filtered[metrics_to_agg_weighted + ["key"]].groupby('key').agg(['mean', 'std']).T.reset_index()
+    # set column names
+    weighted_summary.columns = ['metric', 'stat'] + ref_keys
     weighted_summary.to_csv(f'{outdir}/weighted_metrics_summary_overall.tsv', sep='\t', index=False)
 
     # Summary of means and SDs for all metrics across all cell types (label)
-    label_summary = label_filtered[metrics_to_agg_label].agg(['mean', 'std']).T.reset_index()
-    label_summary.columns = ['metric', 'mean', 'std']
+    # stratify by "key"
+    label_summary = label_filtered[metrics_to_agg_label + ["key"]].groupby('key').agg(['mean', 'std']).T.reset_index()
+    # set column names
+    label_summary.columns = ['metric', 'stat'] + ref_keys
     label_summary.to_csv(f'{outdir}/label_metrics_summary_overall.tsv', sep='\t', index=False)
     
     weighted_long = aggregate_metrics_long(
