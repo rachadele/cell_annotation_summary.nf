@@ -64,7 +64,7 @@ def aggregate_metrics_long(df, groupby_col, metrics_to_agg):
     return df_long
 
 
-def plot_metrics(filtered_df, metric, ref_keys, group_col='study', outdir="outliers_kept"):
+def plot_metrics_box(filtered_df, metric, ref_keys, group_col='study', outdir="outliers_kept"):
     levels = ref_keys
     n_levels = len(levels)
     fig, axes = plt.subplots(n_levels, 1, figsize=(12, 6 * n_levels))
@@ -94,9 +94,11 @@ def plot_metrics(filtered_df, metric, ref_keys, group_col='study', outdir="outli
         ax.set_xlim(-0.05, 1.05)
         ax.set_xticks(np.arange(-0.05, 1.05, 0.2))
         if idx == n_levels - 1:
-            ax.set_xlabel(f'{metric} ± SD')
+            ax.set_xlabel(f'{metric} ± SD', fontsize=MEDIUM_SIZE)
         else:
-            ax.set_xlabel('')
+            ax.set_xlabel('', fontsize=MEDIUM_SIZE)
+        ax.set_ylabel('', fontsize=MEDIUM_SIZE)
+        ax.tick_params(axis='both', labelsize=SMALL_SIZE)
         
     # Add a single legend for the mean to the last axis if any mean was plotted
     if mean_handle is not None:
@@ -107,30 +109,37 @@ def plot_metrics(filtered_df, metric, ref_keys, group_col='study', outdir="outli
     plt.close()
 
 
-
-def dotplot(df, x, y, color_var, title=None, xlabel=None, ylabel=None, outdir=None):
-    plt.figure(figsize=(10, 10))
-    # Plot only dots for each cell type (y axis), colored by study, small size
-    sns.stripplot(data=df, x=y, y=x, hue=color_var, dodge=False, palette='tab10', size=3, alpha=0.8)
-    if title:
-        plt.title(title)
-    if xlabel:
-        plt.xlabel(ylabel if ylabel else y)
-    if ylabel:
-        plt.ylabel(xlabel if xlabel else x)
-    plt.ylim(-0.05, 1.05)
-    plt.yticks(np.arange(-0.05, 1.06, 0.2))
-    plt.tight_layout()
-    plt.savefig(os.path.join(outdir, f"{x}_by_{y}_dots.png"))
-    plt.close()
+def plot_metrics_strip(filtered_df, metric, ref_keys, group_col='study', outdir="outliers_kept", hue_color='label'):
+    levels = ref_keys
+    for level in levels:
+        level_df = filtered_df[filtered_df['key'] == level]
+        if not level_df.empty:
+            fig, ax = plt.subplots(figsize=(12, 10))
+            ax.set_title(f"Level: {level}", fontsize=16, loc='left')
+            # Only stripplot for every point, colored by study, with jitter for visibility
+            strip = sns.stripplot(data=level_df, y=group_col, x=metric, hue=hue_color, dodge=False, palette='tab10', size=8, alpha=0.8, jitter=True, ax=ax)
+            ax.set_ylabel('', fontsize=MEDIUM_SIZE)
+            ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
+            # Add legend for hue (study)
+            handles, labels = ax.get_legend_handles_labels()
+            if handles:
+                ax.legend(handles, labels, title='Study', bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+            ax.set_xlim(-0.05, 1.05)
+            ax.set_xticks(np.arange(-0.05, 1.05, 0.2))
+            ax.set_xlabel(f'{metric}', fontsize=MEDIUM_SIZE)
+            ax.tick_params(axis='both', labelsize=SMALL_SIZE)
+            plt.suptitle(f'{metric} grouped by {group_col}', fontsize=25)
+            plt.tight_layout()
+            plt.subplots_adjust(top=0.9)
+            plt.savefig(os.path.join(outdir, f"{metric}_per_{group_col}_strip_{level}.png"))
+            plt.close()
 
 
 def main():
 
-
     args = parse_arguments()
-    weighted_df = pd.read_csv(args.weighted_metrics, sep='\t')
-    label_df = pd.read_csv(args.label_metrics, sep='\t')
+    weighted_df = pd.read_csv(args.weighted_metrics, sep='\t', low_memory=False)
+    label_df = pd.read_csv(args.label_metrics, sep='\t', low_memory=False)
     ref_keys = args.ref_keys
     # Determine output directory based on outlier removal
     if args.remove_outliers and len(args.remove_outliers) > 0:
@@ -140,16 +149,18 @@ def main():
     os.makedirs(outdir, exist_ok=True)
     # Remove outlier datasets if not None
     if args.remove_outliers:
-        if 'study' in weighted_df.columns:
-            weighted_df = weighted_df[~weighted_df['study'].isin(args.remove_outliers)]
-        if 'label' in label_df.columns:
-            label_df = label_df[~label_df['label'].isin(args.remove_outliers)]
+        weighted_df = weighted_df[~weighted_df['study'].isin(args.remove_outliers)]
+        label_df = label_df[~label_df['study'].isin(args.remove_outliers)]
 
     weighted_filtered = filter_metrics(weighted_df, args.subsample_ref, args.cutoff, args.reference, args.method)
     label_filtered = filter_metrics(label_df, args.subsample_ref, args.cutoff, args.reference, args.method)
+    
+    
 
     # drop "Glia" and "VLMCeuron" - hack for now
     label_filtered = label_filtered[~label_filtered['label'].isin(["Glia", "VLMCeuron"])]
+    
+
 
     metrics_to_agg_weighted = ['weighted_f1', 
                                'weighted_precision', 
@@ -161,55 +172,34 @@ def main():
                                'micro_f1',
                                'micro_precision',
                                'micro_recall']
-    weighted_long = aggregate_metrics_long(
-        weighted_filtered,
-        groupby_col='study',
-        metrics_to_agg=metrics_to_agg_weighted
-    )
-    weighted_long.to_csv(f"{outdir}/weighted_metrics_stats_per_study.tsv", sep="\t", index=False)
-
+    
     metrics_to_agg_label = ['f1_score', 'precision', 'recall']
-    label_long = aggregate_metrics_long(
-        label_filtered,
-        groupby_col='label',
-        metrics_to_agg=metrics_to_agg_label
-        )
-    label_long.to_csv(f"{outdir}/label_metrics_stats_per_label.tsv", sep="\t", index=False)
-
+    
+    
+    
+    # ------------------ grant summary plots ------------------
 
     # change this to a loop over metrics
     # plot weighted metrics
     for metric in metrics_to_agg_weighted:
         if metric in weighted_filtered.columns:
-            plot_metrics(weighted_filtered, metric=metric, ref_keys=ref_keys, group_col='study', outdir=outdir)
+            plot_metrics_box(weighted_filtered, metric=metric, ref_keys=ref_keys, group_col='study', outdir=outdir)
             plt.close()
 
 
 
-    plot_metrics(label_filtered, metric="f1_score", ref_keys=ref_keys, group_col='label', outdir=outdir)
+    plot_metrics_box(label_filtered, metric="f1_score", ref_keys=ref_keys, group_col='label', outdir=outdir)
     plt.close()
-    # add accuracy, precision, recall plots here
-    # Plot dots for label-level metrics, colored by study
-    dotplot(
-        label_filtered,
-        x="f1_score",
-        y='label',
-        color_var='study',
-        title=f'f1_score by label (colored by study)',
-        xlabel='f1_score',
-        ylabel='Label',
-        outdir=outdir
-    )
-  
-    # plot_metrics(label_filtered, metric="accuracy", ref_keys=ref_keys, group_col='label')
-  # plot_metrics(label_filtered, metric="precision", ref_keys=ref_keys, group_col='label')
-  #  plot_metrics(label_filtered, metric="recall", ref_keys=ref_keys, group_col='label')
-
-    # fails because precision is NA for some cell types due to lack of true positive predictions in that sample
-    # this on a per-sample basis
-    # computing overall precision and recall per cell type across samples addresses this
-    # stored in another repo
-
+    
+    
+    # Plot dots for label-level metrics, grouped by study, colored by label
+  #  plot_metrics_box(label_filtered, metric="f1_score", ref_keys=ref_keys, group_col='study', outdir=outdir)
+    plot_metrics_strip(label_filtered, metric="f1_score", ref_keys=ref_keys, group_col='study', outdir=outdir, hue_color='label')
+    plt.close()
+    
+    
+    # ------------------------ file summaries ------------------------
+    
     # Summary of means and SDs for all metrics across all studies (weighted)
     weighted_summary = weighted_filtered[metrics_to_agg_weighted].agg(['mean', 'std']).T.reset_index()
     weighted_summary.columns = ['metric', 'mean', 'std']
@@ -219,6 +209,37 @@ def main():
     label_summary = label_filtered[metrics_to_agg_label].agg(['mean', 'std']).T.reset_index()
     label_summary.columns = ['metric', 'mean', 'std']
     label_summary.to_csv(f'{outdir}/label_metrics_summary_overall.tsv', sep='\t', index=False)
+    
+    weighted_long = aggregate_metrics_long(
+        weighted_filtered,
+        groupby_col='study',
+        metrics_to_agg=metrics_to_agg_weighted
+    )
+    weighted_long.to_csv(f"{outdir}/weighted_metrics_stats_per_study.tsv", sep="\t", index=False)
+
+    label_long = aggregate_metrics_long(
+        label_filtered,
+        groupby_col='label',
+        metrics_to_agg=metrics_to_agg_label
+        )
+    label_long.to_csv(f"{outdir}/label_metrics_stats_per_label.tsv", sep="\t", index=False)
+    
+    
+    
+    
+    
+    
+    #---------------------------- failed plots -----------------------------
+
+    # plot_metrics_box(label_filtered, metric="accuracy", ref_keys=ref_keys, group_col='label')
+  # plot_metrics_box(label_filtered, metric="precision", ref_keys=ref_keys, group_col='label')
+  #  plot_metrics_box(label_filtered, metric="recall", ref_keys=ref_keys, group_col='label')
+
+    # fails because precision is NA for some cell types due to lack of true positive predictions in that sample
+    # this on a per-sample basis
+    # computing overall precision and recall per cell type across samples addresses this
+    # stored in another repo
+
 
 if __name__ == "__main__":
     main()
