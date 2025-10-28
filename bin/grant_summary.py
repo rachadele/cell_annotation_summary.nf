@@ -212,7 +212,7 @@ def main():
     weighted_summary = weighted_filtered[metrics_to_agg_weighted + ["key"]].groupby('key').agg(['mean', 'std']).T.reset_index()
     # set column names
     weighted_summary.columns = ['metric', 'stat'] + ref_keys
-    weighted_summary.to_csv(f'{outdir}/weighted_metrics_summary_overall.tsv', sep='\t', index=False)
+    weighted_summary.to_csv(f'{outdir}/sample_metrics_summary_overall.tsv', sep='\t', index=False)
 
     # Summary of means and SDs for all metrics across all cell types (label)
     # stratify by "key"
@@ -226,7 +226,7 @@ def main():
         groupby_col='study',
         metrics_to_agg=metrics_to_agg_weighted
     )
-    weighted_long.to_csv(f"{outdir}/weighted_metrics_stats_per_study.tsv", sep="\t", index=False)
+    weighted_long.to_csv(f"{outdir}/sample_metrics_stats_per_study.tsv", sep="\t", index=False)
 
     label_long = aggregate_metrics_long(
         label_filtered,
