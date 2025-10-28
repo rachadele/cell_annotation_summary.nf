@@ -27,9 +27,9 @@ def parse_arguments():
 
     parser = argparse.ArgumentParser(description="Plot metrics for chosen pipeline parameters per study and celltype.")
     parser.add_argument('--remove_outliers', type=str, nargs='*', default=None, help="List of study names to remove as outliers")
-    parser.add_argument('--weighted_metrics', type=str, help="Path to weighted metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
-    parser.add_argument('--label_metrics', type=str, help="Path to label metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")
-    parser.add_argument('--ref_keys', type=str, nargs='+', default=["subclass","class","family","global"], help="Reference keys to plot")
+    parser.add_argument('--weighted_metrics', type=str, help="Path to weighted metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
+    parser.add_argument('--label_metrics', type=str, help="Path to label metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")
+    parser.add_argument('--ref_keys', type=str, nargs='+', default=["subclass","class","family"], help="Reference keys to plot")
     parser.add_argument('--subsample_ref', type=int, default=500, help="Subsample reference value")
     parser.add_argument('--cutoff', type=float, default=0, help="Cutoff value")
     parser.add_argument('--reference', type=str, default="whole cortex", help="Reference name")
@@ -210,15 +210,16 @@ def main():
     
     # Summary of means and SDs for all metrics across all studies (weighted)
     weighted_summary = weighted_filtered[metrics_to_agg_weighted + ["key"]].groupby('key').agg(['mean', 'std']).T.reset_index()
-    # set column names
-    weighted_summary.columns = ['metric', 'stat'] + ref_keys
+    # set column names for only the first two columns
+    
+    weighted_summary.columns = ['metric', 'stat']  + weighted_summary.columns.tolist()[2:]
     weighted_summary.to_csv(f'{outdir}/sample_metrics_summary_overall.tsv', sep='\t', index=False)
 
     # Summary of means and SDs for all metrics across all cell types (label)
     # stratify by "key"
     label_summary = label_filtered[metrics_to_agg_label + ["key"]].groupby('key').agg(['mean', 'std']).T.reset_index()
     # set column names
-    label_summary.columns = ['metric', 'stat'] + ref_keys
+    label_summary.columns = ['metric', 'stat'] + weighted_summary.columns.tolist()[2:]
     label_summary.to_csv(f'{outdir}/label_metrics_summary_overall.tsv', sep='\t', index=False)
     
     weighted_long = aggregate_metrics_long(
