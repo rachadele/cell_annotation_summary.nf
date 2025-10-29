@@ -1,9 +1,9 @@
 "reference"	"method"	"response"	"SE"	"df"	"asymp.LCL"	"asymp.UCL"
-"Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"	"seurat"	0.956120474793145	0.0140030470369049	Inf	0.918882375000521	0.976697455107407
-"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"	"seurat"	0.953801321204691	0.0147043060433103	Inf	0.914781206479706	0.975434630862429
-"Single-cell RNA-seq for all cortical  hippocampal regions 10x"	"seurat"	0.970920235827373	0.00942591261461392	Inf	0.94551845682658	0.984670562466981
-"whole cortex"	"seurat"	0.931403487606801	0.0213198018258228	Inf	0.875928927167748	0.96311867728325
-"Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"	"scvi"	0.927377191148694	0.022469982802002	Inf	0.869116118985123	0.960871758245158
-"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"	"scvi"	0.958198965579789	0.0133762063355194	Inf	0.922555868692971	0.977831772452764
-"Single-cell RNA-seq for all cortical  hippocampal regions 10x"	"scvi"	0.959840644446896	0.0128653654242519	Inf	0.925514912183353	0.978711552121905
-"whole cortex"	"scvi"	0.96068241438254	0.0126070180707157	Inf	0.927020508762608	0.979166649315747
+"Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"	"seurat"	0.956120456487256	0.014003053577268	Inf	0.918882339111598	0.976697446204454
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"	"seurat"	0.953801301961798	0.0147043128857871	Inf	0.914781168918601	0.975434621479462
+"Single-cell RNA-seq for all cortical  hippocampal regions 10x"	"seurat"	0.970920223423868	0.00942591716486577	Inf	0.945518431871248	0.984670556517153
+"whole cortex"	"seurat"	0.931403459901942	0.0213198112735705	Inf	0.875928875137398	0.963118663483519
+"Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"	"scvi"	0.927377162695062	0.0224699924660709	Inf	0.869116065796099	0.96087174405665
+"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"	"scvi"	0.958198948575367	0.0133762124588127	Inf	0.922555835147014	0.97783176422521
+"Single-cell RNA-seq for all cortical  hippocampal regions 10x"	"scvi"	0.959840627986873	0.0128653713622078	Inf	0.925514879642289	0.978711544162993
+"whole cortex"	"scvi"	0.960682398530605	0.0126070238134359	Inf	0.927020477323226	0.979166641673286
