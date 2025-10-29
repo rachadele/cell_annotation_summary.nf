@@ -200,8 +200,7 @@ process plot_continuous_contrast {
 process getGrantSummary {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
     // split up files and figures by pattern
-    //publishDir "${params.outdir}/grant_summary/files", mode: 'copy', pattern: "**.tsv"
-   // publishDir "${params.outdir}/grant_summary/figures", mode: 'copy', pattern: "**.png"
+    publishDir "${params.outdir}/grant_summary", mode: 'copy'
 
     input:
     path weighted_f1_results_aggregated

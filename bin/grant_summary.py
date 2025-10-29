@@ -26,9 +26,14 @@ plt.rc('figure', titlesize=BIGGER_SIZE)
 def parse_arguments():
 
     parser = argparse.ArgumentParser(description="Plot metrics for chosen pipeline parameters per study and celltype.")
-    parser.add_argument('--remove_outliers', type=str, nargs='*', default=None, help="List of study names to remove as outliers")
-    parser.add_argument('--weighted_metrics', type=str, help="Path to weighted metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
-    parser.add_argument('--label_metrics', type=str, help="Path to label metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")
+    parser.add_argument('--remove_outliers', type=str, nargs='*', default=[
+    "GSE181021.1",
+    "GSE152715.1",
+    "GSE152715.2",
+    "GSE231868"
+  ], help="List of study names to remove as outliers")
+    parser.add_argument('--weighted_metrics', type=str, help="Path to weighted metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
+    parser.add_argument('--label_metrics', type=str, help="Path to label metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")
     parser.add_argument('--ref_keys', type=str, nargs='+', default=["subclass","class","family"], help="Reference keys to plot")
     parser.add_argument('--subsample_ref', type=int, default=500, help="Subsample reference value")
     parser.add_argument('--cutoff', type=float, default=0, help="Cutoff value")
