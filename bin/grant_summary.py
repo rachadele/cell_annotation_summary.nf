@@ -26,15 +26,10 @@ plt.rc('figure', titlesize=BIGGER_SIZE)
 def parse_arguments():
 
     parser = argparse.ArgumentParser(description="Plot metrics for chosen pipeline parameters per study and celltype.")
-    parser.add_argument('--remove_outliers', type=str, nargs='*', default=[
-    "GSE181021.1",
-    "GSE152715.1",
-    "GSE152715.2",
-    "GSE231868"
-  ], help="List of study names to remove as outliers")
+    parser.add_argument('--remove_outliers', type=str, nargs='*', default=None, help="List of study names to remove as outliers")
     parser.add_argument('--weighted_metrics', type=str, help="Path to weighted metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
     parser.add_argument('--label_metrics', type=str, help="Path to label metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")
-    parser.add_argument('--ref_keys', type=str, nargs='+', default=["subclass","class","family"], help="Reference keys to plot")
+    parser.add_argument('--ref_keys', type=str, nargs='+', default=["subclass","class","family","global"], help="Reference keys to plot")
     parser.add_argument('--subsample_ref', type=int, default=500, help="Subsample reference value")
     parser.add_argument('--cutoff', type=float, default=0, help="Cutoff value")
     parser.add_argument('--reference', type=str, default="whole cortex", help="Reference name")
@@ -111,7 +106,7 @@ def plot_metrics_strip(filtered_df, metric, ref_keys, group_col='study', outdir=
             #level_df[group_col] = level_df[group_col].str.strip().str.title()
             level_df = level_df.sort_values(by=group_col, key=lambda x: x.str.lower())
         if not level_df.empty:
-            fig, ax = plt.subplots(figsize=(8, 8))
+            fig, ax = plt.subplots(figsize=(15, 10))
             ax.set_title(f"Level: {level}", fontsize=16, loc='left')
             # Only stripplot for every point, colored by study, with jitter for visibility
             strip = sns.stripplot(data=level_df, y=group_col, x=metric, hue=hue_color, dodge=False, palette='tab10', size=8, alpha=0.8, jitter=True, ax=ax)
@@ -119,8 +114,7 @@ def plot_metrics_strip(filtered_df, metric, ref_keys, group_col='study', outdir=
             ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
             # Add legend for hue (study)
             handles, labels = ax.get_legend_handles_labels()
-            if handles:
-                ax.legend(handles, labels, title='Study', bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+            ax.legend(handles, labels, title='Study', bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0., ncol=2, fontsize=SMALL_SIZE)
             ax.set_xlim(-0.05, 1.05)
             ax.set_xticks(np.arange(0, 1.01, 0.2))
           #  metric_label = metric.replace('_', ' ').capitalize()
@@ -201,7 +195,7 @@ def main():
 
 
 
-    plot_metrics_box(label_filtered, metric="f1_score", ref_keys=ref_keys, group_col='label', outdir=outdir)
+    plot_metrics_box(label_filtered, metric="f1_score", ref_keys=ref_keys, group_col='label', outdir=outdir, metric_label="F1", group_col_label="label")
     plt.close()
     
     
