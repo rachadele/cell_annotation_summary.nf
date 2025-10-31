@@ -225,6 +225,7 @@ process getGrantSummary {
         --cutoff ${params.cutoff} \\
         --reference '${params.reference}' \\
         --method ${params.method} \\
+        --organism ${params.organism} \\
         ${outlier_arg}
     """
 }
