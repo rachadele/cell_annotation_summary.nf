@@ -43,15 +43,15 @@ human_pmid_mapping = {
 def parse_arguments():
 
     parser = argparse.ArgumentParser(description="Plot metrics for chosen pipeline parameters per study and celltype.")
-    parser.add_argument('--remove_outliers', type=str, nargs='*', default=None, help="List of study names to remove as outliers")
-    parser.add_argument('--weighted_metrics', type=str, help="Path to weighted metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
-    parser.add_argument('--label_metrics', type=str, help="Path to label metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")
-    parser.add_argument('--ref_keys', type=str, nargs='+', default=["subclass","class","family","global"], help="Reference keys to plot")
+    parser.add_argument('--remove_outliers', type=str, nargs='*', default=["GSE180670"], help="List of study names to remove as outliers")
+    parser.add_argument('--weighted_metrics', type=str, help="Path to weighted metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
+    parser.add_argument('--label_metrics', type=str, help="Path to label metrics TSV file", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")
+    parser.add_argument('--ref_keys', type=str, nargs='+', default=["subclass","class","family"], help="Reference keys to plot")
     parser.add_argument('--subsample_ref', type=int, default=500, help="Subsample reference value")
     parser.add_argument('--cutoff', type=float, default=0, help="Cutoff value")
     parser.add_argument('--reference', type=str, default="whole cortex", help="Reference name")
     parser.add_argument('--method', type=str, default="scvi", help="Method name")
-    parser.add_argument('--organism', type=str, default="mus_musculus", help="Organism: mouse or human")
+    parser.add_argument('--organism', type=str, default="homo_sapiens", help="Organism: mouse or human")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -169,11 +169,8 @@ def main():
     if args.remove_outliers:
         weighted_df = weighted_df[~weighted_df['study'].isin(args.remove_outliers)]
         label_df = label_df[~label_df['study'].isin(args.remove_outliers)]
-        
-        
-    if args.organism == "homo_sapiens":
-        weighted_df['study'] = weighted_df['study'].apply(map_study_to_pmid)
-        label_df['study'] = label_df['study'].apply(map_study_to_pmid)
+
+
 
     weighted_filtered = filter_metrics(weighted_df, args.subsample_ref, args.cutoff, args.reference, args.method)
     label_filtered = filter_metrics(label_df, args.subsample_ref, args.cutoff, args.reference, args.method)
@@ -186,6 +183,9 @@ def main():
     # apply smart capitalization 
     label_filtered['study'] = label_filtered['study'].apply(smart_capitalize)
     weighted_filtered['study'] = weighted_filtered['study'].apply(smart_capitalize)
+    if args.organism == "homo_sapiens":
+        weighted_filtered['study'] = weighted_filtered['study'].apply(map_study_to_pmid)
+        label_filtered['study'] = label_filtered['study'].apply(map_study_to_pmid)
 
 
     metrics_to_agg_weighted = ['weighted_f1', 
