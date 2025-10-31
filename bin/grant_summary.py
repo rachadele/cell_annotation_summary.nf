@@ -22,6 +22,23 @@ plt.rc('ytick', labelsize=SMALL_SIZE)
 plt.rc('legend', fontsize=SMALL_SIZE)
 plt.rc('figure', titlesize=BIGGER_SIZE)
 
+human_pmid_mapping = {
+    "CMC": "38781388",
+    "DevBrain": "38781369.1",
+    "GSE211870": "37910626",
+    "GSE237718": "40112813",
+    "Lau": "32989152",
+    "Lim": "36543778",
+    "Ling-2024": "38448582",
+    "MultiomeBrain": "38781369.2",
+    "Nagy": "32341540",
+    "Pineda": "38521060",
+    "PTSDBrainomics": "38781393",
+    "Rosmap": "31042697",
+    "UCLA-ASD": "31220268",
+    "Velmeshev-et-al.1": "31097668.1",
+    "Velmeshev-et-al.2": "31097668.2"
+}
 
 def parse_arguments():
 
@@ -34,6 +51,7 @@ def parse_arguments():
     parser.add_argument('--cutoff', type=float, default=0, help="Cutoff value")
     parser.add_argument('--reference', type=str, default="whole cortex", help="Reference name")
     parser.add_argument('--method', type=str, default="scvi", help="Method name")
+    parser.add_argument('--organism', type=str, default="mus_musculus", help="Organism: mouse or human")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -131,6 +149,10 @@ def smart_capitalize(s):
     s = s.strip()
     return s.capitalize() if s.islower() else s
 
+        # Map PMIDs to study names
+def map_study_to_pmid(study):
+    return human_pmid_mapping.get(study, study)
+
 def main():
 
     args = parse_arguments()
@@ -147,6 +169,11 @@ def main():
     if args.remove_outliers:
         weighted_df = weighted_df[~weighted_df['study'].isin(args.remove_outliers)]
         label_df = label_df[~label_df['study'].isin(args.remove_outliers)]
+        
+        
+    if args.organism == "homo_sapiens":
+        weighted_df['study'] = weighted_df['study'].apply(map_study_to_pmid)
+        label_df['study'] = label_df['study'].apply(map_study_to_pmid)
 
     weighted_filtered = filter_metrics(weighted_df, args.subsample_ref, args.cutoff, args.reference, args.method)
     label_filtered = filter_metrics(label_df, args.subsample_ref, args.cutoff, args.reference, args.method)
