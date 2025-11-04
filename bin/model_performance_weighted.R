@@ -84,26 +84,26 @@ for (df in df_list) {
     df$method <- factor(df$method, levels=c("seurat","scvi"))
     
     # set baseline
-    if (organism == "homo_sapiens") {
+    #if (organism == "homo_sapiens") {
 
-        df$reference <- factor(df$reference)
-        # use relevel instead of this
-        ref_ref = "Dissection Dorsolateral prefrontal cortex DFC"
-        df$reference <- relevel(df$reference, ref = ref_ref)
-         } # need to set default levels for mmus
+        #df$reference <- factor(df$reference)
+        ## use relevel instead of this
+        #ref_ref = "Dissection Dorsolateral prefrontal cortex DFC"
+        #df$reference <- relevel(df$reference, ref = ref_ref)
+         #} # need to set default levels for mmus
     
-    if (organism == "mus_musculus") {
+    #if (organism == "mus_musculus") {
 
-      df$reference <- factor(df$reference)
-      ref_ref <- "Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"
-      df$reference <- relevel(df$reference, ref = ref_ref)
+      #df$reference <- factor(df$reference)
+      #ref_ref <- "Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"
+      #df$reference <- relevel(df$reference, ref = ref_ref)
 
-      df$study <- factor(df$study)
-      study_ref <- "GSE152715.2"
-      df$study <- relevel(df$study, ref=study_ref)
+      #df$study <- factor(df$study)
+      #study_ref <- "GSE152715.2"
+      #df$study <- relevel(df$study, ref=study_ref)
 
 
-    }
+    #}
     key = df$key[1]
     key_dir = file.path(formula_dir, key)
     # make dir
