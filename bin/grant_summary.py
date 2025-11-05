@@ -159,11 +159,13 @@ def main():
     weighted_df = pd.read_csv(args.weighted_metrics, sep='\t', low_memory=False)
     label_df = pd.read_csv(args.label_metrics, sep='\t', low_memory=False)
     ref_keys = args.ref_keys
-    # Determine output directory based on outlier removal
+    # Determine output directory based on outlier removal, reference, and cutoff
+    ref_str = str(args.reference).replace(' ', '_')
+    cutoff_str = f"cutoff_{args.cutoff}"
     if args.remove_outliers and len(args.remove_outliers) > 0:
-        outdir = 'outliers_removed'
+        outdir = f"outliers_removed/{ref_str}/{cutoff_str}"
     else:
-        outdir = 'outliers_kept'
+        outdir = f"outliers_kept/{ref_str}/{cutoff_str}"
     os.makedirs(outdir, exist_ok=True)
     # Remove outlier datasets if not None
     if args.remove_outliers:
