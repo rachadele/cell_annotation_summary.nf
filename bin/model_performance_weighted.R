@@ -27,7 +27,7 @@ theme_set(
 
 parser <- argparse::ArgumentParser()
 parser$add_argument("--weighted_f1_results", help = "Path to the weighted_f1_results file", 
-  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/7e/8d905cdf25ac0d4b7ab33975b41088/weighted_f1_results.tsv")
+  default="")
 args <- parser$parse_args()
 
 
@@ -83,27 +83,6 @@ for (df in df_list) {
     dir.create(formula_dir, showWarnings = FALSE,recursive=TRUE)
     df$method <- factor(df$method, levels=c("seurat","scvi"))
     
-    # set baseline
-    if (organism == "homo_sapiens") {
-
-        df$reference <- factor(df$reference)
-        # use relevel instead of this
-        ref_ref = "Dissection Dorsolateral prefrontal cortex DFC"
-        df$reference <- relevel(df$reference, ref = ref_ref)
-         } # need to set default levels for mmus
-    
-    if (organism == "mus_musculus") {
-
-      df$reference <- factor(df$reference)
-      ref_ref <- "Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"
-      df$reference <- relevel(df$reference, ref = ref_ref)
-
-      df$study <- factor(df$study)
-      study_ref <- "GSE152715.2"
-      df$study <- relevel(df$study, ref=study_ref)
-
-
-    }
     key = df$key[1]
     key_dir = file.path(formula_dir, key)
     # make dir

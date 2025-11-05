@@ -330,12 +330,6 @@ run_and_store_model <- function(df, formula, key_dir, key, type="label", group_v
     ae_contrast <- as.data.frame(ae_contrast[[1]])
     write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
 
-    #alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05)))
-   # ae_contrast <- alleffects["support:method"]
-   # plot_continuous_effects(ae_contrast, fig.dir)
-   # ae_support <- as.data.frame(ae_contrast[[1]])
-   # write.table(ae_support, file = file.path(file.dir, "label_support_effects.tsv"), sep = "\t", row.names = FALSE)
-
   }
   # Save the model summary and coefficients summary to files
   write.table(model_summary_coefs, file = file.path(file.dir, paste0(key,"_model_summary_coefs_combined.tsv")), sep = "\t", row.names = FALSE)
