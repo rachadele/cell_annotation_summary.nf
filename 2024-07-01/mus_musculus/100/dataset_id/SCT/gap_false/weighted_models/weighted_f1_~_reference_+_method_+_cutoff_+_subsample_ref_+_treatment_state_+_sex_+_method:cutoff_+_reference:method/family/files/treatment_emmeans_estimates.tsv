@@ -1,2 +1,2 @@
 "contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"
-"no treatment / treatment"	1.22504754611899	0.036929800260358	Inf	1	6.7333082831231	1.65848145460254e-11
+"no treatment / treatment"	1.27150415799122	0.0328729422287763	Inf	1	9.29080302691689	1.5312860420577e-20

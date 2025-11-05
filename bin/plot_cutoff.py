@@ -31,7 +31,7 @@ def parse_arguments():
     parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2025-01-30/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")   
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
     parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author.tsv")
-    
+    parser.add_argument('--ref_keys', type=str, nargs='+', default=["subclass","class","family","global"], help="levels of granularity to plot")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
@@ -83,7 +83,7 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
 
 
 def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, 
-                           outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col = "subclass"):
+                           outdir="label_f1_plots", level="global", score_col="f1_score", subclass_col = "subclass"):
     os.makedirs(outdir, exist_ok=True)
     new_outdir = os.path.join(outdir, subclass_col)
     os.makedirs(new_outdir, exist_ok=True)
@@ -159,6 +159,8 @@ def main():
     color_mapping_df = pd.read_csv(args.color_mapping_file, sep="\t")
     mapping_df = pd.read_csv(args.mapping_file, sep="\t")
     organism = weighted_f1_results["organism"].unique()[0]
+    ref_keys = args.ref_keys 
+    print(f"Reference keys for plotting: {ref_keys}")
     
     if organism == "homo_sapiens":
         categoricals = ['study','reference','method','ref_split','region_match',"sex","disease_state","dev_stage"]
@@ -197,17 +199,17 @@ def main():
         "global": globalss
     }
     
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col="subclass")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="precision")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="recall")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="subclass")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall")
    
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col="class")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="precision", subclass_col="class")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="recall", subclass_col="class")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="class")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision", subclass_col="class")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall", subclass_col="class")
      
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="f1_score", subclass_col="family")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="precision", subclass_col="family")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level="family", score_col="recall", subclass_col="family") 
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="family")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision", subclass_col="family")
+    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall", subclass_col="family") 
     #-----------------plot weighted f1 score-------------------
     parent = "weighted_f1_plots"
     os.makedirs(parent, exist_ok=True)
