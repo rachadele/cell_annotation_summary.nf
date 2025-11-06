@@ -12,13 +12,6 @@ import warnings
 import json
 import argparse
 import ast
-<<<<<<< HEAD
-import sys
-import matplotlib.lines as mlines
-# set global font size for plots
-plt.rcParams.update({'font.size': 25})
-=======
->>>>>>> census-2025
 
 # Function to parse command line arguments
 def parse_arguments():
