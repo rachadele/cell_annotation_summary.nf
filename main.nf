@@ -142,13 +142,8 @@ process split_by_label {
 process modelEvalLabel {
     beforeScript 'ulimit -Ss unlimited' // Increase stack size limit for R script
     conda '/home/rschwartz/anaconda3/envs/r4.3' 
-<<<<<<< HEAD
-    publishDir "${params.outdir}/models/label/files", mode: 'copy', pattern: "**tsv"
-    publishDir "${params.outdir}/models/label/figs", mode: 'copy', pattern: "**png"
-=======
     publishDir "${params.outdir}/label_models/", mode: 'copy'
     //publishDir "${params.outdir}/label_models/", mode: 'copy', pattern: "**png"
->>>>>>> census-2025
 
     input:
     tuple val(key), val(label), path(label_f1_results_split)
@@ -169,11 +164,7 @@ process modelEvalLabel {
 
 process plotContrasts {
     conda '/home/rschwartz/anaconda3/envs/scanpyenv'
-<<<<<<< HEAD
-    publishDir "${params.outdir}/contrast_figs/weighted", mode: 'copy'
-=======
     publishDir "${params.outdir}/contrast_figs/discrete/weighted/${key}", mode: 'copy'
->>>>>>> census-2025
 
     input:
     tuple val(key), val(contrast), path(emmeans_estimates), path(emmeans_summary)
