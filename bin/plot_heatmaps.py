@@ -139,7 +139,7 @@ def plot_heatmap_human(weighted_f1_results):
     }
 
     # Create a figure for the legends
-    fig, axes = plt.subplots(len(legend_dict), 1, figsize=(10, len(legend_dict) * 1.5))
+    fig, axes = plt.subplots(len(legend_dict), 1, figsize=(6, len(legend_dict) * 1.5))
 
     # Loop through the legend dictionary and create the patches for each category
     for i, (title, elements) in enumerate(legend_dict.items()):
