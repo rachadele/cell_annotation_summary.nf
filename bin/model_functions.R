@@ -79,7 +79,7 @@ run_emmeans_weighted <- function(model, key_dir) {
     dir.create(file.dir)
   }
   # Estimate for reference * method * cutoff
-  emm_reference_method <- emmeans(model, specs = ~ reference * method, at = list(cutoff = 0), type = "response")
+  emm_reference_method <- emmeans(model, specs = ~ reference * method, at = list(cutoff = 0, subsample_ref = 500), type = "response")
   summary_emm_reference_method_df <- as.data.frame(summary(emm_reference_method))
   estimate_reference_method_df <- as.data.frame(pairs(emm_reference_method))
   #plot_contrasts(summary_emm_reference_method_df, key_dir=fig.dir, contrast ="reference:method")
@@ -88,7 +88,7 @@ run_emmeans_weighted <- function(model, key_dir) {
   write.table(estimate_reference_method_df, file = file.path(file.dir, "reference_method_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
 
   # Estimate for method * cutoff
-  emm_method <- emmeans(model, specs = ~ method, at = list(cutoff = 0), type = "response")
+  emm_method <- emmeans(model, specs = ~ method, at = list(cutoff = 0, subsample_ref=500), type = "response")
   summary_emm_method_df <- as.data.frame(summary(emm_method))
   estimate_method_df <- as.data.frame(pairs(emm_method))
   # Save emmeans summary and estimates for method * cutoff
@@ -107,7 +107,7 @@ run_emmeans_weighted <- function(model, key_dir) {
 
 
   if ("sex" %in% colnames(model$frame) ) {
-    emm_sex <- emmeans(model, specs = ~ sex, at = list(cutoff = 0), type = "response")
+    emm_sex <- emmeans(model, specs = ~ sex, at = list(cutoff = 0, subsample_ref=500, reference="whole_cortex"), type = "response")
     summary_emm_sex_df <- as.data.frame(summary(emm_sex))
     estimate_sex_df <- as.data.frame(pairs(emm_sex))
     #plot_contrasts(summary_emm_sex_df, key_dir=fig.dir, contrast="sex")
@@ -117,7 +117,7 @@ run_emmeans_weighted <- function(model, key_dir) {
   }
 
   if ("disease_state" %in% colnames(model$frame) ) {
-    emm_disease_state <- emmeans(model, specs = ~ disease_state, at = list(cutoff = 0), type = "response")
+    emm_disease_state <- emmeans(model, specs = ~ disease_state, at = list(cutoff = 0, subsample_ref=500, reference="whole_cortex"), type = "response")
     summary_emm_disease_state_df <- as.data.frame(summary(emm_disease_state))
     estimate_disease_state_df <- as.data.frame(pairs(emm_disease_state))
     #plot_contrasts(summary_emm_disease_state_df, key_dir=fig.dir, contrast="disease_state")
@@ -126,7 +126,7 @@ run_emmeans_weighted <- function(model, key_dir) {
   }
 
   if ("treatment_state" %in% colnames(model$frame) ) {
-    emm_treatment <- emmeans(model, specs = ~ treatment_state, at = list(cutoff = 0), type = "response")
+    emm_treatment <- emmeans(model, specs = ~ treatment_state, at = list(cutoff = 0, subsample_ref=500, reference="whole_cortex"), type = "response")
     summary_emm_treatment_df <- as.data.frame(summary(emm_treatment))
     estimate_treatment_df <- as.data.frame(pairs(emm_treatment))
     #plot_contrasts(summary_emm_treatment_df, key_dir=fig.dir, contrast="treatment_state")
