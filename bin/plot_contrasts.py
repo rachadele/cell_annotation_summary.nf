@@ -164,7 +164,7 @@ def plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir, cont
                 ax.text(star_x, star_y, '*', ha='left', va='center',
                         fontsize=20, fontweight='bold', color='red')
 
-    ax.set_title(f'{factor1.capitalize()}, Cutoff = 0', fontsize=40)
+    ax.set_title(f'{factor1.capitalize()}', fontsize=40)
     ax.set_ylabel(factor1, fontsize=40)
     ax.set_xlabel('Weighted F1', fontsize=40)
     ax.tick_params(axis='x', labelsize=35)
