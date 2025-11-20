@@ -132,7 +132,7 @@ def plot_metrics_strip(filtered_df, metric, ref_keys, group_col='study', outdir=
             ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
             # Add legend for hue (study)
             handles, labels = ax.get_legend_handles_labels()
-            ax.legend(handles, labels, title='Study', bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0., ncol=2, fontsize=SMALL_SIZE)
+            ax.legend(handles, labels, title='Cell Type', bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0., ncol=2, fontsize=SMALL_SIZE)
             ax.set_xlim(-0.05, 1.05)
             ax.set_xticks(np.arange(0, 1.01, 0.2))
           #  metric_label = metric.replace('_', ' ').capitalize()
