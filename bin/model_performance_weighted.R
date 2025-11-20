@@ -27,7 +27,7 @@ theme_set(
 
 parser <- argparse::ArgumentParser()
 parser$add_argument("--weighted_f1_results", help = "Path to the weighted_f1_results file", 
-  default="")
+  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mmus_new_tabulamuris/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
 args <- parser$parse_args()
 
 
