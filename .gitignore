@@ -109,3 +109,4 @@ meta/
 hsap*
 mmus*
 params.*
+**gemma_genes.tsv
