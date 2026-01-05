@@ -1,0 +1,119 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/nf-core/evaluation_summary/master/nextflow_schema.json",
+    "title": "nf-core/evaluation_summary pipeline parameters",
+    "description": "Pipeline for summarizing benchmarking results from cell-type classification methods",
+    "type": "object",
+    "definitions": {
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["results", "outdir"],
+            "properties": {
+                "results": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "Path to directory containing pipeline run results",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved",
+                    "fa_icon": "fas fa-folder-open",
+                    "default": "./results"
+                }
+            }
+        },
+        "reference_options": {
+            "title": "Reference options",
+            "type": "object",
+            "fa_icon": "fas fa-dna",
+            "description": "Parameters for reference data configuration",
+            "properties": {
+                "organism": {
+                    "type": "string",
+                    "description": "Organism name",
+                    "enum": ["homo_sapiens", "mus_musculus"],
+                    "default": "mus_musculus",
+                    "fa_icon": "fas fa-paw"
+                },
+                "census_version": {
+                    "type": "string",
+                    "description": "Version of CellxGene Census",
+                    "default": "2024-07-01",
+                    "fa_icon": "fas fa-calendar"
+                },
+                "ref_keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Reference hierarchy keys for evaluation",
+                    "default": ["subclass", "class", "family", "global"],
+                    "fa_icon": "fas fa-key"
+                },
+                "mapping_file": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Path to cell type mapping file",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "color_mapping_file": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Path to color mapping file for visualizations",
+                    "fa_icon": "fas fa-palette"
+                }
+            }
+        },
+        "filtering_options": {
+            "title": "Filtering options",
+            "type": "object",
+            "fa_icon": "fas fa-filter",
+            "description": "Parameters for filtering and subsetting results",
+            "properties": {
+                "subsample_ref": {
+                    "type": "integer",
+                    "description": "Number of reference cells to subsample",
+                    "default": 500,
+                    "fa_icon": "fas fa-random"
+                },
+                "cutoff": {
+                    "type": "number",
+                    "description": "F1 score cutoff threshold",
+                    "default": 0.0,
+                    "fa_icon": "fas fa-cut"
+                },
+                "reference": {
+                    "type": "string",
+                    "description": "Reference dataset name",
+                    "default": "whole_cortex",
+                    "fa_icon": "fas fa-database"
+                },
+                "method": {
+                    "type": "string",
+                    "description": "Classification method to analyze",
+                    "enum": ["scvi", "seurat"],
+                    "default": "scvi",
+                    "fa_icon": "fas fa-cogs"
+                },
+                "remove_outliers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of dataset IDs to remove as outliers",
+                    "fa_icon": "fas fa-ban"
+                }
+            }
+        }
+    },
+    "allOf": [
+        { "$ref": "#/definitions/input_output_options" },
+        { "$ref": "#/definitions/reference_options" },
+        { "$ref": "#/definitions/filtering_options" }
+    ]
+}
