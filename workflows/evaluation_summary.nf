@@ -4,18 +4,17 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { ADD_PARAMS             } from '../modules/local/add_params/main'
-include { AGGREGATE_RESULTS      } from '../modules/local/aggregate_results/main'
-include { PLOT_CUTOFF            } from '../modules/local/plot_cutoff/main'
-include { PLOT_COMPTIME          } from '../modules/local/plot_comptime/main'
-include { PLOT_LABEL_DIST        } from '../modules/local/plot_label_dist/main'
-include { MODEL_EVAL_WEIGHTED    } from '../modules/local/model_eval_weighted/main'
-include { SPLIT_BY_LABEL         } from '../modules/local/split_by_label/main'
-include { MODEL_EVAL_LABEL       } from '../modules/local/model_eval_label/main'
-include { PLOT_CONTRASTS         } from '../modules/local/plot_contrasts/main'
-include { PLOT_CONTINUOUS_CONTRAST } from '../modules/local/plot_continuous_contrast/main'
-include { GET_GRANT_SUMMARY      } from '../modules/local/get_grant_summary/main'
-
+include { ADD_PARAMS             } from "$projectDir/modules/local/add_params/main"
+include { AGGREGATE_RESULTS      } from "$projectDir/modules/local/aggregate_results/main"
+include { PLOT_CUTOFF            } from "$projectDir/modules/local/plot_cutoff/main"
+include { PLOT_COMPTIME          } from "$projectDir/modules/local/plot_comptime/main"
+include { PLOT_LABEL_DIST        } from "$projectDir/modules/local/plot_label_dist/main"
+include { MODEL_EVAL_WEIGHTED    } from "$projectDir/modules/local/model_eval_weighted/main"
+include { SPLIT_BY_LABEL         } from "$projectDir/modules/local/split_by_label/main"
+include { MODEL_EVAL_LABEL       } from "$projectDir/modules/local/model_eval_label/main"
+include { PLOT_CONTRASTS         } from "$projectDir/modules/local/plot_contrasts/main"
+include { PLOT_CONTINUOUS_CONTRAST } from "$projectDir/modules/local/plot_continuous_contrast/main"
+include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW

@@ -6,8 +6,8 @@
 ----------------------------------------------------------------------------------------
 */
 
-include { ADD_PARAMS        } from '../../modules/local/add_params/main'
-include { AGGREGATE_RESULTS } from '../../modules/local/aggregate_results/main'
+include { ADD_PARAMS        } from "$projectDir/modules/local/add_params/main"
+include { AGGREGATE_RESULTS } from "$projectDir/modules/local/aggregate_results/main"
 
 workflow AGGREGATION {
 
