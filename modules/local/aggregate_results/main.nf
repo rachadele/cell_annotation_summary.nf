@@ -1,6 +1,5 @@
 process AGGREGATE_RESULTS {
     label 'process_low'
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
 
     input:
     path f1_results_params

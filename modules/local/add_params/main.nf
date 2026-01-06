@@ -1,7 +1,6 @@
 process ADD_PARAMS {
     tag "$run_name"
     label 'process_single'
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
 
     input:
     tuple val(run_name), val(params_file), val(ref_obs), val(f1_results)

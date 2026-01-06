@@ -1,7 +1,6 @@
 process PLOT_CONTRASTS {
     tag "$key"
     label 'process_single'
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
 
     input:
     tuple val(key), val(contrast), path(emmeans_estimates), path(emmeans_summary)

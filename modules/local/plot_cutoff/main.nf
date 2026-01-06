@@ -1,6 +1,5 @@
 process PLOT_CUTOFF {
     label 'process_single'
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
 
     input:
     path weighted_f1_results_aggregated
