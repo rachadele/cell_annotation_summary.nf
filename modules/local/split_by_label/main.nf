@@ -1,6 +1,5 @@
 process SPLIT_BY_LABEL {
     label 'process_single'
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
 
     input:
     path label_f1_results_aggregated
