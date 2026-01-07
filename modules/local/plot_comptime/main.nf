@@ -1,6 +1,5 @@
 process PLOT_COMPTIME {
     label 'process_single'
-    conda '/home/rschwartz/anaconda3/envs/scanpyenv'
 
     input:
     path all_runs_dir

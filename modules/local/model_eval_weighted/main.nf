@@ -1,6 +1,5 @@
 process MODEL_EVAL_WEIGHTED {
     label 'process_medium'
-    conda '/home/rschwartz/anaconda3/envs/r4.3'
 
     input:
     path weighted_f1_results_aggregated
