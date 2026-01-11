@@ -1,4 +1,0 @@
-"contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"
-"subsample_ref500 False / subsample_ref100 False"	1.14018658548651	0.00426973672756428	Inf	1	35.0333703023783	0
-"subsample_ref500 False / subsample_ref50 False"	1.38320948547942	0.00513152119857667	Inf	1	87.4442779372864	0
-"subsample_ref100 False / subsample_ref50 False"	1.21314309700391	0.00436342313802249	Inf	1	53.7185924268081	0
