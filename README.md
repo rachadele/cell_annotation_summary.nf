@@ -16,8 +16,12 @@ This repository implements a modular Nextflow pipeline (DSL2) for summarizing an
   ```bash
   nextflow run main.nf --results <results_dir> --organism <organism> [...other params]
   ```
+- **Using a Parameters File:**
+```bash
+  nextflow run main.nf --params-file <path_to_params_file.json>
+  ```
 - **Cleanup:** Use `nf-cleanup` to remove intermediate files.
-- **Profiles:** Use `-profile conda|docker|singularity` for environment management.
+- **Profiles:** Use `-profile conda` for environment management.
 - **Add/Update Modules:** Place new modules in `modules/local/` and include them in the workflow as needed.
 
 ## Conventions & Patterns

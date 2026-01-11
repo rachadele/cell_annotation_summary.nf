@@ -185,9 +185,9 @@ def main():
     # apply smart capitalization 
     label_filtered['study'] = label_filtered['study'].apply(smart_capitalize)
     weighted_filtered['study'] = weighted_filtered['study'].apply(smart_capitalize)
-    if args.organism == "homo_sapiens":
-        weighted_filtered['study'] = weighted_filtered['study'].apply(map_study_to_pmid)
-        label_filtered['study'] = label_filtered['study'].apply(map_study_to_pmid)
+    #if args.organism == "homo_sapiens":
+        #weighted_filtered['study'] = weighted_filtered['study'].apply(map_study_to_pmid)
+        #label_filtered['study'] = label_filtered['study'].apply(map_study_to_pmid)
 
 
     metrics_to_agg_weighted = ['weighted_f1', 
