@@ -1,403 +1,366 @@
-#!/user/bin/python3
+#!/usr/bin/env python3
+"""
+Factor Contrast Plots
 
-from pathlib import Path
-import os
-import scanpy as sc
-import numpy as np
-import pandas as pd
-import anndata as ad
-import warnings
-import statsmodels.api as sm
-from statsmodels.formula.api import ols
-from statsmodels.stats.anova import anova_lm
-from pathlib import Path
-import matplotlib.pyplot as plt
-import seaborn as sns
+Creates forest-style plots for factor comparisons showing:
+- Point estimates with 95% CI from emmeans
+- Reference line at grand mean
+- Optional significance indicators
+
+Replaces the old bracket-based visualization with a cleaner forest plot approach.
+
+Usage:
+    python plot_contrasts.py \
+        --weighted_f1_results path/to/weighted_f1_results.tsv \
+        --emmeans_estimates path/to/factor_emmeans_estimates.tsv \
+        --emmeans_summary path/to/factor_emmeans_summary.tsv \
+        --key subclass \
+        --outdir figures
+"""
+
 import argparse
 import os
-import statsmodels as sm
-from scipy import stats
-import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-import random
-random.seed(42)
-from collections import defaultdict
-import matplotlib.ticker as ticker
-import textwrap
 import re
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from typing import List, Optional, Tuple
+
+# Import shared utilities
+from plot_utils import (
+    set_pub_style, save_figure,
+    METHOD_COLORS, METHOD_NAMES,
+    forest_plot,
+    SINGLE_COL, HALF_HEIGHT, FULL_WIDTH
+)
 
 
-SMALL_SIZE = 15
-MEDIUM_SIZE = 35
-BIGGER_SIZE = 40
-
-plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
-plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
-plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
-plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
-plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
-
-
-# Function to parse command line arguments
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/aggregated_results/weighted_f1_results.tsv")
-    parser.add_argument('--emmeans_estimates', type=str, help = "OR and pvalues from emmeans", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/subsample_ref_emmeans_estimates.tsv" )
-    parser.add_argument('--emmeans_summary', type = str, help = "emmeans summary", default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/mus_musculus/model_eval/weighted/weighted_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/subclass/files/subsample_ref_emmeans_summary.tsv")
-    parser.add_argument('--key', type = str, help = "key of factor to plot", default = "subclass")
-    # deal with jupyter kernel arguments
+    parser = argparse.ArgumentParser(
+        description="Plot factor contrasts with forest plots"
+    )
+    parser.add_argument(
+        '--weighted_f1_results', type=str, required=True,
+        help="Path to aggregated weighted results TSV"
+    )
+    parser.add_argument(
+        '--emmeans_estimates', type=str, required=True,
+        help="Path to emmeans estimates TSV (odds ratios and p-values)"
+    )
+    parser.add_argument(
+        '--emmeans_summary', type=str, required=True,
+        help="Path to emmeans summary TSV (marginal means)"
+    )
+    parser.add_argument(
+        '--key', type=str, default='subclass',
+        help="Taxonomy level to filter by"
+    )
+    parser.add_argument(
+        '--outdir', type=str, default='.',
+        help="Output directory for figures"
+    )
+    parser.add_argument(
+        '--show_boxplot', action='store_true',
+        help="Include boxplot of raw data behind forest plot"
+    )
+    parser.add_argument(
+        '--significance_threshold', type=float, default=0.05,
+        help="P-value threshold for significance marking"
+    )
+
     if __name__ == "__main__":
-        known_args, _ = parser.parse_known_args()
-        return known_args
-      
-def wrap_labels(ax, width=10):
-  """Wrap x-axis labels to a fixed width."""
-  plt.draw()  # Ensure labels are drawn
-
-  # Get current tick positions and labels
-  tick_labels = [textwrap.fill(label.get_text(), 10) for label in ax.get_xticklabels()]
-  tick_positions = ax.get_xticks()
-  # Apply fixed locator and wrapped labels
-  ax.xaxis.set_major_locator(ticker.FixedLocator(tick_positions))
-  ax.set_xticklabels(tick_labels, rotation=0, ha="center")
+        return parser.parse_args()
+    return parser.parse_known_args()[0]
 
 
-def plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir, contrast_results):
-    sns.set(style="whitegrid", palette="colorblind", context="talk")
-
-    # Calculate the positions for the point plot
-    unique_factor1 = weighted_f1_results[factor1].unique()
-    unique_factor2 = weighted_f1_results[factor2].unique()
-    offsets = {factor: i * 0.4 - 0.2 for i, factor in enumerate(unique_factor2)}
-        # Define color palettes
-    boxplot_palette = sns.color_palette("Set2", n_colors=len(unique_factor2))
-    errorbar_palette = sns.color_palette("Set1", n_colors=len(unique_factor2))
-    color_map = dict(zip(unique_factor2, errorbar_palette))
-    
-    for factor in [factor1, factor2]:
-      weighted_f1_results[factor] = weighted_f1_results[factor].astype(str)
-    # Create a figure and axis
-    fig, ax = plt.subplots(figsize=(30, 15))
-    # Axis label size
-        # Plot the boxplot
-    sns.boxplot(
-        y=factor1,
-        x="weighted_f1",
-        hue=factor2,
-        data=weighted_f1_results,
-        ax=ax,
-        linewidth=2.5,
-        width=0.8,
-        showfliers=False,
-        whis=[5, 95],
-        showcaps=False,
-        palette=boxplot_palette
-    )
+def get_factors_from_emmeans(df: pd.DataFrame) -> List[str]:
+    """Extract factor column names from emmeans dataframe."""
+    standard_cols = {'response', 'SE', 'df', 'asymp.LCL', 'asymp.UCL', 'key'}
+    return [c for c in df.columns if c not in standard_cols]
 
 
-    # Plot the point plot with error bars
-    for i, (f1, f2) in enumerate(weighted_f1_results[[factor1, factor2]].drop_duplicates().values):
-        subset = weighted_f1_results[(weighted_f1_results[factor1] == f1) & (weighted_f1_results[factor2] == f2)]
-        y = unique_factor1.tolist().index(f1) + offsets[f2]
-        x = subset['response'].values[0]
-        lower_err = x - subset['asymp.LCL'].values[0]  # Lower bound
-        upper_err = subset['asymp.UCL'].values[0] - x  # Upper bound
-    
-
-        ax.errorbar(
-            x=x,
-            y=y,
-            xerr=[[lower_err], [upper_err]],
-            fmt='o',
-            color=color_map[f2],
-            capsize=5,
-            capthick=3,
-            elinewidth=3,
-            label=f'estimated marginal mean (95% CI) for {f2}'
-            
-        )
-        
-         # Add ORs and p-values only for same `factor1`
-    for f1 in unique_factor1:
-        contrasts = contrast_results[(contrast_results["group1"] == f1) & (contrast_results["group2"] == f1)]
-        #if len(contrasts) > 1:
-        for idx, contrast in enumerate(contrasts.index):
-          print(idx)
-          f2a = contrasts["level1"].iloc[idx]
-          f2b = contrasts["level2"].iloc[idx]
-          odds_ratio = contrasts['odds.ratio'].iloc[idx]
-          p_value = contrasts['p.value'].iloc[idx]
-
-        
-          y1 = unique_factor1.tolist().index(f1) + offsets[f2a] +0.15
-          y2 = unique_factor1.tolist().index(f1) + offsets[f2b] +0.15
-
-          y_low, y_high = sorted([y1, y2])
-
-          # Bracket dimensions
-          x_base = max(x, subset['response'].values[0]) + 0.4
-          arm_length = 0.01  # horizontal length of the arms
-          arm_height = 0.05 # vertical height of the arms
-
-          # Draw short horizontal arms
-          plt.plot([x_base, x_base + arm_length], [y_low, y_low], color='black')   # bottom
-          plt.plot([x_base, x_base + arm_length], [y_high, y_high], color='black') # top
-
-          # Draw vertical connector between them
-          plt.plot([x_base + arm_length, x_base + arm_length], [y_low, y_high], color='black')
-
-          star_y = (y1 + y2) / 2
-          star_x = x_base + arm_length + 0.01
-        
-          if p_value < 1e-4:
-              stars = '***'
-          elif p_value < 1e-3:
-              stars = '**'
-          elif p_value < 0.01:
-              stars = '*'
-          else:
-              stars = None
-          if stars:
-                ax.text(star_x, star_y, '*', ha='left', va='center',
-                        fontsize=20, fontweight='bold', color='red')
-
-    ax.set_title(f'{factor1.capitalize()}', fontsize=40)
-    ax.set_ylabel(factor1, fontsize=40)
-    ax.set_xlabel('Weighted F1', fontsize=40)
-    ax.tick_params(axis='x', labelsize=35)
-    ax.tick_params(axis='y', labelsize=35)
-
-    # Customize the legend to avoid duplication
-    handles, labels = ax.get_legend_handles_labels()
-    unique_labels = dict(zip(labels, handles))
-    ax.legend(unique_labels.values(), unique_labels.keys(), loc="lower left", bbox_to_anchor=(-1, -0.25), fontsize=35)
-    plt.grid(False)  # Disables gridlines completely
-
-    # Set the title for the plot
-    #ax.set_title(f'{factor1.capitalize()} vs. {factor2.capitalize()} at Cutoff = 0', fontsize=40)
-
-    # Adjust layout to accommodate the title
-   # plt.tight_layout()
-
-    # Show the plot
-    plt.savefig(os.path.join(outdir,f"{factor1}_{factor2}_boxplot.png"), bbox_inches='tight')
-
- 
+def format_factor_value(value, factor_name: str) -> str:
+    """Format factor values for display."""
+    if factor_name == 'method':
+        return METHOD_NAMES.get(value, str(value))
+    elif factor_name == 'subsample_ref':
+        return f'n={value}'
+    elif factor_name == 'reference':
+        s = str(value)
+        return s[:30] + '...' if len(s) > 30 else s
+    return str(value)
 
 
-def plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key, contrast_results):
-    sns.set(style="whitegrid", palette="colorblind", context="talk")
-
-    # Calculate the positions for the point plot
-    unique_factor1 = weighted_f1_results[factor1].unique()
-    
-    # Define color palettes
-    boxplot_palette = sns.color_palette("Set2", n_colors=len(unique_factor1))
-    errorbar_palette = sns.color_palette("Set1", n_colors=len(unique_factor1))
-    color_map = dict(zip(unique_factor1, errorbar_palette))
-    
-    # Create a figure and axis
-    fig, ax = plt.subplots(figsize=(30, 10))
-
-    # Plot the boxplot
-    sns.boxplot(
-        x=factor1,
-        y="weighted_f1",
-        data=weighted_f1_results,
-        ax=ax,
-        linewidth=2.5,
-        width=0.8,
-        showfliers=False,
-        whis=[5, 95],
-        showcaps=False,
-        palette=boxplot_palette
-    )
-
-    # Point plot with error bars
-    x_positions = []
-    y_positions = []
-    for i, f1 in enumerate(unique_factor1):
-        subset = weighted_f1_results[weighted_f1_results[factor1] == f1]
-        x = i
-        y = subset['response'].values[0]
-        lower_err = y - subset['asymp.LCL'].values[0]
-        upper_err = subset['asymp.UCL'].values[0] - y
-        x_positions.append(x)
-        y_positions.append(y)
-        ax.errorbar(
-            x=x,
-            y=y,
-            yerr=[[lower_err], [upper_err]],
-            fmt='o',
-            color=color_map[f1],
-            capsize=5,
-            capthick=5,
-            elinewidth=5,
-            label=f'estimated marginal mean (95% CI) for {f1}'
-        )
-
-    # Add contrast bar and odds ratio for pairwise contrasts
-    for idx, contrast in contrast_results.iterrows():
-        f2a = contrast['group1'].replace("subsample_ref", "")
-        f2b = contrast['group2'].replace("subsample_ref", "")
-    
-        p_value = contrast['p.value']
-
-        # Get x positions for the two levels
-        x1 = unique_factor1.tolist().index(f2a)
-        x2 = unique_factor1.tolist().index(f2b)
-
-        y1 = weighted_f1_results[weighted_f1_results[factor1] == f2a]['response'].values[0]
-        y2 = weighted_f1_results[weighted_f1_results[factor1] == f2b]['response'].values[0]
-        
-        # Set top y position for the bracket
-        y_top = max(y1, y2) + 0.15 + (idx * 0.15)
-
-        # Height of the short vertical arms
-        arm_height = 0.02
-
-        # Draw short vertical arms
-        ax.plot([x1, x1], [y_top - arm_height, y_top], color='black', linewidth=1)
-        ax.plot([x2, x2], [y_top - arm_height, y_top], color='black', linewidth=1)
-
-        # Draw horizontal connector
-        ax.plot([x1, x2], [y_top, y_top], color='black', linewidth=1)
-
-        # Add stars with colors based on p-value
-        # don't add stars for p-values > 0.05
-        
-        if p_value < 1e-4:
-            stars = '***'
-        elif p_value < 1e-3:
-            stars = '**'
-        elif p_value < 0.01:
-            stars = '*'
-        else:
-            stars = None
-        if stars:
-            ax.text((x1 + x2) / 2, y_top + 0.02, stars, ha='center', va='bottom',
-                    fontsize=14, fontweight='bold', color="red")
+def get_color_for_value(value, factor_name: str) -> str:
+    """Get color for factor value."""
+    if factor_name == 'method':
+        return METHOD_COLORS.get(value, '#333333')
+    return '#666666'
 
 
-    # Manually set font sizes
-   # ax.set_title(f'{factor1.capitalize()} at {key} level, Cutoff = 0', fontsize=40)
-    ax.set_xlabel(factor1.replace("_"," "), fontsize=40)
-    ax.set_ylabel('Weighted F1', fontsize=40)
-    ax.tick_params(axis='x', labelsize=35)
-    ax.tick_params(axis='y', labelsize=35)
+def parse_contrast(contrast_str: str, n_factors: int = 1) -> dict:
+    """Parse contrast string into components."""
+    # Handle parentheses and slashes
+    contrast_str = re.sub(r'(?<=\()[^)]*?/', lambda m: m.group(0).replace('/', '-'), contrast_str)
+    groups = re.split(r'\s*/\s*(?![^\(]*\))', contrast_str)
+    groups = [g.replace('(', '').replace(')', '') for g in groups]
 
-    wrap_labels(ax, width=2)
+    result = {'raw': contrast_str}
+    if len(groups) == 2:
+        result['group1'] = groups[0]
+        result['group2'] = groups[1]
 
-    # Customize the legend to avoid duplication
-    handles, labels = ax.get_legend_handles_labels()
-    unique_labels = dict(zip(labels, handles))
-    ax.legend(unique_labels.values(), unique_labels.keys(), loc="upper left", bbox_to_anchor=(1.01, 1.01), fontsize=35)
+        if n_factors == 2:
+            # Extract level from end of each group
+            parts1 = groups[0].rsplit(' ', 1)
+            parts2 = groups[1].rsplit(' ', 1)
+            if len(parts1) == 2:
+                result['factor1_val1'] = parts1[0]
+                result['level1'] = parts1[1]
+            if len(parts2) == 2:
+                result['factor1_val2'] = parts2[0]
+                result['level2'] = parts2[1]
 
-    # Rotate x-axis labels for better readability
-    plt.xticks(rotation=90)
-    plt.grid(False)  # Disables gridlines completely
+    return result
 
-    # Adjust layout to accommodate the title
-    plt.tight_layout()
 
-    # Save the plot
-    plt.savefig(os.path.join(outdir, f"{factor1}_boxplot.png"))
-    
+def create_single_factor_forest(
+    ax: plt.Axes,
+    emmeans_summary: pd.DataFrame,
+    emmeans_estimates: pd.DataFrame,
+    factor_col: str,
+    weighted_f1: Optional[pd.DataFrame] = None,
+    show_boxplot: bool = False,
+    sig_threshold: float = 0.05
+) -> plt.Axes:
+    """
+    Create forest plot for single factor.
+    """
+    # Sort by response value
+    plot_data = emmeans_summary.sort_values('response', ascending=True).reset_index(drop=True)
 
-def split_contrast(contrast):
-    # Replace slashes inside parentheses with dashes
-    contrast = re.sub(r'(?<=\()[^)]*?/', lambda match: match.group(0).replace('/', '-'), contrast)
-    
-    # Now split by slashes outside of parentheses
-    groups = re.split(r'\s*/\s*(?![^\(]*\))', contrast)
-    
-    # Remove parentheses from the groups
-    groups = [group.replace('(', '').replace(')', '') for group in groups]
-    
-    return groups
+    n_groups = len(plot_data)
+    positions = np.arange(n_groups)
 
-  
-def reformat_contrast_df(contrast_results, n_factors=2):
-  rows = []
-  
-  for _, row in contrast_results.iterrows():
-      contrast = row["contrast"]
-      # Use the split_contrast function to properly split the contrast
-      groups = split_contrast(contrast)
-      # Ensure that the contrast splits correctly
-      if len(groups) == 2:
-          group1, group2 = groups
+    # Optional: show boxplot of raw data
+    if show_boxplot and weighted_f1 is not None:
+        for i, (idx, row) in enumerate(plot_data.iterrows()):
+            factor_val = row[factor_col]
+            raw_data = weighted_f1[weighted_f1[factor_col] == factor_val]['weighted_f1']
+            if len(raw_data) > 0:
+                bp = ax.boxplot(
+                    raw_data, positions=[i], vert=False,
+                    widths=0.5, patch_artist=True,
+                    showfliers=False, showcaps=False
+                )
+                bp['boxes'][0].set_facecolor('#f0f0f0')
+                bp['boxes'][0].set_alpha(0.5)
 
-      if n_factors == 2:
-          level1 = group1.split(" ")[-1]
-          level2 = group2.split(" ")[-1]
-          group1 = group1.replace(f" {level1}", "")
-          group2 = group2.replace(f" {level2}", "")
-      else:
-          level1 = None
-          level2 = None
-      
-      rows.append({
-          'contrast': contrast,
-          'group1': group1,
-          'group2': group2,
-          'level1': level1,
-          'level2': level2,
-          'odds.ratio': float(row['odds.ratio']),
-          'SE': float(row['SE']),
-          'p.value': float(row['p.value'])
-      })
-  
-  return pd.DataFrame(rows)
+    # Draw CI bars and points
+    for i, (idx, row) in enumerate(plot_data.iterrows()):
+        color = get_color_for_value(row[factor_col], factor_col)
 
+        # CI bar
+        ax.hlines(i, row['asymp.LCL'], row['asymp.UCL'],
+                 colors=color, linewidth=2.5, zorder=2)
+
+        # Point estimate
+        ax.scatter(row['response'], i, s=100, c=[color],
+                  zorder=3, edgecolors='white', linewidth=0.5)
+
+    # Reference line at grand mean
+    grand_mean = plot_data['response'].mean()
+    ax.axvline(grand_mean, color='gray', linestyle='--',
+              linewidth=0.8, alpha=0.6, zorder=0)
+
+    # Add significance markers if contrast estimates provided
+    if emmeans_estimates is not None and len(emmeans_estimates) > 0:
+        # Parse contrasts to find significant pairs
+        for _, contrast_row in emmeans_estimates.iterrows():
+            if contrast_row.get('p.value', 1) < sig_threshold:
+                # Could add significance markers here
+                pass
+
+    # Axis formatting
+    ax.set_yticks(positions)
+    labels = [format_factor_value(row[factor_col], factor_col)
+              for _, row in plot_data.iterrows()]
+    ax.set_yticklabels(labels)
+    ax.set_xlabel('Estimated Marginal Mean F1')
+    ax.set_ylabel(factor_col.replace('_', ' ').title())
+
+    return ax
+
+
+def create_two_factor_forest(
+    ax: plt.Axes,
+    emmeans_summary: pd.DataFrame,
+    factor1: str,
+    factor2: str,
+    emmeans_estimates: Optional[pd.DataFrame] = None,
+    weighted_f1: Optional[pd.DataFrame] = None
+) -> plt.Axes:
+    """
+    Create forest plot for two-factor interaction.
+    Groups by factor1, colors by factor2.
+    """
+    # Get unique values
+    factor1_vals = emmeans_summary[factor1].unique()
+    factor2_vals = emmeans_summary[factor2].unique()
+
+    n_factor1 = len(factor1_vals)
+    n_factor2 = len(factor2_vals)
+
+    # Calculate positions with dodging
+    positions = []
+    labels = []
+    colors = []
+
+    for i, f1_val in enumerate(factor1_vals):
+        for j, f2_val in enumerate(factor2_vals):
+            offset = (j - (n_factor2 - 1) / 2) * 0.25
+            positions.append(i + offset)
+            labels.append(format_factor_value(f1_val, factor1))
+            colors.append(get_color_for_value(f2_val, factor2))
+
+    # Plot each point
+    plot_idx = 0
+    for f1_val in factor1_vals:
+        for f2_val in factor2_vals:
+            row_data = emmeans_summary[
+                (emmeans_summary[factor1] == f1_val) &
+                (emmeans_summary[factor2] == f2_val)
+            ]
+            if len(row_data) == 0:
+                plot_idx += 1
+                continue
+
+            row = row_data.iloc[0]
+            pos = positions[plot_idx]
+            color = colors[plot_idx]
+
+            # CI bar
+            ax.hlines(pos, row['asymp.LCL'], row['asymp.UCL'],
+                     colors=color, linewidth=2, zorder=2)
+
+            # Point
+            ax.scatter(row['response'], pos, s=80, c=[color],
+                      zorder=3, edgecolors='white', linewidth=0.5)
+
+            plot_idx += 1
+
+    # Reference line
+    grand_mean = emmeans_summary['response'].mean()
+    ax.axvline(grand_mean, color='gray', linestyle='--',
+              linewidth=0.8, alpha=0.6, zorder=0)
+
+    # Axis formatting
+    ax.set_yticks(range(n_factor1))
+    ax.set_yticklabels([format_factor_value(v, factor1) for v in factor1_vals])
+    ax.set_xlabel('Estimated Marginal Mean F1')
+    ax.set_ylabel(factor1.replace('_', ' ').title())
+
+    # Legend for factor2
+    handles = [plt.Line2D([0], [0], marker='o', color='w',
+                         markerfacecolor=get_color_for_value(v, factor2),
+                         markersize=8, label=format_factor_value(v, factor2))
+              for v in factor2_vals]
+    ax.legend(handles=handles, title=factor2.replace('_', ' ').title(),
+             loc='lower right', frameon=False)
+
+    return ax
 
 
 def main():
-  
-  args = parse_arguments()
+    args = parse_arguments()
 
-  weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep = "\t")
-  # label_f1_results = pd.read_csv(args.label_f1_results, sep = "\t")
-  contrast_results = pd.read_csv(args.emmeans_estimates, sep = "\t")
-  emmeans_summary = pd.read_csv(args.emmeans_summary, sep = "\t")
-  
-  
-  factors = emmeans_summary.loc[:, :"response"].iloc[:, :-1].columns.tolist()
-  key = args.key
+    # Set publication style
+    set_pub_style()
 
-  # filter to cutoff=0 
-  # replace np.nan with "None"
-  emmeans_summary = emmeans_summary.replace({np.nan: "None"})
-  weighted_f1_results = weighted_f1_results.replace({np.nan: "None"})
-  weighted_f1_results = weighted_f1_results[(weighted_f1_results["cutoff"] == 0 ) & (weighted_f1_results["key"] == key)]
-  outdir = key
-  os.makedirs(outdir, exist_ok=True)
+    # Create output directory
+    os.makedirs(args.outdir, exist_ok=True)
 
-  
-  # merge means with weighted_f1_results
-  if len(factors) == 1:
-    factor1 = factors[0]
-    factor2=None
-  if len(factors) == 2:
-    factor1, factor2 = factors
+    # Load data
+    print("Loading data...")
+    weighted_f1 = pd.read_csv(args.weighted_f1_results, sep='\t')
+    emmeans_estimates = pd.read_csv(args.emmeans_estimates, sep='\t')
+    emmeans_summary = pd.read_csv(args.emmeans_summary, sep='\t')
 
-  for factor in factors:
-    weighted_f1_results[factor] = weighted_f1_results[factor].astype(str)
-    emmeans_summary[factor] = emmeans_summary[factor].astype(str)
-  
-  contrast_results=reformat_contrast_df(contrast_results, n_factors = len(factors))
-  print(contrast_results)
-  if factor2:
+    # Get factors
+    factors = get_factors_from_emmeans(emmeans_summary)
+    print(f"Detected factors: {factors}")
 
-    weighted_f1_results = weighted_f1_results.merge(emmeans_summary, on = [factor1, factor2])
-    plot_contrast_twofactors(weighted_f1_results, factor1, factor2, outdir, contrast_results)
-  else:
-    weighted_f1_results = weighted_f1_results.merge(emmeans_summary, on = factor1)
-    plot_contrast_onefactor(weighted_f1_results, factor1, outdir, key, contrast_results)
-    
-  
-if __name__ == "__main__":  
+    # Filter weighted_f1 to key and cutoff=0
+    weighted_f1 = weighted_f1.replace({np.nan: 'None'})
+    emmeans_summary = emmeans_summary.replace({np.nan: 'None'})
+
+    weighted_f1_filtered = weighted_f1[
+        (weighted_f1['cutoff'] == 0) &
+        (weighted_f1['key'] == args.key)
+    ].copy()
+
+    # Convert factor columns to string for matching
+    for factor in factors:
+        if factor in weighted_f1_filtered.columns:
+            weighted_f1_filtered[factor] = weighted_f1_filtered[factor].astype(str)
+        if factor in emmeans_summary.columns:
+            emmeans_summary[factor] = emmeans_summary[factor].astype(str)
+
+    # Create figure
+    if len(factors) == 1:
+        factor1 = factors[0]
+        n_levels = emmeans_summary[factor1].nunique()
+        fig_height = max(HALF_HEIGHT, n_levels * 0.4)
+
+        fig, ax = plt.subplots(figsize=(SINGLE_COL * 1.3, fig_height))
+
+        create_single_factor_forest(
+            ax=ax,
+            emmeans_summary=emmeans_summary,
+            emmeans_estimates=emmeans_estimates,
+            factor_col=factor1,
+            weighted_f1=weighted_f1_filtered if args.show_boxplot else None,
+            show_boxplot=args.show_boxplot,
+            sig_threshold=args.significance_threshold
+        )
+
+        ax.set_title(f'{factor1.replace("_", " ").title()} ({args.key})',
+                    fontweight='bold', fontsize=11)
+
+    elif len(factors) == 2:
+        factor1, factor2 = factors
+        n_levels = emmeans_summary[factor1].nunique()
+        fig_height = max(HALF_HEIGHT, n_levels * 0.5)
+
+        fig, ax = plt.subplots(figsize=(SINGLE_COL * 1.5, fig_height))
+
+        create_two_factor_forest(
+            ax=ax,
+            emmeans_summary=emmeans_summary,
+            factor1=factor1,
+            factor2=factor2,
+            emmeans_estimates=emmeans_estimates,
+            weighted_f1=weighted_f1_filtered
+        )
+
+        ax.set_title(f'{factor1.replace("_", " ").title()} x {factor2.replace("_", " ").title()} ({args.key})',
+                    fontweight='bold', fontsize=11)
+
+    else:
+        print(f"Warning: {len(factors)} factors detected. Only 1 or 2 factors supported.")
+        return
+
+    fig.tight_layout()
+
+    # Save
+    output_path = os.path.join(args.outdir, f'{"_".join(factors)}_forest')
+    print(f"Saving figure to {output_path}...")
+    save_figure(fig, output_path, formats=['pdf', 'png'], dpi=300)
+
+    plt.close(fig)
+    print("Done!")
+
+
+if __name__ == "__main__":
     main()

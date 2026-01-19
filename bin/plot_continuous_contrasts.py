@@ -1,91 +1,129 @@
-#!/user/bin/python3
+#!/usr/bin/env python3
+"""
+Parameter Sensitivity Plot (Continuous Contrasts)
 
-from pathlib import Path
-import os
-import scanpy as sc
-import numpy as np
-import pandas as pd
-import anndata as ad
-import warnings
-import statsmodels.api as sm
-from statsmodels.formula.api import ols
-from statsmodels.stats.anova import anova_lm
-from pathlib import Path
-import matplotlib.pyplot as plt
-import seaborn as sns
+Creates clean line plots showing how continuous parameters (cutoff, support)
+affect model performance, with CI ribbons.
+
+Key insight: scvi degrades faster at high cutoffs than seurat
+
+Usage:
+    python plot_continuous_contrasts.py \
+        --contrast path/to/method_cutoff_effects.tsv \
+        --key subclass \
+        --outdir figures
+"""
+
 import argparse
 import os
-import statsmodels as sm
-from scipy import stats
+import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-import random
-random.seed(42)
-from collections import defaultdict
-import matplotlib.ticker as ticker
-import textwrap
-import re
+
+# Import shared utilities
+from plot_utils import (
+    set_pub_style, save_figure,
+    METHOD_COLORS, METHOD_NAMES,
+    cutoff_sensitivity_plot,
+    SINGLE_COL, HALF_HEIGHT
+)
 
 
-SMALL_SIZE = 15
-MEDIUM_SIZE = 20
-BIGGER_SIZE = 35
-
-plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
-plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
-plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
-plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
-plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
-
-
-# Function to parse command line arguments
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--key', type = str, help = "key of factor to plot", default = "subclass")
-    parser.add_argument("--contrast", type=str, help="List of continuous contrasts to plot", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/homo_sapiens/model_eval/label/f1_score_~_label_+_support_+_cutoff_+_method_+_method:cutoff_+_method:support/subclass/files/label_support_effects.tsv")
-    # deal with jupyter kernel arguments
+    parser = argparse.ArgumentParser(
+        description="Plot continuous contrast effects (cutoff/support sensitivity)"
+    )
+    parser.add_argument(
+        '--contrast', type=str, required=True,
+        help="Path to effects TSV file (e.g., method_cutoff_effects.tsv)"
+    )
+    parser.add_argument(
+        '--key', type=str, default='subclass',
+        help="Taxonomy level label for title"
+    )
+    parser.add_argument(
+        '--outdir', type=str, default='.',
+        help="Output directory for figures"
+    )
+    parser.add_argument(
+        '--output_prefix', type=str, default=None,
+        help="Output filename prefix (auto-generated if not provided)"
+    )
+
     if __name__ == "__main__":
-        known_args, _ = parser.parse_known_args()
-        return known_args
-    
+        return parser.parse_args()
+    return parser.parse_known_args()[0]
 
-def plot_fit_with_ci(df, x_col="cutoff", group_col="method",
-                     fit_col="fit", lower_col="lower", upper_col="upper", outdir=None):
-    """
-    Generic plotting function to visualize fit with confidence intervals.
-    """
-    #sns.set(style="whitegrid")
-    plt.figure(figsize=(8, 6))
-
-    for facet, group in df.groupby(group_col):
-        # Sort for consistent plotting
-        group = group.sort_values(by=x_col)
-        plt.plot(group[x_col], group[fit_col], marker="o", label=facet)
-        plt.fill_between(group[x_col], group[lower_col], group[upper_col], alpha=0.2)
-
-    plt.xlabel(x_col.capitalize())
-    plt.ylabel("Fitted F1 Score")
-   # plt.title("Fit with Confidence Interval by Method")
-    plt.legend(title=group_col.capitalize())
-    plt.tight_layout()
-    plt.savefig(os.path.join(outdir,f"{x_col}_{group_col}_fit_with_ci.png"))
 
 def main():
-  args = parse_arguments()
-  contrast = pd.read_csv(args.contrast, sep = "\t")
-  if "cutoff" in contrast.columns:
-    x_col = "cutoff"
-  elif "support" in contrast.columns:    
-    x_col = "support"
-  outdir = x_col
-  if not os.path.exists(outdir):
-      os.makedirs(outdir)
-  group_col = "method"
-  plot_fit_with_ci(df=contrast, x_col=x_col, group_col=group_col,
-                    fit_col="fit", lower_col="lower", upper_col="upper", outdir=outdir)
+    args = parse_arguments()
+
+    # Set publication style
+    set_pub_style()
+
+    # Create output directory
+    os.makedirs(args.outdir, exist_ok=True)
+
+    # Load data
+    print(f"Loading data from {args.contrast}...")
+    contrast_data = pd.read_csv(args.contrast, sep='\t')
+
+    # Determine x column (cutoff or support)
+    if 'cutoff' in contrast_data.columns:
+        x_col = 'cutoff'
+        x_label = 'Confidence Cutoff'
+    elif 'support' in contrast_data.columns:
+        x_col = 'support'
+        x_label = 'Support (Cell Count)'
+    else:
+        print("Error: Could not find 'cutoff' or 'support' column")
+        return
+
+    # Create figure
+    fig, ax = plt.subplots(figsize=(SINGLE_COL * 1.2, HALF_HEIGHT))
+
+    # Use the cutoff sensitivity plot function
+    cutoff_sensitivity_plot(
+        ax=ax,
+        data=contrast_data,
+        x_col=x_col,
+        y_col='fit',
+        lower_col='lower',
+        upper_col='upper',
+        group_col='method',
+        colors=METHOD_COLORS,
+        show_ci=True,
+        ci_alpha=0.2,
+        line_width=2,
+        marker='o',
+        marker_size=6
+    )
+
+    # Customize labels
+    ax.set_xlabel(x_label)
+    ax.set_ylabel('Estimated F1 Score')
+    ax.set_ylim(0, 1)
+
+    # Add title if desired
+    # ax.set_title(f'{x_col.title()} Sensitivity ({args.key})', fontweight='bold')
+
+    # Position legend to avoid overlap with data
+    ax.legend(loc='lower left', frameon=False)
+
+    # Tight layout
+    fig.tight_layout()
+
+    # Generate output filename
+    if args.output_prefix:
+        output_prefix = args.output_prefix
+    else:
+        output_prefix = f'{x_col}_sensitivity'
+
+    output_path = os.path.join(args.outdir, output_prefix)
+    print(f"Saving figure to {output_path}...")
+    save_figure(fig, output_path, formats=['pdf', 'png'], dpi=300)
+
+    plt.close(fig)
+    print("Done!")
 
 
 if __name__ == "__main__":
