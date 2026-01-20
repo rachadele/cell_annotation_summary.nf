@@ -4,14 +4,14 @@ Main Overview Panel Figure for Publication
 
 Creates an information-dense 2x2 panel figure showing:
 A: Cutoff sensitivity curves (F1 vs cutoff by method)
-B: Method effect forest plot (emmeans comparison)
+B: Reference atlas comparison (emmeans by reference, colored by method)
 C: Taxonomy level slope chart (subclass → global)
 D: Cross-study variability (strip plot by study)
 
 Usage:
     python plot_main_figure.py \
         --cutoff_effects path/to/method_cutoff_effects.tsv \
-        --emmeans_summary path/to/method_emmeans_summary.tsv \
+        --reference_emmeans path/to/reference_method_emmeans_summary.tsv \
         --weighted_f1 path/to/weighted_f1_results.tsv \
         --emmeans_dir path/to/models_dir \
         --key subclass \
@@ -44,8 +44,8 @@ def parse_arguments():
         help="Path to method_cutoff_effects.tsv"
     )
     parser.add_argument(
-        '--emmeans_summary', type=str, required=True,
-        help="Path to method_emmeans_summary.tsv for primary taxonomy level"
+        '--reference_emmeans', type=str, required=True,
+        help="Path to reference_method_emmeans_summary.tsv"
     )
     parser.add_argument(
         '--weighted_f1', type=str, required=True,
@@ -98,41 +98,67 @@ def create_panel_a(ax, cutoff_data):
     ax.set_xlabel('Confidence Cutoff')
     ax.set_ylabel('Estimated F1 Score')
 
-    # Move legend to avoid overlap
-    ax.legend(loc='lower left', frameon=False)
+    # Remove legend (will use shared figure legend)
+    ax.get_legend().remove() if ax.get_legend() else None
 
     return ax
 
 
-def create_panel_b(ax, emmeans_data):
+def create_panel_b(ax, reference_emmeans):
     """
-    Panel B: Method effect forest plot.
-    Horizontal forest plot showing scvi vs seurat with 95% CI.
+    Panel B: Reference atlas comparison.
+    Forest plot showing emmeans by reference, colored by method.
     """
-    forest_plot(
-        ax=ax,
-        data=emmeans_data,
-        estimate_col='response',
-        lower_col='asymp.LCL',
-        upper_col='asymp.UCL',
-        group_col='method',
-        color_col='method',
-        colors=METHOD_COLORS,
-        vertical=True,
-        show_reference_line=True,
-        reference_value=None,  # Uses grand mean
-        marker_size=120,
-        line_width=3
-    )
+    # Get unique references and methods
+    references = reference_emmeans['reference'].unique()
+    methods = sorted(reference_emmeans['method'].unique())
+    n_methods = len(methods)
 
+    # Sort references by mean F1 across methods
+    ref_means = reference_emmeans.groupby('reference')['response'].mean().sort_values(ascending=True)
+    references = ref_means.index.tolist()
+
+    # Truncate long reference names
+    def truncate_ref(name, max_len=60):
+        if len(str(name)) > max_len:
+            return str(name)[:max_len-3] + '...'
+        return str(name)
+
+    # Plot each reference with methods dodged
+    for ref_idx, ref in enumerate(references):
+        ref_data = reference_emmeans[reference_emmeans['reference'] == ref]
+
+        for method_idx, method in enumerate(methods):
+            method_data = ref_data[ref_data['method'] == method]
+            if len(method_data) == 0:
+                continue
+
+            row = method_data.iloc[0]
+            color = METHOD_COLORS.get(method, '#333333')
+
+            # Dodge position
+            offset = (method_idx - (n_methods - 1) / 2) * 0.25
+            y_pos = ref_idx + offset
+
+            # CI bar
+            ax.hlines(y_pos, row['asymp.LCL'], row['asymp.UCL'],
+                     colors=color, linewidth=2, zorder=1)
+
+            # Point estimate
+            ax.scatter(row['response'], y_pos, s=60, c=[color],
+                      zorder=2, edgecolors='white', linewidth=0.5)
+
+    # Reference line at grand mean
+    grand_mean = reference_emmeans['response'].mean()
+    ax.axvline(grand_mean, color='gray', linestyle='--',
+              linewidth=0.8, alpha=0.6, zorder=0)
+
+    # Axis formatting
+    ax.set_yticks(range(len(references)))
+    # fix for setting yticklabels
+    ax.set_yticklabels([truncate_ref(r) for r in references])
     ax.set_xlabel('Estimated Marginal Mean F1')
     ax.set_ylabel('')
-
-    # Format y-axis labels
-    yticks = ax.get_yticks()
-    ylabels = [METHOD_NAMES.get(l.get_text(), l.get_text())
-               for l in ax.get_yticklabels()]
-    ax.set_yticklabels(ylabels)
 
     return ax
 
@@ -161,7 +187,7 @@ def create_panel_c(ax, taxonomy_emmeans):
         marker_size=80,
         line_width=2,
         line_alpha=0.8,
-        show_legend=True
+        show_legend=False
     )
 
     ax.set_xlabel('Taxonomy Level')
@@ -215,7 +241,9 @@ def create_panel_d(ax, weighted_f1_data, key='subclass', max_studies=15):
 
     ax.set_xlabel('Weighted F1 Score')
     ax.set_ylabel('')
-    ax.legend(loc='lower right', frameon=False)
+
+    # Remove legend (will use shared figure legend)
+    ax.get_legend().remove() if ax.get_legend() else None
 
     return ax
 
@@ -232,7 +260,7 @@ def main():
     # Load data
     print("Loading data...")
     cutoff_data = pd.read_csv(args.cutoff_effects, sep='\t')
-    emmeans_data = pd.read_csv(args.emmeans_summary, sep='\t')
+    reference_emmeans = pd.read_csv(args.reference_emmeans, sep='\t')
     weighted_f1_data = pd.read_csv(args.weighted_f1, sep='\t')
 
     # Load taxonomy-level emmeans for slope chart
@@ -243,51 +271,78 @@ def main():
             file_pattern='method_emmeans_summary.tsv'
         )
     else:
-        # Create from single file with key column if available
-        taxonomy_emmeans = emmeans_data.copy()
-        if 'key' not in taxonomy_emmeans.columns:
-            taxonomy_emmeans['key'] = args.key
+        # Create empty dataframe if no emmeans_dir
+        taxonomy_emmeans = pd.DataFrame()
 
-    # Create figure with 2x2 layout
-    print("Creating figure...")
-    fig = plt.figure(figsize=(FULL_WIDTH, STANDARD_HEIGHT))
-    gs = gridspec.GridSpec(2, 2, figure=fig, hspace=0.35, wspace=0.35)
 
-    # Panel A: Cutoff sensitivity
-    ax_a = fig.add_subplot(gs[0, 0])
-    create_panel_a(ax_a, cutoff_data)
-    add_panel_label(ax_a, 'A', x=-0.15, y=1.05)
-
-    # Panel B: Method forest plot
-    ax_b = fig.add_subplot(gs[0, 1])
-    create_panel_b(ax_b, emmeans_data)
-    add_panel_label(ax_b, 'B', x=-0.15, y=1.05)
-
-    # Panel C: Taxonomy slope chart
-    ax_c = fig.add_subplot(gs[1, 0])
-    if len(taxonomy_emmeans) > 0 and taxonomy_emmeans['key'].nunique() > 1:
-        create_panel_c(ax_c, taxonomy_emmeans)
+    # --- Top row: Panels A, B, C ---
+    print("Creating top row (A, B, C)...")
+    fig_top, axs_top = plt.subplots(1, 3, figsize=(FULL_WIDTH * 3.7, STANDARD_HEIGHT * 1.1))
+    fig_top.subplots_adjust(wspace=0.55)
+    # Panel A: Cutoff sensitivity (left)
+    create_panel_a(axs_top[0], cutoff_data)
+    add_panel_label(axs_top[0], 'A', x=-0.18, y=1.05, fontsize=20)
+    # Panel B: Taxonomy slope chart (center)
+    if len(taxonomy_emmeans) > 0 and 'key' in taxonomy_emmeans.columns and taxonomy_emmeans['key'].nunique() > 1:
+        create_panel_c(axs_top[1], taxonomy_emmeans)
     else:
-        # Fallback: show single-level data as bar
-        ax_c.text(0.5, 0.5, 'Taxonomy data\nnot available',
-                 ha='center', va='center', transform=ax_c.transAxes,
-                 fontsize=10, color='gray')
-        ax_c.set_xlabel('Taxonomy Level')
-        ax_c.set_ylabel('Estimated F1')
-    add_panel_label(ax_c, 'C', x=-0.15, y=1.05)
+        axs_top[1].text(0.5, 0.5, 'Taxonomy data\nnot available',
+                       ha='center', va='center', transform=axs_top[1].transAxes,
+                       fontsize=10, color='gray')
+        axs_top[1].set_xlabel('Taxonomy Level', fontsize=10)
+        axs_top[1].set_ylabel('Estimated F1', fontsize=10)
+    add_panel_label(axs_top[1], 'B', x=-0.18, y=1.05, fontsize=20)
+    # Panel C: Cross-study swarm (right)
+    create_panel_d(axs_top[2], weighted_f1_data, key=args.key)
+    axs_top[2].set_ylabel('Query Datasets', fontsize=20)
+    add_panel_label(axs_top[2], 'C', x=-0.18, y=1.05, fontsize=20)
+    # Shared legend for top row
+    from matplotlib.lines import Line2D
+    legend_handles = [
+        Line2D([0], [0], marker='o', color=METHOD_COLORS['scvi'],
+               linestyle='-', linewidth=2, markersize=8,
+               label=METHOD_NAMES['scvi']),
+        Line2D([0], [0], marker='o', color=METHOD_COLORS['seurat'],
+               linestyle='-', linewidth=2, markersize=8,
+               label=METHOD_NAMES['seurat'])
+    ]
+    fig_top.legend(handles=legend_handles, loc='upper center',
+                  ncol=2, frameon=False, fontsize=20,
+                  bbox_to_anchor=(0.5, 1.02))
+    # Save top row
+    output_path_top = os.path.join(args.outdir, args.output_prefix + '_top')
+    print(f"Saving top row to {output_path_top}...")
+    save_figure(fig_top, output_path_top, formats=['png'], dpi=300)
+    plt.close(fig_top)
 
-    # Panel D: Cross-study swarm
-    ax_d = fig.add_subplot(gs[1, 1])
-    create_panel_d(ax_d, weighted_f1_data, key=args.key)
-    add_panel_label(ax_d, 'D', x=-0.15, y=1.05)
+    # --- Bottom row: Panel D ---
+    print("Creating bottom row (D)...")
+    fig_bottom, ax_bottom = plt.subplots(1, 1, figsize=(FULL_WIDTH * 2.2, STANDARD_HEIGHT * 1.1))
+    create_panel_b(ax_bottom, reference_emmeans)
+    ax_bottom.set_ylabel('Reference Datasets', fontsize=20)
+    add_panel_label(ax_bottom, 'D', x=-0.04, y=1.05, fontsize=20)
+    # Shared legend for bottom row
+    fig_bottom.legend(handles=legend_handles, loc='upper center',
+                     ncol=2, frameon=False, fontsize=20,
+                     bbox_to_anchor=(0.5, 1.02))
+    output_path_bottom = os.path.join(args.outdir, args.output_prefix + '_bottom')
+    print(f"Saving bottom row to {output_path_bottom}...")
+    save_figure(fig_bottom, output_path_bottom, formats=['png'], dpi=300)
+    plt.close(fig_bottom)
 
-    # Save figure
-    output_path = os.path.join(args.outdir, args.output_prefix)
-    print(f"Saving figure to {output_path}...")
-    save_figure(fig, output_path, formats=['pdf', 'png'], dpi=300)
-
-    plt.close(fig)
-    print("Done!")
+    # --- Combine PNGs vertically ---
+    print("Combining top and bottom PNGs into final figure...")
+    from PIL import Image
+    top_img = Image.open(output_path_top + '.png')
+    bottom_img = Image.open(output_path_bottom + '.png')
+    total_width = max(top_img.width, bottom_img.width)
+    total_height = top_img.height + bottom_img.height
+    combined_img = Image.new('RGB', (total_width, total_height), (255, 255, 255))
+    combined_img.paste(top_img, (0, 0))
+    combined_img.paste(bottom_img, (0, top_img.height))
+    final_output_path = os.path.join(args.outdir, args.output_prefix + '_combined.png')
+    combined_img.save(final_output_path)
+    print(f"Saved combined figure to {final_output_path}")
 
 
 if __name__ == "__main__":

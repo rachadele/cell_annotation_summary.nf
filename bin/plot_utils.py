@@ -51,26 +51,26 @@ def set_pub_style():
         # Font settings
         'font.family': 'sans-serif',
         'font.sans-serif': ['Arial', 'Helvetica', 'DejaVu Sans'],
-        'font.size': 10,
+        'font.size': 20,
 
         # Axes settings
         'axes.linewidth': 0.8,
         'axes.spines.top': False,
         'axes.spines.right': False,
-        'axes.labelsize': 10,
-        'axes.titlesize': 11,
+        'axes.labelsize': 20,
+        'axes.titlesize': 20,
         'axes.titleweight': 'bold',
 
         # Tick settings
-        'xtick.labelsize': 9,
-        'ytick.labelsize': 9,
+        'xtick.labelsize': 20,
+        'ytick.labelsize': 20,
         'xtick.major.width': 0.8,
         'ytick.major.width': 0.8,
         'xtick.major.size': 4,
         'ytick.major.size': 4,
 
         # Legend settings
-        'legend.fontsize': 9,
+        'legend.fontsize': 20,
         'legend.frameon': False,
 
         # Line settings
@@ -671,7 +671,7 @@ def study_swarm_plot(
 # =============================================================================
 
 def add_panel_label(ax: plt.Axes, label: str, x: float = -0.1, y: float = 1.05,
-                   fontsize: int = 12, fontweight: str = 'bold'):
+                   fontsize: int = 20, fontweight: str = 'bold'):
     """Add a panel label (A, B, C, etc.) to axes."""
     ax.text(x, y, label, transform=ax.transAxes,
            fontsize=fontsize, fontweight=fontweight, va='bottom', ha='right')
