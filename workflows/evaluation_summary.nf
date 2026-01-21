@@ -15,6 +15,8 @@ include { MODEL_EVAL_LABEL       } from "$projectDir/modules/local/model_eval_la
 include { PLOT_CONTRASTS         } from "$projectDir/modules/local/plot_contrasts/main"
 include { PLOT_CONTINUOUS_CONTRAST } from "$projectDir/modules/local/plot_continuous_contrast/main"
 include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
+include { PLOT_CELLTYPE_TRENDS   } from "$projectDir/modules/local/plot_celltype_trends/main"
+include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -133,6 +135,16 @@ workflow EVALUATION_SUMMARY {
     // SPLIT_BY_LABEL(ch_label_f1)
     // MODEL_EVAL_LABEL(ch_label_f1_results_split_map)
     // PLOT_CONTINUOUS_CONTRAST(ch_continuous_effects_all)
+
+    //
+    // MODULE: Plot cell type trends (post-hoc)
+    //
+    PLOT_CELLTYPE_TRENDS(ch_label_f1)
+
+    //
+    // MODULE: Plot cell type granularity comparison (post-hoc)
+    //
+    PLOT_CELLTYPE_GRANULARITY(ch_label_f1)
 }
 
 /*
