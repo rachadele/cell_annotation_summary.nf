@@ -175,7 +175,7 @@ def main():
         level_data[level] = level_df
 
     fig_height = max(8, max_labels * 0.4)
-    fig_width = FULL_WIDTH * 0.8 * n_levels
+    fig_width = FULL_WIDTH * 1.0 * n_levels  # Wider to accommodate legend
 
     fig, axes = plt.subplots(1, n_levels, figsize=(fig_width, fig_height), sharey=False)
     if n_levels == 1:
@@ -277,7 +277,7 @@ def main():
     )
 
     plt.tight_layout()
-    plt.subplots_adjust(right=0.88)  # Make room for legend
+    plt.subplots_adjust(right=0.82)  # Make more room for legend
 
     # Save
     output_path = os.path.join(args.outdir, f"{args.output_prefix}_{args.organism}")
