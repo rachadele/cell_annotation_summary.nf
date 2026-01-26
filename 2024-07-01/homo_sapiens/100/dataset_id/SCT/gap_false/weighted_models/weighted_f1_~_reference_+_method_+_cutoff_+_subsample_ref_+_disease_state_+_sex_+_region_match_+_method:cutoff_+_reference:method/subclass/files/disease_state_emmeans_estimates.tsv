@@ -1,2 +1,2 @@
 "contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"
-"control False / disease False"	1.08469078640101	0.00425139480249962	Inf	1	20.7414024827933	1.46588780482238e-95
+"control False / disease False"	1.08472965139586	0.0042513636783601	Inf	1	20.7514394452222	1.1897562463661e-95
