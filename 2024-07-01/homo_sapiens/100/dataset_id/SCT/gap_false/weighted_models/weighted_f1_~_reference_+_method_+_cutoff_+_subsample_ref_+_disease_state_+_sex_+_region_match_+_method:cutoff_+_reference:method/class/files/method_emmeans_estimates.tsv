@@ -1,2 +1,2 @@
 "contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"
-"seurat False / scvi False"	0.653438527408646	0.0065394043073197	Inf	1	-42.5180237934237	0
+"seurat False / scvi False"	0.653501503387924	0.00654021590610837	Inf	1	-42.5072152997891	0

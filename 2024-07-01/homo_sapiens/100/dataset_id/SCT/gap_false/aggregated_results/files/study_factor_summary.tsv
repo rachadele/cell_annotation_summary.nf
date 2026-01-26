@@ -1,0 +1,18 @@
+study	disease	sex	dev_stage	number query samples	query_region	number unique subclasses
+CMC	Schizophrenia, control	male, female	late adult, adult	1507200	prefrontal cortex	21
+DevBrain	ASD, control, Williams Syndrome	female, male	adolescent, adult, late adult	262560	prefrontal cortex	21
+GSE180670	control	None	None	13440	oligodendrocytes in primary culture	2
+GSE211870	control	male	late adult	31200	prefrontal cortex	6
+GSE237718	control	male, female	late adult	581280	temporal cortex	7
+Ling-2024	Affected, Unaffected	male, female	late adult, adult, None	2982240	dorsolateral prefrontal cortex	16
+MultiomeBrain	control, Schizophrenia, Bipolar Disorder	male, female	adult, late adult, adolescent, None	338880	prefrontal cortex	21
+PTSDBrainomics	MDD, PTSD, control	male, female	late adult, adult	319200	prefrontal cortex	21
+SZBDMulti-Seq	Bipolar Disorder, Schizophrenia, control	female, male	late adult, None, adult	1116000	prefrontal cortex	21
+UCLA-ASD	ASD, control	male, female	child, adult, infant, None, late adult, adolescent, toddler	858240	prefrontal cortex	21
+Velmeshev-et-al.1	ASD, control	None	adult, adolescent, child	154560	prefrontal cortex	20
+Velmeshev-et-al.2	ASD, control	None	adolescent, toddler, adult, child, None	276000	prefrontal cortex	20
+lau	control, AD	male, female	late adult	194400	prefrontal cortex	6
+lim	HD, control	male, female	late adult	154080	cingulate cortex	12
+nagy	control	male	late adult	85920	dorsolateral prefrontal cortex	13
+pineda	FTLD, control, ALS	female, male	late adult	978720	primary motor cortex	17
+rosmap	control, AD, DEM	female, male	late adult	487200	prefrontal cortex	8
