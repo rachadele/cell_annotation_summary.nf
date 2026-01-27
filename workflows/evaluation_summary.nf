@@ -12,9 +12,10 @@ include { PLOT_LABEL_DIST        } from "$projectDir/modules/local/plot_label_di
 include { MODEL_EVAL_WEIGHTED    } from "$projectDir/modules/local/model_eval_weighted/main"
 include { SPLIT_BY_LABEL         } from "$projectDir/modules/local/split_by_label/main"
 include { MODEL_EVAL_LABEL       } from "$projectDir/modules/local/model_eval_label/main"
-include { PLOT_CONTRASTS         } from "$projectDir/modules/local/plot_contrasts/main"
-include { PLOT_CONTINUOUS_CONTRAST } from "$projectDir/modules/local/plot_continuous_contrast/main"
 include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
+include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
+include { PLOT_PUB_FIGURES       } from "$projectDir/modules/local/plot_pub_figures/main"
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -24,7 +25,7 @@ include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_sum
 workflow EVALUATION_SUMMARY {
 
     //
-    // SUBWORKFLOW: Prepare input channel from results directory
+    // CHANNEL: Prepare input channel from results directory
     //
     Channel
         .fromPath("${params.results}/*", type: 'dir')
@@ -81,58 +82,75 @@ workflow EVALUATION_SUMMARY {
     //
     MODEL_EVAL_WEIGHTED(ch_weighted_f1)
 
-    ch_continuous_effects_weighted = MODEL_EVAL_WEIGHTED.out.continuous_effects
-    ch_emmeans_estimates           = MODEL_EVAL_WEIGHTED.out.emmeans_estimates
-    ch_emmeans_summary             = MODEL_EVAL_WEIGHTED.out.emmeans_summary
+    ch_continuous_effects = MODEL_EVAL_WEIGHTED.out.continuous_effects
+    ch_emmeans_summary    = MODEL_EVAL_WEIGHTED.out.emmeans_summary
 
     //
-    // CHANNEL: Parse emmeans estimates for plotting
+    // CHANNEL: Prepare files for publication figures
     //
-    ch_emmeans_estimates
-        .flatMap { list ->
-            list.collect { file ->
-                def key = file.getParent().getParent().getName()
-                def factors = file.getName().toString().split("_emmeans_estimates.tsv")[0]
-                return [key, factors, file]
-            }
+
+    // Get cutoff effects file for subclass (primary key)
+    ch_cutoff_effects_subclass = ch_continuous_effects
+        .flatMap { list -> list }
+        .filter { file ->
+            file.getParent().getParent().getName() == 'subclass' &&
+            file.getName() == 'method_cutoff_effects.tsv'
         }
-        .set { ch_emmeans_estimates_map }
+        .first()
 
-    ch_emmeans_summary
-        .flatMap { list ->
-            list.collect { file ->
-                def key = file.getParent().getParent().getName()
-                def factors = file.getName().toString().split("_emmeans_summary.tsv")[0]
-                return [key, factors, file]
-            }
+    // Get reference_method emmeans for subclass
+    ch_reference_emmeans_subclass = ch_emmeans_summary
+        .flatMap { list -> list }
+        .filter { file ->
+            file.getParent().getParent().getName() == 'subclass' &&
+            file.getName() == 'reference_method_emmeans_summary.tsv'
         }
-        .set { ch_emmeans_summary_map }
+        .first()
 
-    ch_emmeans_all = ch_emmeans_estimates_map.join(ch_emmeans_summary_map, by: [0,1])
-
-    //
-    // MODULE: Plot contrasts
-    //
-    PLOT_CONTRASTS(ch_emmeans_all, ch_weighted_f1)
-
-    //
-    // CHANNEL: Parse continuous effects for plotting
-    //
-    ch_continuous_effects_weighted
-        .flatMap { list ->
-            list.collect { file ->
-                def key = file.getParent().getParent().getName()
-                def mode = 'weighted'
-                return [key, mode, file]
-            }
+    // Get method emmeans for all taxonomy levels (for slope chart)
+    ch_method_emmeans = ch_emmeans_summary
+        .flatMap { list -> list }
+        .filter { file -> file.getName() == 'method_emmeans_summary.tsv' }
+        .collect()
+    // Get factor emmeans for subclass (disease_state, sex, region_match, treatment)
+    ch_factor_emmeans = ch_emmeans_summary
+        .flatMap { list -> list }
+        .filter { file ->
+            file.getParent().getParent().getName() == 'subclass' &&
+            (file.getName() =~ /^(disease_state|disease|sex|region_match|treatment_state|treatment)_emmeans_summary\.tsv$/)
         }
-        .set { ch_continuous_effects_weighted_map }
+        .collect()
+
+    //
+    // MODULE: Generate publication figures
+    //
+
+    // view all channels used for publication figures
+    ch_method_emmeans.view()
+    ch_factor_emmeans.view()
+    ch_weighted_f1.view()
+    ch_cutoff_effects_subclass.view()
+    ch_reference_emmeans_subclass.view()
+    
+
+
+    PLOT_PUB_FIGURES(
+        ch_weighted_f1,
+        ch_cutoff_effects_subclass,
+        ch_reference_emmeans_subclass,
+        ch_method_emmeans,
+        ch_factor_emmeans
+    )
 
     // NOTE: Label-level modeling is disabled due to segfault issues
     // Uncomment below to enable label-level analysis:
     // SPLIT_BY_LABEL(ch_label_f1)
     // MODEL_EVAL_LABEL(ch_label_f1_results_split_map)
-    // PLOT_CONTINUOUS_CONTRAST(ch_continuous_effects_all)
+
+    //
+    // MODULE: Plot cell type granularity comparison (post-hoc)
+    //
+    PLOT_CELLTYPE_GRANULARITY(ch_label_f1)
 }
 
 /*
