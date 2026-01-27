@@ -28,43 +28,33 @@ plot_qq <- function(model, key_dir) {
 }
 
 
-run_beta_model <- function(df, formula, group_var = "study", type="weighted") {
-  nt <- min(parallel::detectCores(),10)
-  #nt <- as.integer(nt) # Set the number of threads to use for parallel processing
-  # Ensure the outcome is within (0,1) for Beta regression
+run_beta_model <- function(df, formula, group_var = "study", type="weighted", mixed=TRUE) {
   outcome_var <- all.vars(as.formula(formula))[1]
 
-# add study as a random effect (slope and intercept may very)
-  random_effect_formula <- paste(formula, "+ (1 |", group_var, ")")
-
-    # Add random effects directly to the formula
-
-  if (type == "weighted") {
-  model <- glmmTMB(as.formula(random_effect_formula), data = df, family = beta_family(link = "logit"),
-              control=glmmTMBControl(parallel = nt))
-  }
-  else if (type == "label") {
-    model <- glmmTMB(as.formula(random_effect_formula), data = df, 
-              family = beta_family(link = "logit"),
-              # add 0 inflation
-             # ziformula = ~, # model 0 inflation separately for each label with free intercept
-              # this makes it takeforever
-              control=glmmTMBControl(parallel = nt))
+  if (mixed) {
+    # add study as a random effect (intercept may vary)
+    model_formula <- paste(formula, "+ (1 |", group_var, ")")
+    nt <- min(parallel::detectCores(), 10)
   } else {
-    stop("Invalid type specified. Use 'weighted' or 'label'.")
+    # fixed-effects only beta regression (no random effect)
+    model_formula <- formula
+    nt <- 1L
   }
-  
+
+  model <- glmmTMB(as.formula(model_formula), data = df, family = beta_family(link = "logit"),
+              control=glmmTMBControl(parallel = nt))
+
   # Extract coefficients and p-values
   summary_df <- tidy(model) %>%
     mutate(FDR = p.adjust(p.value, method = "fdr"))
-  
+
   # Model fit statistics
   model_stats <- tibble(
     LogLik = logLik(model),
     AIC = AIC(model),
     BIC = BIC(model)
   )
-  return(list(model = model, summary = summary_df, stats = model_stats, formula = random_effect_formula))
+  return(list(model = model, summary = summary_df, stats = model_stats, formula = model_formula))
 }
 
 
@@ -287,7 +277,7 @@ run_drop1 <- function(model, key_dir) {
   ggsave(file.path(key_dir, "drop1.png"), p, width = 20, height = 20, dpi = 300)
 }
 
-run_and_store_model <- function(df, formula, key_dir, key, type="label", group_var="study") {
+run_and_store_model <- function(df, formula, key_dir, key, type="label", group_var="study", mixed=TRUE) {
   fig.dir <- file.path(key_dir, "figures")
   if (!dir.exists(fig.dir)) {
     dir.create(fig.dir)
@@ -297,7 +287,7 @@ run_and_store_model <- function(df, formula, key_dir, key, type="label", group_v
     dir.create(file.dir)
   }
   # Run the beta model using the run_beta_model function
-  result <- run_beta_model(df, formula, group_var = group_var, type=type)  # Adjust group_var as needed
+  result <- run_beta_model(df, formula, group_var = group_var, type=type, mixed=mixed)
   #plot_model_metrics(result, formula, key)
   # Extract model summary coefficients and add additional info
   model_summary_coefs <- result$summary
@@ -324,11 +314,16 @@ run_and_store_model <- function(df, formula, key_dir, key, type="label", group_v
     # Run emmeans for label F1
     run_emmeans_label(model, key_dir)
 
-    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
-    ae_contrast<- alleffects["cutoff:method"]
-    plot_continuous_effects(ae_contrast, fig.dir)
-    ae_contrast <- as.data.frame(ae_contrast[[1]])
-    write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
+    tryCatch({
+      alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
+      ae_contrast <- alleffects["cutoff:method"]
+      plot_continuous_effects(ae_contrast, fig.dir)
+      ae_contrast <- as.data.frame(ae_contrast[[1]])
+      write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
+    }, error = function(e) {
+      message(paste0("allEffects failed: ", e$message))
+      write.table(data.frame(note = "allEffects_failed"), file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
+    })
 
   }
   # Save the model summary and coefficients summary to files
