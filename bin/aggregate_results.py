@@ -1,4 +1,3 @@
-#!/user/bin/python3
 
 from pathlib import Path
 import os
@@ -12,6 +11,8 @@ import warnings
 import json
 import argparse
 import ast
+import re
+
 
 # Function to parse command line arguments
 def parse_arguments():
@@ -82,7 +83,41 @@ def update_metrics(df):
     df.loc[df['support'] == 0, metrics] = None
     return df
 
+# Function to extract and print unique factor values for each test study
+def print_study_factor_table(label_f1_results, organism):
+    import pandas as pd
+    if organism == "homo_sapiens":
+        columns = ["disease", "sex", "dev_stage", "number query samples", "query_region", "number unique subclasses"]
+    else:
+        columns = ["treatment", "genotype", "strain", "sex", "age", "query_region", "number query samples", "number unique subclasses"]
 
+    # Ensure DataFrames
+    label_df = pd.DataFrame(label_f1_results)
+    # Determine study column name
+    study_col = "study"
+    if study_col not in label_df.columns:
+        print("No study column found in results.")
+        return
+
+    # Prepare table
+    table = []
+    for study, group in label_df.groupby(study_col):
+        row = {"study": study}
+        for col in columns:
+            if col == "number query samples":
+                row[col] = group.shape[0]
+            elif col == "number unique subclasses":
+                # Find unique subclasses for this study in label_f1_results
+                n_subclasses = label_df[(label_df[study_col] == study) & (label_df["key"] == "subclass")]["label"].nunique()
+                row[col] = n_subclasses
+            elif col in group.columns:
+                vals = group[col].dropna().unique()
+                row[col] = ", ".join(map(str, vals))
+        table.append(row)
+    out_cols = [study_col] + columns
+    # write to tsv
+    table_df = pd.DataFrame(table)[out_cols]
+    table_df.to_csv("study_factor_summary.tsv", sep="\t", index=False)
  
 def main():
     # Parse command line arguments
@@ -146,11 +181,12 @@ def main():
         f1_df["dev_stage"] = np.where(f1_df["query"] == "lim C5382Cd" , "late adult", f1_df["dev_stage"])
 
 
-    # data wrangling for sex (Gemmma data uses male:female, conform to this naming scheme)
-        f1_df["sex"] = f1_df["sex"].str.replace("M", "male")
-        f1_df["sex"] = f1_df["sex"].str.replace("F", "female")
-        # don't know why this is in the data
-        f1_df["sex"] = f1_df["sex"].str.replace("feM","female")
+    # data wrangling for sex (Gemma data uses male:female, conform to this naming scheme)
+    # fix replacement logic to avoid 'maleale' etc.
+    f1_df["sex"] = f1_df["sex"].str.replace(r"^M$", "male", regex=True, case=False)
+    f1_df["sex"] = f1_df["sex"].str.replace(r"^F$", "female", regex=True, case=False)
+    # don't know why this is in the data
+    f1_df["sex"] = f1_df["sex"].str.replace(r"^feM$", "female", regex=True, case=False)
          
     if organism == "mus_musculus":
 
@@ -242,6 +278,9 @@ def main():
        columns_to_group=["label","method", "treatment", "genotype","strain","cutoff", "sex", "age", "reference", "study"] 
     factors=columns_to_group + ["query"] + ["query_region"] + ["ref_region"]
     write_factor_summary(label_results, factors) 
+    
+    # write per study factor summary
+    print_study_factor_table(label_results, organism)
 
         
  
