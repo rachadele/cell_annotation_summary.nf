@@ -34,37 +34,34 @@ def parse_arguments():
   return parser.parse_args()
 
 def plot_f1_distribution(df, key, label_name):
-  
+
   df_long = df.melt(id_vars=["key", "label","study"], value_vars=["f1_score"], var_name="metric", value_name="score")
-  
+
   plt.figure(figsize=(10, 6))
   sns.histplot(df_long, x="score", bins=30, kde=False, hue="study")
-  plt.title(f'F1 Score Distribution for {key} - {label_name}')
+  plt.title(f'F1 Score Distribution for {label_name}')
   plt.xlabel('F1 Score')
   plt.ylabel('Frequency')
-  #plt.grid(True)
-  
+
   # Save the plot
-  output_file = f"{key}/{label_name}/f1_distribution.png"
+  output_file = f"{label_name}/f1_distribution.png"
   plt.savefig(output_file)
   plt.close()
 
 def main():
   args = parse_arguments()
   label_f1_results = args.label_f1_results
-	
+
 	# Read the label f1 results
   df = pd.read_csv(label_f1_results, sep="\t")
-	# split by key and label and save to individual files
-  for key, group in df.groupby("key"):
-    for label, sub_group in group.groupby("label"):
-      label_df = sub_group
-    # plot the f1 score distribution
-      label_name = label.replace(" ", "_").replace("/", "_")
-      os.makedirs(f"{key}/{label_name}", exist_ok=True)
-      plot_f1_distribution(label_df, key, label_name)
-      output_file = f"{key}/{label_name}/f1_results.tsv"
-      label_df.to_csv(output_file, sep="\t", index=False)
+	# split by label (pool all granularity levels together)
+  for label, label_df in df.groupby("label"):
+    label_name = label.replace(" ", "_").replace("/", "_")
+    os.makedirs(label_name, exist_ok=True)
+    key = label_df["key"].iloc[0]
+    plot_f1_distribution(label_df, key, label_name)
+    output_file = f"{label_name}/f1_results.tsv"
+    label_df.to_csv(output_file, sep="\t", index=False)
 
 if __name__ == "__main__":
 	main()

@@ -126,11 +126,6 @@ workflow EVALUATION_SUMMARY {
     //
 
     // view all channels used for publication figures
-    ch_method_emmeans.view()
-    ch_factor_emmeans.view()
-    ch_weighted_f1.view()
-    ch_cutoff_effects_subclass.view()
-    ch_reference_emmeans_subclass.view()
     
 
 
@@ -142,10 +137,25 @@ workflow EVALUATION_SUMMARY {
         ch_factor_emmeans
     )
 
-    // NOTE: Label-level modeling is disabled due to segfault issues
-    // Uncomment below to enable label-level analysis:
-    // SPLIT_BY_LABEL(ch_label_f1)
-    // MODEL_EVAL_LABEL(ch_label_f1_results_split_map)
+    //
+    // MODULE: Split label F1 results by key and label
+    //
+    SPLIT_BY_LABEL(ch_label_f1)
+
+    //
+    // CHANNEL: Map split label files to (label, file) tuples
+    //
+    ch_label_f1_results_split_map = SPLIT_BY_LABEL.out.label_f1_results_split
+        .flatten()
+        .map { file ->
+            def label = file.getParent().getName()
+            [label, file]
+        }
+
+    //
+    // MODULE: Model evaluation for label-level results (fixed-effects beta regression)
+    //
+    MODEL_EVAL_LABEL(ch_label_f1_results_split_map)
 
     //
     // MODULE: Plot cell type granularity comparison (post-hoc)
