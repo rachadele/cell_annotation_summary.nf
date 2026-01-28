@@ -2,10 +2,16 @@
 """
 Plot label-level model results across all cell types.
 
-Reads emmeans summary TSVs from label model output directories and creates
-a forest plot showing reference × method estimated marginal means per cell type.
+Reads reference_method emmeans summary TSVs and creates a forest plot
+showing estimated F1 per cell type label, faceted by reference, colored by method.
 
 Usage:
+    python plot_label_figures.py \
+        --emmeans_files path/to/*.tsv \
+        --outdir figures
+
+    OR (directory mode):
+
     python plot_label_figures.py \
         --label_models_dir path/to/label_models \
         --outdir figures
@@ -13,12 +19,14 @@ Usage:
 
 import argparse
 import os
+import re
 import glob
 import pandas as pd
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 from plot_utils import (
     set_pub_style,
     METHOD_COLORS,
@@ -28,19 +36,55 @@ from plot_utils import (
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Plot label-level model results")
-    parser.add_argument("--label_models_dir", type=str, required=True,
+    parser.add_argument("--emmeans_files", type=str, nargs="+", default=None,
+                        help="Paths to reference_method_emmeans_summary.tsv files")
+    parser.add_argument("--label_models_dir", type=str, default=None,
                         help="Directory containing label model outputs (one subdir per label)")
     parser.add_argument("--outdir", type=str, default="figures",
                         help="Output directory for figures")
     return parser.parse_args()
 
 
-def load_label_emmeans(label_models_dir, contrast_name):
+def extract_label_from_path(fpath):
     """
-    Load a specific *_emmeans_summary.tsv across all labels.
+    Extract label name from file path.
+    Expected patterns:
+      .../LabelName/formula_dir/files/reference_method_emmeans_summary.tsv
+      or just LabelName__reference_method_emmeans_summary.tsv (staged flat)
+    """
+    parts = fpath.split(os.sep)
+    # Walk up from file: files/ -> formula_dir/ -> label/
+    for i, part in enumerate(parts):
+        if part == "files" and i >= 2:
+            return parts[i - 2].replace("_", " ")
+    # Fallback: parent of parent of parent
+    if len(parts) >= 4:
+        return parts[-4].replace("_", " ")
+    return os.path.basename(os.path.dirname(fpath)).replace("_", " ")
 
-    Returns a DataFrame with a 'label' column, or None if nothing loaded.
-    """
+
+def load_from_files(emmeans_files):
+    """Load reference_method emmeans from explicit file paths."""
+    dfs = []
+    for fpath in emmeans_files:
+        try:
+            df = pd.read_csv(fpath, sep="\t")
+            if "note" in df.columns or df.empty:
+                continue
+            if "reference" not in df.columns:
+                continue
+            label = extract_label_from_path(os.path.abspath(fpath))
+            df["label"] = label
+            dfs.append(df)
+        except Exception:
+            continue
+    if dfs:
+        return pd.concat(dfs, ignore_index=True)
+    return None
+
+
+def load_from_dir(label_models_dir):
+    """Load reference_method emmeans by scanning label model directory tree."""
     dfs = []
     label_dirs = sorted(glob.glob(os.path.join(label_models_dir, "*")))
     for label_dir in label_dirs:
@@ -51,7 +95,7 @@ def load_label_emmeans(label_models_dir, contrast_name):
         formula_dirs = glob.glob(os.path.join(label_dir, "f1_score_*"))
         if not formula_dirs:
             continue
-        fpath = os.path.join(formula_dirs[0], "files", f"{contrast_name}_emmeans_summary.tsv")
+        fpath = os.path.join(formula_dirs[0], "files", "reference_method_emmeans_summary.tsv")
         if not os.path.isfile(fpath):
             continue
 
@@ -71,14 +115,12 @@ def load_label_emmeans(label_models_dir, contrast_name):
 
 def plot_reference_method_forest(df, outdir):
     """
-    Forest plot: one row per label, points for each reference × method combination.
-    Labels on y-axis sorted by mean F1. Points colored by method, dodged by reference.
-    Each reference gets its own panel column.
+    Forest plot: one row per label, faceted by reference.
+    Points colored by method (scVI / Seurat) with CI bars.
     """
     references = sorted(df["reference"].unique())
     n_refs = len(references)
 
-    # Truncate long reference names for display
     def shorten(name, maxlen=35):
         return (name[:maxlen] + "…") if len(name) > maxlen else name
 
@@ -93,7 +135,6 @@ def plot_reference_method_forest(df, outdir):
     n_methods = len(methods)
     offsets = np.linspace(-0.15, 0.15, n_methods)
 
-    # One column per reference
     fig_width = 3.5 * n_refs + 1.5
     fig_height = max(5, n_labels * 0.45 + 1.5)
     fig, axes = plt.subplots(1, n_refs, figsize=(fig_width, fig_height),
@@ -108,7 +149,6 @@ def plot_reference_method_forest(df, outdir):
         for m_idx, method in enumerate(methods):
             mdf = rdf[rdf["method"] == method]
             color = METHOD_COLORS.get(method, "#333333")
-            display_name = METHOD_NAMES.get(method, method)
 
             for label in label_order:
                 row = mdf[mdf["label"] == label]
@@ -126,12 +166,9 @@ def plot_reference_method_forest(df, outdir):
         ax.tick_params(axis="x", labelsize=8)
         ax.set_xlim(-0.05, 1.05)
 
-    # y-axis labels on leftmost panel only
     axes[0].set_yticks(range(n_labels))
     axes[0].set_yticklabels(label_order, fontsize=10)
 
-    # Shared legend
-    from matplotlib.lines import Line2D
     legend_elements = [
         Line2D([0], [0], marker="o", color=METHOD_COLORS.get(m, "#333"),
                markerfacecolor=METHOD_COLORS.get(m, "#333"), markersize=6,
@@ -152,12 +189,19 @@ def main():
     set_pub_style()
     os.makedirs(args.outdir, exist_ok=True)
 
-    df = load_label_emmeans(args.label_models_dir, "reference_method")
+    if args.emmeans_files:
+        df = load_from_files(args.emmeans_files)
+    elif args.label_models_dir:
+        df = load_from_dir(args.label_models_dir)
+    else:
+        print("Error: provide either --emmeans_files or --label_models_dir")
+        return
+
     if df is None:
         print("No valid reference_method emmeans summary files found.")
         return
 
-    print(f"Loaded reference_method: {df['label'].nunique()} labels, "
+    print(f"Loaded: {df['label'].nunique()} labels, "
           f"{df['reference'].nunique()} references, {len(df)} rows")
 
     plot_reference_method_forest(df, args.outdir)

@@ -11,6 +11,7 @@ process MODEL_EVAL_LABEL {
     path "**tsv"
     path "**model_summary_coefs_combined.tsv", emit: f1_model_summary_coefs
     path "**effects.tsv"                     , emit: continuous_effects
+    path "**emmeans_summary.tsv"             , emit: emmeans_summary
 
     script:
     """

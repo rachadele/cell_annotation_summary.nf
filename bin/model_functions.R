@@ -14,7 +14,7 @@ theme <- theme_set(
 )
 
 plot_qq <- function(model, key_dir) {
-  # Create a QQ plot using the DHARMa package
+  # Create a QQ plot using the DHARua package
   qq_residuals <- simulateResiduals(model, plot = FALSE)
   
   png(file.path(key_dir, "qq_plot.png"), width = 800, height = 800)
