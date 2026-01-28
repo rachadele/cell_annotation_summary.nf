@@ -15,6 +15,7 @@ include { MODEL_EVAL_LABEL       } from "$projectDir/modules/local/model_eval_la
 include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
 include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
 include { PLOT_PUB_FIGURES       } from "$projectDir/modules/local/plot_pub_figures/main"
+include { PLOT_LABEL_FIGURES    } from "$projectDir/modules/local/plot_label_figures/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,6 +157,13 @@ workflow EVALUATION_SUMMARY {
     // MODULE: Model evaluation for label-level results (fixed-effects beta regression)
     //
     MODEL_EVAL_LABEL(ch_label_f1_results_split_map)
+
+    //
+    // MODULE: Plot label-level model results (forest plots)
+    //
+    ch_label_emmeans = MODEL_EVAL_LABEL.out.emmeans_summary
+        .collect()
+    PLOT_LABEL_FIGURES(ch_label_emmeans)
 
     //
     // MODULE: Plot cell type granularity comparison (post-hoc)
