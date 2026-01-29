@@ -9,7 +9,7 @@ include { AGGREGATE_RESULTS      } from "$projectDir/modules/local/aggregate_res
 include { PLOT_CUTOFF            } from "$projectDir/modules/local/plot_cutoff/main"
 include { PLOT_COMPTIME          } from "$projectDir/modules/local/plot_comptime/main"
 include { PLOT_LABEL_DIST        } from "$projectDir/modules/local/plot_label_dist/main"
-include { MODEL_EVAL_WEIGHTED    } from "$projectDir/modules/local/model_eval_weighted/main"
+include { MODEL_EVAL_AGGREGATED  } from "$projectDir/modules/local/model_eval_aggregated/main"
 include { SPLIT_BY_LABEL         } from "$projectDir/modules/local/split_by_label/main"
 include { MODEL_EVAL_LABEL       } from "$projectDir/modules/local/model_eval_label/main"
 include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
@@ -71,7 +71,7 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Plot label distributions
     //
-    PLOT_LABEL_DIST(ch_label_f1)
+    //PLOT_LABEL_DIST(ch_label_f1)
 
     //
     // MODULE: Plot computation time
@@ -79,63 +79,26 @@ workflow EVALUATION_SUMMARY {
     PLOT_COMPTIME("${params.results}")
 
     //
-    // MODULE: Model evaluation for weighted results
+    // MODULE: Model evaluation for aggregated results (macro F1)
     //
-    MODEL_EVAL_WEIGHTED(ch_weighted_f1)
+    MODEL_EVAL_AGGREGATED(ch_weighted_f1)
 
-    ch_continuous_effects = MODEL_EVAL_WEIGHTED.out.continuous_effects
-    ch_emmeans_summary    = MODEL_EVAL_WEIGHTED.out.emmeans_summary
-
-    //
-    // CHANNEL: Prepare files for publication figures
-    //
-
-    // Get cutoff effects file for subclass (primary key)
-    ch_cutoff_effects_subclass = ch_continuous_effects
-        .flatMap { list -> list }
-        .filter { file ->
-            file.getParent().getParent().getName() == 'subclass' &&
-            file.getName() == 'method_cutoff_effects.tsv'
-        }
-        .first()
-
-    // Get reference_method emmeans for subclass
-    ch_reference_emmeans_subclass = ch_emmeans_summary
-        .flatMap { list -> list }
-        .filter { file ->
-            file.getParent().getParent().getName() == 'subclass' &&
-            file.getName() == 'reference_method_emmeans_summary.tsv'
-        }
-        .first()
-
-    // Get method emmeans for all taxonomy levels (for slope chart)
-    ch_method_emmeans = ch_emmeans_summary
-        .flatMap { list -> list }
-        .filter { file -> file.getName() == 'method_emmeans_summary.tsv' }
-        .collect()
-    // Get factor emmeans for subclass (disease_state, sex, region_match, treatment)
-    ch_factor_emmeans = ch_emmeans_summary
-        .flatMap { list -> list }
-        .filter { file ->
-            file.getParent().getParent().getName() == 'subclass' &&
-            (file.getName() =~ /^(disease_state|disease|sex|region_match|treatment_state|treatment)_emmeans_summary\.tsv$/)
-        }
-        .collect()
+    // Combined files now contain all keys with a 'key' column
+    ch_cutoff_effects      = MODEL_EVAL_AGGREGATED.out.cutoff_effects
+    ch_reference_emmeans   = MODEL_EVAL_AGGREGATED.out.reference_method_emmeans
+    ch_method_emmeans      = MODEL_EVAL_AGGREGATED.out.method_emmeans
+    ch_all_emmeans_summary = MODEL_EVAL_AGGREGATED.out.all_emmeans_summary
 
     //
     // MODULE: Generate publication figures
     //
-
-    // view all channels used for publication figures
-    
-
-
+    // Note: Combined files contain all keys - filtering by key happens in R script
     PLOT_PUB_FIGURES(
         ch_weighted_f1,
-        ch_cutoff_effects_subclass,
-        ch_reference_emmeans_subclass,
+        ch_cutoff_effects,
+        ch_reference_emmeans,
         ch_method_emmeans,
-        ch_factor_emmeans
+        ch_all_emmeans_summary
     )
 
     //

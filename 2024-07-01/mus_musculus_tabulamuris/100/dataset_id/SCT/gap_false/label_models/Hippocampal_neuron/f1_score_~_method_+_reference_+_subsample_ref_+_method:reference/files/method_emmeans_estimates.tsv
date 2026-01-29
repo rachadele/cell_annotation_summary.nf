@@ -1,2 +1,2 @@
-"contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"
-"seurat / scvi"	0.404628209385316	0.0712912016775569	Inf	1	-5.13530684554373	2.81684053074708e-07
+"contrast"	"odds.ratio"	"SE"	"df"	"null"	"z.ratio"	"p.value"	"key"
+"seurat / scvi"	0.404628209385316	0.0712912016775569	Inf	1	-5.13530684554373	2.81684053074708e-07	"all"

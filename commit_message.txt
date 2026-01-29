@@ -1,0 +1,50 @@
+Combine model outputs into single files with key column
+
+Refactor model evaluation outputs to write combined files instead of
+separate per-key directories. Each output file now contains results
+from all keys with a 'key' column for filtering.
+
+Changes:
+
+bin/model_functions.R:
+- run_emmeans_weighted(): Returns named list of dataframes with key column
+- run_emmeans_label(): Returns named list of dataframes with key column
+- run_and_store_model(): Changed param from key_dir to fig_dir, returns
+  all results instead of writing files
+
+bin/model_performance_aggregated.R:
+- Collects results across all keys in loop
+- Combines by result name and writes to formula_dir/files/*.tsv
+
+bin/model_performance_label.R:
+- Handles returned results and writes them to files
+
+bin/plot_pub_figures.py:
+- Added --primary_key argument (default: subclass)
+- Filters combined files by key where needed
+- Updated load_method_emmeans() to handle single combined file
+
+modules/local/model_eval_aggregated/main.nf:
+- Updated output patterns for new file structure
+
+modules/local/model_eval_label/main.nf:
+- Updated output patterns for new file structure
+
+modules/local/plot_pub_figures/main.nf:
+- Simplified inputs to handle combined files
+
+workflows/evaluation_summary.nf:
+- Simplified channel handling (no filtering by parent directory)
+
+New output structure:
+  formula_dir/
+    files/
+      model_coefs.tsv
+      method_emmeans_summary.tsv
+      reference_method_emmeans_summary.tsv
+      method_cutoff_effects.tsv
+      ...
+    figures/
+      key1/
+      key2/
+      ...

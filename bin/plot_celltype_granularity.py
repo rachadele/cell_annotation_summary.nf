@@ -62,7 +62,10 @@ def parse_arguments():
         '--organism', type=str, default='mus_musculus',
         help="Organism name (e.g., mus_musculus, homo_sapiens)"
     )
-    # Removed --outdir argument; output will be saved to current directory
+    parser.add_argument(
+        '--outdir', type=str, default='figures',
+        help="Output directory for figures"
+    )
     parser.add_argument(
         '--output_prefix', type=str, default='celltype_granularity',
         help="Prefix for output filenames"
@@ -118,7 +121,7 @@ def main():
     # Set publication style
     set_pub_style()
 
-    # Output directory creation removed; saving to current directory
+    os.makedirs(args.outdir, exist_ok=True)
 
     # Load data
     print(f"Loading data from {args.label_f1_results}...")
@@ -277,10 +280,11 @@ def main():
     plt.subplots_adjust(right=0.82)  # Make more room for legend
 
     # Save
-    output_path = f"{args.output_prefix}_{args.organism}.png"
+    output_path = os.path.join(args.outdir, f"{args.output_prefix}_{args.organism}")
     print(f"Saving to {output_path}...")
-    fig.savefig(output_path, dpi=300, bbox_inches="tight")
+    save_figure(fig, output_path, formats=['png'], dpi=300)
     plt.close(fig)
+
     print("Done!")
 
 
