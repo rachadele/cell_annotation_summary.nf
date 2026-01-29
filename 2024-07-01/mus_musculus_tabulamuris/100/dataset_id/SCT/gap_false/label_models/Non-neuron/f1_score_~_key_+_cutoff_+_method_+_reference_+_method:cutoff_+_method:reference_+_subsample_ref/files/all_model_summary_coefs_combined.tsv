@@ -1,2 +1,0 @@
-"term"	"estimate"	"std.error"	"statistic"	"p.value"	"FDR"	"formula"	"key"	"LogLik"	"AIC"	"BIC"
-"ERROR"	NA	NA	NA	NA	NA	"f1_score ~ key + cutoff + method + reference + method:cutoff + method:reference + subsample_ref"	"all"	NA	NA	NA

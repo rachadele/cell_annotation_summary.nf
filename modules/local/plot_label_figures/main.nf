@@ -3,17 +3,16 @@ process PLOT_LABEL_FIGURES {
 
     input:
     val emmeans_files
+    path label_f1_results
 
     output:
-    path "figures/*.png", emit: figures
+    path "**.png", emit: figures
 
     script:
     emmeans_files_joined = emmeans_files.join(' ')
     """
-    mkdir -p figures
-
     python ${projectDir}/bin/plot_label_figures.py \\
         --emmeans_files ${emmeans_files_joined} \\
-        --outdir figures
+        --label_f1_results ${label_f1_results} 
     """
 }

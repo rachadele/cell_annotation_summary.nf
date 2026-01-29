@@ -163,7 +163,7 @@ workflow EVALUATION_SUMMARY {
     //
     ch_label_emmeans = MODEL_EVAL_LABEL.out.emmeans_summary
         .collect()
-    PLOT_LABEL_FIGURES(ch_label_emmeans)
+    PLOT_LABEL_FIGURES(ch_label_emmeans, ch_label_f1)
 
     //
     // MODULE: Plot cell type granularity comparison (post-hoc)
