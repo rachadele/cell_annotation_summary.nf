@@ -73,10 +73,21 @@ for (formula in formulas) {
   formula_str <- formula %>% gsub(" ", "_", .)
   formula_dir <- file.path(label_dir, formula_str)
   dir.create(formula_dir, showWarnings = FALSE, recursive=TRUE)
-  file.dir <- file.path(formula_dir, "files")
-  dir.create(file.dir, showWarnings = FALSE, recursive = TRUE)
+  fig_dir <- file.path(formula_dir, "figures")
+  file_dir <- file.path(formula_dir, "files")
+  dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
+  dir.create(file_dir, showWarnings = FALSE, recursive = TRUE)
+
   tryCatch({
-    run_and_store_model(df, formula, key_dir = formula_dir, key = "all", type="label", mixed=FALSE)
+    # Run model and get results
+    results <- run_and_store_model(df, formula, fig_dir = fig_dir, key = "all", type="label", mixed=FALSE)
+
+    # Write each result to a separate file
+    for (result_name in names(results)) {
+      result_df <- results[[result_name]]
+      write.table(result_df, file = file.path(file_dir, paste0(result_name, ".tsv")),
+                  sep = "\t", row.names = FALSE)
+    }
   }, error = function(e) {
     message(paste0("Model failed for label ", label, ": ", e$message))
     # Write an error summary so the process still produces output
@@ -85,10 +96,10 @@ for (formula in formulas) {
       p.value = NA, FDR = NA, formula = formula, key = "all",
       LogLik = NA, AIC = NA, BIC = NA
     )
-    write.table(error_df, file = file.path(file.dir, "all_model_summary_coefs_combined.tsv"),
+    write.table(error_df, file = file.path(file_dir, "model_coefs.tsv"),
                 sep = "\t", row.names = FALSE)
     # Write a placeholder effects file so Nextflow output glob matches
-    write.table(data.frame(note = "model_failed"), file = file.path(file.dir, "method_cutoff_effects.tsv"),
+    write.table(data.frame(note = "model_failed"), file = file.path(file_dir, "method_cutoff_effects.tsv"),
                 sep = "\t", row.names = FALSE)
   })
 }

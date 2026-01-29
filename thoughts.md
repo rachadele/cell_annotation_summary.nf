@@ -9,3 +9,8 @@ maybe we need to look at raw values instead of fitted values?
 
 
 > fitting to macro average f1 didn't change scvi improvement over seurat for sample-level f1, so the question remains why seurat is better for individual cell types but scvi is better overall
+
+changes made to make results more interpretable:
+
+- write fitted emmeans results per contrast to a single tsv file instead of separate files per model, and add the key (level of granularity) as a column
+- this will impact PLOT_PUB_FIGURES module, which will need to read from the combined tsv file

@@ -58,121 +58,74 @@ run_beta_model <- function(df, formula, group_var = "study", type="weighted", mi
 }
 
 
-run_emmeans_weighted <- function(model, key_dir) {
+run_emmeans_weighted <- function(model, key) {
+  results <- list()
 
-  fig.dir <- file.path(key_dir, "figures")
-  if (!dir.exists(fig.dir)) {
-    dir.create(fig.dir)
-  }
-  file.dir <- file.path(key_dir, "files")
-  if (!dir.exists(file.dir)) {
-    dir.create(file.dir)
-  }
-  # Estimate for reference * method * cutoff
+  # Estimate for reference * method
   emm_reference_method <- emmeans(model, specs = ~ reference * method, at = list(cutoff = 0, subsample_ref = "500"), type = "response")
-  summary_emm_reference_method_df <- as.data.frame(summary(emm_reference_method))
-  estimate_reference_method_df <- as.data.frame(pairs(emm_reference_method))
-  #plot_contrasts(summary_emm_reference_method_df, key_dir=fig.dir, contrast ="reference:method")
-  # Save emmeans summary and estimates for reference * method * cutoff
-  write.table(summary_emm_reference_method_df, file = file.path(file.dir, "reference_method_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  write.table(estimate_reference_method_df, file = file.path(file.dir, "reference_method_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  results$reference_method_emmeans_summary <- as.data.frame(summary(emm_reference_method)) %>% mutate(key = key)
+  results$reference_method_emmeans_estimates <- as.data.frame(pairs(emm_reference_method)) %>% mutate(key = key)
 
-  # Estimate for method * cutoff
+  # Estimate for method
   emm_method <- emmeans(model, specs = ~ method, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
-  summary_emm_method_df <- as.data.frame(summary(emm_method))
-  estimate_method_df <- as.data.frame(pairs(emm_method))
-  # Save emmeans summary and estimates for method * cutoff
-  write.table(summary_emm_method_df, file = file.path(file.dir, "method_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  write.table(estimate_method_df, file = file.path(file.dir, "method_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
-  #plot_contrasts(summary_emm_method_df, key_dir=fig.dir, contrast ="method")
+  results$method_emmeans_summary <- as.data.frame(summary(emm_method)) %>% mutate(key = key)
+  results$method_emmeans_estimates <- as.data.frame(pairs(emm_method)) %>% mutate(key = key)
 
-# subsample ref 
+  # subsample ref
   emm_subsample_ref <- emmeans(model, specs = ~ subsample_ref, at = list(cutoff = 0, reference="whole cortex"), type = "response")
-  summary_emm_subsample_ref_df <- as.data.frame(summary(emm_subsample_ref))
-  estimate_subsample_ref_df <- as.data.frame(pairs(emm_subsample_ref))
-  #plot_contrasts(summary_emm_subsample_ref_df, key_dir=fig.dir, contrast ="subsample_ref")
-  # Save emmeans summary and estimates for subsample_ref
-  write.table(summary_emm_subsample_ref_df, file = file.path(file.dir, "subsample_ref_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  write.table(estimate_subsample_ref_df, file = file.path(file.dir, "subsample_ref_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  results$subsample_ref_emmeans_summary <- as.data.frame(summary(emm_subsample_ref)) %>% mutate(key = key)
+  results$subsample_ref_emmeans_estimates <- as.data.frame(pairs(emm_subsample_ref)) %>% mutate(key = key)
 
-
-  if ("sex" %in% colnames(model$frame) ) {
+  if ("sex" %in% colnames(model$frame)) {
     emm_sex <- emmeans(model, specs = ~ sex, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
-    summary_emm_sex_df <- as.data.frame(summary(emm_sex))
-    estimate_sex_df <- as.data.frame(pairs(emm_sex))
-    #plot_contrasts(summary_emm_sex_df, key_dir=fig.dir, contrast="sex")
-    # Save emmeans summary and estimates for sex
-    write.table(summary_emm_sex_df, file = file.path(file.dir, "sex_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-    write.table(estimate_sex_df, file = file.path(file.dir, "sex_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+    results$sex_emmeans_summary <- as.data.frame(summary(emm_sex)) %>% mutate(key = key)
+    results$sex_emmeans_estimates <- as.data.frame(pairs(emm_sex)) %>% mutate(key = key)
   }
 
-  if ("disease_state" %in% colnames(model$frame) ) {
+  if ("disease_state" %in% colnames(model$frame)) {
     emm_disease_state <- emmeans(model, specs = ~ disease_state, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
-    summary_emm_disease_state_df <- as.data.frame(summary(emm_disease_state))
-    estimate_disease_state_df <- as.data.frame(pairs(emm_disease_state))
-    #plot_contrasts(summary_emm_disease_state_df, key_dir=fig.dir, contrast="disease_state")
-    write.table(summary_emm_disease_state_df, file = file.path(file.dir, "disease_state_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-    write.table(estimate_disease_state_df, file = file.path(file.dir, "disease_state_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+    results$disease_state_emmeans_summary <- as.data.frame(summary(emm_disease_state)) %>% mutate(key = key)
+    results$disease_state_emmeans_estimates <- as.data.frame(pairs(emm_disease_state)) %>% mutate(key = key)
   }
 
-  if ("treatment_state" %in% colnames(model$frame) ) {
+  if ("treatment_state" %in% colnames(model$frame)) {
     emm_treatment <- emmeans(model, specs = ~ treatment_state, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
-    summary_emm_treatment_df <- as.data.frame(summary(emm_treatment))
-    estimate_treatment_df <- as.data.frame(pairs(emm_treatment))
-    #plot_contrasts(summary_emm_treatment_df, key_dir=fig.dir, contrast="treatment_state")
-    write.table(summary_emm_treatment_df, file = file.path(file.dir, "treatment_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-    write.table(estimate_treatment_df, file = file.path(file.dir, "treatment_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
-    
+    results$treatment_emmeans_summary <- as.data.frame(summary(emm_treatment)) %>% mutate(key = key)
+    results$treatment_emmeans_estimates <- as.data.frame(pairs(emm_treatment)) %>% mutate(key = key)
   }
 
   if ("region_match" %in% colnames(model$frame)) {
-    emm_region_match <- emmeans(model, specs = ~ region_match , at = list(cutoff = 0), type = "response")
-    summary_emm_region_match_df <- as.data.frame(summary(emm_region_match))
-    estimate_region_match_df <- as.data.frame(pairs(emm_region_match))
-    #plot_contrasts(summary_emm_region_match_df, key_dir=fig.dir, contrast="region_match")
-    write.table(summary_emm_region_match_df, file = file.path(file.dir, "region_match_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-    write.table(estimate_region_match_df, file = file.path(file.dir, "region_match_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
-  
+    emm_region_match <- emmeans(model, specs = ~ region_match, at = list(cutoff = 0), type = "response")
+    results$region_match_emmeans_summary <- as.data.frame(summary(emm_region_match)) %>% mutate(key = key)
+    results$region_match_emmeans_estimates <- as.data.frame(pairs(emm_region_match)) %>% mutate(key = key)
   }
 
   # get marginal mean across all contrasts
-  emm_summary_df <- as.data.frame(summary(emmeans(model, type = "response", specs=~1, at = list(cutoff = 0))))
-  write.table(emm_summary_df, file = file.path(file.dir, "summary_emmeans.tsv"), sep = "\t", row.names = FALSE)
+  results$summary_emmeans <- as.data.frame(summary(emmeans(model, type = "response", specs=~1, at = list(cutoff = 0)))) %>% mutate(key = key)
+
+  return(results)
 }
 
 
-run_emmeans_label <- function(model, key_dir) {
+run_emmeans_label <- function(model, key) {
+  results <- list()
 
-  fig.dir <- file.path(key_dir, "figures")
-  if (!dir.exists(fig.dir)) {
-    dir.create(fig.dir)
-  }
-  file.dir <- file.path(key_dir, "files")
-  if (!dir.exists(file.dir)) {
-    dir.create(file.dir)
-  }
-
- # Estimate for reference * method * cutoff
+  # Estimate for reference * method
   emm_reference_method <- emmeans(model, specs = ~ reference * method, at = list(cutoff = 0), type = "response")
-  summary_emm_reference_method_df <- as.data.frame(summary(emm_reference_method))
-  estimate_reference_method_df <- as.data.frame(pairs(emm_reference_method))
-  write.table(summary_emm_reference_method_df, file = file.path(file.dir, "reference_method_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  write.table(estimate_reference_method_df, file = file.path(file.dir, "reference_method_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  results$reference_method_emmeans_summary <- as.data.frame(summary(emm_reference_method)) %>% mutate(key = key)
+  results$reference_method_emmeans_estimates <- as.data.frame(pairs(emm_reference_method)) %>% mutate(key = key)
 
-# subsample ref 
+  # subsample ref
   emm_subsample_ref <- emmeans(model, specs = ~ subsample_ref, at = list(cutoff = 0), type = "response")
-  summary_emm_subsample_ref_df <- as.data.frame(summary(emm_subsample_ref))
-  estimate_subsample_ref_df <- as.data.frame(pairs(emm_subsample_ref))
-  write.table(summary_emm_subsample_ref_df, file = file.path(file.dir, "subsample_ref_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  write.table(estimate_subsample_ref_df, file = file.path(file.dir, "subsample_ref_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  results$subsample_ref_emmeans_summary <- as.data.frame(summary(emm_subsample_ref)) %>% mutate(key = key)
+  results$subsample_ref_emmeans_estimates <- as.data.frame(pairs(emm_subsample_ref)) %>% mutate(key = key)
 
-  # Estimate for method * cutoff
+  # Estimate for method
   emm_method <- emmeans(model, specs = ~ method, at = list(cutoff = 0, reference="whole cortex"), type = "response")
-  summary_emm_method_df <- as.data.frame(summary(emm_method))
-  estimate_method_df <- as.data.frame(pairs(emm_method))
-  write.table(summary_emm_method_df, file = file.path(file.dir, "method_emmeans_summary.tsv"), sep = "\t", row.names = FALSE)
-  write.table(estimate_method_df, file = file.path(file.dir, "method_emmeans_estimates.tsv"), sep = "\t", row.names = FALSE)
+  results$method_emmeans_summary <- as.data.frame(summary(emm_method)) %>% mutate(key = key)
+  results$method_emmeans_estimates <- as.data.frame(pairs(emm_method)) %>% mutate(key = key)
 
+  return(results)
 }
 
 
@@ -277,18 +230,16 @@ run_drop1 <- function(model, key_dir) {
   ggsave(file.path(key_dir, "drop1.png"), p, width = 20, height = 20, dpi = 300)
 }
 
-run_and_store_model <- function(df, formula, key_dir, key, type="label", group_var="study", mixed=TRUE) {
-  fig.dir <- file.path(key_dir, "figures")
-  if (!dir.exists(fig.dir)) {
-    dir.create(fig.dir)
+run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_var="study", mixed=TRUE) {
+  all_results <- list()
+
+  if (!dir.exists(fig_dir)) {
+    dir.create(fig_dir, recursive = TRUE)
   }
-  file.dir <- file.path(key_dir, "files")
-  if (!dir.exists(file.dir)) {
-    dir.create(file.dir)
-  }
-  # Run the beta model using the run_beta_model function
+
+  # Run the beta model
   result <- run_beta_model(df, formula, group_var = group_var, type=type, mixed=mixed)
-  #plot_model_metrics(result, formula, key)
+
   # Extract model summary coefficients and add additional info
   model_summary_coefs <- result$summary
   model_summary_coefs$formula <- result$formula
@@ -296,42 +247,40 @@ run_and_store_model <- function(df, formula, key_dir, key, type="label", group_v
   model_summary_coefs$LogLik <- result$stats$LogLik
   model_summary_coefs$AIC <- result$stats$AIC
   model_summary_coefs$BIC <- result$stats$BIC
-  model = result$model
+  model <- result$model
 
- # run_drop1(model, fig.dir) 
-  plot_qq(model, fig.dir)
+  all_results$model_coefs <- model_summary_coefs
+
+  plot_qq(model, fig_dir)
+
   if (type == "weighted") {
-    # Run emmeans for weighted F1
-    run_emmeans_weighted(model, key_dir)
-    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
+    emmeans_results <- run_emmeans_weighted(model, key)
+    all_results <- c(all_results, emmeans_results)
 
-    ae_contrast<- alleffects["method:cutoff"]
-    plot_continuous_effects(ae_contrast, fig.dir)
-    ae_contrast <- as.data.frame(ae_contrast[[1]])
-    write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
+    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
+    ae_contrast <- alleffects["method:cutoff"]
+    plot_continuous_effects(ae_contrast, fig_dir)
+    all_results$method_cutoff_effects <- as.data.frame(ae_contrast[[1]]) %>% mutate(key = key)
 
   } else if (type == "label") {
-    # Run emmeans for label F1
-    run_emmeans_label(model, key_dir)
+    emmeans_results <- run_emmeans_label(model, key)
+    all_results <- c(all_results, emmeans_results)
 
-    tryCatch({
+    cutoff_effects_result <- tryCatch({
       alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
       ae_contrast <- alleffects["cutoff:method"]
-      plot_continuous_effects(ae_contrast, fig.dir)
-      ae_contrast <- as.data.frame(ae_contrast[[1]])
-      write.table(ae_contrast, file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
+      plot_continuous_effects(ae_contrast, fig_dir)
+      as.data.frame(ae_contrast[[1]]) %>% mutate(key = key)
     }, error = function(e) {
       message(paste0("allEffects failed: ", e$message))
-      write.table(data.frame(note = "allEffects_failed"), file = file.path(file.dir, "method_cutoff_effects.tsv"), sep = "\t", row.names = FALSE)
+      data.frame(note = "allEffects_failed", key = key)
     })
-
+    all_results$method_cutoff_effects <- cutoff_effects_result
   }
-  # Save the model summary and coefficients summary to files
-  write.table(model_summary_coefs, file = file.path(file.dir, paste0(key,"_model_summary_coefs_combined.tsv")), sep = "\t", row.names = FALSE)
-  # Plot the model summary (assuming plot_model_summary is defined)
-  plot_model_summary(model_summary = model_summary_coefs, outdir = fig.dir, key = key)
-  # Return the model summary coefficients
-  return(model_summary_coefs)
+
+  plot_model_summary(model_summary = model_summary_coefs, outdir = fig_dir, key = key)
+
+  return(all_results)
 }
 
 
