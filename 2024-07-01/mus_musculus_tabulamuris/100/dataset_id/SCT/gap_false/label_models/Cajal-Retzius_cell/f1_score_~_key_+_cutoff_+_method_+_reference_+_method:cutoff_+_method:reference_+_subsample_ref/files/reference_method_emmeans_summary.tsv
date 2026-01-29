@@ -1,9 +1,0 @@
-"reference"	"method"	"response"	"SE"	"df"	"asymp.LCL"	"asymp.UCL"
-"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"	"seurat"	0.380828511607273	0.0209194193224358	Inf	0.340758441459653	0.422590028472156
-"Single-cell RNA-seq for all cortical  hippocampal regions 10x"	"seurat"	0.792499100398842	0.0146128843099055	Inf	0.762401117615227	0.81968613183181
-"Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"	"seurat"	0.335287845097235	0.0193101046836657	Inf	0.298556377680143	0.374128057637506
-"whole cortex"	"seurat"	0.583985398651626	0.0219499851175294	Inf	0.540430212685101	0.626267322457079
-"An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types"	"scvi"	0.428939521540942	0.0215456678540728	Inf	0.387323629214248	0.471585120195612
-"Single-cell RNA-seq for all cortical  hippocampal regions 10x"	"scvi"	0.598968648611472	0.0215771568873438	Inf	0.556041039282486	0.640429624959727
-"Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4"	"scvi"	0.423728420418683	0.0211973818889636	Inf	0.382811952591732	0.465718184238738
-"whole cortex"	"scvi"	0.578575530365472	0.0218692229234544	Inf	0.535225425342281	0.620747351299031

@@ -46,29 +46,20 @@ factor_names <- c("reference", "method", "cutoff", "subsample_ref")
 if (organism == "homo_sapiens") {
   all_factors = c(factor_names, "disease_state","sex","region_match")
   # Defining the formulas
-  formulas <- list(
-    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
-    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","disease_state"),collapse = "+")),
-    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","sex"),collapse = "+")),
-    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","region_match"),collapse = "+")),
-    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff", "reference:method"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
+  formulas <- list( 
+    paste("macro_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
     )
 } else if (organism == "mus_musculus") {
     # full interactive model
   all_factors <- c(factor_names, "treatment_state","sex")
   formulas <- list(
-    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff"), collapse = " + ")),
-    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","treatment_state"),collapse = " + ")),
-    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff","sex"),collapse = " + ")),
-    #paste("weighted_f1 ~", paste(c(factor_names, "method:cutoff", "reference:method"), collapse = " + ")),
-    paste("weighted_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
+    paste("macro_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
 
     
   )
 }
 
-weighted_f1_results$weighted_f1 <-  pmax(pmin(weighted_f1_results$weighted_f1, 1 - 1e-6), 1e-6)
+weighted_f1_results$macro_f1 <-  pmax(pmin(weighted_f1_results$macro_f1, 1 - 1e-6), 1e-6)
 weighted_f1_results$subsample_ref <- weighted_f1_results$subsample_ref %>% factor(levels = c("500","100","50"))
 
 # Grouping the data by 'key' column and creating a list of data frames
