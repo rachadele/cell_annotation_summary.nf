@@ -107,28 +107,6 @@ run_emmeans_weighted <- function(model, key) {
 }
 
 
-run_emmeans_label <- function(model, key) {
-  results <- list()
-
-  # Estimate for reference * method
-  emm_reference_method <- emmeans(model, specs = ~ reference * method, at = list(cutoff = 0), type = "response")
-  results$reference_method_emmeans_summary <- as.data.frame(summary(emm_reference_method)) %>% mutate(key = key)
-  results$reference_method_emmeans_estimates <- as.data.frame(pairs(emm_reference_method)) %>% mutate(key = key)
-
-  # subsample ref
-  emm_subsample_ref <- emmeans(model, specs = ~ subsample_ref, at = list(cutoff = 0), type = "response")
-  results$subsample_ref_emmeans_summary <- as.data.frame(summary(emm_subsample_ref)) %>% mutate(key = key)
-  results$subsample_ref_emmeans_estimates <- as.data.frame(pairs(emm_subsample_ref)) %>% mutate(key = key)
-
-  # Estimate for method
-  emm_method <- emmeans(model, specs = ~ method, at = list(cutoff = 0, reference="whole cortex"), type = "response")
-  results$method_emmeans_summary <- as.data.frame(summary(emm_method)) %>% mutate(key = key)
-  results$method_emmeans_estimates <- as.data.frame(pairs(emm_method)) %>% mutate(key = key)
-
-  return(results)
-}
-
-
 
 plot_contrasts <- function(emm_summary_df, key_dir, contrast) {
   
@@ -244,9 +222,9 @@ run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_v
   model_summary_coefs <- result$summary
   model_summary_coefs$formula <- result$formula
   model_summary_coefs$key <- key
-  model_summary_coefs$LogLik <- result$stats$LogLik
-  model_summary_coefs$AIC <- result$stats$AIC
-  model_summary_coefs$BIC <- result$stats$BIC
+  model_summary_coefs$LogLik <- as.numeric(result$stats$LogLik)
+  model_summary_coefs$AIC <- as.numeric(result$stats$AIC)
+  model_summary_coefs$BIC <- as.numeric(result$stats$BIC)
   model <- result$model
 
   all_results$model_coefs <- model_summary_coefs
@@ -262,20 +240,6 @@ run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_v
     plot_continuous_effects(ae_contrast, fig_dir)
     all_results$method_cutoff_effects <- as.data.frame(ae_contrast[[1]]) %>% mutate(key = key)
 
-  } else if (type == "label") {
-    emmeans_results <- run_emmeans_label(model, key)
-    all_results <- c(all_results, emmeans_results)
-
-    cutoff_effects_result <- tryCatch({
-      alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
-      ae_contrast <- alleffects["cutoff:method"]
-      plot_continuous_effects(ae_contrast, fig_dir)
-      as.data.frame(ae_contrast[[1]]) %>% mutate(key = key)
-    }, error = function(e) {
-      message(paste0("allEffects failed: ", e$message))
-      data.frame(note = "allEffects_failed", key = key)
-    })
-    all_results$method_cutoff_effects <- cutoff_effects_result
   }
 
   plot_model_summary(model_summary = model_summary_coefs, outdir = fig_dir, key = key)

@@ -10,12 +10,10 @@ include { PLOT_CUTOFF            } from "$projectDir/modules/local/plot_cutoff/m
 include { PLOT_COMPTIME          } from "$projectDir/modules/local/plot_comptime/main"
 include { PLOT_LABEL_DIST        } from "$projectDir/modules/local/plot_label_dist/main"
 include { MODEL_EVAL_AGGREGATED  } from "$projectDir/modules/local/model_eval_aggregated/main"
-include { SPLIT_BY_LABEL         } from "$projectDir/modules/local/split_by_label/main"
-include { MODEL_EVAL_LABEL       } from "$projectDir/modules/local/model_eval_label/main"
 include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
 include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
 include { PLOT_PUB_FIGURES       } from "$projectDir/modules/local/plot_pub_figures/main"
-include { PLOT_LABEL_FIGURES    } from "$projectDir/modules/local/plot_label_figures/main"
+include { PLOT_LABEL_HEATMAP     } from "$projectDir/modules/local/plot_label_heatmap/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -102,31 +100,9 @@ workflow EVALUATION_SUMMARY {
     )
 
     //
-    // MODULE: Split label F1 results by key and label
+    // MODULE: Plot per-study label F1 heatmaps
     //
-    SPLIT_BY_LABEL(ch_label_f1)
-
-    //
-    // CHANNEL: Map split label files to (label, file) tuples
-    //
-    ch_label_f1_results_split_map = SPLIT_BY_LABEL.out.label_f1_results_split
-        .flatten()
-        .map { file ->
-            def label = file.getParent().getName()
-            [label, file]
-        }
-
-    //
-    // MODULE: Model evaluation for label-level results (fixed-effects beta regression)
-    //
-    MODEL_EVAL_LABEL(ch_label_f1_results_split_map)
-
-    //
-    // MODULE: Plot label-level model results (forest plots)
-    //
-    ch_label_emmeans = MODEL_EVAL_LABEL.out.emmeans_summary
-        .collect()
-    PLOT_LABEL_FIGURES(ch_label_emmeans, ch_label_f1)
+    PLOT_LABEL_HEATMAP(ch_label_f1)
 
     //
     // MODULE: Plot cell type granularity comparison (post-hoc)
