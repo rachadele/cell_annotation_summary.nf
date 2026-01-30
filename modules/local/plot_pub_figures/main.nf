@@ -4,10 +4,10 @@ process PLOT_PUB_FIGURES {
 
     input:
     val weighted_f1_results
-    path cutoff_effects
-    path reference_emmeans
-    path method_emmeans
-    path all_emmeans_summary
+    val cutoff_effects
+    val reference_emmeans
+    val method_emmeans
+    val all_emmeans_summary
 
     output:
     path "**.png", emit: figures

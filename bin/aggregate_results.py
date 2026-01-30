@@ -87,8 +87,11 @@ def update_metrics(df):
 def print_study_factor_table(label_f1_results, organism):
     import pandas as pd
     if organism == "homo_sapiens":
+        # number cells? not sure how to calculate this
         columns = ["disease", "sex", "dev_stage", "number query samples", "query_region", "number unique subclasses"]
     else:
+        # number cells? not sure how to calculate this
+        # support is just a proportion
         columns = ["treatment", "genotype", "strain", "sex", "age", "query_region", "number query samples", "number unique subclasses"]
 
     # Ensure DataFrames
@@ -105,7 +108,13 @@ def print_study_factor_table(label_f1_results, organism):
         row = {"study": study}
         for col in columns:
             if col == "number query samples":
-                row[col] = group.shape[0]
+                row[col] = group["query"].nunique()
+            #elif col == "number cells":
+                ## Sum support per query from one (key, method, reference, cutoff) slice to avoid double-counting
+                #slice_cols = ["key", "method", "reference", "cutoff"]
+                #first_slice = group.drop_duplicates(subset=["query"], keep="first")[slice_cols].iloc[0]
+                #mask = (group[slice_cols] == first_slice).all(axis=1)
+                #row[col] = group.loc[mask].groupby("query")["support"].sum().sum()
             elif col == "number unique subclasses":
                 # Find unique subclasses for this study in label_f1_results
                 n_subclasses = label_df[(label_df[study_col] == study) & (label_df["key"] == "subclass")]["label"].nunique()
