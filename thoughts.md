@@ -14,3 +14,21 @@ changes made to make results more interpretable:
 
 - write fitted emmeans results per contrast to a single tsv file instead of separate files per model, and add the key (level of granularity) as a column
 - this will impact PLOT_PUB_FIGURES module, which will need to read from the combined tsv file
+
+
+Paul thoughts:
+- plot raw data
+- stop label modeling
+- variation sample to sample?
+- e.g. 100 samples
+- score for each sample for f1 for astrocytes
+- variation across samples?
+- build dataset-by-dataset models instead of cell-type-by-cell-type models
+- do cell type analyses per dataset
+- do sample-level analyses per dataset?
+- plot inter-sample variation in an indiviudal study
+- maybe this will explain why seurat is better for individual cell types but scvi is better overall?
+- maybe my model fits are just bad for label models
+- make a heatmap for each dataset: rows are samples, columns are cell types, values are f1 scores
+- look for patterns in the heatmaps
+- order by sex, treatment, disease status, etc
