@@ -12,6 +12,8 @@ process PLOT_LABEL_HEATMAP {
     python ${projectDir}/bin/plot_label_heatmap.py \
         --label_f1_results ${label_f1_results} \
         --organism ${params.organism} \
+        --cutoff ${params.cutoff} \
+        --subsample_ref ${params.subsample_ref} \
         --outdir heatmaps
     """
 }
