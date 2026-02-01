@@ -14,6 +14,11 @@ include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_sum
 include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
 include { PLOT_PUB_FIGURES       } from "$projectDir/modules/local/plot_pub_figures/main"
 include { PLOT_LABEL_HEATMAP     } from "$projectDir/modules/local/plot_label_heatmap/main"
+include { PLOT_LABEL_FOREST     } from "$projectDir/modules/local/plot_label_forest/main"
+include { RANK_LABEL_PERFORMANCE   } from "$projectDir/modules/local/rank_label_performance/main"
+include { PLOT_PARAM_HEATMAP       } from "$projectDir/modules/local/plot_param_heatmap/main"
+include { PLOT_RANKING_SUMMARY     } from "$projectDir/modules/local/plot_ranking_summary/main"
+include { PLOT_RANKING_RELIABILITY } from "$projectDir/modules/local/plot_ranking_reliability/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,6 +108,31 @@ workflow EVALUATION_SUMMARY {
     // MODULE: Plot per-study label F1 heatmaps
     //
     PLOT_LABEL_HEATMAP(ch_label_f1)
+
+    //
+    // MODULE: Plot per-study label F1 forest plots
+    //
+    PLOT_LABEL_FOREST(ch_label_f1)
+
+    //
+    // MODULE: Rank label performance across studies
+    //
+    RANK_LABEL_PERFORMANCE(ch_label_f1)
+
+    //
+    // MODULE: Plot parameter performance heatmaps
+    //
+    PLOT_PARAM_HEATMAP(RANK_LABEL_PERFORMANCE.out.rankings_detailed)
+
+    //
+    // MODULE: Plot ranking summary dot plots
+    //
+    PLOT_RANKING_SUMMARY(RANK_LABEL_PERFORMANCE.out.rankings_best)
+
+    //
+    // MODULE: Plot ranking reliability scatter
+    //
+    PLOT_RANKING_RELIABILITY(RANK_LABEL_PERFORMANCE.out.rankings_best)
 
     //
     // MODULE: Plot cell type granularity comparison (post-hoc)
