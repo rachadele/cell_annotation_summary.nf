@@ -70,11 +70,6 @@ def parse_arguments():
         '--output_prefix', type=str, default='celltype_granularity',
         help="Prefix for output filenames"
     )
-    parser.add_argument(
-        '--methods', type=str, nargs='+', default=['scvi'],
-        help="Methods to include (default: scvi only)"
-    )
-
     if __name__ == "__main__":
         return parser.parse_args()
     return parser.parse_known_args()[0]
@@ -133,9 +128,6 @@ def main():
         mask &= (df['reference'] == args.reference)
     df = df[mask].copy()
 
-    # Filter by methods
-    df = df[df['method'].isin(args.methods)].copy()
-
     if df.empty:
         print("Error: No data found after filtering!")
         return
@@ -181,8 +173,9 @@ def main():
     if n_levels == 1:
         axes = [axes]
 
-    # Method palette
-    method_palette = {m: METHOD_COLORS[m] for m in args.methods}
+    # Determine methods present in data
+    methods = sorted(df['method'].unique())
+    method_palette = {m: METHOD_COLORS.get(m, '#333333') for m in methods}
 
     # Process each granularity level
     for idx, level in enumerate(available_levels):
@@ -217,13 +210,13 @@ def main():
             x='f1_score',
             hue='method',
             order=sorted_labels,
-            hue_order=args.methods,
+            hue_order=methods,
             palette=method_palette,
             orient='h',
             ax=ax,
             linewidth=1.5,
             fliersize=0,
-            width=0.6 if len(args.methods) > 1 else 0.4
+            width=0.6 if len(methods) > 1 else 0.4
         )
 
         # Remove seaborn's auto-generated legend
@@ -254,11 +247,11 @@ def main():
         for lineage, color in global_palette.items()
     ]
 
-    # Method legend (if multiple methods)
-    if len(args.methods) > 1:
+    # Method legend
+    if len(methods) > 1:
         method_handles = [
-            Patch(facecolor=METHOD_COLORS[m], edgecolor='black', linewidth=1, label=METHOD_NAMES[m])
-            for m in args.methods
+            Patch(facecolor=METHOD_COLORS.get(m, '#333333'), edgecolor='black', linewidth=1, label=METHOD_NAMES.get(m, m))
+            for m in methods
         ]
         fig.legend(
             handles=method_handles,

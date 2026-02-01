@@ -2,10 +2,11 @@
 """
 Per-study F1 heatmaps showing sample-level F1 scores by cell type.
 
-For each combination of (study, reference), creates a single figure with
-rows = granularity levels (subclass, class, family, global) and
-columns = methods (e.g. scVI, Seurat). Within each panel, rows are query
-samples and columns are cell type labels. Values are F1 scores.
+For each study, creates a single figure with:
+- Rows = granularity levels (subclass, class, family, global)
+- Columns = references × methods (e.g. ref1:scVI, ref1:Seurat, ref2:scVI, ...)
+- Within each panel: rows = query samples, columns = cell type labels
+- Values = F1 scores
 
 Usage:
     python plot_label_heatmap.py \
@@ -35,14 +36,14 @@ KEY_ORDER = ["subclass", "class", "family", "global"]
 # Experimental factors to annotate on rows, by organism
 ORGANISM_FACTORS = {
     "homo_sapiens": ["sex", "disease_state", "dev_stage"],
-    "mus_musculus": ["sex", "treatment_state", "genotype"],
+    "mus_musculus": ["sex", "treatment", "genotype"],
 }
 
 # Colors for factor annotations
 FACTOR_PALETTES = {
     "sex": {"male": "#4393c3", "female": "#d6604d", "None": "#cccccc"},
     "disease_state": {"control": "#66c2a5", "disease": "#fc8d62", "None": "#cccccc"},
-    "treatment_state": {"no treatment": "#66c2a5", "treatment": "#fc8d62", "None": "#cccccc"},
+    "treatment": None,
     "dev_stage": None,
     "genotype": None,
 }
@@ -129,19 +130,37 @@ def draw_annotation_strip(ax, ann_colors, ann_labels, n_queries, queries_ordered
         spine.set_visible(False)
 
 
-def plot_study_reference_heatmap(study_ref_df, study, reference, factors, outdir):
-    """Plot a keys (rows) x methods (cols) grid of heatmaps for one (study, reference)."""
-    available_keys = [k for k in KEY_ORDER if k in study_ref_df["key"].unique()]
-    methods = sorted(study_ref_df["method"].unique())
+def get_reference_display(row):
+    """Get short display name for a reference, preferring acronym."""
+    acronym = row.get("reference_acronym", None)
+    if pd.notna(acronym) and str(acronym).strip():
+        return str(acronym).strip()
+    ref = str(row.get("reference", ""))
+    return ref if len(ref) <= 30 else ref[:27] + "..."
+
+
+def plot_study_heatmap(study_df, study, factors, outdir):
+    """Plot a keys (rows) × references × methods (cols) grid of heatmaps for one study."""
+    available_keys = [k for k in KEY_ORDER if k in study_df["key"].unique()]
+    methods = sorted(study_df["method"].unique())
+
+    # Build reference list with display names
+    ref_display = {}
+    for ref in study_df["reference"].unique():
+        row = study_df[study_df["reference"] == ref].iloc[0]
+        ref_display[ref] = get_reference_display(row)
+    references = sorted(ref_display.keys())
+
     n_keys = len(available_keys)
+    n_refs = len(references)
     n_methods = len(methods)
 
-    if n_keys == 0 or n_methods == 0:
+    if n_keys == 0 or n_refs == 0 or n_methods == 0:
         return
 
     # Shared sample (row) ordering across all panels
-    sort_cols = [f for f in factors if f in study_ref_df.columns] + ["query"]
-    sample_meta = (study_ref_df.drop_duplicates(subset=["query"])
+    sort_cols = [f for f in factors if f in study_df.columns] + ["query"]
+    sample_meta = (study_df.drop_duplicates(subset=["query"])
                    .sort_values(sort_cols)
                    .reset_index(drop=True))
     queries_ordered = sample_meta["query"].tolist()
@@ -154,100 +173,129 @@ def plot_study_reference_heatmap(study_ref_df, study, reference, factors, outdir
     ann_colors, ann_labels = build_row_annotations(sample_meta, factors, palette_cache)
     n_ann = len(ann_colors)
 
-    # Determine cell types per key for column labels
-    key_labels_ordered = {}
-    key_n_labels = {}
+    # Determine max cell types across all (key, reference) for column sizing
+    max_n_labels = 0
     for key in available_keys:
-        key_df = study_ref_df[study_ref_df["key"] == key]
-        label_means = key_df.groupby("label")["f1_score"].mean().sort_values(ascending=False)
-        key_labels_ordered[key] = label_means.index.tolist()
-        key_n_labels[key] = len(label_means)
+        for ref in references:
+            n_labels = study_df[
+                (study_df["key"] == key) & (study_df["reference"] == ref)
+            ]["label"].nunique()
+            max_n_labels = max(max_n_labels, n_labels)
+
+    if max_n_labels == 0:
+        return
 
     # --- Figure sizing ---
+    total_heatmap_cols = n_refs * n_methods
     row_height = max(0.4, min(0.6, 25.0 / n_queries))
-    panel_height = n_queries * row_height + 3.0  # room for title + x-tick labels
-    fig_height = panel_height * n_keys + 3.5  # rows + suptitle + legend
+    panel_height = n_queries * row_height + 3.0
+    header_height = 1.5
+    fig_height = header_height + panel_height * n_keys + 4.0
 
     ann_width = max(2.5, n_ann * 1.0)
-    # Each method column width scales with the max label count across keys
-    max_n_labels = max(key_n_labels.values())
     col_width_per_label = max(0.45, min(0.85, 35.0 / max_n_labels))
     method_col_width = max(4, max_n_labels * col_width_per_label)
-    fig_width = ann_width + method_col_width * n_methods + 3  # padding + colorbar
+    fig_width = ann_width + method_col_width * total_heatmap_cols + 3
 
     fig = plt.figure(figsize=(fig_width, fig_height))
 
-    # Grid: n_keys rows x (1 annotation col + n_methods heatmap cols)
-    width_ratios = [ann_width] + [method_col_width] * n_methods
+    # Grid: (1 header + n_keys) rows × (1 annotation + n_refs*n_methods) cols
+    n_grid_rows = n_keys + 1
+    width_ratios = [ann_width] + [method_col_width] * total_heatmap_cols
+    height_ratios = [header_height] + [panel_height] * n_keys
+
     outer_gs = gridspec.GridSpec(
-        n_keys, 1 + n_methods, figure=fig,
+        n_grid_rows, 1 + total_heatmap_cols, figure=fig,
         width_ratios=width_ratios,
+        height_ratios=height_ratios,
         hspace=0.4, wspace=0.15
     )
 
+    # --- Row 0: reference group headers ---
+    for ref_idx, reference in enumerate(references):
+        col_start = 1 + ref_idx * n_methods
+        col_end = col_start + n_methods
+        ax_ref = fig.add_subplot(outer_gs[0, col_start:col_end])
+        ax_ref.text(
+            0.5, 0.5, ref_display[reference],
+            transform=ax_ref.transAxes, ha="center", va="center",
+            fontsize=16, fontweight="bold", style="italic",
+        )
+        ax_ref.set_axis_off()
+
+    # Pre-compute cell type ordering per key level (shared across all references)
+    key_labels_ordered = {}
+    for key in available_keys:
+        key_df = study_df[study_df["key"] == key]
+        if key_df.empty:
+            key_labels_ordered[key] = []
+        else:
+            label_means = (key_df.groupby("label")["f1_score"]
+                           .mean().sort_values(ascending=False))
+            key_labels_ordered[key] = label_means.index.tolist()
+
+    # --- Key rows (rows 1..n_keys) ---
     for key_idx, key in enumerate(available_keys):
-        key_df = study_ref_df[study_ref_df["key"] == key]
+        grid_row = key_idx + 1
+        key_df = study_df[study_df["key"] == key]
         if key_df.empty:
             continue
 
         labels_ordered = key_labels_ordered[key]
-        n_labels = len(labels_ordered)
-        if n_labels == 0:
-            continue
 
-        # Annotation strip (leftmost column of each row)
-        ax_ann = fig.add_subplot(outer_gs[key_idx, 0])
+        # Annotation strip (leftmost column)
+        ax_ann = fig.add_subplot(outer_gs[grid_row, 0])
         draw_annotation_strip(ax_ann, ann_colors, ann_labels,
                               n_queries, queries_ordered, show_ylabels=True)
-        # Key label on the left
         ax_ann.set_ylabel(key.capitalize(), fontsize=18, fontweight="bold",
                           labelpad=15)
 
-        # Heatmap for each method
-        for m_idx, method in enumerate(methods):
-            ax = fig.add_subplot(outer_gs[key_idx, 1 + m_idx])
+        for ref_idx, reference in enumerate(references):
+            ref_key_df = key_df[key_df["reference"] == reference]
 
-            method_df = key_df[key_df["method"] == method]
-            dupes = method_df.groupby(["query", "label"]).size()
-            dupes = dupes[dupes > 1]
-            if not dupes.empty:
-                raise ValueError(
-                    f"Duplicate (query, label) entries found for "
-                    f"study={study}, ref={reference[:40]}, key={key}, "
-                    f"method={method}: {dupes.head(5).to_dict()}"
+            for m_idx, method in enumerate(methods):
+                col_idx = 1 + ref_idx * n_methods + m_idx
+                ax = fig.add_subplot(outer_gs[grid_row, col_idx])
+
+                method_df = ref_key_df[ref_key_df["method"] == method]
+
+                if method_df.empty or len(labels_ordered) == 0:
+                    ax.set_visible(False)
+                    continue
+
+                pivot = method_df.pivot_table(
+                    index="query", columns="label", values="f1_score",
+                    aggfunc="mean",
+                )
+                pivot = pivot.reindex(index=queries_ordered, columns=labels_ordered)
+
+                # Colorbar only on the very last panel
+                is_last = (key_idx == n_keys - 1
+                           and ref_idx == n_refs - 1
+                           and m_idx == n_methods - 1)
+
+                sns.heatmap(
+                    pivot, ax=ax, cmap="YlOrRd", vmin=0, vmax=1,
+                    cbar=is_last,
+                    cbar_kws={"label": "F1 score", "shrink": 0.6,
+                              "aspect": 30} if is_last else {},
+                    linewidths=0.3, linecolor="white",
+                    xticklabels=True, yticklabels=False,
                 )
 
-            pivot = method_df.pivot_table(
-                index="query", columns="label", values="f1_score", aggfunc="mean"
-            )
-            pivot = pivot.reindex(index=queries_ordered, columns=labels_ordered)
+                # Method title on the first key row only
+                if key_idx == 0:
+                    method_display = METHOD_NAMES.get(method, method)
+                    ax.set_title(method_display, fontsize=16,
+                                 fontweight="bold", pad=8)
 
-            # Colorbar only on rightmost column of last row
-            is_last = (key_idx == n_keys - 1) and (m_idx == n_methods - 1)
-
-            sns.heatmap(
-                pivot, ax=ax, cmap="YlOrRd", vmin=0, vmax=1,
-                cbar=is_last,
-                cbar_kws={"label": "F1 score", "shrink": 0.6,
-                           "aspect": 30} if is_last else {},
-                linewidths=0.3, linecolor="white",
-                xticklabels=True, yticklabels=False,
-            )
-
-            # Method title on top row only
-            if key_idx == 0:
-                method_display = METHOD_NAMES.get(method, method)
-                ax.set_title(method_display, fontsize=20, fontweight="bold", pad=12)
-
-            ax.set_xlabel("")
-            ax.set_ylabel("")
-            ax.tick_params(axis="x", labelsize=13, rotation=90)
-            ax.tick_params(axis="y", left=False, labelleft=False)
+                ax.set_xlabel("")
+                ax.set_ylabel("")
+                ax.tick_params(axis="x", labelsize=11, rotation=90)
+                ax.tick_params(axis="y", left=False, labelleft=False)
 
     # Suptitle
-    ref_short = reference if len(reference) <= 80 else reference[:77] + "..."
-    fig.suptitle(f"{study}  —  {ref_short}",
-                 fontsize=22, fontweight="bold", y=1.01)
+    fig.suptitle(study, fontsize=22, fontweight="bold", y=1.01)
 
     # Factor legend at bottom
     if palette_cache:
@@ -267,10 +315,9 @@ def plot_study_reference_heatmap(study_ref_df, study, reference, factors, outdir
             )
 
     # Save
-    study_dir = os.path.join(outdir, study)
-    os.makedirs(study_dir, exist_ok=True)
-    ref_safe = sanitize_filename(reference)
-    outpath = os.path.join(study_dir, f"{ref_safe}_f1_heatmap.png")
+    os.makedirs(outdir, exist_ok=True)
+    study_safe = sanitize_filename(study)
+    outpath = os.path.join(outdir, f"{study_safe}_f1_heatmap.png")
     fig.savefig(outpath, dpi=200, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {outpath}")
@@ -307,12 +354,13 @@ def main():
         print("No data after filtering. Exiting.")
         return
 
-    # Generate heatmaps per (study, reference)
-    for (study, reference), group_df in df.groupby(["study", "reference"]):
-        print(f"Plotting: study={study}, ref={reference[:40]}... "
-              f"({len(group_df)} rows)")
-        plot_study_reference_heatmap(group_df, study, reference,
-                                     factors, args.outdir)
+    # Generate one heatmap per study
+    for study, group_df in df.groupby("study"):
+        n_refs = group_df["reference"].nunique()
+        n_keys = group_df["key"].nunique()
+        print(f"Plotting: study={study} "
+              f"({n_refs} references, {n_keys} keys, {len(group_df)} rows)")
+        plot_study_heatmap(group_df, study, factors, args.outdir)
 
     print("Done.")
 
