@@ -31,26 +31,27 @@ from plot_utils import (
 
 
 # Process display names and colors
+# Keys are the final component of the Nextflow process name (after last ':')
 PROCESS_NAMES = {
-    'rfPredict': 'scVI Prediction',
-    'predictSeurat': 'Seurat Prediction',
-    'mapQuery': 'scVI Query Processing',
-    'queryProcessSeurat': 'Seurat Query Processing',
-    'refProcessSeurat': 'Seurat Reference Processing'
+    'RF_PREDICT': 'scVI Prediction',
+    'PREDICT_SEURAT': 'Seurat Prediction',
+    'MAP_QUERY': 'scVI Query Processing',
+    'QUERY_PROCESS_SEURAT': 'Seurat Query Processing',
+    'REF_PROCESS_SEURAT': 'Seurat Reference Processing'
 }
 
 PROCESS_COLORS = {
-    'rfPredict': '#1f77b4',
-    'predictSeurat': '#ff7f0e',
-    'mapQuery': '#2ca02c',
-    'queryProcessSeurat': '#d62728',
-    'refProcessSeurat': '#9467bd'
+    'RF_PREDICT': '#1f77b4',
+    'PREDICT_SEURAT': '#ff7f0e',
+    'MAP_QUERY': '#2ca02c',
+    'QUERY_PROCESS_SEURAT': '#d62728',
+    'REF_PROCESS_SEURAT': '#9467bd'
 }
 
 # Process ordering (prediction methods first, then preprocessing)
 PROCESS_ORDER = [
-    'rfPredict', 'predictSeurat',
-    'mapQuery', 'queryProcessSeurat', 'refProcessSeurat'
+    'RF_PREDICT', 'PREDICT_SEURAT',
+    'MAP_QUERY', 'QUERY_PROCESS_SEURAT', 'REF_PROCESS_SEURAT'
 ]
 
 
@@ -123,19 +124,15 @@ def convert_memory(value_str) -> float:
 
 
 def load_trace_data(all_runs_dir: str) -> pd.DataFrame:
-    """Load and combine all trace files."""
+    """Load and combine all trace files found recursively."""
     reports = pd.DataFrame()
 
-    for run_dir in os.listdir(all_runs_dir):
-        dir_path = os.path.join(all_runs_dir, run_dir)
-        if not os.path.isdir(dir_path):
+    for root, dirs, files in os.walk(all_runs_dir):
+        if "trace.txt" not in files:
             continue
 
-        trace_path = os.path.join(dir_path, "trace.txt")
-        params_path = os.path.join(dir_path, "params.yaml")
-
-        if not os.path.exists(trace_path):
-            continue
+        trace_path = os.path.join(root, "trace.txt")
+        params_path = os.path.join(root, "params.yaml")
 
         try:
             trace = pd.read_csv(trace_path, sep="\t")
@@ -163,58 +160,16 @@ def load_trace_data(all_runs_dir: str) -> pd.DataFrame:
     return reports
 
 
-def create_runtime_bar_chart(
+def create_line_plot(
     ax: plt.Axes,
     stats: pd.DataFrame,
+    mean_col: str,
+    std_col: str,
+    ylabel: str,
     process_order: list = None
 ) -> plt.Axes:
     """
-    Create horizontal bar chart for runtime.
-    """
-    if process_order is None:
-        process_order = stats.index.tolist()
-
-    # Filter to available processes
-    available = [p for p in process_order if p in stats.index]
-    plot_data = stats.loc[available]
-
-    positions = np.arange(len(available))
-    colors = [PROCESS_COLORS.get(p, '#666666') for p in available]
-    labels = [PROCESS_NAMES.get(p, p) for p in available]
-
-    # Bar chart with error bars
-    bars = ax.barh(
-        positions,
-        plot_data['mean_duration'],
-        xerr=plot_data['std_duration'],
-        color=colors,
-        edgecolor='white',
-        linewidth=0.5,
-        capsize=3,
-        alpha=0.9
-    )
-
-    ax.set_yticks(positions)
-    ax.set_yticklabels(labels)
-    ax.set_xlabel('Duration (hours)')
-    ax.set_xlim(0, None)
-
-    # Add value labels on bars
-    for bar, val in zip(bars, plot_data['mean_duration']):
-        if not np.isnan(val):
-            ax.text(bar.get_width() + 0.01, bar.get_y() + bar.get_height()/2,
-                   f'{val:.2f}h', va='center', fontsize=8)
-
-    return ax
-
-
-def create_memory_bar_chart(
-    ax: plt.Axes,
-    stats: pd.DataFrame,
-    process_order: list = None
-) -> plt.Axes:
-    """
-    Create horizontal bar chart for memory usage.
+    Create a line/point plot with error bars for process steps on the x-axis.
     """
     if process_order is None:
         process_order = stats.index.tolist()
@@ -226,27 +181,24 @@ def create_memory_bar_chart(
     colors = [PROCESS_COLORS.get(p, '#666666') for p in available]
     labels = [PROCESS_NAMES.get(p, p) for p in available]
 
-    bars = ax.barh(
-        positions,
-        plot_data['mean_memory'],
-        xerr=plot_data['std_memory'],
-        color=colors,
-        edgecolor='white',
-        linewidth=0.5,
-        capsize=3,
-        alpha=0.9
-    )
+    # Plot connecting line
+    ax.plot(positions, plot_data[mean_col], color='grey', linewidth=1, zorder=1)
 
-    ax.set_yticks(positions)
-    ax.set_yticklabels(labels)
-    ax.set_xlabel('Peak Memory (GB)')
-    ax.set_xlim(0, None)
+    # Plot points with error bars per process
+    for i, (proc, pos) in enumerate(zip(available, positions)):
+        ax.errorbar(
+            pos, plot_data.loc[proc, mean_col],
+            yerr=plot_data.loc[proc, std_col],
+            fmt='o', color=colors[i], markersize=8,
+            capsize=4, capthick=1.5, elinewidth=1.5,
+            markeredgecolor='white', markeredgewidth=0.5,
+            zorder=2
+        )
 
-    # Add value labels
-    for bar, val in zip(bars, plot_data['mean_memory']):
-        if not np.isnan(val):
-            ax.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2,
-                   f'{val:.1f}GB', va='center', fontsize=8)
+    ax.set_xticks(positions)
+    ax.set_xticklabels(labels, rotation=35, ha='right')
+    ax.set_ylabel(ylabel)
+    ax.set_ylim(0, None)
 
     return ax
 
@@ -281,8 +233,10 @@ def main():
     if 'peak_vmem' in reports.columns:
         reports['memory_gb'] = reports['peak_vmem'].apply(convert_memory)
 
-    # Extract process name
-    reports['process'] = reports['name'].apply(lambda x: str(x).split()[0] if pd.notna(x) else None)
+    # Extract process name: "SEURAT_PIPELINE:PREDICT_SEURAT (5)" -> "PREDICT_SEURAT"
+    reports['process'] = reports['name'].apply(
+        lambda x: str(x).split('(')[0].strip().split(':')[-1] if pd.notna(x) else None
+    )
 
     # Filter to relevant processes
     processes = [p for p in PROCESS_ORDER if p in reports['process'].values]
@@ -315,18 +269,20 @@ def main():
     stats_out.index = stats_out.index.map(lambda x: PROCESS_NAMES.get(x, x))
     stats_out.to_csv(os.path.join(args.outdir, f"{args.output_prefix}_summary.tsv"), sep='\t')
 
-    # Create figure with two panels
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(FULL_WIDTH, HALF_HEIGHT))
+    # Create figure with two stacked panels
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(SINGLE_COL, HALF_HEIGHT * 2))
 
     # Panel A: Runtime
-    create_runtime_bar_chart(ax1, stats, PROCESS_ORDER)
+    create_line_plot(ax1, stats, 'mean_duration', 'std_duration',
+                     'Duration (hours)', PROCESS_ORDER)
     ax1.set_title('A. Runtime', fontweight='bold', loc='left')
 
     # Panel B: Memory
-    create_memory_bar_chart(ax2, stats, PROCESS_ORDER)
+    create_line_plot(ax2, stats, 'mean_memory', 'std_memory',
+                     'Peak Memory (GB)', PROCESS_ORDER)
     ax2.set_title('B. Peak Memory', fontweight='bold', loc='left')
 
-    fig.tight_layout()
+    fig.tight_layout(h_pad=3)
 
     # Save
     output_path = os.path.join(args.outdir, args.output_prefix)
