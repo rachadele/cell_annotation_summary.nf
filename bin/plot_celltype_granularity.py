@@ -63,7 +63,7 @@ def parse_arguments():
         help="Organism name (e.g., mus_musculus, homo_sapiens)"
     )
     parser.add_argument(
-        '--outdir', type=str, default='figures',
+        '--outdir', type=str, default='.',
         help="Output directory for figures"
     )
     parser.add_argument(
