@@ -11,7 +11,6 @@ library(ggplot2)
 library(gridExtra)
 library(stringr)
 library(DHARMa)
-library(effects)
 library(emmeans)
 source("/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/model_functions.R")
 #library(multcomp)
@@ -59,7 +58,6 @@ if (organism == "homo_sapiens") {
   )
 }
 
-aggregated_f1_results$macro_f1 <-  pmax(pmin(aggregated_f1_results$macro_f1, 1 - 1e-6), 1e-6)
 aggregated_f1_results$subsample_ref <- aggregated_f1_results$subsample_ref %>% factor(levels = c("500","100","50"))
 
 # Grouping the data by 'key' column and creating a list of data frames

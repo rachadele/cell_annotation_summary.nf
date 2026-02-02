@@ -41,7 +41,7 @@ run_beta_model <- function(df, formula, group_var = "study", type="weighted", mi
     nt <- 1L
   }
 
-  model <- glmmTMB(as.formula(model_formula), data = df, family = beta_family(link = "logit"),
+  model <- glmmTMB(as.formula(model_formula), data = df, family = ordbeta(),
               control=glmmTMBControl(parallel = nt))
 
   # Extract coefficients and p-values
@@ -152,29 +152,20 @@ plot_contrasts <- function(emm_summary_df, key_dir, contrast) {
 }
 
 
-plot_continuous_effects <- function(ae_contrast, key_dir) {
-# only deals with method:cutoff for now
-  contrast = names(ae_contrast)[1]
-  contrast_df = as.data.frame(ae_contrast)[[1]]
-  factor_columns <- colnames(contrast_df)[1:(which(colnames(contrast_df) == "fit") - 1)]
-  num_factors <- length(factor_columns)
-  group_var_columns <- factor_columns[factor_columns != "method"]
-  contrast_df$group_var <- contrast_df[[group_var_columns[1]]]
-
-      p2 <- ggplot(contrast_df, aes(x = group_var, 
-        y = fit, ymin = 
-        lower, 
-        ymax = upper, group = method, color=method)) +
+plot_continuous_effects <- function(effects_df, key_dir, key) {
+  p2 <- ggplot(effects_df, aes(x = cutoff,
+        y = fit, ymin = lower, ymax = upper,
+        group = method, color = method)) +
         geom_point(size = 7) +
         facet_wrap(~ method) +
       theme +
-      theme(legend.position = "right") +     
+      theme(legend.position = "right") +
       theme(axis.text.x = element_text(angle = 90, hjust = 1, size=45)) +
-      labs(y = "F1", title = "", x = colnames(contrast_df)[1]) +
+      labs(y = "F1", title = "", x = "cutoff") +
       geom_line(size=2) +
-      geom_ribbon(aes(ymin = lower, ymax = upper, fill = method), alpha = 0.2)    
-      
-    ggsave(file.path(key_dir, paste0(key, "_", contrast, "_effects.png")), p2, width = 25, height = 15, dpi = 250)
+      geom_ribbon(aes(ymin = lower, ymax = upper, fill = method), alpha = 0.2)
+
+    ggsave(file.path(key_dir, paste0(key, "_method:cutoff_effects.png")), p2, width = 25, height = 15, dpi = 250)
     }
   
 
@@ -235,10 +226,17 @@ run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_v
     emmeans_results <- run_emmeans_weighted(model, key)
     all_results <- c(all_results, emmeans_results)
 
-    alleffects <- allEffects(model, xlevels = list(cutoff = c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)))
-    ae_contrast <- alleffects["method:cutoff"]
-    plot_continuous_effects(ae_contrast, fig_dir)
-    all_results$method_cutoff_effects <- as.data.frame(ae_contrast[[1]]) %>% mutate(key = key)
+    cutoff_grid <- c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)
+    emm_mc <- emmeans(model, specs = ~ method * cutoff,
+                      at = list(cutoff = cutoff_grid),
+                      type = "response")
+    emm_mc_df <- as.data.frame(summary(emm_mc))
+    # Rename columns to match expected format: fit, lower, upper
+    names(emm_mc_df)[names(emm_mc_df) == "response"] <- "fit"
+    names(emm_mc_df)[names(emm_mc_df) == "asymp.LCL"] <- "lower"
+    names(emm_mc_df)[names(emm_mc_df) == "asymp.UCL"] <- "upper"
+    plot_continuous_effects(emm_mc_df, fig_dir, key)
+    all_results$method_cutoff_effects <- emm_mc_df %>% mutate(key = key)
 
   }
 
