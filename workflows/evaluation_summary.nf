@@ -33,13 +33,14 @@ workflow EVALUATION_SUMMARY {
     // CHANNEL: Prepare input channel from results directory
     //
     Channel
-        .fromPath("${params.results}/*", type: 'dir')
+        .fromPath("${params.results}/*/*", type: 'dir')
+        .filter { file("${it}/params.yaml").exists() }
         .map { pipeline_run_dir ->
-            def pipeline_run_dirname = pipeline_run_dir.getName().toString()
+            def pipeline_run_dirname = pipeline_run_dir.getParent().getName().toString() + "_" + pipeline_run_dir.getName().toString()
             def params_file = "${pipeline_run_dir}/params.yaml"
             def ref_obs = "${pipeline_run_dir}/refs/"
             def pipeline_results = []
-            pipeline_run_dir.eachDirRecurse { dir ->
+            pipeline_run_dir.eachDir { dir ->
                 if (dir.getName() == 'scvi' || dir.getName() == 'seurat') {
                     def dir_path = dir.toString()
                     pipeline_results << dir_path
