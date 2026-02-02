@@ -9,12 +9,16 @@ include { AGGREGATE_RESULTS      } from "$projectDir/modules/local/aggregate_res
 include { PLOT_CUTOFF            } from "$projectDir/modules/local/plot_cutoff/main"
 include { PLOT_COMPTIME          } from "$projectDir/modules/local/plot_comptime/main"
 include { PLOT_LABEL_DIST        } from "$projectDir/modules/local/plot_label_dist/main"
-include { MODEL_EVAL_WEIGHTED    } from "$projectDir/modules/local/model_eval_weighted/main"
-include { SPLIT_BY_LABEL         } from "$projectDir/modules/local/split_by_label/main"
-include { MODEL_EVAL_LABEL       } from "$projectDir/modules/local/model_eval_label/main"
+include { MODEL_EVAL_AGGREGATED  } from "$projectDir/modules/local/model_eval_aggregated/main"
 include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
 include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
 include { PLOT_PUB_FIGURES       } from "$projectDir/modules/local/plot_pub_figures/main"
+include { PLOT_LABEL_HEATMAP     } from "$projectDir/modules/local/plot_label_heatmap/main"
+include { PLOT_LABEL_FOREST     } from "$projectDir/modules/local/plot_label_forest/main"
+include { RANK_LABEL_PERFORMANCE   } from "$projectDir/modules/local/rank_label_performance/main"
+include { PLOT_PARAM_HEATMAP       } from "$projectDir/modules/local/plot_param_heatmap/main"
+include { PLOT_RANKING_SUMMARY     } from "$projectDir/modules/local/plot_ranking_summary/main"
+include { PLOT_RANKING_RELIABILITY } from "$projectDir/modules/local/plot_ranking_reliability/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,7 +74,7 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Plot label distributions
     //
-    PLOT_LABEL_DIST(ch_label_f1)
+    //PLOT_LABEL_DIST(ch_label_f1)
 
     //
     // MODULE: Plot computation time
@@ -78,74 +82,57 @@ workflow EVALUATION_SUMMARY {
     PLOT_COMPTIME("${params.results}")
 
     //
-    // MODULE: Model evaluation for weighted results
+    // MODULE: Model evaluation for aggregated results (macro F1)
     //
-    MODEL_EVAL_WEIGHTED(ch_weighted_f1)
+    MODEL_EVAL_AGGREGATED(ch_weighted_f1)
 
-    ch_continuous_effects = MODEL_EVAL_WEIGHTED.out.continuous_effects
-    ch_emmeans_summary    = MODEL_EVAL_WEIGHTED.out.emmeans_summary
-
-    //
-    // CHANNEL: Prepare files for publication figures
-    //
-
-    // Get cutoff effects file for subclass (primary key)
-    ch_cutoff_effects_subclass = ch_continuous_effects
-        .flatMap { list -> list }
-        .filter { file ->
-            file.getParent().getParent().getName() == 'subclass' &&
-            file.getName() == 'method_cutoff_effects.tsv'
-        }
-        .first()
-
-    // Get reference_method emmeans for subclass
-    ch_reference_emmeans_subclass = ch_emmeans_summary
-        .flatMap { list -> list }
-        .filter { file ->
-            file.getParent().getParent().getName() == 'subclass' &&
-            file.getName() == 'reference_method_emmeans_summary.tsv'
-        }
-        .first()
-
-    // Get method emmeans for all taxonomy levels (for slope chart)
-    ch_method_emmeans = ch_emmeans_summary
-        .flatMap { list -> list }
-        .filter { file -> file.getName() == 'method_emmeans_summary.tsv' }
-        .collect()
-    // Get factor emmeans for subclass (disease_state, sex, region_match, treatment)
-    ch_factor_emmeans = ch_emmeans_summary
-        .flatMap { list -> list }
-        .filter { file ->
-            file.getParent().getParent().getName() == 'subclass' &&
-            (file.getName() =~ /^(disease_state|disease|sex|region_match|treatment_state|treatment)_emmeans_summary\.tsv$/)
-        }
-        .collect()
+    // Combined files now contain all keys with a 'key' column
+    ch_cutoff_effects      = MODEL_EVAL_AGGREGATED.out.cutoff_effects
+    ch_reference_emmeans   = MODEL_EVAL_AGGREGATED.out.reference_method_emmeans
+    ch_method_emmeans      = MODEL_EVAL_AGGREGATED.out.method_emmeans
+    ch_all_emmeans_summary = MODEL_EVAL_AGGREGATED.out.all_emmeans_summary
 
     //
     // MODULE: Generate publication figures
     //
-
-    // view all channels used for publication figures
-    ch_method_emmeans.view()
-    ch_factor_emmeans.view()
-    ch_weighted_f1.view()
-    ch_cutoff_effects_subclass.view()
-    ch_reference_emmeans_subclass.view()
-    
-
-
+    // Note: Combined files contain all keys - filtering by key happens in R script
     PLOT_PUB_FIGURES(
         ch_weighted_f1,
-        ch_cutoff_effects_subclass,
-        ch_reference_emmeans_subclass,
+        ch_cutoff_effects,
+        ch_reference_emmeans,
         ch_method_emmeans,
-        ch_factor_emmeans
+        ch_all_emmeans_summary
     )
 
-    // NOTE: Label-level modeling is disabled due to segfault issues
-    // Uncomment below to enable label-level analysis:
-    // SPLIT_BY_LABEL(ch_label_f1)
-    // MODEL_EVAL_LABEL(ch_label_f1_results_split_map)
+    //
+    // MODULE: Plot per-study label F1 heatmaps
+    //
+    PLOT_LABEL_HEATMAP(ch_label_f1)
+
+    //
+    // MODULE: Plot per-study label F1 forest plots
+    //
+    PLOT_LABEL_FOREST(ch_label_f1)
+
+    //
+    // MODULE: Rank label performance across studies
+    //
+    RANK_LABEL_PERFORMANCE(ch_label_f1)
+
+    //
+    // MODULE: Plot parameter performance heatmaps
+    //
+    PLOT_PARAM_HEATMAP(RANK_LABEL_PERFORMANCE.out.rankings_detailed)
+
+    //
+    // MODULE: Plot ranking summary dot plots
+    //
+    PLOT_RANKING_SUMMARY(RANK_LABEL_PERFORMANCE.out.rankings_best)
+
+    //
+    // MODULE: Plot ranking reliability scatter
+    //
+    PLOT_RANKING_RELIABILITY(RANK_LABEL_PERFORMANCE.out.rankings_best)
 
     //
     // MODULE: Plot cell type granularity comparison (post-hoc)

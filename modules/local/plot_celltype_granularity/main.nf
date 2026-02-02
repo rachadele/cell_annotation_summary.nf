@@ -15,8 +15,6 @@ process PLOT_CELLTYPE_GRANULARITY {
         --cutoff ${params.cutoff} \\
         --mapping_file ${params.mapping_file} \\
         --organism ${params.organism} \\
-        --outdir figures \\
-        --output_prefix celltype_granularity \\
-        --methods ${params.method}
+        --output_prefix celltype_granularity
     """
 }

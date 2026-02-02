@@ -1,0 +1,105 @@
+library(glmmTMB)
+library(dplyr)
+library(broom.mixed)
+library(multcomp)
+library(argparse)
+library(dplyr)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(gridExtra)
+library(stringr)
+library(DHARMa)
+library(effects)
+library(emmeans)
+source("/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/model_functions.R")
+#library(multcomp)
+# Set global theme for background
+theme_set(
+  theme_minimal(base_size =30 ) +  # Base theme
+    theme(
+      plot.background = element_rect(fill = "white", color = NA),  # Plot background color
+      panel.background = element_rect(fill = "white", color = NA), # Panel background color
+      legend.background = element_rect(fill = "white", color = NA) # Legend background color
+    )
+)
+
+parser <- argparse::ArgumentParser()
+parser$add_argument("--label_f1_results", help = "Path to the label_f1_results file",
+  default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/6f/dea5391518a01f43e6c8891c9cadd9/f1_results.tsv")
+parser$add_argument("--label", help = "Label subset", default="GABAergic")
+args <- parser$parse_args()
+
+label <- args$label
+# Reading the label_f1_results file
+label_f1_results <- read.table(args$label_f1_results, sep="\t", header=TRUE, stringsAsFactors = TRUE)
+# fill NA with none
+label_f1_results[is.na(label_f1_results)] <- "None"
+# Extract organism (assuming only one unique value in the 'organism' column)
+organism <- unique(label_f1_results$organism)[1]
+
+# Candidate main-effect factors (key/granularity excluded — labels are pooled across levels)
+candidate_factors <- c("cutoff", "method", "reference", "subsample_ref")
+
+label_f1_results$f1_score <-  pmax(pmin(label_f1_results$f1_score, 1 - 1e-6), 1e-6)
+label_f1_results$subsample_ref <- label_f1_results$subsample_ref %>% factor(levels = c("500","100","50"))
+label_f1_results$method <- factor(label_f1_results$method, levels=c("seurat","scvi"))
+
+label_dir <- label
+dir.create(label_dir, showWarnings = FALSE, recursive = TRUE)
+
+df <- droplevels(label_f1_results)
+
+# Keep only factors that have >=2 levels in this label subset
+valid_factors <- candidate_factors[
+  sapply(candidate_factors, function(f) nlevels(df[[f]]) >= 2)
+]
+
+# Build interaction terms only when both component factors are valid
+interaction_terms <- c()
+if ("method" %in% valid_factors && "cutoff" %in% valid_factors) {
+  interaction_terms <- c(interaction_terms, "method:cutoff")
+}
+if ("method" %in% valid_factors && "reference" %in% valid_factors) {
+  interaction_terms <- c(interaction_terms, "method:reference")
+}
+
+all_terms <- c(valid_factors, interaction_terms)
+formula <- paste("f1_score ~", paste(all_terms, collapse = " + "))
+formulas <- list(formula)
+
+for (formula in formulas) {
+  formula_str <- formula %>% gsub(" ", "_", .)
+  formula_dir <- file.path(label_dir, formula_str)
+  dir.create(formula_dir, showWarnings = FALSE, recursive=TRUE)
+  fig_dir <- file.path(formula_dir, "figures")
+  file_dir <- file.path(formula_dir, "files")
+  dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
+  dir.create(file_dir, showWarnings = FALSE, recursive = TRUE)
+
+  tryCatch({
+    # Run model and get results
+    results <- run_and_store_model(df, formula, fig_dir = fig_dir, key = "all", type="label", mixed=FALSE)
+
+    # Write each result to a separate file
+    for (result_name in names(results)) {
+      result_df <- results[[result_name]]
+      write.table(result_df, file = file.path(file_dir, paste0(result_name, ".tsv")),
+                  sep = "\t", row.names = FALSE)
+    }
+  }, error = function(e) {
+    message(paste0("Model failed for label ", label, ": ", e$message))
+    # Write an error summary so the process still produces output
+    error_df <- data.frame(
+      term = "ERROR", estimate = NA, std.error = NA, statistic = NA,
+      p.value = NA, FDR = NA, formula = formula, key = "all",
+      LogLik = NA, AIC = NA, BIC = NA
+    )
+    write.table(error_df, file = file.path(file_dir, "model_coefs.tsv"),
+                sep = "\t", row.names = FALSE)
+    # Write a placeholder effects file so Nextflow output glob matches
+    write.table(data.frame(note = "model_failed"), file = file.path(file_dir, "method_cutoff_effects.tsv"),
+                sep = "\t", row.names = FALSE)
+  })
+}

@@ -57,19 +57,23 @@ def parse_arguments():
     )
     parser.add_argument(
         '--cutoff_effects', type=str, default=None,
-        help="Path to method_cutoff_effects.tsv for primary key"
+        help="Path to method_cutoff_effects.tsv (combined file with key column)"
     )
     parser.add_argument(
         '--reference_emmeans', type=str, default=None,
-        help="Path to reference_method_emmeans_summary.tsv for primary key"
+        help="Path to reference_method_emmeans_summary.tsv (combined file with key column)"
     )
     parser.add_argument(
-        '--method_emmeans', type=str, nargs='+', default=[],
-        help="Paths to method_emmeans_summary.tsv files (one per taxonomy level)"
+        '--method_emmeans', type=str, default=None,
+        help="Path to method_emmeans_summary.tsv (combined file with key column)"
     )
     parser.add_argument(
         '--factor_emmeans', type=str, nargs='+', default=[],
-        help="Paths to factor emmeans summary files (disease_state, sex, etc.)"
+        help="Paths to factor emmeans summary files (combined files with key column)"
+    )
+    parser.add_argument(
+        '--primary_key', type=str, default='subclass',
+        help="Primary taxonomy key to use for filtering (default: subclass)"
     )
     parser.add_argument(
         '--organism', type=str, default='homo_sapiens',
@@ -114,56 +118,50 @@ def extract_factor_from_path(filepath: str) -> str:
     return None
 
 
-def load_method_emmeans_from_files(filepaths: list) -> pd.DataFrame:
+def load_method_emmeans(filepath: str) -> pd.DataFrame:
     """
-    Load and combine method emmeans from multiple files.
+    Load method emmeans from combined file with key column.
 
     Parameters
     ----------
-    filepaths : list
-        List of paths to method_emmeans_summary.tsv files
+    filepath : str
+        Path to method_emmeans_summary.tsv (combined file with key column)
 
     Returns
     -------
     pd.DataFrame
-        Combined data with 'key' column for taxonomy level
+        Data with 'key' column for taxonomy level
     """
-    dfs = []
-    for filepath in filepaths:
-        if not os.path.exists(filepath):
-            print(f"  Warning: File not found: {filepath}")
-            continue
+    if not filepath or not os.path.exists(filepath):
+        print(f"  Warning: File not found: {filepath}")
+        return pd.DataFrame()
 
-        key = extract_key_from_path(filepath)
-        if key is None:
-            print(f"  Warning: Could not extract key from: {filepath}")
-            continue
+    df = pd.read_csv(filepath, sep='\t')
+    if 'key' not in df.columns:
+        print(f"  Warning: No 'key' column in {filepath}")
+        return pd.DataFrame()
 
-        df = pd.read_csv(filepath, sep='\t')
-        df['key'] = key
-        dfs.append(df)
-        print(f"  Loaded {key}: {len(df)} rows")
-
-    if dfs:
-        return pd.concat(dfs, ignore_index=True)
-    return pd.DataFrame()
+    print(f"  Loaded method emmeans: {len(df)} rows, keys: {df['key'].unique().tolist()}")
+    return df
 
 
-def load_factor_emmeans_from_files(filepaths: list, organism: str) -> dict:
+def load_factor_emmeans_from_files(filepaths: list, organism: str, primary_key: str) -> dict:
     """
-    Load factor emmeans from file paths.
+    Load factor emmeans from combined files, filtering by primary key.
 
     Parameters
     ----------
     filepaths : list
-        List of paths to factor emmeans summary files
+        List of paths to factor emmeans summary files (combined with key column)
     organism : str
         Organism name to determine which factors to load
+    primary_key : str
+        Taxonomy key to filter by (e.g., 'subclass')
 
     Returns
     -------
     dict
-        Dictionary mapping factor name to DataFrame
+        Dictionary mapping factor name to DataFrame (filtered by primary_key)
     """
     factor_data = {}
     target_factors = HUMAN_FACTORS if organism == 'homo_sapiens' else MOUSE_FACTORS
@@ -183,8 +181,17 @@ def load_factor_emmeans_from_files(filepaths: list, organism: str) -> dict:
             continue
 
         df = pd.read_csv(filepath, sep='\t')
+
+        # Filter by primary key if key column exists
+        if 'key' in df.columns:
+            df = df[df['key'] == primary_key]
+
+        if len(df) == 0:
+            print(f"  Warning: No data for {factor} with key={primary_key}")
+            continue
+
         factor_data[factor] = df
-        print(f"  Loaded {factor}: {len(df)} levels")
+        print(f"  Loaded {factor}: {len(df)} levels (key={primary_key})")
 
     return factor_data
 
@@ -407,23 +414,31 @@ def main():
 
     set_pub_style()
     os.makedirs(args.outdir, exist_ok=True)
+    primary_key = args.primary_key
 
-    # Load data
-    print("Loading data...")
+    # Load data and filter by primary key
+    print(f"Loading data (filtering by key={primary_key})...")
     cutoff_data = pd.read_csv(args.cutoff_effects, sep='\t')
-    reference_emmeans = pd.read_csv(args.reference_emmeans, sep='\t')
+    if 'key' in cutoff_data.columns:
+        cutoff_data = cutoff_data[cutoff_data['key'] == primary_key]
+    print(f"  Cutoff effects: {len(cutoff_data)} rows")
 
-    # Load taxonomy-level emmeans for slope chart
+    reference_emmeans = pd.read_csv(args.reference_emmeans, sep='\t')
+    if 'key' in reference_emmeans.columns:
+        reference_emmeans = reference_emmeans[reference_emmeans['key'] == primary_key]
+    print(f"  Reference emmeans: {len(reference_emmeans)} rows")
+
+    # Load taxonomy-level emmeans for slope chart (all keys needed)
     print("Loading taxonomy-level emmeans...")
     if args.method_emmeans:
-        taxonomy_emmeans = load_method_emmeans_from_files(args.method_emmeans)
+        taxonomy_emmeans = load_method_emmeans(args.method_emmeans)
     else:
         taxonomy_emmeans = pd.DataFrame()
 
-    # Load experimental factor emmeans
-    print("Loading experimental factor emmeans...")
+    # Load experimental factor emmeans (filtered by primary key)
+    print(f"Loading experimental factor emmeans (key={primary_key})...")
     if args.factor_emmeans:
-        factor_emmeans = load_factor_emmeans_from_files(args.factor_emmeans, args.organism)
+        factor_emmeans = load_factor_emmeans_from_files(args.factor_emmeans, args.organism, primary_key)
     else:
         factor_emmeans = {}
 
