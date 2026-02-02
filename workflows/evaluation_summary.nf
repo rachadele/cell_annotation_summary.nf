@@ -9,6 +9,7 @@ include { AGGREGATE_RESULTS      } from "$projectDir/modules/local/aggregate_res
 include { PLOT_CUTOFF            } from "$projectDir/modules/local/plot_cutoff/main"
 include { PLOT_COMPTIME          } from "$projectDir/modules/local/plot_comptime/main"
 include { PLOT_LABEL_DIST        } from "$projectDir/modules/local/plot_label_dist/main"
+include { PLOT_F1_DISTRIBUTIONS  } from "$projectDir/modules/local/plot_f1_distributions/main"
 include { MODEL_EVAL_AGGREGATED  } from "$projectDir/modules/local/model_eval_aggregated/main"
 include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
 include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
@@ -75,6 +76,11 @@ workflow EVALUATION_SUMMARY {
     // MODULE: Plot label distributions
     //
     //PLOT_LABEL_DIST(ch_label_f1)
+
+    //
+    // MODULE: Plot F1 score distributions (macro and per-label)
+    //
+    PLOT_F1_DISTRIBUTIONS(ch_weighted_f1, ch_label_f1)
 
     //
     // MODULE: Plot computation time
