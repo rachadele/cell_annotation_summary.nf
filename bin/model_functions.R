@@ -41,6 +41,9 @@ run_beta_model <- function(df, formula, group_var = "study", type="weighted", mi
     nt <- 1L
   }
 
+  # Ordered beta regression (Kubinec 2023, Political Analysis 31(4):519-536).
+  # Handles F1 scores bounded [0,1] including exact 0s and 1s at boundaries,
+  # which standard beta regression cannot model.
   model <- glmmTMB(as.formula(model_formula), data = df, family = ordbeta(),
               control=glmmTMBControl(parallel = nt))
 

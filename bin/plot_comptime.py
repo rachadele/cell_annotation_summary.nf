@@ -26,18 +26,18 @@ import yaml
 from plot_utils import (
     set_pub_style, save_figure,
     METHOD_COLORS,
-    SINGLE_COL, HALF_HEIGHT, FULL_WIDTH
+    SINGLE_COL, HALF_HEIGHT, FULL_WIDTH, STANDARD_HEIGHT
 )
 
 
 # Process display names and colors
 # Keys are the final component of the Nextflow process name (after last ':')
 PROCESS_NAMES = {
-    'RF_PREDICT': 'scVI Prediction',
-    'PREDICT_SEURAT': 'Seurat Prediction',
-    'MAP_QUERY': 'scVI Query Processing',
-    'QUERY_PROCESS_SEURAT': 'Seurat Query Processing',
-    'REF_PROCESS_SEURAT': 'Seurat Reference Processing'
+    'RF_PREDICT': 'scVI Predict',
+    'PREDICT_SEURAT': 'Seurat Predict',
+    'MAP_QUERY': 'scVI Query',
+    'QUERY_PROCESS_SEURAT': 'Seurat Query',
+    'REF_PROCESS_SEURAT': 'Seurat Ref'
 }
 
 PROCESS_COLORS = {
@@ -196,7 +196,7 @@ def create_line_plot(
         )
 
     ax.set_xticks(positions)
-    ax.set_xticklabels(labels, rotation=35, ha='right')
+    ax.set_xticklabels(labels, rotation=45, ha='right')
     ax.set_ylabel(ylabel)
     ax.set_ylim(0, None)
 
@@ -270,7 +270,7 @@ def main():
     stats_out.to_csv(os.path.join(args.outdir, f"{args.output_prefix}_summary.tsv"), sep='\t')
 
     # Create figure with two stacked panels
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(SINGLE_COL, HALF_HEIGHT * 2))
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(FULL_WIDTH, STANDARD_HEIGHT))
 
     # Panel A: Runtime
     create_line_plot(ax1, stats, 'mean_duration', 'std_duration',
