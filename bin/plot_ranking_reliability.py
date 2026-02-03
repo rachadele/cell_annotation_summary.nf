@@ -69,10 +69,10 @@ def main():
         print("No data. Exiting.")
         return
 
-    # --- Faceted scatter: one panel per key ---
-    n_cols = min(n_keys, 2)
+    # --- Faceted scatter: one row of panels ---
+    n_cols = min(n_keys, 4)
     n_rows = (n_keys + n_cols - 1) // n_cols
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(7 * n_cols, 6 * n_rows),
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 6 * n_rows),
                               squeeze=False)
 
     # Global n_studies range for sizing
@@ -98,12 +98,14 @@ def main():
             edgecolors="white", linewidth=0.5,
         )
 
-        # Label points
-        for _, row in key_df.iterrows():
+        # Label points with alternating offset direction to reduce overlap
+        for i, (_, row) in enumerate(key_df.iterrows()):
+            offset = (6, 6) if i % 2 == 0 else (-6, -6)
+            ha = "left" if i % 2 == 0 else "right"
             ax.annotate(
                 row["label"], (row["mean_f1_across_studies"], row["win_fraction"]),
-                fontsize=6, alpha=0.8,
-                xytext=(4, 4), textcoords="offset points",
+                fontsize=8, alpha=0.8,
+                xytext=offset, textcoords="offset points", ha=ha,
             )
 
         # Reference lines
@@ -114,7 +116,7 @@ def main():
         ax.set_ylim(-0.05, 1.15)
         ax.set_xlabel("Mean F1 Across Studies")
         ax.set_ylabel("Win Fraction")
-        ax.set_title(key.capitalize(), fontsize=14, fontweight="bold")
+        ax.set_title(key.capitalize(), fontweight="bold")
 
     # Hide unused axes
     for idx in range(n_keys, n_rows * n_cols):
@@ -135,11 +137,11 @@ def main():
         )
     fig.legend(
         handles=legend_handles, loc="lower center",
-        ncol=len(legend_handles), fontsize=9, frameon=False,
-        bbox_to_anchor=(0.5, -0.03), title="N Studies",
+        ncol=len(legend_handles), fontsize=11, frameon=False,
+        bbox_to_anchor=(0.5, -0.03), title="N Studies", title_fontsize=11,
     )
 
-    fig.suptitle("Reliability vs Performance", fontsize=16, fontweight="bold")
+    fig.suptitle("Reliability vs Performance", fontweight="bold")
     fig.tight_layout(rect=[0, 0.04, 1, 0.96])
 
     outpath = os.path.join(args.outdir, "ranking_reliability.png")

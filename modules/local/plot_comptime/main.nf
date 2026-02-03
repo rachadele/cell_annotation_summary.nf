@@ -10,6 +10,6 @@ process PLOT_COMPTIME {
 
     script:
     """
-    python ${projectDir}/bin/plot_comptime.py --all_runs ${all_runs_dir}
+    Rscript ${projectDir}/bin/plot_comptime.R --all_runs ${all_runs_dir}
     """
 }
