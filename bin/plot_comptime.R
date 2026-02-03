@@ -19,26 +19,30 @@ library(yaml)
 
 # -- Constants ----------------------------------------------------------------
 
-PROCESS_NAMES <- c(
-  RF_PREDICT           = "scVI Predict",
-  PREDICT_SEURAT       = "Seurat Predict",
-  MAP_QUERY            = "scVI Query",
-  QUERY_PROCESS_SEURAT = "Seurat Query",
-  REF_PROCESS_SEURAT   = "Seurat Ref"
+# Map each Nextflow process to its methodology and pipeline stage
+PROCESS_METHOD <- c(
+  MAP_QUERY            = "scVI",
+  RF_PREDICT           = "scVI",
+  REF_PROCESS_SEURAT   = "Seurat",
+  QUERY_PROCESS_SEURAT = "Seurat",
+  PREDICT_SEURAT       = "Seurat"
 )
 
-PROCESS_COLORS <- c(
-  RF_PREDICT           = "#1f77b4",
-  PREDICT_SEURAT       = "#ff7f0e",
-  MAP_QUERY            = "#2ca02c",
-  QUERY_PROCESS_SEURAT = "#d62728",
-  REF_PROCESS_SEURAT   = "#9467bd"
+PROCESS_STEP <- c(
+  MAP_QUERY            = "Query Processing",
+  RF_PREDICT           = "Prediction",
+  REF_PROCESS_SEURAT   = "Ref Processing",
+  QUERY_PROCESS_SEURAT = "Query Processing",
+  PREDICT_SEURAT       = "Prediction"
 )
 
-PROCESS_ORDER <- c(
-  "RF_PREDICT", "PREDICT_SEURAT",
-  "MAP_QUERY", "QUERY_PROCESS_SEURAT", "REF_PROCESS_SEURAT"
-)
+# Pipeline stage order (processing → prediction)
+STEP_ORDER <- c("Ref Processing", "Query Processing", "Prediction")
+
+# Method colors (consistent with plot_utils.py METHOD_COLORS)
+METHOD_COLORS <- c(scVI = "#1f77b4", Seurat = "#ff7f0e")
+
+PROCESS_ORDER <- names(PROCESS_METHOD)
 
 KEYS_TO_DROP <- c("ref_collections", "ref_keys", "outdir",
                   "batch_keys", "relabel_r", "relabel_q",
@@ -98,15 +102,17 @@ load_trace_data <- function(all_runs_dir) {
 
 # -- Plotting -----------------------------------------------------------------
 
-make_panel <- function(stats_df, mean_col, sd_col, ylabel, title_label) {
-  ggplot(stats_df, aes(x = process_label, y = .data[[mean_col]], color = process)) +
-    geom_line(aes(group = 1), color = "grey60", linewidth = 0.5) +
+make_panel <- function(stats_df, mean_col, sd_col, ylabel, title_label,
+                       show_legend = FALSE) {
+  ggplot(stats_df, aes(x = step, y = .data[[mean_col]],
+                        color = method, group = method)) +
+    geom_line(linewidth = 0.6) +
     geom_pointrange(
       aes(ymin = .data[[mean_col]] - .data[[sd_col]],
           ymax = .data[[mean_col]] + .data[[sd_col]]),
-      size = 0.6, linewidth = 0.8, show.legend = FALSE
+      size = 0.6, linewidth = 0.8
     ) +
-    scale_color_manual(values = PROCESS_COLORS) +
+    scale_color_manual(values = METHOD_COLORS, name = "Method") +
     scale_y_continuous(expand = expansion(mult = c(0, 0.05)), limits = c(0, NA)) +
     labs(y = ylabel, x = NULL, title = title_label) +
     theme_bw(base_size = 11) +
@@ -115,7 +121,8 @@ make_panel <- function(stats_df, mean_col, sd_col, ylabel, title_label) {
       axis.text.x = element_text(angle = 45, hjust = 1),
       plot.background  = element_rect(fill = "white", color = NA),
       panel.background = element_rect(fill = "white", color = NA),
-      panel.grid.major.x = element_blank()
+      panel.grid.major.x = element_blank(),
+      legend.position = if (show_legend) "right" else "none"
     )
 }
 
@@ -147,9 +154,13 @@ main <- function() {
   reports <- reports %>% filter(process %in% PROCESS_ORDER)
   if (nrow(reports) == 0) stop("No relevant processes found in trace data")
 
-  # Summarise
+  # Add method and pipeline step
+  reports$method <- PROCESS_METHOD[reports$process]
+  reports$step   <- PROCESS_STEP[reports$process]
+
+  # Summarise per process (then carry method/step through)
   stats <- reports %>%
-    group_by(process) %>%
+    group_by(process, method, step) %>%
     summarise(
       mean_duration = mean(duration_hours, na.rm = TRUE),
       sd_duration   = sd(duration_hours,   na.rm = TRUE),
@@ -162,22 +173,20 @@ main <- function() {
     ) %>%
     mutate(across(where(is.numeric), ~ replace_na(., 0)))
 
-  # Ordered factor for x-axis
-  present <- intersect(PROCESS_ORDER, stats$process)
-  stats$process_label <- factor(PROCESS_NAMES[stats$process], levels = PROCESS_NAMES[present])
+  # Ordered factor for x-axis (pipeline order: processing → prediction)
+  stats$step <- factor(stats$step, levels = STEP_ORDER)
 
   cat("Found", nrow(stats), "processes with data\n")
   print(as.data.frame(stats))
 
   # Save summary table
-  stats_out <- stats %>%
-    mutate(process = PROCESS_NAMES[process]) %>%
-    select(-process_label)
-  write_tsv(stats_out, file.path(args$outdir, paste0(args$output_prefix, "_summary.tsv")))
+  write_tsv(stats, file.path(args$outdir, paste0(args$output_prefix, "_summary.tsv")))
 
-  # Build figure (two stacked panels via patchwork)
-  p1 <- make_panel(stats, "mean_duration", "sd_duration", "Duration (hours)", "A. Runtime")
-  p2 <- make_panel(stats, "mean_memory",   "sd_memory",   "Peak Memory (GB)", "B. Peak Memory")
+  # Build figure (two stacked panels via patchwork; legend on bottom panel only)
+  p1 <- make_panel(stats, "mean_duration", "sd_duration",
+                    "Duration (hours)", "A. Runtime", show_legend = FALSE)
+  p2 <- make_panel(stats, "mean_memory", "sd_memory",
+                    "Peak Memory (GB)", "B. Peak Memory", show_legend = TRUE)
 
   fig <- p1 / p2
 
