@@ -1,8 +1,8 @@
 study	treatment	genotype	strain	sex	age	query_region	number query samples	number cells	number unique subclasses
-GSE124952	None, cocaine, saline	wild type genotype	C57BL/6	male	3 weeks, 8-10 weeks	core of nucleus accumbens	15	1500	7
-GSE181021.2	Setd1a CRISPR-Cas9, None	wild type genotype	C57BL/6N	male	8-10 weeks	prefrontal cortex	4	400	7
+GSE124952	saline, None, cocaine	wild type genotype	C57BL/6	male	8-10 weeks, 3 weeks	core of nucleus accumbens	15	1500	7
+GSE181021.2	None, Setd1a CRISPR-Cas9	wild type genotype	C57BL/6N	male	8-10 weeks	prefrontal cortex	4	400	7
 GSE185454	Veh - CFC, HDACi - CFC	wild type genotype	C57BL/6	None	12 weeks	hippocampus (DG)	4	400	9
 GSE199460.2	None	wild type genotype	None	None	None	brain	2	198	1
-GSE214244.1	None	AppNL-G-F/NL-G-F, wild type genotype	C57BL/6J	male	7 months	entorhinal cortex	3	300	8
-GSE247339.1	TBI, T4, sham	wild type genotype	C57BL/6J (B6)	male	10 weeks	Ammon's horn	21	2089	10
-GSE247339.2	TBI, T4, sham	wild type genotype	C57BL/6J (B6)	male	10 weeks	cerebral cortex	20	1993	10
+GSE214244.1	None	wild type genotype, AppNL-G-F/NL-G-F	C57BL/6J	male	7 months	entorhinal cortex	3	300	8
+GSE247339.1	TBI, sham, T4	wild type genotype	C57BL/6J (B6)	male	10 weeks	Ammon's horn	21	2089	10
+GSE247339.2	T4, TBI, sham	wild type genotype	C57BL/6J (B6)	male	10 weeks	cerebral cortex	20	1993	10
