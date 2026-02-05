@@ -31,9 +31,20 @@ args <- parser$parse_args()
 
 
 # Reading the aggregated F1 results file
-aggregated_f1_results <- read.table(args$aggregated_f1_results, sep="\t", header=TRUE, stringsAsFactors = TRUE)
-# fill NA with none
-aggregated_f1_results[is.na(aggregated_f1_results)] <- "None"
+aggregated_f1_results <- read.table(args$aggregated_f1_results, sep = "\t",
+                                    header = TRUE, stringsAsFactors = FALSE)
+# Fill NA only for character columns (avoid coercing numeric responses)
+char_cols <- vapply(aggregated_f1_results, is.character, logical(1))
+aggregated_f1_results[char_cols] <- lapply(
+  aggregated_f1_results[char_cols],
+  function(x) {
+    x[is.na(x)] <- "None"
+    x
+  }
+)
+
+# Ensure response is numeric
+aggregated_f1_results$macro_f1 <- as.numeric(aggregated_f1_results$macro_f1)
 # Extract organism (assuming only one unique value in the 'organism' column)
 organism <- unique(aggregated_f1_results$organism)[1]
 
