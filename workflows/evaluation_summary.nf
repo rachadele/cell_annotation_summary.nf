@@ -20,6 +20,7 @@ include { RANK_LABEL_PERFORMANCE   } from "$projectDir/modules/local/rank_label_
 include { PLOT_PARAM_HEATMAP       } from "$projectDir/modules/local/plot_param_heatmap/main"
 include { PLOT_RANKING_SUMMARY     } from "$projectDir/modules/local/plot_ranking_summary/main"
 include { PLOT_RANKING_RELIABILITY } from "$projectDir/modules/local/plot_ranking_reliability/main"
+include { PLOT_CONFIG_PARETO      } from "$projectDir/modules/local/plot_config_pareto/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,8 +61,8 @@ workflow EVALUATION_SUMMARY {
     //
     AGGREGATE_RESULTS(ADD_PARAMS.out.f1_results_params.flatten().toList())
 
-    ch_weighted_f1 = AGGREGATE_RESULTS.out.weighted_f1_results_aggregated
-    ch_label_f1    = AGGREGATE_RESULTS.out.label_f1_results_aggregated
+    ch_sample_results = AGGREGATE_RESULTS.out.sample_results_aggregated
+    ch_label_results  = AGGREGATE_RESULTS.out.label_results_aggregated
 
     //
     // MODULE: Plot cutoff analysis
@@ -137,6 +138,18 @@ workflow EVALUATION_SUMMARY {
     //
     PLOT_RANKING_SUMMARY(RANK_LABEL_PERFORMANCE.out.rankings_best)
 
+    //
+    // MODULE: Plot ranking reliability scatter
+    //
+    PLOT_RANKING_RELIABILITY(RANK_LABEL_PERFORMANCE.out.rankings_best)
+
+    //
+    // MODULE: Plot configuration Pareto front (F1 vs compute cost)
+    //
+    PLOT_CONFIG_PARETO(
+        RANK_LABEL_PERFORMANCE.out.rankings_detailed,
+        PLOT_COMPTIME.out.comptime_summary
+    )
 
     //
     // MODULE: Plot cell type granularity comparison (post-hoc)

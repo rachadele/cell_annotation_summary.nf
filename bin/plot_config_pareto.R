@@ -153,7 +153,15 @@ main <- function() {
 
   n_keys <- length(keys)
 
+  # Pareto front line data: sort by mean_f1 ascending for geom_step
+  pareto_df <- config_f1 %>%
+    filter(pareto) %>%
+    arrange(key, mean_f1)
+
   p <- ggplot(config_f1, aes(x = mean_f1, y = total_duration_hrs)) +
+    geom_step(data = pareto_df,
+              direction = "vh",
+              linetype = "dashed", color = "grey30", linewidth = 0.5) +
     geom_point(aes(color = method_display, shape = subsample_ref),
                size = 3.6, alpha = 0.85) +
     geom_text_repel(
