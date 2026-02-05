@@ -2,7 +2,7 @@ process RANK_LABEL_PERFORMANCE {
     label 'process_single'
 
     input:
-    path label_f1_results
+    path label_results
 
     output:
     path "rankings/*.tsv",                 emit: rankings
@@ -12,7 +12,7 @@ process RANK_LABEL_PERFORMANCE {
     script:
     """
     python ${projectDir}/bin/rank_label_performance.py \
-        --label_f1_results ${label_f1_results} \
+        --label_results ${label_results} \
         --cutoff ${params.cutoff} \
         --outdir rankings
     """

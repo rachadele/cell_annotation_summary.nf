@@ -3,8 +3,8 @@
 Plot distributions of F1 scores at each taxonomy level.
 Highlights boundary pile-up at 0 and 1 to motivate ordinal beta regression.
 
-Supports both sample-level macro F1 (weighted_f1_results.tsv) and
-per-cell-type F1 (label_f1_results.tsv).
+Supports both sample-level macro F1 (sample_results.tsv) and
+per-cell-type F1 (label_results.tsv).
 """
 
 import argparse
@@ -21,12 +21,12 @@ from plot_utils import set_pub_style, KEY_ORDER, METHOD_COLORS, METHOD_NAMES
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Plot F1 distributions by taxonomy level")
-    parser.add_argument("--weighted_f1_results",
-                        default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus_tabulamuris/100/dataset_id/SCT/gap_false/aggregated_results/files/weighted_f1_results.tsv",
-                        help="Path to weighted_f1_results.tsv")
-    parser.add_argument("--label_f1_results",
-                        default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus_tabulamuris/100/dataset_id/SCT/gap_false/aggregated_results/files/label_f1_results.tsv",
-                        help="Path to label_f1_results.tsv")
+    parser.add_argument("--sample_results",
+                        default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus_tabulamuris/100/dataset_id/SCT/gap_false/aggregated_results/files/sample_results.tsv",
+                        help="Path to sample_results.tsv")
+    parser.add_argument("--label_results",
+                        default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus_tabulamuris/100/dataset_id/SCT/gap_false/aggregated_results/files/label_results.tsv",
+                        help="Path to label_results.tsv")
     parser.add_argument("--outdir", default="f1_distributions", help="Output directory")
     args, _ = parser.parse_known_args()
     return args
@@ -198,10 +198,10 @@ def plot_label_distributions(df, outdir):
 if __name__ == "__main__":
     args = parse_args()
 
-    if args.weighted_f1_results:
-        df = pd.read_csv(args.weighted_f1_results, sep='\t')
+    if args.sample_results:
+        df = pd.read_csv(args.sample_results, sep='\t')
         plot_distributions(df, args.outdir)
 
-    if args.label_f1_results:
-        df_label = pd.read_csv(args.label_f1_results, sep='\t')
+    if args.label_results:
+        df_label = pd.read_csv(args.label_results, sep='\t')
         plot_label_distributions(df_label, args.outdir)

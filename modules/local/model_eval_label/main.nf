@@ -4,7 +4,7 @@ process MODEL_EVAL_LABEL {
     beforeScript 'ulimit -Ss unlimited'
 
     input:
-    tuple val(label), path(label_f1_results_split)
+    tuple val(label), path(label_results_split)
 
     output:
     path "**/figures/**/*.png", optional: true, emit: figures
@@ -16,7 +16,7 @@ process MODEL_EVAL_LABEL {
     script:
     """
     Rscript ${projectDir}/bin/model_performance_label.R \\
-        --label_f1_results ${label_f1_results_split} \\
+        --label_results ${label_results_split} \\
         --label "${label}"
     """
 }
