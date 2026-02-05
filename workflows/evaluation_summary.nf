@@ -116,10 +116,6 @@ workflow EVALUATION_SUMMARY {
     //
     PLOT_LABEL_HEATMAP(ch_label_f1)
 
-    //
-    // MODULE: Plot per-study label F1 forest plots
-    //
-    PLOT_LABEL_FOREST(ch_label_f1)
 
     //
     // MODULE: Rank label performance across studies
@@ -136,10 +132,6 @@ workflow EVALUATION_SUMMARY {
     //
     PLOT_RANKING_SUMMARY(RANK_LABEL_PERFORMANCE.out.rankings_best)
 
-    //
-    // MODULE: Plot ranking reliability scatter
-    //
-    PLOT_RANKING_RELIABILITY(RANK_LABEL_PERFORMANCE.out.rankings_best)
 
     //
     // MODULE: Plot cell type granularity comparison (post-hoc)
