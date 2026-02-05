@@ -104,9 +104,17 @@ load_trace_data <- function(all_runs_dir) {
 
 make_panel <- function(stats_df, mean_col, sd_col, ylabel, title_label,
                        show_legend = FALSE) {
-  ggplot(stats_df, aes(x = step, y = .data[[mean_col]],
-                        color = method, group = method)) +
-    geom_line(linewidth = 0.6) +
+  has_subsample <- "subsample_ref" %in% names(stats_df)
+  group_col <- if (has_subsample) {
+    interaction(stats_df$method, as.character(stats_df$subsample_ref), drop = TRUE)
+  } else {
+    stats_df$method
+  }
+
+  p <- ggplot(stats_df, aes(x = step, y = .data[[mean_col]],
+                             color = method, group = group_col)) +
+    geom_line(aes(linetype = if (has_subsample) factor(subsample_ref) else NULL),
+              linewidth = 0.7) +
     geom_pointrange(
       aes(ymin = .data[[mean_col]] - .data[[sd_col]],
           ymax = .data[[mean_col]] + .data[[sd_col]]),
@@ -124,6 +132,12 @@ make_panel <- function(stats_df, mean_col, sd_col, ylabel, title_label,
       panel.grid.major.x = element_blank(),
       legend.position = if (show_legend) "right" else "none"
     )
+
+  if (has_subsample) {
+    p <- p + scale_linetype_discrete(name = "Subsample Ref")
+  }
+
+  p
 }
 
 # -- Main ---------------------------------------------------------------------
@@ -158,9 +172,14 @@ main <- function() {
   reports$method <- PROCESS_METHOD[reports$process]
   reports$step   <- PROCESS_STEP[reports$process]
 
-  # Summarise per process (then carry method/step through)
+  # Summarise per process (optionally by subsample_ref)
+  group_cols <- c("process", "method", "step")
+  if ("subsample_ref" %in% names(reports)) {
+    group_cols <- c(group_cols, "subsample_ref")
+  }
+
   stats <- reports %>%
-    group_by(process, method, step) %>%
+    group_by(across(all_of(group_cols))) %>%
     summarise(
       mean_duration = mean(duration_hours, na.rm = TRUE),
       sd_duration   = sd(duration_hours,   na.rm = TRUE),
