@@ -6,7 +6,7 @@ process PLOT_COMPTIME {
 
     output:
     path "comptime.png"
-    path "comptime_summary.tsv"
+    path "comptime_summary.tsv", emit: comptime_summary
 
     script:
     """
