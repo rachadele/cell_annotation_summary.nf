@@ -177,7 +177,7 @@ def main():
     weighted_f1_results = weighted_f1_results.fillna("None")
     weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
 
-    weighted_summary = weighted_f1_results.groupby(["method", "cutoff", "reference", "key"]).agg(
+    weighted_summary = weighted_f1_results.groupby(["method", "cutoff", "reference", "key", "subsample_ref"]).agg(
         weighted_f1_mean=("weighted_f1", "mean"),
         weighted_f1_std=("weighted_f1", "std"),
         weighted_f1_count=("weighted_f1", "count")
@@ -194,7 +194,7 @@ def main():
     label_results['precision'] = pd.to_numeric(label_results['precision'], errors='coerce')
     label_results['recall'] = pd.to_numeric(label_results['recall'], errors='coerce')
 
-    label_summary = label_results.groupby(["label", "method", "cutoff", "reference", "key"]).agg(
+    label_summary = label_results.groupby(["label", "method", "cutoff", "reference", "key", "subsample_ref"]).agg(
         label_f1_mean=("f1_score", "mean"),
         label_f1_std=("f1_score", "std"),
         label_f1_count=("f1_score", "count")
