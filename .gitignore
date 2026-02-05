@@ -89,8 +89,8 @@ ipython_config.py
 inputs/
 
 # random
-label_f1_results
-weighted_f1_results
+label_results
+sample_results
 integrated-work/
 lognorm-work/
 mmus/
@@ -98,8 +98,8 @@ params.mmus_sctransform_integrated.json
 params.sctransform.json
 params.sctransform_integrated.json
 sctransform-work/
-label_f1_results.tsv
-weighted_f1_results.tsv
+label_results.tsv
+sample_results.tsv
 params_added
 hsap/
 mmus/
@@ -114,3 +114,5 @@ CLAUDE.md
 todo.md
 METHODS.md
 RESULTS.md
+paul_notes.md
+PLAN_overall_config_ranking.md

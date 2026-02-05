@@ -67,22 +67,22 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Plot cutoff analysis
     //
-    PLOT_CUTOFF(ch_weighted_f1, ch_label_f1)
+    PLOT_CUTOFF(ch_sample_results, ch_label_results)
 
     //
     // MODULE: Generate grant summary
     //
-    GET_GRANT_SUMMARY(ch_weighted_f1, ch_label_f1)
+    GET_GRANT_SUMMARY(ch_sample_results, ch_label_results)
 
     //
     // MODULE: Plot label distributions
     //
-    //PLOT_LABEL_DIST(ch_label_f1)
+    //PLOT_LABEL_DIST(ch_label_results)
 
     //
     // MODULE: Plot F1 score distributions (macro and per-label)
     //
-    PLOT_F1_DISTRIBUTIONS(ch_weighted_f1, ch_label_f1)
+    PLOT_F1_DISTRIBUTIONS(ch_sample_results, ch_label_results)
 
     //
     // MODULE: Plot computation time
@@ -92,7 +92,7 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Model evaluation for aggregated results (macro F1)
     //
-    MODEL_EVAL_AGGREGATED(ch_weighted_f1)
+    MODEL_EVAL_AGGREGATED(ch_sample_results)
 
     // Combined files now contain all keys with a 'key' column
     ch_cutoff_effects      = MODEL_EVAL_AGGREGATED.out.cutoff_effects
@@ -105,7 +105,7 @@ workflow EVALUATION_SUMMARY {
     //
     // Note: Combined files contain all keys - filtering by key happens in R script
     PLOT_PUB_FIGURES(
-        ch_weighted_f1,
+        ch_sample_results,
         ch_cutoff_effects,
         ch_reference_emmeans,
         ch_method_emmeans,
@@ -115,18 +115,18 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Plot per-study label F1 heatmaps
     //
-    PLOT_LABEL_HEATMAP(ch_label_f1)
+    PLOT_LABEL_HEATMAP(ch_label_results)
 
     //
     // MODULE: Plot per-study label F1 forest plots
     //
-    PLOT_LABEL_FOREST(ch_label_f1)
+    PLOT_LABEL_FOREST(ch_label_results)
 
 
     //
     // MODULE: Rank label performance across studies
     //
-    RANK_LABEL_PERFORMANCE(ch_label_f1)
+    RANK_LABEL_PERFORMANCE(ch_label_results)
 
     //
     // MODULE: Plot parameter performance heatmaps
@@ -154,7 +154,7 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Plot cell type granularity comparison (post-hoc)
     //
-    // PLOT_CELLTYPE_GRANULARITY(ch_label_f1)
+    // PLOT_CELLTYPE_GRANULARITY(ch_label_results)
 }
 
 /*

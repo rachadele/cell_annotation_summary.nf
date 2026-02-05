@@ -8,7 +8,7 @@ cell types of the same lineage are in the same order on each plot.
 
 Usage:
     python plot_celltype_granularity.py \
-        --label_f1_results path/to/label_f1_results.tsv \
+        --label_results path/to/label_results.tsv \
         --mapping_file path/to/census_map.tsv \
         --outdir figures
 """
@@ -33,9 +33,9 @@ def parse_arguments():
         description="Generate multi-granularity cell type trends figure"
     )
     parser.add_argument(
-        '--label_f1_results', type=str,
-        default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mmus_new_tabulamuris/100/dataset_id/SCT/gap_false/aggregated_results/files/label_f1_results.tsv",
-        help="Path to label_f1_results.tsv"
+        '--label_results', type=str,
+        default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mmus_new_tabulamuris/100/dataset_id/SCT/gap_false/aggregated_results/files/label_results.tsv",
+        help="Path to label_results.tsv"
     )
     parser.add_argument(
         '--key', type=str, default='class',
@@ -119,8 +119,8 @@ def main():
     os.makedirs(args.outdir, exist_ok=True)
 
     # Load data
-    print(f"Loading data from {args.label_f1_results}...")
-    df = pd.read_csv(args.label_f1_results, sep='\t', low_memory=False)
+    print(f"Loading data from {args.label_results}...")
+    df = pd.read_csv(args.label_results, sep='\t', low_memory=False)
 
     # Filter by cutoff and reference
     mask = (df['cutoff'] == args.cutoff)

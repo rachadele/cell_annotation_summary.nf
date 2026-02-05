@@ -26,9 +26,9 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/weighted_f1_results.tsv")
+    parser.add_argument('--sample_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/sample_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/label_f1_results.tsv")   
+    parser.add_argument('--label_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/aggregated_results/full_query/label_results.tsv")
     parser.add_argument('--factor_names', type=str, nargs = "+", help="Names of factor columns", default=["study","reference","method","ref_split","region_match","subsample_ref","disease_State"])
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
@@ -92,9 +92,9 @@ def plot_anova_results(aov_combined_df, title_prefix):
 def main():
     
     args = parse_arguments()
-    weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
-    label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
-    organism = weighted_f1_results["organism"].unique()[0]
+    sample_results = pd.read_csv(args.sample_results, sep="\t")
+    label_results = pd.read_csv(args.label_results, sep="\t")
+    organism = sample_results["organism"].unique()[0]
     if organism == "homo_sapiens":
 # Assuming f1_results is your pandas DataFrame and factor_names is a list of column names
         factor_names = ['study','reference','method',
@@ -105,25 +105,25 @@ def main():
                         'strain',"age","treatment","subsample_ref",
                         "sex","genotype","cutoff"] # replace with actual factor column names
 
-    weighted_f1_results = weighted_f1_results.fillna("None")
-    label_f1_results = label_f1_results.fillna("None")
+    sample_results = sample_results.fillna("None")
+    label_results = label_results.fillna("None")
   #  else:
     #    factor_names = args.vars
 
     # Convert factor columns to categorical
     for factor in factor_names:
-        weighted_f1_results[factor] =weighted_f1_results[factor].astype('category')
-        label_f1_results[factor] =label_f1_results[factor].astype('category')
+        sample_results[factor] =sample_results[factor].astype('category')
+        label_results[factor] =label_results[factor].astype('category')
     for factor in ["cutoff", "subsample_ref"]: # can't add age right now
-        weighted_f1_results[factor] =weighted_f1_results[factor].astype('float')
-        label_f1_results[factor] =label_f1_results[factor].astype('float')
+        sample_results[factor] =sample_results[factor].astype('float')
+        label_results[factor] =label_results[factor].astype('float')
    
    # change names and capitalize categories
     
     
     
     aov_combined = []
-    df_list = [group for _, group in weighted_f1_results.groupby('key')]
+    df_list = [group for _, group in sample_results.groupby('key')]
     for df in df_list:
         aov_table = run_anova(df, factor_names, f1_column="weighted_f1")
         aov_table.to_csv(df['key'].values[0] + "_anova_global_table.tsv", sep="\t")
@@ -136,7 +136,7 @@ def main():
     
     
     aov_table_label = []
-    df_list = [group for _, group in label_f1_results.groupby('key')]
+    df_list = [group for _, group in label_results.groupby('key')]
     factor_names_label = factor_names + ["label"]
     for df in df_list:
         aov_table = run_anova(df, factor_names_label, f1_column="f1_score")
@@ -149,7 +149,7 @@ def main():
     plot_anova_results(aov_combined_df, "label_f1") 
     
 # do this again with cutoff=0
-    weighted_f1_df = weighted_f1_results[weighted_f1_results["cutoff"]==0]
+    weighted_f1_df = sample_results[sample_results["cutoff"]==0]
     aov_combined = []
     df_list = [group for _, group in weighted_f1_df.groupby('key')]
     factor_names = factor_names
@@ -163,7 +163,7 @@ def main():
     aov_combined_df = pd.concat(aov_combined)
     plot_anova_results(aov_combined_df, "weighted_f1_cutoff0") 
     
-    label_f1_df = label_f1_results[label_f1_results["cutoff"]==0]
+    label_f1_df = label_results[label_results["cutoff"]==0]
     aov_table_label = []
     df_list = [group for _, group in label_f1_df.groupby('key')]
     factor_names_label = factor_names + ["label"]

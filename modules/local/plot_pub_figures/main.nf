@@ -3,7 +3,7 @@ process PLOT_PUB_FIGURES {
     label 'process_single'
 
     input:
-    val weighted_f1_results
+    val sample_results
     val cutoff_effects
     val reference_emmeans
     val method_emmeans

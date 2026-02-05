@@ -2,8 +2,8 @@ process PLOT_F1_DISTRIBUTIONS {
     label 'process_single'
 
     input:
-    path weighted_f1_results
-    path label_f1_results
+    path sample_results
+    path label_results
 
     output:
     path "**png"
@@ -12,8 +12,8 @@ process PLOT_F1_DISTRIBUTIONS {
     script:
     """
     python ${projectDir}/bin/plot_f1_distributions.py \\
-        --weighted_f1_results ${weighted_f1_results} \\
-        --label_f1_results ${label_f1_results} \\
+        --sample_results ${sample_results} \\
+        --label_results ${label_results} \\
         --outdir f1_distributions
     """
 }
