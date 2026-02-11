@@ -21,6 +21,7 @@ include { PLOT_PARAM_HEATMAP       } from "$projectDir/modules/local/plot_param_
 include { PLOT_RANKING_SUMMARY     } from "$projectDir/modules/local/plot_ranking_summary/main"
 include { PLOT_RANKING_RELIABILITY } from "$projectDir/modules/local/plot_ranking_reliability/main"
 include { PLOT_CONFIG_PARETO      } from "$projectDir/modules/local/plot_config_pareto/main"
+include { JOIN_METADATA           } from "$projectDir/modules/local/join_metadata/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,8 +62,18 @@ workflow EVALUATION_SUMMARY {
     //
     AGGREGATE_RESULTS(ADD_PARAMS.out.f1_results_params.flatten().toList())
 
-    ch_sample_results = AGGREGATE_RESULTS.out.sample_results_aggregated
-    ch_label_results  = AGGREGATE_RESULTS.out.label_results_aggregated
+    //
+    // MODULE: Join study and reference metadata
+    //
+    JOIN_METADATA(
+        AGGREGATE_RESULTS.out.sample_results_aggregated,
+        AGGREGATE_RESULTS.out.label_results_aggregated,
+        file("${projectDir}/study_metadata_mus_musculus.tsv"),
+        file("${projectDir}/reference_metadata_mus_musculus.tsv")
+    )
+
+    ch_sample_results = JOIN_METADATA.out.sample_results
+    ch_label_results  = JOIN_METADATA.out.label_results
 
     //
     // MODULE: Plot cutoff analysis

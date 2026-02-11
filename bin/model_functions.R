@@ -34,7 +34,7 @@ run_beta_model <- function(df, formula, group_var = "study", type="weighted", mi
   if (mixed) {
     # add study as a random effect (intercept may vary)
     model_formula <- paste(formula, "+ (1 |", group_var, ")")
-    nt <- min(parallel::detectCores(), 10)
+    nt <- 1L
   } else {
     # fixed-effects only beta regression (no random effect)
     model_formula <- formula

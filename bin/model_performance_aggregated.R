@@ -43,8 +43,10 @@ aggregated_f1_results[char_cols] <- lapply(
   }
 )
 
-# Ensure response is numeric
+# Ensure response is numeric and remove rows with NA
 aggregated_f1_results$macro_f1 <- as.numeric(aggregated_f1_results$macro_f1)
+aggregated_f1_results <- aggregated_f1_results[!is.na(aggregated_f1_results$macro_f1), ]
+aggregated_f1_results <- droplevels(aggregated_f1_results)
 # Extract organism (assuming only one unique value in the 'organism' column)
 organism <- unique(aggregated_f1_results$organism)[1]
 
