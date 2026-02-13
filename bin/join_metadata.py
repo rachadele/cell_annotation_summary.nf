@@ -28,13 +28,13 @@ def main():
     sample_df = pd.read_csv(args.sample_results, sep="\t")
     sample_df = sample_df.merge(study_meta, on="study", how="left")
     sample_df = sample_df.merge(ref_meta, on="reference", how="left")
-    sample_df.to_csv(f"{args.outdir}/sample_results.tsv", sep="\t", index=False)
+    sample_df.to_csv(f"{args.outdir}/sample_results_meta.tsv", sep="\t", index=False)
 
     # Join label results
     label_df = pd.read_csv(args.label_results, sep="\t")
     label_df = label_df.merge(study_meta, on="study", how="left")
     label_df = label_df.merge(ref_meta, on="reference", how="left")
-    label_df.to_csv(f"{args.outdir}/label_results.tsv", sep="\t", index=False)
+    label_df.to_csv(f"{args.outdir}/label_results_meta.tsv", sep="\t", index=False)
 
     print(f"Sample results: {len(sample_df)} rows, "
           f"query_suspension_type null: {sample_df['query_suspension_type'].isna().sum()}, "
