@@ -99,7 +99,9 @@ params.sctransform.json
 params.sctransform_integrated.json
 sctransform-work/
 label_results.tsv
+label_results_meta.tsv
 sample_results.tsv
+sample_results_meta.tsv
 params_added
 hsap/
 mmus/

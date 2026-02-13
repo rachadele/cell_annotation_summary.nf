@@ -8,8 +8,8 @@ process JOIN_METADATA {
     path ref_meta
 
     output:
-    path "sample_results.tsv", emit: sample_results
-    path "label_results.tsv",  emit: label_results
+    path "sample_results_meta.tsv", emit: sample_results
+    path "label_results_meta.tsv",  emit: label_results
 
     script:
     """
