@@ -22,6 +22,8 @@ include { PLOT_RANKING_SUMMARY     } from "$projectDir/modules/local/plot_rankin
 include { PLOT_RANKING_RELIABILITY } from "$projectDir/modules/local/plot_ranking_reliability/main"
 include { PLOT_CONFIG_PARETO      } from "$projectDir/modules/local/plot_config_pareto/main"
 include { JOIN_METADATA           } from "$projectDir/modules/local/join_metadata/main"
+include { MODEL_ASSAY_EFFECTS     } from "$projectDir/modules/local/model_assay_effects/main"
+include { PLOT_ASSAY_EXPLORATION  } from "$projectDir/modules/local/plot_assay_exploration/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,17 +65,32 @@ workflow EVALUATION_SUMMARY {
     AGGREGATE_RESULTS(ADD_PARAMS.out.f1_results_params.flatten().toList())
 
     //
-    // MODULE: Join study and reference metadata
+    // MODULE: Join study and reference metadata (mouse only)
     //
-    JOIN_METADATA(
-        AGGREGATE_RESULTS.out.sample_results_aggregated,
-        AGGREGATE_RESULTS.out.label_results_aggregated,
-        file("${projectDir}/study_metadata_mus_musculus.tsv"),
-        file("${projectDir}/reference_metadata_mus_musculus.tsv")
-    )
+    if (params.organism == 'mus_musculus') {
+        JOIN_METADATA(
+            AGGREGATE_RESULTS.out.sample_results_aggregated,
+            AGGREGATE_RESULTS.out.label_results_aggregated,
+            file("${projectDir}/study_metadata_mus_musculus.tsv"),
+            file("${projectDir}/reference_metadata_mus_musculus.tsv")
+        )
 
-    ch_sample_results = JOIN_METADATA.out.sample_results
-    ch_label_results  = JOIN_METADATA.out.label_results
+        ch_sample_results = JOIN_METADATA.out.sample_results
+        ch_label_results  = JOIN_METADATA.out.label_results
+
+        //
+        // MODULE: Model assay effects (mouse only)
+        //
+        MODEL_ASSAY_EFFECTS(ch_sample_results)
+
+        //
+        // MODULE: Plot assay exploration (mouse only)
+        //
+        PLOT_ASSAY_EXPLORATION(ch_sample_results, MODEL_ASSAY_EFFECTS.out.contrasts)
+    } else {
+        ch_sample_results = AGGREGATE_RESULTS.out.sample_results_aggregated
+        ch_label_results  = AGGREGATE_RESULTS.out.label_results_aggregated
+    }
 
     //
     // MODULE: Plot cutoff analysis
