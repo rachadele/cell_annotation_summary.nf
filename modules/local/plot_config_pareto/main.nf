@@ -7,6 +7,7 @@ process PLOT_CONFIG_PARETO {
 
     output:
     path "config_pareto/*.png", emit: pareto_plots
+    path "config_pareto/config_pareto_table.tsv", emit: pareto_table
 
     script:
     """
