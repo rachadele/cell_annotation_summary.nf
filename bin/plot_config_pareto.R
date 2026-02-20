@@ -30,27 +30,32 @@ KEY_ORDER     <- c("subclass", "class", "family", "global")
 # -- Helpers ------------------------------------------------------------------
 
 identify_pareto <- function(df, x_col, y_col, minimize_y = TRUE) {
-  # Identify Pareto-optimal points (maximize x, minimize y)
-  df <- df %>% arrange(desc(.data[[x_col]]))
-  pareto <- logical(nrow(df))
+  # Identify Pareto-optimal points (maximize x, minimize y).
+  # Flags are returned in the ORIGINAL row order of df so that mutate()
+  # assigns them correctly.
+  df <- df %>% mutate(.orig_row = row_number())
+  df_sorted <- df %>% arrange(desc(.data[[x_col]]))
+  pareto <- logical(nrow(df_sorted))
   if (minimize_y) {
     best_y <- Inf
-    for (i in seq_len(nrow(df))) {
-      if (df[[y_col]][i] <= best_y) {
+    for (i in seq_len(nrow(df_sorted))) {
+      if (df_sorted[[y_col]][i] <= best_y) {
         pareto[i] <- TRUE
-        best_y <- df[[y_col]][i]
+        best_y <- df_sorted[[y_col]][i]
       }
     }
   } else {
     best_y <- -Inf
-    for (i in seq_len(nrow(df))) {
-      if (df[[y_col]][i] >= best_y) {
+    for (i in seq_len(nrow(df_sorted))) {
+      if (df_sorted[[y_col]][i] >= best_y) {
         pareto[i] <- TRUE
-        best_y <- df[[y_col]][i]
+        best_y <- df_sorted[[y_col]][i]
       }
     }
   }
-  pareto
+  # Re-align to original row order before returning
+  df_sorted$pareto <- pareto
+  df_sorted %>% arrange(.orig_row) %>% pull(pareto)
 }
 
 # -- Main ---------------------------------------------------------------------
@@ -152,6 +157,17 @@ main <- function() {
     ungroup()
 
   n_keys <- length(keys)
+
+  # Write table for inspection
+  table_out <- config_f1 %>%
+    select(key, method_display, reference, subsample_ref,
+           mean_f1, n_celltypes, total_duration_hrs, total_memory_gb, pareto) %>%
+    arrange(key, desc(mean_f1))
+  table_path <- file.path(args$outdir, "config_pareto_table.tsv")
+  write_tsv(table_out, table_path)
+  cat(sprintf("Saved table: %s\n", table_path))
+  cat("\n--- Config table ---\n")
+  print(as.data.frame(table_out))
 
   # Pareto front line data: sort by mean_f1 ascending for geom_step
   pareto_df <- config_f1 %>%

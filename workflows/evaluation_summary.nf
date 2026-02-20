@@ -71,8 +71,8 @@ workflow EVALUATION_SUMMARY {
         JOIN_METADATA(
             AGGREGATE_RESULTS.out.sample_results_aggregated,
             AGGREGATE_RESULTS.out.label_results_aggregated,
-            file("${projectDir}/study_metadata_mus_musculus.tsv"),
-            file("${projectDir}/reference_metadata_mus_musculus.tsv")
+            file("${projectDir}/assets/study_metadata_mus_musculus.tsv"),
+            file("${projectDir}/assets/reference_metadata_mus_musculus.tsv")
         )
 
         ch_sample_results = JOIN_METADATA.out.sample_results
