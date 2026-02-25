@@ -10,7 +10,6 @@
         "global"
     ],
     "reference": "whole cortex",
-    "color_mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/color_mapping.tsv",
     "remove_outliers": [
         "GSE180670"
     ]
