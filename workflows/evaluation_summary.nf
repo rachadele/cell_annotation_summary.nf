@@ -143,7 +143,7 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Plot per-study label F1 heatmaps
     //
-    PLOT_LABEL_HEATMAP(ch_label_results)
+    //PLOT_LABEL_HEATMAP(ch_label_results)
 
     //
     // MODULE: Plot per-study label F1 forest plots
