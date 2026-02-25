@@ -31,7 +31,8 @@ def make_acronym(name):
     return acronym
 
 def map_development_stage(stage):
-    # re write dict
+    if pd.isna(stage):
+        return None
     dev_stage_mapping_dict = {
         "HsapDv_0000083": "infant",
         "HsapDv_0000084": "toddler",
@@ -39,7 +40,6 @@ def map_development_stage(stage):
         "HsapDv_0000086": "adolescent",
         "HsapDv_0000088": "adult",
         "HsapDv_0000091": "late adult",
-        np.nan: None
     }
     return dev_stage_mapping_dict[stage]
     
@@ -139,7 +139,10 @@ def main():
     results_df["query"] = results_df["query"].str.replace("_", " ")
     results_df["reference_acronym"] = results_df["reference"].apply(make_acronym)
     results_df["reference"] = results_df["reference"].str.replace("_", " ")
-    results_df["region_match"] = results_df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
+    results_df["region_match"] = results_df.apply(
+        lambda row: isinstance(row['query_region'], str) and isinstance(row['ref_region'], str) and row['query_region'] in row['ref_region'],
+        axis=1
+    )
 
     # --- Standardize disease ---
     results_df["disease"] = np.where(results_df["disease"] == "Control", "control", results_df["disease"])
