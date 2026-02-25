@@ -26,9 +26,9 @@ random.seed(42)
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--weighted_f1_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2025-01-30/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/weighted_f1_results.tsv")
+    parser.add_argument('--sample_results', type=str, help="Aggregated weighted results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2025-01-30/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/sample_results.tsv")
     parser.add_argument('--vars', type=str, nargs = "+", help="Names of factor columns")
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2025-01-30/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/label_f1_results.tsv")   
+    parser.add_argument('--label_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2025-01-30/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_results/label_results.tsv")
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
     parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author.tsv")
     parser.add_argument('--ref_keys', type=str, nargs='+', default=["subclass","class","family","global"], help="levels of granularity to plot")
@@ -82,7 +82,7 @@ def plot_line(df, x, y, hue, col, style, title, xlabel, ylabel, save_path):
     plt.savefig(save_path, bbox_inches="tight")
 
 
-def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, 
+def plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, 
                            outdir="label_f1_plots", level="global", score_col="f1_score", subclass_col = "subclass"):
     os.makedirs(outdir, exist_ok=True)
     new_outdir = os.path.join(outdir, subclass_col)
@@ -96,7 +96,7 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
 
     celltypes = levels[level]
     celltypes = [ct for ct in celltypes if ct != "unknown"]
-    methods = sorted(label_f1_results["method"].unique())
+    methods = sorted(label_results["method"].unique())
 
     rows, cols = len(celltypes), len(methods)
     fig, axes = plt.subplots(rows, cols, 
@@ -109,7 +109,7 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
         if len(subclasses_to_plot) == 0:
            subclasses_to_plot = [celltype]
 
-        filtered_df = label_f1_results[(label_f1_results["label"].isin(subclasses_to_plot)) & (label_f1_results["key"] == subclass_col)]
+        filtered_df = label_results[(label_results["label"].isin(subclasses_to_plot)) & (label_results["key"] == subclass_col)]
         
         if filtered_df.empty:
             print(f"No data available for cell type '{celltype}' with subclasses {subclasses_to_plot}. Skipping this cell type.")
@@ -152,13 +152,13 @@ def plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_d
 def main():
 
     args = parse_arguments()
-    weighted_f1_results = pd.read_csv(args.weighted_f1_results, sep="\t")
-    weighted_f1_results["study"] = weighted_f1_results["query"].str.split(" ").str[0]
-    label_f1_results = pd.read_csv(args.label_f1_results, sep="\t")
-    label_f1_results["study"] = label_f1_results["query"].str.split("_").str[0]
+    sample_results = pd.read_csv(args.sample_results, sep="\t")
+    sample_results["study"] = sample_results["query"].str.split(" ").str[0]
+    label_results = pd.read_csv(args.label_results, sep="\t")
+    label_results["study"] = label_results["query"].str.split("_").str[0]
     color_mapping_df = pd.read_csv(args.color_mapping_file, sep="\t")
     mapping_df = pd.read_csv(args.mapping_file, sep="\t")
-    organism = weighted_f1_results["organism"].unique()[0]
+    organism = sample_results["organism"].unique()[0]
     ref_keys = args.ref_keys 
     print(f"Reference keys for plotting: {ref_keys}")
     
@@ -170,12 +170,12 @@ def main():
 
     # Convert factor columns to categorical
     for factor in categoricals:
-        weighted_f1_results[factor] =weighted_f1_results[factor].astype('category')
-        label_f1_results[factor] =label_f1_results[factor].astype('category')
+        sample_results[factor] =sample_results[factor].astype('category')
+        label_results[factor] =label_results[factor].astype('category')
     
     for factor in ["cutoff", "subsample_ref"]:
-        weighted_f1_results[factor] =weighted_f1_results[factor].astype('float')
-        label_f1_results[factor] =label_f1_results[factor].astype('float')
+        sample_results[factor] =sample_results[factor].astype('float')
+        label_results[factor] =label_results[factor].astype('float')
    
     if organism == "homo_sapiens":
         categories = ['reference', 'ref_split', 'study', 'region_match', 'disease_state', 
@@ -187,10 +187,10 @@ def main():
 
 #--------plot label vs cutoff-------------
   # Define the levels for each category
-    subclasses = label_f1_results[label_f1_results["key"] == "subclass"]["label"].unique()
-    classes = label_f1_results[label_f1_results["key"] == "class"]["label"].unique()
-    families = label_f1_results[label_f1_results["key"] == "family"]["label"].unique()
-    globalss = label_f1_results[label_f1_results["key"] == "global"]["label"].unique()
+    subclasses = label_results[label_results["key"] == "subclass"]["label"].unique()
+    classes = label_results[label_results["key"] == "class"]["label"].unique()
+    families = label_results[label_results["key"] == "family"]["label"].unique()
+    globalss = label_results[label_results["key"] == "global"]["label"].unique()
 
     levels = {
         "subclass": subclasses,
@@ -199,25 +199,25 @@ def main():
         "global": globalss
     }
     
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="subclass")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall")
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="subclass")
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision")
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall")
    
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="class")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision", subclass_col="class")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall", subclass_col="class")
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="class")
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision", subclass_col="class")
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall", subclass_col="class")
      
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="family")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision", subclass_col="family")
-    plot_score_by_celltype(label_f1_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall", subclass_col="family") 
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="family")
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision", subclass_col="family")
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall", subclass_col="family") 
     #-----------------plot weighted f1 score-------------------
     parent = "weighted_f1_plots"
     os.makedirs(parent, exist_ok=True)
-    for key_value in weighted_f1_results["key"].unique():
+    for key_value in sample_results["key"].unique():
         
         outdir = os.path.join(parent, key_value)
         os.makedirs(outdir, exist_ok=True)
-        weighted_subset = weighted_f1_results[weighted_f1_results["key"] == key_value]
+        weighted_subset = sample_results[sample_results["key"] == key_value]
         # Convert the relevant categories into a long format for faceting
 
         

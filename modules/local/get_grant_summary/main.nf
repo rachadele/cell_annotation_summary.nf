@@ -2,8 +2,8 @@ process GET_GRANT_SUMMARY {
     label 'process_single'
 
     input:
-    path weighted_f1_results_aggregated
-    path label_f1_results_aggregated
+    path sample_results_aggregated
+    path label_results_aggregated
 
     output:
     path "outliers**"
@@ -16,8 +16,8 @@ process GET_GRANT_SUMMARY {
     }
     """
     python ${projectDir}/bin/grant_summary.py \\
-        --weighted_metrics ${weighted_f1_results_aggregated} \\
-        --label_metrics ${label_f1_results_aggregated} \\
+        --weighted_metrics ${sample_results_aggregated} \\
+        --label_metrics ${label_results_aggregated} \\
         --ref_keys ${ref_keys} \\
         --subsample_ref ${params.subsample_ref} \\
         --cutoff ${params.cutoff} \\

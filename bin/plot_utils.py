@@ -734,8 +734,8 @@ def load_cutoff_effects(filepath: str) -> pd.DataFrame:
     return pd.read_csv(filepath, sep='\t')
 
 
-def load_weighted_f1_results(filepath: str) -> pd.DataFrame:
-    """Load weighted_f1_results TSV file."""
+def load_sample_results(filepath: str) -> pd.DataFrame:
+    """Load sample_results TSV file."""
     return pd.read_csv(filepath, sep='\t')
 
 

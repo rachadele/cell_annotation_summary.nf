@@ -5,8 +5,8 @@ process AGGREGATE_RESULTS {
     path f1_results_params
 
     output:
-    path "weighted_f1_results.tsv", emit: weighted_f1_results_aggregated
-    path "label_f1_results.tsv"   , emit: label_f1_results_aggregated
+    path "sample_results.tsv", emit: sample_results_aggregated
+    path "label_results.tsv" , emit: label_results_aggregated
     path "**factor**tsv"
     path "**summary.tsv"
 

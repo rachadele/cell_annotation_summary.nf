@@ -1,4 +1,3 @@
-
 # evaluation_summary.nf
 
 ## Project Overview
@@ -65,5 +64,12 @@ The following are key parameters defined in `nextflow.config`:
 - **max_memory**: Maximum memory (default: `128.GB`).
 - **max_time**: Maximum runtime (default: `240.h`).
 
+## Statistical Modeling
+
+The pipeline uses **ordered beta regression** (via `glmmTMB(..., family = ordbeta())`) to model macro F1 score distributions. Standard beta regression assumes the response lies strictly in the open interval (0, 1), but F1 scores are bounded on [0, 1] and can include exact 0s and 1s (boundary inflation). Ordered beta regression handles this by modeling boundary values via ordinal cutpoints and the continuous interior via a beta distribution. The implementation follows Kubinec (2023), which demonstrates that this approach provides better calibration and fit for bounded continuous outcomes compared to alternatives such as zero/one-inflated beta models.
+
+When `mixed=TRUE` (default for sample-level analysis), study is included as a random intercept, yielding a generalized linear mixed model (GLMM). Marginal means and contrasts are estimated via the `emmeans` package on the response scale.
+
 ## References
+- Kubinec, R. (2023). Ordered Beta Regression: A Parsimonious, Well-Fitting Model for Continuous Data with Lower and Upper Bounds. *Political Analysis*, 31(4), 519–536. https://doi.org/10.1017/pan.2022.20
 - [nf-core Nextflow DSL2 documentation](https://nf-co.re/developers/dsl2)

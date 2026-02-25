@@ -31,7 +31,8 @@ def make_acronym(name):
     return acronym
 
 def map_development_stage(stage):
-    # re write dict
+    if pd.isna(stage):
+        return None
     dev_stage_mapping_dict = {
         "HsapDv_0000083": "infant",
         "HsapDv_0000084": "toddler",
@@ -39,7 +40,6 @@ def map_development_stage(stage):
         "HsapDv_0000086": "adolescent",
         "HsapDv_0000088": "adult",
         "HsapDv_0000091": "late adult",
-        np.nan: None
     }
     return dev_stage_mapping_dict[stage]
     
@@ -84,7 +84,7 @@ def update_metrics(df):
     return df
 
 # Function to extract and print unique factor values for each test study
-def print_study_factor_table(label_f1_results, organism):
+def print_study_factor_table(label_results, organism):
     import pandas as pd
     if organism == "homo_sapiens":
         columns = ["disease", "sex", "dev_stage", "number query samples", "number cells", "query_region", "number unique subclasses"]
@@ -92,7 +92,7 @@ def print_study_factor_table(label_f1_results, organism):
         columns = ["treatment", "genotype", "strain", "sex", "age", "query_region", "number query samples", "number cells", "number unique subclasses"]
 
     # Ensure DataFrames
-    label_df = pd.DataFrame(label_f1_results)
+    label_df = pd.DataFrame(label_results)
     # Determine study column name
     study_col = "study"
     if study_col not in label_df.columns:
@@ -109,7 +109,7 @@ def print_study_factor_table(label_f1_results, organism):
             elif col == "number cells":
                 row[col] = group.groupby("query")["total_cell_count"].first().sum()
             elif col == "number unique subclasses":
-                # Find unique subclasses for this study in label_f1_results
+                # Find unique subclasses for this study in label_results
                 n_subclasses = label_df[(label_df[study_col] == study) & (label_df["key"] == "subclass")]["label"].nunique()
                 row[col] = n_subclasses
             elif col in group.columns:
@@ -139,7 +139,10 @@ def main():
     results_df["query"] = results_df["query"].str.replace("_", " ")
     results_df["reference_acronym"] = results_df["reference"].apply(make_acronym)
     results_df["reference"] = results_df["reference"].str.replace("_", " ")
-    results_df["region_match"] = results_df.apply(lambda row: row['query_region'] in row['ref_region'], axis=1)
+    results_df["region_match"] = results_df.apply(
+        lambda row: isinstance(row['query_region'], str) and isinstance(row['ref_region'], str) and row['query_region'] in row['ref_region'],
+        axis=1
+    )
 
     # --- Standardize disease ---
     results_df["disease"] = np.where(results_df["disease"] == "Control", "control", results_df["disease"])
@@ -171,35 +174,51 @@ def main():
 
     # --- Weighted F1 results ---
     label_columns = ["label", "f1_score", "precision", "recall", "support", "accuracy"]
-    weighted_f1_results = results_df.drop(columns=label_columns)
-    weighted_f1_results = weighted_f1_results.drop_duplicates()
-    weighted_f1_results = weighted_f1_results[weighted_f1_results["weighted_f1"].notnull()]
-    weighted_f1_results = weighted_f1_results.fillna("None")
-    weighted_f1_results.to_csv("weighted_f1_results.tsv", sep="\t", index=False)
+    sample_results = results_df.drop(columns=label_columns)
+    sample_results = sample_results.drop_duplicates()
+    sample_results = sample_results[sample_results["weighted_f1"].notnull()]
+    sample_results = sample_results.fillna("None")
+    sample_results.to_csv("sample_results.tsv", sep="\t", index=False)
 
-    weighted_summary = weighted_f1_results.groupby(["method", "cutoff", "reference", "key"]).agg(
-        weighted_f1_mean=("weighted_f1", "mean"),
-        weighted_f1_std=("weighted_f1", "std"),
-        weighted_f1_count=("weighted_f1", "count")
-    ).reset_index()
-    weighted_summary.to_csv("weighted_f1_summary.tsv", sep="\t", index=False)
+    weighted_metrics = [
+        "weighted_f1", "weighted_precision", "weighted_recall",
+        "macro_f1", "macro_precision", "macro_recall",
+        "micro_f1", "micro_precision", "micro_recall",
+        "nmi", "ari", "overall_accuracy"
+    ]
+    weighted_agg = {}
+    for m in weighted_metrics:
+        if m in sample_results.columns:
+            sample_results[m] = pd.to_numeric(sample_results[m], errors='coerce')
+            weighted_agg[f"{m}_mean"] = (m, "mean")
+            weighted_agg[f"{m}_std"] = (m, "std")
+    weighted_agg["count"] = ("weighted_f1", "count")
+    weighted_summary = sample_results.groupby(
+        ["method", "cutoff", "reference", "key", "subsample_ref"]
+    ).agg(**weighted_agg).reset_index()
+    weighted_summary.to_csv("sample_results_summary.tsv", sep="\t", index=False)
 
     # --- Label F1 results ---
     label_results = results_df[results_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
     label_results = label_results.fillna("None")
     label_results = label_results[label_results["label"] != "unkown"]
-    label_results.to_csv("label_f1_results.tsv", sep="\t", index=False)
+    label_results.to_csv("label_results.tsv", sep="\t", index=False)
 
-    label_results['precision'] = pd.to_numeric(label_results['precision'], errors='coerce')
-    label_results['recall'] = pd.to_numeric(label_results['recall'], errors='coerce')
-
-    label_summary = label_results.groupby(["label", "method", "cutoff", "reference", "key"]).agg(
-        label_f1_mean=("f1_score", "mean"),
-        label_f1_std=("f1_score", "std"),
-        label_f1_count=("f1_score", "count")
-    ).reset_index()
-    label_summary.to_csv("label_f1_summary.tsv", sep="\t", index=False)
+    label_metrics = ["f1_score", "precision", "recall"]
+    for m in label_metrics:
+        if m in label_results.columns:
+            label_results[m] = pd.to_numeric(label_results[m], errors='coerce')
+    label_agg = {}
+    for m in label_metrics:
+        if m in label_results.columns:
+            label_agg[f"{m}_mean"] = (m, "mean")
+            label_agg[f"{m}_std"] = (m, "std")
+    label_agg["count"] = ("f1_score", "count")
+    label_summary = label_results.groupby(
+        ["label", "method", "cutoff", "reference", "key", "subsample_ref"]
+    ).agg(**label_agg).reset_index()
+    label_summary.to_csv("label_results_summary.tsv", sep="\t", index=False)
 
     # --- Factor summaries ---
     if organism == "homo_sapiens":
