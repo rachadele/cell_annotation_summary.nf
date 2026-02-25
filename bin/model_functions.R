@@ -28,7 +28,39 @@ plot_qq <- function(model, key_dir) {
 }
 
 
+drop_single_level_terms <- function(formula, df) {
+  formula_obj <- as.formula(formula)
+  all_vars <- all.vars(formula_obj)
+  outcome_var <- all_vars[1]
+
+  single_level_vars <- character(0)
+  for (var in all_vars[-1]) {
+    if (var %in% colnames(df)) {
+      col <- df[[var]]
+      if (is.character(col) || is.factor(col)) {
+        n_levels <- length(unique(col[!is.na(col)]))
+        if (n_levels < 2) {
+          single_level_vars <- c(single_level_vars, var)
+          message("Dropping single-level variable from formula: ", var)
+        }
+      }
+    }
+  }
+
+  if (length(single_level_vars) == 0) return(formula)
+
+  term_labels <- attr(terms(formula_obj), "term.labels")
+  keep_terms <- term_labels[!sapply(term_labels, function(t) {
+    any(sapply(single_level_vars, function(v) grepl(paste0("\\b", v, "\\b"), t)))
+  })]
+
+  if (length(keep_terms) == 0) return(paste(outcome_var, "~ 1"))
+  paste(outcome_var, "~", paste(keep_terms, collapse = " + "))
+}
+
+
 run_beta_model <- function(df, formula, group_var = "study", type="weighted", mixed=TRUE) {
+  formula <- drop_single_level_terms(formula, df)
   outcome_var <- all.vars(as.formula(formula))[1]
 
   if (mixed) {
