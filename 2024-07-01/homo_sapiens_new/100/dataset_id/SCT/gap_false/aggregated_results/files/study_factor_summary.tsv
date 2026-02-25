@@ -1,0 +1,10 @@
+study	disease	sex	dev_stage	number query samples	number cells	query_region	number unique subclasses
+CMC	control	None	None	100	10000	None	21
+DevBrain	control	None	None	16	1600	None	21
+GSE180670	control	None	None	4	400	None	2
+GSE237718	control	None	None	56	5600	None	7
+Ling-2024	Affected, Unaffected	male, female	None	191	19100	None	16
+MultiomeBrain	control	None	None	21	2061	None	21
+PTSDBrainomics	control	None	None	19	1900	None	21
+SZBDMulti-Seq	control	None	None	72	7194	None	21
+UCLA-ASD	control	None	None	51	5100	None	21
