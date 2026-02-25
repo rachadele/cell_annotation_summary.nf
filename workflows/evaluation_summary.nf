@@ -24,6 +24,7 @@ include { PLOT_CONFIG_PARETO      } from "$projectDir/modules/local/plot_config_
 include { JOIN_METADATA           } from "$projectDir/modules/local/join_metadata/main"
 include { MODEL_ASSAY_EFFECTS     } from "$projectDir/modules/local/model_assay_effects/main"
 include { PLOT_ASSAY_EXPLORATION  } from "$projectDir/modules/local/plot_assay_exploration/main"
+include { PLOT_STUDY_VARIANCE     } from "$projectDir/modules/local/plot_study_variance/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -87,10 +88,16 @@ workflow EVALUATION_SUMMARY {
         // MODULE: Plot assay exploration (mouse only)
         //
         PLOT_ASSAY_EXPLORATION(ch_sample_results, MODEL_ASSAY_EFFECTS.out.contrasts)
+
     } else {
         ch_sample_results = AGGREGATE_RESULTS.out.sample_results_aggregated
         ch_label_results  = AGGREGATE_RESULTS.out.label_results_aggregated
     }
+
+    //
+    // MODULE: Plot cell-type F1 variance across studies
+    //
+    PLOT_STUDY_VARIANCE(ch_label_results)
 
     //
     // MODULE: Plot cutoff analysis
