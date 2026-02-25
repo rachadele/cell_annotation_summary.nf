@@ -82,6 +82,7 @@ load_trace_data <- function(all_runs_dir) {
   traces <- lapply(trace_files, function(tf) {
     tryCatch({
       trace <- read_tsv(tf, show_col_types = FALSE)
+      if ("exit" %in% names(trace)) trace$exit <- as.character(trace$exit)
       params_path <- file.path(dirname(tf), "params.yaml")
       if (file.exists(params_path)) {
         params <- yaml::read_yaml(params_path)
