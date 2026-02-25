@@ -6,10 +6,10 @@ process PLOT_COMPTIME {
 
     output:
     path "comptime.png"
-    path "comptime_summary.tsv"
+    path "comptime_summary.tsv", emit: comptime_summary
 
     script:
     """
-    python ${projectDir}/bin/plot_comptime.py --all_runs ${all_runs_dir}
+    Rscript ${projectDir}/bin/plot_comptime.R --all_runs ${all_runs_dir}
     """
 }

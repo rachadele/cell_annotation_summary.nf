@@ -3,7 +3,7 @@ process PLOT_LABEL_FIGURES {
 
     input:
     val emmeans_files
-    path label_f1_results
+    path label_results
 
     output:
     path "**.png", emit: figures
@@ -13,6 +13,6 @@ process PLOT_LABEL_FIGURES {
     """
     python ${projectDir}/bin/plot_label_figures.py \\
         --emmeans_files ${emmeans_files_joined} \\
-        --label_f1_results ${label_f1_results} 
+        --label_results ${label_results}
     """
 }

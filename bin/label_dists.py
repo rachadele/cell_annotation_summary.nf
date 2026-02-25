@@ -30,7 +30,7 @@ random.seed(42)
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
 
-    parser.add_argument('--label_f1_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/14/a9e48688ba370b7a8596e407f02f76/label_f1_results.tsv")   
+    parser.add_argument('--label_results', type=str, help="Label level f1 results", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/14/a9e48688ba370b7a8596e407f02f76/label_results.tsv")   
     parser.add_argument('--color_mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/meta/color_mapping.tsv")
     parser.add_argument('--mapping_file', type=str, help="Mapping file", default = "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_mouse_author2.tsv")
     # deal with jupyter kernel arguments
@@ -50,11 +50,11 @@ def make_stable_colors(color_mapping_df):
     return subclass_colors
     
 
-def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, levels, level="global", method_col="cutoff", score_col="f1_score", subclass_col="subclass"):
+def plot_score_distribution(label_results, color_mapping_df, mapping_df, levels, level="global", method_col="cutoff", score_col="f1_score", subclass_col="subclass"):
     
     # Set global fontsize for matplotlib
     plt.rcParams['font.size'] = 25 
-    methods = label_f1_results[method_col].unique()
+    methods = label_results[method_col].unique()
     # Ensure methods are sorted in increasing order
     methods = sorted(methods)
     # Get the order in levels["subclass"]
@@ -86,7 +86,7 @@ def plot_score_distribution(label_f1_results, color_mapping_df, mapping_df, leve
            subclasses_to_plot = [celltype]
      
         # Filter the data for the current group
-        filtered_df = label_f1_results[(label_f1_results["label"].isin(subclasses_to_plot)) & (label_f1_results["key"] == subclass_col)]
+        filtered_df = label_results[(label_results["label"].isin(subclasses_to_plot)) & (label_results["key"] == subclass_col)]
         
         # Loop over each method
         for j, method in enumerate(methods):
@@ -156,20 +156,20 @@ def main():
     plt.rcParams.update({'font.size': 25})
     # Parse arguments
     args = parse_arguments()
-    label_f1_results = args.label_f1_results
+    label_results = args.label_results
     
     # Read in data
-    label_f1_results = pd.read_csv(args.label_f1_results, sep = "\t")
+    label_results = pd.read_csv(args.label_results, sep = "\t")
     color_mapping_df = pd.read_csv(args.color_mapping_file, sep = "\t")
     mapping_df = pd.read_csv(args.mapping_file, sep = "\t") 
     # filter for cutoff == 0
-  #  label_f1_results = label_f1_results[label_f1_results["cutoff"] == 0]
+  #  label_results = label_results[label_results["cutoff"] == 0]
 
     # Define the levels for each category
-    subclasses = label_f1_results[label_f1_results["key"] == "subclass"]["label"].unique()
-    classes = label_f1_results[label_f1_results["key"] == "class"]["label"].unique()
-    families = label_f1_results[label_f1_results["key"] == "family"]["label"].unique()
-    globals = label_f1_results[label_f1_results["key"] == "global"]["label"].unique()
+    subclasses = label_results[label_results["key"] == "subclass"]["label"].unique()
+    classes = label_results[label_results["key"] == "class"]["label"].unique()
+    families = label_results[label_results["key"] == "family"]["label"].unique()
+    globals = label_results[label_results["key"] == "global"]["label"].unique()
 
     levels = {
         "subclass": subclasses,
@@ -178,40 +178,40 @@ def main():
         "global": globals
     } 
 
-    label_f1_results_filtered = label_f1_results[label_f1_results["cutoff"].isin([0])]
+    label_results_filtered = label_results[label_results["cutoff"].isin([0])]
     # add a column for support across the whole dataset
     
-    #label_f1_results_filtered["inter_dataset_support"] = label_f1_results_filtered["label"].map(label_f1_results_filtered["label"].value_counts())
+    #label_results_filtered["inter_dataset_support"] = label_results_filtered["label"].map(label_results_filtered["label"].value_counts())
     
     
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall")
    
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score", subclass_col="class")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision", subclass_col="class")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall", subclass_col="class")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score", subclass_col="class")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision", subclass_col="class")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall", subclass_col="class")
    
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score", subclass_col="family")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision", subclass_col="family")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall", subclass_col="family")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="f1_score", subclass_col="family")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="precision", subclass_col="family")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method",score_col="recall", subclass_col="family")
       
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="subclass")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="precision", subclass_col="subclass")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="recall", subclass_col="subclass")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="subclass")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="precision", subclass_col="subclass")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="recall", subclass_col="subclass")
     
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="class")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="precision", subclass_col="class")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="recall", subclass_col="class")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="class")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="precision", subclass_col="class")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="recall", subclass_col="class")
     
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="family")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="precision", subclass_col="family")
-    plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="recall", subclass_col="family")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="f1_score", subclass_col="family")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="precision", subclass_col="family")
+    plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="reference",score_col="recall", subclass_col="family")
     
     
     # plot only results for the "whole cortex" reference at subsample_ref=500 and cutoff=0
-    #label_f1_results_filtered = label_f1_results[(label_f1_results["cutoff"] == 0) & (label_f1_results["reference"] == "whole cortex") & (label_f1_results["subsample_ref"] == 500)]
-   # plot_score_distribution(label_f1_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method", score_col="f1_score", subclass_col="subclass")
+    #label_results_filtered = label_results[(label_results["cutoff"] == 0) & (label_results["reference"] == "whole cortex") & (label_results["subsample_ref"] == 500)]
+   # plot_score_distribution(label_results_filtered, color_mapping_df, mapping_df, levels, level="family", method_col="method", score_col="f1_score", subclass_col="subclass")
     
 if __name__ == "__main__":
     main()

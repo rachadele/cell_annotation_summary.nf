@@ -10,7 +10,7 @@ See docs/label_ranking_method.md for a full description of the approach.
 
 Usage:
     python rank_label_performance.py \
-        --label_f1_results label_f1_results.tsv \
+        --label_results label_results.tsv \
         --outdir rankings
 """
 
@@ -24,8 +24,8 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description="Rank reference/method/subsample_ref combinations per cell type"
     )
-    parser.add_argument("--label_f1_results", type=str, required=True,
-                        help="Path to label_f1_results.tsv")
+    parser.add_argument("--label_results", type=str, required=True,
+                        help="Path to label_results.tsv")
     parser.add_argument("--cutoff", type=float, default=0,
                         help="Confidence cutoff to filter to (default: 0)")
     parser.add_argument("--outdir", type=str, default="rankings",
@@ -40,8 +40,8 @@ def main():
     # ------------------------------------------------------------------
     # Load and filter
     # ------------------------------------------------------------------
-    print(f"Loading {args.label_f1_results}...")
-    df = pd.read_csv(args.label_f1_results, sep="\t", low_memory=False)
+    print(f"Loading {args.label_results}...")
+    df = pd.read_csv(args.label_results, sep="\t", low_memory=False)
     print(f"  {len(df)} rows total")
 
     df = df[df["cutoff"] == args.cutoff].copy()

@@ -11,7 +11,6 @@ library(ggplot2)
 library(gridExtra)
 library(stringr)
 library(DHARMa)
-library(effects)
 library(emmeans)
 source("/space/grp/rschwartz/rschwartz/evaluation_summary.nf/bin/model_functions.R")
 #library(multcomp)
@@ -32,9 +31,22 @@ args <- parser$parse_args()
 
 
 # Reading the aggregated F1 results file
-aggregated_f1_results <- read.table(args$aggregated_f1_results, sep="\t", header=TRUE, stringsAsFactors = TRUE)
-# fill NA with none
-aggregated_f1_results[is.na(aggregated_f1_results)] <- "None"
+aggregated_f1_results <- read.table(args$aggregated_f1_results, sep = "\t",
+                                    header = TRUE, stringsAsFactors = FALSE)
+# Fill NA only for character columns (avoid coercing numeric responses)
+char_cols <- vapply(aggregated_f1_results, is.character, logical(1))
+aggregated_f1_results[char_cols] <- lapply(
+  aggregated_f1_results[char_cols],
+  function(x) {
+    x[is.na(x)] <- "None"
+    x
+  }
+)
+
+# Ensure response is numeric and remove rows with NA
+aggregated_f1_results$macro_f1 <- as.numeric(aggregated_f1_results$macro_f1)
+aggregated_f1_results <- aggregated_f1_results[!is.na(aggregated_f1_results$macro_f1), ]
+aggregated_f1_results <- droplevels(aggregated_f1_results)
 # Extract organism (assuming only one unique value in the 'organism' column)
 organism <- unique(aggregated_f1_results$organism)[1]
 
@@ -59,7 +71,6 @@ if (organism == "homo_sapiens") {
   )
 }
 
-aggregated_f1_results$macro_f1 <-  pmax(pmin(aggregated_f1_results$macro_f1, 1 - 1e-6), 1e-6)
 aggregated_f1_results$subsample_ref <- aggregated_f1_results$subsample_ref %>% factor(levels = c("500","100","50"))
 
 # Grouping the data by 'key' column and creating a list of data frames

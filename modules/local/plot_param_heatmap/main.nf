@@ -9,7 +9,7 @@ process PLOT_PARAM_HEATMAP {
 
     script:
     """
-    python ${projectDir}/bin/plot_param_heatmap.py \
+    Rscript ${projectDir}/bin/plot_param_heatmap.R \
         --input ${rankings_detailed} \
         --outdir param_heatmaps
     """

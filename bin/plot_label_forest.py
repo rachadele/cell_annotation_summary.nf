@@ -11,7 +11,7 @@ For each study, creates a single figure with:
 
 Usage:
     python plot_label_forest.py \
-        --label_f1_results label_f1_results.tsv \
+        --label_results label_results.tsv \
         --organism mus_musculus \
         --outdir forest_plots
 """
@@ -38,8 +38,8 @@ SIZE_MAX = 250
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Plot per-study F1 forest plots")
-    parser.add_argument("--label_f1_results", type=str, required=True,
-                        help="Path to label_f1_results.tsv")
+    parser.add_argument("--label_results", type=str, required=True,
+                        help="Path to label_results.tsv")
     parser.add_argument("--organism", type=str, required=True,
                         help="homo_sapiens or mus_musculus")
     parser.add_argument("--cutoff", type=float, default=0,
@@ -243,8 +243,8 @@ def main():
     os.makedirs(args.outdir, exist_ok=True)
 
     # Load data
-    print(f"Loading {args.label_f1_results}...")
-    df = pd.read_csv(args.label_f1_results, sep="\t", low_memory=False)
+    print(f"Loading {args.label_results}...")
+    df = pd.read_csv(args.label_results, sep="\t", low_memory=False)
     print(f"  {len(df)} rows, {df['study'].nunique()} studies, "
           f"{df['key'].nunique()} keys, {df['reference'].nunique()} references")
 

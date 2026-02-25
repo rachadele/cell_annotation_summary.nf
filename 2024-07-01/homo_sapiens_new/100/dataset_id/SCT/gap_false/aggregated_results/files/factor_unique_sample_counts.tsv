@@ -1,0 +1,6 @@
+level	query	factor
+control	339	disease_state
+disease	191	disease_state
+None	339	sex
+female	75	sex
+male	116	sex

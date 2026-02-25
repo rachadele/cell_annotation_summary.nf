@@ -9,7 +9,7 @@ process PLOT_RANKING_RELIABILITY {
 
     script:
     """
-    python ${projectDir}/bin/plot_ranking_reliability.py \
+    Rscript ${projectDir}/bin/plot_ranking_reliability.R \
         --input ${rankings_best} \
         --outdir ranking_reliability
     """

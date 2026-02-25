@@ -2,7 +2,7 @@
     "organism": "homo_sapiens",
     "mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv",
     "census_version": "2024-07-01",
-    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2024-07-01/homo_sapiens/100/dataset_id/SCT/gap_false",
+    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2024-07-01/homo_sapiens_new/100/dataset_id/SCT/gap_false",
     "ref_keys": [
         "subclass",
         "class",
@@ -10,7 +10,6 @@
         "global"
     ],
     "reference": "whole cortex",
-    "color_mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/color_mapping.tsv",
     "remove_outliers": [
         "GSE180670"
     ]
