@@ -61,6 +61,8 @@ def parse_args():
                         help="Subsample reference level to filter to")
     parser.add_argument("--outdir", type=str, default="heatmaps",
                         help="Output directory")
+    parser.add_argument("--max_refs_per_figure", type=int, default=4,
+                        help="Max references per figure panel (splits into part1, part2, ...)")
     return parser.parse_args()
 
 
@@ -139,7 +141,7 @@ def get_reference_display(row):
     return ref if len(ref) <= 30 else ref[:27] + "..."
 
 
-def plot_study_heatmap(study_df, study, factors, outdir):
+def plot_study_heatmap(study_df, study, factors, outdir, part_suffix=""):
     """Plot a keys (rows) × references × methods (cols) grid of heatmaps for one study."""
     available_keys = [k for k in KEY_ORDER if k in study_df["key"].unique()]
     methods = sorted(study_df["method"].unique())
@@ -317,7 +319,7 @@ def plot_study_heatmap(study_df, study, factors, outdir):
     # Save
     os.makedirs(outdir, exist_ok=True)
     study_safe = sanitize_filename(study)
-    outpath = os.path.join(outdir, f"{study_safe}_f1_heatmap.png")
+    outpath = os.path.join(outdir, f"{study_safe}{part_suffix}_f1_heatmap.png")
     fig.savefig(outpath, dpi=200, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {outpath}")
@@ -354,13 +356,21 @@ def main():
         print("No data after filtering. Exiting.")
         return
 
-    # Generate one heatmap per study
+    # Generate one heatmap per study, chunking references to avoid oversized figures
+    max_refs = args.max_refs_per_figure
     for study, group_df in df.groupby("study"):
-        n_refs = group_df["reference"].nunique()
+        all_refs = sorted(group_df["reference"].unique())
+        n_refs = len(all_refs)
         n_keys = group_df["key"].nunique()
         print(f"Plotting: study={study} "
               f"({n_refs} references, {n_keys} keys, {len(group_df)} rows)")
-        plot_study_heatmap(group_df, study, factors, args.outdir)
+
+        chunks = [all_refs[i:i + max_refs] for i in range(0, n_refs, max_refs)]
+        for part_idx, ref_chunk in enumerate(chunks):
+            part_suffix = f"_part{part_idx + 1}" if len(chunks) > 1 else ""
+            chunk_df = group_df[group_df["reference"].isin(ref_chunk)]
+            plot_study_heatmap(chunk_df, study, factors, args.outdir,
+                               part_suffix=part_suffix)
 
     print("Done.")
 
