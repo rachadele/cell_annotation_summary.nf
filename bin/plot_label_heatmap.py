@@ -189,7 +189,7 @@ def plot_study_heatmap(study_df, study, factors, outdir, part_suffix=""):
 
     # --- Figure sizing ---
     total_heatmap_cols = n_refs * n_methods
-    row_height = max(0.4, min(0.6, 25.0 / n_queries))
+    row_height = max(0.15, min(0.4, 20.0 / n_queries))
     panel_height = n_queries * row_height + 3.0
     header_height = 1.5
     fig_height = header_height + panel_height * n_keys + 4.0
@@ -320,7 +320,7 @@ def plot_study_heatmap(study_df, study, factors, outdir, part_suffix=""):
     os.makedirs(outdir, exist_ok=True)
     study_safe = sanitize_filename(study)
     outpath = os.path.join(outdir, f"{study_safe}{part_suffix}_f1_heatmap.png")
-    fig.savefig(outpath, dpi=200, bbox_inches="tight")
+    fig.savefig(outpath, dpi=100, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {outpath}")
 
