@@ -15,7 +15,6 @@ include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_sum
 include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
 include { PLOT_PUB_FIGURES       } from "$projectDir/modules/local/plot_pub_figures/main"
 include { PLOT_LABEL_HEATMAP     } from "$projectDir/modules/local/plot_label_heatmap/main"
-include { PLOT_LABEL_FOREST     } from "$projectDir/modules/local/plot_label_forest/main"
 include { RANK_LABEL_PERFORMANCE   } from "$projectDir/modules/local/rank_label_performance/main"
 include { PLOT_PARAM_HEATMAP       } from "$projectDir/modules/local/plot_param_heatmap/main"
 include { PLOT_RANKING_SUMMARY     } from "$projectDir/modules/local/plot_ranking_summary/main"
@@ -155,12 +154,6 @@ workflow EVALUATION_SUMMARY {
     // MODULE: Plot per-study label F1 heatmaps
     //
     PLOT_LABEL_HEATMAP(ch_label_results)
-
-    //
-    // MODULE: Plot per-study label F1 forest plots (deprecated)
-    //
-    //PLOT_LABEL_FOREST(ch_label_results)
-
 
     //
     // MODULE: Rank label performance across studies
