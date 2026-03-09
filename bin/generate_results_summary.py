@@ -152,7 +152,7 @@ def section_method_comparison(models_dir):
 
 
 def section_cutoff_sensitivity(models_dir):
-    """Cutoff sensitivity table for key=subclass."""
+    """Cutoff sensitivity — one combined table across all taxonomy levels."""
     if models_dir is None:
         return "> *Not available — rerun pipeline.*\n"
 
@@ -161,37 +161,41 @@ def section_cutoff_sensitivity(models_dir):
     if df is None:
         return "> *Not available — rerun pipeline.*\n"
 
-    sub = df[df["key"] == "subclass"].copy()
-    if sub.empty:
-        return "> *No subclass data in method_cutoff_effects.tsv.*\n"
+    keys_present = [k for k in KEY_ORDER if k in df["key"].values]
+    chunks = []
+    for key in keys_present:
+        sub = df[df["key"] == key].copy()
+        pivot = sub.pivot_table(index="cutoff", columns="method", values="fit").reset_index()
+        pivot.columns.name = None
+        pivot.insert(0, "key", key)
+        pivot["cutoff"] = pivot["cutoff"].round(3)
+        for col in pivot.columns[2:]:
+            pivot[col] = pivot[col].round(3)
+        chunks.append(pivot)
 
-    pivot = sub.pivot_table(index="cutoff", columns="method", values="fit").reset_index()
-    pivot.columns.name = None
-    pivot["cutoff"] = pivot["cutoff"].round(3)
-    for col in pivot.columns[1:]:
-        pivot[col] = pivot[col].round(3)
-    pivot = pivot.rename(columns={"cutoff": "Cutoff"})
+    combined = pd.concat(chunks, ignore_index=True)
+    combined = combined.rename(columns={"key": "Key", "cutoff": "Cutoff"})
 
-    lines = [df_to_md_table(pivot), ""]
+    lines = [df_to_md_table(combined), ""]
 
-    # Prose: note direction of change for each method
-    methods_in = [c for c in pivot.columns if c != "Cutoff"]
-    for method in methods_in:
-        low = pivot.loc[pivot["Cutoff"] == pivot["Cutoff"].min(), method].values
-        high = pivot.loc[pivot["Cutoff"] == pivot["Cutoff"].max(), method].values
-        if len(low) and len(high):
-            delta = float(high[0]) - float(low[0])
+    # Summary prose: delta per method at subclass
+    sub_df = df[df["key"] == "subclass"]
+    if not sub_df.empty:
+        for method in sorted(sub_df["method"].unique()):
+            mdf = sub_df[sub_df["method"] == method].sort_values("cutoff")
+            lo_cut, hi_cut = mdf["cutoff"].iloc[0], mdf["cutoff"].iloc[-1]
+            delta = float(mdf["fit"].iloc[-1]) - float(mdf["fit"].iloc[0])
             direction = "decreases" if delta < 0 else "increases"
             lines.append(
-                f"{method}: performance {direction} by {abs(delta):.3f} "
-                f"from cutoff {pivot['Cutoff'].min()} to {pivot['Cutoff'].max()}."
+                f"{method} (subclass): performance {direction} by {abs(delta):.3f} "
+                f"from cutoff {lo_cut} to {hi_cut}."
             )
 
     return "\n".join(lines) + "\n"
 
 
 def section_reference_comparison(models_dir):
-    """Reference × method table for key=subclass."""
+    """Reference × method — one combined table across all taxonomy levels."""
     if models_dir is None:
         return "> *Not available — rerun pipeline.*\n"
 
@@ -200,28 +204,35 @@ def section_reference_comparison(models_dir):
     if df is None:
         return "> *Not available — rerun pipeline.*\n"
 
-    sub = df[df["key"] == "subclass"].copy()
-    if sub.empty:
-        return "> *No subclass data in reference_method_emmeans_summary.tsv.*\n"
+    df["ref_short"] = df["reference"].apply(shorten_ref)
+    keys_present = [k for k in KEY_ORDER if k in df["key"].values]
+    chunks = []
+    for key in keys_present:
+        sub = df[df["key"] == key].copy()
+        pivot = sub.pivot_table(index="ref_short", columns="method", values="response").reset_index()
+        pivot.columns.name = None
+        pivot.insert(0, "key", key)
+        for col in pivot.columns[2:]:
+            pivot[col] = pivot[col].round(3)
+        chunks.append(pivot)
 
-    sub["ref_short"] = sub["reference"].apply(shorten_ref)
+    combined = pd.concat(chunks, ignore_index=True)
+    combined = combined.rename(columns={"key": "Key", "ref_short": "Reference"})
 
-    pivot = sub.pivot_table(index="ref_short", columns="method", values="response").reset_index()
-    pivot.columns.name = None
-    for col in pivot.columns[1:]:
-        pivot[col] = pivot[col].round(3)
-    pivot = pivot.rename(columns={"ref_short": "Reference"})
+    lines = [df_to_md_table(combined), ""]
 
-    lines = [df_to_md_table(pivot), ""]
-
-    # Prose: best and worst by mean across methods
-    numeric_cols = [c for c in pivot.columns if c != "Reference"]
-    if numeric_cols:
-        pivot["_mean"] = pivot[numeric_cols].mean(axis=1)
-        best_ref = pivot.loc[pivot["_mean"].idxmax(), "Reference"]
-        worst_ref = pivot.loc[pivot["_mean"].idxmin(), "Reference"]
+    # Summary prose: best/worst at subclass
+    sub_df = df[df["key"] == "subclass"].copy()
+    if not sub_df.empty:
+        methods = [c for c in sub_df["method"].unique()]
+        pivot_sub = sub_df.pivot_table(index="ref_short", columns="method", values="response").reset_index()
+        pivot_sub.columns.name = None
+        numeric_cols = [c for c in pivot_sub.columns if c != "ref_short"]
+        pivot_sub["_mean"] = pivot_sub[numeric_cols].mean(axis=1)
+        best_ref = pivot_sub.loc[pivot_sub["_mean"].idxmax(), "ref_short"]
+        worst_ref = pivot_sub.loc[pivot_sub["_mean"].idxmin(), "ref_short"]
         lines.append(
-            f"Best-performing reference (mean across methods): **{best_ref}**. "
+            f"Best-performing reference at subclass (mean across methods): **{best_ref}**. "
             f"Lowest: **{worst_ref}**."
         )
 
@@ -229,92 +240,118 @@ def section_reference_comparison(models_dir):
 
 
 def section_celltype_performance(rankings_path):
-    """Hard/easy cell type split from rankings_best.tsv, key=subclass."""
+    """Hard/easy cell type split — combined tables across all taxonomy levels."""
     df = load_optional(rankings_path)
     if df is None:
         return "> *Not available — rerun pipeline.*\n"
 
-    sub = df[df["key"] == "subclass"].copy()
-    if sub.empty:
-        return "> *No subclass data in rankings_best.tsv.*\n"
+    df["ref_short"] = df["reference"].apply(shorten_ref)
+    keys_present = [k for k in KEY_ORDER if k in df["key"].values]
 
-    sub["ref_short"] = sub["reference"].apply(shorten_ref)
+    def make_notes(row):
+        notes = []
+        if row["n_studies"] < 3:
+            notes.append(f"rare (<{row['n_studies']} studies)")
+        return "; ".join(notes) if notes else "—"
 
     lines = []
 
     # --- Well-classified ---
-    well = sub[(sub["mean_f1_across_studies"] >= 0.90) & (sub["n_studies"] >= 3)].copy()
-    well = well.sort_values("mean_f1_across_studies", ascending=False)
-    lines.append("#### Consistently well-classified (mean_f1 ≥ 0.90, ≥ 3 studies)\n")
-    if well.empty:
+    well_chunks = []
+    for key in keys_present:
+        sub = df[df["key"] == key]
+        well = sub[(sub["mean_f1_across_studies"] >= 0.90) & (sub["n_studies"] >= 3)].copy()
+        well = well.sort_values("mean_f1_across_studies", ascending=False)
+        if not well.empty:
+            tbl = well[["label", "method", "ref_short", "subsample_ref",
+                        "mean_f1_across_studies", "n_studies"]].copy()
+            tbl.insert(0, "key", key)
+            well_chunks.append(tbl)
+
+    lines.append("**Consistently well-classified (mean_f1 ≥ 0.90, ≥ 3 studies)**\n")
+    if not well_chunks:
         lines.append("*None meeting criteria.*\n")
     else:
-        tbl = well[["label", "method", "ref_short", "subsample_ref",
-                    "mean_f1_across_studies", "n_studies"]].copy()
-        tbl = tbl.rename(columns={
+        combined_well = pd.concat(well_chunks, ignore_index=True)
+        combined_well = combined_well.rename(columns={
+            "key": "Key",
             "ref_short": "best_reference",
             "method": "best_method",
             "subsample_ref": "best_subsample",
             "mean_f1_across_studies": "mean_f1",
         })
-        tbl["mean_f1"] = tbl["mean_f1"].round(3)
-        lines.append(df_to_md_table(tbl))
+        combined_well["mean_f1"] = combined_well["mean_f1"].round(3)
+        lines.append(df_to_md_table(combined_well))
         lines.append("")
 
     # --- Hard cell types ---
-    hard = sub[sub["mean_f1_across_studies"] < 0.75].copy()
-    hard = hard.sort_values("mean_f1_across_studies")
-    lines.append("#### Hardest cell types (mean_f1 < 0.75)\n")
-    if hard.empty:
+    hard_chunks = []
+    for key in keys_present:
+        sub = df[df["key"] == key]
+        hard = sub[sub["mean_f1_across_studies"] < 0.75].copy()
+        hard = hard.sort_values("mean_f1_across_studies")
+        if not hard.empty:
+            hard["notes"] = hard.apply(make_notes, axis=1)
+            tbl = hard[["label", "mean_f1_across_studies", "std_f1_across_studies",
+                        "n_studies", "notes"]].copy()
+            tbl.insert(0, "key", key)
+            hard_chunks.append(tbl)
+
+    lines.append("**Hardest cell types (mean_f1 < 0.75)**\n")
+    if not hard_chunks:
         lines.append("*None meeting criteria.*\n")
     else:
-        def make_notes(row):
-            notes = []
-            if row["n_studies"] < 3:
-                notes.append(f"rare (<{row['n_studies']} studies)")
-            return "; ".join(notes) if notes else "—"
-
-        hard["notes"] = hard.apply(make_notes, axis=1)
-        tbl = hard[["label", "mean_f1_across_studies", "std_f1_across_studies",
-                    "n_studies", "notes"]].copy()
-        tbl = tbl.rename(columns={
+        combined_hard = pd.concat(hard_chunks, ignore_index=True)
+        combined_hard = combined_hard.rename(columns={
+            "key": "Key",
             "mean_f1_across_studies": "mean_f1",
             "std_f1_across_studies": "std_f1",
         })
-        tbl["mean_f1"] = tbl["mean_f1"].round(3)
-        tbl["std_f1"] = tbl["std_f1"].round(3)
-        lines.append(df_to_md_table(tbl))
+        combined_hard["mean_f1"] = combined_hard["mean_f1"].round(3)
+        combined_hard["std_f1"] = combined_hard["std_f1"].round(3)
+        lines.append(df_to_md_table(combined_hard))
         lines.append("")
 
     return "\n".join(lines) + "\n"
 
 
 def section_study_variance(sv_path):
-    """Study variance table, top 10 by std_f1 at key=subclass, cutoff=0.0."""
+    """Study variance — one combined table (top 10 per key) across all taxonomy levels."""
     df = load_optional(sv_path)
     if df is None:
         return None  # caller will skip section
 
-    sub = df[(df["key"] == "subclass") & (df["cutoff"] == 0.0)].copy()
-    if sub.empty:
-        return "> *No subclass/cutoff=0.0 data in study_variance_summary.tsv.*\n"
+    df_cut = df[df["cutoff"] == 0.0].copy()
+    if df_cut.empty:
+        return "> *No cutoff=0.0 data in study_variance_summary.tsv.*\n"
 
-    top10 = sub.sort_values("std_f1", ascending=False).head(10)
-    cols = ["label", "n_studies", "frac_studies", "mean_f1", "std_f1", "min_f1", "max_f1"]
-    cols = [c for c in cols if c in top10.columns]
-    tbl = top10[cols].copy()
-    for col in ["frac_studies", "mean_f1", "std_f1", "min_f1", "max_f1"]:
-        if col in tbl.columns:
-            tbl[col] = tbl[col].round(3)
+    keys_present = [k for k in KEY_ORDER if k in df_cut["key"].values]
+    chunks = []
+    for key in keys_present:
+        sub = df_cut[df_cut["key"] == key].copy()
+        top10 = sub.sort_values("std_f1", ascending=False).head(10)
+        cols = ["label", "n_studies", "frac_studies", "mean_f1", "std_f1", "min_f1", "max_f1"]
+        cols = [c for c in cols if c in top10.columns]
+        tbl = top10[cols].copy()
+        tbl.insert(0, "key", key)
+        for col in ["frac_studies", "mean_f1", "std_f1", "min_f1", "max_f1"]:
+            if col in tbl.columns:
+                tbl[col] = tbl[col].round(3)
+        chunks.append(tbl)
 
-    lines = [df_to_md_table(tbl), ""]
+    combined = pd.concat(chunks, ignore_index=True)
+    combined = combined.rename(columns={"key": "Key"})
 
-    # Prose
-    most_variable = top10.iloc[0]["label"] if not top10.empty else "N/A"
-    lines.append(
-        f"Cell type with highest study-to-study variability: **{most_variable}** "
-        f"(std_f1 = {top10.iloc[0]['std_f1']:.3f})."
-    )
+    lines = [df_to_md_table(combined), ""]
+
+    # Prose: most variable per key
+    for key in keys_present:
+        sub = df_cut[df_cut["key"] == key].sort_values("std_f1", ascending=False)
+        if not sub.empty:
+            lines.append(
+                f"Most variable at {key}: **{sub.iloc[0]['label']}** "
+                f"(std_f1 = {sub.iloc[0]['std_f1']:.3f})."
+            )
 
     return "\n".join(lines) + "\n"
 
@@ -369,12 +406,12 @@ def dataset_section(name, base):
     lines.append(section_cutoff_sensitivity(models_dir))
 
     # --- Reference comparison ---
-    lines.append("### Reference Comparison (subclass, model-adjusted)\n")
+    lines.append("### Reference Comparison (model-adjusted)\n")
     lines.append(section_reference_comparison(models_dir))
 
     # --- Cell-type performance ---
     rankings_path = os.path.join(base, "celltype_rankings", "rankings", "rankings_best.tsv")
-    lines.append("### Cell-Type Performance (subclass, best config per label)\n")
+    lines.append("### Cell-Type Performance (best config per label)\n")
     lines.append(section_celltype_performance(rankings_path))
 
     # --- Study variance ---
