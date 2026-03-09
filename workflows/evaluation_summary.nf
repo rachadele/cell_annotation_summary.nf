@@ -102,7 +102,9 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Plot cutoff analysis
     //
-    PLOT_CUTOFF(ch_sample_results, ch_label_results)
+    if (!params.skip_modeling) {
+        PLOT_CUTOFF(ch_sample_results, ch_label_results)
+    }
 
     //
     // MODULE: Generate grant summary
@@ -127,25 +129,27 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Model evaluation for aggregated results (macro F1)
     //
-    MODEL_EVAL_AGGREGATED(ch_sample_results)
+    if (!params.skip_modeling) {
+        MODEL_EVAL_AGGREGATED(ch_sample_results)
 
-    // Combined files now contain all keys with a 'key' column
-    ch_cutoff_effects      = MODEL_EVAL_AGGREGATED.out.cutoff_effects
-    ch_reference_emmeans   = MODEL_EVAL_AGGREGATED.out.reference_method_emmeans
-    ch_method_emmeans      = MODEL_EVAL_AGGREGATED.out.method_emmeans
-    ch_all_emmeans_summary = MODEL_EVAL_AGGREGATED.out.all_emmeans_summary
+        // Combined files now contain all keys with a 'key' column
+        ch_cutoff_effects      = MODEL_EVAL_AGGREGATED.out.cutoff_effects
+        ch_reference_emmeans   = MODEL_EVAL_AGGREGATED.out.reference_method_emmeans
+        ch_method_emmeans      = MODEL_EVAL_AGGREGATED.out.method_emmeans
+        ch_all_emmeans_summary = MODEL_EVAL_AGGREGATED.out.all_emmeans_summary
 
-    //
-    // MODULE: Generate publication figures
-    //
-    // Note: Combined files contain all keys - filtering by key happens in R script
-    PLOT_PUB_FIGURES(
-        ch_sample_results,
-        ch_cutoff_effects,
-        ch_reference_emmeans,
-        ch_method_emmeans,
-        ch_all_emmeans_summary
-    )
+        //
+        // MODULE: Generate publication figures
+        //
+        // Note: Combined files contain all keys - filtering by key happens in R script
+        PLOT_PUB_FIGURES(
+            ch_sample_results,
+            ch_cutoff_effects,
+            ch_reference_emmeans,
+            ch_method_emmeans,
+            ch_all_emmeans_summary
+        )
+    }
 
     //
     // MODULE: Plot per-study label F1 heatmaps
