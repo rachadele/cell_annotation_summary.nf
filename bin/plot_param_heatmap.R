@@ -38,7 +38,10 @@ build_ref_short_names <- function(references) {
     grepl("10x", refs_sorted) ~ "10x",
     grepl("SMART", refs_sorted) ~ "SMART-Seq",
     grepl("motor", refs_sorted, ignore.case = TRUE) ~ "Motor Ctx",
-    grepl("whole", refs_sorted, ignore.case = TRUE) ~ "Whole Ctx",
+    grepl("DLPFC.*SEA-AD|SEA-AD.*DLPFC", refs_sorted) ~ "SEA-AD DLPFC",
+    grepl("MTG.*SEA-AD|SEA-AD.*MTG", refs_sorted) ~ "SEA-AD MTG",
+    grepl("whole cortex", refs_sorted, ignore.case = TRUE) ~ "Whole Ctx",
+    grepl("Dissection", refs_sorted) ~ sub("Dissection\\s*", "", refs_sorted),
     TRUE ~ substr(refs_sorted, 1, 15)
   )
   setNames(short, refs_sorted)
