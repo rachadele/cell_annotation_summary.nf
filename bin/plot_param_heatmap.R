@@ -28,7 +28,8 @@ METHOD_NAMES <- c(scvi = "scVI", seurat = "Seurat")
 
 REF_PALETTE <- c(
   "#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3",
-  "#a6d854", "#ffd92f", "#e5c494", "#b3b3b3"
+  "#a6d854", "#ffd92f", "#e5c494", "#b3b3b3",
+  "#80b1d3", "#fb8072"
 )
 SUB_PALETTE <- c("#feedde", "#fdae6b", "#e6550d")
 
