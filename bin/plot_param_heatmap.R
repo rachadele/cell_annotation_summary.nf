@@ -42,6 +42,7 @@ build_ref_short_names <- function(references) {
     grepl("DLPFC.*SEA-AD|SEA-AD.*DLPFC", refs_sorted) ~ "SEA-AD DLPFC",
     grepl("MTG.*SEA-AD|SEA-AD.*MTG", refs_sorted) ~ "SEA-AD MTG",
     grepl("whole cortex", refs_sorted, ignore.case = TRUE) ~ "Whole Ctx",
+    grepl("single-nucleus.*dlPFC|dlPFC.*single-nucleus", refs_sorted, ignore.case = TRUE) ~ "snRNA dlPFC",
     grepl("Dissection", refs_sorted) ~ sub("Dissection\\s*", "", refs_sorted),
     TRUE ~ substr(refs_sorted, 1, 15)
   )
