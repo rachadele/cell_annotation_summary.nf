@@ -15,6 +15,8 @@ process MODEL_EVAL_AGGREGATED {
 
     script:
     """
-    Rscript ${projectDir}/bin/model_performance_aggregated.R --aggregated_f1_results ${aggregated_f1_results}
+    Rscript ${projectDir}/bin/model_performance_aggregated.R \
+        --aggregated_f1_results ${aggregated_f1_results} \
+        --emmeans_cutoff ${params.emmeans_cutoff}
     """
 }
