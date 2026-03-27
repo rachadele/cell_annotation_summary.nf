@@ -34,8 +34,8 @@ library(patchwork)
 # -- Constants ----------------------------------------------------------------
 
 ORGANISM_COLORS  <- c(Human = "#2166ac", Mouse = "#d6604d")
-METHOD_LINETYPES <- c(scvi = "solid", seurat = "dashed")
-METHOD_NAMES     <- c(scvi = "scVI", seurat = "Seurat")
+METHOD_LINETYPES <- c(scvi_rf = "solid", scvi_knn = "dotted", seurat = "dashed", scvi = "solid")
+METHOD_NAMES     <- c(scvi_rf = "scVI RF", scvi_knn = "scVI kNN", seurat = "Seurat", scvi = "scVI")
 
 KEY_ORDER <- c("subclass", "class", "family", "global")
 

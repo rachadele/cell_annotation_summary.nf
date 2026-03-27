@@ -21,8 +21,10 @@ from typing import List, Optional, Dict, Tuple, Union
 # =============================================================================
 
 METHOD_COLORS = {
-    'scvi': '#1f77b4',    # Blue
-    'seurat': '#ff7f0e'   # Orange
+    'scvi_rf':  '#1f77b4',   # Blue
+    'scvi_knn': '#2ca02c',   # Green
+    'seurat':   '#ff7f0e',   # Orange
+    'scvi':     '#1f77b4',   # backward compat
 }
 
 # Colorblind-safe backup palette
@@ -33,8 +35,10 @@ KEY_ORDER = ['subclass', 'class', 'family', 'global']
 
 # Method display names
 METHOD_NAMES = {
-    'scvi': 'scVI',
-    'seurat': 'Seurat'
+    'scvi_rf':  'scVI RF',
+    'scvi_knn': 'scVI kNN',
+    'seurat':   'Seurat',
+    'scvi':     'scVI',      # backward compat
 }
 
 

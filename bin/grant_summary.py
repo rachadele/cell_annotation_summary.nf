@@ -50,7 +50,7 @@ def parse_arguments():
     parser.add_argument('--subsample_ref', type=int, default=500, help="Subsample reference value")
     parser.add_argument('--cutoff', type=float, default=0, help="Cutoff value")
     parser.add_argument('--reference', type=str, default="whole cortex", help="Reference name")
-    parser.add_argument('--method', type=str, default="scvi", help="Method name")
+    parser.add_argument('--method', type=str, default="scvi_rf", help="Method name")
     parser.add_argument('--organism', type=str, default="homo_sapiens", help="Organism: mouse or human")
     # deal with jupyter kernel arguments
     if __name__ == "__main__":
