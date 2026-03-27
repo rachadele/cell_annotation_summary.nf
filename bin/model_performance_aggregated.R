@@ -27,6 +27,8 @@ theme_set(
 parser <- argparse::ArgumentParser()
 parser$add_argument("--aggregated_f1_results", help = "Path to the aggregated F1 results file",
   default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/e8/0ee4b04d0441800e9a092e9885599a/aggregated_f1_results.tsv")
+parser$add_argument("--emmeans_cutoff", type = "double", default = 0,
+  help = "Cutoff value at which to evaluate emmeans (default: 0)")
 args <- parser$parse_args()
 
 
@@ -84,7 +86,7 @@ for (df in df_list) {
     formula_dir <- formula %>% gsub(" ", "_", .)
     dir.create(formula_dir, showWarnings = FALSE, recursive = TRUE)
 
-    df$method <- factor(df$method, levels = c("seurat", "scvi"))
+    df$method <- factor(df$method, levels = c("seurat", "scvi_rf", "scvi_knn", "scvi"))
     key <- df$key[1]
 
     # Create figures directory for this key
@@ -92,7 +94,7 @@ for (df in df_list) {
     dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
 
     # Run model and get results
-    key_results <- run_and_store_model(df, formula, fig_dir = fig_dir, key = key, type = "weighted")
+    key_results <- run_and_store_model(df, formula, fig_dir = fig_dir, key = key, type = "weighted", cutoff_ref = args$emmeans_cutoff)
 
     # Collect results by name
     for (result_name in names(key_results)) {
