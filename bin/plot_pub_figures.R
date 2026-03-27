@@ -28,8 +28,8 @@ library(patchwork)
 
 # -- Constants ----------------------------------------------------------------
 
-METHOD_COLORS <- c(scvi = "#1f77b4", seurat = "#ff7f0e")
-METHOD_NAMES  <- c(scvi = "scVI", seurat = "Seurat")
+METHOD_COLORS <- c(scvi_rf = "#1f77b4", scvi_knn = "#2ca02c", seurat = "#ff7f0e", scvi = "#1f77b4")
+METHOD_NAMES  <- c(scvi_rf = "scVI RF", scvi_knn = "scVI kNN", seurat = "Seurat", scvi = "scVI")
 
 KEY_ORDER <- c("subclass", "class", "family", "global")
 

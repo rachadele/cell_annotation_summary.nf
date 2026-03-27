@@ -21,8 +21,8 @@ library(yaml)
 
 # Map each Nextflow process to its methodology and pipeline stage
 PROCESS_METHOD <- c(
-  MAP_QUERY            = "scVI",
-  RF_PREDICT           = "scVI",
+  MAP_QUERY            = "scVI RF/kNN",
+  RF_PREDICT           = "scVI RF/kNN",
   REF_PROCESS_SEURAT   = "Seurat",
   QUERY_PROCESS_SEURAT = "Seurat",
   PREDICT_SEURAT       = "Seurat"
@@ -40,7 +40,7 @@ PROCESS_STEP <- c(
 STEP_ORDER <- c("Ref Processing", "Query Processing", "Prediction")
 
 # Method colors (consistent with plot_utils.py METHOD_COLORS)
-METHOD_COLORS <- c(scVI = "#1f77b4", Seurat = "#ff7f0e")
+METHOD_COLORS <- c("scVI RF/kNN" = "#1f77b4", Seurat = "#ff7f0e")
 
 PROCESS_ORDER <- names(PROCESS_METHOD)
 

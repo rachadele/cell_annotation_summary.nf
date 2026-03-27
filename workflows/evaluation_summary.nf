@@ -11,7 +11,6 @@ include { PLOT_COMPTIME          } from "$projectDir/modules/local/plot_comptime
 include { PLOT_LABEL_DIST        } from "$projectDir/modules/local/plot_label_dist/main"
 include { PLOT_F1_DISTRIBUTIONS  } from "$projectDir/modules/local/plot_f1_distributions/main"
 include { MODEL_EVAL_AGGREGATED  } from "$projectDir/modules/local/model_eval_aggregated/main"
-include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
 include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
 include { PLOT_PUB_FIGURES       } from "$projectDir/modules/local/plot_pub_figures/main"
 include { PLOT_LABEL_HEATMAP     } from "$projectDir/modules/local/plot_label_heatmap/main"
@@ -45,7 +44,7 @@ workflow EVALUATION_SUMMARY {
             def ref_obs = "${pipeline_run_dir}/refs/"
             def pipeline_results = []
             pipeline_run_dir.eachDir { dir ->
-                if (dir.getName() == 'scvi' || dir.getName() == 'seurat') {
+                if (dir.getName() in ['scvi_rf', 'scvi_knn', 'seurat', 'scvi']) {
                     def dir_path = dir.toString()
                     pipeline_results << dir_path
                 }
@@ -104,11 +103,6 @@ workflow EVALUATION_SUMMARY {
     if (!params.skip_modeling) {
         PLOT_CUTOFF(ch_sample_results, ch_label_results)
     }
-
-    //
-    // MODULE: Generate grant summary
-    //
-    GET_GRANT_SUMMARY(ch_sample_results, ch_label_results)
 
     //
     // MODULE: Plot label distributions

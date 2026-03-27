@@ -23,14 +23,15 @@ library(ggrepel)
 
 # -- Constants ----------------------------------------------------------------
 
-METHOD_COLORS <- c(scVI = "#1f77b4", Seurat = "#ff7f0e")
-METHOD_NAMES  <- c(scvi = "scVI", seurat = "Seurat")
+METHOD_COLORS <- c(scvi_rf = "#1f77b4", scvi_knn = "#2ca02c", seurat = "#ff7f0e")
+METHOD_NAMES  <- c(scvi_rf = "scVI RF", scvi_knn = "scVI kNN", seurat = "Seurat")
 KEY_ORDER     <- c("subclass", "class", "family", "global")
 
 # -- Helpers ------------------------------------------------------------------
 
 identify_pareto <- function(df, x_col, y_col, minimize_y = TRUE) {
   # Identify Pareto-optimal points (maximize x, minimize y).
+  # Rows with NA in y_col are excluded from the Pareto front.
   # Flags are returned in the ORIGINAL row order of df so that mutate()
   # assigns them correctly.
   df <- df %>% mutate(.orig_row = row_number())
@@ -39,17 +40,19 @@ identify_pareto <- function(df, x_col, y_col, minimize_y = TRUE) {
   if (minimize_y) {
     best_y <- Inf
     for (i in seq_len(nrow(df_sorted))) {
-      if (df_sorted[[y_col]][i] <= best_y) {
+      y_val <- df_sorted[[y_col]][i]
+      if (!is.na(y_val) && y_val <= best_y) {
         pareto[i] <- TRUE
-        best_y <- df_sorted[[y_col]][i]
+        best_y <- y_val
       }
     }
   } else {
     best_y <- -Inf
     for (i in seq_len(nrow(df_sorted))) {
-      if (df_sorted[[y_col]][i] >= best_y) {
+      y_val <- df_sorted[[y_col]][i]
+      if (!is.na(y_val) && y_val >= best_y) {
         pareto[i] <- TRUE
-        best_y <- df_sorted[[y_col]][i]
+        best_y <- y_val
       }
     }
   }
@@ -119,15 +122,22 @@ main <- function() {
       .groups = "drop"
     )
 
-  # Join with cost (match on method display name and subsample_ref if present)
+  # Map scVI variants to the shared comptime label (RF and kNN run in one process)
+  config_f1 <- config_f1 %>%
+    mutate(cost_method = case_when(
+      method %in% c("scvi_rf", "scvi_knn") ~ "scVI RF/kNN",
+      TRUE ~ method_display
+    ))
+
+  # Join with cost (match on cost_method and subsample_ref if present)
   if ("subsample_ref" %in% names(cost)) {
     config_f1 <- config_f1 %>%
       mutate(subsample_ref = as.character(subsample_ref)) %>%
-      left_join(cost, by = c("method_display" = "method",
+      left_join(cost, by = c("cost_method" = "method",
                              "subsample_ref" = "subsample_ref"))
   } else {
     config_f1 <- config_f1 %>%
-      left_join(cost, by = c("method_display" = "method"))
+      left_join(cost, by = c("cost_method" = "method"))
   }
 
   # Build short reference labels
