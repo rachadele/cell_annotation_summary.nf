@@ -84,6 +84,15 @@ extract_factor_from_path <- function(filepath) {
 # -- Panel functions ----------------------------------------------------------
 
 create_panel_a <- function(cutoff_data) {
+  if (nrow(cutoff_data) == 0) {
+    return(
+      ggplot() +
+        annotate("text", x = 0.5, y = 0.5, label = "Cutoff sensitivity\nnot available",
+                 colour = "gray", size = 4) +
+        labs(x = "Confidence Cutoff", y = "Estimated F1 Score") +
+        pub_theme()
+    )
+  }
   # Panel A: Cutoff sensitivity — line + ribbon by method
   cutoff_data <- cutoff_data %>%
     mutate(method = factor(method, levels = names(METHOD_NAMES)))
@@ -363,11 +372,15 @@ main <- function() {
   # -- Load data ---------------------------------------------------------------
   message("Loading data (filtering by key=", primary_key, ")...")
 
-  cutoff_data <- read_tsv(args$cutoff_effects, show_col_types = FALSE)
-  if ("key" %in% colnames(cutoff_data)) {
-    cutoff_data <- cutoff_data %>% filter(key == primary_key)
+  cutoff_data <- if (!is.null(args$cutoff_effects) && file.exists(args$cutoff_effects)) {
+    df <- read_tsv(args$cutoff_effects, show_col_types = FALSE)
+    if ("key" %in% colnames(df)) df <- df %>% filter(key == primary_key)
+    message("  Cutoff effects: ", nrow(df), " rows")
+    df
+  } else {
+    message("  Cutoff effects: not available (skipping panel A)")
+    tibble()
   }
-  message("  Cutoff effects: ", nrow(cutoff_data), " rows")
 
   reference_emmeans <- read_tsv(args$reference_emmeans, show_col_types = FALSE)
   if ("key" %in% colnames(reference_emmeans)) {
