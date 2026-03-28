@@ -267,17 +267,20 @@ run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_v
     emmeans_results <- run_emmeans_weighted(model, key, cutoff_ref = cutoff_ref)
     all_results <- c(all_results, emmeans_results)
 
-    cutoff_grid <- c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)
-    emm_mc <- emmeans(model, specs = ~ method * cutoff,
-                      at = list(cutoff = cutoff_grid),
-                      type = "response")
-    emm_mc_df <- as.data.frame(summary(emm_mc))
-    # Rename columns to match expected format: fit, lower, upper
-    names(emm_mc_df)[names(emm_mc_df) == "response"] <- "fit"
-    names(emm_mc_df)[names(emm_mc_df) == "asymp.LCL"] <- "lower"
-    names(emm_mc_df)[names(emm_mc_df) == "asymp.UCL"] <- "upper"
-    plot_continuous_effects(emm_mc_df, fig_dir, key)
-    all_results$method_cutoff_effects <- emm_mc_df %>% mutate(key = key)
+    if ("cutoff" %in% colnames(model$frame)) {
+      cutoff_grid <- c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)
+      emm_mc <- emmeans(model, specs = ~ method * cutoff,
+                        at = list(cutoff = cutoff_grid),
+                        type = "response")
+      emm_mc_df <- as.data.frame(summary(emm_mc))
+      names(emm_mc_df)[names(emm_mc_df) == "response"] <- "fit"
+      names(emm_mc_df)[names(emm_mc_df) == "asymp.LCL"] <- "lower"
+      names(emm_mc_df)[names(emm_mc_df) == "asymp.UCL"] <- "upper"
+      plot_continuous_effects(emm_mc_df, fig_dir, key)
+      all_results$method_cutoff_effects <- emm_mc_df %>% mutate(key = key)
+    } else {
+      message("Skipping cutoff sensitivity emmeans: cutoff was dropped from model (single value in data)")
+    }
 
   }
 
