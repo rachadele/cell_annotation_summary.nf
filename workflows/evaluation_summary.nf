@@ -124,7 +124,7 @@ workflow EVALUATION_SUMMARY {
         MODEL_EVAL_AGGREGATED(ch_sample_results)
 
         // Combined files now contain all keys with a 'key' column
-        ch_cutoff_effects      = MODEL_EVAL_AGGREGATED.out.cutoff_effects
+        ch_cutoff_effects      = MODEL_EVAL_AGGREGATED.out.cutoff_effects.ifEmpty(file('NO_FILE'))
         ch_reference_emmeans   = MODEL_EVAL_AGGREGATED.out.reference_method_emmeans
         ch_method_emmeans      = MODEL_EVAL_AGGREGATED.out.method_emmeans
         ch_all_emmeans_summary = MODEL_EVAL_AGGREGATED.out.all_emmeans_summary
