@@ -7,7 +7,6 @@ process PLOT_F1_DISTRIBUTIONS {
 
     output:
     path "**png"
-    path "**tsv"
 
     script:
     """
