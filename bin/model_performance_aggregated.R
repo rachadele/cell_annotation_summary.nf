@@ -86,7 +86,7 @@ for (df in df_list) {
     formula_dir <- formula %>% gsub(" ", "_", .)
     dir.create(formula_dir, showWarnings = FALSE, recursive = TRUE)
 
-    df$method <- factor(df$method, levels = c("seurat", "scvi_rf", "scvi_knn", "scvi"))
+    df$method <- factor(df$method, levels = c("seurat", "scvi_rf", "scvi_knn"))
     key <- df$key[1]
 
     # Create figures directory for this key

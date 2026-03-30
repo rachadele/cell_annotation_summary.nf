@@ -24,7 +24,6 @@ METHOD_COLORS = {
     'scvi_rf':  '#1f77b4',   # Blue
     'scvi_knn': '#2ca02c',   # Green
     'seurat':   '#ff7f0e',   # Orange
-    'scvi':     '#1f77b4',   # backward compat
 }
 
 # Colorblind-safe backup palette
@@ -38,7 +37,6 @@ METHOD_NAMES = {
     'scvi_rf':  'scVI RF',
     'scvi_knn': 'scVI kNN',
     'seurat':   'Seurat',
-    'scvi':     'scVI',      # backward compat
 }
 
 

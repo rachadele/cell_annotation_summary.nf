@@ -44,7 +44,7 @@ workflow EVALUATION_SUMMARY {
             def ref_obs = "${pipeline_run_dir}/refs/"
             def pipeline_results = []
             pipeline_run_dir.eachDir { dir ->
-                if (dir.getName() in ['scvi_rf', 'scvi_knn', 'seurat', 'scvi']) {
+                if (dir.getName() in ['scvi_rf', 'scvi_knn', 'seurat']) {
                     def dir_path = dir.toString()
                     pipeline_results << dir_path
                 }
