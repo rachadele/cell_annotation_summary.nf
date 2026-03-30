@@ -573,11 +573,11 @@ load_factor_data <- function(hs_files, mm_files, primary_key) {
 
 load_reference_significance <- function(hs_file, mm_file, primary_key) {
   # Perl backreference patterns: same reference on both sides, different method
-  pat_no_paren <- "^(.+) (?:seurat|scvi) / \\1 (?:seurat|scvi)$"
-  pat_parens   <- "^\\((.+) (?:seurat|scvi)\\) / \\(\\1 (?:seurat|scvi)\\)$"
+  pat_no_paren <- "^(.+) (?:seurat|scvi_rf|scvi_knn) / \\1 (?:seurat|scvi_rf|scvi_knn)$"
+  pat_parens   <- "^\\((.+) (?:seurat|scvi_rf|scvi_knn)\\) / \\(\\1 (?:seurat|scvi_rf|scvi_knn)\\)$"
 
   get_ref <- function(contrast) {
-    m <- regmatches(contrast, regexec("^\\(?(.+) (?:seurat|scvi)\\)? /", contrast, perl = TRUE))
+    m <- regmatches(contrast, regexec("^\\(?(.+) (?:seurat|scvi_rf|scvi_knn)\\)? /", contrast, perl = TRUE))
     if (length(m[[1]]) >= 2) return(trimws(m[[1]][2]))
     NA_character_
   }
