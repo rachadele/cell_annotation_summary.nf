@@ -1,7 +1,7 @@
 # evaluation_summary.nf
 
 ## Project Overview
-This repository implements a modular Nextflow pipeline (DSL2) for summarizing and evaluating cell annotation results across multiple datasets and methods. It integrates R and Python scripts for data aggregation, analysis, and visualization.
+This repository implements a modular Nextflow pipeline (DSL2) for summarizing and evaluating cell annotation results across multiple datasets and methods. It compares three classifiers — **scVI RF** (random forest on scVI embeddings), **scVI kNN** (k-nearest neighbours on scVI embeddings), and **Seurat** — across GEO studies for mouse and human brain data. It integrates R and Python scripts for data aggregation, statistical modelling, and visualization.
 
 ## Architecture & Data Flow
 - **Entry Point:** `main.nf` includes the main workflow from `workflows/evaluation_summary.nf`.
@@ -58,7 +58,9 @@ The following are key parameters defined in `nextflow.config`:
 - **subsample_ref**: Number of reference cells to subsample (default: 500).
 - **cutoff**: Cutoff value for filtering (default: 0.0).
 - **reference**: Reference dataset (default: `whole_cortex`).
-- **method**: Annotation method (default: `scvi`).
+- **method**: Annotation method (default: `scvi_rf`). Valid values: `scvi_rf`, `scvi_knn`, `seurat`.
+- **skip_modeling**: Skip GLMM fitting and emmeans steps (default: `false`). Use when data has only one cutoff or subsample_ref value.
+- **emmeans_cutoff**: Cutoff value at which emmeans marginal means are evaluated (default: `0`).
 - **remove_outliers**: Option to remove outliers (default: null).
 - **max_cpus**: Maximum CPUs to use (default: 16).
 - **max_memory**: Maximum memory (default: `128.GB`).
