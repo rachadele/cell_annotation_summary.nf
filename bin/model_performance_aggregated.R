@@ -73,7 +73,45 @@ if (organism == "homo_sapiens") {
   )
 }
 
+METHOD_COLORS <- c(seurat = "#ff7f0e", scvi_rf = "#1f77b4", scvi_knn = "#2ca02c")
+METHOD_NAMES  <- c(seurat = "Seurat",  scvi_rf = "scVI RF",  scvi_knn = "scVI kNN")
+
 aggregated_f1_results$subsample_ref <- aggregated_f1_results$subsample_ref %>% factor(levels = c("500","100","50"))
+
+plot_method_boxplot <- function(df, key, outdir, cutoff_val) {
+  df_plot <- df[df$cutoff == cutoff_val, ]
+  df_plot$method_label <- METHOD_NAMES[df_plot$method]
+  df_plot$method_label <- factor(df_plot$method_label, levels = METHOD_NAMES)
+
+  p <- ggplot(df_plot, aes(x = method_label, y = macro_f1, fill = method)) +
+    geom_boxplot(outlier.shape = NA, alpha = 0.7) +
+    geom_jitter(width = 0.15, alpha = 0.3, size = 1.5) +
+    scale_fill_manual(values = METHOD_COLORS, guide = "none") +
+    labs(x = NULL, y = "Macro F1", title = paste0(key, " — method (cutoff=", cutoff_val, ")")) +
+    theme(axis.text.x = element_text(angle = 30, hjust = 1),
+          plot.title = element_text(size = 18),
+          strip.text = element_text(size = 18))
+
+  ggsave(file.path(outdir, paste0(key, "_method_boxplot.png")), p, width = 12, height = 9, dpi = 200)
+}
+
+plot_reference_method_boxplot <- function(df, key, outdir, cutoff_val) {
+  df_plot <- df[df$cutoff == cutoff_val, ]
+  df_plot$method_label <- METHOD_NAMES[df_plot$method]
+  df_plot$method_label <- factor(df_plot$method_label, levels = METHOD_NAMES)
+
+  p <- ggplot(df_plot, aes(x = method_label, y = macro_f1, fill = method)) +
+    geom_boxplot(outlier.shape = NA, alpha = 0.7) +
+    geom_jitter(width = 0.15, alpha = 0.3, size = 1.5) +
+    scale_fill_manual(values = METHOD_COLORS, guide = "none") +
+    facet_wrap(~ reference, labeller = label_wrap_gen(width = 25)) +
+    labs(x = NULL, y = "Macro F1", title = paste0(key, " — reference × method (cutoff=", cutoff_val, ")")) +
+    theme(axis.text.x = element_text(angle = 30, hjust = 1),
+          plot.title = element_text(size = 18),
+          strip.text = element_text(size = 18))
+
+  ggsave(file.path(outdir, paste0(key, "_reference_method_boxplot.png")), p, width = 18, height = 12, dpi = 200)
+}
 
 # Grouping the data by 'key' column and creating a list of data frames
 df_list <- split(aggregated_f1_results, aggregated_f1_results$key)
@@ -92,6 +130,10 @@ for (df in df_list) {
     # Create figures directory for this key
     fig_dir <- file.path(formula_dir, "figures", key)
     dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
+
+    # Raw value box plots for method and reference×method contrasts
+    plot_method_boxplot(df, key, fig_dir, args$emmeans_cutoff)
+    plot_reference_method_boxplot(df, key, fig_dir, args$emmeans_cutoff)
 
     # Run model and get results
     key_results <- run_and_store_model(df, formula, fig_dir = fig_dir, key = key, type = "weighted", cutoff_ref = args$emmeans_cutoff)
