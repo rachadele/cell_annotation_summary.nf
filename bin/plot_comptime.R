@@ -19,25 +19,27 @@ library(yaml)
 
 # -- Constants ----------------------------------------------------------------
 
-# Map each Nextflow process to its methodology and pipeline stage
+# Map each Nextflow process (full qualified name) to its methodology and pipeline stage
 PROCESS_METHOD <- c(
-  MAP_QUERY            = "scVI RF/kNN",
-  RF_PREDICT           = "scVI RF/kNN",
-  REF_PROCESS_SEURAT   = "Seurat",
-  QUERY_PROCESS_SEURAT = "Seurat",
-  PREDICT_SEURAT       = "Seurat"
+  "MAP_QUERY"                              = "scVI RF/kNN",
+  "SCVI_PIPELINE:SCVI_PREDICT"             = "scVI RF/kNN",
+  "SCVI_PIPELINE:CLASSIFY_ALL"             = "scVI RF/kNN",
+  "PREPARE_REFERENCES:REF_PROCESS_SEURAT"  = "Seurat",
+  "SEURAT_PIPELINE:QUERY_PROCESS_SEURAT"   = "Seurat",
+  "SEURAT_PIPELINE:PREDICT_SEURAT"         = "Seurat"
 )
 
 PROCESS_STEP <- c(
-  MAP_QUERY            = "Query Processing",
-  RF_PREDICT           = "Prediction",
-  REF_PROCESS_SEURAT   = "Ref Processing",
-  QUERY_PROCESS_SEURAT = "Query Processing",
-  PREDICT_SEURAT       = "Prediction"
+  "MAP_QUERY"                              = "Query Processing",
+  "SCVI_PIPELINE:SCVI_PREDICT"             = "Embedding",
+  "SCVI_PIPELINE:CLASSIFY_ALL"             = "Prediction",
+  "PREPARE_REFERENCES:REF_PROCESS_SEURAT"  = "Ref Processing",
+  "SEURAT_PIPELINE:QUERY_PROCESS_SEURAT"   = "Query Processing",
+  "SEURAT_PIPELINE:PREDICT_SEURAT"         = "Prediction"
 )
 
 # Pipeline stage order (processing → prediction)
-STEP_ORDER <- c("Ref Processing", "Query Processing", "Prediction")
+STEP_ORDER <- c("Ref Processing", "Query Processing", "Embedding", "Prediction")
 
 # Method colors (consistent with plot_utils.py METHOD_COLORS)
 METHOD_COLORS <- c("scVI RF/kNN" = "#1f77b4", Seurat = "#ff7f0e")
@@ -161,9 +163,9 @@ main <- function() {
   if ("realtime"  %in% names(reports)) reports$realtime_hours <- convert_time(reports$realtime)
   if ("peak_vmem" %in% names(reports)) reports$memory_gb     <- convert_memory(reports$peak_vmem)
 
-  # Extract process name: "PIPELINE:PROCESS_NAME (sample)" -> "PROCESS_NAME"
-  reports$process <- str_trim(str_extract(reports$name, "[^:]+$")) |>
-    str_remove("\\s*\\(.*\\)$")
+  # Extract process name: "PIPELINE:PROCESS_NAME (sample)" -> "PIPELINE:PROCESS_NAME"
+  # Keep full qualified name to distinguish e.g. SCVI_PIPELINE:CLASSIFY_ALL from SEURAT_PIPELINE:CLASSIFY_ALL
+  reports$process <- str_remove(reports$name, "\\s*\\(.*\\)$") |> str_trim()
 
   # Filter to relevant processes
   reports <- reports %>% filter(process %in% PROCESS_ORDER)

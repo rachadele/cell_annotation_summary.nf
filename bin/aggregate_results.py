@@ -173,7 +173,7 @@ def main():
     results_df["sex"] = results_df["sex"].str.lower()
 
     # --- Weighted F1 results ---
-    label_columns = ["label", "f1_score", "precision", "recall", "support", "accuracy"]
+    label_columns = ["label", "f1_score", "precision", "recall", "support", "accuracy", "predicted_support", "ref_support"]
     sample_results = results_df.drop(columns=label_columns)
     sample_results = sample_results.drop_duplicates()
     sample_results = sample_results[sample_results["weighted_f1"].notnull()]
