@@ -229,35 +229,11 @@ def main():
 
         plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="reference", xlabel="Cutoff", style=None,
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_ref.png"))
-        
+
         plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="study", style=None, xlabel="Cutoff",
                   ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_query.png"))
 
-        plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="subsample_ref", xlabel="Cutoff", style=None,
-                  ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_subsample_ref.png"))
-     
-        if organism == "homo_sapiens":
-            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="region_match", style=None, xlabel="Cutoff",
-                        ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_region_match.png"))
-            
-            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="disease_state", style=None, xlabel="Cutoff",
-                    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_disease_state.png"))
-            
-          
-        if organism == "mus_musculus":
-            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="genotype", style=None, xlabel="Cutoff",
-                        ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_genotype.png"))
-            
-            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="strain", style=None, xlabel="Cutoff",
-                    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_strain.png"))
-            
-            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="age", style=None, xlabel="Cutoff",
-                    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_age.png"))
-            
-            plot_line(weighted_subset, x="cutoff", y="weighted_f1", col="method", hue="treatment", style=None, xlabel="Cutoff",
-                    ylabel="F1 Score", title=f"{key_value}", save_path=os.path.join(outdir,f"{key_value}_weighted_f1_score_treatment.png"))
-           
-            
+
                                               
 if __name__ == "__main__":
     main()
