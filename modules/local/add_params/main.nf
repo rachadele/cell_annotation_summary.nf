@@ -1,6 +1,7 @@
 process ADD_PARAMS {
     tag "$run_name"
     label 'process_single'
+    storeDir "${params.outdir}/params_added"
 
     input:
     tuple val(run_name), val(params_file), val(ref_obs), val(f1_results)
