@@ -6,7 +6,7 @@ process PLOT_F1_DISTRIBUTIONS {
     path label_results
 
     output:
-    path "**png"
+    path "**"
 
     script:
     """

@@ -148,7 +148,21 @@ def plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df,
     plt.close()
 
 
- 
+
+def save_label_cutoff_summary(label_results, outdir="label_f1_plots"):
+    os.makedirs(outdir, exist_ok=True)
+    group_cols = ["label", "key", "method", "cutoff", "reference", "subsample_ref"]
+    agg = (
+        label_results
+        .groupby(group_cols, observed=True)[["f1_score", "precision", "recall"]]
+        .agg(["mean", "std", "count"])
+    )
+    agg.columns = ["_".join(c) for c in agg.columns]
+    agg = agg.rename(columns={"f1_score_count": "n_queries"}).drop(columns=["precision_count", "recall_count"])
+    agg = agg.reset_index()
+    agg.to_csv(os.path.join(outdir, "label_cutoff_summary.tsv"), sep="\t", index=False)
+
+
 def main():
 
     args = parse_arguments()
@@ -209,7 +223,10 @@ def main():
      
     plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="f1_score", subclass_col="family")
     plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="precision", subclass_col="family")
-    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall", subclass_col="family") 
+    plot_score_by_celltype(label_results, levels, color_mapping_df, mapping_df, outdir="label_f1_plots", level=ref_keys[-1], score_col="recall", subclass_col="family")
+
+    save_label_cutoff_summary(label_results, outdir="label_f1_plots")
+
     #-----------------plot weighted f1 score-------------------
     parent = "weighted_f1_plots"
     os.makedirs(parent, exist_ok=True)

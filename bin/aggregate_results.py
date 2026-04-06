@@ -132,6 +132,11 @@ def main():
         results_df = pd.concat([temp_df, results_df], ignore_index=True)
 
     organism = results_df["organism"].unique()[0]
+
+    contamination = results_df[(results_df['support'] == 0) & (results_df['predicted_support'] > 0)]
+    if not contamination.empty:
+        contamination.to_csv("contamination.tsv", sep="\t", index=False)
+
     results_df = results_df[results_df['support'] > 0]
 
     # --- Derive columns ---

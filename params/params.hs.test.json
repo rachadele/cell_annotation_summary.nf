@@ -2,15 +2,13 @@
     "organism": "homo_sapiens",
     "mapping_file": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/meta/census_map_human.tsv",
     "census_version": "2024-07-01",
-    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/2024-07-01/homo_sapiens_new/100/dataset_id/SCT/gap_false",
+    "results": "/space/grp/rschwartz/rschwartz/nextflow_eval_pipeline/results/hsap/test_ma_et_al",
     "ref_keys": [
         "subclass",
         "class",
         "family",
         "global"
     ],
-    "reference": "whole cortex",
-    "remove_outliers": [
-        "GSE180670"
-    ]
+    "skip_modeling": true,
+    "subsample_ref": 100
 }

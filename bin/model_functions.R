@@ -267,6 +267,10 @@ run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_v
     emmeans_results <- run_emmeans_weighted(model, key, cutoff_ref = cutoff_ref)
     all_results <- c(all_results, emmeans_results)
 
+    if (!is.null(emmeans_results$subsample_ref_emmeans_summary)) {
+      plot_contrasts(emmeans_results$subsample_ref_emmeans_summary, fig_dir, paste0(key, "_subsample_ref"))
+    }
+
     if ("cutoff" %in% colnames(model$frame)) {
       cutoff_grid <- c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)
       emm_mc <- emmeans(model, specs = ~ method * cutoff,

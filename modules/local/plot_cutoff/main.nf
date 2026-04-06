@@ -7,6 +7,7 @@ process PLOT_CUTOFF {
 
     output:
     path "**png"
+    path "label_f1_plots/label_cutoff_summary.tsv"
 
     script:
     def ref_keys = params.ref_keys.join(' ')

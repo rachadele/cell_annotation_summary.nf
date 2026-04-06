@@ -60,6 +60,24 @@ def plot_f1_by_method_and_level(df, f1_col, title, outpath):
     plt.close(fig)
 
 
+def save_distribution_summary(df, f1_col, metric_name, outpath):
+    summary = (
+        df.groupby(["method", "key"])[f1_col]
+        .agg(
+            n="count",
+            mean="mean",
+            std="std",
+            median="median",
+            q25=lambda x: x.quantile(0.25),
+            q75=lambda x: x.quantile(0.75),
+        )
+        .reset_index()
+    )
+    summary.insert(0, "metric", metric_name)
+    os.makedirs(os.path.dirname(outpath), exist_ok=True)
+    summary.to_csv(outpath, sep="\t", index=False)
+
+
 if __name__ == "__main__":
     args = parse_args()
     os.makedirs(args.outdir, exist_ok=True)
@@ -70,10 +88,18 @@ if __name__ == "__main__":
         "Macro F1 Distribution by Method and Taxonomy Level",
         os.path.join(args.outdir, "macro_f1_by_method.png"),
     )
+    save_distribution_summary(
+        df, "macro_f1", "macro_f1",
+        os.path.join(args.outdir, "macro_f1_summary.tsv"),
+    )
 
     df_label = pd.read_csv(args.label_results, sep="\t")
     plot_f1_by_method_and_level(
         df_label, "f1_score",
         "Per-Label F1 Distribution by Method and Taxonomy Level",
         os.path.join(args.outdir, "label_f1_by_method.png"),
+    )
+    save_distribution_summary(
+        df_label, "f1_score", "label_f1",
+        os.path.join(args.outdir, "label_f1_summary.tsv"),
     )

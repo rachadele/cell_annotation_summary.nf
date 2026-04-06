@@ -1,97 +1,145 @@
 key	method_display	reference	subsample_ref	mean_f1	n_celltypes	total_duration_hrs	total_memory_gb	pareto
-subclass	Seurat	whole cortex	100	0.6937154889193902	16	0.10919253220611914	0.032080078125	TRUE
-subclass	Seurat	whole cortex	500	0.6889621793323971	16	0.21034420289855071	0.02950067934782608	FALSE
-subclass	scVI	whole cortex	100	0.6578207091158986	16	0.04278069645732688	0.0189750339673913	TRUE
-subclass	scVI	whole cortex	50	0.6491563413768618	16	0.04306229871175522	0.0189750339673913	FALSE
-subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.6490433519656899	16	0.10919253220611914	0.032080078125	FALSE
-subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.6487978514561129	16	0.11932528180354265	0.0498046875	FALSE
-subclass	scVI	whole cortex	500	0.6435220153194213	16	0.04751559983896939	0.0189750339673913	FALSE
-subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.6416753293698513	16	0.21034420289855071	0.02950067934782608	FALSE
-subclass	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.590067743109286	16	0.04278069645732688	0.0189750339673913	TRUE
-subclass	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.5887171627725458	16	0.04751559983896939	0.0189750339673913	FALSE
-subclass	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.588235425861369	16	0.04306229871175522	0.0189750339673913	FALSE
-subclass	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.5646587511637914	16	0.04278069645732688	0.0189750339673913	TRUE
-subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.5559268737663106	16	0.11932528180354265	0.0498046875	FALSE
-subclass	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.5504088229197392	16	0.04751559983896939	0.0189750339673913	FALSE
-subclass	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.5283620930821432	16	0.10919253220611914	0.032080078125	FALSE
-subclass	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.527961278788009	16	0.11932528180354265	0.0498046875	FALSE
-subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.5227835165790687	16	0.10919253220611914	0.032080078125	FALSE
-subclass	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.5208316718066999	16	0.04306229871175522	0.0189750339673913	FALSE
-subclass	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.5109711225762417	16	0.21034420289855071	0.02950067934782608	FALSE
-subclass	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.49871188689061524	16	0.04751559983896939	0.0189750339673913	FALSE
-subclass	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.48618550034500774	16	0.04278069645732688	0.0189750339673913	TRUE
-subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.4700576394640619	16	0.21034420289855071	0.02950067934782608	FALSE
-subclass	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.46977770239138844	16	0.04306229871175522	0.0189750339673913	FALSE
-subclass	Seurat	whole cortex	50	0.4468457426159909	16	0.11932528180354265	0.0498046875	FALSE
-class	Seurat	whole cortex	500	0.6899410860501782	12	0.21034420289855071	0.02950067934782608	TRUE
-class	scVI	whole cortex	100	0.6638960674832839	12	0.04278069645732688	0.0189750339673913	TRUE
-class	scVI	whole cortex	500	0.64197176609319	12	0.04751559983896939	0.0189750339673913	FALSE
-class	Seurat	whole cortex	100	0.6400172435374233	12	0.10919253220611914	0.032080078125	FALSE
-class	scVI	whole cortex	50	0.6337687391294792	12	0.04306229871175522	0.0189750339673913	FALSE
-class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.6329110679328778	12	0.10919253220611914	0.032080078125	FALSE
-class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.6289981522600003	12	0.11932528180354265	0.0498046875	FALSE
-class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.6257936887630334	12	0.21034420289855071	0.02950067934782608	FALSE
-class	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.6105807619061832	12	0.04278069645732688	0.0189750339673913	TRUE
-class	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.6056008346037123	12	0.04306229871175522	0.0189750339673913	FALSE
-class	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.6041692326323681	12	0.04751559983896939	0.0189750339673913	FALSE
-class	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.5788822731685975	12	0.10919253220611914	0.032080078125	FALSE
-class	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.5769651978043664	12	0.11932528180354265	0.0498046875	FALSE
-class	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.5555205490845613	12	0.21034420289855071	0.02950067934782608	FALSE
-class	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.5499271397189286	12	0.04278069645732688	0.0189750339673913	TRUE
-class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.5494894433817173	12	0.11932528180354265	0.0498046875	FALSE
-class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.5476846158039219	12	0.10919253220611914	0.032080078125	FALSE
-class	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.537794029109359	12	0.04751559983896939	0.0189750339673913	FALSE
-class	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.5321448121536199	12	0.04751559983896939	0.0189750339673913	FALSE
-class	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.5206745440074029	12	0.04278069645732688	0.0189750339673913	TRUE
-class	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.5051269937509838	12	0.04306229871175522	0.0189750339673913	FALSE
-class	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.5038889129940484	12	0.04306229871175522	0.0189750339673913	FALSE
-class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.48297042564916465	12	0.21034420289855071	0.02950067934782608	FALSE
-class	Seurat	whole cortex	50	0.44580772709709676	12	0.11932528180354265	0.0498046875	FALSE
-family	scVI	whole cortex	100	0.7562659808622235	9	0.04278069645732688	0.0189750339673913	TRUE
-family	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.7459798032687661	9	0.04751559983896939	0.0189750339673913	FALSE
-family	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.7384103383211422	9	0.21034420289855071	0.02950067934782608	FALSE
-family	scVI	whole cortex	500	0.7368923175015757	9	0.04751559983896939	0.0189750339673913	FALSE
-family	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.7354441936656844	9	0.11932528180354265	0.0498046875	FALSE
-family	Seurat	whole cortex	500	0.7318473039245091	9	0.21034420289855071	0.02950067934782608	FALSE
-family	scVI	whole cortex	50	0.7278847082502452	9	0.04306229871175522	0.0189750339673913	FALSE
-family	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.7252182206415401	9	0.04278069645732688	0.0189750339673913	TRUE
-family	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.7204055429122951	9	0.10919253220611914	0.032080078125	FALSE
-family	Seurat	whole cortex	100	0.7054080665210667	9	0.10919253220611914	0.032080078125	FALSE
-family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.6944981698015363	9	0.10919253220611914	0.032080078125	FALSE
-family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.6935343875610404	9	0.21034420289855071	0.02950067934782608	FALSE
-family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.690909611241151	9	0.11932528180354265	0.0498046875	FALSE
-family	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.6844982498397418	9	0.04306229871175522	0.0189750339673913	FALSE
-family	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.6804551726227297	9	0.04278069645732688	0.0189750339673913	TRUE
-family	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.6789695119601037	9	0.04751559983896939	0.0189750339673913	FALSE
-family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.6785476468922363	9	0.11932528180354265	0.0498046875	FALSE
-family	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.6709073058806485	9	0.04306229871175522	0.0189750339673913	FALSE
-family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.6590185546188532	9	0.10919253220611914	0.032080078125	FALSE
-family	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.6389329838371304	9	0.04751559983896939	0.0189750339673913	FALSE
-family	Seurat	whole cortex	50	0.6265379090824448	9	0.11932528180354265	0.0498046875	FALSE
-family	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.6189937147098141	9	0.04278069645732688	0.0189750339673913	TRUE
-family	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.5971054901789496	9	0.04306229871175522	0.0189750339673913	FALSE
-family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.5874947687705633	9	0.21034420289855071	0.02950067934782608	FALSE
-global	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.7568963136871327	3	0.04751559983896939	0.0189750339673913	TRUE
-global	scVI	whole cortex	100	0.755191650130128	3	0.04278069645732688	0.0189750339673913	TRUE
-global	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.7401267250838311	3	0.10919253220611914	0.032080078125	FALSE
-global	scVI	whole cortex	50	0.7330223980233626	3	0.04306229871175522	0.0189750339673913	FALSE
-global	Seurat	whole cortex	500	0.7291282555815845	3	0.21034420289855071	0.02950067934782608	FALSE
-global	scVI	whole cortex	500	0.725184688987554	3	0.04751559983896939	0.0189750339673913	FALSE
-global	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.719240006436594	3	0.21034420289855071	0.02950067934782608	FALSE
-global	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.7097069787627543	3	0.04278069645732688	0.0189750339673913	TRUE
-global	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.7031181727565934	3	0.11932528180354265	0.0498046875	FALSE
-global	scVI	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.6830834077186471	3	0.04306229871175522	0.0189750339673913	FALSE
-global	Seurat	whole cortex	100	0.6355719539424602	3	0.10919253220611914	0.032080078125	FALSE
-global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.6267880645177946	3	0.10919253220611914	0.032080078125	FALSE
-global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.6260664790118495	3	0.11932528180354265	0.0498046875	FALSE
-global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.6247483587570931	3	0.21034420289855071	0.02950067934782608	FALSE
-global	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.6039514214924812	3	0.04306229871175522	0.0189750339673913	FALSE
-global	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.5990384616186857	3	0.04278069645732688	0.0189750339673913	TRUE
-global	scVI	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.5981808898408193	3	0.04751559983896939	0.0189750339673913	FALSE
-global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.5913943997280223	3	0.11932528180354265	0.0498046875	FALSE
-global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.5690926635166157	3	0.10919253220611914	0.032080078125	FALSE
-global	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.5662353814245407	3	0.04751559983896939	0.0189750339673913	FALSE
-global	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.5606967227268739	3	0.04278069645732688	0.0189750339673913	TRUE
-global	scVI	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.5471123828657392	3	0.04306229871175522	0.0189750339673913	FALSE
-global	Seurat	whole cortex	50	0.5426069800175244	3	0.11932528180354265	0.0498046875	FALSE
-global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.5180685924983155	3	0.21034420289855071	0.02950067934782608	FALSE
+subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.8521192703942365	8	0.10207477858293075	0.039990234375	TRUE
+subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.8496761564386021	8	0.09620581723027374	0.04365234375	TRUE
+subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.8384873254170306	8	0.17255293880837358	0.0498046875	FALSE
+subclass	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.7610160290531898	8	0.052533445299919476	0.01962041440217391	TRUE
+subclass	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.7469179691531769	8	0.057086063305152965	0.01962041440217391	FALSE
+subclass	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.745883827404858	8	0.05575416415056359	0.01962041440217391	FALSE
+subclass	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.7394053919622897	8	0.05575416415056359	0.01962041440217391	FALSE
+subclass	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.7392574757823762	8	0.057086063305152965	0.01962041440217391	FALSE
+subclass	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.7375490077171271	8	0.052533445299919476	0.01962041440217391	TRUE
+subclass	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.7367932670496812	8	0.052533445299919476	0.01962041440217391	TRUE
+subclass	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.734332384254516	8	0.05575416415056359	0.01962041440217391	FALSE
+subclass	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.7193173912783801	8	0.057086063305152965	0.01962041440217391	FALSE
+subclass	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.7006906426578428	8	0.052533445299919476	0.01962041440217391	TRUE
+subclass	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.675803464142667	8	0.05575416415056359	0.01962041440217391	FALSE
+subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.671497563059674	8	0.09620581723027374	0.04365234375	FALSE
+subclass	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.654939145087437	8	0.057086063305152965	0.01962041440217391	FALSE
+subclass	Seurat	whole cortex	100	0.6346956783920885	12	0.10207477858293075	0.039990234375	FALSE
+subclass	scVI kNN	whole cortex	500	0.6325123791133604	12	0.05575416415056359	0.01962041440217391	FALSE
+subclass	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.6315706646045006	8	0.057086063305152965	0.01962041440217391	FALSE
+subclass	scVI kNN	whole cortex	100	0.6304092265910444	12	0.052533445299919476	0.01962041440217391	TRUE
+subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.6218785254148509	8	0.10207477858293075	0.039990234375	FALSE
+subclass	scVI kNN	whole cortex	50	0.6117744051672761	12	0.057086063305152965	0.01962041440217391	FALSE
+subclass	Seurat	whole cortex	500	0.6112961565594317	12	0.17255293880837358	0.0498046875	FALSE
+subclass	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.5985097045166677	8	0.09620581723027374	0.04365234375	FALSE
+subclass	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.5940851410759307	8	0.10207477858293075	0.039990234375	FALSE
+subclass	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.5908277211068722	8	0.05575416415056359	0.01962041440217391	FALSE
+subclass	scVI RF	whole cortex	100	0.5723464028990909	12	0.052533445299919476	0.01962041440217391	TRUE
+subclass	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.571784294984945	8	0.052533445299919476	0.01962041440217391	TRUE
+subclass	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.5649754300890987	8	0.17255293880837358	0.0498046875	FALSE
+subclass	scVI RF	whole cortex	50	0.5633674338504087	12	0.057086063305152965	0.01962041440217391	FALSE
+subclass	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.5578499882918007	8	0.17255293880837358	0.0498046875	FALSE
+subclass	scVI RF	whole cortex	500	0.5555271273586314	12	0.05575416415056359	0.01962041440217391	FALSE
+subclass	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.5474137180541458	8	0.05575416415056359	0.01962041440217391	FALSE
+subclass	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.5322347679698498	8	0.052533445299919476	0.01962041440217391	TRUE
+subclass	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.5234425959166729	8	0.057086063305152965	0.01962041440217391	FALSE
+subclass	Seurat	whole cortex	50	0.35366105734338527	12	0.09620581723027374	0.04365234375	FALSE
+class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.8262871642202787	6	0.10207477858293075	0.039990234375	TRUE
+class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.8147074962897775	6	0.09620581723027374	0.04365234375	TRUE
+class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.8129955319508271	6	0.17255293880837358	0.0498046875	FALSE
+class	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.8024619123396738	6	0.052533445299919476	0.01962041440217391	TRUE
+class	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.7984707541522718	6	0.05575416415056359	0.01962041440217391	FALSE
+class	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.7918136237731568	6	0.057086063305152965	0.01962041440217391	FALSE
+class	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.7813145701728543	6	0.052533445299919476	0.01962041440217391	TRUE
+class	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.7768343271068638	6	0.057086063305152965	0.01962041440217391	FALSE
+class	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.7673702614100946	6	0.05575416415056359	0.01962041440217391	FALSE
+class	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.7333696078320868	6	0.052533445299919476	0.01962041440217391	TRUE
+class	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.7265261547895016	6	0.057086063305152965	0.01962041440217391	FALSE
+class	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.7110978542076309	6	0.05575416415056359	0.01962041440217391	FALSE
+class	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.6829075901755739	6	0.052533445299919476	0.01962041440217391	TRUE
+class	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.6493558865538522	6	0.05575416415056359	0.01962041440217391	FALSE
+class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.6439326268367797	6	0.10207477858293075	0.039990234375	FALSE
+class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.6420298071253561	6	0.09620581723027374	0.04365234375	FALSE
+class	scVI kNN	whole cortex	500	0.6176086817073992	9	0.05575416415056359	0.01962041440217391	FALSE
+class	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.6153691726726273	7	0.057086063305152965	0.01962041440217391	FALSE
+class	scVI kNN	whole cortex	100	0.6148825926219523	9	0.052533445299919476	0.01962041440217391	TRUE
+class	Seurat	whole cortex	500	0.613033520176131	9	0.17255293880837358	0.0498046875	FALSE
+class	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.6073544766863391	6	0.057086063305152965	0.01962041440217391	FALSE
+class	scVI kNN	whole cortex	50	0.6048872922653122	9	0.057086063305152965	0.01962041440217391	FALSE
+class	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.5950824419088743	7	0.09620581723027374	0.04365234375	FALSE
+class	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.5921616424772984	7	0.10207477858293075	0.039990234375	FALSE
+class	scVI RF	whole cortex	100	0.5811006471730594	9	0.052533445299919476	0.01962041440217391	TRUE
+class	Seurat	whole cortex	100	0.5697278153138091	9	0.10207477858293075	0.039990234375	FALSE
+class	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.5675449836680534	7	0.052533445299919476	0.01962041440217391	TRUE
+class	scVI RF	whole cortex	500	0.5511726967022886	9	0.05575416415056359	0.01962041440217391	FALSE
+class	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.5504751875293464	7	0.17255293880837358	0.0498046875	FALSE
+class	scVI RF	whole cortex	50	0.545909329988571	9	0.057086063305152965	0.01962041440217391	FALSE
+class	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.5416789843553433	7	0.05575416415056359	0.01962041440217391	FALSE
+class	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.5402803429319777	7	0.05575416415056359	0.01962041440217391	FALSE
+class	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.533059418267341	6	0.17255293880837358	0.0498046875	FALSE
+class	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.5224663190950783	7	0.052533445299919476	0.01962041440217391	TRUE
+class	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.5160317732796125	7	0.057086063305152965	0.01962041440217391	FALSE
+class	Seurat	whole cortex	50	0.35894764435931525	9	0.09620581723027374	0.04365234375	FALSE
+family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.9123022403365536	6	0.17255293880837358	0.0498046875	TRUE
+family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.9116801965355955	6	0.10207477858293075	0.039990234375	TRUE
+family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.9069981177098246	6	0.09620581723027374	0.04365234375	TRUE
+family	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.9036233599213739	6	0.05575416415056359	0.01962041440217391	TRUE
+family	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.8954877945695296	6	0.052533445299919476	0.01962041440217391	TRUE
+family	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.8912617385930176	6	0.052533445299919476	0.01962041440217391	TRUE
+family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.8889000892469168	6	0.09620581723027374	0.04365234375	FALSE
+family	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.88787591321806	6	0.05575416415056359	0.01962041440217391	FALSE
+family	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.8818304349441307	6	0.057086063305152965	0.01962041440217391	FALSE
+family	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.8763672574844208	6	0.057086063305152965	0.01962041440217391	FALSE
+family	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.8656492915438276	6	0.052533445299919476	0.01962041440217391	TRUE
+family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.8589506982074052	6	0.10207477858293075	0.039990234375	FALSE
+family	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.8570775597547851	6	0.05575416415056359	0.01962041440217391	FALSE
+family	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.8523863239587466	6	0.057086063305152965	0.01962041440217391	FALSE
+family	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.8427999849100979	7	0.05575416415056359	0.01962041440217391	FALSE
+family	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.8421048171053922	7	0.057086063305152965	0.01962041440217391	FALSE
+family	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.8388339588324546	7	0.052533445299919476	0.01962041440217391	TRUE
+family	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.8311258435387349	7	0.05575416415056359	0.01962041440217391	FALSE
+family	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.8291371930501956	7	0.17255293880837358	0.0498046875	FALSE
+family	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.8283367878501571	6	0.05575416415056359	0.01962041440217391	FALSE
+family	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.8241251200659393	7	0.09620581723027374	0.04365234375	FALSE
+family	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.8054253368717501	7	0.10207477858293075	0.039990234375	FALSE
+family	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.8019749439904778	7	0.052533445299919476	0.01962041440217391	TRUE
+family	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.7988203488373615	6	0.052533445299919476	0.01962041440217391	TRUE
+family	scVI kNN	whole cortex	500	0.7742032137069976	8	0.05575416415056359	0.01962041440217391	FALSE
+family	scVI kNN	whole cortex	100	0.767514275265858	8	0.052533445299919476	0.01962041440217391	TRUE
+family	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.7653377804384522	6	0.057086063305152965	0.01962041440217391	FALSE
+family	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.7591557840940587	7	0.057086063305152965	0.01962041440217391	FALSE
+family	scVI kNN	whole cortex	50	0.7578409045732926	8	0.057086063305152965	0.01962041440217391	FALSE
+family	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.7516650194349703	6	0.17255293880837358	0.0498046875	FALSE
+family	scVI RF	whole cortex	100	0.7419053756630456	8	0.052533445299919476	0.01962041440217391	TRUE
+family	Seurat	whole cortex	500	0.7229946097609866	8	0.17255293880837358	0.0498046875	FALSE
+family	scVI RF	whole cortex	500	0.7172780342564742	8	0.05575416415056359	0.01962041440217391	FALSE
+family	Seurat	whole cortex	100	0.7116929536787745	8	0.10207477858293075	0.039990234375	FALSE
+family	scVI RF	whole cortex	50	0.7101445388734082	8	0.057086063305152965	0.01962041440217391	FALSE
+family	Seurat	whole cortex	50	0.644335521817969	8	0.09620581723027374	0.04365234375	FALSE
+global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.9401820967766918	2	0.10207477858293075	0.039990234375	TRUE
+global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.9390997185177743	2	0.09620581723027374	0.04365234375	TRUE
+global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.9371225381356396	2	0.17255293880837358	0.0498046875	FALSE
+global	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.9111081299625021	2	0.052533445299919476	0.01962041440217391	TRUE
+global	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.9105721886875894	2	0.05575416415056359	0.01962041440217391	FALSE
+global	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.9059271322387218	2	0.057086063305152965	0.01962041440217391	FALSE
+global	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions 10x	50	0.9033398204515937	2	0.057086063305152965	0.01962041440217391	FALSE
+global	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	100	0.8985576924280285	2	0.052533445299919476	0.01962041440217391	TRUE
+global	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions 10x	500	0.8972713347612289	2	0.05575416415056359	0.01962041440217391	FALSE
+global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.8870915995920335	2	0.09620581723027374	0.04365234375	FALSE
+global	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.8782720472479997	2	0.052533445299919476	0.01962041440217391	TRUE
+global	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.8705389167693798	2	0.05575416415056359	0.01962041440217391	FALSE
+global	scVI kNN	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.8629173688536556	2	0.057086063305152965	0.01962041440217391	FALSE
+global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.8536389952749235	2	0.10207477858293075	0.039990234375	FALSE
+global	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.849353072136811	2	0.05575416415056359	0.01962041440217391	FALSE
+global	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	100	0.8410450840903109	2	0.052533445299919476	0.01962041440217391	TRUE
+global	scVI RF	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	50	0.8206685742986086	2	0.057086063305152965	0.01962041440217391	FALSE
+global	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.7835054701007907	3	0.052533445299919476	0.01962041440217391	TRUE
+global	scVI kNN	whole cortex	500	0.7777058532773354	3	0.05575416415056359	0.01962041440217391	FALSE
+global	Seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	500	0.7771028887474731	2	0.17255293880837358	0.0498046875	FALSE
+global	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.7756493618318006	3	0.05575416415056359	0.01962041440217391	FALSE
+global	scVI kNN	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.773475436215942	3	0.057086063305152965	0.01962041440217391	FALSE
+global	scVI kNN	whole cortex	100	0.7633674731289832	3	0.052533445299919476	0.01962041440217391	TRUE
+global	scVI kNN	whole cortex	50	0.7611381676868016	3	0.057086063305152965	0.01962041440217391	FALSE
+global	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.7568963136871327	3	0.05575416415056359	0.01962041440217391	FALSE
+global	scVI RF	whole cortex	100	0.755191650130128	3	0.052533445299919476	0.01962041440217391	TRUE
+global	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.7401267250838311	3	0.10207477858293075	0.039990234375	FALSE
+global	scVI RF	whole cortex	50	0.7330223980233626	3	0.057086063305152965	0.01962041440217391	FALSE
+global	Seurat	whole cortex	500	0.7291282555815845	3	0.17255293880837358	0.0498046875	FALSE
+global	scVI RF	whole cortex	500	0.725184688987554	3	0.05575416415056359	0.01962041440217391	FALSE
+global	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	500	0.719240006436594	3	0.17255293880837358	0.0498046875	FALSE
+global	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	100	0.7097069787627542	3	0.052533445299919476	0.01962041440217391	TRUE
+global	Seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.7031181727565934	3	0.09620581723027374	0.04365234375	FALSE
+global	scVI RF	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	50	0.6830834077186471	3	0.057086063305152965	0.01962041440217391	FALSE
+global	Seurat	whole cortex	100	0.6355719539424602	3	0.10207477858293075	0.039990234375	FALSE
+global	Seurat	whole cortex	50	0.5426069800175244	3	0.09620581723027374	0.04365234375	FALSE

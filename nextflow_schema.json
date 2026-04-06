@@ -87,12 +87,6 @@
                     "default": 0.0,
                     "fa_icon": "fas fa-cut"
                 },
-                "reference": {
-                    "type": "string",
-                    "description": "Reference dataset name",
-                    "default": "whole_cortex",
-                    "fa_icon": "fas fa-database"
-                },
                 "method": {
                     "type": "string",
                     "description": "Classification method to analyze",

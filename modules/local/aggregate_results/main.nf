@@ -10,6 +10,7 @@ process AGGREGATE_RESULTS {
     path "label_results.tsv" , emit: label_results_aggregated
     path "**factor**tsv"
     path "**summary.tsv"
+    path "contamination.tsv", optional: true
 
     script:
     """
