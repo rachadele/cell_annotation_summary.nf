@@ -635,14 +635,25 @@ Configurations not dominated in both mean F1 and compute time (filter: `pareto =
 
 ## Configuration Recommendation
 
+### Recommended Taxonomy Level
+
+**Family** is the recommended level for production annotation of mouse brain data.
+
+At subclass and class, several cell types are systematically poorly discriminated across all methods and references: OPC (mean F1 0.131), Microglia (0.154), Macrophage (0.205), and Neural stem cell (0.372). These inflate misclassification rates and drag down macro F1 for every method. At family level, OPC merges into the Oligodendrocyte family and immune cells merge into CNS macrophage — groups that are well-annotated (CNS macrophage F1 0.927–0.960, Oligodendrocyte F1 0.831–0.861). This collapses the problem cells without losing the major biologically informative distinctions (Glutamatergic, GABAergic, Astrocyte, Oligodendrocyte, Vascular, CNS macrophage).
+
+An additional benefit for cortex-focused studies: hippocampal contamination (DG, CA1-ProS, CA3 at subclass; Hippocampal neuron at class) disappears at family level, because these labels merge into Glutamatergic — a valid cortical label. The contamination problem is therefore largely a subclass/class artefact.
+
+For research questions requiring finer resolution (e.g. distinguishing GABAergic subtypes), subclass annotation remains available but should be interpreted with awareness of the low-F1 cell types listed above.
+
 ### Recommended Configuration
 
 | Dimension | Recommended value | Rationale |
 |-----------|------------------|-----------|
-| **Method** | **Seurat** | Wins the most individual cell types at every taxonomy level (subclass: 16 wins vs 2 for scvi_knn, 0 for scvi_rf). Statistically indistinguishable from scvi_rf at class and subclass (p > 0.05), the two most important levels. Has the lowest hippocampal contamination and most stable cutoff behaviour. scvi_rf's higher macro EMMs at family/global are fragile — they collapse completely at any confidence filtering and do not correspond to per-cell-type superiority. |
-| **Reference** | **Cortical+Hipp. 10x** | Highest mean EMM across all methods at every taxonomy level (subclass 0.898, class 0.919, family 0.945, global 0.963). Appears in the Pareto front as the top-performing reference for all methods at all levels. |
-| **Cutoff** | **0.25** | For Seurat: reduces hippocampal contamination from 2.73 to 2.46 spurious predictions per query with negligible recall impact (0.655→0.654 at class level). Model-estimated macro F1 drops only ~0.6 pp at class (0.860→0.854). Avoids the severe contamination seen at cutoff=0 while preserving recall. |
-| **Subsample_ref** | **100** | Statistically indistinguishable from 500 at class, family, and subclass (all p > 0.05). Small advantage for 500 at global level (OR=1.07) but absolute EMM difference is <0.003. Seurat ref processing at subsample_ref=100 takes 0.052 hrs vs 0.117 hrs at 500 — a 2.3× speed-up for no meaningful accuracy cost. |
+| **Taxonomy level** | **Family** | Collapses poorly discriminated cell types (OPC, Microglia, Macrophage) into well-annotated families. Eliminates hippocampal contamination as a concern. Family-level EMMs are 6–15 pp higher than subclass across all methods. |
+| **Method** | **Seurat** | Wins the most individual cell-type comparisons at family level (14 wins vs 6 for scvi_knn, 0 for scvi_rf). At family level scvi_rf has the highest macro EMM (0.923) but zero per-cell-type wins and severe cutoff sensitivity. Seurat (0.906 EMM) is more robust and wins more labels head-to-head. |
+| **Reference** | **Cortical+Hipp. 10x** | Highest mean EMM across all methods at family level (0.945). Appears in the Pareto front as the top-performing reference at all levels. |
+| **Cutoff** | **0.25** | At family level, hippocampal contamination is not a concern (hippocampal labels collapse into valid cortical families). Cutoff=0.25 provides a modest confidence filter with minimal F1 cost for Seurat (family EMM: 0.906→0.895). |
+| **Subsample_ref** | **100** | Statistically indistinguishable from 500 at class, family, and subclass (all p > 0.05). Seurat ref processing at subsample_ref=100 takes 0.052 hrs vs 0.117 hrs at 500 — a 2.3× speed-up for no meaningful accuracy cost. |
 
 ### Raw Performance for the Recommended Configuration
 
@@ -667,7 +678,7 @@ Seurat, subsample_ref=100.
 
 ### Trade-Off Narrative
 
-Choosing Seurat over scvi_rf sacrifices the higher macro F1 EMMs at family (0.906 vs 0.923) and global (0.940 vs 0.958) levels when evaluated at cutoff=0, but this trade-off is illusory in practice: scvi_rf's advantage disappears at any cutoff above zero and it wins zero individual cell-type comparisons in the rankings. Seurat requires ~0.10 hrs total per query set vs ~0.05 hrs for scVI methods — roughly 2× slower, though the absolute difference is small in practice. Using cutoff=0.25 reduces macro recall modestly relative to cutoff=0 (observed recall ~0.95 at class) but eliminates some hippocampal contamination in cortex-only samples without a meaningful macro F1 cost for Seurat. Rare and difficult cell types (OPC, Microglia, Neural stem cell, Macrophage) remain poorly annotated regardless of method or configuration — these likely require specialised models or additional reference data.
+Classifying at family level rather than subclass/class is the single most impactful decision: family-level F1 is 6–15 pp higher across all methods, and the poorly-discriminated cell types (OPC, Microglia, Macrophage) that dominate error at finer levels simply cease to be a problem. The cost is loss of subclass resolution for analyses that require it. Choosing Seurat over scvi_rf at family level sacrifices ~1.7 pp macro EMM (0.906 vs 0.923 at cutoff=0), but scvi_rf wins zero individual cell-type comparisons at family level and degrades severely with any confidence filtering. Seurat is ~2× slower than scVI methods, but the absolute difference per query set is small (~0.05 hrs). For studies requiring subclass annotation, the same method and reference apply but users should be aware that OPC, Microglia, Macrophage, and Neural stem cell will have substantially lower F1 regardless of configuration.
 
 > **Reference coverage caveat:** References differ in which cell types they include. A reference that lacks a label entirely (ref_support=0 in label results) cannot annotate that cell type, forcing those cells into incorrect categories and inflating false positives for other labels. This biases macro F1 comparisons in favour of references that happen to cover the cell types present in each query dataset. Notably, the cell-type rankings reveal this indirectly: Neural stem cell is best annotated by the Motor cortex reference (not Cortical+Hipp. 10x), and hippocampal subtypes (DG, CA1-ProS, CA3) are best annotated by the Whole cortex reference — suggesting these labels are absent or underrepresented in Cortical+Hipp. 10x. The recommendation of Cortical+Hipp. 10x as the overall best reference holds for cortex-focused studies, but for datasets containing Neural stem cells or hippocampal subtypes a supplementary or alternative reference should be considered. A full reference coverage table (which labels have ref_support=0 per reference) is pending.
 
