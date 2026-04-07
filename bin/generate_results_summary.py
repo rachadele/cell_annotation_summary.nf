@@ -604,7 +604,7 @@ def main():
         "> ⚠️ Old pipeline results (scVI monolithic + Seurat). No ref_support=0 filtering. "
         "Per-cell-type cutoff sensitivity tables unavailable. "
         "Compare with new pipeline results before drawing conclusions.\n",
-        f"Generated from: `{args.base_dir}/`\n",
+        f"Generated from: `{args.results_dir or args.base_dir}/`\n",
         "---\n",
     ]
 
