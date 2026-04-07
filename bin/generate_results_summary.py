@@ -2,8 +2,8 @@
 """
 generate_results_summary.py
 
-Reads evaluation outputs across all parameter combinations and writes a
-structured markdown summary to docs/results_summary.md.
+Reads evaluation outputs for old-pipeline results (scvi + seurat) and writes a
+structured markdown summary.
 
 Usage:
     python bin/generate_results_summary.py \
@@ -13,6 +13,7 @@ Usage:
 
 import argparse
 import glob
+import math
 import os
 
 import pandas as pd
@@ -21,14 +22,13 @@ import pandas as pd
 # Constants
 # ---------------------------------------------------------------------------
 
-KEY_ORDER = ["global", "class", "family", "subclass"]
+KEY_ORDER = ["global", "family", "class", "subclass"]
 
-# Short display names for known long reference strings
 REF_SHORT = {
-    "whole cortex": "whole cortex",
-    "An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types": "motor cortex",
-    "Single-cell RNA-seq for all cortical  hippocampal regions 10x": "hippocampal 10x",
-    "Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4": "hippocampal SMART-Seq",
+    "whole cortex": "Whole cortex",
+    "An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types": "Motor cortex",
+    "Single-cell RNA-seq for all cortical  hippocampal regions 10x": "Cortical+Hipp. 10x",
+    "Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4": "Cortical+Hipp. SSv4",
     "Human Multiple Cortical Areas SMART-seq": "Human MC SMART-seq",
     "Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD": "SEA-AD MTG",
     "Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD": "SEA-AD DLPFC",
@@ -40,13 +40,24 @@ REF_SHORT = {
     "Dissection Primary visual cortexV1": "Dissection V1",
 }
 
+# Covariate column name → EMM file stem
+COVARIATE_FILES = {
+    "treatment_state": "treatment_emmeans_summary.tsv",
+    "sex":             "sex_emmeans_summary.tsv",
+    "disease_state":   "disease_state_emmeans_summary.tsv",
+    "region_match":    "region_match_emmeans_summary.tsv",
+}
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
+
 
 def shorten_ref(name):
     if name in REF_SHORT:
         return REF_SHORT[name]
-    if len(name) > 30:
-        return name[:29] + "…"
-    return name
+    if len(str(name)) > 35:
+        return str(name)[:34] + "…"
+    return str(name)
 
 
 # ---------------------------------------------------------------------------
@@ -54,29 +65,39 @@ def shorten_ref(name):
 # ---------------------------------------------------------------------------
 
 def load_optional(path):
-    """Return DataFrame if path exists, else None."""
     if os.path.exists(path):
         return pd.read_csv(path, sep="\t")
     return None
 
 
 def find_models_dir(base):
-    """Return path to the aggregated_models formula subdir files/, or None."""
     pattern = os.path.join(base, "aggregated_models", "*", "files")
     matches = glob.glob(pattern)
+    return matches[0] if matches else None
+
+
+def find_model_formula(base):
+    pattern = os.path.join(base, "aggregated_models", "*")
+    matches = [m for m in glob.glob(pattern) if os.path.isdir(m)]
     if matches:
-        return matches[0]
-    return None
+        return os.path.basename(matches[0]).replace("_", " ").replace("~", "~")
+    return "unknown"
+
+
+def detect_organism(path):
+    if "mus_musculus" in path:
+        return "mus_musculus"
+    if "homo_sapiens" in path:
+        return "homo_sapiens"
+    return "unknown"
 
 
 def discover_datasets(base_dir):
-    """Glob for dataset roots and return list of (name, base_path)."""
     pattern = os.path.join(base_dir, "*/100/dataset_id/SCT/gap_false")
     matches = sorted(glob.glob(pattern))
     datasets = []
     for m in matches:
         parts = m.split(os.sep)
-        # The dataset name is the part right after base_dir
         base_parts = base_dir.rstrip(os.sep).split(os.sep)
         name = parts[len(base_parts)]
         datasets.append((name, m))
@@ -92,117 +113,126 @@ def fmt_emmean(row):
 
 
 def df_to_md_table(df):
-    """Convert a DataFrame to a GitHub-flavoured markdown table string."""
     cols = df.columns.tolist()
     header = "| " + " | ".join(str(c) for c in cols) + " |"
-    sep = "| " + " | ".join("---" for _ in cols) + " |"
-    rows = []
-    for _, r in df.iterrows():
-        rows.append("| " + " | ".join(str(v) for v in r) + " |")
+    sep    = "| " + " | ".join("---" for _ in cols) + " |"
+    rows   = ["| " + " | ".join(str(v) for v in r) + " |" for _, r in df.iterrows()]
     return "\n".join([header, sep] + rows)
+
+
+def classify_failure_mode(prec, rec, std_f1):
+    modes = []
+    if prec > 0.80 and rec < 0.50:
+        modes.append("Label escape")
+    elif prec < 0.50 and rec > 0.70:
+        modes.append("Over-prediction")
+    elif prec < 0.50 and rec < 0.50:
+        modes.append("Coverage failure")
+    if std_f1 > 0.20:
+        modes.append("Study variance")
+    return "; ".join(modes) if modes else "—"
 
 
 # ---------------------------------------------------------------------------
 # Section generators
 # ---------------------------------------------------------------------------
 
-def section_method_comparison(models_dir):
-    """Method comparison table from method_emmeans_summary.tsv."""
-    if models_dir is None:
-        return "> *Not available — rerun pipeline.*\n"
-
-    path = os.path.join(models_dir, "method_emmeans_summary.tsv")
+def section_study_cohort(base, organism):
+    path = os.path.join(base, "aggregated_results", "files", "study_factor_summary.tsv")
     df = load_optional(path)
     if df is None:
-        return "> *Not available — rerun pipeline.*\n"
+        return ""
 
-    lines = []
+    # Select display columns based on what's present
+    priority = ["study", "treatment", "disease", "sex", "query_region",
+                "number query samples", "number cells", "number unique subclasses"]
+    cols = [c for c in priority if c in df.columns]
+    tbl = df[cols].copy()
+    tbl.columns = [c.replace("number query samples", "Samples")
+                    .replace("number cells", "Cells")
+                    .replace("number unique subclasses", "Subclasses")
+                    .replace("query_region", "Region")
+                   for c in tbl.columns]
+
+    return df_to_md_table(tbl) + "\n"
+
+
+def section_method_comparison(models_dir):
+    if models_dir is None:
+        return ""
+    df = load_optional(os.path.join(models_dir, "method_emmeans_summary.tsv"))
+    if df is None:
+        return ""
+
     keys_present = [k for k in KEY_ORDER if k in df["key"].values]
-
-    # Build wide table: key | scvi [CI] | seurat [CI]
     records = []
     for key in keys_present:
         sub = df[df["key"] == key]
-        row = {"Taxonomy level": key}
+        row = {"key": key}
         for _, r in sub.iterrows():
             row[r["method"]] = fmt_emmean(r)
         records.append(row)
 
-    tbl = pd.DataFrame(records).fillna("—")
-    lines.append(df_to_md_table(tbl))
-    lines.append("")
-
-    # Prose summary: all pairwise comparisons at subclass
-    sub_df = df[df["key"] == "subclass"]
-    if not sub_df.empty:
-        method_vals = {r["method"]: r["response"] for _, r in sub_df.iterrows()}
-        methods_sorted = sorted(method_vals.keys())
-        for i, m1 in enumerate(methods_sorted):
-            for m2 in methods_sorted[i + 1:]:
-                v1, v2 = method_vals[m1], method_vals[m2]
-                diff = v1 - v2
-                direction = "outperforms" if diff > 0 else "underperforms relative to"
-                lines.append(
-                    f"At subclass level, {m1} {direction} {m2} "
-                    f"(Δ = {abs(diff):.3f}, model-adjusted marginal means: "
-                    f"{m1} {v1:.3f}, {m2} {v2:.3f})."
-                )
-
-    return "\n".join(lines) + "\n"
+    return df_to_md_table(pd.DataFrame(records).fillna("—")) + "\n"
 
 
-def section_cutoff_sensitivity(models_dir):
-    """Cutoff sensitivity — one combined table across all taxonomy levels."""
+def section_method_contrasts(models_dir):
     if models_dir is None:
-        return "> *Not available — rerun pipeline.*\n"
-
-    path = os.path.join(models_dir, "method_cutoff_effects.tsv")
-    df = load_optional(path)
+        return ""
+    df = load_optional(os.path.join(models_dir, "method_emmeans_estimates.tsv"))
     if df is None:
-        return "> *Not available — rerun pipeline.*\n"
+        return ""
 
     keys_present = [k for k in KEY_ORDER if k in df["key"].values]
     chunks = []
     for key in keys_present:
+        sub = df[df["key"] == key][["contrast", "odds.ratio", "p.value"]].copy()
+        sub.insert(0, "key", key)
+        sub["odds.ratio"] = sub["odds.ratio"].round(3)
+        def fmt_pval(p):
+            if pd.isna(p):
+                return "—"
+            if p == 0:
+                return "< 1e-300"
+            if p < 0.001:
+                return f"< 1e{int(math.floor(math.log10(p)))+1}"
+            return f"{p:.3f}"
+        sub["p.value"] = sub["p.value"].apply(fmt_pval)
+        chunks.append(sub)
+
+    return df_to_md_table(pd.concat(chunks, ignore_index=True)) + "\n"
+
+
+def section_cutoff_sensitivity(models_dir):
+    if models_dir is None:
+        return ""
+    df = load_optional(os.path.join(models_dir, "method_cutoff_effects.tsv"))
+    if df is None:
+        return ""
+
+    # Detect F1 column name (fit or response)
+    f1_col = "fit" if "fit" in df.columns else "response"
+    keys_present = [k for k in KEY_ORDER if k in df["key"].values]
+    chunks = []
+    for key in keys_present:
         sub = df[df["key"] == key].copy()
-        pivot = sub.pivot_table(index="cutoff", columns="method", values="fit").reset_index()
+        pivot = sub.pivot_table(index="cutoff", columns="method", values=f1_col).reset_index()
         pivot.columns.name = None
         pivot.insert(0, "key", key)
-        pivot["cutoff"] = pivot["cutoff"].round(3)
+        pivot["cutoff"] = pivot["cutoff"].round(2)
         for col in pivot.columns[2:]:
             pivot[col] = pivot[col].round(3)
         chunks.append(pivot)
 
-    combined = pd.concat(chunks, ignore_index=True)
-    combined = combined.rename(columns={"key": "Key", "cutoff": "Cutoff"})
-
-    lines = [df_to_md_table(combined), ""]
-
-    # Summary prose: delta per method at subclass
-    sub_df = df[df["key"] == "subclass"]
-    if not sub_df.empty:
-        for method in sorted(sub_df["method"].unique()):
-            mdf = sub_df[sub_df["method"] == method].sort_values("cutoff")
-            lo_cut, hi_cut = mdf["cutoff"].iloc[0], mdf["cutoff"].iloc[-1]
-            delta = float(mdf["fit"].iloc[-1]) - float(mdf["fit"].iloc[0])
-            direction = "decreases" if delta < 0 else "increases"
-            lines.append(
-                f"{method} (subclass): performance {direction} by {abs(delta):.3f} "
-                f"from cutoff {lo_cut} to {hi_cut}."
-            )
-
-    return "\n".join(lines) + "\n"
+    return df_to_md_table(pd.concat(chunks, ignore_index=True)) + "\n"
 
 
 def section_reference_comparison(models_dir):
-    """Reference × method — one combined table across all taxonomy levels."""
     if models_dir is None:
-        return "> *Not available — rerun pipeline.*\n"
-
-    path = os.path.join(models_dir, "reference_method_emmeans_summary.tsv")
-    df = load_optional(path)
+        return ""
+    df = load_optional(os.path.join(models_dir, "reference_method_emmeans_summary.tsv"))
     if df is None:
-        return "> *Not available — rerun pipeline.*\n"
+        return ""
 
     df["ref_short"] = df["reference"].apply(shorten_ref)
     keys_present = [k for k in KEY_ORDER if k in df["key"].values]
@@ -216,144 +246,214 @@ def section_reference_comparison(models_dir):
             pivot[col] = pivot[col].round(3)
         chunks.append(pivot)
 
-    combined = pd.concat(chunks, ignore_index=True)
-    combined = combined.rename(columns={"key": "Key", "ref_short": "Reference"})
-
-    lines = [df_to_md_table(combined), ""]
-
-    # Summary prose: best/worst at subclass
-    sub_df = df[df["key"] == "subclass"].copy()
-    if not sub_df.empty:
-        methods = [c for c in sub_df["method"].unique()]
-        pivot_sub = sub_df.pivot_table(index="ref_short", columns="method", values="response").reset_index()
-        pivot_sub.columns.name = None
-        numeric_cols = [c for c in pivot_sub.columns if c != "ref_short"]
-        pivot_sub["_mean"] = pivot_sub[numeric_cols].mean(axis=1)
-        best_ref = pivot_sub.loc[pivot_sub["_mean"].idxmax(), "ref_short"]
-        worst_ref = pivot_sub.loc[pivot_sub["_mean"].idxmin(), "ref_short"]
-        lines.append(
-            f"Best-performing reference at subclass (mean across methods): **{best_ref}**. "
-            f"Lowest: **{worst_ref}**."
-        )
-
-    return "\n".join(lines) + "\n"
+    return df_to_md_table(pd.concat(chunks, ignore_index=True)) + "\n"
 
 
-def section_celltype_performance(rankings_path):
-    """Hard/easy cell type split — combined tables across all taxonomy levels."""
-    df = load_optional(rankings_path)
+def section_subsample_ref(models_dir):
+    if models_dir is None:
+        return ""
+    df = load_optional(os.path.join(models_dir, "subsample_ref_emmeans_summary.tsv"))
     if df is None:
-        return "> *Not available — rerun pipeline.*\n"
+        return ""
 
-    df["ref_short"] = df["reference"].apply(shorten_ref)
     keys_present = [k for k in KEY_ORDER if k in df["key"].values]
+    records = []
+    for key in keys_present:
+        sub = df[df["key"] == key]
+        for _, r in sub.iterrows():
+            records.append({
+                "key": key,
+                "subsample_ref": r["subsample_ref"],
+                "EMM": f"{r['response']:.3f} [{r['asymp.LCL']:.3f}–{r['asymp.UCL']:.3f}]",
+            })
 
-    def make_notes(row):
-        notes = []
-        if row["n_studies"] < 3:
-            notes.append(f"rare (<{row['n_studies']} studies)")
-        return "; ".join(notes) if notes else "—"
+    return df_to_md_table(pd.DataFrame(records)) + "\n"
 
+
+def section_covariates(models_dir):
+    if models_dir is None:
+        return ""
     lines = []
+    for covariate, fname in COVARIATE_FILES.items():
+        path = os.path.join(models_dir, fname)
+        df = load_optional(path)
+        if df is None:
+            continue
 
-    # --- Well-classified ---
-    well_chunks = []
-    for key in keys_present:
-        sub = df[df["key"] == key]
-        well = sub[(sub["mean_f1_across_studies"] >= 0.90) & (sub["n_studies"] >= 3)].copy()
-        well = well.sort_values("mean_f1_across_studies", ascending=False)
-        if not well.empty:
-            tbl = well[["label", "method", "ref_short", "subsample_ref",
-                        "mean_f1_across_studies", "n_studies"]].copy()
-            tbl.insert(0, "key", key)
-            well_chunks.append(tbl)
+        # Covariate column is whatever is not key/SE/df/response/asymp.*
+        fixed_cols = {"response", "SE", "df", "asymp.LCL", "asymp.UCL", "key"}
+        cov_col = next((c for c in df.columns if c not in fixed_cols), None)
+        if cov_col is None:
+            continue
 
-    lines.append("**Consistently well-classified (mean_f1 ≥ 0.90, ≥ 3 studies)**\n")
-    if not well_chunks:
-        lines.append("*None meeting criteria.*\n")
-    else:
-        combined_well = pd.concat(well_chunks, ignore_index=True)
-        combined_well = combined_well.rename(columns={
-            "key": "Key",
-            "ref_short": "best_reference",
-            "method": "best_method",
-            "subsample_ref": "best_subsample",
-            "mean_f1_across_studies": "mean_f1",
-        })
-        combined_well["mean_f1"] = combined_well["mean_f1"].round(3)
-        lines.append(df_to_md_table(combined_well))
-        lines.append("")
+        keys_present = [k for k in KEY_ORDER if k in df["key"].values]
+        records = []
+        for key in keys_present:
+            sub = df[df["key"] == key]
+            for _, r in sub.iterrows():
+                records.append({
+                    "key": key,
+                    covariate: r[cov_col] if cov_col in r.index else r.iloc[0],
+                    "EMM": f"{r['response']:.3f} [{r['asymp.LCL']:.3f}–{r['asymp.UCL']:.3f}]",
+                })
 
-    # --- Hard cell types ---
-    hard_chunks = []
-    for key in keys_present:
-        sub = df[df["key"] == key]
-        hard = sub[sub["mean_f1_across_studies"] < 0.75].copy()
-        hard = hard.sort_values("mean_f1_across_studies")
-        if not hard.empty:
-            hard["notes"] = hard.apply(make_notes, axis=1)
-            tbl = hard[["label", "mean_f1_across_studies", "std_f1_across_studies",
-                        "n_studies", "notes"]].copy()
-            tbl.insert(0, "key", key)
-            hard_chunks.append(tbl)
+        if records:
+            lines.append(f"**{covariate}**\n")
+            lines.append(df_to_md_table(pd.DataFrame(records)) + "\n")
 
-    lines.append("**Hardest cell types (mean_f1 < 0.75)**\n")
-    if not hard_chunks:
-        lines.append("*None meeting criteria.*\n")
-    else:
-        combined_hard = pd.concat(hard_chunks, ignore_index=True)
-        combined_hard = combined_hard.rename(columns={
-            "key": "Key",
-            "mean_f1_across_studies": "mean_f1",
-            "std_f1_across_studies": "std_f1",
-        })
-        combined_hard["mean_f1"] = combined_hard["mean_f1"].round(3)
-        combined_hard["std_f1"] = combined_hard["std_f1"].round(3)
-        lines.append(df_to_md_table(combined_hard))
-        lines.append("")
-
-    return "\n".join(lines) + "\n"
+    return "\n".join(lines)
 
 
 def section_study_variance(sv_path):
-    """Study variance — one combined table (top 10 per key) across all taxonomy levels."""
     df = load_optional(sv_path)
     if df is None:
-        return None  # caller will skip section
+        return None
 
     df_cut = df[df["cutoff"] == 0.0].copy()
     if df_cut.empty:
-        return "> *No cutoff=0.0 data in study_variance_summary.tsv.*\n"
+        return ""
 
     keys_present = [k for k in KEY_ORDER if k in df_cut["key"].values]
-    chunks = []
+    has_prec_rec = "mean_precision" in df_cut.columns and "mean_recall" in df_cut.columns
+
+    lines = []
     for key in keys_present:
         sub = df_cut[df_cut["key"] == key].copy()
-        top10 = sub.sort_values("std_f1", ascending=False).head(10)
-        cols = ["label", "n_studies", "frac_studies", "mean_f1", "std_f1", "min_f1", "max_f1"]
-        cols = [c for c in cols if c in top10.columns]
-        tbl = top10[cols].copy()
+
+        well = sub[sub["mean_f1"] >= 0.85].sort_values("mean_f1", ascending=False)
+        hard = sub[(sub["mean_f1"] < 0.70) | (sub["std_f1"] > 0.20)].sort_values("mean_f1")
+
+        for label, subset in [("Well-classified (mean F1 ≥ 0.85)", well),
+                               ("Hard / high-variance (mean F1 < 0.70 or std > 0.20)", hard)]:
+            if subset.empty:
+                continue
+            cols = ["label", "n_studies", "mean_f1", "std_f1"]
+            if has_prec_rec:
+                cols += ["mean_precision", "mean_recall"]
+            tbl = subset[cols].copy()
+            tbl.insert(0, "key", key)
+            for c in ["mean_f1", "std_f1", "mean_precision", "mean_recall"]:
+                if c in tbl.columns:
+                    tbl[c] = tbl[c].round(3)
+            if has_prec_rec and label.startswith("Hard"):
+                tbl["failure_mode"] = [
+                    classify_failure_mode(r["mean_precision"], r["mean_recall"], r["std_f1"])
+                    for _, r in subset.iterrows()
+                ]
+            lines.append(f"**{key} — {label}**\n")
+            lines.append(df_to_md_table(tbl) + "\n")
+
+    return "\n".join(lines)
+
+
+def section_celltype_rankings(rankings_path):
+    df = load_optional(rankings_path)
+    if df is None:
+        return ""
+
+    df["ref_short"] = df["reference"].apply(shorten_ref)
+    keys_present = [k for k in KEY_ORDER if k in df["key"].values]
+    chunks = []
+    for key in keys_present:
+        sub = df[df["key"] == key].copy()
+        tbl = sub[["label", "method", "ref_short", "subsample_ref",
+                   "mean_f1_across_studies", "win_fraction", "n_studies"]].copy()
         tbl.insert(0, "key", key)
-        for col in ["frac_studies", "mean_f1", "std_f1", "min_f1", "max_f1"]:
-            if col in tbl.columns:
-                tbl[col] = tbl[col].round(3)
+        tbl["mean_f1_across_studies"] = tbl["mean_f1_across_studies"].round(3)
+        tbl["win_fraction"] = tbl["win_fraction"].round(3)
         chunks.append(tbl)
 
-    combined = pd.concat(chunks, ignore_index=True)
-    combined = combined.rename(columns={"key": "Key"})
+    return df_to_md_table(pd.concat(chunks, ignore_index=True)
+                          .rename(columns={"ref_short": "reference"})) + "\n"
 
-    lines = [df_to_md_table(combined), ""]
 
-    # Prose: most variable per key
+def section_pareto(pareto_path):
+    df = load_optional(pareto_path)
+    if df is None:
+        return ""
+
+    pareto = df[df["pareto"] == True].copy() if "pareto" in df.columns else df
+    if "reference" in pareto.columns:
+        pareto["reference"] = pareto["reference"].apply(shorten_ref)
+
+    cols = [c for c in ["key", "method", "method_display", "reference", "subsample_ref",
+                         "mean_f1", "total_duration_hrs", "total_memory_gb"] if c in pareto.columns]
+    tbl = pareto[cols].copy()
+    for c in ["mean_f1", "total_duration_hrs", "total_memory_gb"]:
+        if c in tbl.columns:
+            tbl[c] = tbl[c].round(3)
+
+    return df_to_md_table(tbl) + "\n"
+
+
+def section_comptime(comptime_path):
+    df = load_optional(comptime_path)
+    if df is None:
+        return ""
+
+    cols = [c for c in ["method", "step", "subsample_ref", "mean_duration", "mean_memory"]
+            if c in df.columns]
+    tbl = df[cols].copy()
+    for c in ["mean_duration", "mean_memory"]:
+        if c in tbl.columns:
+            tbl[c] = tbl[c].round(3)
+
+    return df_to_md_table(tbl) + "\n"
+
+
+def section_reference_coverage(organism, pipeline="old"):
+    if organism == "mus_musculus":
+        subdir = "tabulamuris-mus-musculus"
+        org_prefix = "mus_musculus"
+    elif pipeline == "old":
+        subdir = "no-ma-et-al-homo-sapiens"
+        org_prefix = "homo_sapiens"
+    else:
+        subdir = "ma-et-al-homo-sapiens"
+        org_prefix = "homo_sapiens"
+
+    coverage_base = os.path.join(PROJECT_DIR, "assets", "ref_coverage", subdir)
+    lines = []
+    for key in KEY_ORDER:
+        path = os.path.join(coverage_base, f"{org_prefix}_{key}_ref_support.tsv")
+        df = load_optional(path)
+        if df is None:
+            continue
+        # First column is the label, rest are references
+        df = df.copy()
+        label_col = df.columns[0]
+        ref_cols = df.columns[1:]
+        short_cols = {c: shorten_ref(c) for c in ref_cols}
+        df = df.rename(columns=short_cols)
+        # Convert float to int where possible
+        for c in df.columns[1:]:
+            df[c] = df[c].apply(lambda x: int(x) if pd.notna(x) and x == int(x) else x)
+        lines.append(f"**{key}**\n")
+        lines.append(df_to_md_table(df) + "\n")
+
+    return "\n".join(lines) if lines else ""
+
+
+def section_assay_exploration(base):
+    path = os.path.join(base, "assay_exploration", "assay_model", "files",
+                        "assay_emmeans_summary.tsv")
+    df = load_optional(path)
+    if df is None:
+        return ""
+
+    keys_present = [k for k in KEY_ORDER if k in df["key"].values]
+    records = []
     for key in keys_present:
-        sub = df_cut[df_cut["key"] == key].sort_values("std_f1", ascending=False)
-        if not sub.empty:
-            lines.append(
-                f"Most variable at {key}: **{sub.iloc[0]['label']}** "
-                f"(std_f1 = {sub.iloc[0]['std_f1']:.3f})."
-            )
+        sub = df[df["key"] == key]
+        for _, r in sub.iterrows():
+            records.append({
+                "key": key,
+                "ref_type": r["ref_type"],
+                "query_type": r["query_type"],
+                "EMM": f"{r['response']:.3f} [{r['asymp.LCL']:.3f}–{r['asymp.UCL']:.3f}]",
+            })
 
-    return "\n".join(lines) + "\n"
+    return df_to_md_table(pd.DataFrame(records)) + "\n"
 
 
 # ---------------------------------------------------------------------------
@@ -361,65 +461,98 @@ def section_study_variance(sv_path):
 # ---------------------------------------------------------------------------
 
 def dataset_section(name, base):
-    """Generate the full markdown section for one dataset."""
-    lines = []
-    lines.append(f"## Dataset: {name}\n")
-
-    # --- Summary statistics from sample_results_summary ---
-    sr_path = os.path.join(base, "aggregated_results", "files", "sample_results_summary.tsv")
-    sr = load_optional(sr_path)
-
-    if sr is not None:
-        n_studies_path = os.path.join(base, "aggregated_results", "files", "study_factor_summary.tsv")
-        sf = load_optional(n_studies_path)
-        n_studies = len(sf) - 1 if sf is not None else "?"  # subtract header duplicates if any
-
-        # Better: count unique studies from sample_results if available
-        # study_factor_summary rows = studies
-        if sf is not None:
-            n_studies = len(sf)
-
-        methods = sorted(sr["method"].dropna().unique().tolist())
-        cutoffs = sorted(sr["cutoff"].dropna().unique().tolist())
-        refs = sr["reference"].dropna().unique().tolist()
-        subsamples = sorted(sr["subsample_ref"].dropna().unique().tolist())
-
-        lines.append(
-            f"**Studies:** {n_studies}  "
-            f"**Methods:** {', '.join(methods)}  \n"
-            f"**Cutoffs evaluated:** {min(cutoffs)} – {max(cutoffs)}  "
-            f"**References:** {len(refs)}  "
-            f"**Subsample sizes:** {', '.join(str(int(s)) for s in subsamples)}\n"
-        )
-    else:
-        lines.append("> *aggregated_results not available — rerun pipeline.*\n")
-
-    # --- Models dir ---
+    organism = detect_organism(base)
+    formula  = find_model_formula(base)
     models_dir = find_models_dir(base)
 
-    # --- Method comparison ---
-    lines.append("### Method Comparison (model-adjusted marginal means)\n")
-    lines.append(section_method_comparison(models_dir))
+    lines = []
+    lines.append(f"## {name}\n")
+    lines.append(f"**Organism:** {organism}  ")
+    lines.append(f"**Model formula:** `{formula}`  ")
+    lines.append(f"**Pipeline:** old (scvi + seurat)\n")
 
-    # --- Cutoff sensitivity ---
-    lines.append("### Cutoff Sensitivity\n")
-    lines.append(section_cutoff_sensitivity(models_dir))
+    # Study cohort
+    cohort = section_study_cohort(base, organism)
+    if cohort:
+        lines.append("### Study Cohort\n")
+        lines.append(cohort)
 
-    # --- Reference comparison ---
-    lines.append("### Reference Comparison (model-adjusted)\n")
-    lines.append(section_reference_comparison(models_dir))
+    # Method comparison
+    mc = section_method_comparison(models_dir)
+    if mc:
+        lines.append("### Method Performance (model-adjusted marginal means)\n")
+        lines.append(mc)
 
-    # --- Cell-type performance ---
-    rankings_path = os.path.join(base, "celltype_rankings", "rankings", "rankings_best.tsv")
-    lines.append("### Cell-Type Performance (best config per label)\n")
-    lines.append(section_celltype_performance(rankings_path))
+    # Method contrasts
+    contrasts = section_method_contrasts(models_dir)
+    if contrasts:
+        lines.append("### Method Pairwise Contrasts\n")
+        lines.append(contrasts)
 
-    # --- Study variance ---
+    # Cutoff sensitivity
+    cutoff = section_cutoff_sensitivity(models_dir)
+    if cutoff:
+        lines.append("### Cutoff Sensitivity (method × cutoff EMMs)\n")
+        lines.append(cutoff)
+
+    # Reference comparison
+    ref = section_reference_comparison(models_dir)
+    if ref:
+        lines.append("### Reference × Method Performance\n")
+        lines.append(ref)
+
+    # Subsample
+    sub = section_subsample_ref(models_dir)
+    if sub:
+        lines.append("### Reference Subsample Size\n")
+        lines.append(sub)
+
+    # Covariates
+    cov = section_covariates(models_dir)
+    if cov:
+        lines.append("### Biological Covariates\n")
+        lines.append(cov)
+
+    # Study variance
     sv_path = os.path.join(base, "study_variance", "study_variance", "study_variance_summary.tsv")
-    sv_section = section_study_variance(sv_path)
-    if sv_section is not None:
-        lines.append("### Study Variance\n")
-        lines.append(sv_section)
+    sv = section_study_variance(sv_path)
+    if sv:
+        lines.append("### Between-Study Heterogeneity\n")
+        lines.append(sv)
+
+    # Cell-type rankings
+    rankings_path = os.path.join(base, "celltype_rankings", "rankings", "rankings_best.tsv")
+    rankings = section_celltype_rankings(rankings_path)
+    if rankings:
+        lines.append("### Cell-Type Rankings (best config per label)\n")
+        lines.append(rankings)
+
+    # Reference coverage
+    coverage = section_reference_coverage(organism, pipeline="old")
+    if coverage:
+        lines.append("### Reference Cell-Type Coverage\n")
+        lines.append(coverage)
+
+    # Assay exploration (mouse only)
+    if organism == "mus_musculus":
+        assay = section_assay_exploration(base)
+        if assay:
+            lines.append("### Assay Exploration (mouse only)\n")
+            lines.append(assay)
+
+    # Pareto
+    pareto_path = os.path.join(base, "celltype_rankings", "config_pareto", "config_pareto_table.tsv")
+    pareto = section_pareto(pareto_path)
+    if pareto:
+        lines.append("### Pareto-Optimal Configurations\n")
+        lines.append(pareto)
+
+    # Compute time
+    comptime_path = os.path.join(base, "comptime_plots", "comptime_summary.tsv")
+    comptime = section_comptime(comptime_path)
+    if comptime:
+        lines.append("### Computational Time\n")
+        lines.append(comptime)
 
     return "\n".join(lines)
 
@@ -430,7 +563,7 @@ def dataset_section(name, base):
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Generate reproducible results summary markdown"
+        description="Generate reproducible results summary markdown (old pipeline)"
     )
     parser.add_argument("--base_dir", default="2024-07-01",
                         help="Base directory containing dataset subdirectories")
@@ -441,7 +574,6 @@ def parse_args():
 
 def main():
     args = parse_args()
-
     datasets = discover_datasets(args.base_dir)
     if not datasets:
         print(f"No datasets found under {args.base_dir}/*/100/dataset_id/SCT/gap_false/")
@@ -449,26 +581,25 @@ def main():
 
     print(f"Found {len(datasets)} dataset(s): {[n for n, _ in datasets]}")
 
-    lines = []
-    lines.append("# Cell-Type Annotation Benchmarking: Results Summary\n")
-    lines.append(
-        "Automated summary generated by `bin/generate_results_summary.py`. "
-        "Evaluates cell-type annotation accuracy across methods (scvi_rf, scvi_knn, seurat), "
-        "confidence cutoffs (0.0–0.75), reference atlases, and subsample sizes "
-        f"for datasets found in `{args.base_dir}/`.\n"
-    )
-    lines.append("---\n")
+    lines = [
+        "# Cell-Type Annotation Benchmarking: Results Summary (Old Pipeline)\n",
+        "> ⚠️ Old pipeline results (scVI monolithic + Seurat). No ref_support=0 filtering. "
+        "Per-cell-type cutoff sensitivity tables unavailable. "
+        "Compare with new pipeline results before drawing conclusions.\n",
+        f"Generated from: `{args.base_dir}/`\n",
+        "---\n",
+    ]
 
     for name, base in datasets:
         print(f"  Processing {name} ...")
         lines.append(dataset_section(name, base))
         lines.append("\n---\n")
 
-    os.makedirs(os.path.dirname(args.outfile), exist_ok=True)
+    os.makedirs(os.path.dirname(args.outfile) or ".", exist_ok=True)
     with open(args.outfile, "w") as fh:
         fh.write("\n".join(lines))
 
-    print(f"\nWrote {args.outfile}")
+    print(f"Wrote {args.outfile}")
 
 
 if __name__ == "__main__":
