@@ -565,18 +565,36 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description="Generate reproducible results summary markdown (old pipeline)"
     )
-    parser.add_argument("--base_dir", default="2024-07-01",
-                        help="Base directory containing dataset subdirectories")
-    parser.add_argument("--outfile", default="docs/results_summary.md",
-                        help="Output markdown file")
+    parser.add_argument("--base_dir", default=None,
+                        help="Base directory containing dataset subdirectories "
+                             "(globs for */100/dataset_id/SCT/gap_false)")
+    parser.add_argument("--results_dir", default=None,
+                        help="Path to a single dataset directory "
+                             "(e.g. 2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false). "
+                             "Overrides --base_dir.")
+    parser.add_argument("--outfile", default="summary.md",
+                        help="Output markdown file path.")
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    datasets = discover_datasets(args.base_dir)
+
+    if args.results_dir:
+        # Single-dataset mode: derive a display name from the path
+        path = args.results_dir.rstrip("/")
+        # Name = directory component right after the date prefix (e.g. homo_sapiens_main_branch)
+        parts = path.split(os.sep)
+        name = parts[-5] if len(parts) >= 5 else parts[0]
+        datasets = [(name, path)]
+    elif args.base_dir:
+        datasets = discover_datasets(args.base_dir)
+    else:
+        datasets = discover_datasets("2024-07-01")
+
     if not datasets:
-        print(f"No datasets found under {args.base_dir}/*/100/dataset_id/SCT/gap_false/")
+        src = args.results_dir or args.base_dir or "2024-07-01"
+        print(f"No datasets found under {src}")
         return
 
     print(f"Found {len(datasets)} dataset(s): {[n for n, _ in datasets]}")
