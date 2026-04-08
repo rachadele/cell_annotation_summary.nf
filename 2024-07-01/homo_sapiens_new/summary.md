@@ -422,6 +422,7 @@ scVI leads macro F1 at all taxonomy levels (subclass EMM: scvi 0.923 vs seurat 0
 ## TODO
 
 - [ ] Fix reference coverage tables (`assets/ref_coverage/no-ma-et-al-homo-sapiens/`): PVALB shows 0 cells at subclass for SEA-AD DLPFC and MTG despite being present in the actual reference data. Root cause unknown. Once fixed, revisit reference selection and update the recommendation below.
+- [ ] Fix disease label propagation: CMC (47 SCZ), SZBDMulti-Seq (24 SCZ + 24 BD), UCLA-ASD (27 ASD), and PTSDBrainomics (6 PTSD + 4 MDD) all appear as `disease=control` in `study_factor_summary.tsv` despite having disease samples in the source metadata (`get_gemma_data.nf/all_homo_sapiens_samples/metadata_standardized/`). Sample counts are correct — the samples are present, but `disease` was not correctly propagated from metadata to `params.yaml` in the upstream pipeline. The `disease_state` covariate in the current model is therefore unreliable; only Ling-2024 (191 Affected/Unaffected samples) has correct labels. Rerun with corrected params and re-evaluate covariate effects.
 
 ---
 
