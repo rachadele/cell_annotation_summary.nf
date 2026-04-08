@@ -29,6 +29,8 @@ REF_SHORT = {
     "An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types": "Motor cortex",
     "Single-cell RNA-seq for all cortical  hippocampal regions 10x": "Cortical+Hipp. 10x",
     "Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4": "Cortical+Hipp. SSv4",
+    "Single-cell RNA-seq for all cortical & hippocampal regions (10x)": "Cortical+Hipp. 10x",
+    "Single-cell RNA-seq for all cortical & hippocampal regions (SMART-Seq v4)": "Cortical+Hipp. SSv4",
     "Human Multiple Cortical Areas SMART-seq": "Human MC SMART-seq",
     "Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD": "SEA-AD MTG",
     "Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD": "SEA-AD DLPFC",
@@ -427,7 +429,7 @@ def section_reference_coverage(organism, pipeline="old"):
         df = df.rename(columns=short_cols)
         # Convert float to int where possible
         for c in df.columns[1:]:
-            df[c] = df[c].apply(lambda x: int(x) if pd.notna(x) and x == int(x) else x)
+            df[c] = df[c].apply(lambda x: int(x) if pd.notna(x) and float(x) == int(float(x)) else x)
         lines.append(f"**{key}**\n")
         lines.append(df_to_md_table(df) + "\n")
 

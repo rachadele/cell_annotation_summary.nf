@@ -419,6 +419,12 @@ scVI leads macro F1 at all taxonomy levels (subclass EMM: scvi 0.923 vs seurat 0
 
 ---
 
+## TODO
+
+- [ ] Fix reference coverage tables (`assets/ref_coverage/no-ma-et-al-homo-sapiens/`): PVALB shows 0 cells at subclass for SEA-AD DLPFC and MTG despite being present in the actual reference data. Root cause unknown. Once fixed, revisit reference selection and update the recommendation below.
+
+---
+
 ## Configuration Recommendation
 
 ### Recommended Taxonomy Level: **subclass**
@@ -431,11 +437,11 @@ No cell type at subclass has mean F1 < 0.5 in ≥3 studies using the best availa
 | --- | --- | --- |
 | Taxonomy level | subclass | No systematic failures (mean F1 < 0.5 in ≥3 studies) at best config; maximum biological granularity |
 | Method | scVI | Macro F1 EMM: scvi 0.923 vs seurat 0.882 at subclass; scvi wins 13/23 cell types. Note: seurat preferred for L5 ET, L5/6 NP, L6 CT, L6b, LAMP5, PVALB, SST |
-| Reference | SEA-AD DLPFC | Highest scvi EMM at subclass (0.926); Dissection DFC eliminated due to near-zero coverage for Oligodendrocyte (3 cells), Microglia (8), Astrocyte (10), and Vascular (6); PVALB absent from all Dissection references except DFC |
+| Reference | Whole cortex | Broadest cell-type coverage at subclass; reference coverage tables are currently being corrected (see TODO below) — reference selection will be revisited once fixed tables are available |
 | Cutoff | 0.0 | scVI performance degrades sharply with cutoff (0.905 → 0.551 at subclass from 0.0 → 0.75); no precision benefit justifies the recall cost given no cutoff-sensitive failure modes in this cohort |
 | subsample_ref | 100 | Subclass EMM 0.910 (vs 0.904 for 50 and 500); marginal improvement with lower memory cost than 500 |
 
-### Raw Performance — scVI + SEA-AD DLPFC + cutoff 0.0 + subsample_ref 100
+### Raw Performance — scVI + Whole cortex + cutoff 0.0 + subsample_ref 100
 
 | key | macro_f1_mean | macro_precision_mean | macro_recall_mean |
 | --- | --- | --- | --- |
@@ -459,6 +465,6 @@ scVI is faster and more accurate on average, but seurat has a consistent advanta
 
 ### Pareto Note
 
-scVI + SEA-AD DLPFC + subsample_ref 100 appears in the Pareto table at subclass (mean F1 = 0.859, 0.040 hrs, 0.020 GB). The recommended configuration is Pareto-optimal.
+scVI + Whole cortex + subsample_ref 100 is recommended for broadest cell-type coverage. SEA-AD DLPFC had been previously identified as Pareto-optimal (mean F1 = 0.859, 0.040 hrs, 0.020 GB), but is not recommended pending resolution of a suspected bug in the reference coverage tables (PVALB shows 0 cells at subclass for SEA-AD references, likely due to a `disease == 'normal'` filter excluding Alzheimer's-labeled cells). Recommendation will be revisited once corrected coverage tables are available.
 
 ---
