@@ -94,6 +94,18 @@ def detect_organism(path):
     return "unknown"
 
 
+def detect_pipeline(base):
+    """Return 'new' if scvi_rf or scvi_knn are present, else 'old'."""
+    path = os.path.join(base, "aggregated_results", "files", "sample_results_summary.tsv")
+    df = load_optional(path)
+    if df is None or "method" not in df.columns:
+        return "old"
+    methods = set(df["method"].dropna().unique())
+    if methods & {"scvi_rf", "scvi_knn"}:
+        return "new"
+    return "old"
+
+
 def discover_datasets(base_dir):
     pattern = os.path.join(base_dir, "*/100/dataset_id/SCT/gap_false")
     matches = sorted(glob.glob(pattern))
@@ -436,6 +448,86 @@ def section_reference_coverage(organism, pipeline="old"):
     return "\n".join(lines) if lines else ""
 
 
+def section_label_cutoff_sensitivity(base):
+    path = os.path.join(base, "cutoff_plots", "label_f1_plots", "label_cutoff_summary.tsv")
+    df = load_optional(path)
+    if df is None:
+        return ""
+
+    cutoffs_show = [0.0, 0.25, 0.50, 0.75]
+    lines = []
+    for key in KEY_ORDER:
+        sub = df[df["key"] == key].copy()
+        if sub.empty:
+            continue
+        grp = sub.groupby(["label", "method", "cutoff"])["f1_score_mean"].mean().reset_index()
+        pivot = grp.pivot_table(index=["label", "method"], columns="cutoff",
+                                values="f1_score_mean").reset_index()
+        pivot.columns.name = None
+        available = [c for c in cutoffs_show if c in pivot.columns]
+        col_names = {c: f"F1({c})" for c in available}
+        pivot = pivot.rename(columns=col_names)
+        display_cols = ["label", "method"] + [f"F1({c})" for c in available]
+        pivot = pivot[[c for c in display_cols if c in pivot.columns]]
+        for c in display_cols[2:]:
+            if c in pivot.columns:
+                pivot[c] = pivot[c].round(3)
+        f1_0_col = "F1(0.0)" if "F1(0.0)" in pivot.columns else display_cols[2]
+        pivot = pivot.sort_values(f1_0_col, ascending=False)
+        lines.append(f"### {key.capitalize()}\n")
+        lines.append(df_to_md_table(pivot.reset_index(drop=True)) + "\n")
+
+        # Most cutoff-sensitive per method
+        if "F1(0.0)" in pivot.columns and "F1(0.75)" in pivot.columns:
+            pivot = pivot.copy()
+            pivot["Drop"] = (pivot["F1(0.0)"] - pivot["F1(0.75)"]).round(3)
+            top5 = (pivot.groupby("method", group_keys=False)
+                    .apply(lambda g: g.nlargest(5, "Drop"))
+                    .reset_index(drop=True))
+            sens = top5[["method", "label", "F1(0.0)", "F1(0.75)", "Drop"]]
+            lines.append("**Most cutoff-sensitive cell types (F1(0) → F1(0.75) drop):**\n")
+            lines.append(df_to_md_table(sens) + "\n")
+
+    return "\n".join(lines)
+
+
+def section_hippocampal_contamination(base):
+    contam_path = os.path.join(base, "aggregated_results", "files", "contamination.tsv")
+    cutoff_path = os.path.join(base, "cutoff_plots", "label_f1_plots", "label_cutoff_summary.tsv")
+    contam = load_optional(contam_path)
+    cutoff_df = load_optional(cutoff_path)
+    if contam is None:
+        return "Hippocampal contamination analysis not available — old pipeline does not include ref_support=0 filtering.\n"
+
+    hippo_labels = ["Hippocampal neuron", "DG", "CA1-ProS", "CA3"]
+    mask = contam["label"].isin(hippo_labels)
+    if "key" in contam.columns:
+        mask = mask & (contam["key"] == "class")
+    hippo = contam[mask]
+
+    if hippo.empty:
+        return "No hippocampal contamination detected.\n"
+
+    spurious = (hippo.groupby(["cutoff", "method"])["predicted_support"]
+                .mean().reset_index()
+                .rename(columns={"predicted_support": "mean_spurious_per_query"}))
+    spurious["mean_spurious_per_query"] = spurious["mean_spurious_per_query"].round(3)
+
+    if cutoff_df is not None:
+        cls = cutoff_df[cutoff_df["key"] == "class"]
+        non_hippo_recall = (cls[~cls["label"].isin(hippo_labels)]
+                            .groupby(["cutoff", "method"])["recall_mean"]
+                            .mean().reset_index()
+                            .rename(columns={"recall_mean": "mean_recall_non_hippo"}))
+        non_hippo_recall["mean_recall_non_hippo"] = non_hippo_recall["mean_recall_non_hippo"].round(3)
+        tbl = spurious.merge(non_hippo_recall, on=["cutoff", "method"], how="left")
+    else:
+        tbl = spurious
+
+    tbl = tbl.sort_values(["method", "cutoff"])
+    return df_to_md_table(tbl) + "\n"
+
+
 def section_assay_exploration(base):
     path = os.path.join(base, "assay_exploration", "assay_model", "files",
                         "assay_emmeans_summary.tsv")
@@ -462,16 +554,20 @@ def section_assay_exploration(base):
 # Per-dataset section
 # ---------------------------------------------------------------------------
 
-def dataset_section(name, base):
+def dataset_section(name, base, pipeline=None):
     organism = detect_organism(base)
     formula  = find_model_formula(base)
     models_dir = find_models_dir(base)
+    if pipeline is None:
+        pipeline = detect_pipeline(base)
+
+    pipeline_label = "new (scvi_rf + scvi_knn + seurat)" if pipeline == "new" else "old (scvi + seurat)"
 
     lines = []
     lines.append(f"## {name}\n")
     lines.append(f"**Organism:** {organism}  ")
     lines.append(f"**Model formula:** `{formula}`  ")
-    lines.append(f"**Pipeline:** old (scvi + seurat)\n")
+    lines.append(f"**Pipeline:** {pipeline_label}\n")
 
     # Study cohort
     cohort = section_study_cohort(base, organism)
@@ -530,10 +626,25 @@ def dataset_section(name, base):
         lines.append(rankings)
 
     # Reference coverage
-    coverage = section_reference_coverage(organism, pipeline="old")
+    coverage = section_reference_coverage(organism, pipeline=pipeline)
     if coverage:
         lines.append("### Reference Cell-Type Coverage\n")
         lines.append(coverage)
+
+    # Per-cell-type cutoff sensitivity (new pipeline only)
+    if pipeline == "new":
+        label_cutoff = section_label_cutoff_sensitivity(base)
+        if label_cutoff:
+            lines.append("### Per-Cell-Type Cutoff Sensitivity\n")
+            lines.append(label_cutoff)
+
+    # Hippocampal contamination (mouse + new pipeline)
+    if organism == "mus_musculus":
+        if pipeline == "new":
+            contam = section_hippocampal_contamination(base)
+            if contam:
+                lines.append("### Hippocampal Contamination\n")
+                lines.append(contam)
 
     # Assay exploration (mouse only)
     if organism == "mus_musculus":
@@ -601,18 +712,31 @@ def main():
 
     print(f"Found {len(datasets)} dataset(s): {[n for n, _ in datasets]}")
 
+    # Detect pipeline from first dataset
+    first_pipeline = detect_pipeline(datasets[0][1]) if datasets else "old"
+
+    if first_pipeline == "old":
+        title = "# Cell-Type Annotation Benchmarking: Results Summary (Old Pipeline)\n"
+        warning = (
+            "> WARNING: Old pipeline results (scVI monolithic + Seurat). No ref_support=0 filtering. "
+            "Per-cell-type cutoff sensitivity tables unavailable. "
+            "Compare with new pipeline results before drawing conclusions.\n"
+        )
+    else:
+        title = "# Cell-Type Annotation Benchmarking: Results Summary\n"
+        warning = ""
+
     lines = [
-        "# Cell-Type Annotation Benchmarking: Results Summary (Old Pipeline)\n",
-        "> ⚠️ Old pipeline results (scVI monolithic + Seurat). No ref_support=0 filtering. "
-        "Per-cell-type cutoff sensitivity tables unavailable. "
-        "Compare with new pipeline results before drawing conclusions.\n",
+        title,
+        warning,
         f"Generated from: `{args.results_dir or args.base_dir}/`\n",
         "---\n",
     ]
 
     for name, base in datasets:
         print(f"  Processing {name} ...")
-        lines.append(dataset_section(name, base))
+        pipeline = detect_pipeline(base)
+        lines.append(dataset_section(name, base, pipeline=pipeline))
         lines.append("\n---\n")
 
     os.makedirs(os.path.dirname(args.outfile) or ".", exist_ok=True)
