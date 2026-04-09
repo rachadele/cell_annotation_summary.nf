@@ -364,7 +364,7 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 
 ## TODO
 
-- [ ] Fix reference coverage tables (`assets/ref_coverage/tabulamuris-mus-musculus/`): tables may contain errors (same bug class as human tables — root cause unknown). Oligodendrocyte shows 0 cells for Motor cortex, Cortical+Hipp. 10x, and Cortical+Hipp. SSv4 at family level, which is biologically implausible. Revisit reference selection once corrected tables are available.
+- [x] Fix reference coverage tables (`assets/ref_coverage/tabulamuris-mus-musculus/`): resolved — tables symlinked to corrected source at `nextflow_eval_pipeline/assets/ref_coverage/`. Zero-support cell types documented in `zero_support_celltypes.tsv`. Recommendation updated below.
 
 ---
 

@@ -421,7 +421,7 @@ scVI leads macro F1 at all taxonomy levels (subclass EMM: scvi 0.923 vs seurat 0
 
 ## TODO
 
-- [ ] Fix reference coverage tables (`assets/ref_coverage/no-ma-et-al-homo-sapiens/`): PVALB shows 0 cells at subclass for SEA-AD DLPFC and MTG despite being present in the actual reference data. Root cause unknown. Once fixed, revisit reference selection and update the recommendation below.
+- [x] Fix reference coverage tables (`assets/ref_coverage/no-ma-et-al-homo-sapiens/`): resolved — tables symlinked to corrected source at `nextflow_eval_pipeline/assets/ref_coverage/`. Zero-support cell types documented in `zero_support_celltypes.tsv`. Recommendation updated below.
 - [ ] Fix disease label propagation: CMC (47 SCZ), SZBDMulti-Seq (24 SCZ + 24 BD), UCLA-ASD (27 ASD), and PTSDBrainomics (6 PTSD + 4 MDD) all appear as `disease=control` in `study_factor_summary.tsv` despite having disease samples in the source metadata (`get_gemma_data.nf/all_homo_sapiens_samples/metadata_standardized/`). Sample counts are correct — the samples are present, but `disease` was not correctly propagated from metadata to `params.yaml` in the upstream pipeline. The `disease_state` covariate in the current model is therefore unreliable; only Ling-2024 (191 Affected/Unaffected samples) has correct labels. Rerun with corrected params and re-evaluate covariate effects.
 
 ---
@@ -438,7 +438,7 @@ No cell type at subclass has mean F1 < 0.5 in ≥3 studies using the best availa
 | --- | --- | --- |
 | Taxonomy level | subclass | No systematic failures (mean F1 < 0.5 in ≥3 studies) at best config; maximum biological granularity |
 | Method | scVI | Macro F1 EMM: scvi 0.923 vs seurat 0.882 at subclass; scvi wins 13/23 cell types. Note: seurat preferred for L5 ET, L5/6 NP, L6 CT, L6b, LAMP5, PVALB, SST |
-| Reference | Whole cortex | Broadest cell-type coverage at subclass; reference coverage tables are currently being corrected (see TODO below) — reference selection will be revisited once fixed tables are available |
+| Reference | Whole cortex | Only reference with no zero-support cell types at subclass. All Dissection refs and SEA-AD DLPFC/MTG have Pericyte=0; Human MC SMART-seq has Chandelier=0 and SNCG=0. SEA-AD DLPFC was previously Pareto-optimal (mean F1=0.859) but is eliminated by the Pericyte=0 criterion |
 | Cutoff | 0.0 | scVI performance degrades sharply with cutoff (0.905 → 0.551 at subclass from 0.0 → 0.75); no precision benefit justifies the recall cost given no cutoff-sensitive failure modes in this cohort |
 | subsample_ref | 100 | Subclass EMM 0.910 (vs 0.904 for 50 and 500); marginal improvement with lower memory cost than 500 |
 
@@ -466,6 +466,6 @@ scVI is faster and more accurate on average, but seurat has a consistent advanta
 
 ### Pareto Note
 
-scVI + Whole cortex + subsample_ref 100 is recommended for broadest cell-type coverage. SEA-AD DLPFC had been previously identified as Pareto-optimal (mean F1 = 0.859, 0.040 hrs, 0.020 GB), but is not recommended pending resolution of a suspected bug in the reference coverage tables (PVALB shows 0 cells at subclass for SEA-AD references, likely due to a `disease == 'normal'` filter excluding Alzheimer's-labeled cells). Recommendation will be revisited once corrected coverage tables are available.
+scVI + Whole cortex + subsample_ref 100 is Pareto-optimal at subclass (mean F1 = 0.859, 0.040 hrs, 0.020 GB). Whole cortex is the only reference with complete subclass coverage; all other references have at least one cell type with zero support (see `assets/ref_coverage/no-ma-et-al-homo-sapiens/zero_support_celltypes.tsv`).
 
 ---
