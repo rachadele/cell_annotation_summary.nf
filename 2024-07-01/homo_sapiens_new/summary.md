@@ -1,6 +1,6 @@
 # Cell-Type Annotation Benchmarking: Results Summary (Old Pipeline)
 
-> ⚠️ Old pipeline results (scVI monolithic + Seurat). No ref_support=0 filtering. Per-cell-type cutoff sensitivity tables unavailable. Compare with new pipeline results before drawing conclusions.
+> WARNING: Old pipeline results (scVI monolithic + Seurat). No ref_support=0 filtering. Per-cell-type cutoff sensitivity tables unavailable. Compare with new pipeline results before drawing conclusions.
 
 Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens_new/100/dataset_id/SCT/gap_false/`
 
@@ -266,66 +266,66 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 
 **global**
 
-| Unnamed: 0 | Human MTG SMART-seq | Whole Cortex | Angular gyrus (AnG) | Anterior cingulate cortex (ACC) | Dorsolateral prefrontal cortex (DF… | Primary auditory cortex(A1) | Primary somatosensory cortex (S1) | Primary visual cortex(V1) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| GABAergic | 2325 | 3500 | 3500 | 3500 | 2253 | 3500 | 3500 | 3243 |
-| Glutamatergic | 2158 | 2500 | 2155 | 2500 | 2126 | 2451 | 2500 | 2295 |
-| Non-neuron | 2113 | 3032 | 2186 | 2278 | 40 | 2180 | 2248 | 2194 |
+| label | Dissection: Angular gyrus (AnG) | Dissection: Anterior cingulate cor… | Dissection: Dorsolateral prefronta… | Dissection: Primary auditory corte… | Dissection: Primary somatosensory … | Dissection: Primary visual cortex(… | Human MC SMART-seq | Whole Taxonomy - DLPFC: Seattle Al… | Whole Taxonomy - MTG: Seattle Alzh… | Whole cortex |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| GABAergic | 700 | 700 | 616 | 700 | 700 | 700 | 500 | 700 | 700 | 700 |
+| Glutamatergic | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
+| Non-neuron | 586 | 600 | 40 | 580 | 600 | 592 | 513 | 600 | 600 | 632 |
 
 **family**
 
-| Unnamed: 0 | Human MTG SMART-seq | Whole Cortex | Angular gyrus (AnG) | Anterior cingulate cortex (ACC) | Dorsolateral prefrontal cortex (DF… | Primary auditory cortex(A1) | Primary somatosensory cortex (S1) | Primary visual cortex(V1) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Astrocyte | 500 | 500 | 500 | 500 | 10 | 500 | 500 | 500 |
-| GABAergic | 2325 | 3500 | 3500 | 3500 | 2253 | 3500 | 3500 | 3243 |
-| Glutamatergic | 2158 | 2500 | 2155 | 2500 | 2126 | 2451 | 2500 | 2295 |
-| Microglia | 500 | 500 | 500 | 500 | 8 | 500 | 500 | 500 |
-| Oligodendrocyte | 500 | 500 | 500 | 500 | 3 | 500 | 500 | 500 |
-| OPC | 500 | 500 | 500 | 500 | 13 | 500 | 500 | 500 |
-| Vascular | 113 | 1032 | 186 | 278 | 6 | 180 | 248 | 194 |
+| label | Dissection: Angular gyrus (AnG) | Dissection: Anterior cingulate cor… | Dissection: Dorsolateral prefronta… | Dissection: Primary auditory corte… | Dissection: Primary somatosensory … | Dissection: Primary visual cortex(… | Human MC SMART-seq | Whole Taxonomy - DLPFC: Seattle Al… | Whole Taxonomy - MTG: Seattle Alzh… | Whole cortex |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Astrocyte | 100 | 100 | 10 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| GABAergic | 700 | 700 | 616 | 700 | 700 | 700 | 500 | 700 | 700 | 700 |
+| Glutamatergic | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
+| Microglia | 100 | 100 | 8 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| OPC | 100 | 100 | 3 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Oligodendrocyte | 100 | 100 | 13 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Vascular | 186 | 200 | 6 | 180 | 200 | 192 | 113 | 200 | 200 | 232 |
 
 **class**
 
-| Unnamed: 0 | Human MTG SMART-seq | Whole Cortex | Angular gyrus (AnG) | Anterior cingulate cortex (ACC) | Dorsolateral prefrontal cortex (DF… | Primary auditory cortex(A1) | Primary somatosensory cortex (S1) | Primary visual cortex(V1) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Astrocyte | 500 | 500 | 500 | 500 | 10 | 500 | 500 | 500 |
-| Chandelier | 0 | 500 | 500 | 500 | 137 | 500 | 500 | 500 |
-| deep layer non-IT | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| L2/3-6 IT | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| LAMP5 | 500 | 500 | 500 | 500 | 8 | 500 | 500 | 500 |
-| Microglia | 500 | 500 | 500 | 500 | 3 | 500 | 500 | 500 |
-| Oligodendrocyte | 500 | 500 | 500 | 500 | 13 | 500 | 500 | 500 |
-| OPC | 325 | 500 | 500 | 500 | 66 | 500 | 500 | 243 |
-| PAX6 | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| PVALB | 0 | 500 | 500 | 500 | 50 | 500 | 500 | 500 |
-| SNCG | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| SST | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| Vascular | 113 | 1032 | 186 | 278 | 6 | 180 | 248 | 194 |
-| VIP | 1658 | 2000 | 1655 | 2000 | 1626 | 1951 | 2000 | 1795 |
+| label | Dissection: Angular gyrus (AnG) | Dissection: Anterior cingulate cor… | Dissection: Dorsolateral prefronta… | Dissection: Primary auditory corte… | Dissection: Primary somatosensory … | Dissection: Primary visual cortex(… | Human MC SMART-seq | Whole Taxonomy - DLPFC: Seattle Al… | Whole Taxonomy - MTG: Seattle Alzh… | Whole cortex |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Astrocyte | 100 | 100 | 10 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Chandelier | 100 | 100 | 100 | 100 | 100 | 100 | 0 | 100 | 100 | 100 |
+| L2/3-6 IT | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| LAMP5 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Microglia | 100 | 100 | 8 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| OPC | 100 | 100 | 3 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Oligodendrocyte | 100 | 100 | 13 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| PAX6 | 100 | 100 | 66 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| PVALB | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| SNCG | 100 | 100 | 50 | 100 | 100 | 100 | 0 | 100 | 100 | 100 |
+| SST | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| VIP | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Vascular | 186 | 200 | 6 | 180 | 200 | 192 | 113 | 200 | 200 | 232 |
+| deep layer non-IT | 400 | 400 | 400 | 400 | 400 | 400 | 400 | 400 | 400 | 400 |
 
 **subclass**
 
-| Unnamed: 0 | Human MTG SMART-seq | Whole Cortex | Angular gyrus (AnG) | Anterior cingulate cortex (ACC) | Dorsolateral prefrontal cortex (DF… | Primary auditory cortex(A1) | Primary somatosensory cortex (S1) | Primary visual cortex(V1) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Astrocyte | 500 | 500 | 500 | 500 | 10 | 500 | 500 | 500 |
-| Chandelier | 0 | 500 | 500 | 500 | 137 | 500 | 500 | 500 |
-| Endothelial | 70 | 500 | 97 | 165 | 3 | 94 | 141 | 102 |
-| L2/3-6 IT | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| L5 ET | 158 | 500 | 155 | 500 | 330 | 451 | 500 | 295 |
-| L5/6 NP | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| L6 CT | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| L6b | 500 | 500 | 500 | 500 | 296 | 500 | 500 | 500 |
-| LAMP5 | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| Microglia | 500 | 500 | 500 | 500 | 8 | 500 | 500 | 500 |
-| Oligodendrocyte | 500 | 500 | 500 | 500 | 3 | 500 | 500 | 500 |
-| OPC | 500 | 500 | 500 | 500 | 13 | 500 | 500 | 500 |
-| PAX6 | 325 | 500 | 500 | 500 | 66 | 500 | 500 | 243 |
-| Pericyte | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| PVALB | 32 | 32 | 0 | 0 | 0 | 0 | 0 | 0 |
-| SNCG | 0 | 500 | 500 | 500 | 50 | 500 | 500 | 500 |
-| SST | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| VIP | 500 | 500 | 500 | 500 | 500 | 500 | 500 | 500 |
-| VLMC | 11 | 500 | 89 | 113 | 3 | 86 | 107 | 92 |
+| label | Dissection: Angular gyrus (AnG) | Dissection: Anterior cingulate cor… | Dissection: Dorsolateral prefronta… | Dissection: Primary auditory corte… | Dissection: Primary somatosensory … | Dissection: Primary visual cortex(… | Human MC SMART-seq | Whole Taxonomy - DLPFC: Seattle Al… | Whole Taxonomy - MTG: Seattle Alzh… | Whole cortex |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Astrocyte | 100 | 100 | 10 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Chandelier | 100 | 100 | 100 | 100 | 100 | 100 | 0 | 100 | 100 | 100 |
+| Endothelial | 97 | 100 | 3 | 94 | 100 | 100 | 70 | 100 | 100 | 100 |
+| L2/3-6 IT | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| L5 ET | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| L5/6 NP | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| L6 CT | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| L6b | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| LAMP5 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Microglia | 100 | 100 | 8 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| OPC | 100 | 100 | 3 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Oligodendrocyte | 100 | 100 | 13 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| PAX6 | 100 | 100 | 66 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| PVALB | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| Pericyte | 0 | 0 | 0 | 0 | 0 | 0 | 32 | 0 | 0 | 32 |
+| SNCG | 100 | 100 | 50 | 100 | 100 | 100 | 0 | 100 | 100 | 100 |
+| SST | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| VIP | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| VLMC | 89 | 100 | 3 | 86 | 100 | 92 | 11 | 100 | 100 | 100 |
 
 ### Pareto-Optimal Configurations
 
@@ -411,61 +411,42 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 | scVI | Prediction | 100 | 0.018 | 0.013 |
 | scVI | Prediction | 500 | 0.019 | 0.013 |
 
----
-
-## Macro F1 vs Per-Cell-Type F1 Conflict
-
-scVI leads macro F1 at all taxonomy levels (subclass EMM: scvi 0.923 vs seurat 0.882), and also wins the most individual cell types at subclass (13/23 vs 10/23). The conflict is therefore not about overall dominance but about specific cell types: seurat outperforms scvi for deep-layer excitatory subtypes (L5 ET, L5/6 NP, L6 CT, L6b) and several interneuron classes (LAMP5, PVALB, SST), which together represent the majority of cortical layer-specific cell types of interest. Researchers focused on laminar excitatory neuron identity may see better per-type results with seurat despite its lower macro F1.
 
 ---
 
-## TODO
+## Macro F1 vs Per-Cell-Type Conflict
 
-- [x] Fix reference coverage tables (`assets/ref_coverage/no-ma-et-al-homo-sapiens/`): resolved — tables symlinked to corrected source at `nextflow_eval_pipeline/assets/ref_coverage/`. Zero-support cell types documented in `zero_support_celltypes.tsv`. Recommendation updated below.
-- [ ] Fix disease label propagation: CMC (47 SCZ), SZBDMulti-Seq (24 SCZ + 24 BD), UCLA-ASD (27 ASD), and PTSDBrainomics (6 PTSD + 4 MDD) all appear as `disease=control` in `study_factor_summary.tsv` despite having disease samples in the source metadata (`get_gemma_data.nf/all_homo_sapiens_samples/metadata_standardized/`). Sample counts are correct — the samples are present, but `disease` was not correctly propagated from metadata to `params.yaml` in the upstream pipeline. The `disease_state` covariate in the current model is therefore unreliable; only Ling-2024 (191 Affected/Unaffected samples) has correct labels. Rerun with corrected params and re-evaluate covariate effects.
+scVI leads Seurat at every taxonomy level by macro F1 (subclass: 0.923 vs 0.882, OR = 0.620, p < 10^−300), and also wins more cell types at subclass (13/23 vs 10/23 by best-config win fraction). The methods diverge most for sparse or region-specific types: Seurat achieves better best-config F1 for L5 ET (0.709 vs lower for scVI), L5/6 NP, LAMP5, PVALB, SST, VLMC, and Pericyte — all types where the Human MC SMART-seq reference, which Seurat favors, provides specialized coverage. The macro and cell-type rankings are broadly consistent; scVI's macro advantage does not mask systematic per-type losses.
 
 ---
 
 ## Configuration Recommendation
 
-### Recommended Taxonomy Level: **subclass**
-
-No cell type at subclass has mean F1 < 0.5 in ≥3 studies using the best available configuration (Pericyte achieves 0.819 with seurat + Human MC SMART-seq, despite catastrophic label escape under other configs). Subclass is the finest level with reliable annotation across the cohort and should be preferred for biological granularity. Pericyte performance is config-sensitive (label escape under most references) and should be treated as a known caveat rather than a reason to collapse to class.
-
-### Recommended Configuration
+**Recommended taxonomy level: subclass.** The only systematic failure (mean F1 < 0.5 in ≥ 3 studies) is Pericyte (mean F1 = 0.074, 6 studies), but this is a **reference coverage artifact**: Pericyte has 0 cells in all Dissection and both SEA-AD references — only Whole cortex (32 cells) and Human MC SMART-seq (32 cells) include it. With the recommended reference (Whole cortex), Pericyte annotation is attempted but limited by the small reference size. L5 ET is borderline (mean F1 = 0.574, SD = 0.322, 7 studies) and highly study-variable — not a systematic failure but warrants caution. All other subclasses achieve mean F1 > 0.65.
 
 | Dimension | Recommended value | Rationale |
-| --- | --- | --- |
-| Taxonomy level | subclass | No systematic failures (mean F1 < 0.5 in ≥3 studies) at best config; maximum biological granularity |
-| Method | scVI | Macro F1 EMM: scvi 0.923 vs seurat 0.882 at subclass; scvi wins 13/23 cell types. Note: seurat preferred for L5 ET, L5/6 NP, L6 CT, L6b, LAMP5, PVALB, SST |
-| Reference | Whole cortex | Only reference with no zero-support cell types at subclass. All Dissection refs and SEA-AD DLPFC/MTG have Pericyte=0; Human MC SMART-seq has Chandelier=0 and SNCG=0. SEA-AD DLPFC was previously Pareto-optimal (mean F1=0.859) but is eliminated by the Pericyte=0 criterion |
-| Cutoff | 0.0 | scVI performance degrades sharply with cutoff (0.905 → 0.551 at subclass from 0.0 → 0.75); no precision benefit justifies the recall cost given no cutoff-sensitive failure modes in this cohort |
-| subsample_ref | 100 | Subclass EMM 0.910 (vs 0.904 for 50 and 500); marginal improvement with lower memory cost than 500 |
+|---|---|---|
+| Taxonomy level | subclass | Only failure is Pericyte (coverage artifact); L5 ET high-variance but not systematic |
+| Method | scVI | Higher macro F1 at all levels (subclass Δ = +0.042); wins 13/23 cell types |
+| Reference | Whole cortex | Only reference with complete subclass coverage (all 23 labels > 0); EMM 0.923 — competitive with SEA-AD DLPFC (0.926) and SEA-AD MTG (0.920), which both have 0 Pericyte cells |
+| Cutoff | 0.0 | scVI subclass F1 drops from 0.905 → 0.551 between cutoff 0.0 and 0.75; no benefit to filtering |
+| Subsample_ref | 100 | Marginally higher EMM than 500 (0.910 vs 0.904); identical compute time |
 
-### Raw Performance — scVI + Whole cortex + cutoff 0.0 + subsample_ref 100
+**Raw performance (scVI × Whole cortex × cutoff 0.0 × subsample_ref 100):**
 
-| key | macro_f1_mean | macro_precision_mean | macro_recall_mean |
-| --- | --- | --- | --- |
-| global | 0.992 | — | — |
-| family | 0.983 | — | — |
-| class | 0.940 | — | — |
-| subclass | 0.913 | — | — |
+| key | macro_f1 | macro_precision | macro_recall |
+|---|---|---|---|
+| global | 0.993 | 0.995 | 0.992 |
+| family | 0.983 | 0.988 | 0.984 |
+| class | 0.934 | 0.959 | 0.937 |
+| subclass | 0.908 | 0.961 | 0.908 |
 
-*(weighted precision/recall available; macro precision/recall not extracted separately here)*
-
-### Compute Time — scVI + subsample_ref 100
+**Compute time (scVI × subsample_ref 100):**
 
 | step | mean_duration (hrs) | mean_memory (GB) |
-| --- | --- | --- |
+|---|---|---|
 | Query Processing | 0.022 | 0.020 |
 | Prediction | 0.018 | 0.013 |
+| **Total** | **0.040** | **0.033** |
 
-### Trade-offs
-
-scVI is faster and more accurate on average, but seurat has a consistent advantage for several biologically important subtypes (deep-layer excitatory neurons and key interneuron classes); if laminar resolution of excitatory neurons is the primary goal, seurat with Human MC SMART-seq warrants consideration. Subsample_ref 100 is essentially equivalent to 500 in performance (~0.6% lower macro F1) but avoids the 3× increase in Seurat ref processing time at subsample_ref 500.
-
-### Pareto Note
-
-scVI + Whole cortex + subsample_ref 100 is Pareto-optimal at subclass (mean F1 = 0.859, 0.040 hrs, 0.020 GB). Whole cortex is the only reference with complete subclass coverage; all other references have at least one cell type with zero support (see `assets/ref_coverage/no-ma-et-al-homo-sapiens/zero_support_celltypes.tsv`).
-
----
+SEA-AD DLPFC × 500 and Whole cortex × 500 are the top Pareto-optimal configs; the recommended Whole cortex × 100 is not in the Pareto table, but the EMM difference vs 500 cells is negligible (0.910 vs 0.904) at identical compute cost. If Pericyte annotation is not required, SEA-AD DLPFC × 100 (EMM 0.926, Pareto-optimal) is a stronger choice.
