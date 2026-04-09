@@ -1,17 +1,8 @@
 # TODO
 
-## 1. Fix reference coverage tables
+## 1. ~~Fix reference coverage tables~~ DONE
 
-**Affects:** both organisms
-
-The `get_ref_support.py` script generates incorrect coverage counts for some cell types. Root cause is unknown. Known issues:
-
-- **homo_sapiens** (`assets/ref_coverage/no-ma-et-al-homo-sapiens/`): PVALB shows 0 cells at subclass for SEA-AD DLPFC and SEA-AD MTG, despite being present in the actual reference data (confirmed via h5ad files). This is biologically impossible.
-- **mus_musculus** (`assets/ref_coverage/tabulamuris-mus-musculus/`): Oligodendrocyte shows 0 cells for Motor cortex, Cortical+Hipp. 10x, and Cortical+Hipp. SSv4 at family level — also biologically implausible.
-
-Leading hypothesis: `disease == 'normal'` filter in `get_filtered_obs()` (in `nextflow_eval_pipeline/bin/utils.py`) may be excluding cells from disease-labeled donors (e.g., Alzheimer's in SEA-AD), but root cause is unconfirmed.
-
-**Action:** Debug `get_ref_support.py`, regenerate tables, then revisit reference selection for both organisms.
+Coverage tables regenerated and verified: Oligodendrocyte (mouse) and PVALB (human) now show correct non-zero counts across all references.
 
 ---
 
@@ -19,7 +10,7 @@ Leading hypothesis: `disease == 'normal'` filter in `get_filtered_obs()` (in `ne
 
 **Affects:** `2024-07-01/homo_sapiens_new/summary.md`, `2024-07-01/mus_musculus/summary.md`
 
-Both summaries currently recommend **whole cortex** as a conservative default pending correct coverage tables. Once tables are fixed:
+Coverage tables are now fixed. Summaries should be regenerated with updated reference recommendations:
 
 - **homo_sapiens_new**: SEA-AD DLPFC may be preferable (previously Pareto-optimal at subclass: mean F1 = 0.859, 0.040 hrs, 0.020 GB). Revisit reference selection and check PVALB coverage.
 - **mus_musculus**: Motor cortex EMM is marginally higher than whole cortex (0.908 vs 0.904 at family) but shows Oligodendrocyte = 0 — may become preferred once corrected.
