@@ -11,5 +11,6 @@
     ],
     "reference": "whole cortex",
     "skip_modeling": true,
-    "subsample_ref": 100
+    "subsample_ref": 100,
+    "metadata_dir": "/space/grp/rschwartz/rschwartz/get_gemma_data.nf/all_homo_sapiens_samples/metadata_standardized"
 }

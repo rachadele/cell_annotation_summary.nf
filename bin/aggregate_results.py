@@ -17,11 +17,106 @@ import re
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--pipeline_results', type=str, nargs = "+", 
-                        help="files containing f1 results with params")                                            
+    parser.add_argument('--pipeline_results', type=str, nargs = "+",
+                        help="files containing f1 results with params")
+    parser.add_argument('--metadata_dir', type=str, default=None,
+                        help="Directory containing per-study metadata TSVs for overriding sex/disease")
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
         return known_args
+
+
+# Column name aliases for sex and disease across studies
+SEX_COLS    = ['sex']
+DISEASE_COLS = ['disease', 'group', 'pathological diagnosis', 'treatment']
+
+# Per-study disease value normalisation: map raw value -> 'control' or leave as disease label
+DISEASE_CONTROL_VALUES = {
+    'control', 'Control', 'reference subject role', 'Unaffected', 'no',
+    'vehicle (PBS) for 12h', 'PN',   # GSE174332: PN = peripheral nerve (normal)
+}
+
+def _normalise_disease(val):
+    """Return 'control' if val is a known control label, else the original value."""
+    if pd.isna(val):
+        return np.nan
+    return 'control' if str(val) in DISEASE_CONTROL_VALUES else str(val)
+
+def _normalise_sex(val, study=None):
+    """Lowercase and expand single-letter codes; handle per-study numeric encodings."""
+    if pd.isna(val):
+        return np.nan
+    s = str(val).strip().lower()
+    # Mathys-2023 (ROSMAP): 0 = male, 1 = female
+    if study == 'Mathys-2023':
+        numeric_map = {'0': 'male', '1': 'female'}
+        if s in numeric_map:
+            return numeric_map[s]
+    mapping = {'m': 'male', 'f': 'female', 'fem': 'female'}
+    return mapping.get(s, s)
+
+def load_sample_metadata(metadata_dir):
+    """
+    Walk metadata_dir/<study>/<study>_sample_meta_std.tsv and build a dict
+    mapping str(sample_id) -> {'sex': ..., 'disease': ...}.
+    Returns empty dict if metadata_dir is None or missing.
+    """
+    if not metadata_dir or not os.path.isdir(metadata_dir):
+        return {}
+
+    sample_meta = {}
+    for study in os.listdir(metadata_dir):
+        study_path = os.path.join(metadata_dir, study)
+        if not os.path.isdir(study_path):
+            continue
+        tsv_files = [f for f in os.listdir(study_path) if f.endswith('.tsv')]
+        if not tsv_files:
+            continue
+        df = pd.read_csv(os.path.join(study_path, tsv_files[0]), sep='\t', dtype=str)
+
+        # Resolve sex column
+        sex_col = next((c for c in SEX_COLS if c in df.columns), None)
+        # Resolve disease column
+        disease_col = next((c for c in DISEASE_COLS if c in df.columns), None)
+
+        for _, row in df.iterrows():
+            sid = str(row['sample_id']) if 'sample_id' in df.columns else None
+            if sid is None:
+                continue
+            sex_val     = _normalise_sex(row[sex_col], study=study) if sex_col     else np.nan
+            disease_val = _normalise_disease(row[disease_col])       if disease_col else np.nan
+            sample_meta[sid] = {'sex': sex_val, 'disease': disease_val}
+
+    return sample_meta
+
+
+def apply_sample_metadata(df, sample_meta):
+    """
+    For each row, look up sample_id (query.split('_')[1]) in sample_meta and
+    fill in sex / disease where the existing value is NaN or empty.
+    """
+    if not sample_meta:
+        return df
+
+    df = df.copy()
+    # Ensure columns exist
+    for col in ('sex', 'disease'):
+        if col not in df.columns:
+            df[col] = np.nan
+
+    def _lookup(query, col):
+        parts = str(query).split('_')
+        if len(parts) < 2:
+            return np.nan
+        return sample_meta.get(parts[1], {}).get(col, np.nan)
+
+    mask_sex     = df['sex'].isna()     | (df['sex'].astype(str).str.strip() == '')
+    mask_disease = df['disease'].isna() | (df['disease'].astype(str).str.strip() == '')
+
+    df.loc[mask_sex,     'sex']     = df.loc[mask_sex,     'query'].apply(lambda q: _lookup(q, 'sex'))
+    df.loc[mask_disease, 'disease'] = df.loc[mask_disease, 'query'].apply(lambda q: _lookup(q, 'disease'))
+
+    return df
 
 def make_acronym(name):
     # Split on "_" and replace with spaces
@@ -133,6 +228,11 @@ def main():
 
     organism = results_df["organism"].unique()[0]
     results_df = results_df[results_df['support'] > 0]
+
+    # --- Apply external sample metadata (fill missing sex / disease) ---
+    if organism == "homo_sapiens" and args.metadata_dir:
+        sample_meta = load_sample_metadata(args.metadata_dir)
+        results_df = apply_sample_metadata(results_df, sample_meta)
 
     # --- Derive columns ---
     results_df["study"] = results_df["query"].apply(lambda x: x.split("_")[0])

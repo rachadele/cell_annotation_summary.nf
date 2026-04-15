@@ -12,5 +12,6 @@
     "reference": "whole cortex",
     "remove_outliers": [
         "GSE180670"
-    ]
+    ],
+    "metadata_dir": "/space/grp/rschwartz/rschwartz/get_gemma_data.nf/all_homo_sapiens_samples/metadata_standardized"
 }
