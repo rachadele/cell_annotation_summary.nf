@@ -8,6 +8,7 @@ process PLOT_PUB_FIGURES {
     val reference_emmeans
     val method_emmeans
     val all_emmeans_summary
+    val model_coefs
 
     output:
     path "**.png", emit: figures
@@ -22,6 +23,7 @@ process PLOT_PUB_FIGURES {
         --reference_emmeans ${reference_emmeans} \\
         --method_emmeans ${method_emmeans} \\
         --factor_emmeans "${emmeans_str}" \\
+        --model_coefs ${model_coefs} \\
         --organism ${params.organism} \\
         --outdir . \\
         --output_prefix pub_figure
