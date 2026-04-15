@@ -261,6 +261,62 @@ create_panel_c <- function(factor_emmeans, organism) {
   p
 }
 
+create_panel_e <- function(coef_data, primary_key) {
+  # Panel E: Effect magnitude comparison (logit scale)
+  # Shows study random intercept SD vs fixed-effect predictor magnitudes,
+  # making visible that study of origin dominates unexplained variance.
+  if (is.null(coef_data) || nrow(coef_data) == 0) return(NULL)
+
+  df <- coef_data %>% filter(key == primary_key)
+
+  study_row <- df %>%
+    filter(effect == "ran_pars", group == "study", term == "sd__(Intercept)")
+  if (nrow(study_row) == 0) return(NULL)
+  study_sd <- study_row$estimate[1]
+
+  # Fixed main effects only (no interactions, no intercept)
+  fixed <- df %>%
+    filter(effect == "fixed", term != "(Intercept)", !str_detect(term, ":")) %>%
+    mutate(
+      predictor = case_when(
+        str_starts(term, "reference")                            ~ "Reference",
+        str_starts(term, "method")                              ~ "Method",
+        term == "cutoff"                                         ~ "Cutoff",
+        str_starts(term, "subsample_ref")                       ~ "Subsampling",
+        str_starts(term, "sex")                                 ~ "Sex",
+        str_starts(term, "disease_state") | str_starts(term, "treatment") ~ "Disease/Treatment",
+        str_starts(term, "region_match")                        ~ "Region match",
+        TRUE ~ NA_character_
+      )
+    ) %>%
+    filter(!is.na(predictor)) %>%
+    group_by(predictor) %>%
+    summarise(
+      # For multi-level predictors use SD of coefs; for single-level use |coef|
+      magnitude = if (n() > 1) sd(estimate, na.rm = TRUE) else abs(estimate[1]),
+      .groups = "drop"
+    )
+
+  plot_df <- bind_rows(
+    tibble(predictor = "Study\n(random)", magnitude = study_sd, type = "random"),
+    fixed %>% mutate(type = "fixed")
+  ) %>%
+    arrange(desc(magnitude)) %>%
+    mutate(predictor = factor(predictor, levels = rev(predictor)))
+
+  PANEL_E_COLORS <- c(random = "#e74c3c", fixed = "#888888")
+
+  ggplot(plot_df, aes(x = magnitude, y = predictor, colour = type)) +
+    geom_segment(aes(x = 0, xend = magnitude, yend = predictor), linewidth = 1.5) +
+    geom_point(size = 4) +
+    scale_colour_manual(values = PANEL_E_COLORS) +
+    labs(x = "Effect magnitude (logit scale)", y = "",
+         caption = "Multi-level predictors: SD of coefficients\nSingle-level: |coefficient|") +
+    pub_theme() +
+    theme(plot.caption = element_text(size = 7, colour = "gray50"),
+          axis.text.y = element_text(size = 9))
+}
+
 create_panel_d <- function(reference_emmeans) {
   # Panel D: Reference atlas forest plot (dodged by method)
   methods <- sort(unique(reference_emmeans$method))
@@ -327,6 +383,8 @@ parse_arguments <- function() {
                       help = "Path to method_emmeans_summary.tsv")
   parser$add_argument("--factor_emmeans", type = "character", default = "",
                       help = "Space-separated paths to factor emmeans summary files")
+  parser$add_argument("--model_coefs", type = "character", default = NULL,
+                      help = "Path to model_coefs.tsv for variance source panel")
   parser$add_argument("--primary_key", type = "character", default = "subclass",
                       help = "Primary taxonomy key for filtering")
   parser$add_argument("--organism", type = "character", default = "homo_sapiens",
@@ -405,6 +463,15 @@ main <- function() {
   }
   factor_emmeans <- load_factor_emmeans(factor_files, args$organism, primary_key)
 
+  coef_data <- if (!is.null(args$model_coefs) && file.exists(args$model_coefs)) {
+    df <- read_tsv(args$model_coefs, show_col_types = FALSE)
+    message("  Model coefs: ", nrow(df), " rows")
+    df
+  } else {
+    message("  Model coefs: not available (skipping panel E)")
+    NULL
+  }
+
   # -- Build panels ------------------------------------------------------------
   message("\nCreating panels...")
 
@@ -417,6 +484,7 @@ main <- function() {
   }
   p_c <- create_panel_c(factor_emmeans, args$organism)
   p_d <- create_panel_d(reference_emmeans)
+  p_e <- create_panel_e(coef_data, primary_key)
 
   # -- Compose layout ----------------------------------------------------------
   message("Composing layout...")
@@ -427,13 +495,22 @@ main <- function() {
                                   override.aes = list(size = 3)),
            fill   = "none")
 
-  combined <- (guide_area() /
-    ((p_a | p_b | p_c) + plot_layout(widths = c(1, 1, 1.2))) /
-    p_d) +
-    plot_layout(heights = c(0.06, 1, 1), guides = "collect") +
-    plot_annotation(tag_levels = list(c("", "A", "B", "C", "D"))) &
-    theme(legend.position = "top",
-          legend.text = element_text(size = 16))
+  if (!is.null(p_e)) {
+    top_row <- (p_a | p_b | p_c | p_e) + plot_layout(widths = c(1, 1, 1.2, 0.9))
+    combined <- (guide_area() / top_row / p_d) +
+      plot_layout(heights = c(0.06, 1, 1), guides = "collect") +
+      plot_annotation(tag_levels = list(c("", "A", "B", "C", "E", "D"))) &
+      theme(legend.position = "top",
+            legend.text = element_text(size = 16))
+  } else {
+    combined <- (guide_area() /
+      ((p_a | p_b | p_c) + plot_layout(widths = c(1, 1, 1.2))) /
+      p_d) +
+      plot_layout(heights = c(0.06, 1, 1), guides = "collect") +
+      plot_annotation(tag_levels = list(c("", "A", "B", "C", "D"))) &
+      theme(legend.position = "top",
+            legend.text = element_text(size = 16))
+  }
 
   # -- Save --------------------------------------------------------------------
   out_path <- file.path(args$outdir, paste0(args$output_prefix, "_combined.png"))

@@ -130,6 +130,7 @@ workflow EVALUATION_SUMMARY {
         ch_reference_emmeans   = MODEL_EVAL_AGGREGATED.out.reference_method_emmeans
         ch_method_emmeans      = MODEL_EVAL_AGGREGATED.out.method_emmeans
         ch_all_emmeans_summary = MODEL_EVAL_AGGREGATED.out.all_emmeans_summary
+        ch_model_coefs         = MODEL_EVAL_AGGREGATED.out.model_coefs
 
         //
         // MODULE: Generate publication figures
@@ -140,7 +141,8 @@ workflow EVALUATION_SUMMARY {
             ch_cutoff_effects,
             ch_reference_emmeans,
             ch_method_emmeans,
-            ch_all_emmeans_summary
+            ch_all_emmeans_summary,
+            ch_model_coefs
         )
     }
 
