@@ -1,5 +1,5 @@
 process PLOT_COMPTIME {
-    label 'process_single'
+    label 'process_high'
 
     input:
     path all_runs_dir

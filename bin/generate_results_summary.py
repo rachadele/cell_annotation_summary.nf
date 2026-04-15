@@ -335,10 +335,10 @@ def section_study_variance(sv_path):
         sub = df_cut[df_cut["key"] == key].copy()
 
         well = sub[sub["mean_f1"] >= 0.85].sort_values("mean_f1", ascending=False)
-        hard = sub[(sub["mean_f1"] < 0.70) | (sub["std_f1"] > 0.20)].sort_values("mean_f1")
+        hard = sub[(sub["mean_f1"] < 0.75) | (sub["std_f1"] > 0.20)].sort_values("mean_f1")
 
         for label, subset in [("Well-classified (mean F1 ≥ 0.85)", well),
-                               ("Hard / high-variance (mean F1 < 0.70 or std > 0.20)", hard)]:
+                               ("Hard / high-variance (mean F1 < 0.75 or std > 0.20)", hard)]:
             if subset.empty:
                 continue
             cols = ["label", "n_studies", "mean_f1", "std_f1"]
@@ -370,8 +370,11 @@ def section_celltype_rankings(rankings_path):
     chunks = []
     for key in keys_present:
         sub = df[df["key"] == key].copy()
-        tbl = sub[["label", "method", "ref_short", "subsample_ref",
-                   "mean_f1_across_studies", "win_fraction", "n_studies"]].copy()
+        cols = ["label", "method", "ref_short", "subsample_ref",
+                "mean_f1_across_studies", "win_fraction", "n_studies"]
+        if "mean_support" in sub.columns:
+            cols.append("mean_support")
+        tbl = sub[cols].copy()
         tbl.insert(0, "key", key)
         tbl["mean_f1_across_studies"] = tbl["mean_f1_across_studies"].round(3)
         tbl["win_fraction"] = tbl["win_fraction"].round(3)
@@ -448,6 +451,24 @@ def section_reference_coverage(organism, pipeline="old"):
     return "\n".join(lines) if lines else ""
 
 
+
+def section_reference_ranking(models_dir):
+    """Rank references by mean EMM across all methods and taxonomy keys."""
+    if models_dir is None:
+        return ""
+    ref_method = load_optional(os.path.join(models_dir, "reference_method_emmeans_summary.tsv"))
+    if ref_method is None:
+        return ""
+
+    ref_method["ref_short"] = ref_method["reference"].apply(shorten_ref)
+    mean_emm = (ref_method.groupby("ref_short")["response"]
+                .mean().reset_index()
+                .rename(columns={"response": "mean_emm", "ref_short": "reference"})
+                .sort_values("mean_emm", ascending=False))
+    mean_emm["mean_emm"] = mean_emm["mean_emm"].round(3)
+    return df_to_md_table(mean_emm) + "\n"
+
+
 def section_label_cutoff_sensitivity(base):
     path = os.path.join(base, "cutoff_plots", "label_f1_plots", "label_cutoff_summary.tsv")
     df = load_optional(path)
@@ -487,6 +508,24 @@ def section_label_cutoff_sensitivity(base):
             sens = top5[["method", "label", "F1(0.0)", "F1(0.75)", "Drop"]]
             lines.append("**Most cutoff-sensitive cell types (F1(0) → F1(0.75) drop):**\n")
             lines.append(df_to_md_table(sens) + "\n")
+
+        # Low-F1 types (F1 < 0.5 at cutoff=0): full precision/recall across all cutoffs
+        has_prec_rec = "precision_mean" in sub.columns and "recall_mean" in sub.columns
+        if has_prec_rec and f1_0_col in pivot.columns:
+            low_f1_labels = pivot.loc[pivot[f1_0_col] < 0.5, "label"].unique()
+            if len(low_f1_labels) > 0:
+                low_sub = sub[sub["label"].isin(low_f1_labels)].copy()
+                grp_pr = (low_sub.groupby(["label", "method", "cutoff"])
+                          [["f1_score_mean", "precision_mean", "recall_mean"]]
+                          .mean().reset_index())
+                grp_pr = grp_pr.sort_values(["label", "method", "cutoff"])
+                for c in ["f1_score_mean", "precision_mean", "recall_mean"]:
+                    grp_pr[c] = grp_pr[c].round(3)
+                grp_pr = grp_pr.rename(columns={
+                    "f1_score_mean": "F1", "precision_mean": "precision", "recall_mean": "recall"
+                })
+                lines.append("**Low-F1 cell types at cutoff=0 (F1 < 0.5) — precision/recall across all cutoffs:**\n")
+                lines.append(df_to_md_table(grp_pr) + "\n")
 
     return "\n".join(lines)
 
@@ -599,6 +638,12 @@ def dataset_section(name, base, pipeline=None):
         lines.append("### Reference × Method Performance\n")
         lines.append(ref)
 
+    # Reference ranking (mean EMM across methods and keys)
+    ref_rank = section_reference_ranking(models_dir)
+    if ref_rank:
+        lines.append("### Reference Ranking (mean EMM across methods and keys)\n")
+        lines.append(ref_rank)
+
     # Subsample
     sub = section_subsample_ref(models_dir)
     if sub:
@@ -611,7 +656,7 @@ def dataset_section(name, base, pipeline=None):
         lines.append("### Biological Covariates\n")
         lines.append(cov)
 
-    # Study variance
+    # Study variance (all keys from combined TSV produced by plot_study_variance.py)
     sv_path = os.path.join(base, "study_variance", "study_variance", "study_variance_summary.tsv")
     sv = section_study_variance(sv_path)
     if sv:

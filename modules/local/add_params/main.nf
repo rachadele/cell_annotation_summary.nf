@@ -1,6 +1,6 @@
 process ADD_PARAMS {
     tag "$run_name"
-    label 'process_single'
+    label 'process_high'
 
     input:
     tuple val(run_name), val(params_file), val(ref_obs), val(f1_results)

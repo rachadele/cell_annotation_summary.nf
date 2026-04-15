@@ -130,15 +130,54 @@ def draw_heatmap(ax: plt.Axes, pivot: pd.DataFrame, title: str, cbar_label: str)
         lbl.set_ha("right")
 
 
+ALL_KEYS = ["subclass", "class", "family", "global"]
+
+
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--label_results", default=DEFAULT_LABELS)
     p.add_argument("--organism", default="mus_musculus")
-    p.add_argument("--key",    default="subclass")
     p.add_argument("--cutoff", default=0.0, type=float)
     p.add_argument("--outdir", default="figures")
     p.add_argument("--prefix", default="study_variance")
     return p.parse_args()
+
+
+def run_key(df_all, key, cutoff, outdir, prefix, organism):
+    df = df_all[df_all["key"] == key].copy()
+    if df.empty:
+        print(f"  No data for key={key}, skipping.")
+        return None
+
+    f1_base = (
+        df.groupby(["label", "study"])["f1_score"]
+        .mean()
+        .unstack("study")
+    )
+    row_order = f1_base.mean(axis=1).sort_values().index.tolist()
+    col_order = f1_base.mean(axis=0).sort_values().index.tolist()
+    print(f"  {key}: {len(row_order)} cell types × {len(col_order)} studies")
+
+    pivots = {m: make_pivot(df, m, row_order, col_order) for m in METRICS}
+    key_prefix = f"{prefix}_{key}"
+    write_summary(pivots, outdir, key_prefix, key, cutoff)
+
+    panel_h = max(3, len(row_order) * 0.35)
+    fig_w   = 3 + len(col_order) * 0.75
+    fig, axes = plt.subplots(3, 1, figsize=(fig_w, panel_h * 3 + 0.5))
+    for ax, metric in zip(axes, METRICS):
+        lbl = METRIC_LABELS[metric]
+        title = f"{lbl} by study — {organism} ({key}, cutoff={cutoff})"
+        draw_heatmap(ax, pivots[metric], title, lbl)
+    axes[-1].set_xlabel("Study", fontsize=9)
+    plt.tight_layout(pad=1.5, h_pad=2.0)
+    for ext in ("png", "pdf"):
+        out = os.path.join(outdir, f"{key_prefix}.{ext}")
+        fig.savefig(out, dpi=300, bbox_inches="tight")
+        print(f"  Saved {out}")
+    plt.close(fig)
+
+    return os.path.join(outdir, f"{key_prefix}_summary.tsv")
 
 
 def main():
@@ -147,45 +186,28 @@ def main():
     set_pub_style()
 
     print("Loading data...")
-    df = load_data(args.label_results, args.key, args.cutoff)
-
-    # Determine row/column order from F1 pivot
-    f1_base = (
-        df.groupby(["label", "study"])["f1_score"]
-        .mean()
-        .unstack("study")
+    df_all = pd.read_csv(
+        args.label_results, sep="\t",
+        usecols=["study", "label", "f1_score", "precision", "recall", "key", "cutoff"],
+        na_values=["None", ""],
     )
-    row_order = f1_base.mean(axis=1).sort_values().index.tolist()
-    col_order = f1_base.mean(axis=0).sort_values().index.tolist()
-    print(f"  {len(row_order)} cell types × {len(col_order)} studies")
+    df_all = df_all[df_all["cutoff"] == args.cutoff].copy()
+    for col in ["f1_score", "precision", "recall"]:
+        df_all[col] = pd.to_numeric(df_all[col], errors="coerce")
+    df_all["study"] = df_all["study"].str.split().str[0]
 
-    # Build all three pivots in the same order
-    pivots = {m: make_pivot(df, m, row_order, col_order) for m in METRICS}
+    summary_parts = []
+    for key in ALL_KEYS:
+        tsv = run_key(df_all, key, args.cutoff, args.outdir, args.prefix, args.organism)
+        if tsv:
+            summary_parts.append(pd.read_csv(tsv, sep="\t"))
 
-    write_summary(pivots, args.outdir, args.prefix, args.key, args.cutoff)
+    if summary_parts:
+        combined = pd.concat(summary_parts, ignore_index=True)
+        out = os.path.join(args.outdir, f"{args.prefix}_summary.tsv")
+        combined.to_csv(out, sep="\t", index=False)
+        print(f"Saved combined {out}")
 
-    # --- Three-panel figure: F1 / Precision / Recall ---
-    panel_h = max(3, len(row_order) * 0.35)
-    fig_w   = 3 + len(col_order) * 0.75
-    fig, axes = plt.subplots(3, 1, figsize=(fig_w, panel_h * 3 + 0.5))
-
-    for ax, metric in zip(axes, METRICS):
-        label = METRIC_LABELS[metric]
-        title = (
-            f"{label} by study — {args.organism} "
-            f"({args.key}, cutoff={args.cutoff})"
-        )
-        draw_heatmap(ax, pivots[metric], title, label)
-
-    axes[-1].set_xlabel("Study", fontsize=9)
-    plt.tight_layout(pad=1.5, h_pad=2.0)
-
-    for ext in ("png", "pdf"):
-        out = os.path.join(args.outdir, f"{args.prefix}.{ext}")
-        fig.savefig(out, dpi=300, bbox_inches="tight")
-        print(f"Saved {out}")
-
-    plt.close(fig)
     print("Done.")
 
 

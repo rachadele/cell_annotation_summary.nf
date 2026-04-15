@@ -14,7 +14,6 @@ process PLOT_STUDY_VARIANCE {
     python ${projectDir}/bin/plot_study_variance.py \
         --label_results ${label_results} \
         --organism ${params.organism} \
-        --key subclass \
         --cutoff ${params.cutoff} \
         --outdir study_variance
     """
