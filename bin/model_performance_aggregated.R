@@ -62,12 +62,10 @@ if (organism == "homo_sapiens") {
     paste("macro_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
     )
 } else if (organism == "mus_musculus") {
-    # full interactive model
-  all_factors <- c(factor_names, "treatment_state","sex")
+    # sex excluded: all observed samples are male (2 studies have NA sex)
+  all_factors <- c(factor_names, "treatment_state")
   formulas <- list(
     paste("macro_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
-
-    
   )
 }
 
