@@ -55,7 +55,7 @@ factor_names <- c("reference", "method", "cutoff", "subsample_ref")
 
 
 if (organism == "homo_sapiens") {
-  all_factors = c(factor_names, "disease_state","sex","region_match")
+  all_factors = c(factor_names, "disease_state", "sex")
   # Defining the formulas
   formulas <- list( 
     paste("macro_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
