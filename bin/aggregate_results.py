@@ -21,6 +21,8 @@ def parse_arguments():
                         help="files containing f1 results with params")
     parser.add_argument('--metadata_dir', type=str, default=None,
                         help="Directory containing per-study metadata TSVs for overriding sex/disease")
+    parser.add_argument('--remove_outliers', type=str, nargs='*', default=None,
+                        help="List of study names to exclude from all downstream analyses")
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
         return known_args
@@ -228,6 +230,11 @@ def main():
 
     organism = results_df["organism"].unique()[0]
     results_df = results_df[results_df['support'] > 0]
+
+    # --- Remove outlier studies ---
+    if args.remove_outliers:
+        study_col = results_df["query"].apply(lambda x: x.split("_")[0])
+        results_df = results_df[~study_col.isin(args.remove_outliers)]
 
     # --- Apply external sample metadata (fill missing sex / disease) ---
     if organism == "homo_sapiens" and args.metadata_dir:

@@ -4,6 +4,7 @@ process AGGREGATE_RESULTS {
     input:
     path f1_results_params
     val  metadata_dir
+    val  remove_outliers
 
     output:
     path "sample_results.tsv.gz", emit: sample_results_aggregated
@@ -13,7 +14,8 @@ process AGGREGATE_RESULTS {
 
     script:
     def metadata_arg = metadata_dir ? "--metadata_dir ${metadata_dir}" : ""
+    def outlier_arg  = (remove_outliers && remove_outliers != 'null') ? "--remove_outliers ${remove_outliers.join(' ')}" : ""
     """
-    python ${projectDir}/bin/aggregate_results.py --pipeline_results ${f1_results_params} ${metadata_arg}
+    python ${projectDir}/bin/aggregate_results.py --pipeline_results ${f1_results_params} ${metadata_arg} ${outlier_arg}
     """
 }
