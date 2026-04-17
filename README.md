@@ -28,7 +28,7 @@ This repository implements a modular Nextflow pipeline (DSL2) for summarizing an
 - **Scripts:** Python and R scripts in `bin/` are called by modules for data processing and plotting.
 - **Results Structure:** Output is organized by organism, dataset, and method under dated directories (e.g., `2024-07-01/homo_sapiens/100/dataset_id/SCT/`).
 - **Parameter Passing:** Use Nextflow channels to pass structured data between modules.
-- **Aggregation:** Aggregation and summary files are written to `full_queries/aggregated_results/`.
+- **Aggregation:** Aggregation and summary files are written to `{outdir}/aggregated_results/files/` as gzip-compressed TSVs (`.tsv.gz`).
 
 ## Integration Points
 - **External Tools:**
@@ -42,7 +42,7 @@ This repository implements a modular Nextflow pipeline (DSL2) for summarizing an
 - `modules/local/` – DSL2 modules for each step
 - `bin/` – Python and R scripts for analysis/plotting
 - `nextflow.config` – Pipeline configuration
-- `full_queries/aggregated_results/` – Aggregated output summaries
+- `{outdir}/aggregated_results/files/` – Aggregated output summaries (gzip-compressed TSVs)
 
 
 ## Pipeline Parameter Definitions
@@ -59,7 +59,7 @@ The following are key parameters defined in `nextflow.config`:
 - **cutoff**: Cutoff value for filtering (default: 0.0).
 - **reference**: Reference dataset (default: `whole_cortex`).
 - **method**: Annotation method (default: `scvi`).
-- **remove_outliers**: Option to remove outliers (default: null).
+- **remove_outliers**: List of study names to exclude from all analyses before aggregation (default: null; human default excludes `GSE180670`, a cell line study).
 - **max_cpus**: Maximum CPUs to use (default: 16).
 - **max_memory**: Maximum memory (default: `128.GB`).
 - **max_time**: Maximum runtime (default: `240.h`).
