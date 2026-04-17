@@ -141,7 +141,7 @@ def map_development_stage(stage):
 def write_factor_summary(df, factors):
     # 1. Summarize the number of unique levels for each factor
     unique_counts_df = df[factors].nunique().reset_index()
-    unique_counts_df.to_csv("factor_unique_counts.tsv", sep="\t", index=False)
+    unique_counts_df.to_csv("factor_unique_counts.tsv.gz", sep="\t", index=False, compression="gzip")
 
     cols = ['disease_state', 'treatment_state', 'sex']
     dfs = []
@@ -159,7 +159,7 @@ def write_factor_summary(df, factors):
             dfs.append(unique_counts)
 
     result_df = pd.concat(dfs, ignore_index=True) 
-    result_df.to_csv("factor_unique_sample_counts.tsv", sep="\t", index=False)
+    result_df.to_csv("factor_unique_sample_counts.tsv.gz", sep="\t", index=False, compression="gzip")
     
 def update_metrics(df):
     # set metrics to nan when support is 0
@@ -214,7 +214,7 @@ def print_study_factor_table(label_results, organism):
     out_cols = [study_col] + columns
     # write to tsv
     table_df = pd.DataFrame(table)[out_cols]
-    table_df.to_csv("study_factor_summary.tsv", sep="\t", index=False)
+    table_df.to_csv("study_factor_summary.tsv.gz", sep="\t", index=False, compression="gzip")
  
 def main():
     args = parse_arguments()
@@ -278,7 +278,7 @@ def main():
     sample_results = sample_results.drop_duplicates()
     sample_results = sample_results[sample_results["weighted_f1"].notnull()]
     sample_results = sample_results.fillna("None")
-    sample_results.to_csv("sample_results.tsv", sep="\t", index=False)
+    sample_results.to_csv("sample_results.tsv.gz", sep="\t", index=False, compression="gzip")
 
     weighted_metrics = [
         "weighted_f1", "weighted_precision", "weighted_recall",
@@ -296,14 +296,14 @@ def main():
     weighted_summary = sample_results.groupby(
         ["method", "cutoff", "reference", "key", "subsample_ref"]
     ).agg(**weighted_agg).reset_index()
-    weighted_summary.to_csv("sample_results_summary.tsv", sep="\t", index=False)
+    weighted_summary.to_csv("sample_results_summary.tsv.gz", sep="\t", index=False, compression="gzip")
 
     # --- Label F1 results ---
     label_results = results_df[results_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
     label_results = label_results.fillna("None")
     label_results = label_results[label_results["label"] != "unkown"]
-    label_results.to_csv("label_results.tsv", sep="\t", index=False)
+    label_results.to_csv("label_results.tsv.gz", sep="\t", index=False, compression="gzip")
 
     label_metrics = ["f1_score", "precision", "recall"]
     for m in label_metrics:
@@ -318,7 +318,7 @@ def main():
     label_summary = label_results.groupby(
         ["label", "method", "cutoff", "reference", "key", "subsample_ref"]
     ).agg(**label_agg).reset_index()
-    label_summary.to_csv("label_results_summary.tsv", sep="\t", index=False)
+    label_summary.to_csv("label_results_summary.tsv.gz", sep="\t", index=False, compression="gzip")
 
     # --- Factor summaries ---
     if organism == "homo_sapiens":

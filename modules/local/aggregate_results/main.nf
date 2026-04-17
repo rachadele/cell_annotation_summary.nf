@@ -6,10 +6,10 @@ process AGGREGATE_RESULTS {
     val  metadata_dir
 
     output:
-    path "sample_results.tsv", emit: sample_results_aggregated
-    path "label_results.tsv" , emit: label_results_aggregated
-    path "**factor**tsv"
-    path "**summary.tsv"
+    path "sample_results.tsv.gz", emit: sample_results_aggregated
+    path "label_results.tsv.gz" , emit: label_results_aggregated
+    path "**factor**tsv.gz"
+    path "**summary.tsv.gz"
 
     script:
     def metadata_arg = metadata_dir ? "--metadata_dir ${metadata_dir}" : ""

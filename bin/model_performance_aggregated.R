@@ -31,8 +31,7 @@ args <- parser$parse_args()
 
 
 # Reading the aggregated F1 results file
-aggregated_f1_results <- read.table(args$aggregated_f1_results, sep = "\t",
-                                    header = TRUE, stringsAsFactors = FALSE)
+aggregated_f1_results <- as.data.frame(read_tsv(args$aggregated_f1_results, show_col_types = FALSE))
 # Fill NA only for character columns (avoid coercing numeric responses)
 char_cols <- vapply(aggregated_f1_results, is.character, logical(1))
 aggregated_f1_results[char_cols] <- lapply(
