@@ -180,10 +180,9 @@ def main():
     axes[-1].set_xlabel("Study", fontsize=9)
     plt.tight_layout(pad=1.5, h_pad=2.0)
 
-    for ext in ("png", "pdf"):
-        out = os.path.join(args.outdir, f"{args.prefix}.{ext}")
-        fig.savefig(out, dpi=300, bbox_inches="tight")
-        print(f"Saved {out}")
+    out = os.path.join(args.outdir, f"{args.prefix}.png")
+    fig.savefig(out, dpi=300, bbox_inches="tight")
+    print(f"Saved {out}")
 
     plt.close(fig)
     print("Done.")
