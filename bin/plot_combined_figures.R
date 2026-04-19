@@ -363,6 +363,97 @@ create_panel_c <- function(factor_data, sig_data = NULL) {
   )
 }
 
+# -- Panel E: Variance Source Comparison (logit scale) ------------------------
+
+create_panel_e <- function(hs_coef_path, mm_coef_path, primary_key) {
+  # Shows study random intercept SD vs fixed-effect predictor magnitudes,
+  # demonstrating that study of origin dominates unexplained variance.
+  # Uses facet_wrap per organism to avoid position_dodge segment artifacts.
+  PANEL_E_COLORS <- c(random = "#e74c3c", fixed = "#888888")
+
+  load_one <- function(path, organism_label) {
+    if (is.null(path) || !file.exists(path)) return(NULL)
+    df <- read_tsv(path, show_col_types = FALSE) %>% filter(key == primary_key)
+
+    study_row <- df %>%
+      filter(effect == "ran_pars", group == "study", term == "sd__(Intercept)")
+    if (nrow(study_row) == 0) return(NULL)
+    study_sd <- study_row$estimate[1]
+
+    fixed <- df %>%
+      filter(effect == "fixed", term != "(Intercept)", !str_detect(term, ":")) %>%
+      mutate(
+        predictor = case_when(
+          str_starts(term, "reference")                                      ~ "Reference",
+          str_starts(term, "method")                                        ~ "Method",
+          term == "cutoff"                                                   ~ "Cutoff",
+          str_starts(term, "subsample_ref")                                 ~ "Subsampling",
+          str_starts(term, "sex")                                           ~ "Sex",
+          str_starts(term, "disease_state") | str_starts(term, "treatment") ~ "Disease/Treatment",
+          str_starts(term, "region_match")                                  ~ "Region match",
+          TRUE ~ NA_character_
+        )
+      ) %>%
+      filter(!is.na(predictor), !is.na(estimate)) %>%
+      group_by(predictor) %>%
+      summarise(
+        # Multi-level predictors: SD of coefficients; single-level: |coefficient|
+        magnitude = if (n() > 1) sd(estimate, na.rm = TRUE) else abs(estimate[1]),
+        .groups = "drop"
+      )
+
+    bind_rows(
+      tibble(predictor = "Study (random)", magnitude = study_sd, type = "random"),
+      fixed %>% mutate(type = "fixed")
+    ) %>%
+      mutate(organism = organism_label)
+  }
+
+  hs_df <- load_one(hs_coef_path, "Human")
+  mm_df <- load_one(mm_coef_path, "Mouse")
+  plot_df <- bind_rows(hs_df, mm_df)
+  if (is.null(plot_df) || nrow(plot_df) == 0) return(NULL)
+
+  # Order predictors by mean magnitude across organisms
+  pred_order <- plot_df %>%
+    group_by(predictor) %>%
+    summarise(mean_mag = mean(magnitude), .groups = "drop") %>%
+    arrange(mean_mag) %>%
+    pull(predictor)
+
+  plot_df <- plot_df %>%
+    mutate(
+      predictor = factor(predictor, levels = pred_order),
+      organism  = factor(organism, levels = names(ORGANISM_COLORS))
+    )
+
+  # Compute explicit dodged y positions to avoid position_dodge segment artifacts
+  dodge_offset <- 0.18
+  plot_df <- plot_df %>%
+    mutate(
+      pred_num = as.numeric(predictor),
+      y_pos    = pred_num + ifelse(organism == "Human", dodge_offset, -dodge_offset)
+    )
+
+  ggplot(plot_df, aes(colour = organism)) +
+    geom_segment(aes(x = 0, xend = magnitude, y = y_pos, yend = y_pos),
+                 linewidth = 1.2) +
+    geom_point(aes(x = magnitude, y = y_pos), size = 3.5) +
+    scale_colour_manual(values = ORGANISM_COLORS) +
+    scale_y_continuous(
+      breaks = seq_along(levels(plot_df$predictor)),
+      labels = levels(plot_df$predictor),
+      expand = expansion(mult = c(0.05, 0.05))
+    ) +
+    scale_x_continuous(expand = expansion(mult = c(0, 0.1))) +
+    labs(x = "Effect magnitude (logit scale)", y = "", colour = NULL,
+         caption = "Multi-level: SD of coefs; single-level: |coef|") +
+    pub_theme() +
+    theme(plot.caption    = element_text(size = 7, colour = "gray50"),
+          axis.text.y     = element_text(size = 9),
+          legend.position = "none")
+}
+
 # -- Panel D: Reference Atlas Forest Plot (faceted by organism) ---------------
 
 create_panel_d <- function(reference_data, ref_sig = NULL) {
@@ -669,8 +760,8 @@ load_factor_significance <- function(hs_files, mm_files, primary_key) {
 
 # -- Hardcoded Paths ----------------------------------------------------------
 
-HS_DIR <- "2024-07-01/homo_sapiens_new/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_disease_state_+_sex_+_region_match_+_method:cutoff_+_reference:method/files"
-MM_DIR <- "2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/files"
+HS_DIR <- "2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_disease_state_+_sex_+_region_match_+_method:cutoff_+_reference:method/files"
+MM_DIR <- "2024-07-01/mus_musculus_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/files"
 
 ARGS <- list(
   hs_cutoff_effects    = file.path(HS_DIR, "method_cutoff_effects.tsv"),
@@ -701,8 +792,10 @@ ARGS <- list(
   ),
   hs_reference_estimates = file.path(HS_DIR, "reference_method_emmeans_estimates.tsv"),
   mm_reference_estimates = file.path(MM_DIR, "reference_method_emmeans_estimates.tsv"),
+  hs_model_coefs = file.path(HS_DIR, "model_coefs.tsv"),
+  mm_model_coefs = file.path(MM_DIR, "model_coefs.tsv"),
   primary_key   = "subclass",
-  outdir        = "2024-07-01",
+  outdir        = "combined_orgs",
   output_prefix = "combined_figure"
 )
 
@@ -780,20 +873,27 @@ main <- function() {
   p_b <- create_panel_b(taxonomy_data)
   p_c <- create_panel_c(factor_data, factor_sig)
   p_d <- create_panel_d(reference_data, ref_sig)
+  p_e <- create_panel_e(args$hs_model_coefs, args$mm_model_coefs, pk)
 
   # -- Compose layout ---------------------------------------------------------
   message("Composing layout...")
 
-  combined <- ((p_a | p_b) / (p_c | p_d)) +
-    plot_layout(heights = c(1, 1.5)) +
-    plot_annotation(tag_levels = "A")
+  if (!is.null(p_e)) {
+    combined <- ((p_a | p_b) / (p_c | p_e) / p_d) +
+      plot_layout(heights = c(1, 1, 1.5)) +
+      plot_annotation(tag_levels = "A")
+  } else {
+    combined <- ((p_a | p_b) / (p_c | p_d)) +
+      plot_layout(heights = c(1, 1.5)) +
+      plot_annotation(tag_levels = "A")
+  }
 
   # -- Save -------------------------------------------------------------------
   out_path <- file.path(args$outdir, paste0(args$output_prefix, "_combined.png"))
   message("Saving to ", out_path, " ...")
   ggsave(out_path, combined,
-         width  = FULL_WIDTH * 3.5,
-         height = STANDARD_HEIGHT * 2.8,
+         width  = FULL_WIDTH * 3.8,
+         height = STANDARD_HEIGHT * 3.5,
          dpi = 300, bg = "white")
 
   legend_path <- file.path(args$outdir, paste0(args$output_prefix, "_legend.png"))

@@ -113,8 +113,13 @@ mmus*
 **gemma_genes.tsv
 CLAUDE.md
 todo.md
+TODO.md
+.claude/
+**/contamination.tsv
 METHODS.md
 RESULTS.md
 paul_notes.md
 PLAN_overall_config_ranking.md
-work
+workdocs/
+*gz
+docs/

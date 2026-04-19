@@ -31,8 +31,7 @@ args <- parser$parse_args()
 
 
 # Reading the aggregated F1 results file
-aggregated_f1_results <- read.table(args$aggregated_f1_results, sep = "\t",
-                                    header = TRUE, stringsAsFactors = FALSE)
+aggregated_f1_results <- as.data.frame(read_tsv(args$aggregated_f1_results, show_col_types = FALSE))
 # Fill NA only for character columns (avoid coercing numeric responses)
 char_cols <- vapply(aggregated_f1_results, is.character, logical(1))
 aggregated_f1_results[char_cols] <- lapply(
@@ -56,18 +55,16 @@ factor_names <- c("reference", "method", "cutoff", "subsample_ref")
 
 
 if (organism == "homo_sapiens") {
-  all_factors = c(factor_names, "disease_state","sex","region_match")
+  all_factors = c(factor_names, "disease_state", "sex")
   # Defining the formulas
   formulas <- list( 
     paste("macro_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
     )
 } else if (organism == "mus_musculus") {
-    # full interactive model
-  all_factors <- c(factor_names, "treatment_state","sex")
+    # sex excluded: all observed samples are male (2 studies have NA sex)
+  all_factors <- c(factor_names, "treatment_state")
   formulas <- list(
     paste("macro_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
-
-    
   )
 }
 
