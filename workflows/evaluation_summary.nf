@@ -64,7 +64,7 @@ workflow EVALUATION_SUMMARY {
     //
     AGGREGATE_RESULTS(
         ADD_PARAMS.out.f1_results_params.flatten().toList(),
-        params.metadata_dir ?: null,
+        params.metadata_dir ?: "",
         params.remove_outliers ?: null
     )
 
