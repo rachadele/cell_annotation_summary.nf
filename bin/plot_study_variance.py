@@ -22,6 +22,7 @@ import argparse
 import os
 import sys
 
+import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -36,6 +37,38 @@ DEFAULT_LABELS = (
     "/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false"
     "/aggregated_results/files/label_results.tsv"
 )
+
+_ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets")
+_CENSUS_BY_ORGANISM = {
+    "mus_musculus":  os.path.join(_ASSETS, "census_map_mouse_author.tsv"),
+    "homo_sapiens":  os.path.join(_ASSETS, "census_map_human.tsv"),
+}
+
+FAMILY_COLORS = {
+    "GABAergic":          "#4e79a7",
+    "Glutamatergic":      "#f28e2b",
+    "Astrocyte":          "#59a14f",
+    "Oligodendrocyte":    "#76b7b2",
+    "OPC":                "#edc948",
+    "Vascular":           "#e15759",
+    "Microglia":          "#ff9da7",
+    "CNS macrophage":     "#ff9da7",
+    "Neural stem cell":   "#b07aa1",
+    "Hippocampal neuron": "#9c755f",
+    "Leukocyte":          "#bab0ac",
+    "Neuron":             "#d4b483",
+    "Non-neuron":         "#999999",
+}
+
+
+def load_family_map(census_path: str) -> dict:
+    """Return {subclass: family} from a census map TSV."""
+    df = pd.read_csv(census_path, sep="\t")
+    return (
+        df.drop_duplicates(subset="subclass")
+        .set_index("subclass")["family"]
+        .to_dict()
+    )
 
 METRICS = ["f1_score", "precision", "recall"]
 METRIC_LABELS = {"f1_score": "F1", "precision": "Precision", "recall": "Recall"}
@@ -102,8 +135,14 @@ def write_summary(pivots: dict, outdir: str, prefix: str, key: str, cutoff: floa
     print(f"Saved {out}")
 
 
-def draw_heatmap(ax: plt.Axes, pivot: pd.DataFrame, title: str, cbar_label: str) -> None:
-    """Draw a single metric heatmap onto ax."""
+def draw_heatmap(
+    ax: plt.Axes,
+    pivot: pd.DataFrame,
+    title: str,
+    cbar_label: str,
+    family_map: dict | None = None,
+) -> None:
+    """Draw a single metric heatmap onto ax; colour y-tick labels by family."""
     nan_mask = pivot.isna()
     ax.pcolormesh(
         np.ones(pivot.shape),
@@ -129,11 +168,19 @@ def draw_heatmap(ax: plt.Axes, pivot: pd.DataFrame, title: str, cbar_label: str)
     for lbl in ax.get_xticklabels():
         lbl.set_ha("right")
 
+    if family_map:
+        for tick in ax.get_yticklabels():
+            lbl = tick.get_text()
+            family = family_map.get(lbl) or (lbl if lbl in FAMILY_COLORS else None)
+            tick.set_color(FAMILY_COLORS.get(family, "black"))
+
 
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--label_results", default=DEFAULT_LABELS)
     p.add_argument("--organism", default="mus_musculus")
+    p.add_argument("--census",  default=None,
+                   help="Path to census map TSV (defaults to assets/ for the given organism)")
     p.add_argument("--key",    default="subclass")
     p.add_argument("--cutoff", default=0.0, type=float)
     p.add_argument("--outdir", default="figures")
@@ -145,6 +192,9 @@ def main():
     args = parse_args()
     os.makedirs(args.outdir, exist_ok=True)
     set_pub_style()
+
+    census_path = args.census or _CENSUS_BY_ORGANISM.get(args.organism)
+    family_map = load_family_map(census_path) if census_path and os.path.exists(census_path) else {}
 
     print("Loading data...")
     df = load_data(args.label_results, args.key, args.cutoff)
@@ -164,20 +214,49 @@ def main():
 
     write_summary(pivots, args.outdir, args.prefix, args.key, args.cutoff)
 
-    # --- Three-panel figure: F1 / Precision / Recall ---
-    panel_h = max(3, len(row_order) * 0.35)
-    fig_w   = 3 + len(col_order) * 0.75
-    fig, axes = plt.subplots(3, 1, figsize=(fig_w, panel_h * 3 + 0.5))
+    families_present = {
+        family_map.get(r) or (r if r in FAMILY_COLORS else None)
+        for r in row_order
+    } - {None}
 
-    for ax, metric in zip(axes, METRICS):
+    # --- Three-panel figure: F1 / Precision / Recall + legend row ---
+    panel_h  = max(3, len(row_order) * 0.35)
+    legend_h = 1.8
+    fig_w    = 3 + len(col_order) * 0.75
+    fig, axes = plt.subplots(
+        4, 1,
+        figsize=(fig_w, panel_h * 3 + legend_h + 0.5),
+        gridspec_kw={"height_ratios": [panel_h, panel_h, panel_h, legend_h]},
+    )
+
+    for ax, metric in zip(axes[:3], METRICS):
         label = METRIC_LABELS[metric]
         title = (
             f"{label} by study — {args.organism} "
             f"({args.key}, cutoff={args.cutoff})"
         )
-        draw_heatmap(ax, pivots[metric], title, label)
+        draw_heatmap(ax, pivots[metric], title, label, family_map=family_map or None)
 
-    axes[-1].set_xlabel("Study", fontsize=9)
+    axes[2].set_xlabel("Study", fontsize=9)
+
+    # Family colour legend
+    ax_leg = axes[3]
+    handles = [
+        mpatches.Patch(color=FAMILY_COLORS.get(f, "black"), label=f)
+        for f in sorted(families_present)
+        if f in FAMILY_COLORS
+    ]
+    ax_leg.legend(
+        handles=handles,
+        title="Cell-type family",
+        loc="center",
+        frameon=False,
+        fontsize=9,
+        title_fontsize=10,
+        ncol=min(4, len(handles)),
+    )
+    ax_leg.axis("off")
+
     plt.tight_layout(pad=1.5, h_pad=2.0)
 
     out = os.path.join(args.outdir, f"{args.prefix}.png")

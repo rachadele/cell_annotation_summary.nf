@@ -9,6 +9,7 @@ annotation quality across species.
 Rows: cell type labels (sorted by mean F1 across studies, ascending)
 Columns: studies (sorted by mean F1 across labels, ascending)
 Colour: mean F1 score (averaged over method, 0-1)
+Y-tick labels are coloured by cell-type family lineage.
 
 Usage:
     python plot_study_variance_combined.py \\
@@ -23,6 +24,7 @@ import sys
 
 import matplotlib.cm as cm
 import matplotlib.colors as mcolors
+import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -38,17 +40,48 @@ _BASE = (
 )
 DEFAULT_HS = os.path.join(
     _BASE,
-    "homo_sapiens_new/100/dataset_id/SCT/gap_false",
-    "aggregated_results/files/label_results.tsv",
+    "homo_sapiens_main_branch/100/dataset_id/SCT/gap_false",
+    "aggregated_results/files/label_results.tsv.gz",
 )
 DEFAULT_MM = os.path.join(
     _BASE,
-    "mus_musculus/100/dataset_id/SCT/gap_false",
-    "aggregated_results/files/label_results.tsv",
+    "mus_musculus_main_branch/100/dataset_id/SCT/gap_false",
+    "aggregated_results/files/label_results.tsv.gz",
 )
+
+_ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets")
+DEFAULT_HS_CENSUS = os.path.join(_ASSETS, "census_map_human.tsv")
+DEFAULT_MM_CENSUS = os.path.join(_ASSETS, "census_map_mouse_author.tsv")
 
 CMAP = "YlOrRd"
 NAN_COLOR = "#cccccc"
+
+# Consistent family → colour across both species
+FAMILY_COLORS = {
+    "GABAergic":          "#4e79a7",
+    "Glutamatergic":      "#f28e2b",
+    "Astrocyte":          "#59a14f",
+    "Oligodendrocyte":    "#76b7b2",
+    "OPC":                "#edc948",
+    "Vascular":           "#e15759",
+    "Microglia":          "#ff9da7",
+    "CNS macrophage":     "#ff9da7",
+    "Neural stem cell":   "#b07aa1",
+    "Hippocampal neuron": "#9c755f",
+    "Leukocyte":          "#bab0ac",
+    "Neuron":             "#d4b483",
+    "Non-neuron":         "#999999",
+}
+
+
+def load_family_map(census_path: str) -> dict:
+    """Return {subclass: family} from a census map TSV."""
+    df = pd.read_csv(census_path, sep="\t")
+    return (
+        df.drop_duplicates(subset="subclass")
+        .set_index("subclass")["family"]
+        .to_dict()
+    )
 
 
 def load_data(path: str, key: str, cutoff: float) -> pd.DataFrame:
@@ -61,7 +94,6 @@ def load_data(path: str, key: str, cutoff: float) -> pd.DataFrame:
     )
     df = df[(df["key"] == key) & (df["cutoff"] == cutoff)].copy()
     df["f1_score"] = pd.to_numeric(df["f1_score"], errors="coerce")
-    # Shorten study labels to first token (GEO accession or short name)
     df["study"] = df["study"].str.split().str[0]
     return df
 
@@ -74,10 +106,14 @@ def make_pivot(df: pd.DataFrame) -> pd.DataFrame:
     return pivot.reindex(index=row_order, columns=col_order)
 
 
-def draw_heatmap(ax: plt.Axes, pivot: pd.DataFrame, title: str) -> None:
-    """Draw a single F1 heatmap panel (no internal colorbar)."""
+def draw_heatmap(
+    ax: plt.Axes,
+    pivot: pd.DataFrame,
+    title: str,
+    family_map: dict | None = None,
+) -> None:
+    """Draw a single F1 heatmap panel; colour y-tick labels by family."""
     nan_mask = pivot.isna()
-    # Grey background for missing cells
     ax.pcolormesh(
         np.ones(pivot.shape),
         cmap=ListedColormap([NAN_COLOR]),
@@ -104,14 +140,41 @@ def draw_heatmap(ax: plt.Axes, pivot: pd.DataFrame, title: str) -> None:
     for lbl in ax.get_xticklabels():
         lbl.set_ha("right")
 
+    if family_map:
+        for tick in ax.get_yticklabels():
+            lbl = tick.get_text()
+            family = family_map.get(lbl) or (lbl if lbl in FAMILY_COLORS else None)
+            tick.set_color(FAMILY_COLORS.get(family, "black"))
+
+
+def make_family_legend(ax: plt.Axes, families_present: set) -> None:
+    """Add a family-colour legend to ax."""
+    handles = [
+        mpatches.Patch(color=FAMILY_COLORS.get(f, "black"), label=f)
+        for f in sorted(families_present)
+        if f in FAMILY_COLORS
+    ]
+    ax.legend(
+        handles=handles,
+        title="Cell-type family",
+        loc="center",
+        frameon=False,
+        fontsize=13,
+        title_fontsize=14,
+        ncol=2,
+    )
+    ax.axis("off")
+
 
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--hs_label_results", default=DEFAULT_HS)
     p.add_argument("--mm_label_results", default=DEFAULT_MM)
+    p.add_argument("--hs_census", default=DEFAULT_HS_CENSUS)
+    p.add_argument("--mm_census", default=DEFAULT_MM_CENSUS)
     p.add_argument("--key",    default="subclass")
     p.add_argument("--cutoff", default=0.0, type=float)
-    p.add_argument("--outdir", default="study_variance_combined")
+    p.add_argument("--outdir", default="combined_orgs")
     p.add_argument("--prefix", default="study_variance_combined")
     return p.parse_args()
 
@@ -120,6 +183,9 @@ def main():
     args = parse_args()
     os.makedirs(args.outdir, exist_ok=True)
     set_pub_style()
+
+    family_map_hs = load_family_map(args.hs_census)
+    family_map_mm = load_family_map(args.mm_census)
 
     print("Loading data...")
     df_hs = load_data(args.hs_label_results, args.key, args.cutoff)
@@ -132,34 +198,48 @@ def main():
     print(f"  Human: {n_hs} cell types × {w_hs} studies")
     print(f"  Mouse: {n_mm} cell types × {w_mm} studies")
 
-    # Side-by-side landscape layout: width scales with study counts, height with cell types
+    def resolve_family(label, fmap):
+        return fmap.get(label) or (label if label in FAMILY_COLORS else None)
+
+    families_present = (
+        {resolve_family(r, family_map_hs) for r in pivot_hs.index}
+        | {resolve_family(r, family_map_mm) for r in pivot_mm.index}
+    ) - {None}
+
     col_w = 0.45
     row_h = 0.25
     hs_w  = 5.5 + w_hs * col_w
     mm_w  = 5.5 + w_mm * col_w
     fig_h = max(4.0, max(n_hs, n_mm) * row_h + 3.5)
+    legend_h = 2.5
 
-    fig = plt.figure(figsize=(hs_w + mm_w + 1.5, fig_h + 1.0))
+    fig = plt.figure(figsize=(hs_w + mm_w + 1.5, fig_h + legend_h + 1.0))
     gs = GridSpec(
-        1, 2,
+        2, 2,
+        height_ratios=[fig_h, legend_h],
         width_ratios=[hs_w, mm_w],
         wspace=0.55,
+        hspace=0.35,
     )
-    ax_hs = fig.add_subplot(gs[0])
-    ax_mm = fig.add_subplot(gs[1])
+    ax_hs     = fig.add_subplot(gs[0, 0])
+    ax_mm     = fig.add_subplot(gs[0, 1])
+    ax_legend = fig.add_subplot(gs[1, :])
 
     draw_heatmap(
         ax_hs, pivot_hs,
         f"Human — F1 by study ({args.key}, cutoff={args.cutoff})",
+        family_map=family_map_hs,
     )
     draw_heatmap(
         ax_mm, pivot_mm,
         f"Mouse — F1 by study ({args.key}, cutoff={args.cutoff})",
+        family_map=family_map_mm,
     )
     ax_hs.set_xlabel("Study", fontsize=16)
     ax_mm.set_xlabel("Study", fontsize=16)
 
-    # Shared colorbar on the far right
+    make_family_legend(ax_legend, families_present)
+
     sm = cm.ScalarMappable(
         cmap=CMAP, norm=mcolors.Normalize(vmin=0, vmax=1)
     )
