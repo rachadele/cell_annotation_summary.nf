@@ -65,7 +65,7 @@ if (organism == "homo_sapiens") {
     )
 } else if (organism == "mus_musculus") {
     # full interactive model
-  all_factors <- c(factor_names, "treatment_state","sex")
+  all_factors <- c(factor_names, "treatment_state")
   formulas <- list(
     paste("macro_f1 ~", paste(c(all_factors, "method:cutoff", "reference:method"), collapse = " + "))
 
