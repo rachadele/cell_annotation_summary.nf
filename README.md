@@ -26,43 +26,49 @@ This repository implements a modular Nextflow pipeline (DSL2) for summarizing an
 ## Conventions & Patterns
 - **Module Naming:** All modules are in `modules/local/` and named after their function.
 - **Scripts:** Python and R scripts in `bin/` are called by modules for data processing and plotting.
-- **Results Structure:** Output is organized by organism, dataset, and method under dated directories (e.g., `2024-07-01/homo_sapiens/100/dataset_id/SCT/`).
+- **Results Structure:** Output is organized under `{census_version}/{organism}/{N}/dataset_id/{normalization}/gap_{bool}/` (e.g., `2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/`). `outdir` is auto-derived from `params.results` by stripping the path up to `nextflow[_-]eval[_-]pipeline/(results/)?`.
+- **Data formats:** All aggregated outputs are gzip-compressed TSV (`.tsv.gz`). Two main dataframes flow through the pipeline: `sample_results.tsv.gz` (sample-level macro F1) and `label_results.tsv.gz` (per-cell-type F1).
 - **Parameter Passing:** Use Nextflow channels to pass structured data between modules.
-- **Aggregation:** Aggregation and summary files are written to `full_queries/aggregated_results/`.
+- **Aggregation:** Aggregation and summary files are written to `{outdir}/aggregated_results/files/` via `storeDir`.
 
 ## Integration Points
 - **External Tools:**
-  - Python: `scanpy`, `anndata`, `pandas`, `numpy`, etc.
-  - R: Used for some statistical summaries and plots.
-- **Environment:** Supports Conda, Docker, and Singularity via Nextflow profiles.
+  - Python (`scanpyenv` conda env): `pandas`, `numpy`, `matplotlib`, `seaborn`, `scipy` — used for aggregation, ranking, and all Python-based plots.
+  - R (`r4.3` conda env): `glmmTMB`, `emmeans`, `ggplot2`, `broom.mixed` — used for ordered beta GLMMs, marginal means, and publication figures.
+- **Environment:** Conda only (active profile). Docker and Singularity profiles are defined but commented out.
+- **Compute:** SLURM executor; `workDir` is hardcoded to `/cosmos/data/evaluation-summary-work`.
 
 ## Key Files & Directories
 - `main.nf` – Pipeline entry point
 - `workflows/evaluation_summary.nf` – Main workflow logic
 - `modules/local/` – DSL2 modules for each step
 - `bin/` – Python and R scripts for analysis/plotting
-- `nextflow.config` – Pipeline configuration
-- `full_queries/aggregated_results/` – Aggregated output summaries
-
+- `bin/model_functions.R` – Shared R helpers for GLMM fitting and emmeans
+- `bin/plot_utils.py` – Shared Python plot utilities (`set_pub_style()`, color palettes)
+- `nextflow.config` – Pipeline configuration and parameter defaults
+- `conf/modules.config` – Per-module `publishDir` and conda env settings
+- `assets/` – Color mappings, census maps, mouse study/reference metadata TSVs
+- `params/params.mm.json` – Mouse full-run parameter file
+- `params/params.hs.json` – Human full-run parameter file
 
 ## Pipeline Parameter Definitions
 The following are key parameters defined in `nextflow.config`:
 
 - **results**: Path to the input results directory (required).
-- **organism**: Organism name (e.g., `mus_musculus`, `homo_sapiens`).
+- **organism**: Organism name (`mus_musculus` or `homo_sapiens`).
 - **census_version**: Census version string (e.g., `2024-07-01`).
-- **outdir**: Output directory (default: derived from results path).
-- **ref_keys**: List of reference label types (default: `[subclass, class, family, global]`).
-- **mapping_file**: Optional mapping file for labels.
-- **color_mapping_file**: Optional color mapping file for plots.
-- **subsample_ref**: Number of reference cells to subsample (default: 500).
-- **cutoff**: Cutoff value for filtering (default: 0.0).
-- **reference**: Reference dataset (default: `whole_cortex`).
-- **method**: Annotation method (default: `scvi_rf`). Valid values: `scvi_rf`, `scvi_knn`, `seurat`.
+- **outdir**: Output directory (auto-derived from `results` path; do not set manually).
+- **ref_keys**: List of taxonomy levels (default: `[subclass, class, family, global]`).
+- **mapping_file**: Path to census label mapping TSV.
+- **color_mapping_file**: Path to color mapping TSV (default: `assets/color_mapping.tsv`).
+- **subsample_ref**: Reference subsampling size used in upstream eval (default: `500`).
+- **cutoff**: Confidence cutoff used in upstream eval (default: `0.0`).
+- **method**: Default method for single-method plots (default: `scvi_rf`).
+- **metadata_dir**: Path to standardized metadata directory for human runs (default: null).
 - **skip_modeling**: Skip GLMM fitting and emmeans steps (default: `false`). Use when data has only one cutoff or subsample_ref value.
 - **emmeans_cutoff**: Cutoff value at which emmeans marginal means are evaluated (default: `0`).
-- **remove_outliers**: Option to remove outliers (default: null).
-- **max_cpus**: Maximum CPUs to use (default: 16).
+- **remove_outliers**: List of study IDs to exclude before aggregation (default: null).
+- **max_cpus**: Maximum CPUs (default: 16).
 - **max_memory**: Maximum memory (default: `128.GB`).
 - **max_time**: Maximum runtime (default: `240.h`).
 
