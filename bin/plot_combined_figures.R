@@ -65,6 +65,9 @@ REFERENCE_ABBREVS <- c(
   "Human Multiple Cortical Areas SMART-seq"                        = "MCA (SMART-seq)",
   "Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD" = "SEA-AD DLPFC",
   "Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD"   = "SEA-AD MTG",
+  # Contrast strings use "/" instead of "-" for SEA-AD
+  "Whole Taxonomy / DLPFC Seattle Alzheimers Disease Atlas SEA-AD" = "SEA-AD DLPFC",
+  "Whole Taxonomy / MTG Seattle Alzheimers Disease Atlas SEA-AD"   = "SEA-AD MTG",
   # Mouse
   "An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types" =
     "Motor Cortex Atlas",
@@ -77,11 +80,14 @@ REFERENCE_ABBREVS <- c(
 # -- Theme --------------------------------------------------------------------
 
 pub_theme <- function() {
-  theme_bw(base_size = 24) +
+  theme_bw(base_size = 20) +
     theme(
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       legend.position  = "none",
+      axis.text        = element_text(size = 20),
+      axis.title       = element_text(size = 22),
+      strip.text       = element_text(size = 20),
       plot.background  = element_rect(fill = "white", colour = NA),
       panel.background = element_rect(fill = "white", colour = NA)
     )
@@ -202,7 +208,7 @@ create_panel_b <- function(taxonomy_data) {
 
 # -- Panel C: Combined Factor Effects Forest Plot -----------------------------
 
-create_panel_c <- function(factor_data, sig_data = NULL) {
+create_panel_c <- function(factor_data, sig_data = NULL, raw_data = NULL) {
   if (nrow(factor_data) == 0) {
     return(
       ggplot() +
@@ -280,12 +286,47 @@ create_panel_c <- function(factor_data, sig_data = NULL) {
   plot_df    <- bind_rows(plot_rows)
   grand_mean <- mean(plot_df$response, na.rm = TRUE)
 
+  # Build raw strip points aligned to y_pos
+  raw_points_c <- NULL
+  if (!is.null(raw_data) && nrow(raw_data) > 0) {
+    raw_rows_c <- list()
+    for (i in seq_len(nrow(plot_df))) {
+      org <- plot_df$organism[i]
+      fct <- plot_df$factor_name[i]
+      lbl <- plot_df$label[i]
+      yp  <- plot_df$y_pos[i]
+      # "treatment" emmeans factor maps to raw column "treatment_state" (binary status)
+      raw_col <- if (fct == "treatment" && "treatment_state" %in% colnames(raw_data)) "treatment_state" else fct
+      if (!raw_col %in% colnames(raw_data)) next
+      rd <- raw_data %>%
+        filter(organism == org) %>%
+        { if (raw_col != "subsample_ref" && "subsample_ref" %in% colnames(.)) filter(., subsample_ref == "500") else . } %>%
+        mutate(level_raw = str_to_title(str_replace_all(as.character(.data[[raw_col]]), "_", " "))) %>%
+        filter(level_raw == lbl) %>%
+        mutate(y_pos = yp) %>%
+        select(y_pos, macro_f1, organism)
+      if (nrow(rd) > 0) raw_rows_c[[length(raw_rows_c) + 1]] <- rd
+    }
+    if (length(raw_rows_c) > 0) raw_points_c <- bind_rows(raw_rows_c)
+  }
+
   p <- ggplot(plot_df, aes(x = response, y = y_pos, colour = organism)) +
     geom_vline(xintercept = grand_mean, colour = "gray", linetype = "dashed",
-               linewidth = 0.5, alpha = 0.6) +
+               linewidth = 0.5, alpha = 0.6)
+
+  if (!is.null(raw_points_c) && nrow(raw_points_c) > 0) {
+    p <- p + geom_boxplot(data = raw_points_c,
+                          aes(x = macro_f1, y = y_pos, group = factor(y_pos)),
+                          inherit.aes = FALSE, width = 0.35, alpha = 0.3,
+                          outlier.size = 0.5, colour = "gray50", fill = "gray80",
+                          linewidth = 0.4)
+  }
+
+  p <- p +
     geom_segment(aes(x = lower, xend = upper, yend = y_pos), linewidth = 1.2) +
     geom_point(size = 3) +
     scale_colour_manual(values = ORGANISM_COLORS, name = "Organism") +
+    scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1.0)) +
     scale_y_continuous(
       breaks = plot_df$y_pos,
       labels = plot_df$label,
@@ -299,8 +340,6 @@ create_panel_c <- function(factor_data, sig_data = NULL) {
                         linewidth = 0.5, alpha = 0.7)
   }
 
-  x_range <- range(c(plot_df$lower, plot_df$upper), na.rm = TRUE)
-  x_pad   <- diff(x_range) * 0.25
 
   # Significance brackets: one per individual pairwise contrast
   if (!is.null(sig_data) && nrow(sig_data) > 0) {
@@ -320,17 +359,18 @@ create_panel_c <- function(factor_data, sig_data = NULL) {
       )
 
     if (nrow(bracket_df) > 0) {
-      min_span     <- min(bracket_df$span)
-      x_spine_base <- x_range[2] + diff(x_range) * 0.04
-      x_step       <- diff(x_range) * 0.05
-      x_tick_width <- diff(x_range) * 0.015
+      min_span <- min(bracket_df$span)
 
-      # Longer-spanning brackets step further right to avoid overlap with shorter ones
+      # Assign a unique rank per factor+organism group so every bracket gets its own x lane
       bracket_df <- bracket_df %>%
+        group_by(factor_name, organism) %>%
+        arrange(span, y_lo, .by_group = TRUE) %>%
+        mutate(bracket_rank = row_number()) %>%
+        ungroup() %>%
         mutate(
-          x_spine = x_spine_base + (span - min_span) * x_step,
-          x_tick  = x_spine - x_tick_width,
-          x_star  = x_spine + diff(x_range) * 0.015
+          x_spine = 1.06 + (bracket_rank - 1) * 0.06,
+          x_tick  = x_spine - 0.012,
+          x_star  = x_spine + 0.016
         )
 
       p <- p +
@@ -352,15 +392,12 @@ create_panel_c <- function(factor_data, sig_data = NULL) {
         geom_text(
           data = bracket_df,
           aes(x = x_star, y = y_mid, label = sig, colour = organism),
-          inherit.aes = FALSE, hjust = 0, size = 5
+          inherit.aes = FALSE, hjust = 0, size = 7
         )
     }
   }
 
-  p + coord_cartesian(
-    xlim = c(x_range[1] - diff(x_range) * 0.05, x_range[2] + x_pad),
-    clip = "off"
-  )
+  p + coord_cartesian(xlim = c(0, 1.30), clip = "off")
 }
 
 # -- Panel E: Variance Source Comparison (logit scale) ------------------------
@@ -446,17 +483,14 @@ create_panel_e <- function(hs_coef_path, mm_coef_path, primary_key) {
       expand = expansion(mult = c(0.05, 0.05))
     ) +
     scale_x_continuous(expand = expansion(mult = c(0, 0.1))) +
-    labs(x = "Effect magnitude (logit scale)", y = "", colour = NULL,
-         caption = "Multi-level: SD of coefs; single-level: |coef|") +
+    labs(x = "Effect magnitude (logit scale)", y = "", colour = NULL) +
     pub_theme() +
-    theme(plot.caption    = element_text(size = 7, colour = "gray50"),
-          axis.text.y     = element_text(size = 9),
-          legend.position = "none")
+    theme(legend.position = "none")
 }
 
 # -- Panel D: Reference Atlas Forest Plot (faceted by organism) ---------------
 
-create_panel_d <- function(reference_data, ref_sig = NULL) {
+create_panel_d <- function(reference_data, ref_sig = NULL, raw_data = NULL) {
   # Apply abbreviations
   reference_data <- reference_data %>%
     mutate(ref_abbr = dplyr::recode(reference, !!!REFERENCE_ABBREVS,
@@ -512,9 +546,35 @@ create_panel_d <- function(reference_data, ref_sig = NULL) {
     arrange(y_raw)
   y_labels <- sub(".*##", "", as.character(y_tbl$ref_unique))
 
+  # Build raw strip points aligned to y_dodge (filter to subsample_ref=500 to match emmeans)
+  raw_d <- NULL
+  if (!is.null(raw_data) && nrow(raw_data) > 0) {
+    dodge_map <- reference_data %>%
+      distinct(organism = as.character(organism),
+               reference = as.character(reference),
+               method = as.character(method),
+               y_dodge)
+    raw_d <- raw_data %>%
+      mutate(organism  = as.character(organism),
+             reference = as.character(reference),
+             method    = as.character(method)) %>%
+      { if ("subsample_ref" %in% colnames(.)) filter(., subsample_ref == "500") else . } %>%
+      inner_join(dodge_map, by = c("organism", "reference", "method"))
+  }
+
   p <- ggplot(reference_data, aes(x = response, y = y_dodge, colour = organism)) +
     geom_vline(xintercept = grand_mean, colour = "gray", linetype = "dashed",
-               linewidth = 0.5, alpha = 0.6) +
+               linewidth = 0.5, alpha = 0.6)
+
+  if (!is.null(raw_d) && nrow(raw_d) > 0) {
+    p <- p + geom_boxplot(data = raw_d,
+                          aes(x = macro_f1, y = y_dodge, group = factor(y_dodge)),
+                          inherit.aes = FALSE, width = 0.2, alpha = 0.3,
+                          outlier.size = 0.5, colour = "gray50", fill = "gray80",
+                          linewidth = 0.4)
+  }
+
+  p <- p +
     geom_segment(aes(x = `asymp.LCL`, xend = `asymp.UCL`, yend = y_dodge,
                      linetype = method),
                  linewidth = 0.8) +
@@ -529,6 +589,8 @@ create_panel_d <- function(reference_data, ref_sig = NULL) {
       expand = expansion(mult = c(0.05, 0.05))
     ) +
     labs(x = "Estimated Marginal Mean F1", y = "Reference Datasets") +
+    scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1.0)) +
+    coord_cartesian(xlim = c(0, 1.15), clip = "off") +
     pub_theme()
 
   # Add significance brackets if provided
@@ -552,10 +614,9 @@ create_panel_d <- function(reference_data, ref_sig = NULL) {
       mutate(organism = factor(organism, levels = names(ORGANISM_COLORS)))
 
     if (nrow(y_tbl_aug) > 0) {
-      x_max     <- max(reference_data$`asymp.UCL`, na.rm = TRUE)
-      x_bracket <- x_max + 0.015
-      x_tick    <- x_max + 0.005
-      x_star    <- x_bracket + 0.005
+      x_bracket <- 1.05
+      x_tick    <- 1.038
+      x_star    <- 1.062
       half_span <- dodge_width / 2   # 0.125
 
       bracket_df <- y_tbl_aug %>%
@@ -584,9 +645,8 @@ create_panel_d <- function(reference_data, ref_sig = NULL) {
         geom_text(
           data = bracket_df,
           aes(x = x_star, y = y_raw, label = sig),
-          inherit.aes = FALSE, hjust = 0, size = 5
-        ) +
-        coord_cartesian(clip = "off")
+          inherit.aes = FALSE, hjust = 0, size = 7
+        )
     }
   }
 
@@ -760,8 +820,8 @@ load_factor_significance <- function(hs_files, mm_files, primary_key) {
 
 # -- Hardcoded Paths ----------------------------------------------------------
 
-HS_DIR <- "2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_disease_state_+_sex_+_region_match_+_method:cutoff_+_reference:method/files"
-MM_DIR <- "2024-07-01/mus_musculus_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_sex_+_method:cutoff_+_reference:method/files"
+HS_DIR <- "2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_disease_state_+_sex_+_method:cutoff_+_reference:method/files"
+MM_DIR <- "2024-07-01/mus_musculus_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_method:cutoff_+_reference:method/files"
 
 ARGS <- list(
   hs_cutoff_effects    = file.path(HS_DIR, "method_cutoff_effects.tsv"),
@@ -777,7 +837,6 @@ ARGS <- list(
   ),
   mm_factor_emmeans    = paste(
     file.path(MM_DIR, "treatment_emmeans_summary.tsv"),
-    file.path(MM_DIR, "sex_emmeans_summary.tsv"),
     file.path(MM_DIR, "subsample_ref_emmeans_summary.tsv")
   ),
   hs_factor_estimates  = paste(
@@ -787,13 +846,14 @@ ARGS <- list(
   ),
   mm_factor_estimates  = paste(
     file.path(MM_DIR, "treatment_emmeans_estimates.tsv"),
-    file.path(MM_DIR, "sex_emmeans_estimates.tsv"),
     file.path(MM_DIR, "subsample_ref_emmeans_estimates.tsv")
   ),
   hs_reference_estimates = file.path(HS_DIR, "reference_method_emmeans_estimates.tsv"),
   mm_reference_estimates = file.path(MM_DIR, "reference_method_emmeans_estimates.tsv"),
   hs_model_coefs = file.path(HS_DIR, "model_coefs.tsv"),
   mm_model_coefs = file.path(MM_DIR, "model_coefs.tsv"),
+  hs_sample_results = "2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false/aggregated_results/files/sample_results.tsv.gz",
+  mm_sample_results = "2024-07-01/mus_musculus_main_branch/100/dataset_id/SCT/gap_false/aggregated_results/files/sample_results.tsv.gz",
   primary_key   = "subclass",
   outdir        = "combined_orgs",
   output_prefix = "combined_figure"
@@ -807,6 +867,31 @@ main <- function() {
   pk <- args$primary_key
 
   message("Loading data (key=", pk, ")...")
+
+  # Raw sample results for strip overlay
+  load_raw <- function(path, organism_label, pk) {
+    if (is.null(path) || !file.exists(path)) return(NULL)
+    df <- read_tsv(path, show_col_types = FALSE, col_types = cols(.default = col_character()))
+    if ("key" %in% colnames(df)) df <- df %>% filter(key == pk)
+    # Filter to cutoff=0 (reference configuration for emmeans)
+    if ("cutoff" %in% colnames(df)) df <- df %>% filter(as.numeric(cutoff) == 0)
+    keep_cols <- intersect(
+      c("macro_f1", "reference", "method", "key",
+        "disease_state", "treatment_state", "treatment", "sex", "subsample_ref"),
+      colnames(df)
+    )
+    df %>%
+      select(all_of(keep_cols)) %>%
+      mutate(macro_f1 = as.numeric(macro_f1), organism = organism_label)
+  }
+  hs_raw  <- load_raw(args$hs_sample_results, "Human", pk)
+  mm_raw  <- load_raw(args$mm_sample_results, "Mouse", pk)
+  raw_data <- bind_rows(hs_raw, mm_raw)
+  if (nrow(raw_data) > 0) {
+    message("  Raw sample data: ", nrow(raw_data), " rows")
+  } else {
+    raw_data <- NULL
+  }
 
   # Cutoff effects
   hs_cutoff <- read_tsv(args$hs_cutoff_effects, show_col_types = FALSE) %>%
@@ -871,40 +956,29 @@ main <- function() {
   message("\nCreating panels...")
   p_a <- create_panel_a(cutoff_data)
   p_b <- create_panel_b(taxonomy_data)
-  p_c <- create_panel_c(factor_data, factor_sig)
-  p_d <- create_panel_d(reference_data, ref_sig)
+  p_c <- create_panel_c(factor_data, factor_sig, raw_data = raw_data)
+  p_d <- create_panel_d(reference_data, ref_sig, raw_data = raw_data)
   p_e <- create_panel_e(args$hs_model_coefs, args$mm_model_coefs, pk)
 
-  # -- Compose layout ---------------------------------------------------------
-  message("Composing layout...")
-
-  if (!is.null(p_e)) {
-    combined <- ((p_a | p_b) / (p_c | p_e) / p_d) +
-      plot_layout(heights = c(1, 1, 1.5)) +
-      plot_annotation(tag_levels = "A")
-  } else {
-    combined <- ((p_a | p_b) / (p_c | p_d)) +
-      plot_layout(heights = c(1, 1.5)) +
-      plot_annotation(tag_levels = "A")
+  # -- Save individual panels -------------------------------------------------
+  save_panel <- function(p, suffix, width, height) {
+    path <- file.path(args$outdir, paste0(args$output_prefix, "_", suffix, ".png"))
+    message("Saving ", path, " ...")
+    ggsave(path, p, width = width, height = height, dpi = 300, bg = "white")
   }
 
-  # -- Save -------------------------------------------------------------------
-  out_path <- file.path(args$outdir, paste0(args$output_prefix, "_combined.png"))
-  message("Saving to ", out_path, " ...")
-  ggsave(out_path, combined,
-         width  = FULL_WIDTH * 3.8,
-         height = STANDARD_HEIGHT * 3.5,
-         dpi = 300, bg = "white")
+  save_panel(p_a, "panel_A_cutoff",    width = 10, height = 7)
+  save_panel(p_b, "panel_B_taxonomy",  width = 9,  height = 7)
+  save_panel(p_c, "panel_C_factors",   width = 16, height = 11)
+  save_panel(p_d, "panel_D_reference", width = 18, height = 12)
+  if (!is.null(p_e)) save_panel(p_e, "panel_E_variance", width = 10, height = 8)
 
   legend_path <- file.path(args$outdir, paste0(args$output_prefix, "_legend.png"))
   message("Saving legend to ", legend_path, " ...")
   p_legend <- make_legend_plot()
-  ggsave(legend_path, p_legend,
-         width  = 4,
-         height = 6,
-         dpi = 300, bg = "white")
+  ggsave(legend_path, p_legend, width = 4, height = 3, dpi = 300, bg = "white")
 
-  message("Done! Output: ", out_path, " + ", legend_path)
+  message("Done! Panels saved to ", args$outdir)
 }
 
 main()

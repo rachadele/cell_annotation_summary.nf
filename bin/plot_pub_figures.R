@@ -128,7 +128,7 @@ create_panel_b <- function(taxonomy_emmeans) {
     pub_theme()
 }
 
-create_panel_c <- function(factor_emmeans, organism) {
+create_panel_c <- function(factor_emmeans, organism, raw_data = NULL) {
   # Panel C: Experimental factor forest plot
   if (length(factor_emmeans) == 0) {
     return(
@@ -201,6 +201,23 @@ create_panel_c <- function(factor_emmeans, organism) {
   plot_df <- bind_rows(plot_rows)
   grand_mean <- mean(plot_df$response)
 
+  # Build raw strip points aligned to y_pos
+  raw_points <- NULL
+  if (!is.null(raw_data) && nrow(raw_data) > 0) {
+    raw_rows <- list()
+    for (fct in unique(plot_df$factor)) {
+      if (!fct %in% colnames(raw_data)) next
+      fct_ypos <- plot_df %>% filter(factor == fct) %>% select(level, y_pos)
+      rd <- raw_data %>%
+        { if (fct != "subsample_ref" && "subsample_ref" %in% colnames(.)) filter(., subsample_ref == "500") else . } %>%
+        mutate(level = str_to_title(str_replace_all(as.character(.data[[fct]]), "_", " "))) %>%
+        inner_join(fct_ypos, by = "level") %>%
+        select(y_pos, macro_f1)
+      if (nrow(rd) > 0) raw_rows[[length(raw_rows) + 1]] <- rd
+    }
+    if (length(raw_rows) > 0) raw_points <- bind_rows(raw_rows)
+  }
+
   # Factor group label positions
   factor_labels <- plot_df %>%
     group_by(factor) %>%
@@ -210,7 +227,16 @@ create_panel_c <- function(factor_emmeans, organism) {
 
   p <- ggplot(plot_df, aes(x = response, y = y_pos)) +
     geom_vline(xintercept = grand_mean, colour = "gray", linetype = "dashed",
-               linewidth = 0.5, alpha = 0.6) +
+               linewidth = 0.5, alpha = 0.6)
+
+  if (!is.null(raw_points) && nrow(raw_points) > 0) {
+    p <- p + geom_boxplot(data = raw_points, aes(x = macro_f1, y = y_pos, group = factor(y_pos)),
+                          inherit.aes = FALSE, width = 0.35, alpha = 0.3,
+                          outlier.size = 0.5, colour = "gray50", fill = "gray80",
+                          linewidth = 0.4)
+  }
+
+  p <- p +
     geom_segment(aes(x = lower, xend = upper, yend = y_pos, colour = factor),
                  linewidth = 1.2) +
     geom_point(aes(colour = factor), size = 3) +
@@ -229,11 +255,11 @@ create_panel_c <- function(factor_emmeans, organism) {
                         linewidth = 0.5, alpha = 0.7)
   }
 
-  # Add factor group labels in right margin
+  # Add factor group labels in right margin (pinned to just past x=1)
   for (k in seq_len(nrow(factor_labels))) {
     p <- p + annotate(
       "text",
-      x    = max(plot_df$upper, na.rm = TRUE) + 0.01,
+      x    = 1.01,
       y    = factor_labels$mid_pos[k],
       label = factor_labels$display_name[k],
       hjust = 0, vjust = 0.5,
@@ -242,12 +268,7 @@ create_panel_c <- function(factor_emmeans, organism) {
     )
   }
 
-  # Extend x-axis to make room for factor labels
-  x_range <- range(c(plot_df$lower, plot_df$upper), na.rm = TRUE)
-  x_pad <- diff(x_range) * 0.35
-  p <- p + coord_cartesian(xlim = c(x_range[1] - diff(x_range) * 0.05,
-                                     x_range[2] + x_pad),
-                            clip = "off")
+  p <- p + coord_cartesian(xlim = c(0, 1), clip = "off")
 
   p
 }
@@ -308,7 +329,7 @@ create_panel_e <- function(coef_data, primary_key) {
           axis.text.y = element_text(size = 9))
 }
 
-create_panel_d <- function(reference_emmeans) {
+create_panel_d <- function(reference_emmeans, raw_data = NULL) {
   # Panel D: Reference atlas forest plot (dodged by method)
   methods <- sort(unique(reference_emmeans$method))
   n_methods <- length(methods)
@@ -338,19 +359,41 @@ create_panel_d <- function(reference_emmeans) {
 
   grand_mean <- mean(reference_emmeans$response)
 
+  raw_d <- NULL
+
   # Truncate long reference labels
   ref_labels <- levels(reference_emmeans$reference)
   ref_labels_trunc <- ifelse(nchar(ref_labels) > 60,
                               paste0(substr(ref_labels, 1, 57), "..."),
                               ref_labels)
 
-  ggplot(reference_emmeans, aes(x = response, y = y_dodge, colour = method)) +
+  p_d <- ggplot(reference_emmeans, aes(x = response, y = y_dodge, colour = method)) +
     geom_vline(xintercept = grand_mean, colour = "gray", linetype = "dashed",
-               linewidth = 0.5, alpha = 0.6) +
+               linewidth = 0.5, alpha = 0.6)
+
+  if (!is.null(raw_data) && nrow(raw_data) > 0) {
+    raw_d <- raw_data %>%
+      mutate(reference = as.character(reference), method = as.character(method)) %>%
+      { if ("subsample_ref" %in% colnames(.)) filter(., subsample_ref == "500") else . } %>%
+      inner_join(
+        reference_emmeans %>% distinct(reference = as.character(reference),
+                                       method = as.character(method), y_dodge),
+        by = c("reference", "method")
+      )
+  }
+  if (!is.null(raw_d) && nrow(raw_d) > 0) {
+    p_d <- p_d + geom_boxplot(data = raw_d, aes(x = macro_f1, y = y_dodge, group = factor(y_dodge)),
+                               inherit.aes = FALSE, width = 0.2, alpha = 0.3,
+                               outlier.size = 0.5, colour = "gray50", fill = "gray80",
+                               linewidth = 0.4)
+  }
+
+  p_d <- p_d +
     geom_segment(aes(x = `asymp.LCL`, xend = `asymp.UCL`, yend = y_dodge),
                  linewidth = 0.8) +
     geom_point(size = 2) +
     scale_colour_manual(values = METHOD_COLORS, labels = METHOD_NAMES) +
+    scale_x_continuous(limits = c(0, 1)) +
     scale_y_continuous(
       breaks = seq_along(ref_labels),
       labels = ref_labels_trunc,
@@ -380,6 +423,8 @@ parse_arguments <- function() {
                       help = "Primary taxonomy key for filtering")
   parser$add_argument("--organism", type = "character", default = "homo_sapiens",
                       help = "Organism (homo_sapiens or mus_musculus)")
+  parser$add_argument("--sample_results", type = "character", default = NULL,
+                      help = "Path to sample_results.tsv.gz for raw data overlay")
   parser$add_argument("--outdir", type = "character", default = ".",
                       help = "Output directory")
   parser$add_argument("--output_prefix", type = "character", default = "pub_figure",
@@ -420,6 +465,18 @@ main <- function() {
 
   # -- Load data ---------------------------------------------------------------
   message("Loading data (filtering by key=", primary_key, ")...")
+
+  raw_sample_data <- if (!is.null(args$sample_results) && file.exists(args$sample_results)) {
+    df <- read_tsv(args$sample_results, show_col_types = FALSE,
+                   col_types = cols(.default = col_character()))
+    if ("key"          %in% colnames(df)) df <- df %>% filter(key          == primary_key)
+    if ("cutoff" %in% colnames(df)) df <- df %>% filter(as.numeric(cutoff) == 0)
+    df <- df %>% mutate(macro_f1 = as.numeric(macro_f1))
+    message("  Sample results (raw, cutoff=0, subsample_ref=500): ", nrow(df), " rows")
+    df
+  } else {
+    NULL
+  }
 
   cutoff_data <- read_tsv(args$cutoff_effects, show_col_types = FALSE)
   if ("key" %in% colnames(cutoff_data)) {
@@ -469,8 +526,8 @@ main <- function() {
   } else {
     create_panel_b(tibble())
   }
-  p_c <- create_panel_c(factor_emmeans, args$organism)
-  p_d <- create_panel_d(reference_emmeans)
+  p_c <- create_panel_c(factor_emmeans, args$organism, raw_data = raw_sample_data)
+  p_d <- create_panel_d(reference_emmeans, raw_data = raw_sample_data)
   p_e <- create_panel_e(coef_data, primary_key)
 
   # -- Compose layout ----------------------------------------------------------
@@ -503,8 +560,8 @@ main <- function() {
   out_path <- file.path(args$outdir, paste0(args$output_prefix, "_combined.png"))
   message("Saving to ", out_path, " ...")
   ggsave(out_path, combined,
-         width  = FULL_WIDTH * 3.7,
-         height = STANDARD_HEIGHT * 2.4,
+         width  = FULL_WIDTH * 5.0,
+         height = STANDARD_HEIGHT * 2.8,
          dpi = 300, bg = "white")
 
   message("Done!")
