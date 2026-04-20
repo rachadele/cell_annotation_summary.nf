@@ -117,13 +117,16 @@ make_legend_plot <- function() {
       guide  = guide_legend(override.aes = list(colour = "black"))
     ) +
     coord_cartesian(xlim = c(10, 11)) +   # push dummy lines off-screen
+    labs(caption = "Points + CI: fitted values (estimated marginal mean)\nBoxplots: raw data") +
     theme_void() +
     theme(
-      legend.position  = "right",
+      legend.position  = c(0.6, 0.6),
       legend.direction = "vertical",
       legend.text      = element_text(size = 22),
       legend.title     = element_text(size = 22, face = "bold"),
-      legend.key.width = unit(1.8, "cm")
+      legend.key.width = unit(1.8, "cm"),
+      plot.caption     = element_text(size = 18, hjust = 0, colour = "gray30",
+                                      margin = margin(t = 10))
     )
 }
 
@@ -332,7 +335,7 @@ create_panel_c <- function(factor_data, sig_data = NULL, raw_data = NULL) {
       labels = plot_df$label,
       expand = expansion(mult = c(0.05, 0.05))
     ) +
-    labs(x = "Estimated Marginal Mean F1", y = "") +
+    labs(x = "Agreement with Author Labels (Macro F1)", y = "") +
     pub_theme()
 
   for (sp in separator_positions) {
@@ -368,7 +371,7 @@ create_panel_c <- function(factor_data, sig_data = NULL, raw_data = NULL) {
         mutate(bracket_rank = row_number()) %>%
         ungroup() %>%
         mutate(
-          x_spine = 1.06 + (bracket_rank - 1) * 0.06,
+          x_spine = 1.06 + (bracket_rank - 1) * 0.09,
           x_tick  = x_spine - 0.012,
           x_star  = x_spine + 0.016
         )
@@ -588,7 +591,7 @@ create_panel_d <- function(reference_data, ref_sig = NULL, raw_data = NULL) {
       labels = y_labels,
       expand = expansion(mult = c(0.05, 0.05))
     ) +
-    labs(x = "Estimated Marginal Mean F1", y = "Reference Datasets") +
+    labs(x = "Agreement with Author Labels (Macro F1)", y = "Reference Datasets") +
     scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1.0)) +
     coord_cartesian(xlim = c(0, 1.15), clip = "off") +
     pub_theme()
@@ -976,7 +979,7 @@ main <- function() {
   legend_path <- file.path(args$outdir, paste0(args$output_prefix, "_legend.png"))
   message("Saving legend to ", legend_path, " ...")
   p_legend <- make_legend_plot()
-  ggsave(legend_path, p_legend, width = 4, height = 3, dpi = 300, bg = "white")
+  ggsave(legend_path, p_legend, width = 7, height = 4, dpi = 300, bg = "white")
 
   message("Done! Panels saved to ", args$outdir)
 }
