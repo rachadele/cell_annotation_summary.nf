@@ -69,6 +69,9 @@ def shorten_ref(name):
 def load_optional(path):
     if os.path.exists(path):
         return pd.read_csv(path, sep="\t")
+    gz = path + ".gz"
+    if os.path.exists(gz):
+        return pd.read_csv(gz, sep="\t")
     return None
 
 
@@ -97,6 +100,8 @@ def detect_organism(path):
 def detect_pipeline(base):
     """Return 'new' if scvi_rf or scvi_knn are present, else 'old'."""
     path = os.path.join(base, "aggregated_results", "files", "sample_results_summary.tsv")
+    if not os.path.exists(path):
+        path = path + ".gz"
     df = load_optional(path)
     if df is None or "method" not in df.columns:
         return "old"

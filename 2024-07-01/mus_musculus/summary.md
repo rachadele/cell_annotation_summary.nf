@@ -8,7 +8,7 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 ## mus_musculus
 
 **Organism:** mus_musculus  
-**Model formula:** `macro f1 ~ reference + method + cutoff + subsample ref + treatment state + sex + method:cutoff + reference:method`  
+**Model formula:** `macro f1 ~ reference + method + cutoff + subsample ref + treatment state + method:cutoff + reference:method`  
 **Pipeline:** new (scvi_rf + scvi_knn + seurat)
 
 ### Study Cohort
@@ -27,24 +27,24 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 
 | key | seurat | scvi_rf | scvi_knn |
 | --- | --- | --- | --- |
-| global | 0.940 [0.900–0.965] | 0.958 [0.929–0.976] | 0.948 [0.913–0.970] |
-| family | 0.906 [0.882–0.925] | 0.923 [0.903–0.940] | 0.918 [0.896–0.935] |
-| class | 0.860 [0.801–0.904] | 0.859 [0.799–0.904] | 0.850 [0.786–0.896] |
-| subclass | 0.834 [0.755–0.891] | 0.829 [0.749–0.888] | 0.821 [0.739–0.882] |
+| global | 0.913 [0.841–0.954] | 0.939 [0.886–0.968] | 0.924 [0.860–0.960] |
+| family | 0.886 [0.839–0.921] | 0.907 [0.867–0.936] | 0.901 [0.858–0.931] |
+| class | 0.811 [0.711–0.882] | 0.815 [0.716–0.885] | 0.802 [0.698–0.876] |
+| subclass | 0.806 [0.710–0.876] | 0.801 [0.702–0.872] | 0.792 [0.691–0.866] |
 
 ### Method Pairwise Contrasts
 
 | key | contrast | odds.ratio | p.value |
 | --- | --- | --- | --- |
-| global | seurat / scvi_rf | 0.687 | < 1e-300 |
-| global | seurat / scvi_knn | 0.855 | < 1e-10 |
-| global | scvi_rf / scvi_knn | 1.245 | < 1e-13 |
+| global | seurat / scvi_rf | 0.686 | < 1e-300 |
+| global | seurat / scvi_knn | 0.867 | < 1e-13 |
+| global | scvi_rf / scvi_knn | 1.263 | < 1e-300 |
 | family | seurat / scvi_rf | 0.797 | < 1e-300 |
 | family | seurat / scvi_knn | 0.86 | < 1e-13 |
 | family | scvi_rf / scvi_knn | 1.079 | < 1e-4 |
-| class | seurat / scvi_rf | 1.008 | 0.896 |
-| class | seurat / scvi_knn | 1.092 | < 1e-5 |
-| class | scvi_rf / scvi_knn | 1.083 | < 1e-4 |
+| class | seurat / scvi_rf | 0.974 | 0.197 |
+| class | seurat / scvi_knn | 1.062 | < 1e-3 |
+| class | scvi_rf / scvi_knn | 1.091 | < 1e-7 |
 | subclass | seurat / scvi_rf | 1.035 | 0.055 |
 | subclass | seurat / scvi_knn | 1.093 | < 1e-8 |
 | subclass | scvi_rf / scvi_knn | 1.056 | < 1e-3 |
@@ -53,76 +53,85 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 
 | key | cutoff | scvi_knn | scvi_rf | seurat |
 | --- | --- | --- | --- | --- |
-| global | 0.0 | 0.948 | 0.958 | 0.94 |
-| global | 0.05 | 0.945 | 0.947 | 0.938 |
-| global | 0.1 | 0.94 | 0.934 | 0.936 |
-| global | 0.15 | 0.936 | 0.918 | 0.933 |
-| global | 0.2 | 0.931 | 0.898 | 0.931 |
-| global | 0.25 | 0.926 | 0.873 | 0.928 |
-| global | 0.5 | 0.896 | 0.675 | 0.914 |
-| global | 0.75 | 0.855 | 0.384 | 0.898 |
-| family | 0.0 | 0.918 | 0.923 | 0.906 |
-| family | 0.05 | 0.915 | 0.909 | 0.904 |
-| family | 0.1 | 0.912 | 0.892 | 0.901 |
-| family | 0.15 | 0.909 | 0.872 | 0.899 |
-| family | 0.2 | 0.906 | 0.849 | 0.897 |
-| family | 0.25 | 0.903 | 0.823 | 0.895 |
-| family | 0.5 | 0.886 | 0.641 | 0.882 |
-| family | 0.75 | 0.867 | 0.408 | 0.868 |
-| class | 0.0 | 0.85 | 0.859 | 0.86 |
-| class | 0.05 | 0.847 | 0.841 | 0.859 |
-| class | 0.1 | 0.845 | 0.82 | 0.858 |
-| class | 0.15 | 0.842 | 0.797 | 0.857 |
-| class | 0.2 | 0.84 | 0.772 | 0.855 |
-| class | 0.25 | 0.837 | 0.745 | 0.854 |
-| class | 0.5 | 0.823 | 0.582 | 0.848 |
-| class | 0.75 | 0.809 | 0.399 | 0.841 |
-| subclass | 0.0 | 0.821 | 0.829 | 0.834 |
-| subclass | 0.05 | 0.819 | 0.808 | 0.833 |
-| subclass | 0.1 | 0.816 | 0.785 | 0.831 |
-| subclass | 0.15 | 0.813 | 0.76 | 0.83 |
-| subclass | 0.2 | 0.81 | 0.733 | 0.828 |
-| subclass | 0.25 | 0.808 | 0.704 | 0.827 |
-| subclass | 0.5 | 0.793 | 0.537 | 0.82 |
-| subclass | 0.75 | 0.777 | 0.362 | 0.812 |
+| global | 0.0 | 0.924 | 0.939 | 0.913 |
+| global | 0.05 | 0.919 | 0.924 | 0.91 |
+| global | 0.1 | 0.914 | 0.906 | 0.907 |
+| global | 0.15 | 0.908 | 0.884 | 0.903 |
+| global | 0.2 | 0.902 | 0.859 | 0.9 |
+| global | 0.25 | 0.896 | 0.828 | 0.896 |
+| global | 0.5 | 0.86 | 0.602 | 0.877 |
+| global | 0.75 | 0.813 | 0.323 | 0.854 |
+| family | 0.0 | 0.901 | 0.907 | 0.886 |
+| family | 0.05 | 0.897 | 0.89 | 0.884 |
+| family | 0.1 | 0.894 | 0.87 | 0.881 |
+| family | 0.15 | 0.89 | 0.846 | 0.878 |
+| family | 0.2 | 0.887 | 0.82 | 0.876 |
+| family | 0.25 | 0.883 | 0.79 | 0.873 |
+| family | 0.5 | 0.863 | 0.591 | 0.858 |
+| family | 0.75 | 0.84 | 0.358 | 0.842 |
+| class | 0.0 | 0.802 | 0.815 | 0.811 |
+| class | 0.05 | 0.798 | 0.792 | 0.809 |
+| class | 0.1 | 0.795 | 0.766 | 0.808 |
+| class | 0.15 | 0.792 | 0.738 | 0.806 |
+| class | 0.2 | 0.789 | 0.709 | 0.804 |
+| class | 0.25 | 0.786 | 0.677 | 0.802 |
+| class | 0.5 | 0.769 | 0.5 | 0.794 |
+| class | 0.75 | 0.751 | 0.322 | 0.785 |
+| subclass | 0.0 | 0.792 | 0.801 | 0.806 |
+| subclass | 0.05 | 0.789 | 0.777 | 0.805 |
+| subclass | 0.1 | 0.786 | 0.751 | 0.803 |
+| subclass | 0.15 | 0.783 | 0.723 | 0.801 |
+| subclass | 0.2 | 0.779 | 0.694 | 0.8 |
+| subclass | 0.25 | 0.776 | 0.663 | 0.798 |
+| subclass | 0.5 | 0.76 | 0.49 | 0.79 |
+| subclass | 0.75 | 0.743 | 0.319 | 0.781 |
 
 ### Reference × Method Performance
 
 | key | ref_short | scvi_knn | scvi_rf | seurat |
 | --- | --- | --- | --- | --- |
-| global | Cortical+Hipp. 10x | 0.953 | 0.965 | 0.97 |
-| global | Cortical+Hipp. SSv4 | 0.937 | 0.941 | 0.919 |
-| global | Motor cortex | 0.951 | 0.961 | 0.942 |
-| global | Whole cortex | 0.951 | 0.961 | 0.912 |
-| family | Cortical+Hipp. 10x | 0.94 | 0.95 | 0.946 |
-| family | Cortical+Hipp. SSv4 | 0.911 | 0.894 | 0.892 |
-| family | Motor cortex | 0.934 | 0.942 | 0.924 |
-| family | Whole cortex | 0.875 | 0.891 | 0.828 |
-| class | Cortical+Hipp. 10x | 0.914 | 0.925 | 0.917 |
-| class | Cortical+Hipp. SSv4 | 0.88 | 0.844 | 0.867 |
-| class | Motor cortex | 0.807 | 0.849 | 0.892 |
-| class | Whole cortex | 0.758 | 0.789 | 0.708 |
-| subclass | Cortical+Hipp. 10x | 0.889 | 0.901 | 0.904 |
-| subclass | Cortical+Hipp. SSv4 | 0.851 | 0.81 | 0.829 |
-| subclass | Motor cortex | 0.781 | 0.821 | 0.864 |
-| subclass | Whole cortex | 0.733 | 0.759 | 0.689 |
+| global | Cortical+Hipp. 10x | 0.935 | 0.95 | 0.96 |
+| global | Cortical+Hipp. SSv4 | 0.907 | 0.916 | 0.874 |
+| global | Motor cortex | 0.926 | 0.943 | 0.91 |
+| global | Whole cortex | 0.926 | 0.942 | 0.88 |
+| family | Cortical+Hipp. 10x | 0.926 | 0.938 | 0.934 |
+| family | Cortical+Hipp. SSv4 | 0.892 | 0.872 | 0.87 |
+| family | Motor cortex | 0.919 | 0.93 | 0.908 |
+| family | Whole cortex | 0.85 | 0.869 | 0.796 |
+| class | Cortical+Hipp. 10x | 0.882 | 0.896 | 0.889 |
+| class | Cortical+Hipp. SSv4 | 0.831 | 0.792 | 0.805 |
+| class | Motor cortex | 0.754 | 0.804 | 0.844 |
+| class | Whole cortex | 0.703 | 0.738 | 0.655 |
+| subclass | Cortical+Hipp. 10x | 0.869 | 0.882 | 0.886 |
+| subclass | Cortical+Hipp. SSv4 | 0.825 | 0.779 | 0.8 |
+| subclass | Motor cortex | 0.747 | 0.791 | 0.84 |
+| subclass | Whole cortex | 0.694 | 0.722 | 0.647 |
+
+### Reference Ranking (mean EMM across methods and keys)
+
+| reference | mean_emm |
+| --- | --- |
+| Cortical+Hipp. 10x | 0.912 |
+| Motor cortex | 0.86 |
+| Cortical+Hipp. SSv4 | 0.847 |
+| Whole cortex | 0.785 |
 
 ### Reference Subsample Size
 
 | key | subsample_ref | EMM |
 | --- | --- | --- |
-| global | 500 | 0.954 [0.922–0.973] |
-| global | 100 | 0.951 [0.918–0.971] |
-| global | 50 | 0.943 [0.904–0.966] |
-| family | 500 | 0.918 [0.897–0.936] |
-| family | 100 | 0.919 [0.898–0.936] |
-| family | 50 | 0.911 [0.888–0.929] |
-| class | 500 | 0.860 [0.801–0.904] |
-| class | 100 | 0.858 [0.797–0.902] |
-| class | 50 | 0.851 [0.789–0.898] |
-| subclass | 500 | 0.831 [0.751–0.889] |
-| subclass | 100 | 0.831 [0.751–0.889] |
-| subclass | 50 | 0.823 [0.741–0.884] |
+| global | 500 | 0.931 [0.873–0.964] |
+| global | 100 | 0.929 [0.868–0.963] |
+| global | 50 | 0.917 [0.848–0.956] |
+| family | 500 | 0.901 [0.859–0.932] |
+| family | 100 | 0.902 [0.860–0.932] |
+| family | 50 | 0.892 [0.846–0.925] |
+| class | 500 | 0.812 [0.712–0.883] |
+| class | 100 | 0.812 [0.712–0.883] |
+| class | 50 | 0.804 [0.701–0.877] |
+| subclass | 500 | 0.803 [0.705–0.874] |
+| subclass | 100 | 0.802 [0.705–0.873] |
+| subclass | 50 | 0.794 [0.694–0.868] |
 
 ### Biological Covariates
 
@@ -130,29 +139,64 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 
 | key | treatment_state | EMM |
 | --- | --- | --- |
-| global | no treatment | 0.952 [0.919–0.972] |
-| global | treatment | 0.947 [0.910–0.969] |
-| family | no treatment | 0.915 [0.893–0.933] |
-| family | treatment | 0.917 [0.895–0.935] |
-| class | no treatment | 0.849 [0.786–0.896] |
-| class | treatment | 0.863 [0.805–0.906] |
-| subclass | no treatment | 0.820 [0.736–0.881] |
-| subclass | treatment | 0.837 [0.759–0.893] |
-
-**sex**
-
-| key | sex | EMM |
-| --- | --- | --- |
-| global | nan | 0.969 [0.927–0.987] |
-| global | male | 0.918 [0.855–0.955] |
-| family | nan | 0.947 [0.921–0.965] |
-| family | male | 0.870 [0.835–0.897] |
-| class | nan | 0.910 [0.834–0.953] |
-| class | male | 0.779 [0.683–0.852] |
-| subclass | nan | 0.883 [0.768–0.945] |
-| subclass | male | 0.756 [0.648–0.839] |
+| global | no treatment | 0.930 [0.870–0.963] |
+| global | treatment | 0.922 [0.856–0.959] |
+| family | no treatment | 0.897 [0.853–0.929] |
+| family | treatment | 0.900 [0.857–0.931] |
+| class | no treatment | 0.800 [0.697–0.875] |
+| class | treatment | 0.818 [0.720–0.887] |
+| subclass | no treatment | 0.790 [0.688–0.865] |
+| subclass | treatment | 0.809 [0.714–0.878] |
 
 ### Between-Study Heterogeneity
+
+**global — Well-classified (mean F1 ≥ 0.85)**
+
+| key | label | n_studies | mean_f1 | std_f1 | mean_precision | mean_recall |
+| --- | --- | --- | --- | --- | --- | --- |
+| global | Non-neuron | 7 | 0.953 | 0.028 | 0.993 | 0.924 |
+
+**global — Hard / high-variance (mean F1 < 0.75 or std > 0.20)**
+
+| key | label | n_studies | mean_f1 | std_f1 | mean_precision | mean_recall | failure_mode |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| global | Neural stem cell | 2 | 0.372 | 0.114 | 0.371 | 0.545 | — |
+| global | Neuron | 6 | 0.832 | 0.229 | 0.788 | 0.964 | Study variance |
+
+**family — Well-classified (mean F1 ≥ 0.85)**
+
+| key | label | n_studies | mean_f1 | std_f1 | mean_precision | mean_recall |
+| --- | --- | --- | --- | --- | --- | --- |
+| family | CNS macrophage | 6 | 0.958 | 0.032 | 0.983 | 0.947 |
+| family | Vascular | 6 | 0.928 | 0.047 | 0.982 | 0.906 |
+| family | Astrocyte | 6 | 0.893 | 0.068 | 0.943 | 0.884 |
+| family | GABAergic | 4 | 0.874 | 0.051 | 0.887 | 0.911 |
+
+**family — Hard / high-variance (mean F1 < 0.75 or std > 0.20)**
+
+| key | label | n_studies | mean_f1 | std_f1 | mean_precision | mean_recall | failure_mode |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| family | OPC | 6 | 0.131 | 0.109 | 0.633 | 0.137 | — |
+| family | Neural stem cell | 2 | 0.372 | 0.114 | 0.371 | 0.545 | — |
+| family | Glutamatergic | 6 | 0.762 | 0.341 | 0.733 | 0.955 | Study variance |
+
+**class — Well-classified (mean F1 ≥ 0.85)**
+
+| key | label | n_studies | mean_f1 | std_f1 | mean_precision | mean_recall |
+| --- | --- | --- | --- | --- | --- | --- |
+| class | Vascular | 6 | 0.928 | 0.047 | 0.982 | 0.906 |
+| class | Hippocampal neuron | 1 | 0.915 | nan | 0.999 | 0.877 |
+| class | Astrocyte | 6 | 0.893 | 0.068 | 0.943 | 0.884 |
+
+**class — Hard / high-variance (mean F1 < 0.75 or std > 0.20)**
+
+| key | label | n_studies | mean_f1 | std_f1 | mean_precision | mean_recall | failure_mode |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| class | OPC | 6 | 0.131 | 0.109 | 0.633 | 0.137 | — |
+| class | Microglia | 6 | 0.154 | 0.049 | 0.964 | 0.146 | Label escape |
+| class | Macrophage | 2 | 0.207 | 0.081 | 0.136 | 0.734 | Over-prediction |
+| class | Neural stem cell | 2 | 0.372 | 0.114 | 0.371 | 0.545 | — |
+| class | Cajal-Retzius cell | 2 | 0.573 | 0.25 | 0.99 | 0.559 | Study variance |
 
 **subclass — Well-classified (mean F1 ≥ 0.85)**
 
@@ -162,7 +206,7 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 | subclass | DG | 1 | 0.894 | nan | 0.998 | 0.846 |
 | subclass | Astrocyte | 6 | 0.893 | 0.068 | 0.943 | 0.884 |
 
-**subclass — Hard / high-variance (mean F1 < 0.70 or std > 0.20)**
+**subclass — Hard / high-variance (mean F1 < 0.75 or std > 0.20)**
 
 | key | label | n_studies | mean_f1 | std_f1 | mean_precision | mean_recall | failure_mode |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -177,40 +221,40 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 
 ### Cell-Type Rankings (best config per label)
 
-| key | label | method | reference | subsample_ref | mean_f1_across_studies | win_fraction | n_studies |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| global | Neural stem cell | scvi_knn | Motor cortex | 500 | 0.514 | 0.5 | 2 |
-| global | Neuron | seurat | Cortical+Hipp. 10x | 500 | 0.882 | 0.333 | 6 |
-| global | Non-neuron | seurat | Cortical+Hipp. 10x | 500 | 0.992 | 0.429 | 7 |
-| family | Astrocyte | seurat | Cortical+Hipp. 10x | 500 | 0.943 | 0.667 | 6 |
-| family | CNS macrophage | scvi_knn | Cortical+Hipp. 10x | 100 | 0.983 | 0.5 | 6 |
-| family | GABAergic | seurat | Cortical+Hipp. SSv4 | 50 | 0.99 | 0.5 | 4 |
-| family | Glutamatergic | seurat | Whole cortex | 500 | 0.892 | 0.5 | 6 |
-| family | Neural stem cell | scvi_knn | Motor cortex | 500 | 0.514 | 0.5 | 2 |
-| family | OPC | scvi_knn | Whole cortex | 100 | 0.277 | 0.333 | 6 |
-| family | Oligodendrocyte | seurat | Motor cortex | 100 | 0.974 | 0.5 | 6 |
-| family | Vascular | seurat | Cortical+Hipp. 10x | 500 | 0.977 | 0.333 | 6 |
-| class | Astrocyte | seurat | Cortical+Hipp. 10x | 500 | 0.943 | 0.667 | 6 |
-| class | Cajal-Retzius cell | seurat | Cortical+Hipp. 10x | 50 | 0.992 | 1.0 | 2 |
-| class | Hippocampal neuron | scvi_knn | Cortical+Hipp. 10x | 100 | 0.996 | 1.0 | 1 |
-| class | Macrophage | scvi_rf | Cortical+Hipp. SSv4 | 500 | 0.263 | 0.5 | 2 |
-| class | Microglia | seurat | Whole cortex | 500 | 0.459 | 0.167 | 6 |
-| class | Neural stem cell | scvi_knn | Motor cortex | 500 | 0.514 | 0.5 | 2 |
-| class | OPC | scvi_knn | Whole cortex | 100 | 0.277 | 0.333 | 6 |
-| class | Oligodendrocyte | seurat | Motor cortex | 100 | 0.974 | 0.5 | 6 |
-| class | Vascular | seurat | Cortical+Hipp. 10x | 500 | 0.977 | 0.333 | 6 |
-| subclass | Astrocyte | seurat | Cortical+Hipp. 10x | 500 | 0.943 | 0.667 | 6 |
-| subclass | CA1-ProS | seurat | Whole cortex | 100 | 0.933 | 1.0 | 1 |
-| subclass | CA3 | seurat | Whole cortex | 100 | 0.943 | 1.0 | 1 |
-| subclass | Cajal-Retzius cell | seurat | Cortical+Hipp. 10x | 50 | 0.992 | 1.0 | 2 |
-| subclass | DG | seurat | Whole cortex | 500 | 0.996 | 1.0 | 1 |
-| subclass | Endothelial | seurat | Cortical+Hipp. 10x | 500 | 0.986 | 0.333 | 6 |
-| subclass | Macrophage | scvi_rf | Cortical+Hipp. SSv4 | 100 | 0.247 | 0.0 | 2 |
-| subclass | Microglia | seurat | Whole cortex | 500 | 0.459 | 0.167 | 6 |
-| subclass | Neural stem cell | scvi_knn | Motor cortex | 100 | 0.555 | 0.0 | 2 |
-| subclass | OPC | scvi_knn | Whole cortex | 100 | 0.277 | 0.333 | 6 |
-| subclass | Oligodendrocyte | seurat | Motor cortex | 100 | 0.974 | 0.5 | 6 |
-| subclass | Pericyte | seurat | Whole cortex | 50 | 0.933 | 1.0 | 1 |
+| key | label | method | reference | subsample_ref | mean_f1_across_studies | win_fraction | n_studies | mean_support |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| global | Neural stem cell | scvi_knn | Motor cortex | 500 | 0.514 | 0.5 | 2 | 3.702991452991453 |
+| global | Neuron | seurat | Cortical+Hipp. 10x | 500 | 0.882 | 0.333 | 6 | 39.80992063492064 |
+| global | Non-neuron | seurat | Cortical+Hipp. 10x | 500 | 0.992 | 0.429 | 7 | 64.7561224489796 |
+| family | Astrocyte | seurat | Cortical+Hipp. 10x | 500 | 0.943 | 0.667 | 6 | 10.332539682539682 |
+| family | CNS macrophage | scvi_knn | Cortical+Hipp. 10x | 100 | 0.983 | 0.5 | 6 | 8.907142857142857 |
+| family | GABAergic | seurat | Cortical+Hipp. SSv4 | 50 | 0.99 | 0.5 | 4 | 6.245833333333334 |
+| family | Glutamatergic | seurat | Whole cortex | 500 | 0.892 | 0.5 | 6 | 33.645370370370365 |
+| family | Neural stem cell | scvi_knn | Motor cortex | 500 | 0.514 | 0.5 | 2 | 3.702991452991453 |
+| family | OPC | scvi_knn | Whole cortex | 100 | 0.277 | 0.333 | 6 | 8.003535353535353 |
+| family | Oligodendrocyte | seurat | Motor cortex | 100 | 0.974 | 0.5 | 6 | 17.315079365079367 |
+| family | Vascular | seurat | Cortical+Hipp. 10x | 500 | 0.977 | 0.333 | 6 | 31.713492063492065 |
+| class | Astrocyte | seurat | Cortical+Hipp. 10x | 500 | 0.943 | 0.667 | 6 | 10.332539682539682 |
+| class | Cajal-Retzius cell | seurat | Cortical+Hipp. 10x | 50 | 0.992 | 1.0 | 2 | 1.4444444444444444 |
+| class | Hippocampal neuron | scvi_knn | Cortical+Hipp. 10x | 100 | 0.996 | 1.0 | 1 | 65.5 |
+| class | Macrophage | scvi_rf | Cortical+Hipp. SSv4 | 500 | 0.263 | 0.5 | 2 | 2.1319444444444446 |
+| class | Microglia | seurat | Whole cortex | 500 | 0.459 | 0.167 | 6 | 8.315873015873017 |
+| class | Neural stem cell | scvi_knn | Motor cortex | 500 | 0.514 | 0.5 | 2 | 3.702991452991453 |
+| class | OPC | scvi_knn | Whole cortex | 100 | 0.277 | 0.333 | 6 | 8.003535353535353 |
+| class | Oligodendrocyte | seurat | Motor cortex | 100 | 0.974 | 0.5 | 6 | 17.315079365079367 |
+| class | Vascular | seurat | Cortical+Hipp. 10x | 500 | 0.977 | 0.333 | 6 | 31.713492063492065 |
+| subclass | Astrocyte | seurat | Cortical+Hipp. 10x | 500 | 0.943 | 0.667 | 6 | 10.332539682539682 |
+| subclass | CA1-ProS | seurat | Whole cortex | 100 | 0.933 | 1.0 | 1 | 19.5 |
+| subclass | CA3 | seurat | Whole cortex | 100 | 0.943 | 1.0 | 1 | 11.5 |
+| subclass | Cajal-Retzius cell | seurat | Cortical+Hipp. 10x | 50 | 0.992 | 1.0 | 2 | 1.4444444444444444 |
+| subclass | DG | seurat | Whole cortex | 500 | 0.996 | 1.0 | 1 | 34.5 |
+| subclass | Endothelial | seurat | Cortical+Hipp. 10x | 500 | 0.986 | 0.333 | 6 | 27.807142857142853 |
+| subclass | Macrophage | scvi_rf | Cortical+Hipp. SSv4 | 100 | 0.247 | 0.0 | 2 | 2.1319444444444446 |
+| subclass | Microglia | seurat | Whole cortex | 500 | 0.459 | 0.167 | 6 | 8.315873015873017 |
+| subclass | Neural stem cell | scvi_knn | Motor cortex | 100 | 0.555 | 0.0 | 2 | 3.702991452991453 |
+| subclass | OPC | scvi_knn | Whole cortex | 100 | 0.277 | 0.333 | 6 | 8.003535353535353 |
+| subclass | Oligodendrocyte | seurat | Motor cortex | 100 | 0.974 | 0.5 | 6 | 17.315079365079367 |
+| subclass | Pericyte | seurat | Whole cortex | 50 | 0.933 | 1.0 | 1 | 2.0 |
 
 ### Reference Cell-Type Coverage
 
@@ -321,6 +365,35 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 | seurat | Neural stem cell | 0.256 | 0.135 | 0.121 |
 | seurat | Non-neuron | 0.926 | 0.878 | 0.048 |
 
+**Low-F1 cell types at cutoff=0 (F1 < 0.5) — precision/recall across all cutoffs:**
+
+| label | method | cutoff | F1 | precision | recall |
+| --- | --- | --- | --- | --- | --- |
+| Neural stem cell | scvi_knn | 0.0 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.05 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.1 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.15 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.2 | 0.516 | 0.517 | 0.617 |
+| Neural stem cell | scvi_knn | 0.25 | 0.518 | 0.522 | 0.617 |
+| Neural stem cell | scvi_knn | 0.5 | 0.499 | 0.608 | 0.524 |
+| Neural stem cell | scvi_knn | 0.75 | 0.413 | 0.7 | 0.368 |
+| Neural stem cell | scvi_rf | 0.0 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.05 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.1 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.15 | 0.4 | 0.304 | 0.746 |
+| Neural stem cell | scvi_rf | 0.2 | 0.43 | 0.346 | 0.726 |
+| Neural stem cell | scvi_rf | 0.25 | 0.468 | 0.409 | 0.681 |
+| Neural stem cell | scvi_rf | 0.5 | 0.39 | 0.727 | 0.335 |
+| Neural stem cell | scvi_rf | 0.75 | 0.151 | 0.797 | 0.118 |
+| Neural stem cell | seurat | 0.0 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.05 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.1 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.15 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.2 | 0.256 | 0.342 | 0.304 |
+| Neural stem cell | seurat | 0.25 | 0.254 | 0.342 | 0.302 |
+| Neural stem cell | seurat | 0.5 | 0.215 | 0.367 | 0.229 |
+| Neural stem cell | seurat | 0.75 | 0.135 | 0.424 | 0.124 |
+
 ### Family
 
 | label | method | F1(0.0) | F1(0.25) | F1(0.5) | F1(0.75) |
@@ -369,6 +442,59 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 | seurat | Neural stem cell | 0.256 | 0.135 | 0.121 |
 | seurat | CNS macrophage | 0.928 | 0.814 | 0.114 |
 | seurat | Vascular | 0.906 | 0.848 | 0.058 |
+
+**Low-F1 cell types at cutoff=0 (F1 < 0.5) — precision/recall across all cutoffs:**
+
+| label | method | cutoff | F1 | precision | recall |
+| --- | --- | --- | --- | --- | --- |
+| Neural stem cell | scvi_knn | 0.0 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.05 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.1 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.15 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.2 | 0.516 | 0.517 | 0.617 |
+| Neural stem cell | scvi_knn | 0.25 | 0.518 | 0.522 | 0.617 |
+| Neural stem cell | scvi_knn | 0.5 | 0.499 | 0.608 | 0.524 |
+| Neural stem cell | scvi_knn | 0.75 | 0.413 | 0.7 | 0.368 |
+| Neural stem cell | scvi_rf | 0.0 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.05 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.1 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.15 | 0.4 | 0.304 | 0.746 |
+| Neural stem cell | scvi_rf | 0.2 | 0.43 | 0.346 | 0.726 |
+| Neural stem cell | scvi_rf | 0.25 | 0.468 | 0.409 | 0.681 |
+| Neural stem cell | scvi_rf | 0.5 | 0.39 | 0.727 | 0.335 |
+| Neural stem cell | scvi_rf | 0.75 | 0.151 | 0.797 | 0.118 |
+| Neural stem cell | seurat | 0.0 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.05 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.1 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.15 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.2 | 0.256 | 0.342 | 0.304 |
+| Neural stem cell | seurat | 0.25 | 0.254 | 0.342 | 0.302 |
+| Neural stem cell | seurat | 0.5 | 0.215 | 0.367 | 0.229 |
+| Neural stem cell | seurat | 0.75 | 0.135 | 0.424 | 0.124 |
+| OPC | scvi_knn | 0.0 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.05 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.1 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.15 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.2 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.25 | 0.261 | 0.901 | 0.217 |
+| OPC | scvi_knn | 0.5 | 0.175 | 0.849 | 0.148 |
+| OPC | scvi_knn | 0.75 | 0.048 | 0.847 | 0.036 |
+| OPC | scvi_rf | 0.0 | 0.06 | 0.996 | 0.044 |
+| OPC | scvi_rf | 0.05 | 0.06 | 0.996 | 0.044 |
+| OPC | scvi_rf | 0.1 | 0.06 | 0.996 | 0.044 |
+| OPC | scvi_rf | 0.15 | 0.058 | 0.996 | 0.042 |
+| OPC | scvi_rf | 0.2 | 0.05 | 0.994 | 0.037 |
+| OPC | scvi_rf | 0.25 | 0.038 | 1.0 | 0.029 |
+| OPC | scvi_rf | 0.5 | 0.0 | nan | 0.0 |
+| OPC | scvi_rf | 0.75 | 0.0 | nan | 0.0 |
+| OPC | seurat | 0.0 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.05 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.1 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.15 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.2 | 0.078 | 0.252 | 0.083 |
+| OPC | seurat | 0.25 | 0.078 | 0.252 | 0.083 |
+| OPC | seurat | 0.5 | 0.062 | 0.275 | 0.065 |
+| OPC | seurat | 0.75 | 0.038 | 0.809 | 0.034 |
 
 ### Class
 
@@ -421,6 +547,131 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 | seurat | Microglia | 0.456 | 0.352 | 0.104 |
 | seurat | Vascular | 0.906 | 0.848 | 0.058 |
 | seurat | Hippocampal neuron | 0.836 | 0.781 | 0.055 |
+
+**Low-F1 cell types at cutoff=0 (F1 < 0.5) — precision/recall across all cutoffs:**
+
+| label | method | cutoff | F1 | precision | recall |
+| --- | --- | --- | --- | --- | --- |
+| Cajal-Retzius cell | scvi_knn | 0.0 | 0.564 | 1.0 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.05 | 0.564 | 1.0 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.1 | 0.564 | 1.0 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.15 | 0.564 | 1.0 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.2 | 0.564 | 1.0 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.25 | 0.564 | 1.0 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.5 | 0.445 | 1.0 | 0.419 |
+| Cajal-Retzius cell | scvi_knn | 0.75 | 0.235 | 1.0 | 0.22 |
+| Cajal-Retzius cell | scvi_rf | 0.0 | 0.365 | 1.0 | 0.337 |
+| Cajal-Retzius cell | scvi_rf | 0.05 | 0.365 | 1.0 | 0.337 |
+| Cajal-Retzius cell | scvi_rf | 0.1 | 0.365 | 1.0 | 0.337 |
+| Cajal-Retzius cell | scvi_rf | 0.15 | 0.365 | 1.0 | 0.337 |
+| Cajal-Retzius cell | scvi_rf | 0.2 | 0.343 | 1.0 | 0.312 |
+| Cajal-Retzius cell | scvi_rf | 0.25 | 0.242 | 1.0 | 0.216 |
+| Cajal-Retzius cell | scvi_rf | 0.5 | 0.02 | 1.0 | 0.015 |
+| Cajal-Retzius cell | scvi_rf | 0.75 | 0.0 | nan | 0.0 |
+| Cajal-Retzius cell | seurat | 0.0 | 0.453 | 0.929 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.05 | 0.453 | 0.929 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.1 | 0.453 | 0.929 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.15 | 0.453 | 0.929 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.2 | 0.453 | 0.929 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.25 | 0.453 | 0.929 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.5 | 0.42 | 0.901 | 0.404 |
+| Cajal-Retzius cell | seurat | 0.75 | 0.243 | 0.878 | 0.229 |
+| Macrophage | scvi_knn | 0.0 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.05 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.1 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.15 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.2 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.25 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.5 | 0.204 | 0.127 | 0.719 |
+| Macrophage | scvi_knn | 0.75 | 0.172 | 0.11 | 0.586 |
+| Macrophage | scvi_rf | 0.0 | 0.242 | 0.148 | 0.874 |
+| Macrophage | scvi_rf | 0.05 | 0.242 | 0.148 | 0.874 |
+| Macrophage | scvi_rf | 0.1 | 0.242 | 0.148 | 0.874 |
+| Macrophage | scvi_rf | 0.15 | 0.242 | 0.148 | 0.874 |
+| Macrophage | scvi_rf | 0.2 | 0.24 | 0.148 | 0.865 |
+| Macrophage | scvi_rf | 0.25 | 0.224 | 0.138 | 0.807 |
+| Macrophage | scvi_rf | 0.5 | 0.149 | 0.098 | 0.495 |
+| Macrophage | scvi_rf | 0.75 | 0.057 | 0.046 | 0.124 |
+| Macrophage | seurat | 0.0 | 0.179 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.05 | 0.179 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.1 | 0.179 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.15 | 0.179 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.2 | 0.179 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.25 | 0.179 | 0.129 | 0.583 |
+| Macrophage | seurat | 0.5 | 0.17 | 0.121 | 0.559 |
+| Macrophage | seurat | 0.75 | 0.146 | 0.111 | 0.475 |
+| Microglia | scvi_knn | 0.0 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.05 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.1 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.15 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.2 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.25 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.5 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.75 | 0.0 | nan | 0.0 |
+| Microglia | scvi_rf | 0.0 | 0.01 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.05 | 0.01 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.1 | 0.01 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.15 | 0.009 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.2 | 0.009 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.25 | 0.006 | 1.0 | 0.004 |
+| Microglia | scvi_rf | 0.5 | 0.0 | nan | 0.0 |
+| Microglia | scvi_rf | 0.75 | 0.0 | nan | 0.0 |
+| Microglia | seurat | 0.0 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.05 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.1 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.15 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.2 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.25 | 0.456 | 0.952 | 0.439 |
+| Microglia | seurat | 0.5 | 0.453 | 0.954 | 0.435 |
+| Microglia | seurat | 0.75 | 0.352 | 0.964 | 0.331 |
+| Neural stem cell | scvi_knn | 0.0 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.05 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.1 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.15 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.2 | 0.516 | 0.517 | 0.617 |
+| Neural stem cell | scvi_knn | 0.25 | 0.518 | 0.522 | 0.617 |
+| Neural stem cell | scvi_knn | 0.5 | 0.499 | 0.608 | 0.524 |
+| Neural stem cell | scvi_knn | 0.75 | 0.413 | 0.7 | 0.368 |
+| Neural stem cell | scvi_rf | 0.0 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.05 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.1 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.15 | 0.4 | 0.304 | 0.746 |
+| Neural stem cell | scvi_rf | 0.2 | 0.43 | 0.346 | 0.726 |
+| Neural stem cell | scvi_rf | 0.25 | 0.468 | 0.409 | 0.681 |
+| Neural stem cell | scvi_rf | 0.5 | 0.39 | 0.727 | 0.335 |
+| Neural stem cell | scvi_rf | 0.75 | 0.151 | 0.797 | 0.118 |
+| Neural stem cell | seurat | 0.0 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.05 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.1 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.15 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.2 | 0.256 | 0.342 | 0.304 |
+| Neural stem cell | seurat | 0.25 | 0.254 | 0.342 | 0.302 |
+| Neural stem cell | seurat | 0.5 | 0.215 | 0.367 | 0.229 |
+| Neural stem cell | seurat | 0.75 | 0.135 | 0.424 | 0.124 |
+| OPC | scvi_knn | 0.0 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.05 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.1 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.15 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.2 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.25 | 0.261 | 0.901 | 0.217 |
+| OPC | scvi_knn | 0.5 | 0.175 | 0.849 | 0.148 |
+| OPC | scvi_knn | 0.75 | 0.048 | 0.847 | 0.036 |
+| OPC | scvi_rf | 0.0 | 0.06 | 0.996 | 0.044 |
+| OPC | scvi_rf | 0.05 | 0.06 | 0.996 | 0.044 |
+| OPC | scvi_rf | 0.1 | 0.06 | 0.996 | 0.044 |
+| OPC | scvi_rf | 0.15 | 0.058 | 0.996 | 0.042 |
+| OPC | scvi_rf | 0.2 | 0.05 | 0.994 | 0.037 |
+| OPC | scvi_rf | 0.25 | 0.038 | 1.0 | 0.029 |
+| OPC | scvi_rf | 0.5 | 0.0 | nan | 0.0 |
+| OPC | scvi_rf | 0.75 | 0.0 | nan | 0.0 |
+| OPC | seurat | 0.0 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.05 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.1 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.15 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.2 | 0.078 | 0.252 | 0.083 |
+| OPC | seurat | 0.25 | 0.078 | 0.252 | 0.083 |
+| OPC | seurat | 0.5 | 0.062 | 0.275 | 0.065 |
+| OPC | seurat | 0.75 | 0.038 | 0.809 | 0.034 |
 
 ### Subclass
 
@@ -482,6 +733,131 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 | seurat | CA3 | 0.765 | 0.603 | 0.162 |
 | seurat | Neural stem cell | 0.256 | 0.135 | 0.121 |
 | seurat | Microglia | 0.456 | 0.352 | 0.104 |
+
+**Low-F1 cell types at cutoff=0 (F1 < 0.5) — precision/recall across all cutoffs:**
+
+| label | method | cutoff | F1 | precision | recall |
+| --- | --- | --- | --- | --- | --- |
+| Cajal-Retzius cell | scvi_knn | 0.0 | 0.561 | 0.982 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.05 | 0.561 | 0.982 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.1 | 0.561 | 0.982 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.15 | 0.561 | 0.982 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.2 | 0.561 | 0.994 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.25 | 0.563 | 0.997 | 0.537 |
+| Cajal-Retzius cell | scvi_knn | 0.5 | 0.445 | 1.0 | 0.419 |
+| Cajal-Retzius cell | scvi_knn | 0.75 | 0.235 | 1.0 | 0.22 |
+| Cajal-Retzius cell | scvi_rf | 0.0 | 0.355 | 0.843 | 0.337 |
+| Cajal-Retzius cell | scvi_rf | 0.05 | 0.355 | 0.843 | 0.337 |
+| Cajal-Retzius cell | scvi_rf | 0.1 | 0.355 | 0.843 | 0.337 |
+| Cajal-Retzius cell | scvi_rf | 0.15 | 0.361 | 0.924 | 0.337 |
+| Cajal-Retzius cell | scvi_rf | 0.2 | 0.339 | 0.916 | 0.312 |
+| Cajal-Retzius cell | scvi_rf | 0.25 | 0.241 | 0.923 | 0.216 |
+| Cajal-Retzius cell | scvi_rf | 0.5 | 0.02 | 1.0 | 0.015 |
+| Cajal-Retzius cell | scvi_rf | 0.75 | 0.0 | nan | 0.0 |
+| Cajal-Retzius cell | seurat | 0.0 | 0.453 | 0.895 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.05 | 0.453 | 0.895 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.1 | 0.453 | 0.895 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.15 | 0.453 | 0.895 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.2 | 0.453 | 0.895 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.25 | 0.453 | 0.895 | 0.437 |
+| Cajal-Retzius cell | seurat | 0.5 | 0.42 | 0.901 | 0.404 |
+| Cajal-Retzius cell | seurat | 0.75 | 0.243 | 0.878 | 0.229 |
+| Macrophage | scvi_knn | 0.0 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.05 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.1 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.15 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.2 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.25 | 0.212 | 0.131 | 0.752 |
+| Macrophage | scvi_knn | 0.5 | 0.204 | 0.127 | 0.719 |
+| Macrophage | scvi_knn | 0.75 | 0.172 | 0.11 | 0.586 |
+| Macrophage | scvi_rf | 0.0 | 0.235 | 0.143 | 0.874 |
+| Macrophage | scvi_rf | 0.05 | 0.235 | 0.143 | 0.874 |
+| Macrophage | scvi_rf | 0.1 | 0.235 | 0.143 | 0.874 |
+| Macrophage | scvi_rf | 0.15 | 0.236 | 0.144 | 0.874 |
+| Macrophage | scvi_rf | 0.2 | 0.237 | 0.145 | 0.865 |
+| Macrophage | scvi_rf | 0.25 | 0.223 | 0.137 | 0.807 |
+| Macrophage | scvi_rf | 0.5 | 0.149 | 0.098 | 0.495 |
+| Macrophage | scvi_rf | 0.75 | 0.057 | 0.046 | 0.124 |
+| Macrophage | seurat | 0.0 | 0.178 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.05 | 0.178 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.1 | 0.178 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.15 | 0.178 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.2 | 0.178 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.25 | 0.178 | 0.128 | 0.583 |
+| Macrophage | seurat | 0.5 | 0.17 | 0.121 | 0.559 |
+| Macrophage | seurat | 0.75 | 0.146 | 0.111 | 0.475 |
+| Microglia | scvi_knn | 0.0 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.05 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.1 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.15 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.2 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.25 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.5 | 0.0 | nan | 0.0 |
+| Microglia | scvi_knn | 0.75 | 0.0 | nan | 0.0 |
+| Microglia | scvi_rf | 0.0 | 0.01 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.05 | 0.01 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.1 | 0.01 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.15 | 0.009 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.2 | 0.009 | 1.0 | 0.006 |
+| Microglia | scvi_rf | 0.25 | 0.006 | 1.0 | 0.004 |
+| Microglia | scvi_rf | 0.5 | 0.0 | nan | 0.0 |
+| Microglia | scvi_rf | 0.75 | 0.0 | nan | 0.0 |
+| Microglia | seurat | 0.0 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.05 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.1 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.15 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.2 | 0.456 | 0.951 | 0.439 |
+| Microglia | seurat | 0.25 | 0.456 | 0.952 | 0.439 |
+| Microglia | seurat | 0.5 | 0.453 | 0.954 | 0.435 |
+| Microglia | seurat | 0.75 | 0.352 | 0.964 | 0.331 |
+| Neural stem cell | scvi_knn | 0.0 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.05 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.1 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.15 | 0.515 | 0.515 | 0.617 |
+| Neural stem cell | scvi_knn | 0.2 | 0.516 | 0.517 | 0.617 |
+| Neural stem cell | scvi_knn | 0.25 | 0.518 | 0.522 | 0.617 |
+| Neural stem cell | scvi_knn | 0.5 | 0.499 | 0.608 | 0.524 |
+| Neural stem cell | scvi_knn | 0.75 | 0.413 | 0.7 | 0.368 |
+| Neural stem cell | scvi_rf | 0.0 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.05 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.1 | 0.386 | 0.288 | 0.748 |
+| Neural stem cell | scvi_rf | 0.15 | 0.4 | 0.304 | 0.746 |
+| Neural stem cell | scvi_rf | 0.2 | 0.43 | 0.346 | 0.726 |
+| Neural stem cell | scvi_rf | 0.25 | 0.468 | 0.409 | 0.681 |
+| Neural stem cell | scvi_rf | 0.5 | 0.39 | 0.727 | 0.335 |
+| Neural stem cell | scvi_rf | 0.75 | 0.151 | 0.797 | 0.118 |
+| Neural stem cell | seurat | 0.0 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.05 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.1 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.15 | 0.256 | 0.342 | 0.305 |
+| Neural stem cell | seurat | 0.2 | 0.256 | 0.342 | 0.304 |
+| Neural stem cell | seurat | 0.25 | 0.254 | 0.342 | 0.302 |
+| Neural stem cell | seurat | 0.5 | 0.215 | 0.367 | 0.229 |
+| Neural stem cell | seurat | 0.75 | 0.135 | 0.424 | 0.124 |
+| OPC | scvi_knn | 0.0 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.05 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.1 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.15 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.2 | 0.262 | 0.902 | 0.218 |
+| OPC | scvi_knn | 0.25 | 0.261 | 0.901 | 0.217 |
+| OPC | scvi_knn | 0.5 | 0.175 | 0.849 | 0.148 |
+| OPC | scvi_knn | 0.75 | 0.048 | 0.847 | 0.036 |
+| OPC | scvi_rf | 0.0 | 0.06 | 0.996 | 0.044 |
+| OPC | scvi_rf | 0.05 | 0.06 | 0.996 | 0.044 |
+| OPC | scvi_rf | 0.1 | 0.06 | 0.996 | 0.044 |
+| OPC | scvi_rf | 0.15 | 0.058 | 0.996 | 0.042 |
+| OPC | scvi_rf | 0.2 | 0.05 | 0.994 | 0.037 |
+| OPC | scvi_rf | 0.25 | 0.038 | 1.0 | 0.029 |
+| OPC | scvi_rf | 0.5 | 0.0 | nan | 0.0 |
+| OPC | scvi_rf | 0.75 | 0.0 | nan | 0.0 |
+| OPC | seurat | 0.0 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.05 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.1 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.15 | 0.079 | 0.252 | 0.083 |
+| OPC | seurat | 0.2 | 0.078 | 0.252 | 0.083 |
+| OPC | seurat | 0.25 | 0.078 | 0.252 | 0.083 |
+| OPC | seurat | 0.5 | 0.062 | 0.275 | 0.065 |
+| OPC | seurat | 0.75 | 0.038 | 0.809 | 0.034 |
 
 ### Hippocampal Contamination
 
@@ -603,56 +979,59 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 
 
 ---
+
 ## Macro F1 vs Per-Cell-Type F1 Conflict
 
-At global and family levels, scvi_rf leads macro F1 (global: 0.958 vs seurat 0.940; family: 0.923 vs seurat 0.906), but seurat wins most individual cell types at family (5/8: Astrocyte, GABAergic, Glutamatergic, Oligodendrocyte, Vascular) while scvi_knn wins 3/8 (CNS macrophage, OPC, Neural stem cell). At class and subclass, seurat leads both macro F1 and per-type wins. The scvi_rf macro F1 advantage at coarser levels reflects higher per-type F1 at cutoff=0 on majority neuron classes, but this advantage collapses entirely at any cutoff > 0.20 — making scvi_rf impractical as a cutoff-robust method.
+At global and family levels, scVI RF achieves the highest model-adjusted macro F1 (global: 0.939, family: 0.907), significantly outperforming Seurat (0.913, 0.886). However, in per-cell-type rankings, Seurat wins the best configuration for 5/8 family-level cell types (Astrocyte, GABAergic, Glutamatergic, Oligodendrocyte, Vascular) while scVI RF wins none. This discrepancy arises because scVI RF's macro advantage is driven by Glutamatergic and GABAergic neurons, which dominate cell counts and thus macro averaging, even though Seurat achieves higher F1 for these same types at their individually optimal configurations.
+
+At class and subclass, scVI RF and Seurat are statistically indistinguishable (class: 0.815 vs 0.811, p=0.197; subclass: 0.801 vs 0.806, p=0.055), yet Seurat wins 5/9 class-level and 9/12 subclass-level cell types. scVI RF's macro EMM advantage at global/family thus does not reflect uniformly superior per-type performance.
+
+Critically, scVI RF is far more cutoff-sensitive: at family, Glutamatergic drops from 0.788 → 0.047 and GABAergic from 0.820 → 0.126 by cutoff=0.75, compared to Seurat drops of 0.798 → 0.634 and 0.916 → 0.705. scVI kNN is intermediate. Any pipeline applying a confidence cutoff should strongly prefer Seurat or scVI kNN over scVI RF.
+
+---
 
 ## Configuration Recommendation
 
-### Recommended Taxonomy Level: family
+**Date:** 2026-04-20  
+**Goal:** Identify the best method, reference, cutoff, and subsample_ref for mouse brain cell-type annotation.
 
-**Systematic failures (mean F1 < 0.50, n >= 3 studies):**
+### Recommended Taxonomy Level: Family
 
-| Taxonomy level | Failing types |
-| --- | --- |
-| subclass | OPC (F1=0.131, n=6), Microglia (F1=0.154, n=6) |
-| class | OPC (F1=0.277, n=6), Microglia (F1=0.459, n=6) |
-| family | OPC (F1=0.277, n=6) |
-
-Microglia fails at subclass and class but collapses into CNS macrophage at family (F1=0.960), resolving the failure. OPC persists as a systematic failure at family (F1=0.262–0.277 across methods, n=6) and should be excluded or manually curated. For cortex-focused studies, hippocampal subtypes (DG, CA1-ProS, CA3) also merge into Glutamatergic/GABAergic at family, eliminating spurious hippocampal assignments without requiring a cutoff.
+Systematic failures (mean F1 < 0.5, ≥ 3 studies) at subclass and class: **OPC** (F1 = 0.131, 6 studies) and **Microglia** (F1 = 0.154, 6 studies). At family, Microglia collapses into CNS macrophage (F1 = 0.958), eliminating that failure. OPC remains a systematic failure at family (F1 = 0.131, 6 studies) due to near-zero reference support in most references — this is a coverage problem, not a model problem, and cannot be resolved by changing the classifier. Hippocampal subtypes (DG, CA1-ProS, CA3) collapse into Glutamatergic/GABAergic at family, which is appropriate for cortex-focused studies.
 
 ### Recommended Configuration
 
 | Dimension | Recommended value | Rationale |
-| --- | --- | --- |
-| Taxonomy level | family | Finest level without systematic failures; Microglia resolves into CNS macrophage (F1=0.960); hippocampal contamination eliminated structurally |
-| Method | Seurat | Wins 5/8 cell types at family; cutoff-stable (Astrocyte 0.861→0.858 at 0.75); scvi_rf wins on macro F1 (0.923 vs 0.906) but collapses catastrophically with any cutoff |
-| Reference | Cortical+Hipp. 10x | Broadest family-level coverage including GABAergic and Glutamatergic; highest mean EMM at family (seurat: 0.946); Motor cortex has zero coverage for GABAergic/Glutamatergic |
-| Cutoff | 0 | scvi_rf is non-viable at any cutoff > 0.20 (Glutamatergic drops 0.741); seurat and scvi_knn are stable but cutoff offers no contamination benefit at family level |
-| subsample_ref | 100 | EMM difference from 500 negligible at family (0.919 vs 0.918); Seurat ref processing 2x faster (0.052 vs 0.117 hrs) |
+|-----------|------------------|-----------|
+| Taxonomy level | **family** | Eliminates Microglia failure (→ CNS macrophage, F1=0.958); OPC remains unresolvable at all levels due to missing reference support |
+| Method | **Seurat** (macro F1 alt: scVI RF) | Seurat wins 5/8 family-level cell types; scVI RF has higher macro EMM (0.907 vs 0.886) but wins 0/8 per-type and collapses at cutoff > 0.1. Use scVI RF only at cutoff=0 if macro F1 is the sole criterion. |
+| Reference | **Cortical+Hipp. 10x** | Highest mean EMM (0.912); includes hippocampal types (DG, CA1-ProS, CA3). OPC and Neural stem cell absent from this reference but fail in all references regardless. |
+| Cutoff | **0** | Any cutoff degrades scVI RF performance sharply; Seurat is more robust but cutoff=0 still maximises F1 across all methods. |
+| Subsample_ref | **100** | Indistinguishable from 500 at family (EMM: 0.902 vs 0.901); Seurat ref processing is 2× faster at 100 vs 500. |
 
-### Raw Performance — Recommended Configuration (Seurat, Cortical+Hipp. 10x, cutoff=0, subsample_ref=100)
+### Raw Performance: Seurat + Cortical+Hipp. 10x + cutoff=0 + subsample_ref=100
 
 | key | macro_f1_mean | macro_precision_mean | macro_recall_mean |
-| --- | --- | --- | --- |
+|-----|--------------|---------------------|------------------|
 | global | 0.897 | 0.866 | 0.976 |
 | family | 0.908 | 0.894 | 0.956 |
 | class | 0.828 | 0.797 | 0.948 |
 | subclass | 0.830 | 0.802 | 0.948 |
 
-### Compute Time — Recommended Configuration (Seurat, subsample_ref=100)
+### Compute Time: Seurat + subsample_ref=100
 
 | step | mean_duration (hrs) | mean_memory (GB) |
-| --- | --- | --- |
-| Query Processing | 0.032 | 0.025 |
+|------|--------------------|--------------------|
 | Ref Processing | 0.052 | 0.040 |
+| Query Processing | 0.032 | 0.025 |
 | Prediction | 0.019 | 0.021 |
-| **Total** | **0.103** | **0.086** |
 
-### Trade-off Narrative
+Total per-query wall time: ~0.10 hrs.
 
-scvi_knn offers comparable macro F1 at family (0.918 vs 0.906 Seurat) at half the compute time (0.053 vs 0.103 hrs total), making it the preferred alternative when throughput is the constraint. Seurat is recommended over scvi_knn when per-cell-type reliability matters — particularly for Astrocyte, Oligodendrocyte, and the major neuron families where seurat is more cutoff-stable and wins more studies.
+### Trade-offs
+
+scVI RF achieves 0.021 higher macro F1 at family (0.907 vs 0.886, significant) but wins zero individual cell types and is highly cutoff-sensitive; Seurat's per-type wins and robustness make it more reliable across diverse query datasets. scVI kNN (family macro EMM: 0.901) is a viable middle ground — outperforms Seurat on CNS macrophage and Neural stem cell while being more robust than scVI RF, at roughly half Seurat's compute cost.
 
 ### Pareto Note
 
-The recommended configuration (Seurat, Cortical+Hipp. 10x, subsample_ref=100) appears in the Pareto table at family level (mean_f1=0.912, 0.102 hrs), confirming it is not dominated on both performance and compute.
+Seurat + Cortical+Hipp. 10x + subsample_ref=100 appears in the Pareto-optimal table at family (mean_f1=0.912, 0.102 hrs) — the recommended configuration is Pareto-efficient.
