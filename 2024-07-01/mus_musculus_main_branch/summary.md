@@ -1,8 +1,8 @@
 # Cell-Type Annotation Benchmarking: Results Summary (Old Pipeline)
 
-> ⚠️ Old pipeline results (scVI monolithic + Seurat). No ref_support=0 filtering. Per-cell-type cutoff sensitivity tables unavailable. Compare with new pipeline results before drawing conclusions.
+> WARNING: Old pipeline results (scVI monolithic + Seurat). No ref_support=0 filtering. Per-cell-type cutoff sensitivity tables unavailable. Compare with new pipeline results before drawing conclusions.
 
-Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false//`
+Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/`
 
 ---
 
@@ -220,80 +220,80 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 
 **global**
 
-| Unnamed: 0 | Motor cortex | Cortical+Hipp. 10x | Cortical+Hipp. SSv4 | Whole cortex |
-| --- | --- | --- | --- | --- |
-| Neural stem cell | 246 | 0 | 0 | 494 |
-| Neuron | 5016 | 7605 | 6850 | 7678 |
-| Non-neuron | 3102 | 2440 | 1336 | 4511 |
+| label | All - A single-cell transcriptomic… | Motor cortex | Cortical+Hipp. 10x | Cortical+Hipp. SSv4 | Whole cortex |
+| --- | --- | --- | --- | --- | --- |
+| Neural stem cell | 248 | 246 | 0 | 0 | 494 |
+| Neuron | 0 | 343823 | 1149359 | 64794 | 1557976 |
+| Non-neuron | 19537 | 56301 | 15241 | 1799 | 92878 |
 
 **family**
 
-| Unnamed: 0 | Motor cortex | Cortical+Hipp. 10x | Cortical+Hipp. SSv4 | Whole cortex |
-| --- | --- | --- | --- | --- |
-| Astrocyte | 500 | 500 | 500 | 500 |
-| CNS macrophage | 555 | 500 | 177 | 1000 |
-| GABAergic | 2500 | 2500 | 2500 | 2500 |
-| Glutamatergic | 2516 | 5105 | 4350 | 5178 |
-| Leukocyte | 0 | 0 | 0 | 188 |
-| Neural stem cell | 246 | 0 | 0 | 494 |
-| Oligodendrocyte | 0 | 0 | 0 | 312 |
-| OPC | 500 | 500 | 229 | 500 |
-| Vascular | 1547 | 940 | 430 | 2011 |
+| label | All - A single-cell transcriptomic… | Motor cortex | Cortical+Hipp. 10x | Cortical+Hipp. SSv4 | Whole cortex |
+| --- | --- | --- | --- | --- | --- |
+| Astrocyte | 592 | 18905 | 3899 | 963 | 24359 |
+| CNS macrophage | 13580 | 8463 | 955 | 177 | 23175 |
+| GABAergic | 0 | 61650 | 177594 | 20531 | 259775 |
+| Glutamatergic | 0 | 282173 | 971765 | 44263 | 1298201 |
+| Leukocyte | 188 | 0 | 0 | 0 | 188 |
+| Neural stem cell | 248 | 246 | 0 | 0 | 494 |
+| OPC | 312 | 0 | 0 | 0 | 312 |
+| Oligodendrocyte | 2094 | 21549 | 8987 | 229 | 32859 |
+| Vascular | 2771 | 7384 | 1400 | 430 | 11985 |
 
 **class**
 
-| Unnamed: 0 | Motor cortex | Cortical+Hipp. 10x | Cortical+Hipp. SSv4 | Whole cortex |
-| --- | --- | --- | --- | --- |
-| Astrocyte | 500 | 500 | 500 | 500 |
-| Cajal-Retzius cell | 16 | 277 | 38 | 331 |
-| deep layer non-IT | 0 | 2328 | 1812 | 2347 |
-| Hippocampal neuron | 500 | 500 | 500 | 500 |
-| L2/3-6 IT | 500 | 500 | 500 | 500 |
-| LAMP5 | 0 | 0 | 0 | 188 |
-| Leukocyte | 500 | 500 | 177 | 500 |
-| Macrophage | 55 | 0 | 0 | 500 |
-| Microglia | 246 | 0 | 0 | 494 |
-| Neural stem cell | 0 | 0 | 0 | 312 |
-| Oligodendrocyte | 500 | 500 | 229 | 500 |
-| OPC | 500 | 500 | 500 | 500 |
-| PVALB | 500 | 500 | 500 | 500 |
-| SNCG | 500 | 500 | 500 | 500 |
-| SST | 500 | 500 | 500 | 500 |
-| Vascular | 1547 | 940 | 430 | 2011 |
-| VIP | 2000 | 2000 | 2000 | 2000 |
+| label | All - A single-cell transcriptomic… | Motor cortex | Cortical+Hipp. 10x | Cortical+Hipp. SSv4 | Whole cortex |
+| --- | --- | --- | --- | --- | --- |
+| Astrocyte | 592 | 18905 | 3899 | 963 | 24359 |
+| Cajal-Retzius cell | 0 | 16 | 277 | 38 | 331 |
+| Hippocampal neuron | 0 | 0 | 81035 | 4990 | 86025 |
+| L2/3-6 IT | 0 | 194564 | 645985 | 27175 | 867724 |
+| LAMP5 | 0 | 12656 | 42144 | 4430 | 59230 |
+| Leukocyte | 188 | 0 | 0 | 0 | 188 |
+| Macrophage | 312 | 8408 | 955 | 177 | 9852 |
+| Microglia | 13268 | 55 | 0 | 0 | 13323 |
+| Neural stem cell | 248 | 246 | 0 | 0 | 494 |
+| OPC | 312 | 0 | 0 | 0 | 312 |
+| Oligodendrocyte | 2094 | 21549 | 8987 | 229 | 32859 |
+| PVALB | 0 | 14706 | 30461 | 3581 | 48748 |
+| SNCG | 0 | 2594 | 13877 | 1419 | 17890 |
+| SST | 0 | 15733 | 47428 | 5366 | 68527 |
+| VIP | 0 | 15961 | 43684 | 5735 | 65380 |
+| Vascular | 2771 | 7384 | 1400 | 430 | 11985 |
+| deep layer non-IT | 0 | 87593 | 244468 | 12060 | 344121 |
 
 **subclass**
 
-| Unnamed: 0 | Motor cortex | Cortical+Hipp. 10x | Cortical+Hipp. SSv4 | Whole cortex |
-| --- | --- | --- | --- | --- |
-| Astrocyte | 500 | 500 | 500 | 500 |
-| CA1-ProS | 0 | 500 | 500 | 500 |
-| CA2-IG-FC | 0 | 328 | 19 | 347 |
-| CA3 | 0 | 500 | 322 | 500 |
-| Cajal-Retzius cell | 500 | 500 | 500 | 500 |
-| CT | 16 | 277 | 38 | 331 |
-| DG | 0 | 500 | 500 | 500 |
-| Endothelial | 500 | 500 | 193 | 500 |
-| Ependymal | 0 | 0 | 0 | 55 |
-| L2/3-6 IT | 500 | 500 | 500 | 500 |
-| L5 ET | 500 | 500 | 500 | 500 |
-| L6b | 500 | 500 | 500 | 500 |
-| LAMP5 | 500 | 500 | 500 | 500 |
-| Leukocyte | 0 | 0 | 0 | 188 |
-| Macrophage | 500 | 500 | 177 | 500 |
-| Microglia | 55 | 0 | 0 | 500 |
-| Neural stem cell | 500 | 500 | 500 | 500 |
-| NP | 246 | 0 | 0 | 494 |
-| Oligodendrocyte | 0 | 0 | 0 | 312 |
-| OPC | 500 | 500 | 229 | 500 |
-| Pericyte | 500 | 500 | 500 | 500 |
-| PVALB | 500 | 0 | 0 | 500 |
-| SMC | 47 | 288 | 121 | 456 |
-| SNCG | 500 | 500 | 500 | 500 |
-| SST | 500 | 500 | 500 | 500 |
-| SUB-ProS | 0 | 500 | 471 | 500 |
-| VIP | 500 | 500 | 500 | 500 |
-| VLMC | 500 | 152 | 116 | 500 |
+| label | All - A single-cell transcriptomic… | Motor cortex | Cortical+Hipp. 10x | Cortical+Hipp. SSv4 | Whole cortex |
+| --- | --- | --- | --- | --- | --- |
+| Astrocyte | 592 | 18905 | 3899 | 963 | 24359 |
+| CA1-ProS | 0 | 0 | 15897 | 1704 | 17601 |
+| CA2-IG-FC | 0 | 0 | 328 | 19 | 347 |
+| CA3 | 0 | 0 | 1675 | 322 | 1997 |
+| CT | 0 | 62674 | 154521 | 5501 | 222696 |
+| Cajal-Retzius cell | 0 | 16 | 277 | 38 | 331 |
+| DG | 0 | 0 | 58948 | 2474 | 61422 |
+| Endothelial | 2232 | 3483 | 960 | 193 | 6868 |
+| Ependymal | 55 | 0 | 0 | 0 | 55 |
+| L2/3-6 IT | 0 | 194564 | 645985 | 27175 | 867724 |
+| L5 ET | 0 | 6643 | 18443 | 1787 | 26873 |
+| L6b | 0 | 5801 | 35319 | 2348 | 43468 |
+| LAMP5 | 0 | 12656 | 42144 | 4430 | 59230 |
+| Leukocyte | 188 | 0 | 0 | 0 | 188 |
+| Macrophage | 312 | 8408 | 955 | 177 | 9852 |
+| Microglia | 13268 | 55 | 0 | 0 | 13323 |
+| NP | 0 | 12475 | 36185 | 2424 | 51084 |
+| Neural stem cell | 248 | 246 | 0 | 0 | 494 |
+| OPC | 312 | 0 | 0 | 0 | 312 |
+| Oligodendrocyte | 2094 | 21549 | 8987 | 229 | 32859 |
+| PVALB | 0 | 14706 | 30461 | 3581 | 48748 |
+| Pericyte | 484 | 1450 | 0 | 0 | 1934 |
+| SMC | 0 | 47 | 288 | 121 | 456 |
+| SNCG | 0 | 2594 | 13877 | 1419 | 17890 |
+| SST | 0 | 15733 | 47428 | 5366 | 68527 |
+| SUB-ProS | 0 | 0 | 4187 | 471 | 4658 |
+| VIP | 0 | 15961 | 43684 | 5735 | 65380 |
+| VLMC | 0 | 2404 | 152 | 116 | 2672 |
 
 ### Assay Exploration (mouse only)
 
@@ -360,61 +360,50 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 | scVI | Prediction | 100 | 0.017 | 0.013 |
 | scVI | Prediction | 500 | 0.022 | 0.013 |
 
----
-
-## TODO
-
-- [x] Fix reference coverage tables (`assets/ref_coverage/tabulamuris-mus-musculus/`): resolved — tables symlinked to corrected source at `nextflow_eval_pipeline/assets/ref_coverage/`. Zero-support cell types documented in `zero_support_celltypes.tsv`. Recommendation updated below.
 
 ---
 
 ## Macro F1 vs Per-Cell-Type Conflict
 
-scVI leads macro F1 at all levels (family EMM: 0.904 vs 0.855; subclass: 0.822 vs 0.773), but Seurat wins the best configuration for 14 of 19 cell types at subclass in per-cell-type rankings. The macro advantage of scVI likely reflects broadly stable performance across the large, common populations (Glutamatergic, GABAergic, Astrocyte) that dominate the macro average, whereas Seurat's per-cell-type wins include many rare or single-study types (CA1-ProS, CA3, DG, Cajal-Retzius cell) where Seurat's optimal reference differs from the single reference used in the macro model.
+scVI leads Seurat at every taxonomy level by macro F1 (subclass: 0.822 vs 0.773, OR = 0.739, p < 10^−63), yet Seurat achieves better best-config F1 for 15 of 18 cell types at subclass. The conflict arises because Seurat's wins are concentrated among hippocampal types (DG, CA1-ProS, CA3 — each appearing in only 1 study) and persistently low-F1 types (OPC: 0.199; Microglia: 0.459) where Seurat marginally outperforms scVI but both methods fail. scVI's macro advantage reflects consistently higher average F1 across the common cortical cell types that dominate the macro mean.
+
+---
+
+## Hippocampal Contamination
+
+Hippocampal contamination analysis not available — old pipeline does not include ref_support=0 filtering.
 
 ---
 
 ## Configuration Recommendation
 
-### Recommended Taxonomy Level: **family**
-
-Two cell types show systematic failures (mean F1 < 0.5 in ≥ 3 studies) at subclass and class:
-
-- **OPC**: mean F1 = 0.016 (subclass/class), n = 6 studies — fails at all levels including family (mean F1 = 0.199). Flag for manual curation; collapsing further to global removes biological resolution without resolving the problem.
-- **Microglia**: mean F1 = 0.116 (subclass), n = 6 studies — merges into CNS macrophage at family (mean F1 = 0.988, n = 6). Family eliminates this failure.
-
-Family is therefore the finest level where Microglia classification is reliable. OPC remains a known failure at all levels and should be excluded from downstream analysis or curated manually. For cortex-focused studies, hippocampal subtypes (CA1-ProS, CA3, DG — all present in only 1 study) merge into Glutamatergic at family, further reducing spurious label variation from region mismatch.
-
-### Recommended Configuration
+**Recommended taxonomy level: family.** Two cell types show systematic failures (mean F1 < 0.5 in ≥ 3 studies) at subclass: **OPC** (mean F1 = 0.199, 6 studies) and **Microglia** (mean F1 = 0.459, 6 studies). Neither improves at class (OPC remains 0.199; Microglia 0.459). At family these types persist as separate categories with unchanged failure rates — the taxonomy does not merge them further below global. Family is therefore the finest level where the remaining cell types are reliably annotated; OPC and Microglia should be flagged for manual curation. Hippocampal subtypes (DG, CA1-ProS, CA3) collapse into Glutamatergic at family, which is an additional argument for family in cortex-focused studies.
 
 | Dimension | Recommended value | Rationale |
-| --- | --- | --- |
-| Taxonomy level | family | Microglia failure (n=6 studies) eliminated at family (→ CNS macrophage, F1=0.988); OPC fails at all levels — flag for curation |
-| Method | scVI | Macro F1 EMM: scvi 0.904 vs seurat 0.855 at family; scvi wins macro at all levels. Note: seurat preferred at subclass for many individual cell types (14/19), but performance advantage is reference-specific |
-| Reference | Whole cortex | Highest mean F1 at family in Pareto (0.756); broadest biological scope. Motor cortex EMM slightly higher (0.908 vs 0.904) but coverage tables (note: may have errors — see TODO) show Oligodendrocyte = 0 at family — pending table correction |
-| Cutoff | 0.0 | scVI performance degrades sharply with cutoff (0.793 → 0.287 at subclass from 0.0 → 0.75); seurat is more robust (0.772 → 0.712) |
-| subsample_ref | 100 | Subclass EMM 0.797 vs 0.799 at 500 — negligible difference; Seurat ref processing 0.038 hrs at 100 vs 0.114 hrs at 500 |
+|---|---|---|
+| Taxonomy level | family | OPC (F1=0.199) and Microglia (F1=0.459) are systematic failures at subclass and class; family eliminates hippocampal subtypes (1 study each) |
+| Method | scVI | Higher macro F1 at all levels (subclass Δ = +0.049); Seurat cell-type wins are concentrated in low-F1 or single-study types |
+| Reference | Whole cortex | Highest model-adjusted EMM for scVI at subclass (0.822); broadest biological scope; Pareto-optimal (0.043h, 0.019GB) |
+| Cutoff | 0.0 | scVI is cutoff-sensitive; maximum F1 at 0.0; no contamination filtering available in old pipeline |
+| Subsample_ref | 100 | Subclass EMM 0.797 vs 0.799 for 500 — negligible difference at lower compute cost |
 
-### Raw Performance — scVI + Whole cortex + cutoff 0.0 + subsample_ref 100
+**Raw performance (scVI × Whole cortex × cutoff 0.0 × subsample_ref 100):**
 
-| key | macro_f1_mean | macro_precision_mean | macro_recall_mean |
-| --- | --- | --- | --- |
+| key | macro_f1 | macro_precision | macro_recall |
+|---|---|---|---|
 | global | 0.824 | 0.805 | 0.886 |
 | family | 0.770 | 0.888 | 0.783 |
 | class | 0.625 | 0.826 | 0.664 |
 | subclass | 0.644 | 0.844 | 0.672 |
 
-### Compute Time — scVI + subsample_ref 100
+*Note: Raw means are unmodeled and include study-heterogeneity effects; model-adjusted EMMs (scVI overall: global 0.966, family 0.904, class 0.839, subclass 0.822) are more reliable for comparison.*
+
+**Compute time (scVI × subsample_ref 100):**
 
 | step | mean_duration (hrs) | mean_memory (GB) |
-| --- | --- | --- |
+|---|---|---|
 | Query Processing | 0.025 | 0.019 |
 | Prediction | 0.017 | 0.013 |
+| **Total** | **0.042** | **0.032** |
 
-### Trade-offs
-
-scVI is substantially faster than Seurat (0.043 hrs total vs 0.109 hrs at subsample_ref 100) while achieving higher macro F1 at all levels; the per-cell-type win advantage of Seurat is reference-dependent and does not translate to a consistent macro benefit. For single-nucleus data, using a reference that includes nucleus data (cell_and_nucleus) yields +0.03–0.05 F1 at family over cell-only references.
-
-### Pareto Note
-
-scVI + Whole cortex + subsample_ref 100 is Pareto-optimal at family (mean F1 = 0.756, 0.043 hrs, 0.019 GB). The recommended configuration is Pareto-optimal.
+The motor cortex reference (seurat EMM 0.833 at subclass) marginally outperforms whole cortex for Seurat, but whole cortex is preferred for scVI (EMM 0.822 vs 0.819) and covers all brain regions in the query set. The recommended config (scVI × whole cortex × 100) appears in the Pareto table (mean F1 = 0.658, 0.043h, 0.019GB).
