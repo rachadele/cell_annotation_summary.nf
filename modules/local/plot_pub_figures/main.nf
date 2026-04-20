@@ -24,6 +24,7 @@ process PLOT_PUB_FIGURES {
         --method_emmeans ${method_emmeans} \\
         --factor_emmeans "${emmeans_str}" \\
         --model_coefs ${model_coefs} \\
+        --sample_results ${sample_results} \\
         --organism ${params.organism} \\
         --outdir . \\
         --output_prefix pub_figure
