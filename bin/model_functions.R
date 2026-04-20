@@ -93,16 +93,16 @@ run_beta_model <- function(df, formula, group_var = "study", type="weighted", mi
 }
 
 
-run_emmeans_weighted <- function(model, key) {
+run_emmeans_weighted <- function(model, key, subsample_ref_emmeans = "500") {
   results <- list()
 
   # Estimate for reference * method
-  emm_reference_method <- emmeans(model, specs = ~ reference * method, at = list(cutoff = 0, subsample_ref = "500"), type = "response")
+  emm_reference_method <- emmeans(model, specs = ~ reference * method, at = list(cutoff = 0, subsample_ref = subsample_ref_emmeans), type = "response")
   results$reference_method_emmeans_summary <- as.data.frame(summary(emm_reference_method)) %>% mutate(key = key)
   results$reference_method_emmeans_estimates <- as.data.frame(pairs(emm_reference_method)) %>% mutate(key = key)
 
   # Estimate for method
-  emm_method <- emmeans(model, specs = ~ method, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
+  emm_method <- emmeans(model, specs = ~ method, at = list(cutoff = 0, subsample_ref=subsample_ref_emmeans, reference="whole cortex"), type = "response")
   results$method_emmeans_summary <- as.data.frame(summary(emm_method)) %>% mutate(key = key)
   results$method_emmeans_estimates <- as.data.frame(pairs(emm_method)) %>% mutate(key = key)
 
@@ -112,19 +112,19 @@ run_emmeans_weighted <- function(model, key) {
   results$subsample_ref_emmeans_estimates <- as.data.frame(pairs(emm_subsample_ref)) %>% mutate(key = key)
 
   if ("sex" %in% colnames(model$frame)) {
-    emm_sex <- emmeans(model, specs = ~ sex, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
+    emm_sex <- emmeans(model, specs = ~ sex, at = list(cutoff = 0, subsample_ref=subsample_ref_emmeans, reference="whole cortex"), type = "response")
     results$sex_emmeans_summary <- as.data.frame(summary(emm_sex)) %>% mutate(key = key)
     results$sex_emmeans_estimates <- as.data.frame(pairs(emm_sex)) %>% mutate(key = key)
   }
 
   if ("disease_state" %in% colnames(model$frame)) {
-    emm_disease_state <- emmeans(model, specs = ~ disease_state, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
+    emm_disease_state <- emmeans(model, specs = ~ disease_state, at = list(cutoff = 0, subsample_ref=subsample_ref_emmeans, reference="whole cortex"), type = "response")
     results$disease_state_emmeans_summary <- as.data.frame(summary(emm_disease_state)) %>% mutate(key = key)
     results$disease_state_emmeans_estimates <- as.data.frame(pairs(emm_disease_state)) %>% mutate(key = key)
   }
 
   if ("treatment_state" %in% colnames(model$frame)) {
-    emm_treatment <- emmeans(model, specs = ~ treatment_state, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
+    emm_treatment <- emmeans(model, specs = ~ treatment_state, at = list(cutoff = 0, subsample_ref=subsample_ref_emmeans, reference="whole cortex"), type = "response")
     results$treatment_emmeans_summary <- as.data.frame(summary(emm_treatment)) %>% mutate(key = key)
     results$treatment_emmeans_estimates <- as.data.frame(pairs(emm_treatment)) %>% mutate(key = key)
   }
@@ -234,7 +234,7 @@ run_drop1 <- function(model, key_dir) {
   ggsave(file.path(key_dir, "drop1.png"), p, width = 20, height = 20, dpi = 300)
 }
 
-run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_var="study", mixed=TRUE) {
+run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_var="study", mixed=TRUE, subsample_ref_emmeans="500") {
   all_results <- list()
 
   if (!dir.exists(fig_dir)) {
@@ -258,7 +258,7 @@ run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_v
   plot_qq(model, fig_dir)
 
   if (type == "weighted") {
-    emmeans_results <- run_emmeans_weighted(model, key)
+    emmeans_results <- run_emmeans_weighted(model, key, subsample_ref_emmeans = subsample_ref_emmeans)
     all_results <- c(all_results, emmeans_results)
 
     cutoff_grid <- c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)

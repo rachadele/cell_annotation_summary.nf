@@ -27,6 +27,8 @@ theme_set(
 parser <- argparse::ArgumentParser()
 parser$add_argument("--aggregated_f1_results", help = "Path to the aggregated F1 results file",
   default="/space/grp/rschwartz/rschwartz/evaluation_summary.nf/work/e8/0ee4b04d0441800e9a092e9885599a/aggregated_f1_results.tsv")
+parser$add_argument("--subsample_ref_emmeans", help = "subsample_ref level used for emmeans evaluation",
+  default="500")
 args <- parser$parse_args()
 
 
@@ -89,7 +91,8 @@ for (df in df_list) {
     dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
 
     # Run model and get results
-    key_results <- run_and_store_model(df, formula, fig_dir = fig_dir, key = key, type = "weighted")
+    key_results <- run_and_store_model(df, formula, fig_dir = fig_dir, key = key, type = "weighted",
+                                       subsample_ref_emmeans = args$subsample_ref_emmeans)
 
     # Collect results by name
     for (result_name in names(key_results)) {
