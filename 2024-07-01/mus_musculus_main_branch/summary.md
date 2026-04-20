@@ -285,7 +285,13 @@ scVI is ~3× faster than Seurat end-to-end.
 
 ## Macro F1 vs Per-Cell-Type F1 Conflict
 
-The macro F1 ranking (scVI > Seurat at all levels, OR 0.739 at subclass) conflicts with the cell-type win-fraction ranking, where Seurat wins the best configuration for the majority of individual types at family, class, and subclass. scVI's advantage is concentrated in high-abundance types (Glutamatergic, GABAergic) that dominate the macro average. For analyses where per-type accuracy matters equally across rare and common types, Seurat is the more consistent performer. The cutoff sensitivity further favours Seurat: at cutoff=0.25, Seurat matches or exceeds scVI at every level.
+The macro F1 ranking (scVI > Seurat at all levels, OR 0.739 at subclass, p < 1e-63) conflicts with the cell-type win-fraction ranking, where Seurat wins the best configuration for the majority of individual types at family, class, and subclass.
+
+**Why macro F1 favours scVI.** Macro F1 is the mean F1 across all cell types present in a query sample, evaluated under a single configuration. It reflects overall annotation quality as a researcher would experience it in practice. scVI's advantage is large, statistically robust, and consistent across all taxonomy levels. The most likely explanation is that scVI has a substantial advantage on the two highest-abundance types — Glutamatergic and GABAergic — which appear in nearly every sample and therefore contribute disproportionately to the per-sample macro average. Even if Seurat wins more types by count, scVI's gains on dominant types outweigh those losses in aggregate.
+
+**Why the per-type win fraction matters.** The cell-type rankings identify the best-performing configuration for each type *independently*, which is not achievable in practice (you cannot use a different reference per cell type). However, the pattern is informative: Seurat consistently wins for vascular, microglial, and oligodendrocyte lineages, suggesting that the RF classifier generalises less well for non-neuronal rare types. Additionally, Seurat is nearly cutoff-insensitive (subclass EMM 0.772 → 0.712 from cutoff 0 → 0.75), whereas scVI degrades severely (0.793 → 0.287). For users who apply a non-zero confidence cutoff, Seurat's aggregate performance can meet or exceed scVI's.
+
+**Interpretation.** In datasets dominated by cortical excitatory and inhibitory neurons, scVI is the better aggregate choice. In datasets where non-neuronal or rare types are the scientific focus, or where a confidence cutoff will be applied, Seurat is more reliable.
 
 ---
 
