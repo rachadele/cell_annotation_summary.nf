@@ -14,9 +14,11 @@ process MODEL_EVAL_AGGREGATED {
     path "**/files/*_emmeans_summary.tsv" , emit: all_emmeans_summary
 
     script:
+    def subsample_arg = params.subsample_ref_emmeans ? "--subsample_ref_emmeans ${params.subsample_ref_emmeans}" : ""
     """
     Rscript ${projectDir}/bin/model_performance_aggregated.R \
         --aggregated_f1_results ${aggregated_f1_results} \
-        --emmeans_cutoff ${params.emmeans_cutoff}
+        --emmeans_cutoff ${params.emmeans_cutoff} \
+        ${subsample_arg}
     """
 }

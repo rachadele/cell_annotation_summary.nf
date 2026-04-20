@@ -98,16 +98,19 @@ run_beta_model <- function(df, formula, group_var = "study", type="weighted", mi
 }
 
 
-run_emmeans_weighted <- function(model, key, cutoff_ref = 0) {
+run_emmeans_weighted <- function(model, key, cutoff_ref = 0, subsample_ref_emmeans = "500") {
   results <- list()
   at_cutoff <- list(cutoff = cutoff_ref)
+  if ("subsample_ref" %in% colnames(model$frame)) {
+    at_cutoff$subsample_ref <- subsample_ref_emmeans
+  }
 
-  # Estimate for reference * method (average over subsample_ref levels)
+  # Estimate for reference * method (average over any remaining levels)
   emm_reference_method <- emmeans(model, specs = ~ reference * method, at = at_cutoff, type = "response")
   results$reference_method_emmeans_summary <- as.data.frame(summary(emm_reference_method)) %>% mutate(key = key)
   results$reference_method_emmeans_estimates <- as.data.frame(pairs(emm_reference_method)) %>% mutate(key = key)
 
-  # Estimate for method (average over references and subsample_ref levels)
+  # Estimate for method (average over references)
   emm_method <- emmeans(model, specs = ~ method, at = at_cutoff, type = "response")
   results$method_emmeans_summary <- as.data.frame(summary(emm_method)) %>% mutate(key = key)
   results$method_emmeans_estimates <- as.data.frame(pairs(emm_method)) %>% mutate(key = key)
@@ -240,7 +243,7 @@ run_drop1 <- function(model, key_dir) {
   ggsave(file.path(key_dir, "drop1.png"), p, width = 20, height = 20, dpi = 300)
 }
 
-run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_var="study", mixed=TRUE, cutoff_ref=0) {
+run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_var="study", mixed=TRUE, cutoff_ref=0, subsample_ref_emmeans="500") {
   all_results <- list()
 
   if (!dir.exists(fig_dir)) {
@@ -264,7 +267,9 @@ run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_v
   plot_qq(model, fig_dir)
 
   if (type == "weighted") {
-    emmeans_results <- run_emmeans_weighted(model, key, cutoff_ref = cutoff_ref)
+    emmeans_results <- run_emmeans_weighted(model, key,
+                                            cutoff_ref = cutoff_ref,
+                                            subsample_ref_emmeans = subsample_ref_emmeans)
     all_results <- c(all_results, emmeans_results)
 
     if ("cutoff" %in% colnames(model$frame)) {
