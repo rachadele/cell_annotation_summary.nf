@@ -11,5 +11,8 @@
     ],
     "remove_outliers": [
         "GSE180670"
-    ]
+    ],
+    "subsample_ref_emmeans": "500",
+    "metadata_dir": "/space/grp/rschwartz/rschwartz/get_gemma_data.nf/all_homo_sapiens_samples/metadata_standardized",
+    "outdir": "/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false"
 }

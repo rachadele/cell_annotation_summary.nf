@@ -73,7 +73,7 @@ def main():
                     f1_results_df = pd.concat([f1_results_df, tempdf], ignore_index=True)  # Append to the DataFrame
     
     
-    f1_results_df.to_csv(f"{run_name}_f1_results.tsv", sep="\t", index=False)
+    f1_results_df.to_csv(f"{run_name}_f1_results.tsv.gz", sep="\t", index=False, compression="gzip")
     
 if __name__ == "__main__":
     main()

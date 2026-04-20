@@ -22,6 +22,7 @@ import argparse
 import os
 import sys
 
+import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -36,6 +37,39 @@ DEFAULT_LABELS = (
     "/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false"
     "/aggregated_results/files/label_results.tsv"
 )
+
+_ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets")
+_CENSUS_BY_ORGANISM = {
+    "mus_musculus":  os.path.join(_ASSETS, "census_map_mouse_author.tsv"),
+    "homo_sapiens":  os.path.join(_ASSETS, "census_map_human.tsv"),
+}
+
+FAMILY_COLORS = {
+    "GABAergic":          "#4e79a7",
+    "Glutamatergic":      "#f28e2b",
+    "Astrocyte":          "#59a14f",
+    "Oligodendrocyte":    "#76b7b2",
+    "OPC":                "#edc948",
+    "Vascular":           "#e15759",
+    "Microglia":          "#ff9da7",
+    "CNS macrophage":     "#ff9da7",
+    "Neural stem cell":   "#b07aa1",
+    "Hippocampal neuron": "#9c755f",
+    "Leukocyte":          "#bab0ac",
+    "Neuron":             "#d4b483",
+    "Non-neuron":         "#999999",
+}
+
+
+def load_family_map(census_path: str) -> dict:
+    """Return {subclass: family} from a census map TSV."""
+    df = pd.read_csv(census_path, sep="\t")
+    return (
+        df.drop_duplicates(subset="subclass")
+        .set_index("subclass")["family"]
+        .to_dict()
+    )
+
 
 METRICS = ["f1_score", "precision", "recall"]
 METRIC_LABELS = {"f1_score": "F1", "precision": "Precision", "recall": "Recall"}
@@ -102,8 +136,14 @@ def write_summary(pivots: dict, outdir: str, prefix: str, key: str, cutoff: floa
     print(f"Saved {out}")
 
 
-def draw_heatmap(ax: plt.Axes, pivot: pd.DataFrame, title: str, cbar_label: str) -> None:
-    """Draw a single metric heatmap onto ax."""
+def draw_heatmap(
+    ax: plt.Axes,
+    pivot: pd.DataFrame,
+    title: str,
+    cbar_label: str,
+    family_map: dict | None = None,
+) -> None:
+    """Draw a single metric heatmap onto ax; colour y-tick labels by family."""
     nan_mask = pivot.isna()
     ax.pcolormesh(
         np.ones(pivot.shape),
@@ -129,21 +169,49 @@ def draw_heatmap(ax: plt.Axes, pivot: pd.DataFrame, title: str, cbar_label: str)
     for lbl in ax.get_xticklabels():
         lbl.set_ha("right")
 
+    if family_map:
+        for tick in ax.get_yticklabels():
+            lbl = tick.get_text()
+            family = family_map.get(lbl) or (lbl if lbl in FAMILY_COLORS else None)
+            tick.set_color(FAMILY_COLORS.get(family, "black"))
+
 
 ALL_KEYS = ["subclass", "class", "family", "global"]
+
+
+def make_family_legend(ax: plt.Axes, families_present: set) -> None:
+    """Add a family-colour legend to ax."""
+    handles = [
+        mpatches.Patch(color=FAMILY_COLORS.get(f, "black"), label=f)
+        for f in sorted(families_present)
+        if f in FAMILY_COLORS
+    ]
+    ax.legend(
+        handles=handles,
+        title="Cell-type family",
+        loc="center",
+        frameon=False,
+        fontsize=9,
+        title_fontsize=10,
+        ncol=2,
+    )
+    ax.axis("off")
 
 
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--label_results", default=DEFAULT_LABELS)
     p.add_argument("--organism", default="mus_musculus")
+    p.add_argument("--census", default=None,
+                   help="Path to census map TSV for family colouring; "
+                        "auto-detected from --organism if omitted")
     p.add_argument("--cutoff", default=0.0, type=float)
     p.add_argument("--outdir", default="figures")
     p.add_argument("--prefix", default="study_variance")
     return p.parse_args()
 
 
-def run_key(df_all, key, cutoff, outdir, prefix, organism):
+def run_key(df_all, key, cutoff, outdir, prefix, organism, family_map=None):
     df = df_all[df_all["key"] == key].copy()
     if df.empty:
         print(f"  No data for key={key}, skipping.")
@@ -164,12 +232,27 @@ def run_key(df_all, key, cutoff, outdir, prefix, organism):
 
     panel_h = max(3, len(row_order) * 0.35)
     fig_w   = 3 + len(col_order) * 0.75
-    fig, axes = plt.subplots(3, 1, figsize=(fig_w, panel_h * 3 + 0.5))
-    for ax, metric in zip(axes, METRICS):
+    legend_h = 2.0 if family_map else 0.0
+    fig, axes = plt.subplots(
+        4 if family_map else 3, 1,
+        figsize=(fig_w, panel_h * 3 + legend_h + 0.5),
+        gridspec_kw={"height_ratios": [panel_h, panel_h, panel_h, legend_h]} if family_map
+                    else {"height_ratios": [panel_h, panel_h, panel_h]},
+    )
+    heatmap_axes = axes[:3]
+    for ax, metric in zip(heatmap_axes, METRICS):
         lbl = METRIC_LABELS[metric]
         title = f"{lbl} by study — {organism} ({key}, cutoff={cutoff})"
-        draw_heatmap(ax, pivots[metric], title, lbl)
-    axes[-1].set_xlabel("Study", fontsize=9)
+        draw_heatmap(ax, pivots[metric], title, lbl, family_map=family_map)
+    heatmap_axes[-1].set_xlabel("Study", fontsize=9)
+
+    if family_map:
+        families_present = {
+            family_map.get(lbl) or (lbl if lbl in FAMILY_COLORS else None)
+            for lbl in row_order
+        } - {None}
+        make_family_legend(axes[3], families_present)
+
     plt.tight_layout(pad=1.5, h_pad=2.0)
     for ext in ("png", "pdf"):
         out = os.path.join(outdir, f"{key_prefix}.{ext}")
@@ -185,6 +268,13 @@ def main():
     os.makedirs(args.outdir, exist_ok=True)
     set_pub_style()
 
+    census_path = args.census or _CENSUS_BY_ORGANISM.get(args.organism)
+    family_map = load_family_map(census_path) if census_path and os.path.exists(census_path) else None
+    if family_map:
+        print(f"Loaded family map: {len(family_map)} entries from {census_path}")
+    else:
+        print("No census map found; y-tick labels will not be coloured.")
+
     print("Loading data...")
     df_all = pd.read_csv(
         args.label_results, sep="\t",
@@ -198,7 +288,8 @@ def main():
 
     summary_parts = []
     for key in ALL_KEYS:
-        tsv = run_key(df_all, key, args.cutoff, args.outdir, args.prefix, args.organism)
+        tsv = run_key(df_all, key, args.cutoff, args.outdir, args.prefix, args.organism,
+                      family_map=family_map)
         if tsv:
             summary_parts.append(pd.read_csv(tsv, sep="\t"))
 

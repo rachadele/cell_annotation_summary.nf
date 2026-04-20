@@ -17,11 +17,108 @@ import re
 # Function to parse command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Download model file based on organism, census version, and tree file.")
-    parser.add_argument('--pipeline_results', type=str, nargs = "+", 
-                        help="files containing f1 results with params")                                            
+    parser.add_argument('--pipeline_results', type=str, nargs = "+",
+                        help="files containing f1 results with params")
+    parser.add_argument('--metadata_dir', type=str, default=None,
+                        help="Directory containing per-study metadata TSVs for overriding sex/disease")
+    parser.add_argument('--remove_outliers', type=str, nargs='*', default=None,
+                        help="List of study names to exclude from all downstream analyses")
     if __name__ == "__main__":
         known_args, _ = parser.parse_known_args()
         return known_args
+
+
+# Column name aliases for sex and disease across studies
+SEX_COLS    = ['sex']
+DISEASE_COLS = ['disease', 'group', 'pathological diagnosis', 'treatment']
+
+# Per-study disease value normalisation: map raw value -> 'control' or leave as disease label
+DISEASE_CONTROL_VALUES = {
+    'control', 'Control', 'reference subject role', 'Unaffected', 'no',
+    'vehicle (PBS) for 12h', 'PN',   # GSE174332: PN = peripheral nerve (normal)
+}
+
+def _normalise_disease(val):
+    """Return 'control' if val is a known control label, else the original value."""
+    if pd.isna(val):
+        return np.nan
+    return 'control' if str(val) in DISEASE_CONTROL_VALUES else str(val)
+
+def _normalise_sex(val, study=None):
+    """Lowercase and expand single-letter codes; handle per-study numeric encodings."""
+    if pd.isna(val):
+        return np.nan
+    s = str(val).strip().lower()
+    # Mathys-2023 (ROSMAP): 0 = male, 1 = female
+    if study == 'Mathys-2023':
+        numeric_map = {'0': 'male', '1': 'female'}
+        if s in numeric_map:
+            return numeric_map[s]
+    mapping = {'m': 'male', 'f': 'female', 'fem': 'female'}
+    return mapping.get(s, s)
+
+def load_sample_metadata(metadata_dir):
+    """
+    Walk metadata_dir/<study>/<study>_sample_meta_std.tsv and build a dict
+    mapping str(sample_id) -> {'sex': ..., 'disease': ...}.
+    Returns empty dict if metadata_dir is None or missing.
+    """
+    if not metadata_dir or not os.path.isdir(metadata_dir):
+        return {}
+
+    sample_meta = {}
+    for study in os.listdir(metadata_dir):
+        study_path = os.path.join(metadata_dir, study)
+        if not os.path.isdir(study_path):
+            continue
+        tsv_files = [f for f in os.listdir(study_path) if f.endswith('.tsv')]
+        if not tsv_files:
+            continue
+        df = pd.read_csv(os.path.join(study_path, tsv_files[0]), sep='\t', dtype=str)
+
+        # Resolve sex column
+        sex_col = next((c for c in SEX_COLS if c in df.columns), None)
+        # Resolve disease column
+        disease_col = next((c for c in DISEASE_COLS if c in df.columns), None)
+
+        for _, row in df.iterrows():
+            sid = str(row['sample_id']) if 'sample_id' in df.columns else None
+            if sid is None:
+                continue
+            sex_val     = _normalise_sex(row[sex_col], study=study) if sex_col     else np.nan
+            disease_val = _normalise_disease(row[disease_col])       if disease_col else np.nan
+            sample_meta[sid] = {'sex': sex_val, 'disease': disease_val}
+
+    return sample_meta
+
+
+def apply_sample_metadata(df, sample_meta):
+    """
+    For each row, look up sample_id (query.split('_')[1]) in sample_meta and
+    fill in sex / disease where the existing value is NaN or empty.
+    """
+    if not sample_meta:
+        return df
+
+    df = df.copy()
+    # Ensure columns exist
+    for col in ('sex', 'disease'):
+        if col not in df.columns:
+            df[col] = np.nan
+
+    def _lookup(query, col):
+        parts = str(query).split('_')
+        if len(parts) < 2:
+            return np.nan
+        return sample_meta.get(parts[1], {}).get(col, np.nan)
+
+    mask_sex     = df['sex'].isna()     | (df['sex'].astype(str).str.strip() == '')
+    mask_disease = df['disease'].isna() | (df['disease'].astype(str).str.strip() == '')
+
+    df.loc[mask_sex,     'sex']     = df.loc[mask_sex,     'query'].apply(lambda q: _lookup(q, 'sex'))
+    df.loc[mask_disease, 'disease'] = df.loc[mask_disease, 'query'].apply(lambda q: _lookup(q, 'disease'))
+
+    return df
 
 def make_acronym(name):
     # Split on "_" and replace with spaces
@@ -46,7 +143,7 @@ def map_development_stage(stage):
 def write_factor_summary(df, factors):
     # 1. Summarize the number of unique levels for each factor
     unique_counts_df = df[factors].nunique().reset_index()
-    unique_counts_df.to_csv("factor_unique_counts.tsv", sep="\t", index=False)
+    unique_counts_df.to_csv("factor_unique_counts.tsv.gz", sep="\t", index=False, compression="gzip")
 
     cols = ['disease_state', 'treatment_state', 'sex']
     dfs = []
@@ -64,7 +161,7 @@ def write_factor_summary(df, factors):
             dfs.append(unique_counts)
 
     result_df = pd.concat(dfs, ignore_index=True) 
-    result_df.to_csv("factor_unique_sample_counts.tsv", sep="\t", index=False)
+    result_df.to_csv("factor_unique_sample_counts.tsv.gz", sep="\t", index=False, compression="gzip")
     
 def update_metrics(df):
     # set metrics to nan when support is 0
@@ -119,7 +216,7 @@ def print_study_factor_table(label_results, organism):
     out_cols = [study_col] + columns
     # write to tsv
     table_df = pd.DataFrame(table)[out_cols]
-    table_df.to_csv("study_factor_summary.tsv", sep="\t", index=False)
+    table_df.to_csv("study_factor_summary.tsv.gz", sep="\t", index=False, compression="gzip")
  
 def main():
     args = parse_arguments()
@@ -139,6 +236,16 @@ def main():
             contamination.to_csv("contamination.tsv", sep="\t", index=False)
 
     results_df = results_df[results_df['support'] > 0]
+
+    # --- Remove outlier studies ---
+    if args.remove_outliers:
+        study_col = results_df["query"].apply(lambda x: x.split("_")[0])
+        results_df = results_df[~study_col.isin(args.remove_outliers)]
+
+    # --- Apply external sample metadata (fill missing sex / disease) ---
+    if organism == "homo_sapiens" and args.metadata_dir:
+        sample_meta = load_sample_metadata(args.metadata_dir)
+        results_df = apply_sample_metadata(results_df, sample_meta)
 
     # --- Derive columns ---
     results_df["study"] = results_df["query"].apply(lambda x: x.split("_")[0])
@@ -184,7 +291,7 @@ def main():
     sample_results = sample_results.drop_duplicates()
     sample_results = sample_results[sample_results["weighted_f1"].notnull()]
     sample_results = sample_results.fillna("None")
-    sample_results.to_csv("sample_results.tsv", sep="\t", index=False)
+    sample_results.to_csv("sample_results.tsv.gz", sep="\t", index=False, compression="gzip")
 
     weighted_metrics = [
         "weighted_f1", "weighted_precision", "weighted_recall",
@@ -202,14 +309,14 @@ def main():
     weighted_summary = sample_results.groupby(
         ["method", "cutoff", "reference", "key", "subsample_ref"]
     ).agg(**weighted_agg).reset_index()
-    weighted_summary.to_csv("sample_results_summary.tsv", sep="\t", index=False)
+    weighted_summary.to_csv("sample_results_summary.tsv.gz", sep="\t", index=False, compression="gzip")
 
     # --- Label F1 results ---
     label_results = results_df[results_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
     label_results = label_results.fillna("None")
     label_results = label_results[label_results["label"] != "unkown"]
-    label_results.to_csv("label_results.tsv", sep="\t", index=False)
+    label_results.to_csv("label_results.tsv.gz", sep="\t", index=False, compression="gzip")
 
     label_metrics = ["f1_score", "precision", "recall"]
     for m in label_metrics:
@@ -224,7 +331,7 @@ def main():
     label_summary = label_results.groupby(
         ["label", "method", "cutoff", "reference", "key", "subsample_ref"]
     ).agg(**label_agg).reset_index()
-    label_summary.to_csv("label_results_summary.tsv", sep="\t", index=False)
+    label_summary.to_csv("label_results_summary.tsv.gz", sep="\t", index=False, compression="gzip")
 
     # --- Factor summaries ---
     if organism == "homo_sapiens":

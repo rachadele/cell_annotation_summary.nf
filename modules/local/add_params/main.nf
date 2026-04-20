@@ -6,7 +6,7 @@ process ADD_PARAMS {
     tuple val(run_name), val(params_file), val(ref_obs), val(f1_results)
 
     output:
-    path "*f1_results.tsv", emit: f1_results_params
+    path "*f1_results.tsv.gz", emit: f1_results_params
 
     script:
     """

@@ -6,7 +6,6 @@ process PLOT_STUDY_VARIANCE {
 
     output:
     path "study_variance/*.png",  emit: plots
-    path "study_variance/*.pdf",  emit: pdfs
     path "study_variance/*.tsv",  emit: summary
 
     script:

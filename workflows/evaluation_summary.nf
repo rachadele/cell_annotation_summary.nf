@@ -61,7 +61,11 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Aggregate results across runs
     //
-    AGGREGATE_RESULTS(ADD_PARAMS.out.f1_results_params.flatten().toList())
+    AGGREGATE_RESULTS(
+        ADD_PARAMS.out.f1_results_params.flatten().toList(),
+        params.metadata_dir ?: "",
+        params.remove_outliers ?: null
+    )
 
     //
     // MODULE: Join study and reference metadata (mouse only)
