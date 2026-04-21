@@ -49,11 +49,13 @@ def plot(df, keys, outpath, cutoff=0, subsample_ref=100):
 
     nrows = len(keys)
     ncols = len(refs)
-    fig, axes = plt.subplots(nrows, ncols, figsize=(5 * ncols, 4 * nrows),
+    fig, axes = plt.subplots(nrows, ncols, figsize=(9 * ncols, 6 * nrows),
                              sharey=False, sharex=True)
 
     if nrows == 1:
         axes = [axes]
+
+    import textwrap
 
     for ri, key in enumerate(keys):
         df_key = df[df["key"] == key]
@@ -73,12 +75,8 @@ def plot(df, keys, outpath, cutoff=0, subsample_ref=100):
                     continue
                 vals = tbl[method].values
                 ax.scatter(x + offsets[method], vals,
-                           color=METHOD_COLORS[method], s=60, zorder=3,
+                           color=METHOD_COLORS[method], s=200, zorder=3,
                            label=METHOD_LABELS[method])
-                # connect same-study points with faint lines
-                for xi, v in zip(x + offsets[method], vals):
-                    if not np.isnan(v):
-                        ax.plot([xi, xi], [v, v], color=METHOD_COLORS[method], alpha=0)
 
             # draw thin connecting lines across methods per study
             for si, study in enumerate(study_order):
@@ -88,29 +86,29 @@ def plot(df, keys, outpath, cutoff=0, subsample_ref=100):
                 pts = [(si + offsets[m], row[m]) for m in methods if m in row and not np.isnan(row[m])]
                 if len(pts) > 1:
                     xs, ys = zip(*pts)
-                    ax.plot(xs, ys, color="grey", lw=0.8, alpha=0.4, zorder=1)
+                    ax.plot(xs, ys, color="grey", lw=1.5, alpha=0.4, zorder=1)
 
             ax.set_xticks(x)
-            ax.set_xticklabels(study_order, fontsize=7, rotation=45, ha="right")
+            ax.set_xticklabels(study_order, fontsize=16, rotation=45, ha="right")
+            ax.tick_params(axis="y", labelsize=16)
             ax.set_ylim(0.3, 1.02)
-            ax.axhline(0.5, color="lightgrey", lw=0.8, ls="--", zorder=0)
+            ax.axhline(0.5, color="lightgrey", lw=1.0, ls="--", zorder=0)
             ax.grid(axis="y", alpha=0.3)
 
             if ri == 0:
-                import textwrap
-                ax.set_title("\n".join(textwrap.wrap(ref, width=30)), fontsize=9, fontweight="bold")
+                ax.set_title("\n".join(textwrap.wrap(ref, width=30)), fontsize=18, fontweight="bold")
             if ci == 0:
-                ax.set_ylabel(f"{key}\nmacro F1", fontsize=9)
+                ax.set_ylabel(f"{key}\nmacro F1", fontsize=18)
 
     # shared legend
     handles = [mlines.Line2D([], [], color=METHOD_COLORS[m], marker="o",
-                             linestyle="None", markersize=7, label=METHOD_LABELS[m])
+                             linestyle="None", markersize=14, label=METHOD_LABELS[m])
                for m in methods]
-    fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=10,
+    fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=18,
                frameon=False, bbox_to_anchor=(0.5, -0.01))
 
     fig.suptitle(f"Macro F1 by study × reference × method\n(cutoff={cutoff}, subsample_ref={subsample_ref})",
-                 fontsize=12, y=1.01)
+                 fontsize=20, y=1.01)
     plt.tight_layout()
     outdir = os.path.dirname(outpath)
     if outdir:
@@ -130,4 +128,5 @@ if __name__ == "__main__":
 
     df = load(args.results)
     plot(df, args.keys, args.outpath, args.cutoff, args.subsample_ref)
-    write_tsv(df, args.keys, "method_study_raw_scores.tsv", args.cutoff, args.subsample_ref)
+    tsv_out = os.path.join(os.path.dirname(args.outpath), "method_study_raw_scores.tsv")
+    write_tsv(df, args.keys, tsv_out, args.cutoff, args.subsample_ref)
