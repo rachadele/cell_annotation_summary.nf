@@ -8,12 +8,9 @@ include { ADD_PARAMS             } from "$projectDir/modules/local/add_params/ma
 include { AGGREGATE_RESULTS      } from "$projectDir/modules/local/aggregate_results/main"
 include { PLOT_CUTOFF            } from "$projectDir/modules/local/plot_cutoff/main"
 include { PLOT_COMPTIME          } from "$projectDir/modules/local/plot_comptime/main"
-include { PLOT_LABEL_DIST        } from "$projectDir/modules/local/plot_label_dist/main"
 include { PLOT_F1_DISTRIBUTIONS  } from "$projectDir/modules/local/plot_f1_distributions/main"
 include { MODEL_EVAL_AGGREGATED  } from "$projectDir/modules/local/model_eval_aggregated/main"
-include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
 include { PLOT_PUB_FIGURES       } from "$projectDir/modules/local/plot_pub_figures/main"
-include { PLOT_LABEL_HEATMAP     } from "$projectDir/modules/local/plot_label_heatmap/main"
 include { RANK_LABEL_PERFORMANCE   } from "$projectDir/modules/local/rank_label_performance/main"
 include { PLOT_PARAM_HEATMAP       } from "$projectDir/modules/local/plot_param_heatmap/main"
 include { PLOT_RANKING_SUMMARY     } from "$projectDir/modules/local/plot_ranking_summary/main"
@@ -115,11 +112,6 @@ workflow EVALUATION_SUMMARY {
     }
 
     //
-    // MODULE: Plot label distributions
-    //
-    //PLOT_LABEL_DIST(ch_label_results)
-
-    //
     // MODULE: Plot F1 score distributions (macro and per-label)
     //
     PLOT_F1_DISTRIBUTIONS(ch_sample_results, ch_label_results)
@@ -157,11 +149,6 @@ workflow EVALUATION_SUMMARY {
     }
 
     //
-    // MODULE: Plot per-study label F1 heatmaps
-    //
-    //PLOT_LABEL_HEATMAP(ch_label_results)
-
-    //
     // MODULE: Rank label performance across studies
     //
     RANK_LABEL_PERFORMANCE(ch_label_results)
@@ -189,10 +176,6 @@ workflow EVALUATION_SUMMARY {
         PLOT_COMPTIME.out.comptime_summary
     )
 
-    //
-    // MODULE: Plot cell type granularity comparison (post-hoc)
-    //
-    // PLOT_CELLTYPE_GRANULARITY(ch_label_results)
 }
 
 /*
