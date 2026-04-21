@@ -3,6 +3,8 @@
 
 Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01/mus_musculus/100/dataset_id/SCT/gap_false/`
 
+> *AI-generated report — 2026-04-21*
+
 ---
 
 ## mus_musculus
@@ -239,7 +241,7 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 | class | Hippocampal neuron | scvi_knn | Cortical+Hipp. 10x | 100 | 0.996 | 1.0 | 1 | 65.5 |
 | class | Macrophage | scvi_rf | Cortical+Hipp. SSv4 | 500 | 0.263 | 0.5 | 2 | 2.1319444444444446 |
 | class | Microglia | seurat | Whole cortex | 500 | 0.459 | 0.167 | 6 | 8.315873015873017 |
-| class | Neural stem cell | scvi_knn | Motor cortex | 500 | 0.514 | 0.5 | 2 | 3.702991452991453 |
+| class | Neural stem cell | scvi_knn | Motor cortex | 100 | 0.555 | 0.0 | 2 | 3.702991452991453 |
 | class | OPC | scvi_knn | Whole cortex | 100 | 0.277 | 0.333 | 6 | 8.003535353535353 |
 | class | Oligodendrocyte | seurat | Motor cortex | 100 | 0.974 | 0.5 | 6 | 17.315079365079367 |
 | class | Vascular | seurat | Cortical+Hipp. 10x | 500 | 0.977 | 0.333 | 6 | 31.713492063492065 |
@@ -249,12 +251,12 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 | subclass | Cajal-Retzius cell | seurat | Cortical+Hipp. 10x | 50 | 0.992 | 1.0 | 2 | 1.4444444444444444 |
 | subclass | DG | seurat | Whole cortex | 500 | 0.996 | 1.0 | 1 | 34.5 |
 | subclass | Endothelial | seurat | Cortical+Hipp. 10x | 500 | 0.986 | 0.333 | 6 | 27.807142857142853 |
-| subclass | Macrophage | scvi_rf | Cortical+Hipp. SSv4 | 100 | 0.247 | 0.0 | 2 | 2.1319444444444446 |
+| subclass | Macrophage | scvi_rf | Motor cortex | 500 | 0.247 | 0.0 | 2 | 2.1319444444444446 |
 | subclass | Microglia | seurat | Whole cortex | 500 | 0.459 | 0.167 | 6 | 8.315873015873017 |
 | subclass | Neural stem cell | scvi_knn | Motor cortex | 100 | 0.555 | 0.0 | 2 | 3.702991452991453 |
 | subclass | OPC | scvi_knn | Whole cortex | 100 | 0.277 | 0.333 | 6 | 8.003535353535353 |
 | subclass | Oligodendrocyte | seurat | Motor cortex | 100 | 0.974 | 0.5 | 6 | 17.315079365079367 |
-| subclass | Pericyte | seurat | Whole cortex | 50 | 0.933 | 1.0 | 1 | 2.0 |
+| subclass | Pericyte | scvi_knn | Motor cortex | 500 | 0.933 | 1.0 | 1 | 2.0 |
 
 ### Reference Cell-Type Coverage
 
@@ -982,56 +984,98 @@ Generated from: `/space/grp/rschwartz/rschwartz/evaluation_summary.nf/2024-07-01
 
 ## Macro F1 vs Per-Cell-Type F1 Conflict
 
-At global and family levels, scVI RF achieves the highest model-adjusted macro F1 (global: 0.939, family: 0.907), significantly outperforming Seurat (0.913, 0.886). However, in per-cell-type rankings, Seurat wins the best configuration for 5/8 family-level cell types (Astrocyte, GABAergic, Glutamatergic, Oligodendrocyte, Vascular) while scVI RF wins none. This discrepancy arises because scVI RF's macro advantage is driven by Glutamatergic and GABAergic neurons, which dominate cell counts and thus macro averaging, even though Seurat achieves higher F1 for these same types at their individually optimal configurations.
+At **global and family** levels, scvi_rf has the highest macro EMM (0.939 global, 0.907 family) over seurat (0.913, 0.886), but this advantage is driven by high recall at cutoff=0 rather than balanced performance. At family level, seurat wins the most per-cell-type comparisons (6 of 11 families: Astrocyte, GABAergic, Glutamatergic, Neural stem cell, Oligodendrocyte, Vascular), while scvi_rf wins zero. The divergence arises because scvi_rf achieves high recall for major cell populations (e.g. Glutamatergic F1=0.788 at cutoff=0 but drops to 0.047 at cutoff=0.75, GABAergic 0.820→0.126), inflating macro averages at cutoff=0 while collapsing under any confidence filtering.
 
-At class and subclass, scVI RF and Seurat are statistically indistinguishable (class: 0.815 vs 0.811, p=0.197; subclass: 0.801 vs 0.806, p=0.055), yet Seurat wins 5/9 class-level and 9/12 subclass-level cell types. scVI RF's macro EMM advantage at global/family thus does not reflect uniformly superior per-type performance.
+At **class and subclass** levels the macro conflict resolves: seurat and scvi_rf are statistically tied (class: seurat/scvi_rf OR=0.974, p=0.197; subclass: OR=1.035, p=0.055). Here seurat's per-cell-type consistency is reflected in the macro estimates as well. scvi_knn trails both by ~1–2 EMM points at class/subclass but is the most cutoff-stable method across all levels (family F1 at cutoff=0.75: scvi_knn=0.840, seurat=0.842, scvi_rf=0.358).
 
-Critically, scVI RF is far more cutoff-sensitive: at family, Glutamatergic drops from 0.788 → 0.047 and GABAergic from 0.820 → 0.126 by cutoff=0.75, compared to Seurat drops of 0.798 → 0.634 and 0.916 → 0.705. scVI kNN is intermediate. Any pipeline applying a confidence cutoff should strongly prefer Seurat or scVI kNN over scVI RF.
+**Bottom line:** scvi_rf's macro advantage is an artifact of high recall at cutoff=0. For practical use at family level, scvi_knn (EMM=0.901) provides near-identical macro performance to scvi_rf (0.907) with far greater cutoff stability and substantially fewer spurious hippocampal predictions than seurat (1.09 vs 1.67 spurious/query).
+
+---
+
+## Raw Per-Study Performance
+
+Per-study mean macro F1 at family level, cutoff=0, subsample_ref=500. See `method_study_comparison/method_study_comparison.png` for the dot-plot figure.
+
+| study | reference | scvi_knn | scvi_rf | seurat |
+| --- | --- | --- | --- | --- |
+| GSE124952 | CH.10x | 0.902 | 0.898 | 0.935 |
+| GSE124952 | CH.SSv4 | 0.895 | 0.878 | 0.910 |
+| GSE124952 | Motor cortex | 0.947 | 0.909 | 0.949 |
+| GSE124952 | Whole cortex | 0.896 | 0.813 | 0.817 |
+| GSE181021.2 | CH.10x | 0.929 | 0.927 | 0.893 |
+| GSE181021.2 | CH.SSv4 | 0.902 | 0.886 | 0.904 |
+| GSE181021.2 | Motor cortex | 0.910 | 0.908 | 0.910 |
+| GSE181021.2 | Whole cortex | 0.876 | 0.795 | 0.803 |
+| GSE185454 | CH.10x | 0.993 | 0.975 | 0.986 |
+| GSE185454 | CH.SSv4 | 0.964 | 0.913 | 0.982 |
+| GSE185454 | Motor cortex | 0.987 | 0.981 | 0.984 |
+| GSE185454 | Whole cortex | 0.865 | 0.862 | 0.857 |
+| GSE199460.2 | CH.10x | 0.946 | 0.952 | 0.958 |
+| GSE199460.2 | CH.SSv4 | 0.941 | 0.955 | 0.929 |
+| GSE199460.2 | Motor cortex | 0.958 | 0.955 | 0.961 |
+| GSE199460.2 | Whole cortex | 0.947 | 0.947 | 0.949 |
+| GSE214244.1 | CH.10x | 0.977 | 0.960 | 0.977 |
+| GSE214244.1 | CH.SSv4 | 0.886 | 0.897 | 0.791 |
+| GSE214244.1 | Motor cortex | 0.964 | 0.964 | 0.973 |
+| GSE214244.1 | Whole cortex | 0.834 | 0.783 | 0.785 |
+| GSE247339.1 | CH.10x | 0.842 | 0.825 | 0.862 |
+| GSE247339.1 | CH.SSv4 | 0.786 | 0.747 | 0.463 |
+| GSE247339.1 | Motor cortex | 0.795 | 0.813 | 0.785 |
+| GSE247339.1 | Whole cortex | 0.681 | 0.653 | 0.669 |
+| GSE247339.2 | CH.10x | 0.903 | 0.878 | 0.909 |
+| GSE247339.2 | CH.SSv4 | 0.858 | 0.799 | 0.433 |
+| GSE247339.2 | Motor cortex | 0.853 | 0.848 | 0.827 |
+| GSE247339.2 | Whole cortex | 0.731 | 0.670 | 0.661 |
+
+Seurat collapses with CH.SSv4 in GSE247339.1 (0.463) and GSE247339.2 (0.433), which drives its lower model-adjusted EMM for that reference. With CH.10x, methods are more consistent across studies (spread ≤0.05), though seurat shows a modest raw advantage in simpler prefrontal cortex studies (e.g. GSE124952: seurat 0.935 vs scvi_knn 0.902). The study×reference interaction explains why model-adjusted EMMs show near-parity across methods despite raw differences in specific study×reference combinations.
 
 ---
 
 ## Configuration Recommendation
 
-**Date:** 2026-04-20  
-**Goal:** Identify the best method, reference, cutoff, and subsample_ref for mouse brain cell-type annotation.
-
 ### Recommended Taxonomy Level: Family
 
-Systematic failures (mean F1 < 0.5, ≥ 3 studies) at subclass and class: **OPC** (F1 = 0.131, 6 studies) and **Microglia** (F1 = 0.154, 6 studies). At family, Microglia collapses into CNS macrophage (F1 = 0.958), eliminating that failure. OPC remains a systematic failure at family (F1 = 0.131, 6 studies) due to near-zero reference support in most references — this is a coverage problem, not a model problem, and cannot be resolved by changing the classifier. Hippocampal subtypes (DG, CA1-ProS, CA3) collapse into Glutamatergic/GABAergic at family, which is appropriate for cortex-focused studies.
+At subclass and class levels, Microglia (mean F1=0.154, 6 studies, label-escape failure) and OPC (mean F1=0.131, 6 studies, 0 cells in CH.10x/SSv4/MotorCortex) are systematic failures. At family level, Microglia and Macrophage merge into CNS macrophage (F1=0.958), resolving the label-escape issue. OPC persists as a family-level failure (F1=0.131) but exclusively due to reference coverage — no evaluated reference except Whole cortex contains OPC cells. Hippocampal subtypes (DG, CA1-ProS, CA3) collapse into Glutamatergic at family, which is acceptable for cortex-focused studies. Family is the finest level where systematic failures either resolve (Microglia) or are attributable to data limitations rather than classifier failures.
 
 ### Recommended Configuration
 
 | Dimension | Recommended value | Rationale |
-|-----------|------------------|-----------|
-| Taxonomy level | **family** | Eliminates Microglia failure (→ CNS macrophage, F1=0.958); OPC remains unresolvable at all levels due to missing reference support |
-| Method | **Seurat** (macro F1 alt: scVI RF) | Seurat wins 5/8 family-level cell types; scVI RF has higher macro EMM (0.907 vs 0.886) but wins 0/8 per-type and collapses at cutoff > 0.1. Use scVI RF only at cutoff=0 if macro F1 is the sole criterion. |
-| Reference | **Cortical+Hipp. 10x** | Highest mean EMM (0.912); includes hippocampal types (DG, CA1-ProS, CA3). OPC and Neural stem cell absent from this reference but fail in all references regardless. |
-| Cutoff | **0** | Any cutoff degrades scVI RF performance sharply; Seurat is more robust but cutoff=0 still maximises F1 across all methods. |
-| Subsample_ref | **100** | Indistinguishable from 500 at family (EMM: 0.902 vs 0.901); Seurat ref processing is 2× faster at 100 vs 500. |
+| --- | --- | --- |
+| Taxonomy level | family | Finest reliable level; Microglia→CNS macrophage (F1=0.958); OPC failure is reference-coverage limited |
+| Method | scvi_knn | EMM=0.901 [0.858–0.931], near-identical to scvi_rf (0.907, contrast p=4.7×10⁻⁵) but dramatically more cutoff-stable (F1 at cutoff=0.75: 0.840 vs 0.358); lower hippocampal contamination than seurat (1.09 vs 1.67 spurious/query at cutoff=0). **Exception:** seurat is substantially better for GABAergic (CH.10x: 0.931 vs 0.856; CH.SSv4: 0.966 vs 0.908) and Glutamatergic (CH.10x: 0.850 vs 0.779) cells — prefer seurat if excitatory/inhibitory neuron annotation quality is the priority. Glutamatergic advantage is reference-dependent: scvi_knn wins at MotorCtx (0.800 vs 0.752) and CH.SSv4 (0.743 vs 0.732). |
+| Reference | Single-cell RNA-seq for all cortical hippocampal regions 10x | Highest mean EMM (0.912); broadest cortical+hippocampal coverage. **Coverage gaps:** OPC, Microglia, Neural stem cell, Leukocyte (all levels), Pericyte and Ependymal (subclass only) have zero reference cells and cannot be annotated. Macrophage (955 cells) and Cajal-Retzius cell (277 cells) are present but unreliable (mean F1=0.207 and 0.573). Use Whole cortex if any of these types are required (EMM=0.785 vs 0.912). |
+| Cutoff | 0 | scvi_knn F1 is stable across cutoffs (0.901→0.840 at cutoff=0.75); hippocampal contamination is unchanged up to cutoff=0.25 (1.093 at 0.0 vs 1.094 at 0.25), so raising the cutoff provides no contamination benefit at this level |
+| Subsample_ref | 100 | Statistically equivalent to 500 (EMM difference <0.004 at family); Seurat ref processing 2× faster (0.052 vs 0.117 hrs); scVI inference unaffected by subsample_ref |
 
-### Raw Performance: Seurat + Cortical+Hipp. 10x + cutoff=0 + subsample_ref=100
+### Raw Performance at Recommended Configuration
+
+scvi_knn, Single-cell RNA-seq for all cortical hippocampal regions 10x, cutoff=0, subsample_ref=100:
 
 | key | macro_f1_mean | macro_precision_mean | macro_recall_mean |
-|-----|--------------|---------------------|------------------|
-| global | 0.897 | 0.866 | 0.976 |
-| family | 0.908 | 0.894 | 0.956 |
-| class | 0.828 | 0.797 | 0.948 |
-| subclass | 0.830 | 0.802 | 0.948 |
+| --- | --- | --- | --- |
+| global | 0.849 | 0.820 | 0.958 |
+| family | 0.893 | 0.891 | 0.934 |
+| class | 0.816 | 0.809 | 0.911 |
+| subclass | 0.806 | 0.807 | 0.897 |
 
-### Compute Time: Seurat + subsample_ref=100
+### Compute Time at Recommended Configuration
+
+scVI RF/kNN, subsample_ref=100 (per-query costs; reference embedding is one-time):
 
 | step | mean_duration (hrs) | mean_memory (GB) |
-|------|--------------------|--------------------|
-| Ref Processing | 0.052 | 0.040 |
-| Query Processing | 0.032 | 0.025 |
-| Prediction | 0.019 | 0.021 |
+| --- | --- | --- |
+| Query Processing | 0.018 | 0.020 |
+| Embedding | 0.017 | 0.016 |
+| Prediction | 0.017 | 0.013 |
 
-Total per-query wall time: ~0.10 hrs.
+Total per query: ~0.052 hrs, ~0.049 GB peak.
 
 ### Trade-offs
 
-scVI RF achieves 0.021 higher macro F1 at family (0.907 vs 0.886, significant) but wins zero individual cell types and is highly cutoff-sensitive; Seurat's per-type wins and robustness make it more reliable across diverse query datasets. scVI kNN (family macro EMM: 0.901) is a viable middle ground — outperforms Seurat on CNS macrophage and Neural stem cell while being more robust than scVI RF, at roughly half Seurat's compute cost.
+scvi_knn's macro advantage over seurat at family is 0.015 EMM points (0.901 vs 0.886); seurat wins more per-cell-type comparisons (6 of 11 families) and has near-identical cutoff stability at high cutoffs, so users prioritizing specific families (especially GABAergic and Glutamatergic) may prefer seurat (GABAergic CH.10x: seurat 0.931 vs scvi_knn 0.856). scvi_rf offers the highest macro EMM (0.907) but is unsuitable when any confidence cutoff will be applied — its F1 collapses to 0.358 at cutoff=0.75 and loses most annotations for several cell types.
+
+The CH.10x reference cannot annotate OPC, Microglia, Neural stem cell, Leukocyte, Pericyte, or Ependymal. The Whole cortex reference nominally fills these gaps (it includes brain Microglia and OPC cells from Tabula Muris Senis Smart-seq2, which was not evaluated as a standalone reference), but Microglia detection with Whole cortex remains poor for all methods (seurat F1=0.056–0.261) despite 13,268 Tabula Muris Microglia cells. In contrast, seurat with Motor cortex achieves F1=0.794 using only 55 Microglia cells. The reason for this discrepancy is unclear — one hypothesis is platform mismatch (Tabula Muris Senis is Smart-seq2; Motor cortex and most queries are 10x), but this has not been tested directly. If Microglia annotation is required, seurat + Motor cortex is empirically the best-performing configuration.
 
 ### Pareto Note
 
-Seurat + Cortical+Hipp. 10x + subsample_ref=100 appears in the Pareto-optimal table at family (mean_f1=0.912, 0.102 hrs) — the recommended configuration is Pareto-efficient.
+scvi_knn + Cortical+Hipp. 10x + subsample_ref=100 appears in the Pareto-optimal configurations table at family level (mean_f1=0.895, 0.053 hrs total), confirming this is a Pareto-efficient choice.
