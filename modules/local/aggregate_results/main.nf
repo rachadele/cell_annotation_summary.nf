@@ -1,9 +1,8 @@
 process AGGREGATE_RESULTS {
     label 'process_low'
-    storeDir "${params.outdir}/aggregated_results/files"
 
     input:
-    path f1_results_params
+    path(f1_results_params, stageAs: "inputs/?/*")
     val  metadata_dir
     val  remove_outliers
 
