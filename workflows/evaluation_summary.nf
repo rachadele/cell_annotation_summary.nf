@@ -19,7 +19,7 @@ include { PLOT_CONFIG_PARETO      } from "$projectDir/modules/local/plot_config_
 include { JOIN_METADATA           } from "$projectDir/modules/local/join_metadata/main"
 include { MODEL_ASSAY_EFFECTS     } from "$projectDir/modules/local/model_assay_effects/main"
 include { PLOT_ASSAY_EXPLORATION  } from "$projectDir/modules/local/plot_assay_exploration/main"
-include { PLOT_STUDY_VARIANCE             } from "$projectDir/modules/local/plot_study_variance/main"
+include { VARIANCE_SUMMARY                } from "$projectDir/modules/local/variance_summary/main"
 include { PLOT_METHOD_STUDY_COMPARISON    } from "$projectDir/modules/local/plot_method_study_comparison/main"
 include { PLOT_CELLTYPE_COMPARISON        } from "$projectDir/modules/local/plot_celltype_comparison/main"
 
@@ -96,9 +96,9 @@ workflow EVALUATION_SUMMARY {
     }
 
     //
-    // MODULE: Plot cell-type F1 variance across studies
+    // MODULE: Study-variance heatmaps and cross-study stability summaries
     //
-    PLOT_STUDY_VARIANCE(ch_label_results)
+    VARIANCE_SUMMARY(ch_label_results)
 
     //
     // MODULE: Plot raw macro F1 per study × reference × method
