@@ -19,7 +19,7 @@ def load(path):
     return pd.read_csv(path, sep="\t")
 
 
-def plot(df, labels, key, outpath, cutoff=0, subsample_ref=100):
+def plot(df, key, outpath, cutoff=0, subsample_ref=100):
     methods = ["scvi_knn", "scvi_rf", "seurat"]
     methods = [m for m in methods if m in df["method"].unique()]
 
@@ -27,8 +27,9 @@ def plot(df, labels, key, outpath, cutoff=0, subsample_ref=100):
         (df["key"] == key)
         & (df["cutoff"] == cutoff)
         & (df["subsample_ref"] == subsample_ref)
-        & (df["label"].isin(labels))
     ].copy()
+
+    labels = sorted(df["label"].unique())
 
     refs = sorted(df["reference"].unique())
     study_order = sorted(df["study"].unique())
@@ -126,11 +127,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--results", required=True, help="Path to label_results.tsv.gz")
     parser.add_argument("--outpath", required=True, help="Output PNG path")
-    parser.add_argument("--key", default="family", help="Taxonomy level (family, class, subclass)")
-    parser.add_argument("--labels", nargs="+", required=True, help="Cell-type labels to plot")
+    parser.add_argument("--key", default="class", help="Taxonomy level (family, class, subclass)")
     parser.add_argument("--cutoff", type=float, default=0)
     parser.add_argument("--subsample_ref", type=int, default=100)
     args = parser.parse_args()
 
     df = load(args.results)
-    plot(df, args.labels, args.key, args.outpath, args.cutoff, args.subsample_ref)
+    plot(df, args.key, args.outpath, args.cutoff, args.subsample_ref)
