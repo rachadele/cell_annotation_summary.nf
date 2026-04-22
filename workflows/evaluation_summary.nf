@@ -21,6 +21,7 @@ include { MODEL_ASSAY_EFFECTS     } from "$projectDir/modules/local/model_assay_
 include { PLOT_ASSAY_EXPLORATION  } from "$projectDir/modules/local/plot_assay_exploration/main"
 include { PLOT_STUDY_VARIANCE             } from "$projectDir/modules/local/plot_study_variance/main"
 include { PLOT_METHOD_STUDY_COMPARISON    } from "$projectDir/modules/local/plot_method_study_comparison/main"
+include { PLOT_CELLTYPE_COMPARISON        } from "$projectDir/modules/local/plot_celltype_comparison/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,6 +104,11 @@ workflow EVALUATION_SUMMARY {
     // MODULE: Plot raw macro F1 per study × reference × method
     //
     PLOT_METHOD_STUDY_COMPARISON(ch_sample_results)
+
+    //
+    // MODULE: Plot per-cell-type F1 by study × reference × method
+    //
+    PLOT_CELLTYPE_COMPARISON(ch_label_results)
 
     //
     // MODULE: Plot cutoff analysis
