@@ -24,6 +24,7 @@
 #       --outdir figures \
 #       --output_prefix combined_figure
 
+library(argparse)
 library(dplyr)
 library(tidyr)
 library(readr)
@@ -821,51 +822,90 @@ load_factor_significance <- function(hs_files, mm_files, primary_key) {
   )
 }
 
-# -- Hardcoded Paths ----------------------------------------------------------
+# -- CLI Arguments ------------------------------------------------------------
 
-HS_DIR <- "2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_disease_state_+_sex_+_method:cutoff_+_reference:method/files"
-MM_DIR <- "2024-07-01/mus_musculus_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_method:cutoff_+_reference:method/files"
+parse_args_cli <- function() {
+  p <- ArgumentParser(description = "Combined Human + Mouse publication figure")
 
-ARGS <- list(
-  hs_cutoff_effects    = file.path(HS_DIR, "method_cutoff_effects.tsv"),
-  mm_cutoff_effects    = file.path(MM_DIR, "method_cutoff_effects.tsv"),
-  hs_reference_emmeans = file.path(HS_DIR, "reference_method_emmeans_summary.tsv"),
-  mm_reference_emmeans = file.path(MM_DIR, "reference_method_emmeans_summary.tsv"),
-  hs_method_emmeans    = file.path(HS_DIR, "method_emmeans_summary.tsv"),
-  mm_method_emmeans    = file.path(MM_DIR, "method_emmeans_summary.tsv"),
-  hs_factor_emmeans    = paste(
-    file.path(HS_DIR, "disease_state_emmeans_summary.tsv"),
-    file.path(HS_DIR, "sex_emmeans_summary.tsv"),
-    file.path(HS_DIR, "subsample_ref_emmeans_summary.tsv")
-  ),
-  mm_factor_emmeans    = paste(
-    file.path(MM_DIR, "treatment_emmeans_summary.tsv"),
-    file.path(MM_DIR, "subsample_ref_emmeans_summary.tsv")
-  ),
-  hs_factor_estimates  = paste(
-    file.path(HS_DIR, "disease_state_emmeans_estimates.tsv"),
-    file.path(HS_DIR, "sex_emmeans_estimates.tsv"),
-    file.path(HS_DIR, "subsample_ref_emmeans_estimates.tsv")
-  ),
-  mm_factor_estimates  = paste(
-    file.path(MM_DIR, "treatment_emmeans_estimates.tsv"),
-    file.path(MM_DIR, "subsample_ref_emmeans_estimates.tsv")
-  ),
-  hs_reference_estimates = file.path(HS_DIR, "reference_method_emmeans_estimates.tsv"),
-  mm_reference_estimates = file.path(MM_DIR, "reference_method_emmeans_estimates.tsv"),
-  hs_model_coefs = file.path(HS_DIR, "model_coefs.tsv"),
-  mm_model_coefs = file.path(MM_DIR, "model_coefs.tsv"),
-  hs_sample_results = "2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false/aggregated_results/files/sample_results.tsv.gz",
-  mm_sample_results = "2024-07-01/mus_musculus_main_branch/100/dataset_id/SCT/gap_false/aggregated_results/files/sample_results.tsv.gz",
-  primary_key   = "subclass",
-  outdir        = "combined_orgs",
-  output_prefix = "combined_figure"
-)
+  p$add_argument(
+    "--hs_model_dir",
+    default = "2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_disease_state_+_sex_+_method:cutoff_+_reference:method/files",
+    help    = "Path to HS aggregated_models/.../files directory"
+  )
+  p$add_argument(
+    "--mm_model_dir",
+    default = "2024-07-01/mus_musculus_main_branch/100/dataset_id/SCT/gap_false/aggregated_models/macro_f1_~_reference_+_method_+_cutoff_+_subsample_ref_+_treatment_state_+_method:cutoff_+_reference:method/files",
+    help    = "Path to MM aggregated_models/.../files directory"
+  )
+  p$add_argument(
+    "--hs_sample_results",
+    default = "2024-07-01/homo_sapiens_main_branch/100/dataset_id/SCT/gap_false/aggregated_results/files/sample_results.tsv.gz",
+    help    = "Path to HS sample_results.tsv.gz (optional; used for raw data overlays)"
+  )
+  p$add_argument(
+    "--mm_sample_results",
+    default = "2024-07-01/mus_musculus_main_branch/100/dataset_id/SCT/gap_false/aggregated_results/files/sample_results.tsv.gz",
+    help    = "Path to MM sample_results.tsv.gz (optional; used for raw data overlays)"
+  )
+  p$add_argument(
+    "--hs_factors",
+    nargs   = "+",
+    default = c("disease_state", "sex", "subsample_ref"),
+    help    = "Factor names for human Panel C (files derived from --hs_model_dir)"
+  )
+  p$add_argument(
+    "--mm_factors",
+    nargs   = "+",
+    default = c("treatment", "subsample_ref"),
+    help    = "Factor names for mouse Panel C (files derived from --mm_model_dir)"
+  )
+  p$add_argument("--primary_key",    default = "subclass")
+  p$add_argument("--outdir",         default = "combined_orgs/main_branch")
+  p$add_argument("--output_prefix",  default = "combined_figure")
+
+  a      <- p$parse_args()
+  hs_dir <- a$hs_model_dir
+  mm_dir <- a$mm_model_dir
+
+  list(
+    hs_cutoff_effects      = file.path(hs_dir, "method_cutoff_effects.tsv"),
+    mm_cutoff_effects      = file.path(mm_dir, "method_cutoff_effects.tsv"),
+    hs_reference_emmeans   = file.path(hs_dir, "reference_method_emmeans_summary.tsv"),
+    mm_reference_emmeans   = file.path(mm_dir, "reference_method_emmeans_summary.tsv"),
+    hs_method_emmeans      = file.path(hs_dir, "method_emmeans_summary.tsv"),
+    mm_method_emmeans      = file.path(mm_dir, "method_emmeans_summary.tsv"),
+    hs_factor_emmeans      = paste(
+      file.path(hs_dir, paste0(a$hs_factors, "_emmeans_summary.tsv")),
+      collapse = " "
+    ),
+    mm_factor_emmeans      = paste(
+      file.path(mm_dir, paste0(a$mm_factors, "_emmeans_summary.tsv")),
+      collapse = " "
+    ),
+    hs_factor_estimates    = paste(
+      file.path(hs_dir, paste0(a$hs_factors, "_emmeans_estimates.tsv")),
+      collapse = " "
+    ),
+    mm_factor_estimates    = paste(
+      file.path(mm_dir, paste0(a$mm_factors, "_emmeans_estimates.tsv")),
+      collapse = " "
+    ),
+    hs_reference_estimates = file.path(hs_dir, "reference_method_emmeans_estimates.tsv"),
+    mm_reference_estimates = file.path(mm_dir, "reference_method_emmeans_estimates.tsv"),
+    hs_model_coefs         = file.path(hs_dir, "model_coefs.tsv"),
+    mm_model_coefs         = file.path(mm_dir, "model_coefs.tsv"),
+    hs_sample_results      = a$hs_sample_results,
+    mm_sample_results      = a$mm_sample_results,
+    primary_key            = a$primary_key,
+    outdir                 = a$outdir,
+    output_prefix          = a$output_prefix
+  )
+}
 
 # -- Main ---------------------------------------------------------------------
 
 main <- function() {
-  args <- ARGS
+  args <- parse_args_cli()
   dir.create(args$outdir, recursive = TRUE, showWarnings = FALSE)
   pk <- args$primary_key
 
