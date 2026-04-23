@@ -1,0 +1,25 @@
+contrast	odds.ratio	SE	df	null	z.ratio	p.value	key
+(cell_only single-cell) / (cell_and_nucleus single-cell)	1.650793409575589	0.020355139575917888	Inf	1	40.65165665802912	0	subclass
+(cell_only single-cell) / (cell_only single-nucleus)	0.5814939643603548	0.0170562955638797	Inf	1	-18.483478828919644	0	subclass
+(cell_only single-cell) / (cell_and_nucleus single-nucleus)	1.55881818696656	0.04181820055634849	Inf	1	16.54788994256705	0	subclass
+(cell_and_nucleus single-cell) / (cell_only single-nucleus)	0.3522512029593419	0.010324895560787107	Inf	1	-35.59771396418725	0	subclass
+(cell_and_nucleus single-cell) / (cell_and_nucleus single-nucleus)	0.9442842320089737	0.02520618603911356	Inf	1	-2.1476469180007225	0.1382135582776316	subclass
+(cell_only single-nucleus) / (cell_and_nucleus single-nucleus)	2.680712582599658	0.1012405389904466	Inf	1	26.110135217572182	0	subclass
+(cell_only single-cell) / (cell_and_nucleus single-cell)	1.6566873393053145	0.020887901389799	Inf	1	40.03891709452144	0	class
+(cell_only single-cell) / (cell_only single-nucleus)	0.4242539956972566	0.013083103235480016	Inf	1	-27.80419208000184	0	class
+(cell_only single-cell) / (cell_and_nucleus single-nucleus)	1.4982045590680957	0.04124174399153971	Inf	1	14.685977093210768	0	class
+(cell_and_nucleus single-cell) / (cell_only single-nucleus)	0.2560857354503328	0.007907002534253959	Inf	1	-44.11924690049704	0	class
+(cell_and_nucleus single-cell) / (cell_and_nucleus single-nucleus)	0.9043375436769655	0.024792067155650986	Inf	1	-3.6678462531343947	0.0013968061296378842	class
+(cell_only single-nucleus) / (cell_and_nucleus single-nucleus)	3.5313858543767247	0.1390643642767606	Inf	1	32.03923312174993	0	class
+(cell_only single-cell) / (cell_and_nucleus single-cell)	1.240693172652645	0.015972244086933006	Inf	1	16.752848563802686	0	family
+(cell_only single-cell) / (cell_only single-nucleus)	0.5157019400049272	0.016498062434616968	Inf	1	-20.7000911325503	0	family
+(cell_only single-cell) / (cell_and_nucleus single-nucleus)	0.6331413827299546	0.019043968740791496	Inf	1	-15.1956019241969	0	family
+(cell_and_nucleus single-cell) / (cell_only single-nucleus)	0.41565630517845004	0.013288321485434622	Inf	1	-27.460446119413614	0	family
+(cell_and_nucleus single-cell) / (cell_and_nucleus single-nucleus)	0.5103126193370408	0.015335438298271699	Inf	1	-22.38628599216652	0	family
+(cell_only single-nucleus) / (cell_and_nucleus single-nucleus)	1.2277273626775678	0.05143445876200104	Inf	1	4.897230957506017	5.79188649452167e-6	family
+(cell_only single-cell) / (cell_and_nucleus single-cell)	1.0333081088808447	0.014821556089862726	Inf	1	2.284292247175521	0.10165749469189422	global
+(cell_only single-cell) / (cell_only single-nucleus)	0.32394358653443284	0.012781820710971116	Inf	1	-28.56749828096343	0	global
+(cell_only single-cell) / (cell_and_nucleus single-nucleus)	0.34492673673561597	0.011853129187023885	Inf	1	-30.974777166695375	0	global
+(cell_and_nucleus single-cell) / (cell_only single-nucleus)	0.3135014462291307	0.012343631621370114	Inf	1	-29.46024501233714	0	global
+(cell_and_nucleus single-cell) / (cell_and_nucleus single-nucleus)	0.3338082163210731	0.011432178153413821	Inf	1	-32.03681595019165	0	global
+(cell_only single-nucleus) / (cell_and_nucleus single-nucleus)	1.064774087444243	0.053151981465341606	Inf	1	1.2573011179151525	0.5902422252041664	global
