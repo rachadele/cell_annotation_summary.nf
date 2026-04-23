@@ -223,7 +223,23 @@ def main():
     pipeline_results = args.pipeline_results
 
     # --- Load and concatenate input files ---
-    dfs = [pd.read_csv(filepath, sep="\t", low_memory=False) for filepath in pipeline_results]
+    # Only columns that are never mutated downstream are cast to category; mutated string
+    # columns (disease, sex, reference, query, genotype, treatment, dev_stage) stay object.
+    CATEGORICAL_COLS = {
+        c: "category" for c in ["method", "key", "cutoff", "subsample_ref", "organism", "label"]
+    }
+    FLOAT32_COLS = {
+        c: "float32" for c in [
+            "f1_score", "accuracy", "precision", "recall",
+            "weighted_f1", "weighted_precision", "weighted_recall",
+            "macro_f1", "macro_precision", "macro_recall",
+            "micro_f1", "micro_precision", "micro_recall",
+            "nmi", "ari", "overall_accuracy",
+        ]
+    }
+    READ_DTYPES = {**CATEGORICAL_COLS, **FLOAT32_COLS}
+
+    dfs = [pd.read_csv(filepath, sep="\t", dtype=READ_DTYPES) for filepath in pipeline_results]
     results_df = pd.concat(dfs, ignore_index=True)
     del dfs
 
@@ -251,10 +267,13 @@ def main():
     results_df["query"] = results_df["query"].str.replace("_", " ")
     results_df["reference_acronym"] = results_df["reference"].apply(make_acronym)
     results_df["reference"] = results_df["reference"].str.replace("_", " ")
-    results_df["region_match"] = results_df.apply(
-        lambda row: isinstance(row['query_region'], str) and isinstance(row['ref_region'], str) and row['query_region'] in row['ref_region'],
-        axis=1
-    )
+    qr = results_df["query_region"]
+    rr = results_df["ref_region"]
+    valid = qr.notna() & rr.notna()
+    results_df["region_match"] = False
+    results_df.loc[valid, "region_match"] = [
+        q in r for q, r in zip(qr[valid].values, rr[valid].values)
+    ]
 
     # --- Standardize disease ---
     results_df["disease"] = np.where(results_df["disease"] == "Control", "control", results_df["disease"])
