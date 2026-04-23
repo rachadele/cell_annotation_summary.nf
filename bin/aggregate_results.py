@@ -223,10 +223,9 @@ def main():
     pipeline_results = args.pipeline_results
 
     # --- Load and concatenate input files ---
-    results_df = pd.DataFrame()
-    for filepath in pipeline_results:
-        temp_df = pd.read_csv(filepath, sep="\t")
-        results_df = pd.concat([temp_df, results_df], ignore_index=True)
+    dfs = [pd.read_csv(filepath, sep="\t", low_memory=False) for filepath in pipeline_results]
+    results_df = pd.concat(dfs, ignore_index=True)
+    del dfs
 
     organism = results_df["organism"].unique()[0]
 
