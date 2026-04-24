@@ -38,6 +38,11 @@ DISEASE_CONTROL_VALUES = {
     'vehicle (PBS) for 12h', 'PN',   # GSE174332: PN = peripheral nerve (normal)
 }
 
+LABEL_ONLY_COLUMNS = [
+    "label", "f1_score", "precision", "recall", "support",
+    "accuracy", "predicted_support", "ref_support",
+]
+
 def _normalise_disease(val):
     """Return 'control' if val is a known control label, else the original value."""
     if pd.isna(val):
@@ -100,7 +105,6 @@ def apply_sample_metadata(df, sample_meta):
     if not sample_meta:
         return df
 
-    df = df.copy()
     # Ensure columns exist
     for col in ('sex', 'disease'):
         if col not in df.columns:
@@ -139,7 +143,7 @@ def map_development_stage(stage):
         "HsapDv_0000091": "late adult",
     }
     return dev_stage_mapping_dict[stage]
-    
+
 def write_factor_summary(df, factors):
     # 1. Summarize the number of unique levels for each factor
     unique_counts_df = df[factors].nunique().reset_index()
@@ -160,15 +164,15 @@ def write_factor_summary(df, factors):
             unique_counts['factor'] = col
             dfs.append(unique_counts)
 
-    result_df = pd.concat(dfs, ignore_index=True) 
+    result_df = pd.concat(dfs, ignore_index=True)
     result_df.to_csv("factor_unique_sample_counts.tsv.gz", sep="\t", index=False, compression="gzip")
-    
+
 def update_metrics(df):
     # set metrics to nan when support is 0
-    metrics = ['f1_score', 'precision', 
-               'recall', 'accuracy', 
-               'weighted_f1', 
-               'weighted_precision', 
+    metrics = ['f1_score', 'precision',
+               'recall', 'accuracy',
+               'weighted_f1',
+               'weighted_precision',
                'weighted_recall',
                'macro_f1',
                'macro_precision',
@@ -176,7 +180,7 @@ def update_metrics(df):
                'nmi',
                'overall_accuracy',
                'ari']
-                
+
     df.loc[df['support'] == 0, metrics] = None
     return df
 
@@ -217,74 +221,144 @@ def print_study_factor_table(label_results, organism):
     # write to tsv
     table_df = pd.DataFrame(table)[out_cols]
     table_df.to_csv("study_factor_summary.tsv.gz", sep="\t", index=False, compression="gzip")
- 
+
+
+def transform_df(df, organism, sample_meta, remove_outliers):
+    """
+    Apply all row-level transforms (derive columns, standardize fields,
+    organism-specific fixes) to a raw f1_results dataframe.
+    Safe to call per-file before any cross-file concat.
+    """
+    df["study"] = df["query"].str.split("_").str[0]
+    if remove_outliers:
+        df = df[~df["study"].isin(remove_outliers)]
+    if df.empty:
+        return df
+
+    if organism == "homo_sapiens" and sample_meta:
+        df = apply_sample_metadata(df, sample_meta)
+
+    df["query"] = df["query"].str.replace("_", " ")
+    df["reference_acronym"] = df["reference"].apply(make_acronym)
+    df["reference"] = df["reference"].str.replace("_", " ")
+
+    qr = df["query_region"]
+    rr = df["ref_region"]
+    valid = qr.notna() & rr.notna()
+    df["region_match"] = False
+    df.loc[valid, "region_match"] = [
+        q in r for q, r in zip(qr[valid].values, rr[valid].values)
+    ]
+
+    df["disease"] = np.where(df["disease"] == "Control", "control", df["disease"])
+    df["disease"] = np.where(df["disease"].isnull(), "control", df["disease"])
+    df["disease_state"] = np.where(df["disease"] == "control", "control", "disease")
+
+    df["sex"] = df["sex"].str.replace(r"^M$", "male", regex=True, case=False)
+    df["sex"] = df["sex"].str.replace(r"^F$", "female", regex=True, case=False)
+    df["sex"] = df["sex"].str.replace(r"^feM$", "female", regex=True, case=False)
+
+    if organism == "homo_sapiens":
+        df["disease"] = np.where(df["study"] == "GSE211870", "control", df["disease"])
+        df["dev_stage"] = df["dev_stage"].apply(map_development_stage)
+        df["dev_stage"] = np.where(df["study"] == "rosmap", "late adult", df["dev_stage"])
+        df["dev_stage"] = np.where(df["study"] == "pineda", "late adult", df["dev_stage"])
+        df["sex"] = np.where(df["query"] == "lim C5382Cd", "male", df["sex"])
+        df["dev_stage"] = np.where(df["query"] == "lim C5382Cd", "late adult", df["dev_stage"])
+
+    if organism == "mus_musculus":
+        df["treatment_state"] = np.where(df["treatment"].isnull(), "No treatment", "treatment")
+        df["genotype"] = np.where(df["genotype"].isnull(), "wild type genotype", df["genotype"])
+        df["treatment_state"] = df["treatment_state"].str.lower()
+
+    df["disease_state"] = df["disease_state"].str.lower()
+    df["sex"] = df["sex"].str.lower()
+    return df
+
+
 def main():
     args = parse_arguments()
     pipeline_results = args.pipeline_results
 
     # --- Load and concatenate input files ---
-    results_df = pd.DataFrame()
+    # Only columns that are never mutated downstream are cast to category; mutated string
+    # columns (disease, sex, reference, query, genotype, treatment, dev_stage) stay object.
+    CATEGORICAL_COLS = {
+        c: "category" for c in ["method", "key", "cutoff", "subsample_ref", "organism", "label"]
+    }
+    FLOAT32_COLS = {
+        c: "float32" for c in [
+            "f1_score", "accuracy", "precision", "recall",
+            "weighted_f1", "weighted_precision", "weighted_recall",
+            "macro_f1", "macro_precision", "macro_recall",
+            "micro_f1", "micro_precision", "micro_recall",
+            "nmi", "ari", "overall_accuracy",
+        ]
+    }
+    READ_DTYPES = {**CATEGORICAL_COLS, **FLOAT32_COLS}
+
+    # Load sample metadata once (cheap, disk only).
+    sample_meta = {}  # populated lazily after organism is known
+
+    sample_dfs = []
+    label_dfs = []
+    contamination_dfs = []
+    organism = None
+
+    # Stream per-file: transform → split into sample-slice / label-slice →
+    # append. Never holds the full combined frame in memory.
     for filepath in pipeline_results:
-        temp_df = pd.read_csv(filepath, sep="\t")
-        results_df = pd.concat([temp_df, results_df], ignore_index=True)
+        df = pd.read_csv(filepath, sep="\t", dtype=READ_DTYPES, low_memory=False)
+        if df.empty:
+            continue
 
-    organism = results_df["organism"].unique()[0]
-    results_df = results_df[results_df['support'] > 0]
+        if organism is None:
+            organism = df["organism"].unique()[0]
+            if organism == "homo_sapiens" and args.metadata_dir:
+                sample_meta = load_sample_metadata(args.metadata_dir)
 
-    # --- Remove outlier studies ---
-    if args.remove_outliers:
-        study_col = results_df["query"].apply(lambda x: x.split("_")[0])
-        results_df = results_df[~study_col.isin(args.remove_outliers)]
+        if organism == "mus_musculus":
+            contam = df[(df["support"] == 0) & (df["predicted_support"] > 0)]
+            if not contam.empty:
+                contamination_dfs.append(contam)
 
-    # --- Apply external sample metadata (fill missing sex / disease) ---
-    if organism == "homo_sapiens" and args.metadata_dir:
-        sample_meta = load_sample_metadata(args.metadata_dir)
-        results_df = apply_sample_metadata(results_df, sample_meta)
+        df = df[df["support"] > 0]
+        if df.empty:
+            continue
 
-    # --- Derive columns ---
-    results_df["study"] = results_df["query"].apply(lambda x: x.split("_")[0])
-    results_df["query"] = results_df["query"].str.replace("_", " ")
-    results_df["reference_acronym"] = results_df["reference"].apply(make_acronym)
-    results_df["reference"] = results_df["reference"].str.replace("_", " ")
-    results_df["region_match"] = results_df.apply(
-        lambda row: isinstance(row['query_region'], str) and isinstance(row['ref_region'], str) and row['query_region'] in row['ref_region'],
-        axis=1
-    )
+        df = transform_df(df, organism, sample_meta, args.remove_outliers)
+        if df.empty:
+            continue
 
-    # --- Standardize disease ---
-    results_df["disease"] = np.where(results_df["disease"] == "Control", "control", results_df["disease"])
-    results_df["disease"] = np.where(results_df["disease"].isnull(), "control", results_df["disease"])
-    results_df["disease_state"] = np.where(results_df["disease"] == "control", "control", "disease")
+        # Sample-level slice: drop label-specific columns and dedup within this file.
+        sample_slice = df.drop(columns=LABEL_ONLY_COLUMNS).drop_duplicates()
+        sample_slice = sample_slice[sample_slice["weighted_f1"].notnull()]
+        if not sample_slice.empty:
+            sample_dfs.append(sample_slice)
 
-    # --- Standardize sex ---
-    results_df["sex"] = results_df["sex"].str.replace(r"^M$", "male", regex=True, case=False)
-    results_df["sex"] = results_df["sex"].str.replace(r"^F$", "female", regex=True, case=False)
-    results_df["sex"] = results_df["sex"].str.replace(r"^feM$", "female", regex=True, case=False)
+        # Label-level slice.
+        label_slice = df[df["label"].notnull()]
+        label_slice = label_slice[label_slice["f1_score"].notnull()]
+        label_slice = label_slice[label_slice["label"] != "unkown"]
+        if not label_slice.empty:
+            label_dfs.append(label_slice)
 
-    # --- Organism-specific fixes ---
-    if organism == "homo_sapiens":
-        results_df["disease"] = np.where(results_df["study"] == "GSE211870", "control", results_df["disease"])
-        results_df["dev_stage"] = results_df["dev_stage"].apply(map_development_stage)
-        results_df["dev_stage"] = np.where(results_df["study"] == "rosmap", "late adult", results_df["dev_stage"])
-        results_df["dev_stage"] = np.where(results_df["study"] == "pineda", "late adult", results_df["dev_stage"])
-        results_df["sex"] = np.where(results_df["query"] == "lim C5382Cd", "male", results_df["sex"])
-        results_df["dev_stage"] = np.where(results_df["query"] == "lim C5382Cd", "late adult", results_df["dev_stage"])
+        del df, sample_slice, label_slice
 
-    if organism == "mus_musculus":
-        results_df["treatment_state"] = np.where(results_df["treatment"].isnull(), "No treatment", "treatment")
-        results_df["genotype"] = np.where(results_df["genotype"].isnull(), "wild type genotype", results_df["genotype"])
-        results_df["treatment_state"] = results_df["treatment_state"].str.lower()
+    if organism is None:
+        raise RuntimeError("No non-empty input files provided to aggregate_results")
 
-    # --- Lowercase normalization ---
-    results_df["disease_state"] = results_df["disease_state"].str.lower()
-    results_df["sex"] = results_df["sex"].str.lower()
+    # --- Contamination report (mouse only) ---
+    if organism == "mus_musculus" and contamination_dfs:
+        contamination = pd.concat(contamination_dfs, ignore_index=True)
+        contamination.to_csv("contamination.tsv", sep="\t", index=False)
+        del contamination
+    del contamination_dfs
 
-    # --- Weighted F1 results ---
-    label_columns = ["label", "f1_score", "precision", "recall", "support", "accuracy"]
-    sample_results = results_df.drop(columns=label_columns)
-    sample_results = sample_results.drop_duplicates()
-    sample_results = sample_results[sample_results["weighted_f1"].notnull()]
-    sample_results = sample_results.fillna("None")
+    # --- Sample-level results + summary ---
+    sample_results = pd.concat(sample_dfs, ignore_index=True)
+    del sample_dfs
+    sample_results = sample_results.drop_duplicates().fillna("None")
     sample_results.to_csv("sample_results.tsv.gz", sep="\t", index=False, compression="gzip")
 
     weighted_metrics = [
@@ -304,12 +378,12 @@ def main():
         ["method", "cutoff", "reference", "key", "subsample_ref"]
     ).agg(**weighted_agg).reset_index()
     weighted_summary.to_csv("sample_results_summary.tsv.gz", sep="\t", index=False, compression="gzip")
+    del sample_results, weighted_summary
 
-    # --- Label F1 results ---
-    label_results = results_df[results_df['label'].notnull()]
-    label_results = label_results[label_results["f1_score"].notnull()]
+    # --- Label-level results + summary + factor summaries ---
+    label_results = pd.concat(label_dfs, ignore_index=True)
+    del label_dfs
     label_results = label_results.fillna("None")
-    label_results = label_results[label_results["label"] != "unkown"]
     label_results.to_csv("label_results.tsv.gz", sep="\t", index=False, compression="gzip")
 
     label_metrics = ["f1_score", "precision", "recall"]
@@ -326,8 +400,8 @@ def main():
         ["label", "method", "cutoff", "reference", "key", "subsample_ref"]
     ).agg(**label_agg).reset_index()
     label_summary.to_csv("label_results_summary.tsv.gz", sep="\t", index=False, compression="gzip")
+    del label_summary
 
-    # --- Factor summaries ---
     if organism == "homo_sapiens":
         columns_to_group = ["label", "method", "disease", "cutoff", "sex", "dev_stage", "reference", "study"]
     if organism == "mus_musculus":
@@ -339,4 +413,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
