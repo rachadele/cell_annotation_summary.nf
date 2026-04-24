@@ -7,7 +7,7 @@
 #
 #   A: Cutoff sensitivity curves (F1 vs cutoff)
 #   B: Taxonomy level slope chart (subclass -> global)
-#   C: Experimental factor contrasts (disease/treatment/sex/subsample_ref)
+#   C: Experimental factor contrasts (disease/treatment/sex)
 #   D: Reference atlas comparison
 #
 # Usage:
@@ -18,8 +18,8 @@
 #       --mm_reference_emmeans path/to/mm/reference_method_emmeans_summary.tsv \
 #       --hs_method_emmeans   path/to/hs/method_emmeans_summary.tsv \
 #       --mm_method_emmeans   path/to/mm/method_emmeans_summary.tsv \
-#       --hs_factor_emmeans   "path/sex.tsv path/disease_state.tsv path/subsample_ref.tsv" \
-#       --mm_factor_emmeans   "path/sex.tsv path/treatment.tsv path/subsample_ref.tsv" \
+#       --hs_factor_emmeans   "path/sex.tsv path/disease_state.tsv" \
+#       --mm_factor_emmeans   "path/sex.tsv path/treatment.tsv" \
 #       --primary_key subclass \
 #       --outdir figures \
 #       --output_prefix combined_figure
@@ -47,12 +47,11 @@ FACTOR_DISPLAY_NAMES <- c(
   disease_state   = "Disease State",
   treatment_state = "Treatment",
   treatment       = "Treatment",
-  sex             = "Sex",
-  subsample_ref   = "Reference Size"
+  sex             = "Sex"
 )
 
 # Factor section order for Panel C (top to bottom)
-FACTOR_ORDER <- c("disease_state", "treatment_state", "sex", "subsample_ref")
+FACTOR_ORDER <- c("disease_state", "treatment_state", "sex")
 
 # Reference abbreviations for Panel D
 REFERENCE_ABBREVS <- c(
@@ -229,8 +228,7 @@ create_panel_c <- function(factor_data, sig_data = NULL, raw_data = NULL) {
   sections <- list(
     list(factor = "disease_state",   organisms = "Human"),
     list(factor = "treatment",       organisms = "Mouse"),
-    list(factor = "sex",             organisms = c("Human", "Mouse")),
-    list(factor = "subsample_ref",   organisms = c("Human", "Mouse"))
+    list(factor = "sex",             organisms = c("Human", "Mouse"))
   )
 
   plot_rows           <- list()
@@ -246,14 +244,7 @@ create_panel_c <- function(factor_data, sig_data = NULL, raw_data = NULL) {
       filter(factor_name == fct, organism %in% orgs) %>%
       mutate(organism = factor(organism, levels = orgs))
 
-    if (fct == "subsample_ref") {
-      sec_df <- sec_df %>%
-        mutate(level_num = suppressWarnings(as.numeric(level))) %>%
-        arrange(organism, level_num) %>%
-        select(-level_num)
-    } else {
-      sec_df <- sec_df %>% arrange(organism, desc(response))
-    }
+    sec_df <- sec_df %>% arrange(organism, desc(response))
 
     if (nrow(sec_df) == 0) next
     n_sections_added <- n_sections_added + 1
@@ -304,7 +295,7 @@ create_panel_c <- function(factor_data, sig_data = NULL, raw_data = NULL) {
       if (!raw_col %in% colnames(raw_data)) next
       rd <- raw_data %>%
         filter(organism == org) %>%
-        { if (raw_col != "subsample_ref" && "subsample_ref" %in% colnames(.)) filter(., subsample_ref == "500") else . } %>%
+        { if ("subsample_ref" %in% colnames(.)) filter(., subsample_ref == "500") else . } %>%
         mutate(level_raw = str_to_title(str_replace_all(as.character(.data[[raw_col]]), "_", " "))) %>%
         filter(level_raw == lbl) %>%
         mutate(y_pos = yp) %>%
@@ -605,63 +596,67 @@ create_panel_d <- function(reference_data, ref_sig = NULL, raw_data = NULL,
     ) +
     labs(x = "Agreement with Author Labels (Macro F1)", y = "Reference Datasets") +
     scale_x_continuous(breaks = c(0, 0.5, 1.0)) +
-    coord_cartesian(xlim = c(0, 1.15), clip = "off") +
+    coord_cartesian(xlim = c(0, 1.25), clip = "off") +
     pub_theme()
 
-  # Add significance brackets if provided
+  # Pairwise method significance brackets (one per method pair per reference),
+  # stacked in x-lanes when a reference has >1 pairwise contrast (3+ methods).
   if (!is.null(ref_sig) && nrow(ref_sig) > 0) {
     ref_sig_abbr <- ref_sig %>%
       mutate(
         ref_abbr = dplyr::recode(reference, !!!REFERENCE_ABBREVS, .default = reference),
+        organism = as.character(organism)
+      )
+
+    # y_dodge lookup per (organism, ref_abbr, method)
+    dodge_lookup <- reference_data %>%
+      distinct(organism, ref_abbr, method, y_dodge) %>%
+      mutate(
+        organism = as.character(organism),
+        method   = as.character(method)
+      )
+
+    bracket_df <- ref_sig_abbr %>%
+      inner_join(dodge_lookup,
+                 by = c("organism", "ref_abbr", "method1" = "method")) %>%
+      rename(y1 = y_dodge) %>%
+      inner_join(dodge_lookup,
+                 by = c("organism", "ref_abbr", "method2" = "method")) %>%
+      rename(y2 = y_dodge) %>%
+      mutate(
+        y_lo     = pmin(y1, y2),
+        y_hi     = pmax(y1, y2),
+        y_mid    = (y_lo + y_hi) / 2,
+        span     = y_hi - y_lo,
         organism = factor(organism, levels = names(ORGANISM_COLORS))
       )
 
-    # Join to y_tbl to get y_raw positions per organism × ref_abbr
-    y_tbl_aug <- y_tbl %>%
-      mutate(
-        organism  = sub("##.*", "", as.character(ref_unique)),
-        ref_label = sub(".*##", "", as.character(ref_unique))
-      ) %>%
-      inner_join(
-        ref_sig_abbr %>% select(organism, ref_abbr, sig),
-        by = c("organism", "ref_label" = "ref_abbr")
-      ) %>%
-      mutate(organism = factor(organism, levels = names(ORGANISM_COLORS)))
-
-    if (nrow(y_tbl_aug) > 0) {
-      x_bracket <- 1.05
-      x_tick    <- 1.038
-      x_star    <- 1.062
-      half_span <- dodge_width / 2   # 0.125
-
-      bracket_df <- y_tbl_aug %>%
-        mutate(y_lo = y_raw - half_span, y_hi = y_raw + half_span)
+    if (nrow(bracket_df) > 0) {
+      # One x-lane per (organism, ref) so 3+ method pairs don't overlap
+      bracket_df <- bracket_df %>%
+        group_by(organism, ref_abbr) %>%
+        arrange(span, y_lo, .by_group = TRUE) %>%
+        mutate(bracket_rank = row_number()) %>%
+        ungroup() %>%
+        mutate(
+          x_spine = 1.05 + (bracket_rank - 1) * 0.04,
+          x_tick  = x_spine - 0.012,
+          x_star  = x_spine + 0.016
+        )
 
       p <- p +
-        # Vertical spine
-        geom_segment(
-          data = bracket_df,
-          aes(x = x_bracket, xend = x_bracket, y = y_lo, yend = y_hi),
-          inherit.aes = FALSE, colour = "black", linewidth = 0.5
-        ) +
-        # Bottom tick
-        geom_segment(
-          data = bracket_df,
-          aes(x = x_tick, xend = x_bracket, y = y_lo, yend = y_lo),
-          inherit.aes = FALSE, colour = "black", linewidth = 0.5
-        ) +
-        # Top tick
-        geom_segment(
-          data = bracket_df,
-          aes(x = x_tick, xend = x_bracket, y = y_hi, yend = y_hi),
-          inherit.aes = FALSE, colour = "black", linewidth = 0.5
-        ) +
-        # Significance star
-        geom_text(
-          data = bracket_df,
-          aes(x = x_star, y = y_raw, label = sig),
-          inherit.aes = FALSE, hjust = 0, size = 12
-        )
+        geom_segment(data = bracket_df,
+                     aes(x = x_spine, xend = x_spine, y = y_lo, yend = y_hi),
+                     inherit.aes = FALSE, colour = "black", linewidth = 0.5) +
+        geom_segment(data = bracket_df,
+                     aes(x = x_tick, xend = x_spine, y = y_lo, yend = y_lo),
+                     inherit.aes = FALSE, colour = "black", linewidth = 0.5) +
+        geom_segment(data = bracket_df,
+                     aes(x = x_tick, xend = x_spine, y = y_hi, yend = y_hi),
+                     inherit.aes = FALSE, colour = "black", linewidth = 0.5) +
+        geom_text(data = bracket_df,
+                  aes(x = x_star, y = y_mid, label = sig),
+                  inherit.aes = FALSE, hjust = 0, size = 12)
     }
   }
 
@@ -738,14 +733,18 @@ load_factor_data <- function(hs_files, mm_files, primary_key) {
 }
 
 load_reference_significance <- function(hs_file, mm_file, primary_key) {
-  # Perl backreference patterns: same reference on both sides, different method
-  pat_no_paren <- "^(.+) (?:seurat|scvi_rf|scvi_knn) / \\1 (?:seurat|scvi_rf|scvi_knn)$"
-  pat_parens   <- "^\\((.+) (?:seurat|scvi_rf|scvi_knn)\\) / \\(\\1 (?:seurat|scvi_rf|scvi_knn)\\)$"
+  # Accepts methods: scvi, scvi_rf, scvi_knn, seurat
+  method_alt <- "(scvi_rf|scvi_knn|scvi|seurat)"
+  pat_no_paren <- paste0("^(.+) ", method_alt, " / (.+) ", method_alt, "$")
+  pat_parens   <- paste0("^\\((.+) ", method_alt, "\\) / \\((.+) ", method_alt, "\\)$")
 
-  get_ref <- function(contrast) {
-    m <- regmatches(contrast, regexec("^\\(?(.+) (?:seurat|scvi_rf|scvi_knn)\\)? /", contrast, perl = TRUE))
-    if (length(m[[1]]) >= 2) return(trimws(m[[1]][2]))
-    NA_character_
+  parse_contrast <- function(contrast) {
+    m <- regmatches(contrast, regexec(pat_parens, contrast, perl = TRUE))[[1]]
+    if (length(m) < 5) {
+      m <- regmatches(contrast, regexec(pat_no_paren, contrast, perl = TRUE))[[1]]
+    }
+    if (length(m) < 5) return(c(NA_character_, NA_character_, NA_character_, NA_character_))
+    c(trimws(m[2]), m[3], trimws(m[4]), m[5])
   }
 
   rows <- list()
@@ -760,21 +759,22 @@ load_reference_significance <- function(hs_file, mm_file, primary_key) {
       filter(key == primary_key)
     if (nrow(df) == 0) next
 
-    keep <- grepl(pat_no_paren, df$contrast, perl = TRUE) |
-            grepl(pat_parens,   df$contrast, perl = TRUE)
-    df <- df[keep, ]
-    if (nrow(df) == 0) next
-
+    parsed <- t(vapply(df$contrast, parse_contrast, character(4L)))
     df <- df %>%
       mutate(
-        reference = vapply(contrast, get_ref, character(1L)),
-        organism  = org,
-        sig       = sig_stars(p.value)
+        ref1     = parsed[, 1],
+        method1  = parsed[, 2],
+        ref2     = parsed[, 3],
+        method2  = parsed[, 4],
+        organism = org,
+        sig      = sig_stars(p.value)
       ) %>%
-      filter(!is.na(reference)) %>%
-      select(reference, organism, p_value = p.value, sig)
+      filter(!is.na(ref1), !is.na(ref2), ref1 == ref2, method1 != method2) %>%
+      mutate(reference = ref1) %>%
+      select(reference, method1, method2, organism, p_value = p.value, sig)
+    if (nrow(df) == 0) next
     rows[[length(rows) + 1]] <- df
-    message("  Loaded reference sig (", org, "): ", nrow(df), " contrasts")
+    message("  Loaded reference sig (", org, "): ", nrow(df), " within-ref method contrasts")
   }
   bind_rows(rows)
 }
@@ -861,18 +861,24 @@ parse_args_cli <- function() {
   p$add_argument(
     "--hs_factors",
     nargs   = "+",
-    default = c("disease_state", "sex", "subsample_ref"),
+    default = c("disease_state", "sex"),
     help    = "Factor names for human Panel C (files derived from --hs_model_dir)"
   )
   p$add_argument(
     "--mm_factors",
     nargs   = "+",
-    default = c("treatment", "subsample_ref"),
+    default = c("treatment"),
     help    = "Factor names for mouse Panel C (files derived from --mm_model_dir)"
   )
   p$add_argument("--primary_key",    default = "subclass")
   p$add_argument("--outdir",         default = "combined_orgs/main_branch")
   p$add_argument("--output_prefix",  default = "combined_figure")
+  p$add_argument(
+    "--methods",
+    nargs   = "+",
+    default = c("scvi", "seurat"),
+    help    = "Methods to include in the legend (default: main-branch two-classifier set)"
+  )
 
   a      <- p$parse_args()
   hs_dir <- a$hs_model_dir
@@ -909,7 +915,8 @@ parse_args_cli <- function() {
     mm_sample_results      = a$mm_sample_results,
     primary_key            = a$primary_key,
     outdir                 = a$outdir,
-    output_prefix          = a$output_prefix
+    output_prefix          = a$output_prefix,
+    methods                = a$methods
   )
 }
 
@@ -919,6 +926,15 @@ main <- function() {
   args <- parse_args_cli()
   dir.create(args$outdir, recursive = TRUE, showWarnings = FALSE)
   pk <- args$primary_key
+
+  # Restrict method legend/aesthetics to the requested set
+  missing_methods <- setdiff(args$methods, names(METHOD_NAMES))
+  if (length(missing_methods) > 0) {
+    stop("Unknown method(s) in --methods: ", paste(missing_methods, collapse = ", "),
+         ". Known: ", paste(names(METHOD_NAMES), collapse = ", "))
+  }
+  METHOD_NAMES     <<- METHOD_NAMES[args$methods]
+  METHOD_LINETYPES <<- METHOD_LINETYPES[args$methods]
 
   message("Loading data (key=", pk, ")...")
 
