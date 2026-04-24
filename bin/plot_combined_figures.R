@@ -81,14 +81,14 @@ REFERENCE_ABBREVS <- c(
 # -- Theme --------------------------------------------------------------------
 
 pub_theme <- function() {
-  theme_bw(base_size = 20) +
+  theme_bw(base_size = 36) +
     theme(
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       legend.position  = "none",
-      axis.text        = element_text(size = 20),
-      axis.title       = element_text(size = 22),
-      strip.text       = element_text(size = 20),
+      axis.text        = element_text(size = 34),
+      axis.title       = element_text(size = 40),
+      strip.text       = element_text(size = 34),
       plot.background  = element_rect(fill = "white", colour = NA),
       panel.background = element_rect(fill = "white", colour = NA)
     )
@@ -123,10 +123,10 @@ make_legend_plot <- function() {
     theme(
       legend.position  = c(0.6, 0.6),
       legend.direction = "vertical",
-      legend.text      = element_text(size = 22),
-      legend.title     = element_text(size = 22, face = "bold"),
-      legend.key.width = unit(1.8, "cm"),
-      plot.caption     = element_text(size = 18, hjust = 0, colour = "gray30",
+      legend.text      = element_text(size = 36),
+      legend.title     = element_text(size = 40, face = "bold"),
+      legend.key.width = unit(3, "cm"),
+      plot.caption     = element_text(size = 28, hjust = 0, colour = "gray30",
                                       margin = margin(t = 10))
     )
 }
@@ -396,7 +396,7 @@ create_panel_c <- function(factor_data, sig_data = NULL, raw_data = NULL) {
         geom_text(
           data = bracket_df,
           aes(x = x_star, y = y_mid, label = sig, colour = organism),
-          inherit.aes = FALSE, hjust = 0, size = 7
+          inherit.aes = FALSE, hjust = 0, size = 12
         )
     }
   }
@@ -494,7 +494,18 @@ create_panel_e <- function(hs_coef_path, mm_coef_path, primary_key) {
 
 # -- Panel D: Reference Atlas Forest Plot (faceted by organism) ---------------
 
-create_panel_d <- function(reference_data, ref_sig = NULL, raw_data = NULL) {
+create_panel_d <- function(reference_data, ref_sig = NULL, raw_data = NULL,
+                           organism_filter = NULL) {
+  if (!is.null(organism_filter)) {
+    reference_data <- reference_data %>% filter(organism == organism_filter)
+    if (!is.null(raw_data) && nrow(raw_data) > 0) {
+      raw_data <- raw_data %>% filter(organism == organism_filter)
+    }
+    if (!is.null(ref_sig) && nrow(ref_sig) > 0) {
+      ref_sig <- ref_sig %>% filter(organism == organism_filter)
+    }
+  }
+
   # Apply abbreviations
   reference_data <- reference_data %>%
     mutate(ref_abbr = dplyr::recode(reference, !!!REFERENCE_ABBREVS,
@@ -573,16 +584,16 @@ create_panel_d <- function(reference_data, ref_sig = NULL, raw_data = NULL) {
   if (!is.null(raw_d) && nrow(raw_d) > 0) {
     p <- p + geom_boxplot(data = raw_d,
                           aes(x = macro_f1, y = y_dodge, group = factor(y_dodge)),
-                          inherit.aes = FALSE, width = 0.2, alpha = 0.3,
-                          outlier.size = 0.5, colour = "gray50", fill = "gray80",
-                          linewidth = 0.4)
+                          inherit.aes = FALSE, width = 0.7, alpha = 0.3,
+                          outlier.size = 1.2, colour = "gray50", fill = "gray80",
+                          linewidth = 0.8)
   }
 
   p <- p +
     geom_segment(aes(x = `asymp.LCL`, xend = `asymp.UCL`, yend = y_dodge,
                      linetype = method),
-                 linewidth = 0.8) +
-    geom_point(size = 2) +
+                 linewidth = 1.5) +
+    geom_point(size = 4) +
     facet_wrap(~ organism, scales = "free_y", ncol = 2) +
     scale_colour_manual(values = ORGANISM_COLORS, name = "Organism") +
     scale_linetype_manual(values = METHOD_LINETYPES, labels = METHOD_NAMES,
@@ -593,7 +604,7 @@ create_panel_d <- function(reference_data, ref_sig = NULL, raw_data = NULL) {
       expand = expansion(mult = c(0.05, 0.05))
     ) +
     labs(x = "Agreement with Author Labels (Macro F1)", y = "Reference Datasets") +
-    scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1.0)) +
+    scale_x_continuous(breaks = c(0, 0.5, 1.0)) +
     coord_cartesian(xlim = c(0, 1.15), clip = "off") +
     pub_theme()
 
@@ -649,7 +660,7 @@ create_panel_d <- function(reference_data, ref_sig = NULL, raw_data = NULL) {
         geom_text(
           data = bracket_df,
           aes(x = x_star, y = y_raw, label = sig),
-          inherit.aes = FALSE, hjust = 0, size = 7
+          inherit.aes = FALSE, hjust = 0, size = 12
         )
     }
   }
@@ -1000,7 +1011,10 @@ main <- function() {
   p_a <- create_panel_a(cutoff_data)
   p_b <- create_panel_b(taxonomy_data)
   p_c <- create_panel_c(factor_data, factor_sig, raw_data = raw_data)
-  p_d <- create_panel_d(reference_data, ref_sig, raw_data = raw_data)
+  p_d_human <- create_panel_d(reference_data, ref_sig, raw_data = raw_data,
+                              organism_filter = "Human")
+  p_d_mouse <- create_panel_d(reference_data, ref_sig, raw_data = raw_data,
+                              organism_filter = "Mouse")
   p_e <- create_panel_e(args$hs_model_coefs, args$mm_model_coefs, pk)
 
   # -- Save individual panels -------------------------------------------------
@@ -1010,16 +1024,17 @@ main <- function() {
     ggsave(path, p, width = width, height = height, dpi = 300, bg = "white")
   }
 
-  save_panel(p_a, "panel_A_cutoff",    width = 10, height = 7)
-  save_panel(p_b, "panel_B_taxonomy",  width = 9,  height = 7)
-  save_panel(p_c, "panel_C_factors",   width = 16, height = 11)
-  save_panel(p_d, "panel_D_reference", width = 18, height = 12)
-  if (!is.null(p_e)) save_panel(p_e, "panel_E_variance", width = 10, height = 8)
+  save_panel(p_a, "panel_A_cutoff",    width = 13, height = 9)
+  save_panel(p_b, "panel_B_taxonomy",  width = 13, height = 12)
+  save_panel(p_c, "panel_C_factors",   width = 21, height = 14)
+  save_panel(p_d_human, "panel_D_reference_human", width = 18, height = 16)
+  save_panel(p_d_mouse, "panel_D_reference_mouse", width = 18, height = 10)
+  if (!is.null(p_e)) save_panel(p_e, "panel_E_variance", width = 14, height = 10)
 
   legend_path <- file.path(args$outdir, paste0(args$output_prefix, "_legend.png"))
   message("Saving legend to ", legend_path, " ...")
   p_legend <- make_legend_plot()
-  ggsave(legend_path, p_legend, width = 7, height = 4, dpi = 300, bg = "white")
+  ggsave(legend_path, p_legend, width = 12, height = 8, dpi = 300, bg = "white")
 
   message("Done! Panels saved to ", args$outdir)
 }
