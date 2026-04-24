@@ -358,7 +358,9 @@ def main():
     # --- Sample-level results + summary ---
     sample_results = pd.concat(sample_dfs, ignore_index=True)
     del sample_dfs
-    sample_results = sample_results.drop_duplicates().fillna("None")
+    sample_results = sample_results.drop_duplicates()
+    obj_cols = sample_results.select_dtypes(include="object").columns
+    sample_results[obj_cols] = sample_results[obj_cols].fillna("None")
     sample_results.to_csv("sample_results.tsv.gz", sep="\t", index=False, compression="gzip")
 
     weighted_metrics = [
@@ -383,7 +385,8 @@ def main():
     # --- Label-level results + summary + factor summaries ---
     label_results = pd.concat(label_dfs, ignore_index=True)
     del label_dfs
-    label_results = label_results.fillna("None")
+    obj_cols = label_results.select_dtypes(include="object").columns
+    label_results[obj_cols] = label_results[obj_cols].fillna("None")
     label_results.to_csv("label_results.tsv.gz", sep="\t", index=False, compression="gzip")
 
     label_metrics = ["f1_score", "precision", "recall"]
