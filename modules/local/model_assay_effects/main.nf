@@ -1,5 +1,4 @@
 process MODEL_ASSAY_EFFECTS {
-    label 'process_medium'
 
     input:
     path sample_results

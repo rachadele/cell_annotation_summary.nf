@@ -1,5 +1,4 @@
 process PLOT_CUTOFF {
-    label 'process_single'
 
     input:
     path sample_results_aggregated

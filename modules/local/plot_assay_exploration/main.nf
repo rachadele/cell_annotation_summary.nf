@@ -1,5 +1,4 @@
 process PLOT_ASSAY_EXPLORATION {
-    label 'process_single'
 
     input:
     path sample_results

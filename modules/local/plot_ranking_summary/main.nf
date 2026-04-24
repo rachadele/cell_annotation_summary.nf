@@ -1,5 +1,4 @@
 process PLOT_RANKING_SUMMARY {
-    label 'process_single'
 
     input:
     path rankings_best

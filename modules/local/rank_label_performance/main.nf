@@ -1,5 +1,4 @@
 process RANK_LABEL_PERFORMANCE {
-    label 'process_single'
 
     input:
     path label_results

@@ -23,8 +23,6 @@ log.info """\
     census_version : ${params.census_version}
     results        : ${params.results}
     outdir         : ${params.outdir}
-    method         : ${params.method}
-    cutoff         : ${params.cutoff}
     """
     .stripIndent()
 

@@ -43,6 +43,11 @@ drop_single_level_terms <- function(formula, df) {
           single_level_vars <- c(single_level_vars, var)
           message("Dropping single-level variable from formula: ", var)
         }
+      } else if (is.numeric(col)) {
+        if (length(unique(col[!is.na(col)])) < 2) {
+          single_level_vars <- c(single_level_vars, var)
+          message("Dropping zero-variance numeric variable from formula: ", var)
+        }
       }
     }
   }
@@ -93,50 +98,54 @@ run_beta_model <- function(df, formula, group_var = "study", type="weighted", mi
 }
 
 
-run_emmeans_weighted <- function(model, key) {
+run_emmeans_weighted <- function(model, key, cutoff_ref = 0, subsample_ref_emmeans = "500") {
   results <- list()
+  at_cutoff <- list(cutoff = cutoff_ref)
+  if ("subsample_ref" %in% colnames(model$frame)) {
+    at_cutoff$subsample_ref <- subsample_ref_emmeans
+  }
 
-  # Estimate for reference * method
-  emm_reference_method <- emmeans(model, specs = ~ reference * method, at = list(cutoff = 0, subsample_ref = "500"), type = "response")
+  # Estimate for reference * method (average over any remaining levels)
+  emm_reference_method <- emmeans(model, specs = ~ reference * method, at = at_cutoff, type = "response")
   results$reference_method_emmeans_summary <- as.data.frame(summary(emm_reference_method)) %>% mutate(key = key)
   results$reference_method_emmeans_estimates <- as.data.frame(pairs(emm_reference_method)) %>% mutate(key = key)
 
-  # Estimate for method
-  emm_method <- emmeans(model, specs = ~ method, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
+  # Estimate for method (average over references)
+  emm_method <- emmeans(model, specs = ~ method, at = at_cutoff, type = "response")
   results$method_emmeans_summary <- as.data.frame(summary(emm_method)) %>% mutate(key = key)
   results$method_emmeans_estimates <- as.data.frame(pairs(emm_method)) %>% mutate(key = key)
 
-  # subsample ref
-  emm_subsample_ref <- emmeans(model, specs = ~ subsample_ref, at = list(cutoff = 0, reference="whole cortex"), type = "response")
-  results$subsample_ref_emmeans_summary <- as.data.frame(summary(emm_subsample_ref)) %>% mutate(key = key)
-  results$subsample_ref_emmeans_estimates <- as.data.frame(pairs(emm_subsample_ref)) %>% mutate(key = key)
+  if ("subsample_ref" %in% colnames(model$frame)) {
+    emm_subsample_ref <- emmeans(model, specs = ~ subsample_ref, at = at_cutoff, type = "response")
+    results$subsample_ref_emmeans_summary <- as.data.frame(summary(emm_subsample_ref)) %>% mutate(key = key)
+    results$subsample_ref_emmeans_estimates <- as.data.frame(pairs(emm_subsample_ref)) %>% mutate(key = key)
+  }
 
   if ("sex" %in% colnames(model$frame)) {
-    emm_sex <- emmeans(model, specs = ~ sex, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
+    emm_sex <- emmeans(model, specs = ~ sex, at = at_cutoff, type = "response")
     results$sex_emmeans_summary <- as.data.frame(summary(emm_sex)) %>% mutate(key = key)
     results$sex_emmeans_estimates <- as.data.frame(pairs(emm_sex)) %>% mutate(key = key)
   }
 
   if ("disease_state" %in% colnames(model$frame)) {
-    emm_disease_state <- emmeans(model, specs = ~ disease_state, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
+    emm_disease_state <- emmeans(model, specs = ~ disease_state, at = at_cutoff, type = "response")
     results$disease_state_emmeans_summary <- as.data.frame(summary(emm_disease_state)) %>% mutate(key = key)
     results$disease_state_emmeans_estimates <- as.data.frame(pairs(emm_disease_state)) %>% mutate(key = key)
   }
 
   if ("treatment_state" %in% colnames(model$frame)) {
-    emm_treatment <- emmeans(model, specs = ~ treatment_state, at = list(cutoff = 0, subsample_ref="500", reference="whole cortex"), type = "response")
+    emm_treatment <- emmeans(model, specs = ~ treatment_state, at = at_cutoff, type = "response")
     results$treatment_emmeans_summary <- as.data.frame(summary(emm_treatment)) %>% mutate(key = key)
     results$treatment_emmeans_estimates <- as.data.frame(pairs(emm_treatment)) %>% mutate(key = key)
   }
 
   if ("region_match" %in% colnames(model$frame)) {
-    emm_region_match <- emmeans(model, specs = ~ region_match, at = list(cutoff = 0), type = "response")
+    emm_region_match <- emmeans(model, specs = ~ region_match, at = at_cutoff, type = "response")
     results$region_match_emmeans_summary <- as.data.frame(summary(emm_region_match)) %>% mutate(key = key)
     results$region_match_emmeans_estimates <- as.data.frame(pairs(emm_region_match)) %>% mutate(key = key)
   }
 
-  # get marginal mean across all contrasts
-  results$summary_emmeans <- as.data.frame(summary(emmeans(model, type = "response", specs=~1, at = list(cutoff = 0)))) %>% mutate(key = key)
+  results$summary_emmeans <- as.data.frame(summary(emmeans(model, type = "response", specs = ~1, at = at_cutoff))) %>% mutate(key = key)
 
   return(results)
 }
@@ -234,7 +243,7 @@ run_drop1 <- function(model, key_dir) {
   ggsave(file.path(key_dir, "drop1.png"), p, width = 20, height = 20, dpi = 300)
 }
 
-run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_var="study", mixed=TRUE) {
+run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_var="study", mixed=TRUE, cutoff_ref=0, subsample_ref_emmeans="500") {
   all_results <- list()
 
   if (!dir.exists(fig_dir)) {
@@ -258,20 +267,25 @@ run_and_store_model <- function(df, formula, fig_dir, key, type="label", group_v
   plot_qq(model, fig_dir)
 
   if (type == "weighted") {
-    emmeans_results <- run_emmeans_weighted(model, key)
+    emmeans_results <- run_emmeans_weighted(model, key,
+                                            cutoff_ref = cutoff_ref,
+                                            subsample_ref_emmeans = subsample_ref_emmeans)
     all_results <- c(all_results, emmeans_results)
 
-    cutoff_grid <- c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)
-    emm_mc <- emmeans(model, specs = ~ method * cutoff,
-                      at = list(cutoff = cutoff_grid),
-                      type = "response")
-    emm_mc_df <- as.data.frame(summary(emm_mc))
-    # Rename columns to match expected format: fit, lower, upper
-    names(emm_mc_df)[names(emm_mc_df) == "response"] <- "fit"
-    names(emm_mc_df)[names(emm_mc_df) == "asymp.LCL"] <- "lower"
-    names(emm_mc_df)[names(emm_mc_df) == "asymp.UCL"] <- "upper"
-    plot_continuous_effects(emm_mc_df, fig_dir, key)
-    all_results$method_cutoff_effects <- emm_mc_df %>% mutate(key = key)
+    if ("cutoff" %in% colnames(model$frame)) {
+      cutoff_grid <- c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75)
+      emm_mc <- emmeans(model, specs = ~ method * cutoff,
+                        at = list(cutoff = cutoff_grid),
+                        type = "response")
+      emm_mc_df <- as.data.frame(summary(emm_mc))
+      names(emm_mc_df)[names(emm_mc_df) == "response"] <- "fit"
+      names(emm_mc_df)[names(emm_mc_df) == "asymp.LCL"] <- "lower"
+      names(emm_mc_df)[names(emm_mc_df) == "asymp.UCL"] <- "upper"
+      plot_continuous_effects(emm_mc_df, fig_dir, key)
+      all_results$method_cutoff_effects <- emm_mc_df %>% mutate(key = key)
+    } else {
+      message("Skipping cutoff sensitivity emmeans: cutoff was dropped from model (single value in data)")
+    }
 
   }
 

@@ -1,5 +1,4 @@
 process PLOT_CONFIG_PARETO {
-    label 'process_single'
 
     input:
     path rankings_detailed

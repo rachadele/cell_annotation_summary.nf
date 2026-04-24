@@ -1,5 +1,4 @@
 process PLOT_RANKING_RELIABILITY {
-    label 'process_single'
 
     input:
     path rankings_best
