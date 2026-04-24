@@ -317,7 +317,7 @@ def main():
             if organism == "homo_sapiens" and args.metadata_dir:
                 sample_meta = load_sample_metadata(args.metadata_dir)
 
-        if organism == "mus_musculus":
+        if organism == "mus_musculus" and "predicted_support" in df.columns:
             contam = df[(df["support"] == 0) & (df["predicted_support"] > 0)]
             if not contam.empty:
                 contamination_dfs.append(contam)
@@ -331,7 +331,7 @@ def main():
             continue
 
         # Sample-level slice: drop label-specific columns and dedup within this file.
-        sample_slice = df.drop(columns=LABEL_ONLY_COLUMNS).drop_duplicates()
+        sample_slice = df.drop(columns=LABEL_ONLY_COLUMNS, errors="ignore").drop_duplicates()
         sample_slice = sample_slice[sample_slice["weighted_f1"].notnull()]
         if not sample_slice.empty:
             sample_dfs.append(sample_slice)
