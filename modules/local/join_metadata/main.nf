@@ -1,5 +1,4 @@
 process JOIN_METADATA {
-    label 'process_single'
 
     input:
     path sample_results

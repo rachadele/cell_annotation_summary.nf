@@ -1,5 +1,4 @@
 process PLOT_STUDY_VARIANCE {
-    label 'process_single'
 
     input:
     path label_results

@@ -1,5 +1,4 @@
 process PLOT_F1_DISTRIBUTIONS {
-    label 'process_single'
 
     input:
     path sample_results

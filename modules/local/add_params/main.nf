@@ -1,6 +1,5 @@
 process ADD_PARAMS {
     tag "$run_name"
-    label 'process_high'
     storeDir "${params.outdir}/params_added"
 
     input:

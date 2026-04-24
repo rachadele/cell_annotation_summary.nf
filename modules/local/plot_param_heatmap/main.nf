@@ -1,5 +1,4 @@
 process PLOT_PARAM_HEATMAP {
-    label 'process_single'
 
     input:
     path rankings_detailed

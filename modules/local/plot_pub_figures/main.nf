@@ -1,6 +1,5 @@
 process PLOT_PUB_FIGURES {
 
-    label 'process_single'
 
     input:
     val sample_results
