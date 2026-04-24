@@ -1,6 +1,4 @@
 process AGGREGATE_RESULTS {
-    label 'process_high'
-
     input:
     path(f1_results_params, stageAs: "inputs/?/*")
     val  metadata_dir
