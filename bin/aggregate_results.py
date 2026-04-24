@@ -100,7 +100,6 @@ def apply_sample_metadata(df, sample_meta):
     if not sample_meta:
         return df
 
-    df = df.copy()
     # Ensure columns exist
     for col in ('sex', 'disease'):
         if col not in df.columns:
@@ -239,18 +238,27 @@ def main():
     }
     READ_DTYPES = {**CATEGORICAL_COLS, **FLOAT32_COLS}
 
-    dfs = [pd.read_csv(filepath, sep="\t", dtype=READ_DTYPES) for filepath in pipeline_results]
+    # Filter support > 0 per file before concat to lower peak memory; keep
+    # contamination rows (support==0 & predicted_support>0) separately so the
+    # mouse contamination report can still be written.
+    dfs = []
+    contamination_dfs = []
+    for filepath in pipeline_results:
+        df = pd.read_csv(filepath, sep="\t", dtype=READ_DTYPES, low_memory=False)
+        contam = df[(df['support'] == 0) & (df['predicted_support'] > 0)]
+        if not contam.empty:
+            contamination_dfs.append(contam)
+        dfs.append(df[df['support'] > 0])
     results_df = pd.concat(dfs, ignore_index=True)
     del dfs
 
     organism = results_df["organism"].unique()[0]
 
-    if organism == 'mus_musculus':
-        contamination = results_df[(results_df['support'] == 0) & (results_df['predicted_support'] > 0)]
-        if not contamination.empty:
-            contamination.to_csv("contamination.tsv", sep="\t", index=False)
-
-    results_df = results_df[results_df['support'] > 0]
+    if organism == 'mus_musculus' and contamination_dfs:
+        contamination = pd.concat(contamination_dfs, ignore_index=True)
+        contamination.to_csv("contamination.tsv", sep="\t", index=False)
+        del contamination
+    del contamination_dfs
 
     # --- Remove outlier studies ---
     if args.remove_outliers:
@@ -328,10 +336,12 @@ def main():
         ["method", "cutoff", "reference", "key", "subsample_ref"]
     ).agg(**weighted_agg).reset_index()
     weighted_summary.to_csv("sample_results_summary.tsv.gz", sep="\t", index=False, compression="gzip")
+    del sample_results, weighted_summary
 
     # --- Label F1 results ---
     label_results = results_df[results_df['label'].notnull()]
     label_results = label_results[label_results["f1_score"].notnull()]
+    del results_df
     label_results = label_results.fillna("None")
     label_results = label_results[label_results["label"] != "unkown"]
     label_results.to_csv("label_results.tsv.gz", sep="\t", index=False, compression="gzip")

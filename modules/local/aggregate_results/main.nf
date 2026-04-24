@@ -1,5 +1,5 @@
 process AGGREGATE_RESULTS {
-    label 'process_low'
+    label 'process_high'
 
     input:
     path(f1_results_params, stageAs: "inputs/?/*")
