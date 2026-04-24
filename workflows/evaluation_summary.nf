@@ -60,8 +60,17 @@ workflow EVALUATION_SUMMARY {
     //
     // MODULE: Aggregate results across runs
     //
+    ch_f1_params_added = ADD_PARAMS.out.f1_results_params
+        .flatten()
+        .filter { f ->
+            if (params.max_cutoff == null) return true
+            def m = (f.name =~ /cutoff_([0-9.]+)_f1_results/)
+            m ? (m[0][1] as double) <= (params.max_cutoff as double) : true
+        }
+        .toList()
+
     AGGREGATE_RESULTS(
-        ADD_PARAMS.out.f1_results_params.flatten().toList(),
+        ch_f1_params_added,
         params.metadata_dir ?: "",
         params.remove_outliers ?: null
     )
