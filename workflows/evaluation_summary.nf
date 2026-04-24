@@ -11,8 +11,6 @@ include { PLOT_COMPTIME          } from "$projectDir/modules/local/plot_comptime
 include { PLOT_LABEL_DIST        } from "$projectDir/modules/local/plot_label_dist/main"
 include { PLOT_F1_DISTRIBUTIONS  } from "$projectDir/modules/local/plot_f1_distributions/main"
 include { MODEL_EVAL_AGGREGATED  } from "$projectDir/modules/local/model_eval_aggregated/main"
-include { GET_GRANT_SUMMARY      } from "$projectDir/modules/local/get_grant_summary/main"
-include { PLOT_CELLTYPE_GRANULARITY } from "$projectDir/modules/local/plot_celltype_granularity/main"
 include { PLOT_PUB_FIGURES       } from "$projectDir/modules/local/plot_pub_figures/main"
 include { PLOT_LABEL_HEATMAP     } from "$projectDir/modules/local/plot_label_heatmap/main"
 include { RANK_LABEL_PERFORMANCE   } from "$projectDir/modules/local/rank_label_performance/main"
@@ -110,16 +108,6 @@ workflow EVALUATION_SUMMARY {
     }
 
     //
-    // MODULE: Generate grant summary
-    //
-    GET_GRANT_SUMMARY(ch_sample_results, ch_label_results)
-
-    //
-    // MODULE: Plot label distributions
-    //
-    //PLOT_LABEL_DIST(ch_label_results)
-
-    //
     // MODULE: Plot F1 score distributions (macro and per-label)
     //
     PLOT_F1_DISTRIBUTIONS(ch_sample_results, ch_label_results)
@@ -189,10 +177,6 @@ workflow EVALUATION_SUMMARY {
         PLOT_COMPTIME.out.comptime_summary
     )
 
-    //
-    // MODULE: Plot cell type granularity comparison (post-hoc)
-    //
-    // PLOT_CELLTYPE_GRANULARITY(ch_label_results)
 }
 
 /*
