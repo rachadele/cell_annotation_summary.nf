@@ -105,6 +105,13 @@ def run_key(df_k: pd.DataFrame, key: str, outdir: str, min_study_n: int):
                      .sort_values(CONFIG_COLS).reset_index(drop=True))
     full_best = full.loc[[full["full_data_mean"].idxmax()]].iloc[0]
 
+    # Modal pick across outer folds: most common config tuple.
+    pick_counts = (outer_df.groupby(CONFIG_COLS, observed=True)
+                            .size().rename("n").reset_index()
+                            .sort_values("n", ascending=False))
+    modal_pick = pick_counts.iloc[0]
+    modal_agreement = float(modal_pick["n"]) / len(outer_df)
+
     summary = {
         "key": key,
         "n_folds": len(outer_df),
@@ -114,9 +121,11 @@ def run_key(df_k: pd.DataFrame, key: str, outdir: str, min_study_n: int):
         "full_data_mean": float(full_best["full_data_mean"]),
         "selection_bias": float(full_best["full_data_mean"]
                                 - outer_df["outer_score"].mean(skipna=True)),
+        "modal_agreement": modal_agreement,
     }
     for col in CONFIG_COLS:
         summary[f"full_data_{col}"] = full_best[col]
+        summary[f"modal_{col}"] = modal_pick[col]
 
     pd.DataFrame([summary]).to_csv(
         os.path.join(key_dir, "unbiased_summary.tsv"),
@@ -125,7 +134,8 @@ def run_key(df_k: pd.DataFrame, key: str, outdir: str, min_study_n: int):
     print(f"  [{key}] outer mean = {summary['outer_mean']:.4f} "
           f"± {summary['outer_sd']:.4f} "
           f"(full-data mean = {summary['full_data_mean']:.4f}, "
-          f"selection bias = {summary['selection_bias']:+.4f})")
+          f"selection bias = {summary['selection_bias']:+.4f}, "
+          f"modal agreement = {modal_agreement:.0%})")
 
 
 def main():
