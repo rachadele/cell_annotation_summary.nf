@@ -140,7 +140,8 @@ def plot_summary_bars(runs, outpath: str):
     ax.set_title("Selection bias: full-data vs CV mean (gap = bias)")
     ax.set_ylim(0, 1.05)
     ax.grid(axis="y", alpha=0.3)
-    ax.legend(loc="lower right", fontsize=15, ncol=n_runs)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.12),
+              fontsize=15, ncol=n_runs * 2, frameon=False)
     fig.tight_layout()
     save_figure(fig, outpath, formats=["png"])
     plt.close(fig)
