@@ -114,6 +114,92 @@ def plot_per_fold_facets(label: str, outer_df: pd.DataFrame,
     plt.close(fig)
 
 
+def plot_recommendations(runs, outpath: str):
+    """One row per (organism, key) showing the recommended config plus its
+    full-data mean (open marker) and CV mean ± SD (filled marker + bar).
+    Color encodes modal-pick agreement across outer folds.
+    """
+    # Build the long-format table.
+    rows = []
+    for label, _outer, summary in runs:
+        for _, r in summary.iterrows():
+            cfg = (f"{r['modal_method']}, {r['modal_reference']}, "
+                   f"cutoff={r['modal_cutoff']}, sub_ref={r['modal_subsample_ref']}")
+            full_eq_modal = all(r[f"full_data_{c}"] == r[f"modal_{c}"]
+                                for c in CONFIG_COLS)
+            rows.append({
+                "label": f"{label} · {r['key']}",
+                "config": cfg if len(cfg) <= 50 else cfg[:47] + "...",
+                "cv_mean": r["outer_mean"],
+                "cv_sd": r["outer_sd"],
+                "full_data_mean": r["full_data_mean"],
+                "agreement": r["modal_agreement"],
+                "match": full_eq_modal,
+            })
+    plot_df = pd.DataFrame(rows)
+    # Sort by organism then by KEY_ORDER
+    plot_df["_key_order"] = plot_df["label"].str.split(" · ").str[1].map(
+        {k: i for i, k in enumerate(KEY_ORDER)})
+    plot_df["_org"] = plot_df["label"].str.split(" · ").str[0]
+    plot_df = plot_df.sort_values(["_org", "_key_order"]).reset_index(drop=True)
+
+    n = len(plot_df)
+    # Two side-by-side panels sharing y: scores on the left, agreement bar
+    # + config text on the right.
+    fig, (ax_score, ax_anno) = plt.subplots(
+        1, 2, figsize=(17, 0.75 * n + 3.5),
+        gridspec_kw={"width_ratios": [3, 4], "wspace": 0.05},
+        sharey=True,
+    )
+    y = np.arange(n)
+
+    # ---- Left panel: scores ----
+    ax_score.errorbar(plot_df["cv_mean"], y, xerr=plot_df["cv_sd"],
+                      fmt="o", color="#444444", ecolor="#888888",
+                      markersize=12, capsize=5, zorder=3, label="CV mean ± SD")
+    ax_score.scatter(plot_df["full_data_mean"], y, marker="D",
+                     s=130, facecolors="none", edgecolors="#1f77b4", linewidths=2.2,
+                     zorder=4, label="full-data mean")
+    ax_score.set_yticks(y)
+    ax_score.set_yticklabels(plot_df["label"], fontsize=20)
+    ax_score.tick_params(axis="x", labelsize=18)
+    ax_score.invert_yaxis()
+    ax_score.set_xlabel("macro F1", fontsize=22)
+    lo = plot_df["cv_mean"].min() - plot_df["cv_sd"].max() - 0.05
+    hi = plot_df["full_data_mean"].max() + 0.04
+    ax_score.set_xlim(lo, hi)
+    ax_score.grid(axis="x", alpha=0.3)
+    ax_score.legend(loc="upper center", bbox_to_anchor=(0.5, -0.12),
+                    fontsize=18, frameon=False, ncol=2)
+
+    # ---- Right panel: agreement bar + config text ----
+    cmap = plt.get_cmap("RdYlGn")
+    bar_max = 1.0
+    for yi, (a, cfg) in enumerate(zip(plot_df["agreement"], plot_df["config"])):
+        ax_anno.add_patch(plt.Rectangle((0, yi - 0.35), a, 0.7,
+                                         facecolor=cmap(a), edgecolor="black", lw=0.5))
+        ax_anno.text(a + 0.02, yi, f"{a:.0%}", fontsize=18, va="center", ha="left")
+        ax_anno.text(bar_max + 0.18, yi, cfg, fontsize=12,
+                     va="center", ha="left", family="monospace")
+    ax_anno.set_xlim(0, bar_max + 2.5)
+    ax_anno.set_xticks([0, 0.5, 1.0])
+    ax_anno.set_xticklabels(["0%", "50%", "100%"], fontsize=18)
+    ax_anno.set_xlabel("modal-pick fold agreement", fontsize=20)
+    ax_anno.spines["top"].set_visible(False)
+    ax_anno.spines["right"].set_visible(False)
+    ax_anno.set_ylim(n - 0.5, -0.5)
+
+    # Single label above the right panel for the config column
+    ax_anno.text(bar_max + 0.18, -0.7, "recommended config (method, reference, cutoff, subsample_ref)",
+                 fontsize=14, ha="left", va="bottom", style="italic")
+
+    fig.suptitle("Recommended config = full-data argmax (modal pick across folds shown for confidence)",
+                 fontsize=20, y=1.02)
+    fig.tight_layout()
+    save_figure(fig, outpath, formats=["png"])
+    plt.close(fig)
+
+
 def plot_summary_bars(runs, outpath: str):
     """Compact summary across organisms: full-data mean vs CV mean,
     grouped bars per (key, organism). Selection bias = visible gap."""
@@ -205,6 +291,7 @@ def main():
 
     if len(runs) > 1:
         plot_summary_bars(runs, os.path.join(args.outdir, "summary_bias_comparison"))
+    plot_recommendations(runs, os.path.join(args.outdir, "recommended_configs"))
 
     print(f"Wrote figures to {args.outdir}")
 
