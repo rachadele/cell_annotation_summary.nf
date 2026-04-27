@@ -1,0 +1,9 @@
+held_out_study	method	reference	cutoff	subsample_ref	outer_score	n_outer_test_samples
+CMC	scvi	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	0.25	500	0.9972510110752687	43941
+DevBrain	scvi	whole cortex	0.25	500	0.9871593562500001	7040
+GSE237718	scvi	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	0.25	500	0.99558089125	24640
+Ling-2024	scvi	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	0.2	500	0.9972633909424083	80866
+MultiomeBrain	scvi	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	0.25	500	0.944775330952381	9240
+PTSDBrainomics	scvi	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	0.25	500	0.9865347105263157	8360
+SZBDMulti-Seq	scvi	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	0.25	500	0.9840300220833333	31680
+UCLA-ASD	scvi	whole cortex	0.0	500	0.9729242050980392	21420

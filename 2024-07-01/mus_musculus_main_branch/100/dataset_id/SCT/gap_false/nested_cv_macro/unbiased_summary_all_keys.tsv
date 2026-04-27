@@ -1,0 +1,5 @@
+key	n_folds	n_folds_with_outer_score	outer_mean	outer_sd	full_data_mean	selection_bias	modal_agreement	full_data_method	modal_method	full_data_reference	modal_reference	full_data_cutoff	modal_cutoff	full_data_subsample_ref	modal_subsample_ref
+class	7	7	0.6858476853877552	0.1533173627093907	0.7301558622687075	0.0443081768809523	0.4285714285714285	seurat	seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	0.0	50	50
+family	7	7	0.805665953734694	0.0839022440939891	0.8171763933061225	0.0115104395714284	0.7142857142857143	scvi	scvi	whole cortex	whole cortex	0.0	0.0	100	100
+global	7	7	0.9016809353367348	0.1510675884708523	0.91559699757483	0.0139160622380952	0.7142857142857143	seurat	seurat	whole cortex	whole cortex	0.25	0.25	500	500
+subclass	7	7	0.6753617439353742	0.1659256851645835	0.7347711990782313	0.0594094551428571	0.7142857142857143	seurat	seurat	whole cortex	whole cortex	0.25	0.25	500	500

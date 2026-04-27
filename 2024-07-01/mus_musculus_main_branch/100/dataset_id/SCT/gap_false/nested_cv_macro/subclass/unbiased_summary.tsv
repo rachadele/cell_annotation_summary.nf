@@ -1,0 +1,2 @@
+key	n_folds	n_folds_with_outer_score	outer_mean	outer_sd	full_data_mean	selection_bias	modal_agreement	full_data_method	modal_method	full_data_reference	modal_reference	full_data_cutoff	modal_cutoff	full_data_subsample_ref	modal_subsample_ref
+subclass	7	7	0.6753617439353742	0.16592568516458353	0.7347711990782313	0.059409455142857115	0.7142857142857143	seurat	seurat	whole cortex	whole cortex	0.25	0.25	500	500

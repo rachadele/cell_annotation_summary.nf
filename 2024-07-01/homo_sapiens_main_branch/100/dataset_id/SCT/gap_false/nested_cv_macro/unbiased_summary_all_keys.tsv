@@ -1,0 +1,5 @@
+key	n_folds	n_folds_with_outer_score	outer_mean	outer_sd	full_data_mean	selection_bias	modal_agreement	full_data_method	modal_method	full_data_reference	modal_reference	full_data_cutoff	modal_cutoff	full_data_subsample_ref	modal_subsample_ref
+class	8	7	0.9519871177166732	0.0247132686206617	0.9533645120023876	0.0013773942857142	0.875	scvi	scvi	whole cortex	whole cortex	0.25	0.25	500	500
+family	8	8	0.9831898647722184	0.0175581824984889	0.9861781364873012	0.0029882717150827	0.5	scvi	scvi	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	Whole Taxonomy - MTG Seattle Alzheimers Disease Atlas SEA-AD	0.25	0.25	500	500
+global	8	8	0.9921356878952392	0.0150084695334187	0.9924908129547628	0.0003551250595237	0.875	scvi	scvi	whole cortex	whole cortex	0.0	0.0	500	500
+subclass	8	8	0.9051254370297565	0.0489638915879895	0.9154026203089172	0.0102771832791609	0.625	scvi	scvi	whole cortex	whole cortex	0.25	0.25	500	500

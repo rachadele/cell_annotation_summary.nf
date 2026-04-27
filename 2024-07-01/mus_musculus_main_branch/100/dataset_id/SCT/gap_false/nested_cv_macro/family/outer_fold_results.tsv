@@ -1,0 +1,8 @@
+held_out_study	method	reference	cutoff	subsample_ref	outer_score	n_outer_test_samples
+GSE124952	scvi	whole cortex	0.15	100	0.8470200499999999	2880
+GSE181021.2	seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.7801182975	768
+GSE185454	scvi	whole cortex	0.0	100	0.8556357325	768
+GSE199460.2	scvi	whole cortex	0.0	100	0.9467221299999999	384
+GSE214244.1	scvi	whole cortex	0.0	100	0.78286649	576
+GSE247339.1	scvi	whole cortex	0.0	100	0.7173221071428572	4032
+GSE247339.2	scvi	whole cortex	0.0	100	0.709976869	3840

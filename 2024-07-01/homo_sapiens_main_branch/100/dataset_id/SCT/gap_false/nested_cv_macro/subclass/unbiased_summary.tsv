@@ -1,0 +1,2 @@
+key	n_folds	n_folds_with_outer_score	outer_mean	outer_sd	full_data_mean	selection_bias	modal_agreement	full_data_method	modal_method	full_data_reference	modal_reference	full_data_cutoff	modal_cutoff	full_data_subsample_ref	modal_subsample_ref
+subclass	8	8	0.9051254370297563	0.04896389158798954	0.9154026203089173	0.01027718327916094	0.625	scvi	scvi	whole cortex	whole cortex	0.25	0.25	500	500

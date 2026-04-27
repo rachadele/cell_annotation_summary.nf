@@ -1,0 +1,8 @@
+held_out_study	method	reference	cutoff	subsample_ref	outer_score	n_outer_test_samples
+GSE124952	seurat	whole cortex	0.25	500	0.985019518	2880
+GSE181021.2	seurat	whole cortex	0.25	500	0.9882509275	768
+GSE185454	seurat	whole cortex	0.25	500	0.98002676	768
+GSE199460.2	seurat	whole cortex	0.25	500	1.0	384
+GSE214244.1	seurat	whole cortex	0.25	500	0.9966636666666666	576
+GSE247339.1	seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.6902957061904762	4032
+GSE247339.2	seurat	whole cortex	0.0	500	0.6715099689999999	3840

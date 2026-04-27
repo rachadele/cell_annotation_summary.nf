@@ -1,0 +1,1345 @@
+method	reference	cutoff	subsample_ref	score_inner	held_out_study
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.7667233781507936	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.7982936136825396	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8097621264007936	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.7667233781507936	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.7982936136825396	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8097621264007936	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.7667638710079365	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.7982936136825396	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8097621264007936	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.7659145091904761	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.7997178094126984	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8102210478650793	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.7669981324365079	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.798277899170635	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8041648391507937	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.750327968968254	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7820614466269841	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.8014438337301587	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.5726569054801587	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.6287557137896825	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.7104470553849206	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.3283983670063492	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.3987334332690476	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.5175204156785714	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7718052066309524	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.781176007952381	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.7795717440634921	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7718052066309524	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.781176007952381	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.7795717440634921	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7718052066309524	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.781176007952381	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.7795717440634921	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7723930630436509	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7736076696587301	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.7790228791984127	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7626297843769841	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7704587053174604	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.7779382051746032	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7449220539761905	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.752627487123016	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7669295915198413	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.5709179973849207	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.6211915590436508	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.6512391604404763	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.3254358677464286	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.40498850406547615	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.4740117414484127	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.6837298149126984	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7163414438730159	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.7403361736944444	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.6837298149126984	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7163414438730159	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.7403361736944444	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.683627773579365	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7163414438730159	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.7403361736944444	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.6713629620873016	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.712577151	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.7398310079047619	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.6469583880079365	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.6965114029206348	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.7240762023333334	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.5919258223174603	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.6565397601388889	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.7000191585079364	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.35895920813095245	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.41536891312698415	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.4639408405	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.11327436826984127	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.12623965444801585	GSE124952
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.2272616365892857	GSE124952
+scvi	whole cortex	0.0	50	0.7985117695039682	GSE124952
+scvi	whole cortex	0.0	100	0.8109196001904762	GSE124952
+scvi	whole cortex	0.0	500	0.7958941401944445	GSE124952
+scvi	whole cortex	0.05	50	0.7985117695039682	GSE124952
+scvi	whole cortex	0.05	100	0.8109196001904762	GSE124952
+scvi	whole cortex	0.05	500	0.7958941401944445	GSE124952
+scvi	whole cortex	0.1	50	0.7985117695039682	GSE124952
+scvi	whole cortex	0.1	100	0.8109196001904762	GSE124952
+scvi	whole cortex	0.1	500	0.7958153582777778	GSE124952
+scvi	whole cortex	0.15	50	0.79112403809127	GSE124952
+scvi	whole cortex	0.15	100	0.8115937743253968	GSE124952
+scvi	whole cortex	0.15	500	0.7950901422976191	GSE124952
+scvi	whole cortex	0.2	50	0.7771386528809524	GSE124952
+scvi	whole cortex	0.2	100	0.8001947735634921	GSE124952
+scvi	whole cortex	0.2	500	0.7881511503849206	GSE124952
+scvi	whole cortex	0.25	50	0.7589589463015872	GSE124952
+scvi	whole cortex	0.25	100	0.7750466715714285	GSE124952
+scvi	whole cortex	0.25	500	0.7713290931349207	GSE124952
+scvi	whole cortex	0.5	50	0.5202545742857143	GSE124952
+scvi	whole cortex	0.5	100	0.5807970126626985	GSE124952
+scvi	whole cortex	0.5	500	0.642820833515873	GSE124952
+scvi	whole cortex	0.75	50	0.30595765856190477	GSE124952
+scvi	whole cortex	0.75	100	0.37417593273174604	GSE124952
+scvi	whole cortex	0.75	500	0.45070359231547624	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.8094138092460318	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.7790870510515874	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8044118393888889	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.8094138092460318	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.7790870510515874	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8044118393888889	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.8094138092460318	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.7790870510515874	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8044118393888889	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.8094138092460318	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.7790870510515874	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8044118393888889	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.8094138092460318	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.7790870510515874	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8044118393888889	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.8090416469642857	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7790185899642857	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.8044285126428572	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.8016467490238095	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.7613434773452381	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.784248627563492	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.7511444031666666	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.7079521990952381	GSE124952
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.7278192802142858	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7776576701349206	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.7856625892936507	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.785943504265873	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7776576701349206	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.7856625892936507	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.785943504265873	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7776576701349206	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.7856625892936507	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.785943504265873	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7776576701349206	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7856625892936507	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.785943504265873	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7776576701349206	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7856625892936507	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.785943504265873	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7776941353174603	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.7858153271388888	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7859693839325397	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.776484507920635	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.7848039668174603	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.7844794521626984	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.7543982514166667	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.7477773275158729	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.7503546130357143	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.7720733358373016	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7495795681507936	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.6676108339781747	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.7720733358373016	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7495795681507936	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.6676108339781747	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.7720733358373016	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7495795681507936	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.6676108339781747	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.7720733358373016	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7495795681507936	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.6676108339781747	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.7720733358373016	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.7495795681507936	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.6676108339781747	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.7721457589484126	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.7496233356507936	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.6676108339781747	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.7591982474484128	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.7396711997738095	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.6606134505492064	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.7069863269563492	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.6865445477896825	GSE124952
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.6066827740912698	GSE124952
+seurat	whole cortex	0.0	50	0.7429300627500001	GSE124952
+seurat	whole cortex	0.0	100	0.7887874017103175	GSE124952
+seurat	whole cortex	0.0	500	0.7938088092103174	GSE124952
+seurat	whole cortex	0.05	50	0.7429300627500001	GSE124952
+seurat	whole cortex	0.05	100	0.7887874017103175	GSE124952
+seurat	whole cortex	0.05	500	0.7938088092103174	GSE124952
+seurat	whole cortex	0.1	50	0.7429300627500001	GSE124952
+seurat	whole cortex	0.1	100	0.7887874017103175	GSE124952
+seurat	whole cortex	0.1	500	0.7938088092103174	GSE124952
+seurat	whole cortex	0.15	50	0.7429300627500001	GSE124952
+seurat	whole cortex	0.15	100	0.7887874017103175	GSE124952
+seurat	whole cortex	0.15	500	0.7938088092103174	GSE124952
+seurat	whole cortex	0.2	50	0.7432820333492063	GSE124952
+seurat	whole cortex	0.2	100	0.7887874017103175	GSE124952
+seurat	whole cortex	0.2	500	0.7937562505992064	GSE124952
+seurat	whole cortex	0.25	50	0.7418755911785714	GSE124952
+seurat	whole cortex	0.25	100	0.7887874017103175	GSE124952
+seurat	whole cortex	0.25	500	0.7942359644166667	GSE124952
+seurat	whole cortex	0.5	50	0.6976961168730158	GSE124952
+seurat	whole cortex	0.5	100	0.7653900222896826	GSE124952
+seurat	whole cortex	0.5	500	0.7767315822063492	GSE124952
+seurat	whole cortex	0.75	50	0.5690992153571429	GSE124952
+seurat	whole cortex	0.75	100	0.664503657845238	GSE124952
+seurat	whole cortex	0.75	500	0.6435906571587301	GSE124952
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.7735016909563491	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.8032599859325397	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8147076408174603	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.7735016909563491	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.8032599859325397	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8147076408174603	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.773542183813492	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.8032599859325397	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8147076408174603	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.7727145468015872	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.8040200723849207	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8149758792817461	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.7691504594920634	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.8009761992539683	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8080506631230159	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.7487243983849207	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7764659503769842	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.801481101952381	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.5469519214246031	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.6044810597896825	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.6897370917460317	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.32223618035079366	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.38054887704682544	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.4926347060674603	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7735725456587302	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.7827924062301587	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.7802626835079365	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7735725456587302	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.7827924062301587	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.7802626835079365	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7735725456587302	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.7827924062301587	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.7802626835079365	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7732670490714285	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7755052061587301	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.7790238840873016	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7625256365714286	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7668213521507936	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.7751796042857143	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7403975883928572	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.748368880734127	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7602229617698413	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.5456780859126984	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.597629177265873	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.632001545718254	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.31467423504920633	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.3895242502210317	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.45512208167063495	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.6880234514126983	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7205046767619048	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.7440296348888888	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.6880234514126983	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7205046767619048	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.7440296348888888	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.687921410079365	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7205046767619048	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.7440296348888888	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.6740792549484128	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.715866246	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.7434300380714286	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.6468237310912698	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.6985219291984127	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.7252531468333334	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.593279510984127	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.6531814814722222	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.6976934452857142	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.34982631541984127	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.4076988503769841	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.45991975061111107	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.11710255336428571	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.11662684333968254	GSE181021.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.21483175703373014	GSE181021.2
+scvi	whole cortex	0.0	50	0.7963027705873017	GSE181021.2
+scvi	whole cortex	0.0	100	0.8112067467738094	GSE181021.2
+scvi	whole cortex	0.0	500	0.798856415111111	GSE181021.2
+scvi	whole cortex	0.05	50	0.7963027705873017	GSE181021.2
+scvi	whole cortex	0.05	100	0.8112067467738094	GSE181021.2
+scvi	whole cortex	0.05	500	0.798856415111111	GSE181021.2
+scvi	whole cortex	0.1	50	0.7963027705873017	GSE181021.2
+scvi	whole cortex	0.1	100	0.8112067467738094	GSE181021.2
+scvi	whole cortex	0.1	500	0.7987776331944444	GSE181021.2
+scvi	whole cortex	0.15	50	0.7881475312857144	GSE181021.2
+scvi	whole cortex	0.15	100	0.81038692515873	GSE181021.2
+scvi	whole cortex	0.15	500	0.7978431749920635	GSE181021.2
+scvi	whole cortex	0.2	50	0.77599980415873	GSE181021.2
+scvi	whole cortex	0.2	100	0.7994832846746031	GSE181021.2
+scvi	whole cortex	0.2	500	0.789230315968254	GSE181021.2
+scvi	whole cortex	0.25	50	0.7520157633571428	GSE181021.2
+scvi	whole cortex	0.25	100	0.7704810736269841	GSE181021.2
+scvi	whole cortex	0.25	500	0.7706816737460317	GSE181021.2
+scvi	whole cortex	0.5	50	0.5009953458412698	GSE181021.2
+scvi	whole cortex	0.5	100	0.5517582507738096	GSE181021.2
+scvi	whole cortex	0.5	500	0.6250869234047619	GSE181021.2
+scvi	whole cortex	0.75	50	0.30125886696190474	GSE181021.2
+scvi	whole cortex	0.75	100	0.36558103932619046	GSE181021.2
+scvi	whole cortex	0.75	500	0.43078099197103176	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.8091532521626984	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.7909669333849206	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8152017984722222	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.8091532521626984	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.7909669333849206	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8152017984722222	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.8091532521626984	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.7909669333849206	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8152017984722222	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.8091532521626984	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.7909669333849206	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8152017984722222	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.8091532521626984	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.7909669333849206	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8152017984722222	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.8087671808809525	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7908984722976191	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.8152184717261904	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.7985572886349206	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.7736715004285714	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.7931338062579365	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.7399188681111112	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.7049836285952381	GSE181021.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.7296082583531746	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7839192053849207	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.7964641435158729	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.7970637025436508	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7839192053849207	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.7964641435158729	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.7970637025436508	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7839192053849207	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.7964641435158729	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.7970637025436508	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7839192053849207	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7964641435158729	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.7970637025436508	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7839192053849207	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7964641435158729	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.7970637025436508	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7839556705674603	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.7966168813611111	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7970895822103174	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.7833956046150794	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.7951678237063492	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.7954120110793651	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.7645800250277778	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.7615617996547619	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.759220640952381	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.7780903532817459	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7561733974563492	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.6735842884226191	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.7780903532817459	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7561733974563492	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.6735842884226191	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.7780903532817459	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7561733974563492	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.6735842884226191	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.7780903532817459	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7561733974563492	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.6735842884226191	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.7780903532817459	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.7561733974563492	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.6735842884226191	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.7781627763928571	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.7562171649563493	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.6735842884226191	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.7647145265873015	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.7462173231904762	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.6664481275769841	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.7123345738174603	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.6960100405119047	GSE181021.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.6123048842301587	GSE181021.2
+seurat	whole cortex	0.0	50	0.7531495142222222	GSE181021.2
+seurat	whole cortex	0.0	100	0.7907034145436507	GSE181021.2
+seurat	whole cortex	0.0	500	0.7961681044325397	GSE181021.2
+seurat	whole cortex	0.05	50	0.7531495142222222	GSE181021.2
+seurat	whole cortex	0.05	100	0.7907034145436507	GSE181021.2
+seurat	whole cortex	0.05	500	0.7961681044325397	GSE181021.2
+seurat	whole cortex	0.1	50	0.7531495142222222	GSE181021.2
+seurat	whole cortex	0.1	100	0.7907034145436507	GSE181021.2
+seurat	whole cortex	0.1	500	0.7961681044325397	GSE181021.2
+seurat	whole cortex	0.15	50	0.7531495142222222	GSE181021.2
+seurat	whole cortex	0.15	100	0.7907034145436507	GSE181021.2
+seurat	whole cortex	0.15	500	0.7961681044325397	GSE181021.2
+seurat	whole cortex	0.2	50	0.7535014848214286	GSE181021.2
+seurat	whole cortex	0.2	100	0.7907034145436507	GSE181021.2
+seurat	whole cortex	0.2	500	0.7961155458214285	GSE181021.2
+seurat	whole cortex	0.25	50	0.7521452812619048	GSE181021.2
+seurat	whole cortex	0.25	100	0.7907034145436507	GSE181021.2
+seurat	whole cortex	0.25	500	0.7965952596388889	GSE181021.2
+seurat	whole cortex	0.5	50	0.7041875421785715	GSE181021.2
+seurat	whole cortex	0.5	100	0.7739363577619048	GSE181021.2
+seurat	whole cortex	0.5	500	0.7869314668730159	GSE181021.2
+seurat	whole cortex	0.75	50	0.5673700386904762	GSE181021.2
+seurat	whole cortex	0.75	100	0.6698195936785715	GSE181021.2
+seurat	whole cortex	0.75	500	0.6596151057142857	GSE181021.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.7522947734563492	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.7917636671825395	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8011649658174603	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.7522947734563492	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.7917636671825395	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8011649658174603	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.752335266313492	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.7917636671825395	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8011649658174603	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.7522642738849207	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.7932506998849207	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.801385966781746	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.7571126849087301	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.7929174575873016	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.7974055993730159	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.7441234988015873	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7725128641269841	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.793158336952381	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.5335812822579366	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.5868757181230159	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.6880269313293651	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.27523391476746034	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.33278303371349205	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.45266268773412693	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7608540398253968	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.7712881358134921	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.7704255993412699	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7608540398253968	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.7712881358134921	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.7704255993412699	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7608540398253968	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.7712881358134921	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.7704255993412699	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7610064182380952	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7634794132420635	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.769186799920635	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7488781274047619	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.754715506734127	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.7673079117857142	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7294336813095237	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.734923066984127	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7539596305198413	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.5232784871626984	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.5866461743492063	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.6127103203015872	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.271335571090873	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.3464898973043651	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.4133929345873016	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.7018450064126984	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7123804896785714	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.7371779828055556	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.7018450064126984	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7123804896785714	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.7371779828055556	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.7017429650793651	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7123804896785714	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.7371779828055556	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.6889025774484127	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7078327776666667	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.7367959172380952	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.6624534194246031	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.6943662129484127	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.7217945001666667	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.6031753239007936	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.654736579388889	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.7001083090357142	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.35976296875317465	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.4270962745436508	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.4769141235277778	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.10021574294761905	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.12163992454801587	GSE185454
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.21142895120039681	GSE185454
+scvi	whole cortex	0.0	50	0.7851107047539682	GSE185454
+scvi	whole cortex	0.0	100	0.8107665034404762	GSE185454
+scvi	whole cortex	0.0	500	0.7876468317777778	GSE185454
+scvi	whole cortex	0.05	50	0.7851107047539682	GSE185454
+scvi	whole cortex	0.05	100	0.8107665034404762	GSE185454
+scvi	whole cortex	0.05	500	0.7876468317777778	GSE185454
+scvi	whole cortex	0.1	50	0.7851107047539682	GSE185454
+scvi	whole cortex	0.1	100	0.8107665034404762	GSE185454
+scvi	whole cortex	0.1	500	0.7875680498611111	GSE185454
+scvi	whole cortex	0.15	50	0.777358175452381	GSE185454
+scvi	whole cortex	0.15	100	0.8101578272420634	GSE185454
+scvi	whole cortex	0.15	500	0.7866335916587301	GSE185454
+scvi	whole cortex	0.2	50	0.7649202287420636	GSE185454
+scvi	whole cortex	0.2	100	0.7978973505079364	GSE185454
+scvi	whole cortex	0.2	500	0.7795676813849206	GSE185454
+scvi	whole cortex	0.25	50	0.7419458816904762	GSE185454
+scvi	whole cortex	0.25	100	0.7697551223769841	GSE185454
+scvi	whole cortex	0.25	500	0.762590507079365	GSE185454
+scvi	whole cortex	0.5	50	0.46882743334126986	GSE185454
+scvi	whole cortex	0.5	100	0.5183725561904762	GSE185454
+scvi	whole cortex	0.5	500	0.6039517175714285	GSE185454
+scvi	whole cortex	0.75	50	0.2556924273785714	GSE185454
+scvi	whole cortex	0.75	100	0.31136929682619047	GSE185454
+scvi	whole cortex	0.75	500	0.3814696573876984	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.8055603229960319	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.8032366921349207	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8015779705555556	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.8055603229960319	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.8032366921349207	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8015779705555556	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.8055603229960319	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.8032366921349207	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8015779705555556	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.8055603229960319	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.8032366921349207	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8015779705555556	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.8055603229960319	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.8032366921349207	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8015779705555556	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.8051742517142858	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.803136843547619	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.8015946438095237	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.7948774723849206	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.779687342095238	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.7805340600079363	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.7402923639444444	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.7007984865119048	GSE185454
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.7131704037698413	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.776305037468254	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.7831494318492064	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.7807476221269841	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7763050374682541	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.7831494318492064	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.7807476221269841	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7763050374682541	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.7831494318492064	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.7807476221269841	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7763050374682541	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7831494318492064	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.7807476221269841	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.776305037468254	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7831494318492064	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.7807476221269841	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7763415026507937	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.7833021696944445	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7807735017936507	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.775559665031746	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.7822627132896826	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.7796722856626984	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.7549169775277779	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.7493942138214286	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.7457889572023809	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.7674735066150794	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7454608624563491	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.659619699672619	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.7674735066150794	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7454608624563491	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.659619699672619	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.7674735066150794	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7454608624563491	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.659619699672619	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.7674735066150794	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7454608624563491	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.659619699672619	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.7674735066150794	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.7454608624563491	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.659619699672619	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.7675459297261904	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.7455046299563491	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.659619699672619	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.7595769132539681	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.7378287436071429	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.6552927179936509	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.7138420513174603	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.6947228184285713	GSE185454
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.6125828913134921	GSE185454
+seurat	whole cortex	0.0	50	0.7411842954722222	GSE185454
+seurat	whole cortex	0.0	100	0.7863151674603174	GSE185454
+seurat	whole cortex	0.0	500	0.7870929194325397	GSE185454
+seurat	whole cortex	0.05	50	0.7411842954722222	GSE185454
+seurat	whole cortex	0.05	100	0.7863151674603174	GSE185454
+seurat	whole cortex	0.05	500	0.7870929194325397	GSE185454
+seurat	whole cortex	0.1	50	0.7411842954722222	GSE185454
+seurat	whole cortex	0.1	100	0.7863151674603174	GSE185454
+seurat	whole cortex	0.1	500	0.7870929194325397	GSE185454
+seurat	whole cortex	0.15	50	0.7411842954722222	GSE185454
+seurat	whole cortex	0.15	100	0.7863151674603174	GSE185454
+seurat	whole cortex	0.15	500	0.7870929194325397	GSE185454
+seurat	whole cortex	0.2	50	0.7415362660714285	GSE185454
+seurat	whole cortex	0.2	100	0.7863151674603174	GSE185454
+seurat	whole cortex	0.2	500	0.7870403608214286	GSE185454
+seurat	whole cortex	0.25	50	0.7401221750119048	GSE185454
+seurat	whole cortex	0.25	100	0.7863151674603174	GSE185454
+seurat	whole cortex	0.25	500	0.787520074638889	GSE185454
+seurat	whole cortex	0.5	50	0.6845442817619047	GSE185454
+seurat	whole cortex	0.5	100	0.7663035077619048	GSE185454
+seurat	whole cortex	0.5	500	0.7729076468730159	GSE185454
+seurat	whole cortex	0.75	50	0.5616390774404761	GSE185454
+seurat	whole cortex	0.75	100	0.6924055120119048	GSE185454
+seurat	whole cortex	0.75	500	0.6548857023809523	GSE185454
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.7321868730396824	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.7727323830158729	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.7852023654007936	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.7321868730396824	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.7727323830158729	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.7852023654007936	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.7322273658968254	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.7727323830158729	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.7852023654007936	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.7319997793015873	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.7741538453015874	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.7854706038650794	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.7351970719920634	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.7721757455039683	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.7800195827063492	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.7183418013015873	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7486326366269841	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.7761946436190477	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.49413614059126987	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.5483016022896825	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.658238481329365	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.230959962684127	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.27717312038015873	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.41663652523412703	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7458551427420635	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.7558151603968254	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.7539671535079365	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7458551427420635	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.7558151603968254	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.7539671535079365	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7458551427420635	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.7558151603968254	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.7539671535079365	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.746007521154762	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7480578769920635	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.7527283540873015	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7337517994880952	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7393405663174604	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.7509432992857142	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7104084296428571	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.7180710515674603	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7360193221865079	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.48566755382936505	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.5547757180992063	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.5863219982182539	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.206357318590873	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.28810307355436504	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.3622099316706349	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.656463270579365	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.6833580050952381	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.7113790411388888	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.656463270579365	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.6833580050952381	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.7113790411388888	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.6563612292460318	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.6833580050952381	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.7113790411388888	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.643350289531746	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.679241346	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.7110420505714284	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.6165015473412698	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.663046965031746	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.6949445360000001	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.5504193393174602	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.6173567848055556	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.6685135569523809	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.2593202062531746	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.3306606657936508	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.39497657227777777	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.05987770028095238	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.09451168854801588	GSE199460.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.14069314953373016	GSE199460.2
+scvi	whole cortex	0.0	50	0.7692044618373016	GSE199460.2
+scvi	whole cortex	0.0	100	0.7955854371904761	GSE199460.2
+scvi	whole cortex	0.0	500	0.7736116088611111	GSE199460.2
+scvi	whole cortex	0.05	50	0.7692044618373016	GSE199460.2
+scvi	whole cortex	0.05	100	0.7955854371904761	GSE199460.2
+scvi	whole cortex	0.05	500	0.7736116088611111	GSE199460.2
+scvi	whole cortex	0.1	50	0.7692044618373016	GSE199460.2
+scvi	whole cortex	0.1	100	0.7955854371904761	GSE199460.2
+scvi	whole cortex	0.1	500	0.7735328269444445	GSE199460.2
+scvi	whole cortex	0.15	50	0.761931104202381	GSE199460.2
+scvi	whole cortex	0.15	100	0.7949767609920634	GSE199460.2
+scvi	whole cortex	0.15	500	0.7725983687420634	GSE199460.2
+scvi	whole cortex	0.2	50	0.7467166183253968	GSE199460.2
+scvi	whole cortex	0.2	100	0.7821511796746031	GSE199460.2
+scvi	whole cortex	0.2	500	0.7639855097182539	GSE199460.2
+scvi	whole cortex	0.25	50	0.7230370825238096	GSE199460.2
+scvi	whole cortex	0.25	100	0.7532820944603175	GSE199460.2
+scvi	whole cortex	0.25	500	0.7452190362460317	GSE199460.2
+scvi	whole cortex	0.5	50	0.4257054150079365	GSE199460.2
+scvi	whole cortex	0.5	100	0.48627497577380946	GSE199460.2
+scvi	whole cortex	0.5	500	0.5750554742380952	GSE199460.2
+scvi	whole cortex	0.75	50	0.18844200446190476	GSE199460.2
+scvi	whole cortex	0.75	100	0.2669180014095238	GSE199460.2
+scvi	whole cortex	0.75	500	0.3346480528043651	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.7884072009126984	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.7612274683849206	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.7851410480555555	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.7884072009126984	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.7612274683849206	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.7851410480555555	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.7884072009126984	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.7612274683849206	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.7851410480555555	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.7884072009126984	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.7612274683849206	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.7851410480555555	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.7884072009126984	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.7612274683849206	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.7851410480555555	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.7880211296309524	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7611590072976191	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.7851577213095239	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.7775786544682539	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.7366189083452381	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.7622343516746031	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.7148950389444444	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.6575093860952381	GSE199460.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.6931500621031746	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7561816658015873	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.7665142218492064	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.7650228733769842	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7561816658015873	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.7665142218492064	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.7650228733769842	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7561816658015873	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.7665142218492064	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.7650228733769842	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7561816658015873	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7665142218492064	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.7650228733769842	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7561816658015873	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7665142218492064	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.7650228733769842	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.756218130984127	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.7666669596944443	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7650487530436507	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.7548703816984127	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.7653419103730159	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.7634338381626984	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.7306328341944445	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.7258479617380953	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.7270407780357143	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.7548203999484127	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7337191120396825	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.6479958684226191	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.7548203999484127	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7337191120396825	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.6479958684226191	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.7548203999484127	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7337191120396825	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.6479958684226191	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.7548203999484127	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7337191120396825	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.6479958684226191	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.7548203999484127	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.7337191120396825	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.6479958684226191	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.7548928230595239	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.7337628795396824	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.6479958684226191	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.741720708670635	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.7236090644404762	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.6407084746603174	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.6834472350674603	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.6664010580119047	GSE199460.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.582260191313492	GSE199460.2
+seurat	whole cortex	0.0	50	0.7157278296388889	GSE199460.2
+seurat	whole cortex	0.0	100	0.7672577053769841	GSE199460.2
+seurat	whole cortex	0.0	500	0.7717057744325397	GSE199460.2
+seurat	whole cortex	0.05	50	0.7157278296388889	GSE199460.2
+seurat	whole cortex	0.05	100	0.7672577053769841	GSE199460.2
+seurat	whole cortex	0.05	500	0.7717057744325397	GSE199460.2
+seurat	whole cortex	0.1	50	0.7157278296388889	GSE199460.2
+seurat	whole cortex	0.1	100	0.7672577053769841	GSE199460.2
+seurat	whole cortex	0.1	500	0.7717057744325397	GSE199460.2
+seurat	whole cortex	0.15	50	0.7157278296388889	GSE199460.2
+seurat	whole cortex	0.15	100	0.7672577053769841	GSE199460.2
+seurat	whole cortex	0.15	500	0.7717057744325397	GSE199460.2
+seurat	whole cortex	0.2	50	0.7160798002380951	GSE199460.2
+seurat	whole cortex	0.2	100	0.7672577053769841	GSE199460.2
+seurat	whole cortex	0.2	500	0.7716532158214285	GSE199460.2
+seurat	whole cortex	0.25	50	0.7146657091785714	GSE199460.2
+seurat	whole cortex	0.25	100	0.7672577053769841	GSE199460.2
+seurat	whole cortex	0.25	500	0.7721329296388889	GSE199460.2
+seurat	whole cortex	0.5	50	0.6602115317619047	GSE199460.2
+seurat	whole cortex	0.5	100	0.7435766715119048	GSE199460.2
+seurat	whole cortex	0.5	500	0.754219346873016	GSE199460.2
+seurat	whole cortex	0.75	50	0.5117489286904762	GSE199460.2
+seurat	whole cortex	0.75	100	0.6345093011785714	GSE199460.2
+seurat	whole cortex	0.75	500	0.5967718507142857	GSE199460.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.7536145013730159	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.7929805696825397	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8066874437341269	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.7536145013730159	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.7929805696825397	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8066874437341269	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.7536549942301587	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.7929805696825397	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8066874437341269	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.7534274076349207	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.794092816968254	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8069556821984127	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.7570417903253969	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.7911546443928571	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8064738221507937	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.7463288740793651	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7738243710714285	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.8008373313968254	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.5319758005912698	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.5879417970119047	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.6865742688293651	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.2907830387952381	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.3440805587134921	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.4691176824563492	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7753497794087302	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.7769750331746031	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.7755867151746032	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7753497794087302	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.7769750331746031	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.7755867151746032	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7753497794087302	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.7769750331746031	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.7755867151746032	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7756520461547619	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7766385969920635	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.7744483451984127	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7650245478214286	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7680243252063491	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.7727330742857142	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7458544318650793	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.7479914337896826	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7578397282976191	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.5456058038293651	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.6038668444880952	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.6271068787738096	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.29494690942420637	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.3679852129988095	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.43956265861507937	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.7053141961349206	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.718068270095238	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.7424130816944444	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.7053141961349206	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.718068270095238	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.7424130816944444	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.7052121548015874	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.718068270095238	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.7424130816944444	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.6987008478650795	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7142829104444445	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.7419781061269841	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.6718600312301587	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.6991633544761905	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.7343923604444446	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.6083697843174604	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.66364360925	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.7112615086190476	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.37310350486428573	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.42080683634920635	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.4730664783888889	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.11365303089206348	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.1312731153813492	GSE214244.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.2226304695892857	GSE214244.1
+scvi	whole cortex	0.0	50	0.7901140962817461	GSE214244.1
+scvi	whole cortex	0.0	100	0.8228947105238095	GSE214244.1
+scvi	whole cortex	0.0	500	0.8008965471944444	GSE214244.1
+scvi	whole cortex	0.05	50	0.7901140962817461	GSE214244.1
+scvi	whole cortex	0.05	100	0.8228947105238095	GSE214244.1
+scvi	whole cortex	0.05	500	0.8008965471944444	GSE214244.1
+scvi	whole cortex	0.1	50	0.7901140962817461	GSE214244.1
+scvi	whole cortex	0.1	100	0.8228947105238095	GSE214244.1
+scvi	whole cortex	0.1	500	0.8008177652777778	GSE214244.1
+scvi	whole cortex	0.15	50	0.7902980753134922	GSE214244.1
+scvi	whole cortex	0.15	100	0.8218683248809523	GSE214244.1
+scvi	whole cortex	0.15	500	0.7998833070753969	GSE214244.1
+scvi	whole cortex	0.2	50	0.775305879436508	GSE214244.1
+scvi	whole cortex	0.2	100	0.8095532141190476	GSE214244.1
+scvi	whole cortex	0.2	500	0.791580610829365	GSE214244.1
+scvi	whole cortex	0.25	50	0.7553726664126984	GSE214244.1
+scvi	whole cortex	0.25	100	0.7811841366825396	GSE214244.1
+scvi	whole cortex	0.25	500	0.7715045729126984	GSE214244.1
+scvi	whole cortex	0.5	50	0.4852100058412699	GSE214244.1
+scvi	whole cortex	0.5	100	0.5406412246626985	GSE214244.1
+scvi	whole cortex	0.5	500	0.6201393667380952	GSE214244.1
+scvi	whole cortex	0.75	50	0.2803351911285714	GSE214244.1
+scvi	whole cortex	0.75	100	0.3336715036317461	GSE214244.1
+scvi	whole cortex	0.75	500	0.40557404335992064	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.8083751848015873	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.7811025628293651	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8061620702777778	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.8083751848015873	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.7811025628293651	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8061620702777778	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.8083751848015873	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.7811025628293651	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8061620702777778	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.8083751848015873	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.7811025628293651	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8061620702777778	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.8083751848015873	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.7811025628293651	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8061620702777778	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.8079891135198413	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7810341017420636	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.806178743531746	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.796622405579365	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.7561570216785715	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.790899265563492	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.7434717233888889	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.6887568216507937	GSE214244.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.7260087387698412	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7877649602460317	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.7861028074047619	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.7850522289325396	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7877649602460318	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.7861028074047619	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.7850522289325396	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7877649602460318	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.7861028074047619	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.7850522289325396	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7877649602460318	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7861028074047619	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.7850522289325396	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7877649602460317	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7861028074047619	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.7850522289325396	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7878014254285715	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.78625554525	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7850781085992063	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.7855645155873017	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.7859849992619048	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.7837294503849206	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.7645871369722222	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.7578615800714287	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.7568294102579364	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.7810371255039682	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.764492092595238	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.6897462634226191	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.7810371255039682	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.764492092595238	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.6897462634226191	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.7810371255039682	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.764492092595238	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.6897462634226191	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.7810371255039682	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.764492092595238	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.6897462634226191	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.7810371255039682	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.764492092595238	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.6897462634226191	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.7811095486150794	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.7645358600952381	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.6897462634226191	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.7689378197817461	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.7546477772182539	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.6833121641047618	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.7254731300674603	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.7077715635674603	GSE214244.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.6377278513134921	GSE214244.1
+seurat	whole cortex	0.0	50	0.7558378879722222	GSE214244.1
+seurat	whole cortex	0.0	100	0.7868677520436508	GSE214244.1
+seurat	whole cortex	0.0	500	0.7991510855436509	GSE214244.1
+seurat	whole cortex	0.05	50	0.7558378879722222	GSE214244.1
+seurat	whole cortex	0.05	100	0.7868677520436508	GSE214244.1
+seurat	whole cortex	0.05	500	0.7991510855436509	GSE214244.1
+seurat	whole cortex	0.1	50	0.7558378879722222	GSE214244.1
+seurat	whole cortex	0.1	100	0.7868677520436508	GSE214244.1
+seurat	whole cortex	0.1	500	0.7991510855436509	GSE214244.1
+seurat	whole cortex	0.15	50	0.7558378879722222	GSE214244.1
+seurat	whole cortex	0.15	100	0.7868677520436508	GSE214244.1
+seurat	whole cortex	0.15	500	0.7991510855436509	GSE214244.1
+seurat	whole cortex	0.2	50	0.7561898585714286	GSE214244.1
+seurat	whole cortex	0.2	100	0.7868677520436508	GSE214244.1
+seurat	whole cortex	0.2	500	0.7990985269325397	GSE214244.1
+seurat	whole cortex	0.25	50	0.7547757675119048	GSE214244.1
+seurat	whole cortex	0.25	100	0.7868677520436508	GSE214244.1
+seurat	whole cortex	0.25	500	0.79957824075	GSE214244.1
+seurat	whole cortex	0.5	50	0.7067380545396825	GSE214244.1
+seurat	whole cortex	0.5	100	0.7725313042896825	GSE214244.1
+seurat	whole cortex	0.5	500	0.7818049057619048	GSE214244.1
+seurat	whole cortex	0.75	50	0.5936149003571428	GSE214244.1
+seurat	whole cortex	0.75	100	0.7039156634007937	GSE214244.1
+seurat	whole cortex	0.75	500	0.6529087351587302	GSE214244.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.7789759077222222	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.8149342383333332	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8259091100833333	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.7789759077222222	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.8149342383333332	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8259091100833333	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.7789759077222222	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.8149342383333332	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8259091100833333	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.7796079181111111	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.8162447152222222	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8259978078333333	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.7846561240555555	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.8149012466944444	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.821161959611111	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.7717769428888889	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.794490541388889	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.8182574037777778	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.5862501385277777	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.6316992583611111	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.7241731165277777	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.33506592970000004	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.3972432542611111	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.5173448865833333	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.7967318286944445	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.8072240566666666	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.8048650064444445	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.7967318286944445	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.8072240566666666	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.8048650064444445	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.7967318286944445	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.8072240566666666	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.8048650064444445	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.7972255686944445	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.7991117485	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.8039004452777778	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7884323186944444	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.7915616271111111	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.8045670544444444	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7694576402777779	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.7761710551388888	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7942895148055555	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.5845019265277778	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.6443301409166666	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.6696809464722223	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.3291543231861111	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.4032849095861111	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.47265046202777783	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.7262422499444444	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7530635825555555	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.7710573811388889	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.7262422499444444	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7530635825555555	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.7710573811388889	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.7261402086111111	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7530635825555555	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.7710573811388889	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.7152447129444445	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7512507815555556	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.770983383111111	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.6987514952777777	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.7403697006666666	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.7594104732222222	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.6434218956666666	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.7037575981388889	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.7399133921111111	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.3832996052611111	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.4513807911111111	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.5122937945	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.1140556329	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.12841806950833332	GSE247339.1
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.23212802376388889	GSE247339.1
+scvi	whole cortex	0.0	50	0.8132211341388889	GSE247339.1
+scvi	whole cortex	0.0	100	0.8338187743333333	GSE247339.1
+scvi	whole cortex	0.0	500	0.81564647775	GSE247339.1
+scvi	whole cortex	0.05	50	0.8132211341388889	GSE247339.1
+scvi	whole cortex	0.05	100	0.8338187743333333	GSE247339.1
+scvi	whole cortex	0.05	500	0.81564647775	GSE247339.1
+scvi	whole cortex	0.1	50	0.8132211341388889	GSE247339.1
+scvi	whole cortex	0.1	100	0.8338187743333333	GSE247339.1
+scvi	whole cortex	0.1	500	0.8155676958333333	GSE247339.1
+scvi	whole cortex	0.15	50	0.80505116825	GSE247339.1
+scvi	whole cortex	0.15	100	0.8332098152777777	GSE247339.1
+scvi	whole cortex	0.15	500	0.8153053780277778	GSE247339.1
+scvi	whole cortex	0.2	50	0.7932430665	GSE247339.1
+scvi	whole cortex	0.2	100	0.8250306331666666	GSE247339.1
+scvi	whole cortex	0.2	500	0.8091481229722222	GSE247339.1
+scvi	whole cortex	0.25	50	0.7769897729999999	GSE247339.1
+scvi	whole cortex	0.25	100	0.8018215836666668	GSE247339.1
+scvi	whole cortex	0.25	500	0.7966740689444444	GSE247339.1
+scvi	whole cortex	0.5	50	0.5375149075555555	GSE247339.1
+scvi	whole cortex	0.5	100	0.5794111768055555	GSE247339.1
+scvi	whole cortex	0.5	500	0.6587831853888889	GSE247339.1
+scvi	whole cortex	0.75	50	0.3218044110333333	GSE247339.1
+scvi	whole cortex	0.75	100	0.3800835419888889	GSE247339.1
+scvi	whole cortex	0.75	500	0.45408561105833334	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.8301083186111112	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.8052445649722223	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8302278486111111	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.8301083186111112	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.8052445649722223	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8302278486111111	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.8301083186111112	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.8052445649722223	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8302278486111111	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.8301083186111112	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.8052445649722223	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8302278486111111	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.8301083186111112	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.8052445649722223	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8302278486111111	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.8297132850277777	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.8053177238055556	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.8302278486111111	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.8237386055	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.7854236269166667	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.8124681757222222	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.7757934595	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.7244881391111111	GSE247339.1
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.7632893547222223	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.8050312490555557	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.8140401121666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.8131864448055556	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.8050312490555557	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.8140401121666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.8131864448055556	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.8050312490555557	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.8140401121666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.8131864448055556	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.8050312490555557	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.8140401121666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.8131864448055556	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.8050312490555557	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.8140401121666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.8131864448055556	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.8050709312222222	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.8141049019166666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.8132123244722221	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.8046461928888888	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.8126556528333334	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.8121987008611112	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.7820565297500001	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.7777119103888889	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.7807028181944444	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.8059761444722221	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7900019561666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.7333355404861112	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.8059761444722221	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7900019561666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.7333355404861112	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.8059761444722221	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7900019561666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.7333355404861112	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.8059761444722221	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7900019561666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.7333355404861112	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.8059761444722221	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.7900019561666666	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.7333355404861112	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.8060199114722222	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.7900457236666667	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.7333355404861112	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.7969518598611112	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.7846408988055557	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.7275382155333334	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.7500459941944445	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.7390765965833334	GSE247339.1
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.6797959731388888	GSE247339.1
+seurat	whole cortex	0.0	50	0.7718004746388889	GSE247339.1
+seurat	whole cortex	0.0	100	0.8155364379166666	GSE247339.1
+seurat	whole cortex	0.0	500	0.8135721558611112	GSE247339.1
+seurat	whole cortex	0.05	50	0.7718004746388889	GSE247339.1
+seurat	whole cortex	0.05	100	0.8155364379166666	GSE247339.1
+seurat	whole cortex	0.05	500	0.8135721558611112	GSE247339.1
+seurat	whole cortex	0.1	50	0.7718004746388889	GSE247339.1
+seurat	whole cortex	0.1	100	0.8155364379166666	GSE247339.1
+seurat	whole cortex	0.1	500	0.8135721558611112	GSE247339.1
+seurat	whole cortex	0.15	50	0.7718004746388889	GSE247339.1
+seurat	whole cortex	0.15	100	0.8155364379166666	GSE247339.1
+seurat	whole cortex	0.15	500	0.8135721558611112	GSE247339.1
+seurat	whole cortex	0.2	50	0.7723694422222223	GSE247339.1
+seurat	whole cortex	0.2	100	0.8155364379166666	GSE247339.1
+seurat	whole cortex	0.2	500	0.8135622666944444	GSE247339.1
+seurat	whole cortex	0.25	50	0.7721438094166667	GSE247339.1
+seurat	whole cortex	0.25	100	0.8155364379166666	GSE247339.1
+seurat	whole cortex	0.25	500	0.8140611418611111	GSE247339.1
+seurat	whole cortex	0.5	50	0.7357056231111111	GSE247339.1
+seurat	whole cortex	0.5	100	0.7941453645277777	GSE247339.1
+seurat	whole cortex	0.5	500	0.7989893271111111	GSE247339.1
+seurat	whole cortex	0.75	50	0.6035234058333333	GSE247339.1
+seurat	whole cortex	0.75	100	0.6921262208611111	GSE247339.1
+seurat	whole cortex	0.75	500	0.6611873511111112	GSE247339.1
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.7794940835396825	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.8145814702658729	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8227766401507935	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.7794940835396825	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.8145814702658729	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8227766401507935	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.7795345763968253	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.8145814702658729	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8227766401507935	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.7797402108849206	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.8155947426349206	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8228127353650794	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.7846961387420635	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.814802910420635	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8178371301230158	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.7711595933849207	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.7932591595436508	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.8152463602857143	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.5725678046746031	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.6223865593730159	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.7159016678293652	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.3287562628007937	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.39327444489682545	GSE247339.2
+scvi	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.5110704476507937	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.8031139434920634	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.8146162621468255	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.8112756490079365	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.8031139434920634	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.8146162621468255	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.8112756490079365	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.8031139434920634	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.8146162621468255	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.8112756490079365	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.8026450905714286	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.8069428504087303	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.8102110467539682	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.7905451825714286	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.8001174150674603	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.8091422764523809	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.7712533523928572	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.7797244840674603	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.7961317840198413	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.581523318329365	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.6405949594325396	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.6681439893849207	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.3232652014575397	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.3993611935960317	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.4676303050039683	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.7321577340793651	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7595589825119048	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.7768770514722222	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.7321577340793651	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7595589825119048	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.7768770514722222	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.7321577340793651	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7595589825119048	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.7768770514722222	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.7206127223650793	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7575242833333333	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.7771879004047619	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.7020311216746031	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.7437708249484126	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.764792097	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.6466843294007937	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.707076525638889	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.745723601202381	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.37979595383650794	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.44822825346031747	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.5060244638611111	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.11339320803095237	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.12662170551468255	GSE247339.2
+scvi	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.23002434449206347	GSE247339.2
+scvi	whole cortex	0.0	50	0.8122129839206349	GSE247339.2
+scvi	whole cortex	0.0	100	0.8350429806904761	GSE247339.2
+scvi	whole cortex	0.0	500	0.8156937522777779	GSE247339.2
+scvi	whole cortex	0.05	50	0.8122129839206349	GSE247339.2
+scvi	whole cortex	0.05	100	0.8350429806904761	GSE247339.2
+scvi	whole cortex	0.05	500	0.8156937522777779	GSE247339.2
+scvi	whole cortex	0.1	50	0.8122129839206349	GSE247339.2
+scvi	whole cortex	0.1	100	0.8350429806904761	GSE247339.2
+scvi	whole cortex	0.1	500	0.8156937522777779	GSE247339.2
+scvi	whole cortex	0.15	50	0.8042526526190477	GSE247339.2
+scvi	whole cortex	0.15	100	0.8343892680753968	GSE247339.2
+scvi	whole cortex	0.15	500	0.8148123696587302	GSE247339.2
+scvi	whole cortex	0.2	50	0.7906454299087301	GSE247339.2
+scvi	whole cortex	0.2	100	0.8224437423412699	GSE247339.2
+scvi	whole cortex	0.2	500	0.8088257870515873	GSE247339.2
+scvi	whole cortex	0.25	50	0.7735723518571428	GSE247339.2
+scvi	whole cortex	0.25	100	0.7973947343769842	GSE247339.2
+scvi	whole cortex	0.25	500	0.7942562154126983	GSE247339.2
+scvi	whole cortex	0.5	50	0.5332875331746032	GSE247339.2
+scvi	whole cortex	0.5	100	0.5720057077738095	GSE247339.2
+scvi	whole cortex	0.5	500	0.6539830795714285	GSE247339.2
+scvi	whole cortex	0.75	50	0.3179336372452381	GSE247339.2
+scvi	whole cortex	0.75	100	0.3788232425428571	GSE247339.2
+scvi	whole cortex	0.75	500	0.4498358679293651	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	50	0.8284679167460318	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	100	0.8013235175515874	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.0	500	0.8286065129722222	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	50	0.8284679167460318	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	100	0.8013235175515874	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.05	500	0.8286065129722222	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	50	0.8284679167460318	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	100	0.8013235175515874	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.1	500	0.8286065129722222	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	50	0.8284679167460318	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	100	0.8013235175515874	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.15	500	0.8286065129722222	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	50	0.8284679167460318	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	100	0.8013235175515874	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.2	500	0.8286065129722222	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	50	0.828462970047619	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	100	0.8012132851309524	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.25	500	0.8286231862261905	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	50	0.821493551218254	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	100	0.7816355532619048	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.5	500	0.8076982732579365	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	50	0.770224826611111	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	100	0.7153916355119048	GSE247339.2
+seurat	An integrated transcriptomic and epigenomic atlas of mouse primary motor cortex cell types	0.75	500	0.755130874686508	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	50	0.813160656718254	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	100	0.821976005015873	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.0	500	0.8205894642103174	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	50	0.813160656718254	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	100	0.821976005015873	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.05	500	0.8205894642103174	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	50	0.813160656718254	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	100	0.821976005015873	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.1	500	0.8205894642103174	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	50	0.813160656718254	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	100	0.821976005015873	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.15	500	0.8205894642103174	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	50	0.813160656718254	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	100	0.821976005015873	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.2	500	0.8205894642103174	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	50	0.8131574397341269	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	100	0.822063953111111	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.25	500	0.8205894642103174	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	50	0.8116318724484127	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	100	0.8206583759563492	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.5	500	0.8191458906626984	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	50	0.7898362002777778	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	100	0.7839757772380952	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions 10x	0.75	500	0.7857402005357143	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	50	0.812586804031746	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	100	0.7969154833730158	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.0	500	0.7447376861309524	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	50	0.812586804031746	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	100	0.7969154833730158	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.05	500	0.7447376861309524	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	50	0.812586804031746	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	100	0.7969154833730158	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.1	500	0.7447376861309524	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	50	0.812586804031746	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	100	0.7969154833730158	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.15	500	0.7447376861309524	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	50	0.812586804031746	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	100	0.7969154833730158	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.2	500	0.7447376861309524	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	50	0.8126154601428571	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	100	0.7969154833730158	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.25	500	0.7447376861309524	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	50	0.8023594464206348	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	100	0.7890671796071428	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.5	500	0.7389926675436508	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	50	0.751689368984127	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	100	0.7419075231785714	GSE247339.2
+seurat	Single-cell RNA-seq for all cortical  hippocampal regions SMART-Seq v4	0.75	500	0.6846193524801588	GSE247339.2
+seurat	whole cortex	0.0	50	0.7742197131388888	GSE247339.2
+seurat	whole cortex	0.0	100	0.8202299832103174	GSE247339.2
+seurat	whole cortex	0.0	500	0.8180123976825397	GSE247339.2
+seurat	whole cortex	0.05	50	0.7742197131388888	GSE247339.2
+seurat	whole cortex	0.05	100	0.8202299832103174	GSE247339.2
+seurat	whole cortex	0.05	500	0.8180123976825397	GSE247339.2
+seurat	whole cortex	0.1	50	0.7742197131388888	GSE247339.2
+seurat	whole cortex	0.1	100	0.8202299832103174	GSE247339.2
+seurat	whole cortex	0.1	500	0.8180123976825397	GSE247339.2
+seurat	whole cortex	0.15	50	0.7742197131388888	GSE247339.2
+seurat	whole cortex	0.15	100	0.8202299832103174	GSE247339.2
+seurat	whole cortex	0.15	500	0.8180123976825397	GSE247339.2
+seurat	whole cortex	0.2	50	0.7740027161547619	GSE247339.2
+seurat	whole cortex	0.2	100	0.8202299832103174	GSE247339.2
+seurat	whole cortex	0.2	500	0.8179697282380952	GSE247339.2
+seurat	whole cortex	0.25	50	0.7727487215119048	GSE247339.2
+seurat	whole cortex	0.25	100	0.8202299832103174	GSE247339.2
+seurat	whole cortex	0.25	500	0.8179505668888889	GSE247339.2
+seurat	whole cortex	0.5	50	0.7298544903452381	GSE247339.2
+seurat	whole cortex	0.5	100	0.7977284309285714	GSE247339.2
+seurat	whole cortex	0.5	500	0.8030084055396826	GSE247339.2
+seurat	whole cortex	0.75	50	0.5955289557738096	GSE247339.2
+seurat	whole cortex	0.75	100	0.6932086080952381	GSE247339.2
+seurat	whole cortex	0.75	500	0.660948302047619	GSE247339.2

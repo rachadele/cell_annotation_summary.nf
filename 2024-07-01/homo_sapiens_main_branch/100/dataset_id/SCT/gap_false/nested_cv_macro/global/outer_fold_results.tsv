@@ -1,0 +1,9 @@
+held_out_study	method	reference	cutoff	subsample_ref	outer_score	n_outer_test_samples
+CMC	scvi	whole cortex	0.0	500	0.9989664128	43941
+DevBrain	scvi	whole cortex	0.0	500	1.0	7040
+GSE237718	scvi	whole cortex	0.0	500	0.9979257298214286	24640
+Ling-2024	scvi	whole cortex	0.0	500	0.9988506791099477	80866
+MultiomeBrain	scvi	Whole Taxonomy - DLPFC Seattle Alzheimers Disease Atlas SEA-AD	0.25	500	0.9567975642857143	9240
+PTSDBrainomics	scvi	whole cortex	0.0	500	0.9994214931578947	8360
+SZBDMulti-Seq	scvi	whole cortex	0.0	500	0.9991734722222222	31680
+UCLA-ASD	scvi	whole cortex	0.0	500	0.9859501517647059	21420
